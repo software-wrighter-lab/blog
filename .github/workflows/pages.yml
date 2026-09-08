@@ -1,0 +1,93 @@
+name: Deploy blog
+
+on:
+  # Every branch is built so problems surface before merge; only main deploys.
+  push:
+  pull_request:
+  # Daily rebuild so future-dated posts go live on their own date without a push.
+  # 08:20 UTC is 00:20 America/Los_Angeles (01:20 during PST). Posts are dated
+  # 00:15 local by scripts/publish, which puts them just far enough in the past
+  # to be included by the time this runs.
+  schedule:
+    - cron: '20 8 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      TZ: America/Los_Angeles
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+
+      - name: Validate front matter
+        run: scripts/validate
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      # No --drafts and no --future: _drafts/ and future-dated posts are
+      # excluded from production by default. That is the whole publishing gate.
+      - name: Build site
+        run: bundle exec jekyll build
+        env:
+          JEKYLL_ENV: production
+
+      # Drafts live only on the `drafts` branch, so the production build above
+      # never renders them. Build again with drafts so a draft that breaks the
+      # templates is caught on that branch, before it is ever published.
+      - name: Smoke-test post templates against drafts
+        run: |
+          bundle exec jekyll build --drafts --future --destination _site_drafts
+          if ! find _site_drafts -path '*/20*/*' -name index.html | grep -q .; then
+            echo "::warning::no draft rendered as a post; templates not exercised"
+          fi
+          rm -rf _site_drafts
+
+      - name: Check the build produced the expected pages
+        run: |
+          missing=0
+          for f in index.html search.json about/index.html abstracts/index.html \
+                   series/index.html categories/index.html tags/index.html \
+                   index-all/index.html search/index.html; do
+            if [[ ! -f "_site/$f" ]]; then
+              echo "::error::_site/$f was not generated"
+              missing=1
+            fi
+          done
+          [[ -f _site/feed.xml ]] || echo "::warning::feed.xml missing"
+          exit $missing
+
+      - name: Upload Pages artifact
+        if: github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./_site
+
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

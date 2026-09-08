@@ -1,0 +1,70 @@
+---
+layout: default
+---
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+    {%- include post-meta.html post=page show_author=true -%}
+
+    {%- if page.categories.size > 0 or page.tags.size > 0 -%}
+    <div class="post-taxonomies">
+      {%- if page.categories.size > 0 -%}
+        <span class="post-categories">
+          {%- for category in page.categories -%}
+            <a href="{{ '/categories/' | relative_url }}#{{ category | slugify }}" class="category">{{ category }}</a>
+          {%- endfor -%}
+        </span>
+      {%- endif -%}
+      {%- if page.tags.size > 0 -%}
+        <span class="post-tags">
+          {%- for tag in page.tags -%}
+            <a href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}" class="tag">{{ tag }}</a>
+          {%- endfor -%}
+        </span>
+      {%- endif -%}
+    </div>
+    {%- endif -%}
+  </header>
+
+  {%- unless page.toc == false -%}
+    {%- include toc.html -%}
+  {%- endunless -%}
+
+  <div class="post-content e-content" itemprop="articleBody">
+    {{ content }}
+  </div>
+
+  {%- if page.series -%}
+  {%- assign series_posts = site.posts | where: "series", page.series | sort: "series_part" -%}
+  {%- assign current_index = nil -%}
+  {%- for p in series_posts -%}
+    {%- if p.url == page.url -%}
+      {%- assign current_index = forloop.index0 -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- assign next_index = current_index | plus: 1 -%}
+  {%- assign next_post = series_posts[next_index] -%}
+  <div class="series-nav">
+    <p><em>Part {{ page.series_part }} of the {{ page.series }} series. <a href="/series/#{{ page.series | slugify }}">View all parts</a>{%- if next_post %} | <a href="{{ next_post.url | relative_url }}">Next: Part {{ next_post.series_part }} →</a>{%- endif -%}</em></p>
+  </div>
+  {%- endif -%}
+
+  {%- if page.video_urls -%}
+    {%- for video in page.video_urls -%}
+      {%- include youtube-embed.html video_url=video -%}
+    {%- endfor -%}
+  {%- elsif page.video_url -%}
+    {%- include youtube-embed.html video_url=page.video_url -%}
+  {%- endif -%}
+
+  <p id="comments" class="discord-cta"><em>Comments or questions? <a href="https://discord.com/invite/Ctzk5uHggZ">SW Lab Discord</a> or <a href="https://www.youtube.com/@SoftwareWrighter">YouTube @SoftwareWrighter</a>.</em></p>
+
+  <img src="{{ '/assets/images/site/post-separator.webp' | relative_url }}" class="post-separator" alt="">
+
+  {%- if site.disqus.shortname -%}
+    {%- include disqus_comments.html -%}
+  {%- endif -%}
+
+  <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
+</article>

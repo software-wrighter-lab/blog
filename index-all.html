@@ -1,0 +1,560 @@
+---
+layout: page
+title: Post Index
+nav_title: Index
+permalink: /index-all/
+---
+
+<style>
+.index-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid #ddd;
+  margin-bottom: 1.5em;
+}
+
+.index-tabs button {
+  padding: 0.75em 1.5em;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-bottom: none;
+  margin-bottom: -2px;
+  background: #f5f5f5;
+  border-radius: 8px 8px 0 0;
+  font-weight: 500;
+  font-size: 1em;
+}
+
+.index-tabs button:hover {
+  background: #e8e8e8;
+}
+
+.index-tabs button.active {
+  background: var(--background-color, #fff);
+  border-color: #ddd;
+  border-bottom-color: var(--background-color, #fff);
+}
+
+[data-theme="dark"] .index-tabs button {
+  background: #2a2a2a;
+  color: #ccc;
+}
+
+[data-theme="dark"] .index-tabs button:hover {
+  background: #3a3a3a;
+}
+
+[data-theme="dark"] .index-tabs button.active {
+  background: var(--background-color, #1a1a1a);
+  border-bottom-color: var(--background-color, #1a1a1a);
+  color: #fff;
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+.index-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.index-list li {
+  padding: 0.4em 0;
+  border-bottom: 1px solid #eee;
+}
+
+[data-theme="dark"] .index-list li {
+  border-bottom-color: #333;
+}
+
+.index-list a {
+  text-decoration: none;
+}
+
+.index-list .date {
+  color: #888;
+  font-size: 0.85em;
+  margin-left: 0.5em;
+}
+
+.index-list .date-prefix {
+  font-family: monospace;
+  color: #888;
+  font-size: 0.9em;
+  margin-right: 0.75em;
+}
+
+[data-theme="dark"] .index-list .date-prefix {
+  color: #888;
+}
+
+/* Index abstract toggle */
+.index-abstract-toggle {
+  cursor: pointer;
+  color: var(--link-color, #2a7ae2);
+  margin-left: 0.5em;
+  font-size: 0.85em;
+}
+
+.index-abstract-toggle:hover {
+  color: var(--link-hover, #1756a9);
+}
+
+.index-abstract-toggle::before {
+  content: "▶";
+  margin-right: 0.2em;
+}
+
+.index-abstract-toggle.open::before {
+  content: "▼";
+}
+
+.index-abstract {
+  display: none;
+  margin-top: 0.4em;
+  padding: 0.5em 0.75em;
+  background-color: var(--bg-secondary, #f5f5f5);
+  border-left: 3px solid var(--link-color, #2a7ae2);
+  border-radius: 0 4px 4px 0;
+  font-size: 0.9em;
+  color: var(--text-color, #111);
+}
+
+[data-theme="dark"] .index-abstract {
+  background-color: #1a1a2e;
+}
+
+.index-abstract.open {
+  display: block;
+}
+
+/* KWIC styles */
+.kwic-table {
+  width: 100%;
+  font-family: monospace;
+  border-collapse: collapse;
+}
+
+.kwic-table td {
+  padding: 0.3em 0.5em;
+  vertical-align: top;
+  border-bottom: 1px solid #eee;
+}
+
+[data-theme="dark"] .kwic-table td {
+  border-bottom-color: #333;
+}
+
+.kwic-left {
+  text-align: right;
+  width: 40%;
+  color: #666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .kwic-left {
+  color: #888;
+}
+
+.kwic-keyword {
+  text-align: center;
+  font-weight: bold;
+  white-space: nowrap;
+  background: #fffde7;
+  padding: 0.3em 0.75em;
+}
+
+[data-theme="dark"] .kwic-keyword {
+  background: #4a4a00;
+}
+
+.kwic-right {
+  text-align: left;
+  width: 40%;
+  color: #666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .kwic-right {
+  color: #888;
+}
+
+.kwic-table a {
+  text-decoration: none;
+}
+
+.letter-header {
+  font-size: 1.4em;
+  font-weight: bold;
+  margin: 1em 0 0.5em 0;
+  padding-bottom: 0.25em;
+  border-bottom: 2px solid #ddd;
+  color: #666;
+}
+
+[data-theme="dark"] .letter-header {
+  border-bottom-color: #444;
+  color: #999;
+}
+
+.year-header {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 1.5em 0 0.5em 0;
+  color: #666;
+}
+
+[data-theme="dark"] .year-header {
+  color: #999;
+}
+</style>
+
+<div class="index-tabs">
+  <button class="active" data-tab="alpha">Alphabetical</button>
+  <button data-tab="chron">Chronological</button>
+  <button data-tab="kwic">KWIC</button>
+  <button data-tab="code">Code</button>
+  <button data-tab="videos">Videos</button>
+  <button data-tab="papers">Papers</button>
+</div>
+
+<!-- Alphabetical Panel -->
+<div class="tab-panel active" id="panel-alpha">
+{% assign alpha_entries = "" | split: "" %}
+{% for post in site.posts %}
+  {% comment %} Create sort key: lowercase + pad single-digit numbers {% endcomment %}
+  {% assign sort_key = post.title | downcase %}
+  {% assign sort_key = sort_key | replace: "#10", "~10" | replace: "#11", "~11" | replace: "#12", "~12" | replace: "#13", "~13" | replace: "#14", "~14" | replace: "#15", "~15" | replace: "#16", "~16" | replace: "#17", "~17" | replace: "#18", "~18" | replace: "#19", "~19" | replace: "#20", "~20" %}
+  {% assign sort_key = sort_key | replace: "#1", "#01" | replace: "#2", "#02" | replace: "#3", "#03" | replace: "#4", "#04" | replace: "#5", "#05" | replace: "#6", "#06" | replace: "#7", "#07" | replace: "#8", "#08" | replace: "#9", "#09" %}
+  {% assign sort_key = sort_key | replace: "~", "#" %}
+  {% assign entry = sort_key | append: "|" | append: post.title | append: "|" | append: post.url | append: "|" | append: post.date %}
+  {% assign alpha_entries = alpha_entries | push: entry %}
+{% endfor %}
+{% assign sorted_alpha = alpha_entries | sort %}
+{% assign current_letter = "" %}
+{% for entry in sorted_alpha %}
+  {% assign parts = entry | split: "|" %}
+  {% assign post_title = parts[1] %}
+  {% assign post_url = parts[2] %}
+  {% assign post_date = parts[3] %}
+  {% assign first_letter = post_title | slice: 0 | upcase %}
+  {% if first_letter != current_letter %}
+    {% if current_letter != "" %}</ul>{% endif %}
+    {% assign current_letter = first_letter %}
+<div class="letter-header">{{ current_letter }}</div>
+<ul class="index-list">
+  {% endif %}
+  <li>
+    <a href="{{ post_url | relative_url }}">{{ post_title }}</a>
+    <span class="date">{{ post_date | date: "%b %Y" }}</span>
+    <span class="index-abstract-toggle" data-url="{{ post_url | relative_url }}"></span>
+    <div class="index-abstract" data-url="{{ post_url | relative_url }}"></div>
+  </li>
+{% endfor %}
+</ul>
+</div>
+
+<!-- Chronological Panel -->
+<div class="tab-panel" id="panel-chron">
+<div style="margin-bottom: 1em;">
+  <label for="chron-sort">Sort:</label>
+  <select id="chron-sort" style="padding: 0.4em 0.8em; border: 1px solid var(--border-color, #ddd); border-radius: 4px; background: var(--bg-color, #fff); color: var(--text-color, #000); font-size: 0.9em;">
+    <option value="newest">Newest First</option>
+    <option value="oldest">Oldest First</option>
+  </select>
+</div>
+<ul class="index-list" id="chron-list">
+  {% for post in site.posts %}
+  <li data-date="{{ post.date | date: '%Y%m%d' }}">
+    <span class="date-prefix">{{ post.date | date: "%Y%m%d" }}</span>
+    <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    <span class="index-abstract-toggle" data-url="{{ post.url | relative_url }}"></span>
+    <div class="index-abstract" data-url="{{ post.url | relative_url }}"></div>
+  </li>
+  {% endfor %}
+</ul>
+</div>
+
+<!-- KWIC Panel -->
+<div class="tab-panel" id="panel-kwic">
+<p><em>Keywords from titles, sorted alphabetically. Click any keyword to read the post.</em></p>
+
+{% assign kwic_entries = "" | split: "" %}
+{% assign stopwords = "a,an,the,and,or,but,in,on,at,to,for,of,with,by,from,is,it,as,be,are,was,were,been,being,have,has,had,do,does,did,will,would,could,should,may,might,must,shall,can,this,that,these,those,i,you,we,they,he,she,my,your,our,their,his,her,its,1/2,2/2,1/6,2/6,3/6,4/6,5/6,6/6,1/?,part,#1,#2,#3,#4,#5,#6,#7,#8,#9,#10,#11,#12,#13,#14,#15,#16,#17,#18,#19,#20" | split: "," %}
+
+{% for post in site.posts %}
+  {% comment %} Index title words {% endcomment %}
+  {% assign words = post.title | split: " " %}
+  {% for word in words %}
+    {% assign clean_word = word | remove: ":" | remove: "(" | remove: ")" | remove: "," | remove: "?" | remove: "!" | remove: "-" | downcase %}
+    {% unless stopwords contains clean_word or clean_word.size < 3 or clean_word contains "/" %}
+      {% assign before_words = "" %}
+      {% assign after_words = "" %}
+      {% for w in words %}
+        {% if forloop.index < forloop.parentloop.index %}
+          {% assign before_words = before_words | append: w | append: " " %}
+        {% elsif forloop.index > forloop.parentloop.index %}
+          {% assign after_words = after_words | append: " " | append: w %}
+        {% endif %}
+      {% endfor %}
+      {% comment %} Pad numbers for natural sorting {% endcomment %}
+      {% assign sort_before = before_words | replace: "#10", "~10" | replace: "#11", "~11" | replace: "#12", "~12" | replace: "#13", "~13" | replace: "#14", "~14" | replace: "#15", "~15" | replace: "#16", "~16" | replace: "#17", "~17" | replace: "#18", "~18" | replace: "#19", "~19" | replace: "#20", "~20" %}
+      {% assign sort_before = sort_before | replace: "#1", "#01" | replace: "#2", "#02" | replace: "#3", "#03" | replace: "#4", "#04" | replace: "#5", "#05" | replace: "#6", "#06" | replace: "#7", "#07" | replace: "#8", "#08" | replace: "#9", "#09" %}
+      {% assign sort_before = sort_before | replace: "~", "#" %}
+      {% assign entry = clean_word | append: "|" | append: sort_before | append: "|" | append: before_words | append: "|" | append: word | append: "|" | append: after_words | append: "|" | append: post.url %}
+      {% assign kwic_entries = kwic_entries | push: entry %}
+    {% endunless %}
+  {% endfor %}
+  {% comment %} Index keywords from frontmatter {% endcomment %}
+  {% if post.keywords %}
+    {% assign kw_list = post.keywords | split: ", " %}
+    {% for kw in kw_list %}
+      {% assign clean_kw = kw | remove: "-" | downcase %}
+      {% unless stopwords contains clean_kw or clean_kw.size < 3 %}
+        {% comment %} Pad numbers for natural sorting {% endcomment %}
+        {% assign sort_title = post.title | replace: "#10", "~10" | replace: "#11", "~11" | replace: "#12", "~12" | replace: "#13", "~13" | replace: "#14", "~14" | replace: "#15", "~15" | replace: "#16", "~16" | replace: "#17", "~17" | replace: "#18", "~18" | replace: "#19", "~19" | replace: "#20", "~20" %}
+        {% assign sort_title = sort_title | replace: "#1", "#01" | replace: "#2", "#02" | replace: "#3", "#03" | replace: "#4", "#04" | replace: "#5", "#05" | replace: "#6", "#06" | replace: "#7", "#07" | replace: "#8", "#08" | replace: "#9", "#09" %}
+        {% assign sort_title = sort_title | replace: "~", "#" %}
+        {% assign entry = clean_kw | append: "|" | append: sort_title | append: "|" | append: post.title | append: " ~ |" | append: kw | append: "||" | append: post.url %}
+        {% assign kwic_entries = kwic_entries | push: entry %}
+      {% endunless %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+
+{% assign sorted_kwic = kwic_entries | sort %}
+
+<table class="kwic-table">
+{% assign current_letter = "" %}
+{% for entry in sorted_kwic %}
+  {% assign parts = entry | split: "|" %}
+  {% assign sort_key = parts[0] %}
+  {% assign before = parts[2] %}
+  {% assign keyword = parts[3] %}
+  {% assign after = parts[4] %}
+  {% assign url = parts[5] %}
+  {% assign first_letter = sort_key | slice: 0 | upcase %}
+  {% if first_letter != current_letter %}
+    {% assign current_letter = first_letter %}
+    <tr><td colspan="3" class="letter-header">{{ current_letter }}</td></tr>
+  {% endif %}
+  <tr>
+    <td class="kwic-left">{{ before | strip }}</td>
+    <td class="kwic-keyword"><a href="{{ url | relative_url }}">{{ keyword }}</a></td>
+    <td class="kwic-right">{{ after | strip }}</td>
+  </tr>
+{% endfor %}
+</table>
+</div>
+
+<!-- Code Panel -->
+<div class="tab-panel" id="panel-code">
+<p><em>GitHub repositories referenced in posts, sorted alphabetically by URL.</em></p>
+{% assign code_entries = "" | split: "" %}
+{% for post in site.posts %}
+  {% if post.repo_url and post.repo_url != "" %}
+    {% assign entry = post.repo_url | append: "|" | append: post.title | append: "|" | append: post.url %}
+    {% assign code_entries = code_entries | push: entry %}
+  {% endif %}
+  {% if post.repo_urls %}
+    {% for repo in post.repo_urls %}
+      {% if repo.url and repo.url != "" %}
+        {% assign entry = repo.url | append: "|" | append: post.title | append: "|" | append: post.url %}
+        {% assign code_entries = code_entries | push: entry %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+{% assign sorted_code = code_entries | sort | uniq %}
+<table class="index-list" style="width: 100%;">
+<tr><th style="text-align: left;">Repository</th><th style="text-align: left;">Blog Post</th></tr>
+{% for entry in sorted_code %}
+  {% assign parts = entry | split: "|" %}
+  {% assign repo_url = parts[0] %}
+  {% assign post_title = parts[1] %}
+  {% assign post_url = parts[2] %}
+  <tr>
+    <td><a href="{{ repo_url }}" target="_blank">{{ repo_url }}</a></td>
+    <td>
+      <a href="{{ post_url | relative_url }}">{{ post_title }}</a>
+      <span class="index-abstract-toggle" data-url="{{ post_url | relative_url }}"></span>
+      <div class="index-abstract" data-url="{{ post_url | relative_url }}"></div>
+    </td>
+  </tr>
+{% endfor %}
+</table>
+</div>
+
+<!-- Videos Panel -->
+<div class="tab-panel" id="panel-videos">
+<p><em>Videos referenced in posts, sorted alphabetically by video title.</em></p>
+{% assign video_entries = "" | split: "" %}
+{% for post in site.posts %}
+  {% comment %} Handle singular video_url {% endcomment %}
+  {% if post.video_url and post.video_url != "" %}
+    {% if post.video_title %}
+      {% assign v_title = post.video_title %}
+    {% else %}
+      {% assign v_title = post.title %}
+    {% endif %}
+    {% assign sort_key = v_title | downcase %}
+    {% assign sort_key = sort_key | replace: "#10", "~10" | replace: "#11", "~11" | replace: "#12", "~12" | replace: "#13", "~13" | replace: "#14", "~14" | replace: "#15", "~15" | replace: "#16", "~16" | replace: "#17", "~17" | replace: "#18", "~18" | replace: "#19", "~19" | replace: "#20", "~20" | replace: "#21", "~21" | replace: "#22", "~22" | replace: "#23", "~23" | replace: "#24", "~24" | replace: "#25", "~25" | replace: "#26", "~26" | replace: "#27", "~27" | replace: "#28", "~28" | replace: "#29", "~29" | replace: "#30", "~30" %}
+    {% assign sort_key = sort_key | replace: "#1", "#01" | replace: "#2", "#02" | replace: "#3", "#03" | replace: "#4", "#04" | replace: "#5", "#05" | replace: "#6", "#06" | replace: "#7", "#07" | replace: "#8", "#08" | replace: "#9", "#09" %}
+    {% assign sort_key = sort_key | replace: "~", "#" %}
+    {% assign entry = sort_key | append: "|" | append: v_title | append: "|" | append: post.video_url | append: "|" | append: post.url | append: "|" | append: post.title %}
+    {% assign video_entries = video_entries | push: entry %}
+  {% endif %}
+  {% comment %} Handle plural video_urls (array) {% endcomment %}
+  {% if post.video_urls %}
+    {% for vurl in post.video_urls %}
+      {% if post.video_titles and post.video_titles[forloop.index0] %}
+        {% assign v_title = post.video_titles[forloop.index0] %}
+      {% else %}
+        {% assign v_title = post.title %}
+      {% endif %}
+      {% assign sort_key = v_title | downcase %}
+      {% assign sort_key = sort_key | replace: "#10", "~10" | replace: "#11", "~11" | replace: "#12", "~12" | replace: "#13", "~13" | replace: "#14", "~14" | replace: "#15", "~15" | replace: "#16", "~16" | replace: "#17", "~17" | replace: "#18", "~18" | replace: "#19", "~19" | replace: "#20", "~20" | replace: "#21", "~21" | replace: "#22", "~22" | replace: "#23", "~23" | replace: "#24", "~24" | replace: "#25", "~25" | replace: "#26", "~26" | replace: "#27", "~27" | replace: "#28", "~28" | replace: "#29", "~29" | replace: "#30", "~30" %}
+      {% assign sort_key = sort_key | replace: "#1", "#01" | replace: "#2", "#02" | replace: "#3", "#03" | replace: "#4", "#04" | replace: "#5", "#05" | replace: "#6", "#06" | replace: "#7", "#07" | replace: "#8", "#08" | replace: "#9", "#09" %}
+      {% assign sort_key = sort_key | replace: "~", "#" %}
+      {% assign entry = sort_key | append: "|" | append: v_title | append: "|" | append: vurl | append: "|" | append: post.url | append: "|" | append: post.title %}
+      {% assign video_entries = video_entries | push: entry %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+{% assign sorted_videos = video_entries | sort %}
+<table class="index-list" style="width: 100%;">
+<tr><th style="text-align: left;">Video</th><th style="text-align: left;">Blog Post</th></tr>
+{% for entry in sorted_videos %}
+  {% assign parts = entry | split: "|" %}
+  {% assign video_title = parts[1] %}
+  {% assign video_url = parts[2] %}
+  {% assign post_url = parts[3] %}
+  {% assign post_title = parts[4] %}
+  <tr>
+    <td><a href="{{ video_url }}" target="_blank">{{ video_title }}</a></td>
+    <td>
+      <a href="{{ post_url | relative_url }}">{{ post_title }}</a>
+      <span class="index-abstract-toggle" data-url="{{ post_url | relative_url }}"></span>
+      <div class="index-abstract" data-url="{{ post_url | relative_url }}"></div>
+    </td>
+  </tr>
+{% endfor %}
+</table>
+</div>
+
+<!-- Papers Panel -->
+<div class="tab-panel" id="panel-papers">
+<p><em>Research papers referenced in posts, sorted alphabetically by title.</em></p>
+{% assign paper_entries = "" | split: "" %}
+{% for post in site.posts %}
+  {% if post.papers %}
+    {% for paper in post.papers %}
+      {% if paper.title and paper.url %}
+        {% comment %} Create sort key: lowercase for case-insensitive sorting {% endcomment %}
+        {% assign sort_key = paper.title | downcase %}
+        {% assign entry = sort_key | append: "|" | append: paper.title | append: "|" | append: paper.url | append: "|" | append: post.title | append: "|" | append: post.url %}
+        {% assign paper_entries = paper_entries | push: entry %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+{% assign sorted_papers = paper_entries | sort %}
+{% if sorted_papers.size > 0 %}
+<table class="index-list" style="width: 100%;">
+<tr><th style="text-align: left;">Paper</th><th style="text-align: left;">Blog Post</th></tr>
+{% for entry in sorted_papers %}
+  {% assign parts = entry | split: "|" %}
+  {% assign paper_title = parts[1] %}
+  {% assign paper_url = parts[2] %}
+  {% assign post_title = parts[3] %}
+  {% assign post_url = parts[4] %}
+  <tr>
+    <td><a href="{{ paper_url }}" target="_blank">{{ paper_title }}</a></td>
+    <td>
+      <a href="{{ post_url | relative_url }}">{{ post_title }}</a>
+      <span class="index-abstract-toggle" data-url="{{ post_url | relative_url }}"></span>
+      <div class="index-abstract" data-url="{{ post_url | relative_url }}"></div>
+    </td>
+  </tr>
+{% endfor %}
+</table>
+{% else %}
+<p><em>No papers indexed yet. Add <code>papers</code> frontmatter to posts.</em></p>
+{% endif %}
+</div>
+
+<script>
+// Abstract data map
+const abstractMap = {
+{% for post in site.posts %}
+  "{{ post.url | relative_url }}": {{ post.abstract | default: "" | jsonify }},
+{% endfor %}
+};
+
+// Populate abstracts and set up toggles
+document.querySelectorAll('.index-abstract-toggle').forEach(toggle => {
+  const url = toggle.dataset.url;
+  const abstract = abstractMap[url];
+  if (!abstract) {
+    toggle.style.display = 'none';
+    return;
+  }
+  const abstractDiv = toggle.nextElementSibling;
+  if (abstractDiv && abstractDiv.classList.contains('index-abstract')) {
+    abstractDiv.textContent = abstract;
+  }
+  toggle.addEventListener('click', () => {
+    toggle.classList.toggle('open');
+    if (abstractDiv) abstractDiv.classList.toggle('open');
+  });
+});
+
+document.querySelectorAll('.index-tabs button').forEach(button => {
+  button.addEventListener('click', () => {
+    // Remove active from all buttons and panels
+    document.querySelectorAll('.index-tabs button').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+
+    // Add active to clicked button and corresponding panel
+    button.classList.add('active');
+    document.getElementById('panel-' + button.dataset.tab).classList.add('active');
+  });
+});
+
+// Chronological sort
+(function() {
+  const chronSort = document.getElementById('chron-sort');
+  const chronList = document.getElementById('chron-list');
+  if (!chronSort || !chronList) return;
+
+  const items = Array.from(chronList.querySelectorAll('li'));
+
+  function sortChron() {
+    const order = chronSort.value;
+    items.sort((a, b) => {
+      const dateA = a.dataset.date;
+      const dateB = b.dataset.date;
+      if (order === 'newest') {
+        return dateB.localeCompare(dateA);
+      } else {
+        return dateA.localeCompare(dateB);
+      }
+    });
+    items.forEach(item => chronList.appendChild(item));
+  }
+
+  chronSort.addEventListener('change', sortChron);
+  // Initial sort (newest first is default)
+  sortChron();
+})();
+</script>

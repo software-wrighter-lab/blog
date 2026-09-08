@@ -1,0 +1,432 @@
+---
+layout: default
+---
+
+<style>
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1em;
+  margin: 0.5em 0 1em 0;
+  padding: 0.75em 1em;
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
+#pagination-top {
+  margin-top: 0;
+}
+
+[data-theme="dark"] .pagination-controls {
+  background: #2a2a2a;
+}
+
+.pagination-controls label {
+  font-size: 0.9em;
+  margin-right: 0.5em;
+}
+
+.pagination-controls select {
+  padding: 0.4em 0.8em;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: #fff;
+  font-size: 0.9em;
+}
+
+[data-theme="dark"] .pagination-controls select {
+  background: #333;
+  border-color: #555;
+  color: #eee;
+}
+
+.page-numbers {
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
+  flex-wrap: wrap;
+}
+
+.page-numbers button {
+  padding: 0.4em 0.8em;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  min-width: 2.5em;
+}
+
+.page-numbers button:hover:not(:disabled) {
+  background: #e8e8e8;
+}
+
+.page-numbers button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.page-numbers button.active {
+  background: #0066cc;
+  color: #fff;
+  border-color: #0066cc;
+}
+
+[data-theme="dark"] .page-numbers button {
+  background: #333;
+  border-color: #555;
+  color: #eee;
+}
+
+[data-theme="dark"] .page-numbers button:hover:not(:disabled) {
+  background: #444;
+}
+
+[data-theme="dark"] .page-numbers button.active {
+  background: #0066cc;
+  border-color: #0066cc;
+}
+
+.page-info {
+  font-size: 0.85em;
+  color: #666;
+}
+
+[data-theme="dark"] .page-info {
+  color: #999;
+}
+
+/* First 10 posts visible immediately (no JS wait) */
+.post-item {
+  display: none;
+}
+
+.post-item:nth-child(-n+10) {
+  display: block;
+}
+
+/* Once JS loads, it controls visibility */
+.js-pagination .post-item {
+  display: none;
+}
+
+.js-pagination .post-item.visible {
+  display: block;
+}
+
+.archive-notice {
+  margin-top: 2em;
+  padding: 1em;
+  background: #fff8e1;
+  border-radius: 8px;
+  font-size: 0.9em;
+}
+
+[data-theme="dark"] .archive-notice {
+  background: #3a3500;
+}
+</style>
+
+<div class="home">
+  {%- if page.title -%}
+    <h1 class="page-heading">{{ page.title }}</h1>
+  {%- endif -%}
+
+  {{ content }}
+
+  {%- if site.posts.size > 0 -%}
+    {%- assign max_posts = 100 -%}
+    {%- assign total_posts = site.posts.size -%}
+    {%- if total_posts > max_posts -%}
+      {%- assign display_posts = site.posts | slice: 0, max_posts -%}
+      {%- assign archived_count = total_posts | minus: max_posts -%}
+    {%- else -%}
+      {%- assign display_posts = site.posts -%}
+      {%- assign archived_count = 0 -%}
+    {%- endif -%}
+
+    {%- if page.list_title -%}
+    <h2 class="post-list-heading">{{ page.list_title }}</h2>
+    {%- endif -%}
+
+    <div class="pagination-controls" id="pagination-top">
+      <div>
+        <label for="per-page-select">Posts per page:</label>
+        <select id="per-page-select">
+          <option value="5">5</option>
+          <option value="10" selected>10</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </div>
+      <div class="page-numbers" id="page-numbers-top"></div>
+      <div class="page-info" id="page-info-top"></div>
+    </div>
+
+    <ul class="post-list" id="post-list">
+      {%- for post in display_posts -%}
+      {%- assign post_number = total_posts | minus: forloop.index0 -%}
+      <li class="post-item" id="post-{{ post_number }}" data-index="{{ forloop.index0 }}" data-post-number="{{ post_number }}">
+        {%- assign prev_index = forloop.index0 | plus: 1 -%}
+        <div class="post-nav">
+          {%- if forloop.index0 > 0 -%}
+            {%- assign next_number = post_number | plus: 1 -%}
+            <a href="#post-{{ next_number }}" class="post-nav-link" title="Jump to the next post">[{{ next_number }}]</a>
+          {%- else -%}
+            <span class="post-nav-disabled" aria-disabled="true">[--]</span>
+          {%- endif -%}
+          ←<span class="post-nav-num">[{{ post_number }}]</span>→
+          {%- if prev_index < display_posts.size -%}
+            {%- assign prev_number = post_number | minus: 1 -%}
+            <a href="#post-{{ prev_number }}" class="post-nav-link" title="Jump to the previous post">[{{ prev_number }}]</a>
+          {%- else -%}
+            <span class="post-nav-disabled" aria-disabled="true">[--]</span>
+          {%- endif -%}
+        </div>
+        {%- include post-meta.html post=post show_author=true -%}
+        <h3>
+          <a class="post-link" href="{{ post.url | relative_url }}">
+            {{ post.title | escape }}
+          </a>
+        </h3>
+        {%- unless post.toc == false -%}
+          {%- include toc.html toc_id=post.slug comments_id=post.slug -%}
+        {%- endunless -%}
+        {%- if site.show_excerpts -%}
+          <div class="post-content">
+          {{ post.excerpt }}
+          </div>
+        {%- endif -%}
+        {%- if post.series -%}
+        {%- assign series_posts = site.posts | where: "series", post.series | sort: "series_part" -%}
+        {%- assign current_index = nil -%}
+        {%- for p in series_posts -%}
+          {%- if p.url == post.url -%}
+            {%- assign current_index = forloop.index0 -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- assign next_index = current_index | plus: 1 -%}
+        {%- assign next_post = series_posts[next_index] -%}
+        <div class="series-nav">
+          <p><em>Part {{ post.series_part }} of the {{ post.series }} series. <a href="/series/#{{ post.series | slugify }}">View all parts</a>{%- if next_post %} | <a href="{{ next_post.url | relative_url }}">Next: Part {{ next_post.series_part }} →</a>{%- endif -%}</em></p>
+        </div>
+        {%- endif -%}
+        {%- if post.video_urls -%}
+          {%- assign first_video = post.video_urls | first -%}
+          {%- include youtube-embed.html video_url=first_video -%}
+        {%- elsif post.video_url -%}
+          {%- include youtube-embed.html video_url=post.video_url -%}
+        {%- endif -%}
+        <p id="comments-{{ post.slug }}" class="discord-cta"><em>Comments or questions? <a href="https://discord.com/invite/Ctzk5uHggZ">SW Lab Discord</a> or <a href="https://www.youtube.com/@SoftwareWrighter">YouTube @SoftwareWrighter</a>.</em></p>
+        <img src="{{ '/assets/images/site/post-separator.webp' | relative_url }}" class="post-separator" alt="">
+      </li>
+      {%- endfor -%}
+    </ul>
+
+    <div class="pagination-controls" id="pagination-bottom">
+      <div>
+        <label for="per-page-select-bottom">Posts per page:</label>
+        <select id="per-page-select-bottom">
+          <option value="5">5</option>
+          <option value="10" selected>10</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </div>
+      <div class="page-numbers" id="page-numbers-bottom"></div>
+      <div class="page-info" id="page-info-bottom"></div>
+    </div>
+
+    {%- if archived_count > 0 -%}
+    <div class="archive-notice">
+      Showing the {{ max_posts }} most recent posts.
+      <a href="{{ '/index-all/' | relative_url }}">View all {{ total_posts }} posts in the Index</a>.
+    </div>
+    {%- endif -%}
+
+    <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
+  {%- endif -%}
+</div>
+
+<script>
+(function() {
+  const posts = document.querySelectorAll('.post-item');
+  const totalPosts = posts.length;
+  let perPage = 10;
+  let currentPage = 1;
+
+  const perPageSelects = [
+    document.getElementById('per-page-select'),
+    document.getElementById('per-page-select-bottom')
+  ];
+
+  function getTotalPages() {
+    return Math.ceil(totalPosts / perPage);
+  }
+
+  function showPage(page) {
+    currentPage = page;
+    const start = (page - 1) * perPage;
+    const end = start + perPage;
+
+    posts.forEach((post, i) => {
+      if (i >= start && i < end) {
+        post.classList.add('visible');
+      } else {
+        post.classList.remove('visible');
+      }
+    });
+
+    // Hide separator on last visible post
+    const visiblePosts = document.querySelectorAll('.post-item.visible');
+    visiblePosts.forEach((post, i) => {
+      const sep = post.querySelector('.post-separator');
+      if (sep) {
+        sep.style.display = (i === visiblePosts.length - 1) ? 'none' : '';
+      }
+    });
+
+    updateControls();
+  }
+
+  function updateControls() {
+    const totalPages = getTotalPages();
+
+    // Update page info
+    const start = (currentPage - 1) * perPage + 1;
+    const end = Math.min(currentPage * perPage, totalPosts);
+    const infoText = `Showing ${start}-${end} of ${totalPosts}`;
+
+    document.getElementById('page-info-top').textContent = infoText;
+    document.getElementById('page-info-bottom').textContent = infoText;
+
+    // Build page numbers
+    ['top', 'bottom'].forEach(pos => {
+      const container = document.getElementById(`page-numbers-${pos}`);
+      container.innerHTML = '';
+
+      // Prev button
+      const prevBtn = document.createElement('button');
+      prevBtn.textContent = '< Prev';
+      prevBtn.disabled = currentPage === 1;
+      prevBtn.onclick = () => { showPage(currentPage - 1); scrollToTop(); };
+      container.appendChild(prevBtn);
+
+      // Page number buttons
+      const maxButtons = 7;
+      let startPage = Math.max(1, currentPage - 3);
+      let endPage = Math.min(totalPages, startPage + maxButtons - 1);
+
+      if (endPage - startPage < maxButtons - 1) {
+        startPage = Math.max(1, endPage - maxButtons + 1);
+      }
+
+      if (startPage > 1) {
+        const btn = document.createElement('button');
+        btn.textContent = '1';
+        btn.onclick = () => { showPage(1); scrollToTop(); };
+        container.appendChild(btn);
+
+        if (startPage > 2) {
+          const ellipsis = document.createElement('span');
+          ellipsis.textContent = ' ... ';
+          ellipsis.style.padding = '0 0.25em';
+          container.appendChild(ellipsis);
+        }
+      }
+
+      for (let i = startPage; i <= endPage; i++) {
+        if (i === 1 && startPage > 1) continue;
+        if (i === totalPages && endPage < totalPages) continue;
+
+        const btn = document.createElement('button');
+        btn.textContent = i;
+        if (i === currentPage) btn.classList.add('active');
+        btn.onclick = () => { showPage(i); scrollToTop(); };
+        container.appendChild(btn);
+      }
+
+      if (endPage < totalPages) {
+        if (endPage < totalPages - 1) {
+          const ellipsis = document.createElement('span');
+          ellipsis.textContent = ' ... ';
+          ellipsis.style.padding = '0 0.25em';
+          container.appendChild(ellipsis);
+        }
+
+        const btn = document.createElement('button');
+        btn.textContent = totalPages;
+        btn.onclick = () => { showPage(totalPages); scrollToTop(); };
+        container.appendChild(btn);
+      }
+
+      // Next button
+      const nextBtn = document.createElement('button');
+      nextBtn.textContent = 'Next >';
+      nextBtn.disabled = currentPage === totalPages;
+      nextBtn.onclick = () => { showPage(currentPage + 1); scrollToTop(); };
+      container.appendChild(nextBtn);
+    });
+  }
+
+  function scrollToTop() {
+    document.getElementById('pagination-top').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function setPerPage(value) {
+    perPage = parseInt(value);
+    perPageSelects.forEach(s => s.value = value);
+    currentPage = 1;
+    showPage(1);
+  }
+
+  // Event listeners
+  perPageSelects.forEach(select => {
+    select.addEventListener('change', (e) => setPerPage(e.target.value));
+  });
+
+  // Initialize - add class to enable JS-controlled pagination
+  document.getElementById('post-list').classList.add('js-pagination');
+  showPage(1);
+
+  // [N]→[N-1] post-nav: scroll to the previous post in the list,
+  // advancing pagination first if the target is on a hidden page.
+  function jumpToPostNumber(targetNumber) {
+    const target = document.getElementById('post-' + targetNumber);
+    if (!target) return false;
+    const targetIndex = parseInt(target.dataset.index, 10);
+    if (Number.isNaN(targetIndex)) return false;
+    const targetPage = Math.floor(targetIndex / perPage) + 1;
+    if (targetPage !== currentPage) {
+      showPage(targetPage);
+    }
+    requestAnimationFrame(function() {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    if (history.replaceState) {
+      history.replaceState(null, '', '#post-' + targetNumber);
+    }
+    return true;
+  }
+
+  document.querySelectorAll('.post-nav-link').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      const href = link.getAttribute('href') || '';
+      const m = href.match(/^#post-(\d+)$/);
+      if (!m) return;
+      e.preventDefault();
+      jumpToPostNumber(m[1]);
+    });
+  });
+
+  // Honor a #post-N hash on initial load too.
+  const initialHash = window.location.hash.match(/^#post-(\d+)$/);
+  if (initialHash) {
+    jumpToPostNumber(initialHash[1]);
+  }
+})();
+</script>

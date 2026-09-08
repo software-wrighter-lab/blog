@@ -1,0 +1,39 @@
+---
+layout: page
+title: Blog Series
+nav_title: Series
+permalink: /series/
+---
+
+{% assign series_posts = site.posts | where_exp: "post", "post.series" | where_exp: "post", "post.series != ''" | group_by: "series" | sort: "name" %}
+
+<div class="series-toc">
+  <h4>Series</h4>
+  <ul>
+    {% for series in series_posts %}
+    <li><a href="#{{ series.name | slugify }}">{{ series.name }}</a> <span class="series-count">({{ series.items.size }})</span></li>
+    {% endfor %}
+  </ul>
+</div>
+
+<p>Multi-part blog post series, organized by topic.</p>
+
+{% for series in series_posts %}
+<div class="series-group">
+  <h2 id="{{ series.name | slugify }}">{{ series.name }}</h2>
+  <ul class="series-list">
+    {% assign sorted_posts = series.items | sort: "series_part" %}
+    {% for post in sorted_posts %}
+    <li>
+      <span class="series-part">Part {{ post.series_part | default: forloop.index }}:</span>
+      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      {%- include post-meta.html post=post -%}
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endfor %}
+
+{% if series_posts.size == 0 %}
+<p><em>No series posts yet.</em></p>
+{% endif %}

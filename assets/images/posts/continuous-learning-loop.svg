@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 350">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; font-weight: 600; fill: #333; }
+      .label { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; fill: #333; }
+      .sublabel { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 10px; fill: #666; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="350" fill="#fafafa"/>
+
+  <!-- Title -->
+  <text x="300" y="25" class="title" text-anchor="middle">Continuous Learning: Experience Consolidation</text>
+
+  <!-- Main flow (left to right) -->
+  <!-- Agent -->
+  <rect x="30" y="70" width="80" height="55" rx="8" fill="#cce5ff" stroke="#66b3ff" stroke-width="2"/>
+  <text x="70" y="95" class="label" text-anchor="middle">Agent</text>
+  <text x="70" y="110" class="sublabel" text-anchor="middle">Run tasks</text>
+
+  <path d="M115 95 L150 95" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Logs -->
+  <rect x="155" y="70" width="80" height="55" rx="8" fill="#f5f5f5" stroke="#999" stroke-width="2"/>
+  <text x="195" y="95" class="label" text-anchor="middle">Logs</text>
+  <text x="195" y="110" class="sublabel" text-anchor="middle">Traces</text>
+
+  <path d="M240 95 L275 95" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Evaluation -->
+  <rect x="280" y="70" width="80" height="55" rx="8" fill="#f3e5f5" stroke="#c4b0e0" stroke-width="2"/>
+  <text x="320" y="95" class="label" text-anchor="middle">Evaluate</text>
+  <text x="320" y="110" class="sublabel" text-anchor="middle">Score</text>
+
+  <path d="M365 95 L400 95" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Cluster -->
+  <rect x="405" y="70" width="80" height="55" rx="8" fill="#fff3e0" stroke="#ffb366" stroke-width="2"/>
+  <text x="445" y="95" class="label" text-anchor="middle">Cluster</text>
+  <text x="445" y="110" class="sublabel" text-anchor="middle">Patterns</text>
+
+  <path d="M490 95 L525 95" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Train (goes down) -->
+  <rect x="490" y="145" width="80" height="55" rx="8" fill="#ffe5cc" stroke="#ffb366" stroke-width="2"/>
+  <text x="530" y="170" class="label" text-anchor="middle">Train</text>
+  <text x="530" y="185" class="sublabel" text-anchor="middle">Adapters</text>
+
+  <path d="M530 130 L530 140" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Validate -->
+  <rect x="365" y="145" width="80" height="55" rx="8" fill="#d4edda" stroke="#98d1a5" stroke-width="2"/>
+  <text x="405" y="170" class="label" text-anchor="middle">Validate</text>
+  <text x="405" y="185" class="sublabel" text-anchor="middle">Retention</text>
+
+  <path d="M485 172 L450 172" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Deploy -->
+  <rect x="240" y="145" width="80" height="55" rx="8" fill="#cce5ff" stroke="#66b3ff" stroke-width="2"/>
+  <text x="280" y="170" class="label" text-anchor="middle">Deploy</text>
+  <text x="280" y="185" class="sublabel" text-anchor="middle">Modular</text>
+
+  <path d="M360 172 L325 172" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Back to Agent -->
+  <path d="M235 172 Q 100 172 70 130" stroke="#27ae60" stroke-width="2" marker-end="url(#arrow)" fill="none"/>
+  <text x="130" y="165" class="sublabel" fill="#27ae60">Updated</text>
+
+  <!-- Memory branch (continuous) -->
+  <rect x="155" y="230" width="80" height="45" rx="6" fill="#d4edda" stroke="#98d1a5" stroke-width="2"/>
+  <text x="195" y="255" class="label" text-anchor="middle">Memory</text>
+  <text x="195" y="268" class="sublabel" text-anchor="middle">Continuous</text>
+
+  <path d="M195 130 L195 225" stroke="#27ae60" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrow)"/>
+  <text x="210" y="180" class="sublabel" fill="#27ae60">Fast</text>
+
+  <!-- Caption -->
+  <rect x="75" y="300" width="450" height="35" rx="6" fill="#f5f5f5" stroke="#ddd"/>
+  <text x="300" y="318" class="label" text-anchor="middle">Learn often in memory. Consolidate carefully in weights.</text>
+  <text x="300" y="332" class="sublabel" text-anchor="middle">Periodic consolidation, not constant updates</text>
+</svg>

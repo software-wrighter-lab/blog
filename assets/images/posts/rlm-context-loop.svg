@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 380">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 14px; font-weight: 600; fill: #333; }
+      .label { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; fill: #333; }
+      .sublabel { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 10px; fill: #666; }
+    </style>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#66b3ff"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#27ae60"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="550" height="380" fill="#fafafa"/>
+
+  <!-- Title -->
+  <text x="275" y="25" class="title" text-anchor="middle">RLM: Recursive Context Management</text>
+
+  <!-- Center: LLM -->
+  <circle cx="275" cy="180" r="50" fill="#cce5ff" stroke="#66b3ff" stroke-width="3"/>
+  <text x="275" y="175" class="label" text-anchor="middle">LLM</text>
+  <text x="275" y="190" class="sublabel" text-anchor="middle">Reason</text>
+
+  <!-- Top: Context -->
+  <rect x="220" y="45" width="110" height="45" rx="8" fill="#e8e0f0" stroke="#c4b0e0" stroke-width="2"/>
+  <text x="275" y="70" class="label" text-anchor="middle">Context</text>
+  <text x="275" y="83" class="sublabel" text-anchor="middle">Rebuilt each step</text>
+
+  <!-- Right: Tools -->
+  <rect x="385" y="155" width="100" height="50" rx="8" fill="#fff3e0" stroke="#ffb366" stroke-width="2"/>
+  <text x="435" y="178" class="label" text-anchor="middle">Tools</text>
+  <text x="435" y="193" class="sublabel" text-anchor="middle">Execute</text>
+
+  <!-- Bottom: Memory -->
+  <rect x="220" y="280" width="110" height="45" rx="8" fill="#d4edda" stroke="#98d1a5" stroke-width="2"/>
+  <text x="275" y="303" class="label" text-anchor="middle">Memory</text>
+  <text x="275" y="318" class="sublabel" text-anchor="middle">Retrieve</text>
+
+  <!-- Left: Evaluate -->
+  <rect x="65" y="155" width="100" height="50" rx="8" fill="#f3e5f5" stroke="#c4b0e0" stroke-width="2"/>
+  <text x="115" y="178" class="label" text-anchor="middle">Evaluate</text>
+  <text x="115" y="193" class="sublabel" text-anchor="middle">Check result</text>
+
+  <!-- Circular arrows -->
+  <!-- LLM to Context -->
+  <path d="M275 130 L275 95" stroke="#66b3ff" stroke-width="2" marker-end="url(#arrowBlue)" fill="none"/>
+
+  <!-- Context to LLM (right side of top) -->
+  <path d="M305 90 Q 350 90 330 130" stroke="#66b3ff" stroke-width="2" marker-end="url(#arrowBlue)" fill="none"/>
+
+  <!-- LLM to Tools -->
+  <path d="M320 160 L380 165" stroke="#66b3ff" stroke-width="2" marker-end="url(#arrowBlue)" fill="none"/>
+
+  <!-- Tools to Evaluate (curved bottom) -->
+  <path d="M385 200 Q 275 260 170 200" stroke="#27ae60" stroke-width="2" marker-end="url(#arrowGreen)" fill="none"/>
+
+  <!-- Evaluate to LLM -->
+  <path d="M165 165 L220 170" stroke="#27ae60" stroke-width="2" marker-end="url(#arrowGreen)" fill="none"/>
+
+  <!-- LLM to Memory -->
+  <path d="M260 230 L255 275" stroke="#66b3ff" stroke-width="2" marker-end="url(#arrowBlue)" fill="none"/>
+
+  <!-- Memory to Context (curved left) -->
+  <path d="M230 280 Q 150 200 220 95" stroke="#27ae60" stroke-width="2" marker-end="url(#arrowGreen)" fill="none"/>
+
+  <!-- Labels for flow -->
+  <text x="380" y="145" class="sublabel">Call</text>
+  <text x="135" y="250" class="sublabel">Return</text>
+  <text x="175" y="110" class="sublabel">Inject</text>
+
+  <!-- Bottom caption -->
+  <rect x="75" y="345" width="400" height="25" rx="5" fill="#f5f5f5" stroke="#ddd"/>
+  <text x="275" y="362" class="label" text-anchor="middle">Rebuild context each step instead of dragging it forward</text>
+</svg>

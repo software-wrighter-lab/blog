@@ -1,0 +1,90 @@
+#!/usr/bin/env bash
+# Create a new draft in _drafts/ from the standard front matter template.
+#
+#   scripts/new-post "Recursive Language Models"
+#
+# Drafts have no date in the filename. The date is assigned by scripts/publish
+# when the post is promoted to _posts/.
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+
+# Drafts live on their own branch so main shows only published content.
+branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "")
+if [[ "$branch" != "drafts" ]]; then
+  echo "error: you are on '$branch'; drafts live on the 'drafts' branch." >&2
+  echo "       git checkout drafts" >&2
+  exit 1
+fi
+
+if [[ $# -lt 1 ]]; then
+  echo "usage: scripts/new-post \"Post Title\"" >&2
+  exit 1
+fi
+
+title="$1"
+
+# Lowercase, spaces to dashes, drop anything else. Hyphens are kept: names like
+# COR24-TB and I-JEPA are the norm here, and stripping the hyphen turns them
+# into unsearchable mush.
+slug=$(printf '%s' "$title" \
+  | tr '[:upper:]' '[:lower:]' \
+  | sed -E 's/[^a-z0-9 -]//g; s/ +/-/g; s/-+/-/g; s/^-+|-+$//g')
+
+if [[ -z "$slug" ]]; then
+  echo "error: title produced an empty slug" >&2
+  exit 1
+fi
+
+file="_drafts/${slug}.md"
+
+if [[ -e "$file" ]]; then
+  echo "error: $file already exists" >&2
+  exit 1
+fi
+
+mkdir -p _drafts
+
+cat > "$file" <<EOF
+---
+layout: post
+title: "${title}"
+categories: []
+tags: []
+keywords: ""
+author: Software Wrighter
+abstract: ""
+---
+
+<!--
+  categories:   broad bucket, e.g. [machine-learning], [ai-agents], [systems]
+  tags:         fine grained, e.g. [llm, rag, rust]
+  keywords:     comma-separated phrases for search and SEO, in prose form
+  abstract:     one or two sentences; used by search, the feed, and every index
+
+  Optional, all omit-if-unused. Delete the ones you do not need:
+
+  series: "How AI Learns"     name shown on /series/; must match the other parts
+  series_part: 4              required whenever series is set, or the build fails
+  repo_url: "https://github.com/softwarewrighter/..."
+  demo_url: "https://..."
+  video_url: "https://www.youtube.com/watch?v=..."
+  video_title: "..."
+  papers:
+    - title: "Paper Title"
+      url: "https://arxiv.org/abs/..."
+  toc: true                   long posts only; renders a table of contents
+-->
+
+Opening paragraph. What this post is about and why it matters.
+
+<!--more-->
+
+## First Section
+
+Body.
+EOF
+
+echo "created $file"
+echo "preview with: scripts/preview"
+echo "publish with: scripts/publish $slug"

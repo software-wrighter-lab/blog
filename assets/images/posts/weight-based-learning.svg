@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 400">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; font-weight: 600; fill: #333; }
+      .label { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; fill: #333; }
+      .sublabel { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 10px; fill: #666; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="650" height="400" fill="#fafafa"/>
+
+  <!-- Section 1: LoRA -->
+  <text x="170" y="30" class="title" text-anchor="middle">LoRA / Adapters</text>
+
+  <!-- Base model -->
+  <rect x="70" y="50" width="200" height="100" rx="8" fill="#cce5ff" stroke="#66b3ff" stroke-width="2"/>
+  <text x="170" y="90" class="label" text-anchor="middle">Base Model</text>
+  <text x="170" y="105" class="sublabel" text-anchor="middle">Frozen weights</text>
+
+  <!-- LoRA adapters -->
+  <rect x="50" y="70" width="30" height="60" rx="4" fill="#ffe5cc" stroke="#ffb366" stroke-width="2"/>
+  <text x="65" y="105" class="sublabel" text-anchor="middle">LoRA</text>
+
+  <rect x="260" y="70" width="30" height="60" rx="4" fill="#ffe5cc" stroke="#ffb366" stroke-width="2"/>
+  <text x="275" y="105" class="sublabel" text-anchor="middle">LoRA</text>
+
+  <!-- Benefits -->
+  <text x="170" y="175" class="label" text-anchor="middle">+ Modular, versioned</text>
+  <text x="170" y="190" class="label" text-anchor="middle">+ Lower forgetting risk</text>
+  <text x="170" y="205" class="label" text-anchor="middle">+ Fast training</text>
+
+  <!-- Section 2: Distillation -->
+  <text x="500" y="30" class="title" text-anchor="middle">Distillation</text>
+
+  <!-- Teacher model -->
+  <rect x="400" y="50" width="80" height="90" rx="8" fill="#cce5ff" stroke="#66b3ff" stroke-width="2"/>
+  <text x="440" y="90" class="label" text-anchor="middle">Teacher</text>
+  <text x="440" y="105" class="sublabel" text-anchor="middle">Large</text>
+
+  <!-- Arrow -->
+  <path d="M490 95 L530 95" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="510" y="85" class="sublabel" text-anchor="middle">distill</text>
+
+  <!-- Student model -->
+  <rect x="540" y="65" width="60" height="60" rx="6" fill="#d4edda" stroke="#98d1a5" stroke-width="2"/>
+  <text x="570" y="95" class="label" text-anchor="middle">Student</text>
+  <text x="570" y="108" class="sublabel" text-anchor="middle">Small</text>
+
+  <!-- Benefits -->
+  <text x="500" y="175" class="label" text-anchor="middle">+ Faster inference</text>
+  <text x="500" y="190" class="label" text-anchor="middle">+ More consistent</text>
+  <text x="500" y="205" class="label" text-anchor="middle">+ Reduced hallucination</text>
+
+  <!-- Section 3: Alignment (bottom) -->
+  <text x="325" y="245" class="title" text-anchor="middle">Alignment Methods</text>
+
+  <!-- Flow -->
+  <rect x="70" y="270" width="80" height="50" rx="6" fill="#cce5ff" stroke="#66b3ff" stroke-width="2"/>
+  <text x="110" y="295" class="label" text-anchor="middle">Base</text>
+  <text x="110" y="308" class="sublabel" text-anchor="middle">Model</text>
+
+  <path d="M160 295 L200 295" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="210" y="270" width="90" height="50" rx="6" fill="#ffe5cc" stroke="#ffb366" stroke-width="2"/>
+  <text x="255" y="295" class="label" text-anchor="middle">SFT</text>
+  <text x="255" y="308" class="sublabel" text-anchor="middle">Instructions</text>
+
+  <path d="M310 295 L350 295" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="360" y="270" width="90" height="50" rx="6" fill="#f3e5f5" stroke="#c4b0e0" stroke-width="2"/>
+  <text x="405" y="295" class="label" text-anchor="middle">RLHF/DPO</text>
+  <text x="405" y="308" class="sublabel" text-anchor="middle">Preferences</text>
+
+  <path d="M460 295 L500 295" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="510" y="270" width="90" height="50" rx="6" fill="#d4edda" stroke="#98d1a5" stroke-width="2"/>
+  <text x="555" y="295" class="label" text-anchor="middle">Aligned</text>
+  <text x="555" y="308" class="sublabel" text-anchor="middle">Model</text>
+
+  <!-- Caption -->
+  <text x="325" y="360" class="label" text-anchor="middle">Weight-based learning modifies the brain itself</text>
+  <text x="325" y="378" class="sublabel" text-anchor="middle">Slow to change, but forms the stable core</text>
+</svg>

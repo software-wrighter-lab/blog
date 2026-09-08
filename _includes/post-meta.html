@@ -1,0 +1,11 @@
+{%- comment -%}
+Shared post meta: date, author, word count, reading time
+Usage: {% include post-meta.html post=post %}
+       {% include post-meta.html post=page show_author=true %}
+{%- endcomment -%}
+{%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+{%- assign words = include.post.content | number_of_words -%}
+{%- assign minutes = words | plus: 199 | divided_by: 200 -%}
+<p class="post-meta">{{ include.post.date | date: date_format }}{%- if include.show_author and include.post.author %} &bull; {{ include.post.author }}{%- endif -%}</p>
+<p class="post-reading-info"><em><span class="post-word-count">{{ words }} words</span> &bull; <span class="post-read-time">{{ minutes }} min read</span></em>{%- if include.post.abstract %} &bull; <span class="abstract-toggle" onclick="this.classList.toggle('open'); this.parentElement.nextElementSibling.classList.toggle('open')">Abstract</span>{%- endif -%}</p>
+{%- if include.post.abstract -%}<div class="post-meta-abstract">{{ include.post.abstract }}</div>{%- endif -%}

@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 420">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; font-weight: 600; fill: #333; }
+      .label { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; fill: #333; }
+      .sublabel { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 10px; fill: #666; }
+      .layer-label { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 10px; fill: #999; }
+    </style>
+    <marker id="arrowFeedback" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#e74c3c"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="550" height="420" fill="#fafafa"/>
+
+  <!-- Title -->
+  <text x="275" y="25" class="title" text-anchor="middle">Layered Agent Architecture</text>
+
+  <!-- Layer 1: Context Manager (top) -->
+  <rect x="100" y="50" width="300" height="55" rx="10" fill="#e8e0f0" stroke="#c4b0e0" stroke-width="2"/>
+  <text x="250" y="75" class="label" text-anchor="middle">Context Manager (RLM)</text>
+  <text x="250" y="90" class="sublabel" text-anchor="middle">Rebuilds focus each step</text>
+  <text x="420" y="80" class="layer-label">Updates: per call</text>
+
+  <!-- Layer 2: External Memory -->
+  <rect x="100" y="120" width="300" height="55" rx="10" fill="#d4edda" stroke="#98d1a5" stroke-width="2"/>
+  <text x="250" y="145" class="label" text-anchor="middle">External Memory (RAG / Engram)</text>
+  <text x="250" y="160" class="sublabel" text-anchor="middle">Facts & experiences</text>
+  <text x="420" y="150" class="layer-label">Updates: continuous</text>
+
+  <!-- Layer 3: Adapters -->
+  <rect x="100" y="190" width="300" height="55" rx="10" fill="#ffe5cc" stroke="#ffb366" stroke-width="2"/>
+  <text x="250" y="215" class="label" text-anchor="middle">Adapters (PEFT / LoRA)</text>
+  <text x="250" y="230" class="sublabel" text-anchor="middle">Modular skills</text>
+  <text x="420" y="220" class="layer-label">Updates: periodic</text>
+
+  <!-- Layer 4: Core Weights (bottom) -->
+  <rect x="100" y="260" width="300" height="55" rx="10" fill="#cce5ff" stroke="#66b3ff" stroke-width="2"/>
+  <text x="250" y="285" class="label" text-anchor="middle">Core Weights</text>
+  <text x="250" y="300" class="sublabel" text-anchor="middle">Foundation capabilities</text>
+  <text x="420" y="290" class="layer-label">Updates: rare</text>
+
+  <!-- Side: Feedback/Logging -->
+  <rect x="30" y="110" width="55" height="160" rx="8" fill="#f3e5f5" stroke="#c4b0e0" stroke-width="2"/>
+  <text x="57" y="180" class="label" text-anchor="middle" transform="rotate(-90 57 180)">Logging &amp; Feedback</text>
+
+  <!-- Feedback arrows -->
+  <path d="M85 130 Q 60 190 85 240" stroke="#e74c3c" stroke-width="2" stroke-dasharray="4,2" fill="none" marker-end="url(#arrowFeedback)"/>
+
+  <!-- Right side: Evaluation -->
+  <rect x="415" y="110" width="55" height="160" rx="8" fill="#fff3e0" stroke="#ffb366" stroke-width="2"/>
+  <text x="442" y="180" class="label" text-anchor="middle" transform="rotate(90 442 180)">Evaluation Loop</text>
+
+  <!-- Evaluation arrows -->
+  <path d="M415 240 Q 435 190 415 130" stroke="#27ae60" stroke-width="2" stroke-dasharray="4,2" fill="none" marker-end="url(#arrowFeedback)"/>
+
+  <!-- Update arrows (left side, showing hierarchy) -->
+  <text x="70" y="55" class="sublabel">Fast</text>
+  <path d="M70 60 L70 310" stroke="#999" stroke-width="1"/>
+  <text x="70" y="325" class="sublabel">Slow</text>
+
+  <!-- Bottom summary boxes -->
+  <rect x="50" y="340" width="145" height="60" rx="6" fill="#f5f5f5" stroke="#ddd"/>
+  <text x="122" y="360" class="label" text-anchor="middle">Reduces</text>
+  <text x="122" y="375" class="sublabel" text-anchor="middle">Forgetting</text>
+  <text x="122" y="388" class="sublabel" text-anchor="middle">Hallucination</text>
+
+  <rect x="205" y="340" width="145" height="60" rx="6" fill="#f5f5f5" stroke="#ddd"/>
+  <text x="277" y="360" class="label" text-anchor="middle">Prevents</text>
+  <text x="277" y="375" class="sublabel" text-anchor="middle">Context rot</text>
+  <text x="277" y="388" class="sublabel" text-anchor="middle">Instruction drift</text>
+
+  <rect x="360" y="340" width="145" height="60" rx="6" fill="#f5f5f5" stroke="#ddd"/>
+  <text x="432" y="360" class="label" text-anchor="middle">Enables</text>
+  <text x="432" y="375" class="sublabel" text-anchor="middle">Safe improvement</text>
+  <text x="432" y="388" class="sublabel" text-anchor="middle">over time</text>
+</svg>

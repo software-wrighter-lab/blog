@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+# Serve the site locally INCLUDING drafts and future-dated posts, so you see
+# exactly what is not yet public alongside what is.
+#
+#   scripts/preview            # http://localhost:5907
+#   scripts/preview --port 8080
+#
+# Published-only preview (what visitors actually get):
+#   scripts/preview --no-drafts
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+
+port=5907
+flags=(--drafts --future --livereload)
+passthrough=()
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --no-drafts)
+      flags=(--livereload)
+      shift
+      ;;
+    --port)
+      port="$2"
+      shift 2
+      ;;
+    *)
+      passthrough+=("$1")
+      shift
+      ;;
+  esac
+done
+
+branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "")
+if [[ "$branch" != "drafts" && " ${flags[*]} " == *" --drafts "* ]]; then
+  echo "note: on branch '$branch'; _drafts/ lives on the 'drafts' branch, so" >&2
+  echo "      no drafts will appear. Run: git checkout drafts" >&2
+fi
+
+if ! command -v bundle >/dev/null 2>&1; then
+  echo "error: bundler not found. See docs/workflow.md for toolchain setup." >&2
+  exit 1
+fi
+
+ruby_major_minor=$(ruby -e 'print RUBY_VERSION[/\d+\.\d+/]')
+if [[ $(printf '%s\n2.7\n' "$ruby_major_minor" | sort -V | head -1) != "2.7" ]]; then
+  echo "error: Jekyll 4.4 needs Ruby >= 2.7, found $(ruby -v)." >&2
+  echo "       macOS system Ruby is too old. Install a current one:" >&2
+  echo "         brew install ruby" >&2
+  echo "       then add it to PATH. See docs/workflow.md." >&2
+  exit 1
+fi
+
+if [[ ! -d .bundle && ! -f Gemfile.lock ]]; then
+  echo "first run: installing gems..."
+  bundle install
+fi
+
+exec bundle exec jekyll serve --port "$port" "${flags[@]}" ${passthrough[@]+"${passthrough[@]}"}

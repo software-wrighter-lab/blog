@@ -1,0 +1,69 @@
+# Site settings
+title: "Software Wrighter Lab"
+email: ""
+description: "AI coding agents, systems programming, and practical machine learning"
+author: Mike Wright
+github_username: softwarewrighter
+
+# Where the site is served from.
+#
+# Today this is the GitHub Pages project address, which lives under a path.
+# Every URL in the templates and posts goes through the `relative_url` filter,
+# so pointing a custom domain here later is a two-line change: set `url` to the
+# domain, set `baseurl` to "", and add a CNAME file. Nothing else moves.
+url: "https://software-wrighter-lab.github.io"
+baseurl: "/blog"
+
+# Build settings
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Permalink structure
+permalink: /:year/:month/:day/:title/
+
+# Excerpt settings
+excerpt_separator: <!--more-->
+show_excerpts: true
+
+# Minima theme settings
+minima:
+  skin: auto
+  date_format: "%B %-d, %Y"
+  social_links:
+    - { platform: github,  user_url: "https://github.com/softwarewrighter" }
+    - { platform: youtube, user_url: "https://www.youtube.com/@SoftwareWrighter" }
+    - { platform: discord, user_url: "https://discord.com/invite/Ctzk5uHggZ" }
+
+# Header pages, in nav order
+header_pages:
+  - about.markdown
+  - abstracts.html
+  - series.html
+  - categories.html
+  - tags.html
+  - index-all.html
+  - search.html
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Mike Wright"
+
+# Exclude from processing
+exclude:
+  - .bundle/
+  - .jekyll-cache/
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - docs/
+  - node_modules/
+  - scripts/
+  - vendor/

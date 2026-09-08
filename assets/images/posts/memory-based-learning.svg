@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 380">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; font-weight: 600; fill: #333; }
+      .label { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; fill: #333; }
+      .sublabel { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 10px; fill: #666; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#666"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="380" fill="#fafafa"/>
+
+  <!-- Title -->
+  <text x="300" y="25" class="title" text-anchor="middle">Memory-Based Learning: Brain vs Notebook</text>
+
+  <!-- Left: Model (Brain) -->
+  <rect x="60" y="60" width="120" height="120" rx="10" fill="#cce5ff" stroke="#66b3ff" stroke-width="3"/>
+  <text x="120" y="110" class="label" text-anchor="middle">Model</text>
+  <text x="120" y="125" class="sublabel" text-anchor="middle">(Brain)</text>
+  <text x="120" y="155" class="sublabel" text-anchor="middle">Frozen weights</text>
+
+  <!-- Right: Memory (Notebook) -->
+  <rect x="420" y="60" width="120" height="120" rx="10" fill="#d4edda" stroke="#98d1a5" stroke-width="3"/>
+  <text x="480" y="110" class="label" text-anchor="middle">External</text>
+  <text x="480" y="125" class="label" text-anchor="middle">Memory</text>
+  <text x="480" y="155" class="sublabel" text-anchor="middle">(Notebook)</text>
+
+  <!-- Query flow -->
+  <path d="M185 90 L270 90" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="227" y="82" class="sublabel" text-anchor="middle">Query</text>
+
+  <!-- Search in DB -->
+  <ellipse cx="300" cy="120" rx="25" ry="25" fill="#f5f5f5" stroke="#999"/>
+  <text x="300" y="125" class="label" text-anchor="middle">Search</text>
+
+  <path d="M325 105 L415 90" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Return relevant docs -->
+  <path d="M415 130 L325 135" stroke="#27ae60" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="370" y="145" class="sublabel" text-anchor="middle" fill="#27ae60">Results</text>
+
+  <path d="M270 140 L185 140" stroke="#27ae60" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="227" y="155" class="sublabel" text-anchor="middle" fill="#27ae60">Inject</text>
+
+  <!-- Three types of memory -->
+  <text x="150" y="220" class="title" text-anchor="middle">RAG</text>
+  <rect x="80" y="235" width="140" height="60" rx="6" fill="#d4edda" stroke="#98d1a5"/>
+  <text x="150" y="260" class="label" text-anchor="middle">Vector Database</text>
+  <text x="150" y="275" class="sublabel" text-anchor="middle">Semantic similarity</text>
+
+  <text x="300" y="220" class="title" text-anchor="middle">CAG</text>
+  <rect x="230" y="235" width="140" height="60" rx="6" fill="#fff3e0" stroke="#ffb366"/>
+  <text x="300" y="260" class="label" text-anchor="middle">KV Cache</text>
+  <text x="300" y="275" class="sublabel" text-anchor="middle">Precomputed context</text>
+
+  <text x="450" y="220" class="title" text-anchor="middle">Engram</text>
+  <rect x="380" y="235" width="140" height="60" rx="6" fill="#e3f2fd" stroke="#64b5f6"/>
+  <text x="450" y="260" class="label" text-anchor="middle">Indexed Slots</text>
+  <text x="450" y="275" class="sublabel" text-anchor="middle">O(1) lookup</text>
+
+  <!-- Benefits row -->
+  <rect x="60" y="320" width="480" height="45" rx="6" fill="#f5f5f5" stroke="#ddd"/>
+  <text x="300" y="342" class="label" text-anchor="middle">Benefits: No forgetting | Persists across restarts | Survives model upgrades</text>
+  <text x="300" y="356" class="sublabel" text-anchor="middle">Store facts outside the brain</text>
+</svg>
