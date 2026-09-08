@@ -1,5 +1,5 @@
 # Site settings
-title: "Software Wrighter Lab"
+title: "Software Wrighter Lab Blog"
 email: ""
 description: "AI coding agents, systems programming, and practical machine learning"
 author: Mike Wright
@@ -39,14 +39,15 @@ minima:
     - { platform: discord, user_url: "https://discord.com/invite/Ctzk5uHggZ" }
 
 # Header pages, in nav order
+# Alphabetical by nav_title, matching the old site.
 header_pages:
   - about.markdown
   - abstracts.html
-  - series.html
   - categories.html
-  - tags.html
   - index-all.html
   - search.html
+  - series.html
+  - tags.html
 
 # Default front matter
 defaults:
