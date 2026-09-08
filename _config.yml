@@ -7,12 +7,13 @@ github_username: softwarewrighter
 
 # Where the site is served from.
 #
-# Today this is the GitHub Pages project address, which lives under a path.
-# Every URL in the templates and posts goes through the `relative_url` filter,
-# so pointing a custom domain here later is a two-line change: set `url` to the
-# domain, set `baseurl` to "", and add a CNAME file. Nothing else moves.
-url: "https://software-wrighter-lab.github.io"
-baseurl: "/blog"
+# A custom domain on a project repo serves the repo at the domain ROOT, so the
+# baseurl is empty --- not "/blog", even though the repo is named blog. Getting
+# this wrong breaks every stylesheet, script, and image at once while the pages
+# themselves still load, because permalinks are directories and asset URLs are
+# not. The bare domain is also in ./CNAME, which Jekyll copies into the build.
+url: "https://blog.softwarewrighter.com"
+baseurl: ""
 
 # Build settings
 theme: minima

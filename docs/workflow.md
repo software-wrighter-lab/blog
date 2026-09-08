@@ -104,32 +104,37 @@ drafts branch keeps tracking the live theme and scripts.
 
 ## URLs and the custom domain
 
-The site is served today from the GitHub Pages *project* address, which lives
-under a path:
+The site is served from a custom domain:
 
 ```
-https://software-wrighter-lab.github.io/blog/
+https://blog.softwarewrighter.com/
 ```
 
-`_config.yml` therefore sets `baseurl: "/blog"`, and every URL in the templates
-and in post bodies goes through Jekyll's `relative_url` filter. Nothing
-hardcodes a leading `/assets/...`.
+A custom domain on a *project* repo serves the repo at the domain **root**, not
+under the repo name. So `_config.yml` sets `baseurl: ""` even though the repo is
+called `blog`, and `./CNAME` holds the bare domain (Jekyll copies it into the
+build, which keeps the domain set across deploys).
 
-To move to a custom domain later:
+If the domain is ever removed, the site falls back to the project address
+`https://software-wrighter-lab.github.io/blog/` and `baseurl` must become
+`"/blog"` to match. Those two settings move together --- `url` and `baseurl` in
+`_config.yml`, plus `CNAME`. Nothing else changes, because every URL in the
+templates and in post bodies goes through Jekyll's `relative_url` filter and
+nothing hardcodes a leading `/assets/...`.
 
-1. `url: "https://<domain>"` and `baseurl: ""` in `_config.yml`
-2. add a `CNAME` file at the repo root containing the bare domain
-3. point the DNS record at GitHub Pages and enable it in repo settings
+**Two traps here, both of which this repo has already hit:**
 
-No post or template changes. That is the entire migration.
+*Getting the baseurl wrong is quiet.* Permalinks are directories, so every page
+still loads --- while every stylesheet, script, and image 404s, and the nav links
+point at a path that does not exist. If the site renders as unstyled text, check
+`baseurl` before anything else.
 
-**The trap this avoids:** with an empty baseurl, `relative_url` is a silent
-no-op, so a template that applies it *twice* looks perfectly fine. Serve the
-same site from a subpath and every one of those URLs doubles its prefix and
-404s. `abstracts.html` had exactly this bug --- it scrapes the first `<img src>`
-out of already-rendered post HTML, which already carries the baseurl. If you add
-a template that pulls a URL out of `post.content`, do not put it through
-`relative_url` again.
+*Applying `relative_url` twice is quiet too*, as long as the baseurl is empty,
+because then the filter is a no-op. Serve the same site from a subpath and every
+double-filtered URL doubles its prefix. `abstracts.html` had exactly this bug: it
+scrapes the first `<img src>` out of already-rendered post HTML, which already
+carries the baseurl. If you add a template that pulls a URL out of
+`post.content`, do not put it through `relative_url` again.
 
 ## Local toolchain
 
