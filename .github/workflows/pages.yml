@@ -17,8 +17,13 @@ permissions:
   pages: write
   id-token: write
 
+# Keyed by branch, not a single global "pages" group. Every branch builds here
+# but only main deploys, so a shared group lets a push to `drafts` cancel a
+# main deploy that is already running --- the site then silently stays on the
+# previous version. Per-branch groups still collapse a burst of pushes to the
+# same branch, which is the behaviour actually wanted.
 concurrency:
-  group: pages
+  group: pages-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
