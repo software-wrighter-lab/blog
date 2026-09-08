@@ -5,11 +5,11 @@ machine learning.
 
 ## Live site
 
-**https://software-wrighter-lab.github.io/blog/**
+**https://blog.softwarewrighter.com/**
 
 Built from source by GitHub Actions on every push to `main` and deployed to
-GitHub Pages. A custom domain can be pointed here later; see
-[docs/workflow.md](docs/workflow.md#urls-and-the-custom-domain).
+GitHub Pages. The old project address,
+`https://software-wrighter-lab.github.io/blog/`, redirects here.
 
 ## Writing
 
