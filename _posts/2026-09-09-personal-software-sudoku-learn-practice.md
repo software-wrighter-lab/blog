@@ -87,11 +87,19 @@ The solver is deterministic backtracking with most-constrained-cell selection, a
 
 ## The part I actually wanted
 
+
+<div class="gutter-section" markdown="1">
+
+<img src="{{ '/assets/images/posts/sudoku-learn-mode.webp' | relative_url }}" class="gutter-img-right no-invert" alt="Learn mode walking through a naked single, with the pattern cell highlighted">
+
 **Learn mode** looks at the live board and lists *every* strategy currently applicable to it --- singles, pointing and claiming, naked and hidden pairs, X-Wing, XY-Wing --- then walks whichever you pick, step by step. The highlighting does the explaining: pattern cells outlined, the involved rows, columns and blocks tinted, eliminated candidates pulsing red with a strike-through, placements pulsing green.
 
 That is the difference from reading about a technique. The board in front of you is the example, and the strategy is shown where it applies rather than in an abstract diagram.
 
 **Show me mode** hands the board to the game, which solves it while explaining one strategy at a time. It runs automatically with a speed selector --- 1s, 3s, or 6s, with a manual Next that pauses --- or step by step. When the taught techniques run out, it explains a trial placement instead of stopping, so even a Hardest board solves to the end rather than dead-ending at the limit of the curriculum.
+
+</div>
+
 
 ## Notes, after feedback
 

@@ -127,6 +127,11 @@ Work so far: a safe QEMU launcher and a reproducible build setup, plus a local V
 
 ## MLOS
 
+
+<div class="gutter-section" markdown="1">
+
+<img src="{{ '/assets/images/posts/sw-mlos-logo.webp' | relative_url }}" class="gutter-img-right no-invert" alt="SW MLOS logo">
+
 [**MLOS**](https://github.com/sw-ml-study/sw-os-ml) starts from what an operating system virtualizes. A conventional kernel virtualizes physical memory behind an abstraction the hardware understands --- the page --- and paging, faults, working sets and replacement policy all follow from that.
 
 On a machine running models, the scarce resource is resident model state: weights, KV blocks, MoE expert streams, activations, embeddings, adapters. Each application manages its own by hand, with no shared notion of residency, eviction or fairness. MLOS asks what a kernel looks like when the *ML object* is the unit of virtualization --- with residency, tiering, leases and faults as kernel concepts. It is a new Rust kernel, not a Linux derivative, and boots in a VM under QEMU on arm64.
@@ -147,6 +152,9 @@ The repo keeps `docs/status.md` as ground truth: "If it is not in this file, it 
 It boots and gives you a shell called `mlsh`. Milestone M0 is complete, M1 is 17 of 18 steps with one parked, and M2 --- the object table --- is where the ML content starts and has not begun. Everything described above is architecture, not code.
 
 **Next:** M2, the object table.
+
+</div>
+
 
 ## emufpga
 
