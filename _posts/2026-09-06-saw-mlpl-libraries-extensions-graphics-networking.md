@@ -119,7 +119,10 @@ include "vendor/swml/result.mlpl"
 
 <div class="gutter-section" markdown="1">
 
-<img src="{{ '/assets/images/posts/life-torus-animated.webp' | relative_url }}" class="gutter-img-right no-invert" alt="A glider advancing across the wrapped native Life torus, from demo-extensions">
+<figure class="gutter-img-right no-invert">
+<img src="{{ '/assets/images/posts/life-torus-animated.webp' | relative_url }}" alt="A glider advancing across the wrapped native Life torus">
+<figcaption>A glider crossing the wrapped Life torus, rendered natively by <a href="https://github.com/sw-ml-study/demo-extensions">demo-extensions</a>.</figcaption>
+</figure>
 
 Thirteen companion repositories exercise the language on real material. Each states an ownership boundary --- what MLPL does, and where a native tool or external oracle takes over --- and records what it cannot yet express as an upstream request rather than working around it.
 
