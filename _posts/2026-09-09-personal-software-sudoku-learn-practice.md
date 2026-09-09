@@ -109,6 +109,11 @@ The cleanup pass added a pencil toggle, fill, clear, hide, and auto-pruning of n
 
 ## How it was built
 
+
+<div class="gutter-section" markdown="1">
+
+<img src="{{ '/assets/images/posts/sudoku-tower.webp' | relative_url }}" class="gutter-img-left no-invert" alt="A folk-art totem with a Sudoku grid for a body and a SOLVE ME plaque">
+
 Development is saga-driven with AgentRail and TDD, decomposed into component workspaces following the sw-MLPL pattern: each `components/*` directory is its own cargo workspace of small crates, sharing one root `target/` and a global build lock.
 
 | Workspace | Contents |
@@ -121,6 +126,9 @@ Development is saga-driven with AgentRail and TDD, decomposed into component wor
 The `tutor` split is what made teaching possible: the engine's job is to decide a puzzle's difficulty, while the tutor's job is to produce an explanation with the cells and candidates attached.
 
 Eighty-seven commits between 2026-08-18 and 2026-08-26 took it from an empty workspace to v0.7.2. The site is built locally and pushed as a bundle; there is no CI build step.
+
+</div>
+
 
 ## Bottom line
 
