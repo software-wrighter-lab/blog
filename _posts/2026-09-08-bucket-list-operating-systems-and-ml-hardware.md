@@ -85,6 +85,10 @@ The board's constraints drive the design:
 | Interrupt PC unreadable | The resume address must be measured rather than saved (below) |
 | 1 MB total | Kernel, services and applications link into one flat binary |
 
+<figure class="inline-left" style="max-width: 200px;">
+<img src="{{ '/assets/images/posts/sw-tos-logo.webp' | relative_url }}" alt="Software Wrighter Tiny O/S logo">
+</figure>
+
 **Running now:** the whole system --- emulated COR24, microkernel, services, shell, tiled terminal frontend --- is compiled to WebAssembly at [swtos.softwarewrighter.com](https://swtos.softwarewrighter.com/). `Ctrl-O` then `?` lists commands.
 
 **On hardware:** SWTOS has booted on a physical COR24-TB at 921600 baud, running the scheduler, catalog shell, process listing, the time applications, two workers under the multitask menu, and the `help`, `df`, `du`, `dir`, `uname` and `stat` queries.
