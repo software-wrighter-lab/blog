@@ -9,6 +9,23 @@ abstract: "Status report on two bucket list items: developing operating systems,
 series: "Bucket List"
 series_part: 4
 date: 2026-09-08 00:15:00 -0700
+repo_urls:
+  - url: "https://github.com/sw-embed/sw-tos"
+    title: "sw-tos (SWTOS microkernel)"
+  - url: "https://github.com/sw-embed/web-sw-tos"
+    title: "web-sw-tos (browser frontend)"
+  - url: "https://github.com/sw-embed/sw-cor24-plsw"
+    title: "sw-cor24-plsw (PL/SW)"
+  - url: "https://github.com/softwarewrighter/MesaOS"
+    title: "MesaOS (my fork)"
+  - url: "https://github.com/crackanimad0r/MesaOS"
+    title: "crackanimad0r/MesaOS (upstream)"
+  - url: "https://github.com/sw-ml-study/sw-os-ml"
+    title: "sw-os-ml (MLOS)"
+  - url: "https://github.com/sw-ml-study/emufpga"
+    title: "emufpga"
+  - url: "https://github.com/softwarewrighter/bucketlist"
+    title: "bucketlist"
 ---
 
 <img src="{{ '/assets/images/posts/bucket-list-os-and-ml-hardware.webp' | relative_url }}" class="post-marker" alt="" style="width: 200px;">
