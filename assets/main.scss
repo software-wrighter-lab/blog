@@ -966,6 +966,32 @@ article.post .resource-box,
   object-position: center;
 }
 
+// A gutter item may be a <figure> rather than a bare <img>, so it can carry a
+// caption. The base rules above size a replaced element; a figure needs its
+// child image constrained instead, leaving room for the caption beneath.
+figure.gutter-img-left,
+figure.gutter-img-right {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    max-height: calc(100% - 3em);
+    object-fit: contain;
+  }
+
+  figcaption {
+    margin-top: 0.6em;
+    font-size: 0.82em;
+    line-height: 1.4;
+    text-align: center;
+  }
+}
+
 .gutter-img-left  { right: calc(100% + 1.25rem); }
 .gutter-img-right { left:  calc(100% + 1.25rem); }
 
