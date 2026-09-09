@@ -87,6 +87,25 @@ git show "${DRAFT_BRANCH}:${src}" | awk -v newdate="date: ${date_arg} ${POST_TIM
   { print }
 ' > "$work/$dest"
 
+# Carry across any image the post references that main does not have yet.
+# Publishing moves a file between branches; an image committed alongside the
+# draft stays on `drafts` unless it is copied too, and main then ships a post
+# pointing at an asset that 404s. The post still builds, so nothing fails ---
+# it is only visible by loading the page.
+assets=$(grep -oE "/assets/images/[A-Za-z0-9._/-]+" "$work/$dest" | sort -u || true)
+for a in $assets; do
+  rel="${a#/}"
+  [[ -e "$work/$rel" ]] && continue
+  if git cat-file -e "${DRAFT_BRANCH}:${rel}" 2>/dev/null; then
+    mkdir -p "$work/$(dirname "$rel")"
+    git show "${DRAFT_BRANCH}:${rel}" > "$work/$rel"
+    git -C "$work" add "$rel"
+    echo "carried asset: $rel"
+  else
+    echo "warning: $dest references $a, which is on neither branch" >&2
+  fi
+done
+
 if [[ -x "$work/scripts/validate" ]]; then
   ( cd "$work" && git add "$dest" && scripts/validate ) || {
     echo "error: validation failed; nothing was pushed" >&2; exit 1; }
