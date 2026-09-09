@@ -9,6 +9,7 @@ abstract: "I was tired of ad-supported Sudoku apps, and I wanted to learn the mo
 series: "Personal Software"
 series_part: 10
 date: 2026-09-09 00:15:00 -0700
+repo_url: "https://github.com/sw-fun/sudoku"
 ---
 
 <img src="{{ '/assets/images/posts/sudoku-board.webp' | relative_url }}" class="post-marker" alt="A Sudoku board in play, with pencil-mark candidates and coordinate labels" style="width: 220px;">

@@ -9,6 +9,7 @@ abstract: "local-llm-loop is a Rust harness that drives opencode against a local
 series: "AI Tools"
 series_part: 6
 date: 2026-09-09 00:15:00 -0700
+repo_url: "https://github.com/softwarewrighter/local-llm-loop"
 ---
 
 <img src="{{ '/assets/images/posts/gear-brain.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 200px;">

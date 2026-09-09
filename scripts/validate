@@ -68,6 +68,25 @@ for f in "${posts[@]}"; do
     fi
   fi
 
+  # index-all.html builds its Code, Videos and Papers tabs purely from front
+  # matter --- repo_url / repo_urls, video_url / video_urls, papers. A post that
+  # links a repository in its body but declares none is simply absent from the
+  # Code index. Nothing fails: the post builds, renders, and reaches every other
+  # index, so the gap is invisible until someone opens the tab and notices a
+  # project missing. Warn rather than error, because not every GitHub link in a
+  # body is the post's own project.
+  if ! grep -qE '^repo_urls?:' "$f"; then
+    if sed '1,/^---$/d;1,/^---$/d' "$f" | grep -q 'github\.com/'; then
+      warn "$base: links a repo but sets no repo_url/repo_urls; it will be missing from the Code tab on /index-all/"
+    fi
+  fi
+
+  if ! grep -qE '^video_urls?:' "$f"; then
+    if sed '1,/^---$/d;1,/^---$/d' "$f" | grep -qE 'youtube\.com|youtu\.be'; then
+      warn "$base: links a video but sets no video_url/video_urls; it will be missing from the Videos tab on /index-all/"
+    fi
+  fi
+
   # An unquoted numeric list entry parses as an Integer, which breaks the build
   # in two non-obvious ways: `slugify` calls gsub on it, and `site.tags | sort`
   # cannot compare an Integer key against String keys. Version numbers and bare

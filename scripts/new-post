@@ -66,14 +66,22 @@ abstract: ""
 
   series: "How AI Learns"     name shown on /series/; must match the other parts
   series_part: 4              required whenever series is set, or the build fails
-  repo_url: "https://github.com/softwarewrighter/..."
   demo_url: "https://..."
+  toc: true                   long posts only; renders a table of contents
+
+  THESE DRIVE THE /index-all/ TABS. A post that talks about a repo, a video or
+  a paper but omits the matching field is missing from that tab, silently ---
+  the post still builds and appears everywhere else. scripts/validate warns.
+
+  repo_url: "https://github.com/owner/repo"
+  repo_urls:                  use instead of repo_url when a post covers several
+    - url: "https://github.com/owner/repo"
+      title: "repo"
   video_url: "https://www.youtube.com/watch?v=..."
   video_title: "..."
   papers:
     - title: "Paper Title"
       url: "https://arxiv.org/abs/..."
-  toc: true                   long posts only; renders a table of contents
 -->
 
 Opening paragraph. What this post is about and why it matters.

@@ -61,6 +61,32 @@ the front matter date; that a post with a `series` also has a `series_part`
 (without it, `series.html` sorts nil against Integer and the whole build dies);
 and that the time of day will not make a *scheduled* post slip a day.
 
+## Front matter that drives the indexes
+
+Most indexes build themselves from the posts collection: home, abstracts,
+series, categories, tags, `search.json`, `feed.xml`, `sitemap.xml`, and the
+Alphabetical, Chronological and KWIC tabs of `/index-all/`. Write a post and it
+appears in all of them.
+
+Three tabs on `/index-all/` do **not** work that way. They are built purely from
+front matter:
+
+| Tab | Built from |
+|-----|-----------|
+| Code | `repo_url`, or `repo_urls` (a list of `{url, title}`) |
+| Videos | `video_url` + `video_title`, or `video_urls` + `video_titles` |
+| Papers | `papers` (a list of `{title, url}`) |
+
+A post that links a repository in its prose but declares no `repo_url` is simply
+absent from the Code tab. Nothing fails --- the post builds, renders, and reaches
+every other index --- so the gap stays invisible until someone opens the tab and
+notices a project missing. This has already happened once, to four posts at
+once.
+
+`scripts/validate` now warns when a post's body links a GitHub repository or a
+video but the matching front matter is absent. It is a warning, not an error,
+because not every link in a body is the post's own project.
+
 ## How publishing actually works
 
 A post is public when it is a file in `_posts/` with a date in the past, on
