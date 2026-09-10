@@ -125,7 +125,7 @@ A newer COR24-TB revision is expected soon with interrupt register support, an i
 
 SWTOS runs on a machine with no memory protection at all. MesaOS has the thing SWTOS does without: real privilege separation, real ELF loading, a real user/kernel boundary. [My fork](https://github.com/softwarewrighter/MesaOS) is where I run experiments against that boundary.
 
-Work so far: a safe QEMU launcher and a reproducible build setup, plus a local VNC console that keeps MesaOS running across a disconnect. Then Ring 3 experiments in Rust `no_std` --- most recently an ASCII analog clock loaded as an isolated ELF in Ring 3, with no direct framebuffer access and no kernel privileges. It gets RTC time, console clear and colour, and a latched Ctrl+C through small, narrowly scoped syscalls. Getting the animation to sweep correctly required the kernel shell to wait while an `exec`'d child holds the foreground, so the two stop racing for the keyboard and screen.
+Work so far: a safe QEMU launcher and a reproducible build setup, plus a local VNC console that keeps MesaOS running across a disconnect. Then Ring 3 experiments in Rust `no_std` --- most recently an ASCII analog clock loaded as an isolated ELF in Ring 3, with no direct framebuffer access and no kernel privileges. It gets RTC time, console clear and color, and a latched Ctrl+C through small, narrowly scoped syscalls. Getting the animation to sweep correctly required the kernel shell to wait while an `exec`'d child holds the foreground, so the two stop racing for the keyboard and screen.
 
 **Next:** further Ring 3 experiments against the privilege boundary.
 
