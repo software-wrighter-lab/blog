@@ -152,7 +152,7 @@ Qwen3.5, 3.6 and 3.8 at 27B were run identically --- text-only `Q4_K_M`, 32k con
 | Qwen3.6-27B | 100.8 / 12.4 t/s | Plan failed 3/3, 6,321 planner output tokens; terminal after 11m25s |
 | Qwen3.8-27B | 114.1 / 12.4 t/s | Plan on attempt 2; full loop; 3/3 tests + clippy; fixed a runtime parser bug it found |
 
-Decode rates are effectively tied, so agent behaviour rather than inference throughput determined the outcome. The expectation that 3.6 would use fewer tokens is not supported here: it produced 6,321 output tokens during planning and never produced a valid plan, and its 11-minute figure is time to failure, not a faster loop. Qwen3.6 also did not recover from rejected absolute-path writes.
+Decode rates are effectively tied, so agent behavior rather than inference throughput determined the outcome. The expectation that 3.6 would use fewer tokens is not supported here: it produced 6,321 output tokens during planning and never produced a valid plan, and its 11-minute figure is time to failure, not a faster loop. Qwen3.6 also did not recover from rejected absolute-path writes.
 
 ## Scope of these numbers
 
