@@ -30,6 +30,14 @@
         section.appendChild(node);
         node = next;
       }
+
+      // Moving a media element out of and back into the document pauses it,
+      // and autoplay does not fire a second time. Resume any autoplaying
+      // video that was carried into this section.
+      section.querySelectorAll('video[autoplay]').forEach(function(v) {
+        const p = v.play();
+        if (p && p.catch) p.catch(function() {});
+      });
     });
   }
 

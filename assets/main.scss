@@ -444,9 +444,12 @@ figure {
   margin: 1.5em 0;
   padding: 0;
 
-  img {
+  img,
+  video {
     display: block;
     margin: 0 auto;
+    max-width: 100%;
+    height: auto;
     border-radius: 4px;
   }
 
@@ -874,6 +877,33 @@ article.post .resource-box,
   }
 }
 
+// Light/dark image PAIRS. Use these when a CSS invert(1) would tint the image
+// -- sepia line art, photographs, anything not neutral gray. Ship two files
+// and mark them; the theme picks one. Falls back to the light image when CSS
+// is unavailable. (For neutral artwork, the .post-marker auto-invert above is
+// cheaper: one file, no second download.)
+.theme-dark-only {
+  display: none;
+}
+
+[data-theme="dark"] .theme-light-only {
+  display: none;
+}
+
+[data-theme="dark"] .theme-dark-only {
+  display: inline;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-light-only {
+    display: none;
+  }
+
+  :root:not([data-theme="light"]) .theme-dark-only {
+    display: inline;
+  }
+}
+
 // Per-post navigation on the home page list: [N+1]←[N]→[N-1]
 // Bidirectional in-page jump. The current [N] is shown as a span,
 // available neighbors as anchor links, and unavailable ones (newest
@@ -966,6 +996,16 @@ article.post .resource-box,
   object-position: center;
 }
 
+// A gutter video sits inside the gutter with a little air on both sides,
+// rather than bleeding into the page margin the way a still is allowed to.
+// It still takes the section's height, so a landscape clip matches the text
+// beside it and object-fit keeps its aspect.
+video.gutter-img-left,
+video.gutter-img-right {
+  width: 60%;
+  border-radius: 4px;
+}
+
 // A gutter item may be a <figure> rather than a bare <img>, so it can carry a
 // caption. The base rules above size a replaced element; a figure needs its
 // child image constrained instead, leaving room for the caption beneath.
@@ -976,7 +1016,8 @@ figure.gutter-img-right {
   flex-direction: column;
   justify-content: center;
 
-  img {
+  img,
+  video {
     display: block;
     margin: 0 auto;
     max-width: 100%;
