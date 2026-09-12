@@ -444,9 +444,12 @@ figure {
   margin: 1.5em 0;
   padding: 0;
 
-  img {
+  img,
+  video {
     display: block;
     margin: 0 auto;
+    max-width: 100%;
+    height: auto;
     border-radius: 4px;
   }
 
@@ -991,6 +994,16 @@ article.post .resource-box,
   max-height: 100%;
   object-fit: contain;
   object-position: center;
+}
+
+// A gutter video sits inside the gutter with a little air on both sides,
+// rather than bleeding into the page margin the way a still is allowed to.
+// It still takes the section's height, so a landscape clip matches the text
+// beside it and object-fit keeps its aspect.
+video.gutter-img-left,
+video.gutter-img-right {
+  width: 60%;
+  border-radius: 4px;
 }
 
 // A gutter item may be a <figure> rather than a bare <img>, so it can carry a
