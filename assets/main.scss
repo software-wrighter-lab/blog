@@ -874,6 +874,33 @@ article.post .resource-box,
   }
 }
 
+// Light/dark image PAIRS. Use these when a CSS invert(1) would tint the image
+// -- sepia line art, photographs, anything not neutral gray. Ship two files
+// and mark them; the theme picks one. Falls back to the light image when CSS
+// is unavailable. (For neutral artwork, the .post-marker auto-invert above is
+// cheaper: one file, no second download.)
+.theme-dark-only {
+  display: none;
+}
+
+[data-theme="dark"] .theme-light-only {
+  display: none;
+}
+
+[data-theme="dark"] .theme-dark-only {
+  display: inline;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-light-only {
+    display: none;
+  }
+
+  :root:not([data-theme="light"]) .theme-dark-only {
+    display: inline;
+  }
+}
+
 // Per-post navigation on the home page list: [N+1]←[N]→[N-1]
 // Bidirectional in-page jump. The current [N] is shown as a span,
 // available neighbors as anchor links, and unavailable ones (newest
@@ -976,7 +1003,8 @@ figure.gutter-img-right {
   flex-direction: column;
   justify-content: center;
 
-  img {
+  img,
+  video {
     display: block;
     margin: 0 auto;
     max-width: 100%;
