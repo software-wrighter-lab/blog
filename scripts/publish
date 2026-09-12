@@ -92,7 +92,7 @@ git show "${DRAFT_BRANCH}:${src}" | awk -v newdate="date: ${date_arg} ${POST_TIM
 # draft stays on `drafts` unless it is copied too, and main then ships a post
 # pointing at an asset that 404s. The post still builds, so nothing fails ---
 # it is only visible by loading the page.
-assets=$(grep -oE "/assets/images/[A-Za-z0-9._/-]+" "$work/$dest" | sort -u || true)
+assets=$(grep -oE "/assets/(images|videos)/[A-Za-z0-9._/-]+" "$work/$dest" | sort -u || true)
 for a in $assets; do
   rel="${a#/}"
   [[ -e "$work/$rel" ]] && continue
