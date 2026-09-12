@@ -48,6 +48,11 @@ date: 2026-09-12 00:15:00 -0700
 
 [MesaOS](https://github.com/crackanimad0r/MesaOS) is the conventional one, and that is why it belongs here. It is somebody else's work --- I am running [a fork](https://github.com/softwarewrighter/MesaOS) of it. A 64-bit hybrid kernel with a physical frame allocator, a virtual memory manager, a higher-half direct map, a kernel heap, and ELF programs running in Ring 3 behind a real privilege boundary. Textbook architecture, the kind SWTOS deliberately is not.
 
+<figure class="inline-right no-invert" style="max-width: 330px;">
+<a href="https://github.com/softwarewrighter/MesaOS/blob/main/experiments/capture/xclock-demo.webp"><img src="{{ '/assets/images/posts/mesaos-xclock-demo.webp' | relative_url }}" alt="xclock running as a Ring 3 ELF program under MesaOS, its second hand sweeping"></a>
+<figcaption>An ELF program in Ring 3, drawing. <a href="https://github.com/softwarewrighter/MesaOS/blob/main/experiments/capture/xclock-demo.webp">Capture</a> from <a href="https://github.com/softwarewrighter/MesaOS">my fork</a>.</figcaption>
+</figure>
+
 Which makes it the useful second case. SWTOS has no MMU at all --- addresses are addresses, and isolation is a discipline rather than a mechanism. MesaOS has exactly the machinery SWTOS does without: frames, mappings, and a distinction between what is physically there and what a process is allowed to see. The same picture has to mean something in both.
 
 A note on the name. MesaOS is what the upstream project is called, and the name is well and truly spoken for: `mesaos.com` belongs to an active restaurant point-of-sale product, and it is in use elsewhere besides. So neither the upstream project nor my fork is necessarily keeping it. If you go searching for MesaOS and find yourself reading about kitchen printers, you have not taken a wrong turn --- and if either repository has been renamed by the time you read this, that is why.

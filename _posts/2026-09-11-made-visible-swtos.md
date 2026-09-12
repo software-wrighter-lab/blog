@@ -39,6 +39,7 @@ So: draw it. Blocks, stacked, colored by what they are, and turnable.
 | **SWTOS** | [sw-embed/sw-tos](https://github.com/sw-embed/sw-tos) · [live terminal demo](https://swtos.softwarewrighter.com/) |
 | **native3d** | [sw-ml-study/demo-extensions](https://github.com/sw-ml-study/demo-extensions) |
 | **sw-MLPL** | [sw-ml-study/sw-mlpl](https://github.com/sw-ml-study/sw-mlpl) · [playground](https://mlpl.softwarewrighter.com/) |
+| **COR24** | [makerlisp.com](https://makerlisp.com) · [soft CPU](https://makerlisp.com/cor24-soft-cpu) · [dev board](https://makerlisp.com/cor24-dev-board) |
 | **Prior art** | [FlashViz](https://clisystems.com/tools/flashviz/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
