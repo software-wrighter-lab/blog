@@ -7,6 +7,8 @@ keywords: "Software Wrighter Research Campus, project discoverability, isometric
 author: Software Wrighter
 series: "Personal Software"
 series_part: 11
+repo_url: "https://github.com/software-wrighter-lab/sw-campus"
+demo_url: "https://software-wrighter-lab.github.io/sw-campus/#/"
 abstract: "There are 133 public repositories spread across fifteen GitHub organizations, and no single place to stand and see them. This is the start of one: a 2.5D isometric campus where subjects are buildings, every place has a shareable address, and the organizing unit is a topic rather than a repository."
 date: 2026-09-12 00:15:00 -0700
 ---
@@ -24,9 +26,19 @@ Today the count is **133 public repositories across fifteen organizations**, and
 
 So I am building a front door: the **Software Wrighter Research Campus**, a single starting point for the public work, where a thing's place on the map tells you what kind of thing it is.
 
+<div class="resource-box" markdown="1">
+
+| Resource | Link |
+|----------|------|
+| **Live campus** | [software-wrighter-lab.github.io/sw-campus](https://software-wrighter-lab.github.io/sw-campus/#/) |
+| **Source** | [software-wrighter-lab/sw-campus](https://github.com/software-wrighter-lab/sw-campus) |
+| **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
+
+</div>
+
 <figure class="no-invert">
-<img src="{{ '/assets/images/posts/campus-overview.webp' | relative_url }}" alt="An illustrated isometric map of the Software Wrighter Research Campus: the Computer History Museum, Computer Science Building, Hardware Lab, Computational Sciences Institute, Digital Media Studio and Interactive Computing Lab arranged around a central green called the Commons, with three empty lots marked Future Building">
-<figcaption>The campus as currently imagined --- six buildings around the Commons, and three lots left empty.</figcaption>
+<a href="https://software-wrighter-lab.github.io/sw-campus/#/"><img src="{{ '/assets/images/posts/campus-overview.webp' | relative_url }}" alt="An illustrated isometric map of the Software Wrighter Research Campus: the Computer History Museum, Computer Science Building, Hardware Lab, Computational Sciences Institute, Digital Media Studio and Interactive Computing Lab arranged around a central green called the Commons, with three empty lots marked Future Building"></a>
+<figcaption>The campus as currently imagined --- six buildings around the Commons, and three lots left empty. <a href="https://software-wrighter-lab.github.io/sw-campus/#/">Visit the live campus.</a></figcaption>
 </figure>
 
 ## Why a map and not a list
@@ -86,6 +98,4 @@ Rust, compiled to WebAssembly, with [Yew](https://yew.rs/) generating SVG straig
 
 That separation is what lets me redraw the maps later --- and I will --- without touching the information architecture underneath. No 3D engine. A hand-placed isometric scene in SVG is sharper, smaller, and far more legible than a camera you have to fly around.
 
-There is nothing to link to yet. The first milestone is small and deliberately complete rather than broad: the campus map, the Computer History Museum, the IBM 1130 wing, and one exhibit that works end to end with real URLs and real breadcrumbs. Everything after that is content.
-
-I will post the link when there is a link to post.
+The campus is live at [software-wrighter-lab.github.io/sw-campus](https://software-wrighter-lab.github.io/sw-campus/#/), with the source at [software-wrighter-lab/sw-campus](https://github.com/software-wrighter-lab/sw-campus). It starts deliberately small rather than broad --- the map, the first buildings, and real URLs and breadcrumbs at every level --- and everything after that is content rather than redesign.
