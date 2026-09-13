@@ -15,11 +15,41 @@ A blog exploring AI coding agents, systems programming, and practical machine le
 
 | Connect | Link |
 |---------|------|
+| **Campus** | [Research Campus](https://software-wrighter-lab.github.io/sw-campus/#/campus/computational-sciences) |
 | **Discord** | [SW Lab Discord](https://discord.com/invite/Ctzk5uHggZ) |
 | **GitHub** | [softwarewrighter](https://github.com/softwarewrighter)<br>[All orgs ↓](#github-orgs) |
 | **YouTube** | [@SoftwareWrighter](https://www.youtube.com/@SoftwareWrighter) |
 
 </div>
+
+<div class="campus-hero">
+<a href="https://software-wrighter-lab.github.io/sw-campus/#/campus/computational-sciences"><img src="{{ '/assets/images/posts/campus-overview.webp' | relative_url }}" class="no-invert" alt="Illustrated isometric map of the Software Wrighter Research Campus: six buildings around the Commons, with empty lots for future buildings"></a>
+<p><a href="https://software-wrighter-lab.github.io/sw-campus/#/campus/computational-sciences">Explore the Software Wrighter Research Campus &rarr;</a></p>
+</div>
+
+<style>
+.campus-hero {
+  display: flow-root; /* a block formatting context does not overlap the
+                         TOC and link-box floats, so it takes exactly the
+                         space between them */
+  margin: 0 0 1.5rem;
+  text-align: center;
+}
+
+.campus-hero img {
+  display: block;
+  width: 100%;
+  max-width: 960px;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 8px;
+}
+
+.campus-hero p {
+  margin: 0.5rem 0 0;
+  font-size: 0.95em;
+}
+</style>
 
 ## About the Author
 
