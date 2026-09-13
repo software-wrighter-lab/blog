@@ -123,6 +123,6 @@ And the result that reframes the rest: at 120 training examples, doubling the ep
 
 The lessons that exist today are the dense baseline, routing, top-1 and top-2 mixtures, sparse dispatch, low-rank delta experts, the data-scale sweep, an in-repo teacher for distillation, and a resource budget where every number is labeled measured, derived, or estimated. Ahead are the parts that connect most directly to the embedded target: recurrence, the from-scratch Engram with a table-size sweep, distillation at four levels, INT8 and INT4 experts, the capacity-limited expert cache with its hit-rate curve, the CPU/NPU hybrid split, and the packed model file that has to fit in 256 MB.
 
-Every one of those is a question with a measurement attached, and every measurement lands in the same table as the ones above. The documentation is being reorganized around that table; the README is the place to start.
+Every one of those is a question with a measurement attached, and every measurement lands in the same table as the ones above.
 
 Building the smallest useful mixture of experts was never the goal. The goal is to be able to look inside one --- and to have somewhere to stand when the next tiny model needs to run on something small.
