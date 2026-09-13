@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Saw #11: Building a Tiny Mixture of Experts"
+title: "Saw #11: Building a Tiny Mixture of Experts Microscope"
 categories: [machine-learning, languages, projects]
 tags: [sharpen-the-saw, sw-mlpl, mlpl, mixture-of-experts, moe, engram, hrm, trm, freetoken, tiny-llm, embedded, npu, distillation, quantization, dogfooding, array-languages]
 keywords: "mixture of experts, MoE, tiny LLM, MicroMoE, moe-microscope, sw-MLPL, FreeToken, expert cache, Engram, HRM, TRM, recursive reasoning, sparse routing, top-1 routing, top-2 routing, load balance, expert specialization, low-rank experts, distillation, INT4, 256 MB, NPU, embedded inference, dogfooding"
 author: Software Wrighter
-abstract: "A mixture-of-experts language model with 7,096 parameters, built from scratch in sw-MLPL so that every part of it --- the router, the experts, the load-balance term, the expert cache --- can be watched while it works. It exists for two reasons: to be the workbench for tiny language models headed for microprocessors with a few hundred megabytes and a fraction of a TOPS, and to put sw-MLPL under real load so its gaps turn into fixes."
+abstract: "A microscope for mixture-of-experts models, built in sw-MLPL: a tiny model --- 7,096 parameters today --- where every part, the router, the experts, the load-balance term, the expert cache, can be watched while it works, and swapped for a different implementation to compare. It exists for two reasons: to be the workbench for tiny language models headed for microprocessors with a few hundred megabytes and a fraction of a TOPS, and to put sw-MLPL under real load so its gaps turn into fixes."
 series: "Sharpen the Saw Sundays"
 series_part: 11
 date: 2026-09-13 00:15:00 -0700
