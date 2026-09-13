@@ -26,7 +26,11 @@ The mixture-of-experts models worth reading about have hundreds of billions of p
 
 **moe-microscope** is an sw-MLPL project that builds a tiny mixture-of-experts language model, MicroMoE, from scratch, and lets you look inside every part of it. Each mechanism is a separate, executable lesson that records its own intermediate values, draws them, and measures memory, speed, and quality against a dense baseline. You read the MLPL, change it, rerun it, and watch the numbers and pictures change.
 
+<div class="aside-box" markdown="1">
+
 **Why "Saw"?** The name is Habit 7 from Stephen Covey's [*The 7 Habits of Highly Effective People*](https://en.wikipedia.org/wiki/The_7_Habits_of_Highly_Effective_People): stop cutting long enough to sharpen the blade. [This series](/series/#sharpen-the-saw-sundays) is where I routinely add tools and improve the ones I have, on the principle that time spent on the tools comes back many times over in everything built with them. This week two blades are on the stone at once: the microscope is a new tool for examining mixture-of-experts implementations side by side, and building it is how sw-MLPL, the language underneath, gets its next set of fixes and features.
+
+</div>
 
 <div class="resource-box" markdown="1">
 

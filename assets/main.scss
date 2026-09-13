@@ -1111,6 +1111,23 @@ figure.gutter-img-right {
   line-height: 1.4;
 }
 
+// A short aside that belongs in a box rather than the running text -- the
+// "Why Sharpen the Saw?" note that opens each Saw post, and similar. Not
+// floated: it takes the column width and sits between paragraphs.
+.aside-box {
+  margin: 1.2em 0 1.5em;
+  padding: 0.7em 1em;
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--link-color);
+  border-radius: 6px;
+  background-color: rgba(127, 127, 127, 0.08);
+  font-size: 1.05em;
+  line-height: 1.45;
+
+  > :first-child { margin-top: 0; }
+  > :last-child { margin-bottom: 0; }
+}
+
 // ============================================
 // Font Size Controls
 // ============================================
