@@ -131,6 +131,13 @@ Every one of those numbers is labeled measured, derived, or estimated in a resou
 
 ## A docent for the campus
 
+<div class="gutter-section" markdown="1">
+
+<figure class="gutter-img-left no-invert">
+<a href="https://software-wrighter-lab.github.io/sw-campus/?docent#/"><img src="{{ '/assets/images/posts/campus-docent.webp' | relative_url }}" alt="The campus map with the docent drawer open on the right: a welcome stop, the question 'where can I try APL?', and the answer locating APL in the Computer Science Building with a Take me to APL button"></a>
+<figcaption>The campus with the docent open. <a href="https://software-wrighter-lab.github.io/sw-campus/?docent#/">Try it</a>.</figcaption>
+</figure>
+
 A synthetic domain is the right place to learn the mechanism, so I also keep an eye out for real applications. One candidate came from the [Software Wrighter Research Campus](https://software-wrighter-lab.github.io/sw-campus/#/) --- the isometric map of the public work from [last week's post](/2026/09/12/software-wrighter-research-campus/). Every lobby has an easel. The easel shows a featured exhibit, and underneath it you can ask a **docent** where something is: *"where can I try array programming?"*, *"show me an early microprocessor."* The obvious tiny-ML design is a MoE classifier trained on the campus catalog --- hashed word features in, an intent and a destination out --- with the catalog supplying the title, breadcrumb, and URL so the model can never invent an exhibit, and retraining in the browser whenever the campus changes.
 
 The key takeaway is that designing it carefully showed it was over-engineering. The campus has a few dozen destinations and a handful of intents. A dictionary of aliases and a keyword table over the catalog --- *array programming → APL*, *COSMAC → RCA 1802*, *minicomputer → IBM 1130* --- answers the same questions deterministically, has the same cannot-hallucinate property for free, needs no training, no weights to go stale, and no versioning of model against catalog. So that is what ships: a campus with a deterministic docent. That is a decision about the campus, not about the microscope --- the tool exists to learn and build MoE models whether or not the campus ever needs one, and this section is here because the exercise sharpened the question the tool is for.
@@ -138,6 +145,8 @@ The key takeaway is that designing it carefully showed it was over-engineering. 
 What the exercise did clarify is exactly where a model would earn its place: when the aliases and near-terms outgrow a table. *"An early single-chip processor rather than a whole minicomputer"* is not a keyword match; it is a concept that has to land on the RCA 1802 and not the IBM 1130, and questions like *"an old programming environment associated with IBM systems"* legitimately want two answers ranked. That is a real, small, inspectable MoE problem --- and it is also precisely the shape [Engram](/2026/02/02/deepseek-papers-part2-engram/) conditional memory is good at: hashed n-gram lookup is a learned alias table, so aliases and synonyms could live in cheap deterministic memory while the experts handle the concepts. That research is ongoing here, on the synthetic domain first.
 
 The campus also hands the microscope its best future experiment for free. The 1442 card reader and its radio demonstration are not on the campus yet. When they arrive, the catalog will know immediately and a trained model would not, which is the thing people hear about constantly and never get to see at understandable scale: *the world changed, the application's data knows it, the model doesn't --- now watch the model learn the change*, with catastrophic forgetting as a number in a results row. That experiment is queued, with the 1442 reserved as its test case. Meanwhile what runs in the browser is the microscope itself: the recorded lessons rendered by the generic Rust/Yew/WASM host, and possibly training, since a 7,000-parameter model is small enough to learn in front of you.
+
+</div>
 
 ## What is still to come
 
