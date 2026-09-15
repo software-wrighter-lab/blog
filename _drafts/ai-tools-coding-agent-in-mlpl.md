@@ -45,7 +45,7 @@ Two reasons, and they are the same two reasons behind [last week's mixture-of-ex
 
 **To understand the thing by owning a small one.** I use coding agents every day, and the earlier posts in this series looked at them from the outside: [Pi](/2026/05/16/pi-minimal-agent/), which is about as small as a useful agent gets; [nono](/2026/05/16/nono-sandbox-ai-agents/), which boxes one in; and [local-llm-loop](/2026/09/09/ai-tools-local-llm-loop-model-evaluation/), which measures local models inside a plan-execute-review loop. This one is the loop itself, written so that every decision is visible as data flowing through functions, in a language where the whole program fits on a screen. [OpenCode](https://github.com/anomalyco/opencode) is the architectural reference --- its conceptual core is exactly the loop above --- and the repository is explicit that it is not a port. It is the smallest loop that turns a task into observations, decisions, and file changes.
 
-**To dogfood sw-MLPL on something that is not machine learning.** The ML demos stress tensor semantics. An agent stresses everything else: strings, records, `Result` values, function references, dispatch, sandboxed I/O, and now an extension boundary. Every gap the agent meets goes into a capability ledger with an executable probe, expected versus observed behavior, and the agent it affects --- and stays there, marked unavailable, until upstream ships a change. Nothing is worked around silently. Five findings are already recorded from the first week, before any agent has run: `+` on two strings fails with a diagnostic about arrays; calling a function that does not exist reports the *same* array diagnostic, which hid the fact that `str_starts_with` and `str_trim` do not exist; `write_text` will not create a parent directory; `len` rejects a string list; and the sandbox documentation says symlinks are never followed when the measured behavior is the more useful *symlinks that resolve outside the sandbox are refused*. Four of those are the kind of thing only a program that is not a matrix benchmark finds.
+**To dogfood sw-MLPL on something that is not machine learning.** The ML demos stress tensor semantics. An agent stresses everything else: strings, records, `Result` values, function references, dispatch, sandboxed I/O, and now an extension boundary. Every gap the agent meets goes into a capability ledger with an executable probe, expected versus observed behavior, and the agent it affects --- and stays there, marked unavailable, until upstream ships a change. Nothing is worked around silently. Five findings are recorded from the first week alone: `+` on two strings fails with a diagnostic about arrays; calling a function that does not exist reports the *same* array diagnostic, which hid the fact that `str_starts_with` and `str_trim` do not exist; `write_text` will not create a parent directory; `len` rejects a string list; and the sandbox documentation says symlinks are never followed when the measured behavior is the more useful *symlinks that resolve outside the sandbox are refused*. Four of those are the kind of thing only a program that is not a matrix benchmark finds.
 
 ## MLPL owns policy, Rust owns mechanisms
 
@@ -129,17 +129,17 @@ permissions = {
 }
 ```
 
-`authorize(action, permissions)` is a pure function returning `allow`, `ask`, or `deny`, tested without a model or a filesystem. A denial is recorded as an observation so the model can choose differently. Later, each agent gets its own record --- a planner that can read and search but not write or test, a builder that can write only by asking, a reviewer that can test and read git but not write --- which is OpenCode's useful distinction between full development agents and restricted plan or review agents, done with data instead of a framework.
+`authorize(action, permissions)` is a pure function returning `allow`, `ask`, or `deny`, tested without a model or a filesystem. A denial is recorded as an observation so the model can choose differently. Each agent has its own record --- a planner that can read and search but not write or test, a builder that can write only by asking, a reviewer that can test and read git but not write --- which is OpenCode's useful distinction between full development agents and restricted plan or review agents, done with data instead of a framework.
 
 ## Tests need no model
 
-`llm_call` needs a running server, so no test calls it. Every agent takes its model as an injected function reference, and the scripted version replays a fixed transcript of replies, which makes every loop test deterministic and offline. Twenty-one native mlplunit probes already pin the measured behavior of every builtin the agent will depend on: sandboxed reads, walks, writes, and removals; parent-directory and symlink escapes returning `err`; the record that `run_script` returns; the string helpers a prefix protocol needs. `just check` never contacts a model server, so a fork without a GPU still gets a green gate.
+`llm_call` needs a running server, so no test calls it. Every agent takes its model as an injected function reference, and the scripted version replays a fixed transcript of replies, which makes every loop test deterministic and offline. Native mlplunit probes pin the measured behavior of every builtin the agent will depend on: sandboxed reads, walks, writes, and removals; parent-directory and symlink escapes returning `err`; the record that `run_script` returns; the string helpers a prefix protocol needs. `just check` never contacts a model server, so a fork without a GPU still gets a green gate.
 
-Live runs are opt-in `just` recipes against a local Ollama. The floor is `qwen2.5-coder:7b`: it fits an RTX 3060 or a 16 GB Mac with room for context, and it keeps to the one-action protocol, where the 1.5B model drifts out of it. Bigger cards point the same variable at 14B or 32B. An OpenAI-compatible endpoint is planned so any hosted model can drive the same loop through the same injection seam --- the loop never learns which server answered.
+Live runs are opt-in `just` recipes against a local Ollama. The floor is `qwen2.5-coder:7b`: it fits an RTX 3060 or a 16 GB Mac with room for context, and it keeps to the one-action protocol, where the 1.5B model drifts out of it. Bigger cards point the same variable at 14B or 32B, and any other provider plugs into the same injection seam --- the loop never learns which server answered.
 
-## How it grows
+## One file per capability
 
-Each version is a separate MLPL file, so a reader can diff the loop as it gains capability:
+The agent is not one program but a sequence of them. Each version is a separate MLPL file that adds one capability to the previous one, so a reader can diff the loop as it grows rather than read the finished thing and guess which lines matter:
 
 | version | shape |
 |---------|-------|
@@ -161,10 +161,12 @@ prompt = str_concat("TASK:\n", str_concat(task, str_concat("\n\nSOURCE:\n", sour
 answer = llm_call(HOST, prompt, MODEL, "You are a careful Rust programmer.")
 ```
 
-Everything after it is iteration policy. And the last row is a decision I like more the longer I look at it: there is no terminal UI in the plan. sw-MLPL already has an org-babel backend, so once the agent works, the front end is an org file in Emacs with `#+begin_src mlpl` blocks --- a lighter path to an interactive agent than a TUI, and one that leaves the transcript as a document.
+Everything after it is iteration policy. And the last row is the one I like most: there is no terminal UI. sw-MLPL has an org-babel backend, so the front end is an org file in Emacs with `#+begin_src mlpl` blocks --- a lighter path to an interactive agent than a TUI, and one that leaves the whole transcript behind as a document.
 
-Deliberately postponed, in OpenCode's terms: TUI, MCP, streaming, subagent concurrency, LSP, GitHub integration, session persistence, embeddings or RAG, automatic context compaction, arbitrary shell access. Each would obscure the experiment more than it would teach.
+Deliberately left out, in OpenCode's terms: TUI, MCP, streaming, subagent concurrency, LSP, GitHub integration, session persistence, embeddings or RAG, automatic context compaction, arbitrary shell access. Each would obscure the experiment more than it would teach.
 
-## Where it stands
+## What it comes to
 
-The foundation is in place and the builtins are measured; no agent runs yet. The first one, v0, reads a file and thinks about it, and it is next. The interesting results will be the ones the progression is built to produce: how many lines the loop actually takes, how far a 7B model keeps to the protocol, what the planner/builder/reviewer split costs in tokens, and how many more findings an agent files against the language it is written in.
+Strip the loop down and it is what the first paragraph said: build context, ask, parse one action, authorize it, execute it, update the state, repeat until `DONE` or the budget runs out. The agent reads the project, searches it, edits files, runs the tests through an allow-list, and goes around again until they pass --- with every decision a value in a transcript, every mechanism confined by something other than the model's good behavior, and every test of the loop runnable without a model at all.
+
+One LLM primitive, five tools, a couple of hundred lines of an array language. That is the answer to how little machinery it takes, and the reason the answer is worth having is that at this size you can read all of it.
