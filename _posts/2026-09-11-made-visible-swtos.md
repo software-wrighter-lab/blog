@@ -30,7 +30,7 @@ Ask someone to explain an operating system's memory layout and you get a table o
 
 So: draw it. Blocks, stacked, colored by what they are, and turnable.
 
-**SWTOS** is a microkernel for the COR24 --- a 24-bit soft CPU on an FPGA, one megabyte of SRAM, no MMU, no hardware multiply. **What is drawn here is its storage**: the four-megabyte flash chip where programs live before they run, divided into eight-byte blocks and classified into a storage header, catalog records, program images, padding, and the free space that dwarfs all of them.
+**SWTOS** is a microkernel for the COR24 --- a 24-bit soft CPU on an FPGA, one megabyte of SRAM, no MMU, hardware multiply but no hardware divide. **What is drawn here is its storage**: the four-megabyte flash chip where programs live before they run, divided into eight-byte blocks and classified into a storage header, catalog records, program images, padding, and the free space that dwarfs all of them.
 
 <div class="resource-box" markdown="1">
 
