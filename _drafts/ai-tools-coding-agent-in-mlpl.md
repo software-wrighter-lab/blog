@@ -185,22 +185,22 @@ Two example projects, one MLPL and one Rust, get a function and a passing test a
 
 One LLM primitive, six verbs, about 850 lines of an array language. The loop is the agent; the rest is policy, and policy is data.
 
+<hr>
+
 <div class="aside-box wide" markdown="1">
 
-**Where the lines go.** Counted from the repository on the day of publication; *code* excludes blank and comment lines. MLPL has no block comments, so each function's one-line docstring is counted separately.
+**Where the lines go.** Counted from the repository on the day of publication. *Code* excludes blank and comment lines --- across all the MLPL below there are only 10 comment lines and 89 blanks, because MLPL has no block comments and each function carries a one-line docstring instead: 75 of them, one per function.
 
-| What | MLPL code | of which docstrings | Rust code | Notes |
-|---|---:|---:|---:|---|
-| **The agent** --- `loop`, `protocol`, `tools`, `model` | 946 | 68 | | loop 313 · parser 388 · tools 182 · model injection 63; includes 25 lines of test doubles (`ask_scripted`, `ask_echo`, `decide_yes/no`, `verify_always`) |
-| **Essential, net** | **853** | | **220** | the agent minus its docstrings and test doubles; the Rust is the search and allow-listed runner, four files |
-| Runners and replay --- `run_loop`, `replay_loop`, `run_replay` | 145 | 4 | | the CLI entry, model warm-up, and the transcript replay behind the recording |
-| The v0 lesson --- `v0_read_think`, `run_v0` | 33 | 3 | | read one file, ask once: the smallest possible first proof |
-| Tests | 817 | | 83 | 84 mlplunit tests in ten files; one Rust contract test for the extension |
-| Probes | 55 | | | five standalone reproducers for the findings ledger |
-| Example projects the agent edits | 18 | | | one MLPL function and its test; the Rust crate is two files |
-| Prompts | | | | 53 lines of plain text in two files |
-| Comments and blanks, all MLPL above | 10 comment · 89 blank | | 31 comment · 41 blank | |
+| What | MLPL | Rust | What it is |
+|---|---:|---:|---|
+| **The agent** | **946** | **220** | `loop` 313 · `protocol` 388 · `tools` 182 · `model` 63. Of the MLPL, 68 lines are docstrings and 25 are test doubles (`ask_scripted`, `ask_echo`, `decide_yes/no`, `verify_always`), so the **essential agent is 853 lines**. The Rust is the ripgrep search and the allow-listed runner, four files, plus 31 comment lines. |
+| Runners and replay | 145 | | the CLI entry with model warm-up and approval wiring, and the transcript replay behind the recording |
+| The v0 lesson | 33 | | read one file, ask once: the smallest possible first proof, kept as a stage |
+| Tests | 817 | 83 | 84 mlplunit tests in ten files; one Rust contract test for the extension |
+| Probes | 55 | | five standalone reproducers behind the findings ledger |
+| Example projects | 18 | 2 files | the one-function MLPL project and its test; the Rust crate the agent patches |
+| Prompts | | | 53 lines of plain text in two files |
 
-So "1,200 lines" is every line in `agents/`; the loop a reader has to understand is the 853, and nearly as many lines again exist to prove it without a model.
+So "1,200 lines" is every line in `agents/`, blanks and docstrings included. The loop a reader has to understand is the 853, and nearly as many lines again exist to prove it without a model.
 
 </div>
