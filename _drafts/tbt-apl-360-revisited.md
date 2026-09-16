@@ -3,7 +3,7 @@ layout: post
 title: "TBT #11: APL\\360 Revisited"
 categories: [tbt, programming-history, retrocomputing, languages]
 tags: [apl, apl360, throwback-thursday, iverson, ibm, mainframe, array-languages, rust, sw-apl, cor24, sw-mlpl, notation, interpreters]
-keywords: "APL\\360, APL, Kenneth Iverson, Adin Falkoff, IBM System/360, IBM 2741, Selectric typeball, array language, sw-apl, clean-room interpreter, Rust, workspaces, del editor, six-space prompt, APLSV, APL2, Dyalog, J, K, BQN, NumPy, notation as a tool of thought, COR24 APL, sw-MLPL"
+keywords: "APL\\360, APL, Kenneth Iverson, Adin Falkoff, IBM System/360, IBM 2741, Selectric typeball, array language, sw-apl, clean-room interpreter, Rust, workspaces, del editor, six-space prompt, I-beams, APL2, Dyalog, J, K, BQN, NumPy, notation as a tool of thought, COR24 APL, sw-MLPL"
 author: Software Wrighter
 abstract: "APL\\360 was the first APL you could actually type at --- IBM's 1968 implementation of Iverson's notation, used from a typewriter terminal with a special typeball. This is a look at what it did and did not do, why its ideas turned up in half the languages and libraries that followed, and a third APL of my own: sw-apl, a clean-room APL\\360 in Rust that keeps the glyphs, the six-space prompt, the del editor, and the workspaces, and is checked against the printed examples in IBM's own manuals."
 series: "Throwback Thursday"
@@ -27,7 +27,7 @@ The first APL post here was [a horse race](/2026/01/29/tbt-apl-horse-race/) --- 
 
 </div>
 
-**sw-apl** is a clean-room APL\360 interpreter written in Rust. It keeps what made the original what it was: the traditional glyphs, typed as Unicode; the six-space indent prompt and printer-style transcript; the del editor for defining functions; the caret under the point of an error; and the system commands for workspaces --- `)CLEAR`, `)SAVE`, `)LOAD`, `)FNS`, `)VARS`. It is deliberately not APL2 and not Dyalog: flat arrays only, no nested arrays, no each. Its behavior is checked against the printed examples in IBM's APL\360 and APLSV manuals.
+**sw-apl** is a clean-room APL\360 interpreter written in Rust. It keeps what made the original what it was: the traditional glyphs, typed as Unicode; the six-space indent prompt and printer-style transcript; the del editor for defining functions; the caret under the point of an error; and the system commands for workspaces --- `)CLEAR`, `)SAVE`, `)LOAD`, `)FNS`, `)VARS`. It is deliberately not APL2 and not Dyalog: flat arrays only, no nested arrays, no each. Its behavior is checked against the printed examples in IBM's APL\360 manuals.
 
 <div class="resource-box" markdown="1">
 
@@ -35,7 +35,7 @@ The first APL post here was [a horse race](/2026/01/29/tbt-apl-horse-race/) --- 
 |----------|------|
 | **sw-apl** | [sw-vibe-coding/sw-apl](https://github.com/sw-vibe-coding/sw-apl) · [language reference](https://github.com/sw-vibe-coding/sw-apl/blob/main/docs/language.md) · [glyph table](https://github.com/sw-vibe-coding/sw-apl/blob/main/docs/glyphs.txt) · [conformance samples](https://github.com/sw-vibe-coding/sw-apl/tree/main/samples) |
 | **The other two APLs** | [sw-cor24-apl](https://github.com/sw-embed/sw-cor24-apl) on the COR24 · [in the browser](https://sw-embed.github.io/web-sw-cor24-apl/) · [sw-MLPL](https://github.com/sw-ml-study/sw-mlpl) |
-| **IBM documents** | APL\360 User's Manual, APL\360 Primer, APLSV User's Manual --- scanned at [bitsavers](http://bitsavers.org/pdf/ibm/apl/) |
+| **IBM documents** | APL\360 User's Manual, APL\360 Primer --- scanned at [bitsavers](http://bitsavers.org/pdf/ibm/apl/) |
 | **Prior post** | [TBT #1: My First Program Was a Horse Race](/2026/01/29/tbt-apl-horse-race/) |
 | **GNU APL** | [gnu.org/software/apl](https://www.gnu.org/software/apl/) --- an APL2 implementation |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
@@ -72,7 +72,7 @@ You used it from an IBM 2741, a Selectric typewriter wired to a phone line, fitt
 
 The evaluation rule is the thing people remember: right to left, no operator precedence. `2+3×4` is 14 because `×` takes `4` on its right and `3` on its left, then `+` takes the result. A function's right argument is *everything* to its right; its left argument is the single array immediately to its left. It is the opposite of the school rule, and it is what makes a line like `(+/X)÷⍴X` --- the average --- read as a single thought.
 
-Everything worked on whole arrays. Scalar functions --- `+ - × ÷ ⌈ ⌊ * ⍟ | ! ○` and the comparisons --- extended element by element, with a scalar pairing against every element of a vector. Mixed functions rearranged: `⍳` generated indices, `⍴` gave or set a shape, `,` raveled or catenated, `⌽` reversed, `⍉` transposed, `↑` and `↓` took and dropped, `/` compressed, `⊥` and `⊤` decoded and encoded in any radix, `⍋` and `⍒` graded. Operators took functions as arguments: reduce `f/`, scan `f\`, inner product `f.g`, outer product `∘.f`. There was one numeric type as far as you could tell, comparison had a tolerance, and `0÷0` was 1.
+Everything worked on whole arrays. Scalar functions --- `+ - × ÷ ⌈ ⌊ * ⍟ | ! ○` and the comparisons --- extended element by element, with a scalar pairing against every element of a vector. Mixed functions rearranged: `⍳` generated indices, `⍴` gave or set a shape, `,` raveled or catenated, `⌽` reversed, `⍉` transposed, `↑` and `↓` took and dropped, `/` compressed, `⊥` and `⊤` decoded and encoded in any radix, `⍋` and `⍒` graded. Operators took functions as arguments: reduce `f/`, scan `f\`, inner product `f.g`, outer product `∘.f`. There was one numeric type as far as you could tell, comparison had a tolerance --- APL\360 called it fuzz --- and `0÷0` was 1. The session's settings were commands, not variables: `)ORIGIN 0` set the index origin, `)DIGITS` the print precision, `)WIDTH` the line width; and system information --- the time, the date, the workspace available, the line number --- came from the I-beam functions, `⌶` followed by a number.
 
 Functions were defined with the del editor. You typed `∇`, a header, and then lines that the editor numbered for you; `[3]` repositioned, `[⎕]` displayed, `∇` closed. Control flow was `→` --- branch to a line number, with the idiom `→(N>0)/LOOP` meaning *branch to LOOP if N>0, otherwise fall through*, because compressing a one-element vector by a false condition leaves nothing to branch to. Names were dynamically scoped: a local shadowed a global for everything called beneath it, as in LISP. And when something went wrong, you got the error name, the statement echoed, and a caret under the point of detection:
 
@@ -87,9 +87,9 @@ Your work lived in a workspace. `)SAVE` kept it under your account; `)LOAD` brou
 
 ## What it did not do
 
-The absences define it as much as the primitives. APL\360 had no nested arrays --- an element was a number or a character, never an array --- and so no `each`, no enclose, no pick. Those came with APL2 in 1984 and changed the language's character --- and they are what you get from [GNU APL](https://www.gnu.org/software/apl/), which is an APL2 implementation; it is the APL the [horse race](/2026/01/29/tbt-apl-horse-race/) ran on, and it has everything in this paragraph that sw-apl deliberately does not. There were no dfns, no diamonds, no lowercase, no strings other than character vectors. There were no user-defined operators. Files, in the sense a FORTRAN programmer meant, did not exist; the workspace was the persistence. System information came through I-beam functions, `⌶`, before APLSV in 1973 introduced the quad names --- `⎕IO`, `⎕PP`, `⎕CT` --- that every APL since has used, along with shared variables and the `⍎` execute and `⍕` format primitives.
+The absences define it as much as the primitives. APL\360 had no nested arrays --- an element was a number or a character, never an array --- and so no `each`, no enclose, no pick. Those came with APL2 in 1984 and changed the language's character --- and they are what you get from [GNU APL](https://www.gnu.org/software/apl/), which is an APL2 implementation; it is the APL the [horse race](/2026/01/29/tbt-apl-horse-race/) ran on, and it has everything in this paragraph that sw-apl deliberately does not. There were no dfns, no diamonds, no lowercase, no strings other than character vectors. There were no user-defined operators. Files, in the sense a FORTRAN programmer meant, did not exist; the workspace was the persistence. There were no quad system variables: `⎕IO`, `⎕PP`, `⎕CT` and the rest arrived with APLSV in 1973, along with shared variables and the `⍎` execute and `⍕` format primitives, and every APL since has used them. In APL\360 the same things were `)ORIGIN`, `)DIGITS`, and the I-beams.
 
-sw-apl draws the line where the documents do: APL\360's primitives and session, APLSV's quad system interface, and nothing from APL2 onward. The `)ORIGIN`, `)DIGITS`, and `)WIDTH` commands still work as aliases for the quad variables, because that is how a 1970 transcript sets them.
+sw-apl draws the line at APL\360 itself, not at APLSV a few years later: the primitives, the session, and the system interface as it was --- `)ORIGIN`, `)DIGITS`, and `)WIDTH` for the settings, I-beams for system information --- and nothing from APL2 onward. A 1970 transcript sets its origin with `)ORIGIN 0`, and so does this one.
 
 ## The idioms
 
@@ -130,19 +130,19 @@ The notation spread too, in a direct line. APL2 (IBM, 1984) added nesting, and i
 
 ## How sw-apl does it
 
-The interpreter is written from the APL\360 and APLSV language descriptions and from observed terminal behavior, not by translating any existing implementation. The C interpreter for the COR24 and GNU APL --- an APL2, so only where APL2 and APL\360 agree --- are consulted only for expected results.
+The interpreter is written from the APL\360 language description and from observed terminal behavior, not by translating any existing implementation. The C interpreter for the COR24 and GNU APL --- an APL2, so only where APL2 and APL\360 agree --- are consulted only for expected results.
 
 **Glyphs only.** Input is Unicode. There are no keyword aliases --- no `rho` for `⍴` --- and no translation layer. The lexer accepts printable ASCII plus exactly the code points in the glyph table; anything else is `CHARACTER ERROR` naming the code point, and the message tells you which one you meant: `CHARACTER ERROR: U+03C1 (use ⍴ U+2374)` for a Greek rho that looks the same and is not. Typing the glyphs on a modern keyboard is handled outside the interpreter, with Espanso expansions and an Emacs keymap.
 
-**One number.** To the program there is one numeric type. Underneath, integers are exact in 64 bits and promote to floating point on overflow or a fractional result, and comparison is tolerant through `⎕CT` --- `1E¯13` by default --- the way APL defined it. Booleans are the numbers 0 and 1. Negative literals use the high minus, `¯5`; a leading ASCII minus is the subtract function.
+**One number.** To the program there is one numeric type. Underneath, integers are exact in 64 bits and promote to floating point on overflow or a fractional result, and comparison is tolerant, the way APL\360's fuzz made it. Booleans are the numbers 0 and 1. Negative literals use the high minus, `¯5`; a leading ASCII minus is the subtract function.
 
 **Flat arrays, right to left.** A value is a shape and a flat vector of numbers or characters. Statements parse right to left with the long right scope; operators bind before functions and take their operands from the left; strands of numeric literals are vectors at lex time.
 
-**The session, as printed.** Six spaces, then your input on the same line; output from column one; definition mode prompts with `[n]`; errors as the three-line caret display; output wider than `⎕PW` wraps with a six-space continuation. Batch mode echoes each input line with the indent, so a transcript from a file reads exactly like a session.
+**The session, as printed.** Six spaces, then your input on the same line; output from column one; definition mode prompts with `[n]`; errors as the three-line caret display; output wider than the `)WIDTH` setting wraps with a six-space continuation. Batch mode echoes each input line with the indent, so a transcript from a file reads exactly like a session.
 
 **Workspaces as text.** `)SAVE` writes a plain UTF-8 file --- settings, variables as APL expressions, functions as del definitions --- with a header carrying the workspace id and timestamp so `)LOAD` can print the `SAVED` line. It is human-readable, re-executable, and diffable in git. Numbered libraries map to directories, so `)LOAD 1 CLASS` means what it meant. Every shipped workspace defines a niladic `DESCRIBE` that says what it holds and how to start, and the session says so after a load.
 
-**Checked against the record.** The conformance corpus is a set of glyph-form APL programs, one feature area per file, each pinned as a transcript with reg-rs so that any change in behavior shows up as a diff. Beyond that, the interpreter is validated against the printed examples in IBM's own documents --- the worked expressions and their output in the APL\360 User's Manual and Primer and the APLSV manual, as scanned and found online. Where APL\360 and APLSV differ, APL\360 wins for primitives and APLSV wins for the quad system interface.
+**Checked against the record.** The conformance corpus is a set of glyph-form APL programs, one feature area per file, each pinned as a transcript with reg-rs so that any change in behavior shows up as a diff. Beyond that, the interpreter is validated against the printed examples in IBM's own documents --- the worked expressions and their output in the APL\360 User's Manual and the APL\360 Primer, as scanned and found online. Where a later manual differs, APL\360 wins.
 
 ## What it looks like
 
