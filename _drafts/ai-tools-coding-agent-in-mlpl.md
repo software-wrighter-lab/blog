@@ -201,6 +201,6 @@ One LLM primitive, six verbs, about 850 lines of an array language. The loop is 
 | Example projects | 18 | 2 files | the one-function MLPL project and its test; the Rust crate the agent patches |
 | Prompts | | | 53 lines of plain text in two files |
 
-Every line in `agents/` comes to about 1,200 once blanks and docstrings are counted. The loop a reader has to understand is the 853, and nearly as many lines again exist to prove it without a model.
+Every line in `agents/` comes to about 1,200 once blanks and docstrings are counted. The loop a reader has to understand is the 853, and nearly as many lines again exist to prove it without a model when testing the code.
 
 </div>
