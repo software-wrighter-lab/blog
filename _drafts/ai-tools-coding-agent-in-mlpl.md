@@ -5,7 +5,7 @@ categories: [tools, ai-agents, languages, machine-learning]
 tags: [ai-tools, coding-agent, mlplcode, sw-mlpl, mlpl, opencode, ollama, qwen2.5-coder, devstral, llm-call, agent-loop, permissions, sandbox, dogfooding, array-languages, literate-programming, org-mode, emacs]
 keywords: "coding agent, mlplcode, sw-MLPL, MLPL, OpenCode, agent loop, action protocol, tool dispatch, permissions allow ask deny, sandbox, verify gate, llm_call, Ollama, qwen2.5-coder, Devstral, local LLM, literate programming, org-babel, tangle, dogfooding, capability ledger"
 author: Software Wrighter
-abstract: "Coding agents are usually described from the outside: a product with a terminal UI, a permission system, a dozen tools, and a model behind it all. mlplcode is the inside, kept small: the whole control loop in sw-MLPL, an array language, with Rust only for the mechanisms the language cannot express and a local model for inference. One LLM primitive, six verbs, about 1,200 lines --- and a verifier standing between the model's claim of success and the real thing, because a 7B model will say it ran the tests when it did not."
+abstract: "Coding agents are usually described from the outside: a product with a terminal UI, a permission system, a dozen tools, and a model behind it all. mlplcode is the inside, kept small: the whole control loop in sw-MLPL, an array language, with Rust only for the mechanisms the language cannot express and a local model for inference. One LLM primitive, six verbs, about 850 lines of MLPL that matter and 220 of Rust --- and a verifier standing between the model's claim of success and the real thing, because a 7B model will say it ran the tests when it did not."
 series: "AI Tools"
 series_part: 7
 date: 2026-09-16 00:15:00 -0700
@@ -24,7 +24,7 @@ Strip a coding agent down to what it actually does and there is not much left: b
 
 </div>
 
-**mlplcode** is that loop, built in the open, with the layers left off. It is the coding-agent demo in the [sw-MLPL](https://github.com/sw-ml-study/sw-mlpl) family, named in the spirit of [OpenCode](https://github.com/anomalyco/opencode), and it follows one rule: **MLPL owns every decision, Rust owns only the mechanisms MLPL cannot express, and a local model owns inference.** The question it answers is not *can MLPL call a model* --- it can --- but *can an array language express the control plane of an autonomous coding agent?* The answer is yes, in about 1,200 lines and 75 functions, and the interesting part is what those lines had to contain.
+**mlplcode** is that loop, built in the open, with the layers left off. It is the coding-agent demo in the [sw-MLPL](https://github.com/sw-ml-study/sw-mlpl) family, named in the spirit of [OpenCode](https://github.com/anomalyco/opencode), and it follows one rule: **MLPL owns every decision, Rust owns only the mechanisms MLPL cannot express, and a local model owns inference.** The question it answers is not *can MLPL call a model* --- it can --- but *can an array language express the control plane of an autonomous coding agent?* The answer is yes, in about 850 lines of MLPL --- 75 small functions --- backed by 220 lines of Rust, and the interesting part is what those lines had to contain. (The full count, tests and all, is broken down at the end.)
 
 <div class="resource-box" markdown="1">
 
@@ -106,7 +106,7 @@ The parser is longer than the loop --- about 410 lines against 340 --- because i
 
 OpenCode is not sandboxed; its permission system is an interaction and awareness layer around powerful shell and filesystem access. mlplcode is more constrained, deliberately, in two layers.
 
-**Mechanism confinement** is not up to the model. Every filesystem builtin is confined by sw-MLPL to the `--source-dir` root and refuses anything that resolves outside it, symlinks included. The Rust extension, `agent-tools`, does only what the language genuinely cannot: search on the ripgrep crates, honoring `.gitignore`, with bounded output; and a runner for exactly `cargo test`, `cargo check`, `cargo clippy`, `cargo fmt`, `git diff`, and `git status`, inside the project root, with a two-minute timeout. That runner is about 250 lines of Rust. There is no shell anywhere.
+**Mechanism confinement** is not up to the model. Every filesystem builtin is confined by sw-MLPL to the `--source-dir` root and refuses anything that resolves outside it, symlinks included. The Rust extension, `agent-tools`, does only what the language genuinely cannot: search on the ripgrep crates, honoring `.gitignore`, with bounded output; and a runner for exactly `cargo test`, `cargo check`, `cargo clippy`, `cargo fmt`, `git diff`, and `git status`, inside the project root, with a two-minute timeout. The whole extension is about 220 lines of Rust. There is no shell anywhere.
 
 **Policy** is MLPL data:
 
@@ -183,4 +183,24 @@ Deliberately not here, in OpenCode's terms: TUI, MCP, multiple providers, stream
 
 Two example projects, one MLPL and one Rust, get a function and a passing test added by a local model through a loop you can read in an afternoon. Everything the model does passes through one authorization function and one verifier, every mechanism is confined by something other than the model's good behavior, every guard exists because a transcript showed it was needed, and every test of the loop runs without a model at all.
 
-One LLM primitive, six verbs, about 1,200 lines of an array language. The loop is the agent; the rest is policy, and policy is data.
+One LLM primitive, six verbs, about 850 lines of an array language. The loop is the agent; the rest is policy, and policy is data.
+
+<div class="aside-box wide" markdown="1">
+
+**Where the lines go.** Counted from the repository on the day of publication; *code* excludes blank and comment lines. MLPL has no block comments, so each function's one-line docstring is counted separately.
+
+| What | MLPL code | of which docstrings | Rust code | Notes |
+|---|---:|---:|---:|---|
+| **The agent** --- `loop`, `protocol`, `tools`, `model` | 946 | 68 | | loop 313 · parser 388 · tools 182 · model injection 63; includes 25 lines of test doubles (`ask_scripted`, `ask_echo`, `decide_yes/no`, `verify_always`) |
+| **Essential, net** | **853** | | **220** | the agent minus its docstrings and test doubles; the Rust is the search and allow-listed runner, four files |
+| Runners and replay --- `run_loop`, `replay_loop`, `run_replay` | 145 | 4 | | the CLI entry, model warm-up, and the transcript replay behind the recording |
+| The v0 lesson --- `v0_read_think`, `run_v0` | 33 | 3 | | read one file, ask once: the smallest possible first proof |
+| Tests | 817 | | 83 | 84 mlplunit tests in ten files; one Rust contract test for the extension |
+| Probes | 55 | | | five standalone reproducers for the findings ledger |
+| Example projects the agent edits | 18 | | | one MLPL function and its test; the Rust crate is two files |
+| Prompts | | | | 53 lines of plain text in two files |
+| Comments and blanks, all MLPL above | 10 comment · 89 blank | | 31 comment · 41 blank | |
+
+So "1,200 lines" is every line in `agents/`; the loop a reader has to understand is the 853, and nearly as many lines again exist to prove it without a model.
+
+</div>

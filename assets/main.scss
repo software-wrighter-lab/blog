@@ -1131,6 +1131,16 @@ figure.gutter-img-right {
   > :first-child { margin-top: 0; }
   > :last-child { margin-bottom: 0; }
 
+  // A full-column variant for an aside that holds a table.
+  &.wide {
+    width: auto;
+  }
+
+  table {
+    margin: 0.6em 0 0;
+    font-size: 0.95em;
+  }
+
   @media (max-width: 900px) {
     width: auto;
   }
