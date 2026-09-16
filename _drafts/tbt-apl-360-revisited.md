@@ -58,6 +58,8 @@ Kenneth Iverson published *A Programming Language* in 1962 as a notation --- a w
 
 You used it from an IBM 2741, a Selectric typewriter wired to a phone line, fitted with the APL typeball so that the keys produced `⍳` and `⍴` and `⌈` instead of the usual characters. The session was a piece of paper. APL\360 indented its prompt six spaces; you typed on the same line; the answer came back flush left. That layout is why an APL transcript is readable at a glance forty years later --- input is indented, output is not --- and it is why sw-apl prints exactly that way.
 
+None of those characters had anywhere to live. The System/360 was an EBCDIC machine, and EBCDIC had no code for `⍳` or `⍴` or `⌈`; ASCII, standardized in 1963, did not either, and Unicode was twenty-five years away. APL\360 handled its alphabet by owning the whole path from the keyboard: the 2741 sent the tilt-and-rotate code of whatever typeball was mounted, and the APL typeball simply put different characters on the same keys, so the system translated the terminal's codes into a character set of its own. The glyphs existed on paper and in the interpreter and nowhere else. IBM later defined EBCDIC code pages for the APL character set, and Unicode finally gave the symbols standard code points in 1993, in the *APL functional symbols* range. That is what sw-apl reads: source is UTF-8, the lexer works in Unicode code points, and the glyph table lists exactly which ones are APL.
+
 ```text
       2+3×4
 14
@@ -132,7 +134,7 @@ The notation spread too, in a direct line. APL2 (IBM, 1984) added nesting, and i
 
 The interpreter is written from the APL\360 language description and from observed terminal behavior, not by translating any existing implementation. The C interpreter for the COR24 and GNU APL --- an APL2, so only where APL2 and APL\360 agree --- are consulted only for expected results.
 
-**Glyphs only.** Input is Unicode. There are no keyword aliases --- no `rho` for `⍴` --- and no translation layer. The lexer accepts printable ASCII plus exactly the code points in the glyph table; anything else is `CHARACTER ERROR` naming the code point, and the message tells you which one you meant: `CHARACTER ERROR: U+03C1 (use ⍴ U+2374)` for a Greek rho that looks the same and is not. Typing the glyphs on a modern keyboard is handled outside the interpreter, with Espanso expansions and an Emacs keymap.
+**Glyphs only, in Unicode.** Input is UTF-8 and the lexer works in Unicode code points --- the encoding APL\360 never had, arriving as it did a quarter century before the APL symbols were given standard positions. There are no keyword aliases --- no `rho` for `⍴` --- and no translation layer. The lexer accepts printable ASCII plus exactly the code points in the glyph table; anything else is `CHARACTER ERROR` naming the code point, and the message tells you which one you meant: `CHARACTER ERROR: U+03C1 (use ⍴ U+2374)` for a Greek rho that looks the same and is not. Typing the glyphs on a modern keyboard is handled outside the interpreter, with Espanso expansions and an Emacs keymap.
 
 **One number.** To the program there is one numeric type. Underneath, integers are exact in 64 bits and promote to floating point on overflow or a fractional result, and comparison is tolerant, the way APL\360's fuzz made it. Booleans are the numbers 0 and 1. Negative literals use the high minus, `¯5`; a leading ASCII minus is the subtract function.
 
