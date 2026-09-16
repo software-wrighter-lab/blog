@@ -129,7 +129,7 @@ The task: add `u:mul` and its test to a one-function MLPL project, run the tests
 
 <figure class="no-invert">
 <video src="{{ '/assets/videos/coding-agent-loop.mp4' | relative_url }}" autoplay muted loop playsinline preload="auto" aria-label="Terminal recording of mlplcode reading the MLPL example, writing u:mul and its test, running the tests, and finishing"></video>
-<figcaption>Six steps: read, write, read, write, run, done. The model replies are replayed from the saved <code>qwen2.5-coder:7b</code> transcript; the parser, the file writes, and the test run happen for real. Recorded with <a href="https://github.com/charmbracelet/vhs">VHS</a>.</figcaption>
+<figcaption>Six steps: read, write, read, write, run, done, slowed to reading pace. The model replies are replayed from the saved <code>qwen2.5-coder:7b</code> transcript; the parser, the file writes, and the test run happen for real. Recorded with <a href="https://github.com/charmbracelet/vhs">VHS</a>.</figcaption>
 </figure>
 
 `READ lib.mlpl`. `WRITE lib.mlpl` with `u:add` kept verbatim and `u:mul` added beneath it. `READ tests/test_add.mlpl`. `WRITE` it back with the includes intact and a second test. `RUN mlpl tests/test_add.mlpl`, which comes back as an observation with one line per test:
@@ -201,6 +201,6 @@ One LLM primitive, six verbs, about 850 lines of an array language. The loop is 
 | Example projects | 18 | 2 files | the one-function MLPL project and its test; the Rust crate the agent patches |
 | Prompts | | | 53 lines of plain text in two files |
 
-So "1,200 lines" is every line in `agents/`, blanks and docstrings included. The loop a reader has to understand is the 853, and nearly as many lines again exist to prove it without a model.
+Every line in `agents/` comes to about 1,200 once blanks and docstrings are counted. The loop a reader has to understand is the 853, and nearly as many lines again exist to prove it without a model.
 
 </div>
