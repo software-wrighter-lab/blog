@@ -37,7 +37,7 @@ The first APL post here was [a horse race](/2026/01/29/tbt-apl-horse-race/) --- 
 | **The other two APLs** | [sw-cor24-apl](https://github.com/sw-embed/sw-cor24-apl) on the COR24 · [in the browser](https://sw-embed.github.io/web-sw-cor24-apl/) · [sw-MLPL](https://github.com/sw-ml-study/sw-mlpl) |
 | **IBM documents** | APL\360 User's Manual, APL\360 Primer, APLSV User's Manual --- scanned at [bitsavers](http://bitsavers.org/pdf/ibm/apl/) |
 | **Prior post** | [TBT #1: My First Program Was a Horse Race](/2026/01/29/tbt-apl-horse-race/) |
-| **GNU APL** | [gnu.org/software/apl](https://www.gnu.org/software/apl/) |
+| **GNU APL** | [gnu.org/software/apl](https://www.gnu.org/software/apl/) --- an APL2 implementation |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
 </div>
@@ -87,7 +87,7 @@ Your work lived in a workspace. `)SAVE` kept it under your account; `)LOAD` brou
 
 ## What it did not do
 
-The absences define it as much as the primitives. APL\360 had no nested arrays --- an element was a number or a character, never an array --- and so no `each`, no enclose, no pick. Those came with APL2 in 1984 and changed the language's character. There were no dfns, no diamonds, no lowercase, no strings other than character vectors. There were no user-defined operators. Files, in the sense a FORTRAN programmer meant, did not exist; the workspace was the persistence. System information came through I-beam functions, `⌶`, before APLSV in 1973 introduced the quad names --- `⎕IO`, `⎕PP`, `⎕CT` --- that every APL since has used, along with shared variables and the `⍎` execute and `⍕` format primitives.
+The absences define it as much as the primitives. APL\360 had no nested arrays --- an element was a number or a character, never an array --- and so no `each`, no enclose, no pick. Those came with APL2 in 1984 and changed the language's character --- and they are what you get from [GNU APL](https://www.gnu.org/software/apl/), which is an APL2 implementation; it is the APL the [horse race](/2026/01/29/tbt-apl-horse-race/) ran on, and it has everything in this paragraph that sw-apl deliberately does not. There were no dfns, no diamonds, no lowercase, no strings other than character vectors. There were no user-defined operators. Files, in the sense a FORTRAN programmer meant, did not exist; the workspace was the persistence. System information came through I-beam functions, `⌶`, before APLSV in 1973 introduced the quad names --- `⎕IO`, `⎕PP`, `⎕CT` --- that every APL since has used, along with shared variables and the `⍎` execute and `⍕` format primitives.
 
 sw-apl draws the line where the documents do: APL\360's primitives and session, APLSV's quad system interface, and nothing from APL2 onward. The `)ORIGIN`, `)DIGITS`, and `)WIDTH` commands still work as aliases for the quad variables, because that is how a 1970 transcript sets them.
 
@@ -126,11 +126,11 @@ In 1968 the alternatives were FORTRAN IV, COBOL, ALGOL 60, PL/I, LISP 1.5, and t
 
 The deeper difference was the unit of work. FORTRAN operated on one number at a time and you wrote the loop; APL operated on the array and the loop was the interpreter's problem. That is the idea that outlived the notation. NumPy's broadcasting is APL's scalar extension. MATLAB is an APL whose glyphs were replaced with function names and whose arrays became matrices first. R's vectorized operations, spreadsheet array formulas, `reduce` and `scan` and `outer` in a dozen libraries, the tensor operations in every ML framework --- these are APL's primitives with the typeball removed. Iverson's 1979 Turing Award lecture was titled *Notation as a Tool of Thought*, and the tools of thought spread further than the notation did.
 
-The notation spread too, in a direct line. APL2 added nesting. J (Iverson and Roger Hui, 1990) kept the semantics and moved to ASCII. K and q (Arthur Whitney) stripped the language down again and put it under the world's financial data. Dyalog carried APL forward with lexical dfns and a modern runtime. BQN redesigned the glyphs from scratch in 2020. Each of them is an argument about what APL should have been. sw-apl is not an argument; it is a record of what it was.
+The notation spread too, in a direct line. APL2 (IBM, 1984) added nesting, and it is the APL most people can run today: GNU APL is an APL2, and Dyalog started from it. J (Iverson and Roger Hui, 1990) kept the semantics and moved to ASCII. K and q (Arthur Whitney) stripped the language down again and put it under the world's financial data. Dyalog carried APL forward with lexical dfns and a modern runtime. BQN redesigned the glyphs from scratch in 2020. Each of them is an argument about what APL should have been. sw-apl is not an argument; it is a record of what it was.
 
 ## How sw-apl does it
 
-The interpreter is written from the APL\360 and APLSV language descriptions and from observed terminal behavior, not by translating any existing implementation. The C interpreter for the COR24 and GNU APL are consulted only for expected results.
+The interpreter is written from the APL\360 and APLSV language descriptions and from observed terminal behavior, not by translating any existing implementation. The C interpreter for the COR24 and GNU APL --- an APL2, so only where APL2 and APL\360 agree --- are consulted only for expected results.
 
 **Glyphs only.** Input is Unicode. There are no keyword aliases --- no `rho` for `⍴` --- and no translation layer. The lexer accepts printable ASCII plus exactly the code points in the glyph table; anything else is `CHARACTER ERROR` naming the code point, and the message tells you which one you meant: `CHARACTER ERROR: U+03C1 (use ⍴ U+2374)` for a Greek rho that looks the same and is not. Typing the glyphs on a modern keyboard is handled outside the interpreter, with Espanso expansions and an Emacs keymap.
 
