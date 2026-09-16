@@ -1,0 +1,3040 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2026-09-15 Tue 21:12 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>mlplcode, a coding agent in sw-MLPL</title>
+<meta name="author" content="Michael A Wright" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">mlplcode, a coding agent in sw-MLPL
+<br />
+<span class="subtitle">a literate reading of every MLPL file in the agent</span>
+</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org504a138">1. How to read and run this document</a>
+<ul>
+<li><a href="#org0119feb">1.1. Evaluating blocks</a></li>
+<li><a href="#org0d06c51">1.2. Publishing</a></li>
+<li><a href="#org92ecfa2">1.3. Regenerating the sources</a></li>
+</ul>
+</li>
+<li><a href="#orgf5f3ad3">2. MLPL in ten minutes</a>
+<ul>
+<li><a href="#orgc0e361c">2.1. Try it: Results and <code>?</code></a></li>
+<li><a href="#orgf7515d5">2.2. Try it: records and partials</a></li>
+<li><a href="#org8daff83">2.3. Try it: the string toolkit</a></li>
+</ul>
+</li>
+<li><a href="#orga35028d">3. The shape of the agent</a></li>
+<li><a href="#org3006314">4. prompts/act.md</a></li>
+<li><a href="#org1321227">5. prompts/think.md</a></li>
+<li><a href="#org71157aa">6. How the model is injected: <code>agents/model.mlpl</code></a>
+<ul>
+<li><a href="#orgdd7dced">6.1. Module header</a></li>
+<li><a href="#org1c55e85">6.2. <code>u:ask_live</code></a></li>
+<li><a href="#org071d502">6.3. <code>u:ask_scripted</code></a></li>
+<li><a href="#org5a49f7c">6.4. <code>u:ask_echo</code></a></li>
+<li><a href="#org56db5b4">6.5. <code>u:describe_action</code></a></li>
+<li><a href="#orgef4adc0">6.6. <code>u:is_yes</code></a></li>
+<li><a href="#org1a32437">6.7. <code>u:decide_prompt</code></a></li>
+</ul>
+</li>
+<li><a href="#org176bcd0">7. The action protocol parser: <code>agents/protocol.mlpl</code></a>
+<ul>
+<li><a href="#orgbba6bb6">7.1. Module header</a></li>
+<li><a href="#org0712408">7.2. <code>u:has_prefix</code></a></li>
+<li><a href="#orgbe1c7da">7.3. <code>u:has_verb</code></a></li>
+<li><a href="#orgc08855f">7.4. <code>u:is_blank_char</code></a></li>
+<li><a href="#orgfa7de6d">7.5. <code>u:rtrim</code></a></li>
+<li><a href="#orgfb21c5e">7.6. <code>u:ltrim</code></a></li>
+<li><a href="#org2db28a9">7.7. <code>u:trim</code></a></li>
+<li><a href="#orgc0cec1b">7.8. <code>u:normalize_newlines</code></a></li>
+<li><a href="#org5544096">7.9. <code>u:is_verb_line</code></a></li>
+<li><a href="#orgc00861a">7.10. <code>u:argument_after</code></a></li>
+<li><a href="#org1b474af">7.11. <code>u:validate_path</code></a></li>
+<li><a href="#org5a5b426">7.12. <code>u:has_parent_component</code></a></li>
+<li><a href="#org49f8882">7.13. <code>u:split_words</code></a></li>
+<li><a href="#org2b482e6">7.14. <code>u:first_content_line_after</code></a></li>
+<li><a href="#org1d3bb63">7.15. <code>u:first_content_line</code></a></li>
+<li><a href="#orgbc6dee5">7.16. <code>u:rest_after</code></a></li>
+<li><a href="#org958e484">7.17. <code>u:is_fence_line</code></a></li>
+<li><a href="#orgc916201">7.18. <code>u:join_lines</code></a></li>
+<li><a href="#orgfa44c0e">7.19. <code>u:strip_outer_fences</code></a></li>
+<li><a href="#orgcae8338">7.20. <code>u:parse_write</code></a></li>
+<li><a href="#org2fda328">7.21. <code>u:find_marker</code></a></li>
+<li><a href="#orgbe63941">7.22. <code>u:parse_patch</code></a></li>
+<li><a href="#orgc239cdb">7.23. <code>u:parse_done</code></a></li>
+<li><a href="#org072d171">7.24. <code>u:parse_action</code></a></li>
+</ul>
+</li>
+<li><a href="#org689787b">8. Mechanisms: running tests, searching, patching: <code>agents/tools.mlpl</code></a>
+<ul>
+<li><a href="#orgef9a2a5">8.1. Module header</a></li>
+<li><a href="#orgd7470be">8.2. Top level, part 1</a></li>
+<li><a href="#org767e166">8.3. <code>u:run_kind</code></a></li>
+<li><a href="#orgb708cf0">8.4. <code>u:native_loaded</code></a></li>
+<li><a href="#org5e88ba9">8.5. <code>u:render_native_run</code></a></li>
+<li><a href="#org3c4dec9">8.6. <code>u:native_result</code></a></li>
+<li><a href="#org3a0714f">8.7. <code>u:run_native</code></a></li>
+<li><a href="#org827176d">8.8. <code>u:render_search</code></a></li>
+<li><a href="#org834d797">8.9. <code>u:search_tool</code></a></li>
+<li><a href="#org89fb03b">8.10. <code>u:run_refused</code></a></li>
+<li><a href="#org847d382">8.11. <code>u:run_allowed</code></a></li>
+<li><a href="#orgc5ed501">8.12. <code>u:render_event</code></a></li>
+<li><a href="#orge349235">8.13. <code>u:render_run</code></a></li>
+<li><a href="#org3876a15">8.14. <code>u:run_mlpl</code></a></li>
+<li><a href="#org948d7e1">8.15. <code>u:run_tool</code></a></li>
+<li><a href="#orga728aaa">8.16. <code>u:apply_patch</code></a></li>
+</ul>
+</li>
+<li><a href="#org320dffb">9. The loop: <code>agents/loop.mlpl</code></a>
+<ul>
+<li><a href="#org2785457">9.1. Module header</a></li>
+<li><a href="#org433e0a9">9.2. <code>u:loop_initial_state</code></a></li>
+<li><a href="#org76c987b">9.3. <code>u:build_context</code></a></li>
+<li><a href="#orga4d400c">9.4. <code>u:authorize_run</code></a></li>
+<li><a href="#orgbaac308">9.5. <code>u:authorize</code></a></li>
+<li><a href="#orgdfa0b1b">9.6. <code>u:decide_yes</code></a></li>
+<li><a href="#orgb87c19d">9.7. <code>u:decide_no</code></a></li>
+<li><a href="#orgb1d22bc">9.8. <code>u:observe_result</code></a></li>
+<li><a href="#orgb0d1f26">9.9. <code>u:execute</code></a></li>
+<li><a href="#org7a5c6b9">9.10. <code>u:touched_path</code></a></li>
+<li><a href="#org0e8a8e0">9.11. <code>u:advanced</code></a></li>
+<li><a href="#orged0c151">9.12. <code>u:stopped</code></a></li>
+<li><a href="#org93df245">9.13. <code>u:last_index</code></a></li>
+<li><a href="#orgd094197">9.14. <code>u:verify_always</code></a></li>
+<li><a href="#orgd6f1438">9.15. <code>u:last_edit_index</code></a></li>
+<li><a href="#orgeb7ed2f">9.16. <code>u:last_passing_run</code></a></li>
+<li><a href="#org9bb7147">9.17. <code>u:run_reported_failure</code></a></li>
+<li><a href="#org5f92b7d">9.18. <code>u:verify_tests_passed</code></a></li>
+<li><a href="#org338f08d">9.19. <code>u:approved</code></a></li>
+<li><a href="#org4309cbe">9.20. <code>u:was_read</code></a></li>
+<li><a href="#org100c9ca">9.21. <code>u:unread_write</code></a></li>
+<li><a href="#org42a19c0">9.22. <code>u:loop_step</code></a></li>
+<li><a href="#orgd1b5c5d">9.23. <code>u:loop_step_fresh</code></a></li>
+<li><a href="#org8f14aca">9.24. <code>u:run_loop</code></a></li>
+<li><a href="#org2f78b89">9.25. <code>u:count_occurrences</code></a></li>
+<li><a href="#orgd68cba1">9.26. <code>u:ask_transcript</code></a></li>
+</ul>
+</li>
+<li><a href="#org465f111">10. Replaying a recorded run: <code>agents/replay_loop.mlpl</code></a>
+<ul>
+<li><a href="#org20cbc59">10.1. Module header</a></li>
+<li><a href="#org1918e3c">10.2. <code>u:strip_trailing_newlines</code></a></li>
+<li><a href="#orgcc62d9c">10.3. <code>u:transcript_replies</code></a></li>
+<li><a href="#org2a26fe9">10.4. <code>u:final_reply</code></a></li>
+<li><a href="#orgfffa3ef">10.5. <code>u:replay_ask</code></a></li>
+</ul>
+</li>
+<li><a href="#org2b3be96">11. The smallest agent: <code>agents/v0_read_think.mlpl</code></a>
+<ul>
+<li><a href="#org1541ab0">11.1. Module header</a></li>
+<li><a href="#org739ec9e">11.2. <code>u:v0_build_prompt</code></a></li>
+<li><a href="#orgd489f05">11.3. <code>u:v0_system_prompt</code></a></li>
+<li><a href="#org4c52f44">11.4. <code>u:v0_think</code></a></li>
+</ul>
+</li>
+<li><a href="#orge4d62c2">12. Entry: the v0 agent: <code>agents/run_v0.mlpl</code></a>
+<ul>
+<li><a href="#orgc3984e0">12.1. Module header</a></li>
+<li><a href="#org766324d">12.2. Top level, part 1</a></li>
+<li><a href="#org612eec2">12.3. Top level, part 2</a></li>
+<li><a href="#org9322313">12.4. Top level, part 3</a></li>
+</ul>
+</li>
+<li><a href="#org96787ba">13. Entry: the live loop: <code>agents/run_loop.mlpl</code></a>
+<ul>
+<li><a href="#org3c63d50">13.1. Module header</a></li>
+<li><a href="#org2021a3f">13.2. Top level, part 1</a></li>
+<li><a href="#orgc14daa1">13.3. Top level, part 2</a></li>
+<li><a href="#org2a2f325">13.4. Top level, part 3</a></li>
+<li><a href="#org8d53de5">13.5. Top level, part 4</a></li>
+<li><a href="#org6098894">13.6. Top level, part 5</a></li>
+</ul>
+</li>
+<li><a href="#org012aea4">14. Entry: the replay: <code>agents/run_replay.mlpl</code></a>
+<ul>
+<li><a href="#orgd5b9729">14.1. Module header</a></li>
+<li><a href="#orgd16995e">14.2. Top level, part 1</a></li>
+<li><a href="#org7bb7131">14.3. Top level, part 2</a></li>
+<li><a href="#org9fc9afc">14.4. Top level, part 3</a></li>
+<li><a href="#org9de0f68">14.5. Top level, part 4</a></li>
+<li><a href="#org9cf523a">14.6. Top level, part 5</a></li>
+</ul>
+</li>
+<li><a href="#org00e7175">15. Where to go next</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org504a138" class="outline-2">
+<h2 id="org504a138"><span class="section-number-2">1.</span> How to read and run this document</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+This is the agent, in the order a reader should meet it, with prose before
+every function. Each source block carries a <code>:tangle</code> target: tangling this
+file regenerates the committed sources byte for byte, and <code>just check</code> runs
+<code>scripts/check-tangle</code> to prove it, so the prose can never describe code that
+no longer exists. The committed <code>.mlpl</code> files remain the source of truth;
+when they change, this document is edited to match.
+</p>
+</div>
+<div id="outline-container-org0119feb" class="outline-3">
+<h3 id="org0119feb"><span class="section-number-3">1.1.</span> Evaluating blocks</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+The document never evaluates anything on export (<code>:eval no-export</code> in the
+header), so <code>C-c C-e h o</code> produces HTML with no prompts. Evaluation is for
+reading interactively. To make <code>C-c C-c</code> work, evaluate this setup block
+once per Emacs session; it loads sw-MLPL's org-babel backend from the
+adjacent checkout and points it at whichever interpreter exists (GUI Emacs
+has a minimal PATH, so the full path matters):
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(let* ((here (file-name-directory (buffer-file-name)))
+       ;; The repository root is wherever AGENTS.md is, so this also works
+       ;; on a copy of the document under out/ or work/.
+       (repo (or (locate-dominating-file here "AGENTS.md") (expand-file-name ".." here)))
+       (sw-mlpl (expand-file-name "../sw-mlpl" repo))
+       (candidates (list (expand-file-name "target/release/mlpl-repl" sw-mlpl)
+                         (expand-file-name "target/debug/mlpl-repl" sw-mlpl)
+                         (executable-find "mlpl-repl")
+                         (expand-file-name "~/.local/softwarewrighter/bin/mlpl-repl"))))
+  (add-to-list 'load-path (expand-file-name "elisp" sw-mlpl))
+  (require 'ob-mlpl)
+  ;; Keep org-babel's scratch files inside the repository's ignored work/
+  ;; directory rather than /tmp.
+  (make-directory (expand-file-name "work" repo) t)
+  (setq temporary-file-directory (expand-file-name "work/" repo))
+  (setq org-babel-mlpl-command
+        (or (seq-find (lambda (p) (and p (file-executable-p p))) candidates)
+            (user-error "no mlpl-repl found; build ../sw-mlpl or set org-babel-mlpl-command")))
+  (setq org-confirm-babel-evaluate nil)
+  (message "ob-mlpl ready: %s" org-babel-mlpl-command))
+</pre>
+</div>
+
+<p>
+Three things to know before pressing <code>C-c C-c</code> on a block:
+</p>
+
+<ul class="org-ul">
+<li>A block runs in a fresh interpreter on a temporary file, so a block that
+says <code>include "model.mlpl"</code> cannot find its neighbour and will report an
+include error. The function blocks in this document are for reading and
+tangling; the runnable ones are the small self-contained examples in the
+primer below.</li>
+<li><code>org-confirm-babel-evaluate</code> controls the yes/no prompt. The setup block
+sets it to <code>nil</code> (never ask) for the session; set it back to <code>t</code> to be
+asked, or to a function to decide per block.</li>
+<li>To evaluate every runnable block at once use <code>C-c C-v C-b</code>
+(<code>org-babel-execute-buffer</code>); blocks marked <code>:eval no-export</code> or
+<code>:eval never</code> are skipped, so that command runs only the primer examples.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org0d06c51" class="outline-3">
+<h3 id="org0d06c51"><span class="section-number-3">1.2.</span> Publishing</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+<code>just publish-doc</code> writes <code>out/docs/mlplcode.{html,txt,md,pdf}</code> with Emacs
+in batch mode and, for the PDF, Chrome headless; nothing is evaluated and
+nothing is installed. The same exports are available interactively from
+<code>C-c C-e</code>.
+</p>
+</div>
+</div>
+<div id="outline-container-org92ecfa2" class="outline-3">
+<h3 id="org92ecfa2"><span class="section-number-3">1.3.</span> Regenerating the sources</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+<code>just tangle</code> runs org-babel-tangle over this file and then the drift
+check; <code>just tangle-check</code> runs only the check.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf5f3ad3" class="outline-2">
+<h2 id="orgf5f3ad3"><span class="section-number-2">2.</span> MLPL in ten minutes</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+The language is small and the agent uses a small part of it.
+</p>
+
+<ul class="org-ul">
+<li><b>Values.</b> Numbers, strings, string lists such as <code>["a", "b"]</code>, and records
+such as <code>{tool: "read", path: "src/lib.mlpl"}</code>. Records are immutable
+values; to change one, build a new one. A field is read with a dot:
+<code>action.tool</code>.</li>
+<li><b>Functions.</b> <code>def u:name(a, b) { "docstring"; body }</code>. The <code>u:</code> prefix
+marks a user-defined function. The first expression is a docstring. The
+last expression is the return value; there is no <code>return</code> keyword and no
+early return, which is why the code nests <code>if</code> &#x2026; <code>else</code> instead of
+returning early, and why a six-way choice is a six-deep chain (there is no
+<code>else if</code> or <code>match</code>).</li>
+<li><b>Results.</b> Anything that can fail answers <code>ok(value)</code> or <code>err(message)</code>.
+<code>is_ok</code>, <code>is_err</code>, <code>unwrap</code>, <code>unwrap_or</code>, and <code>err_message</code> take them
+apart. Writing <code>?</code> after an expression inside a function means: if this is
+an <code>err</code>, return it from the function now. That is the only early exit.</li>
+<li><b>Function references.</b> <code>:u:name</code> is a reference to a function.
+<code>call(f, x)</code> invokes one. Calling with fewer arguments than the function
+takes returns a partial, a value that remembers the bound arguments and
+behaves like a smaller function. The agent's model, decision, and verify
+hooks are all passed this way.</li>
+<li><b>Loops.</b> <code>while cond { ... }</code> with <code>break</code>. <code>if</code> is an expression, so
+<code>x = if c { a } else { b }</code> is common.</li>
+<li><b>Strings.</b> <code>str_concat</code>, <code>str_join(list, sep)</code>, <code>str_split</code>, <code>str_find</code>
+(index or -1), <code>str_slice(s, start, len)</code>, <code>str_len</code>, <code>str_eq</code>. String
+lists are read with <code>list_len</code> and <code>list_get</code> (which answers a Result).
+The code joins strings with <code>str_concat</code> and <code>str_join</code> rather than <code>+</code>
+because when it was written <code>+</code> rejected strings; that has since been
+fixed upstream.</li>
+<li><b>Files.</b> <code>read_text</code>, <code>write_atomic</code>, <code>fs_walk</code>, <code>run_script</code> are all
+confined to a sandbox root given on the command line and answer Results.</li>
+<li><b>Modules.</b> <code>include "file.mlpl"</code> splices another file in, resolved
+relative to the including file. A binding made at the top level of a file
+is visible inside functions that run later, which the tools module uses
+for the extension root.</li>
+</ul>
+</div>
+<div id="outline-container-orgc0e361c" class="outline-3">
+<h3 id="orgc0e361c"><span class="section-number-3">2.1.</span> Try it: Results and <code>?</code></h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+These three blocks are self-contained and safe to evaluate.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:half(n) {
+  "Half of a non-negative number, or an err naming the problem.";
+  if n &lt; 0 { err("negative: " + to_string(n)) } else { ok(n / 2) }
+}
+
+def u:quarter(n) {
+  "Half of half; the ? returns the first err as this function's value.";
+  h = u:half(n)?;
+  u:half(h)
+}
+
+print(u:quarter(8));
+print(u:quarter(-4));
+print(unwrap_or(u:quarter(-4), -1))
+</pre>
+</div>
+
+<pre class="example">
+Ok(2)
+Err(negative: -4)
+-1
+-1
+</pre>
+</div>
+</div>
+<div id="outline-container-orgf7515d5" class="outline-3">
+<h3 id="orgf7515d5"><span class="section-number-3">2.2.</span> Try it: records and partials</h3>
+<div class="outline-text-3" id="text-2-2">
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:greet(greeting, name) {
+  "Two-argument function; binding the first with call() makes a one-argument partial.";
+  greeting + ", " + name
+}
+
+hello = call(:u:greet, "hello");
+action = {tool: "read", path: "src/lib.mlpl"};
+print(call(hello, "world"));
+print(action.tool, action.path);
+print(type_of(hello))
+</pre>
+</div>
+
+<pre class="example">
+hello, world
+read src/lib.mlpl
+partial
+partial
+</pre>
+</div>
+</div>
+<div id="outline-container-org8daff83" class="outline-3">
+<h3 id="org8daff83"><span class="section-number-3">2.3.</span> Try it: the string toolkit</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+Note the four words from <code>"cargo  test --lib"</code>: the double space yields an
+empty word, which is exactly what the parser's <code>u:split_words</code> removes.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">line = "READ   src/lib.mlpl  ";
+verb_end = str_find(line, " ");
+print(str_slice(line, 0, verb_end));
+words = str_split("cargo  test --lib", " ");
+print(list_len(words), unwrap(list_get(words, 0)));
+print(str_join(["a", "b", "c"], "-"))
+</pre>
+</div>
+
+<pre class="example">
+READ
+4 cargo
+a-b-c
+a-b-c
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orga35028d" class="outline-2">
+<h2 id="orga35028d"><span class="section-number-2">3.</span> The shape of the agent</h2>
+<div class="outline-text-2" id="text-3">
+<pre class="example" id="org89628f8">
+task -&gt; build_context -&gt; ask (injected) -&gt; parse_action -&gt; guards
+     -&gt; authorize (allow | ask | deny) -&gt; execute -&gt; advanced state
+     ... until DONE is verified, an action is denied, the budget is spent,
+         or the model repeats itself
+</pre>
+
+<p>
+The model speaks a six-verb text protocol: READ, SEARCH, WRITE &#x2026; END,
+PATCH &#x2026; END, RUN, DONE. MLPL owns everything you see above. A small Rust
+extension supplies ripgrep search and allow-listed cargo/git; the sandboxed
+builtins supply reads, writes, and MLPL test runs.
+</p>
+</div>
+</div>
+<div id="outline-container-org3006314" class="outline-2">
+<h2 id="org3006314"><span class="section-number-2">4.</span> prompts/act.md</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+The system prompt is the only place the model learns the protocol. Every rule in it was added after a live run broke: fences, fabricated observations, copied example text, repeated actions. Placeholders such as <code>&lt;path&gt;</code> are deliberate; a concrete example path was once copied verbatim by a 7B model. It is tangled like code because the agent reads it with <code>read_text</code> at run time.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-text">You are mlplcode, a small coding agent working inside one project directory.
+Each turn you reply with exactly one action and nothing else. The system
+then sends you the observation. Use the file paths named in the task.
+
+The five actions, where &lt;path&gt; is a path from the task:
+
+READ &lt;path&gt;
+
+SEARCH &lt;text&gt;
+
+WRITE &lt;path&gt;
+&lt;the complete file contents, raw text, no ``` fences&gt;
+END
+
+PATCH &lt;path&gt;
+OLD
+&lt;a few existing lines, copied exactly&gt;
+NEW
+&lt;the lines that replace them&gt;
+END
+
+RUN mlpl &lt;path&gt;
+RUN cargo test --manifest-path &lt;path to Cargo.toml&gt;
+
+DONE &lt;one-line summary&gt;
+
+Shape of a WRITE, with the body's last line followed by END:
+
+WRITE &lt;path&gt;
+&lt;first line of the file&gt;
+&lt;every other line of the file, exactly as it should be saved&gt;
+&lt;last line of the file&gt;
+END
+
+Rules:
+- WRITE and PATCH end with END. READ, SEARCH, RUN, and DONE are a single line.
+- Prefer PATCH for a small change to a file you have read: the OLD block must
+  match the file exactly once. Use WRITE only for new files or rewrites.
+- Paths are relative to the project root; never use .. or a leading /.
+- Never write OBSERVATION, ERROR, or a result yourself; stop after your
+  action and wait for the system.
+- READ a file before you WRITE it; a write to an unread file is refused.
+- When rewriting a file you have read, keep every unchanged line exactly,
+  including comments, def, docstrings, and the ; after a docstring. Never
+  copy text from these instructions into a file.
+- Never send the same action twice in a row; if an action failed, change it.
+- Reply DONE only after a RUN observation showed status: ok.
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1321227" class="outline-2">
+<h2 id="org1321227"><span class="section-number-2">5.</span> prompts/think.md</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+The one-shot v0 agent uses this shorter prompt: read one file, answer in prose. It has no protocol because v0 never acts.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-text">You are a careful programmer reading exactly one source file.
+
+Answer in plain prose, under 120 words.
+First say what the file does.
+Then name the single most useful unit test it is missing and what it would assert.
+Refer only to functions that appear in the source. Do not invent code.
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org71157aa" class="outline-2">
+<h2 id="org71157aa"><span class="section-number-2">6.</span> How the model is injected: <code>agents/model.mlpl</code></h2>
+<div class="outline-text-2" id="text-6">
+<p>
+A model is anything you can call with one prompt string and get one reply string back. Keeping that shape lets a test substitute a fixed reply for a live server, which is why nothing in the loop knows whether it is talking to Ollama.
+</p>
+</div>
+<div id="outline-container-orgdd7dced" class="outline-3">
+<h3 id="orgdd7dced"><span class="section-number-3">6.1.</span> Module header</h3>
+<div class="outline-text-3" id="text-6-1">
+<div class="org-src-container">
+<pre class="src src-mlpl"># Model injection: every agent takes a one-argument ask function; these are the standard ones.
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1c55e85" class="outline-3">
+<h3 id="org1c55e85"><span class="section-number-3">6.2.</span> <code>u:ask_live</code></h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+<code>llm_call</code> is the language builtin that posts to an Ollama server. Binding the first three arguments with <code>call(:u:ask_live, host, model, system)</code> yields a partial, a plain value that behaves like a one-argument function. The entries build the live model this way.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:ask_live(host, model, system, prompt) {
+  "Ask a live Ollama model; bind host, model, and system with call() to get a one-argument ask.";
+  llm_call(host, prompt, model, system)
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org071d502" class="outline-3">
+<h3 id="org071d502"><span class="section-number-3">6.3.</span> <code>u:ask_scripted</code></h3>
+<div class="outline-text-3" id="text-6-3">
+<p>
+The simplest fake model: the same reply every time. Tests bind <code>reply</code> with <code>call</code> and get a deterministic one-argument ask.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:ask_scripted(reply, prompt) {
+  "Return a fixed reply for any prompt; bind reply with call() to get a deterministic ask.";
+  reply
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org5a49f7c" class="outline-3">
+<h3 id="org5a49f7c"><span class="section-number-3">6.4.</span> <code>u:ask_echo</code></h3>
+<div class="outline-text-3" id="text-6-4">
+<p>
+The echo model returns the prompt itself, so a test can assert on exactly what the model would have seen, for example that the source of a file really made it into the prompt.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:ask_echo(prompt) {
+  "Return the prompt unchanged so a test can inspect exactly what the model would see.";
+  prompt
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org56db5b4" class="outline-3">
+<h3 id="org56db5b4"><span class="section-number-3">6.5.</span> <code>u:describe_action</code></h3>
+<div class="outline-text-3" id="text-6-5">
+<p>
+Before asking a person to approve an action, the loop shows it in the protocol's own syntax. A WRITE shows its whole body and a PATCH both blocks, so approval is informed.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:describe_action(action) {
+  "Human-readable proposal of an action for an approval prompt.";
+  if str_eq(action.tool, "write") {
+    str_join(["WRITE ", action.path, "\n", action.body, "END"], "")
+  } else {
+    if str_eq(action.tool, "patch") {
+      str_join(["PATCH ", action.path, "\nOLD\n", action.old, "NEW\n", action.new, "END"], "")
+    } else {
+      if str_eq(action.tool, "run") {
+        str_concat("RUN ", str_join(action.argv, " "))
+      } else {
+        if str_eq(action.tool, "search") {
+          str_concat("SEARCH ", action.text)
+        } else {
+          str_concat("READ ", action.path)
+        }
+      }
+    }
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgef4adc0" class="outline-3">
+<h3 id="orgef4adc0"><span class="section-number-3">6.6.</span> <code>u:is_yes</code></h3>
+<div class="outline-text-3" id="text-6-6">
+<p>
+MLPL has no case folding, so the accepted spellings are enumerated. Anything else refuses, which is the safe default.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:is_yes(answer) {
+  "1 for y, Y, yes, or YES; everything else refuses.";
+  if str_eq(answer, "y") {
+    1
+  } else {
+    if str_eq(answer, "Y") {
+      1
+    } else {
+      if str_eq(answer, "yes") {
+        1
+      } else {
+        str_eq(answer, "YES")
+      }
+    }
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1a32437" class="outline-3">
+<h3 id="org1a32437"><span class="section-number-3">6.7.</span> <code>u:decide_prompt</code></h3>
+<div class="outline-text-3" id="text-6-7">
+<p>
+This is the interactive approval used by <code>just loop</code> at a terminal. <code>read_stdin_chunk</code> reads one bounded chunk; the first line is trimmed and checked. Two things are worth knowing: every stdin builtin refuses a real terminal (ledger finding F9), so the wrapper script feeds this function through a FIFO filled by <code>cat /dev/tty</code>; and an error or end of input refuses rather than approving.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:decide_prompt(action) {
+  "Ask on stdin: print the proposal, read one line, approve only for y or yes; no input refuses.";
+  print("");
+  print("mlplcode wants to:");
+  print(u:describe_action(action));
+  print("approve? [y/N]");
+  chunk = read_stdin_chunk(256);
+  if is_err(chunk) {
+    print("no input available, refusing:", err_message(chunk));
+    0
+  } else {
+    first = unwrap(list_get(str_split(decode_bytes(unwrap(chunk).bytes), "\n"), 0));
+    u:is_yes(u:trim(first))
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org176bcd0" class="outline-2">
+<h2 id="org176bcd0"><span class="section-number-2">7.</span> The action protocol parser: <code>agents/protocol.mlpl</code></h2>
+<div class="outline-text-2" id="text-7">
+<p>
+The parser is the boundary between free text and data. A model reply comes in as one string; what comes out is either <code>ok(record)</code> with a <code>tool</code> field or <code>err(reason)</code>. Nothing downstream ever looks at the raw text again.
+</p>
+</div>
+<div id="outline-container-orgbba6bb6" class="outline-3">
+<h3 id="orgbba6bb6"><span class="section-number-3">7.1.</span> Module header</h3>
+<div class="outline-text-3" id="text-7-1">
+<div class="org-src-container">
+<pre class="src src-mlpl"># Action protocol parser: one model reply becomes an action record or a named err.
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org0712408" class="outline-3">
+<h3 id="org0712408"><span class="section-number-3">7.2.</span> <code>u:has_prefix</code></h3>
+<div class="outline-text-3" id="text-7-2">
+<p>
+<code>str_find</code> returns the index of the first occurrence or -1, so a prefix is simply a match at index zero.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:has_prefix(s, prefix) {
+  "1 when s starts with prefix, else 0.";
+  if str_find(s, prefix) == 0 {
+    1
+  } else {
+    0
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbe1c7da" class="outline-3">
+<h3 id="orgbe1c7da"><span class="section-number-3">7.3.</span> <code>u:has_verb</code></h3>
+<div class="outline-text-3" id="text-7-3">
+<p>
+A verb must be a whole word: <code>READ</code> alone or <code>READ</code> followed by a space. Without this, <code>READING the file</code> parsed as a read of <code>ING the file</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:has_verb(line, verb) {
+  "1 when line is exactly verb or starts with verb followed by a space.";
+  if str_eq(line, verb) {
+    1
+  } else { u:has_prefix(line, str_concat(verb, " ")) }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc08855f" class="outline-3">
+<h3 id="orgc08855f"><span class="section-number-3">7.4.</span> <code>u:is_blank_char</code></h3>
+<div class="outline-text-3" id="text-7-4">
+<p>
+The characters trimming removes. Newlines are deliberately not blank here; line splitting handles them.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:is_blank_char(c) {
+  "1 for a space, tab, or carriage return character.";
+  if str_eq(c, " ") {
+    1
+  } else {
+    if str_eq(c, "\t") {
+      1
+    } else {
+      str_eq(c, "\r")
+    }
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfa7de6d" class="outline-3">
+<h3 id="orgfa7de6d"><span class="section-number-3">7.5.</span> <code>u:rtrim</code></h3>
+<div class="outline-text-3" id="text-7-5">
+<p>
+MLPL has no <code>str_trim</code>, so trimming is written out: walk back from the end while the last character is blank, then slice. <code>while</code> with <code>break</code> is the language's loop; <code>str_slice</code> is character indexed.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:rtrim(s) {
+  "Strip trailing spaces, tabs, and carriage returns; MLPL has no str_trim.";
+  n = str_len(s);
+  while n &gt; 0 {
+    if u:is_blank_char(str_slice(s, n - 1, 1)) {
+      n = n - 1
+    } else {
+      break
+    }
+  };
+  str_slice(s, 0, n)
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfb21c5e" class="outline-3">
+<h3 id="orgfb21c5e"><span class="section-number-3">7.6.</span> <code>u:ltrim</code></h3>
+<div class="outline-text-3" id="text-7-6">
+<p>
+The mirror image of <code>u:rtrim</code> for the front of the string.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:ltrim(s) {
+  "Strip leading spaces and tabs.";
+  n = str_len(s);
+  i = 0;
+  while i &lt; n {
+    if u:is_blank_char(str_slice(s, i, 1)) {
+      i = i + 1
+    } else {
+      break
+    }
+  };
+  str_slice(s, i, n - i)
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2db28a9" class="outline-3">
+<h3 id="org2db28a9"><span class="section-number-3">7.7.</span> <code>u:trim</code></h3>
+<div class="outline-text-3" id="text-7-7">
+<p>
+Both ends. Composed rather than written a third time.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:trim(s) {
+  "Strip both ends.";
+  u:ltrim(u:rtrim(s))
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc0cec1b" class="outline-3">
+<h3 id="orgc0cec1b"><span class="section-number-3">7.8.</span> <code>u:normalize_newlines</code></h3>
+<div class="outline-text-3" id="text-7-8">
+<p>
+Windows line endings are folded into plain newlines up front, so every later check can assume <code>\n</code>. Splitting on the two-character sequence and rejoining is the idiom for replace in a language without <code>str_replace</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:normalize_newlines(text) {
+  "Turn CRLF into LF so line splitting is uniform.";
+  str_join(str_split(text, "\r\n"), "\n")
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org5544096" class="outline-3">
+<h3 id="org5544096"><span class="section-number-3">7.9.</span> <code>u:is_verb_line</code></h3>
+<div class="outline-text-3" id="text-7-9">
+<p>
+Used to detect a second action hiding after the first. The nested <code>if</code> chain is how MLPL spells a six-way choice: there is no <code>else if</code> and no <code>match</code> (ledger finding F7).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:is_verb_line(line) {
+  "1 when a trimmed line starts with one of the six protocol verbs.";
+  if u:has_verb(line, "READ") {
+    1
+  } else {
+    if u:has_verb(line, "SEARCH") {
+      1
+    } else {
+      if u:has_verb(line, "WRITE") {
+        1
+      } else {
+        if u:has_verb(line, "RUN") {
+          1
+        } else {
+          if u:has_verb(line, "PATCH") {
+            1
+          } else { u:has_verb(line, "DONE") }
+        }
+      }
+    }
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc00861a" class="outline-3">
+<h3 id="orgc00861a"><span class="section-number-3">7.10.</span> <code>u:argument_after</code></h3>
+<div class="outline-text-3" id="text-7-10">
+<p>
+Everything after the verb word, trimmed. The verb's length is the slice start.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:argument_after(line, verb) {
+  "The trimmed remainder of line after the verb word.";
+  u:trim(str_slice(line, str_len(verb), str_len(line)))
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1b474af" class="outline-3">
+<h3 id="org1b474af"><span class="section-number-3">7.11.</span> <code>u:validate_path</code></h3>
+<div class="outline-text-3" id="text-7-11">
+<p>
+Paths are the security edge of the whole agent. A path must be non-empty, relative, and free of <code>..</code> components; the sandboxed builtins would refuse escapes anyway, but refusing here gives the model a clear observation instead of a filesystem error.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:validate_path(path) {
+  "ok(path) for a non-empty relative path with no .. component; err otherwise.";
+  if str_len(path) == 0 {
+    err("empty path")
+  } else {
+    if u:has_prefix(path, "/") {
+      err(str_concat("absolute path not allowed: ", path))
+    } else {
+      if u:has_parent_component(path) {
+        err(str_concat("path may not contain ..: ", path))
+      } else {
+        ok(path)
+      }
+    }
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org5a5b426" class="outline-3">
+<h3 id="org5a5b426"><span class="section-number-3">7.12.</span> <code>u:has_parent_component</code></h3>
+<div class="outline-text-3" id="text-7-12">
+<p>
+Only a component that is exactly <code>..</code> counts, so a file called <code>lib..rs.bak</code> is still allowed.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:has_parent_component(path) {
+  "1 when any slash-separated component of path is exactly ..";
+  parts = str_split(path, "/");
+  n = list_len(parts);
+  i = 0;
+  found = 0;
+  while i &lt; n {
+    if str_eq(unwrap(list_get(parts, i)), "..") {
+      found = 1
+    } else {
+      0
+    };
+    i = i + 1
+  };
+  found
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org49f8882" class="outline-3">
+<h3 id="org49f8882"><span class="section-number-3">7.13.</span> <code>u:split_words</code></h3>
+<div class="outline-text-3" id="text-7-13">
+<p>
+A RUN command becomes an argv list. Tabs are folded into spaces, then empty words from repeated spaces are dropped. String lists cannot be appended to and there is no filter, so the words are re-joined into one string and split once more; ledger finding F8 records this awkwardness.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:split_words(text) {
+  "Split on spaces and tabs, dropping empty words; MLPL has no list filter.";
+  raw = str_split(str_join(str_split(text, "\t"), " "), " ");
+  n = list_len(raw);
+  i = 0;
+  joined = "";
+  while i &lt; n {
+    word = unwrap(list_get(raw, i));
+    if str_len(word) &gt; 0 {
+      joined = if str_len(joined) == 0 {
+        word
+      } else {
+        str_join([joined, word], " ")
+      }
+    } else {
+      0
+    };
+    i = i + 1
+  };
+  str_split(joined, " ")
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2b482e6" class="outline-3">
+<h3 id="org2b482e6"><span class="section-number-3">7.14.</span> <code>u:first_content_line_after</code></h3>
+<div class="outline-text-3" id="text-7-14">
+<p>
+Index of the first non-blank line at or after a position, or -1. The <code>break</code> inside the <code>if</code> is how MLPL leaves a <code>while</code> early.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:first_content_line_after(lines, from) {
+  "Index of the first non-blank line at or after from, or -1.";
+  n = list_len(lines);
+  i = from;
+  found = -1;
+  while i &lt; n {
+    if str_len(u:trim(unwrap(list_get(lines, i)))) &gt; 0 {
+      found = i;
+      break
+    } else {
+      0
+    };
+    i = i + 1
+  };
+  found
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1d3bb63" class="outline-3">
+<h3 id="org1d3bb63"><span class="section-number-3">7.15.</span> <code>u:first_content_line</code></h3>
+<div class="outline-text-3" id="text-7-15">
+<p>
+The same search from the start of the reply. Kept separate so the common case reads plainly.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:first_content_line(lines) {
+  "Index of the first non-blank line, or -1.";
+  n = list_len(lines);
+  i = 0;
+  found = -1;
+  while i &lt; n {
+    if str_len(u:trim(unwrap(list_get(lines, i)))) &gt; 0 {
+      found = i;
+      break
+    } else {
+      0
+    };
+    i = i + 1
+  };
+  found
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbc6dee5" class="outline-3">
+<h3 id="orgbc6dee5"><span class="section-number-3">7.16.</span> <code>u:rest_after</code></h3>
+<div class="outline-text-3" id="text-7-16">
+<p>
+After a complete action nothing else may follow, with three tolerated exceptions learned from live transcripts: blank lines, a lone markdown fence, and a fabricated <code>OBSERVATION:</code> block that some models write to continue the transcript themselves. A second verb is the error "more than one action"; any other text is named in the error.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:rest_after(lines, start) {
+  "ok(1) when only blanks, fence lines, or a fabricated OBSERVATION: block follow start; err otherwise.";
+  n = list_len(lines);
+  i = start;
+  result = ok(1);
+  while i &lt; n {
+    line = u:trim(unwrap(list_get(lines, i)));
+    line = if u:is_fence_line(line) {
+      ""
+    } else {
+      line
+    };
+    if str_len(line) &gt; 0 {
+      result = if str_eq(line, "OBSERVATION:") {
+        ok(1)
+      } else {
+        if u:is_verb_line(line) {
+          err("more than one action")
+        } else {
+          err(str_concat("unexpected text after action: ", line))
+        }
+      };
+      i = n
+    } else {
+      0
+    };
+    i = i + 1
+  };
+  result
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org958e484" class="outline-3">
+<h3 id="org958e484"><span class="section-number-3">7.17.</span> <code>u:is_fence_line</code></h3>
+<div class="outline-text-3" id="text-7-17">
+<p>
+A fence is three backticks optionally followed by one language word, and nothing else on the line.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:is_fence_line(line) {
+  "1 when a line is only a markdown fence: three backticks, optionally followed by one language word.";
+  trimmed = u:trim(line);
+  if u:has_prefix(trimmed, "```") {
+    if str_find(str_slice(trimmed, 3, str_len(trimmed)), " ") &lt; 0 {
+      1
+    } else {
+      0
+    }
+  } else {
+    0
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc916201" class="outline-3">
+<h3 id="orgc916201"><span class="section-number-3">7.18.</span> <code>u:join_lines</code></h3>
+<div class="outline-text-3" id="text-7-18">
+<p>
+Rebuilds a body from a half-open range of lines, each followed by a newline, so a written file always ends with one.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:join_lines(lines, first, last) {
+  "Join lines[first, last) each followed by a newline.";
+  body = "";
+  i = first;
+  while i &lt; last {
+    body = str_concat(body, str_concat(unwrap(list_get(lines, i)), "\n"));
+    i = i + 1
+  };
+  body
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfa44c0e" class="outline-3">
+<h3 id="orgfa44c0e"><span class="section-number-3">7.19.</span> <code>u:strip_outer_fences</code></h3>
+<div class="outline-text-3" id="text-7-19">
+<p>
+Models like to wrap a WRITE body in a code fence, sometimes after a blank line. The outermost fence lines are dropped; a fence in the middle of a file is content and stays.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:strip_outer_fences(lines, first, last) {
+  "Body text for lines[first, last): leading blanks plus an opening fence and a closing fence are dropped; inner fences are content.";
+  lead = first;
+  while lead &lt; last {
+    if str_len(u:trim(unwrap(list_get(lines, lead)))) == 0 {
+      lead = lead + 1
+    } else {
+      break
+    }
+  };
+  from = if lead &lt; last {
+    if u:is_fence_line(unwrap(list_get(lines, lead))) {
+      lead + 1
+    } else {
+      first
+    }
+  } else {
+    first
+  };
+  to = if last &gt; from {
+    if u:is_fence_line(unwrap(list_get(lines, last - 1))) {
+      last - 1
+    } else {
+      last
+    }
+  } else {
+    last
+  };
+  u:join_lines(lines, from, to)
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgcae8338" class="outline-3">
+<h3 id="orgcae8338"><span class="section-number-3">7.20.</span> <code>u:parse_write</code></h3>
+<div class="outline-text-3" id="text-7-20">
+<p>
+Find the <code>END</code> line, refuse if it is missing, refuse if anything but the tolerated noise follows it, then hand the body lines to the fence stripper. The <code>?</code> after <code>u:rest_after</code> is MLPL's early return on <code>err</code>: if that call fails, this function returns that same <code>err</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:parse_write(lines, start, path) {
+  "Collect body lines after start up to END, dropping outer fence lines; err on missing END or text after it.";
+  n = list_len(lines);
+  i = start + 1;
+  end_at = -1;
+  while i &lt; n {
+    if str_eq(u:rtrim(unwrap(list_get(lines, i))), "END") {
+      end_at = i;
+      break
+    } else {
+      0
+    };
+    i = i + 1
+  };
+  if end_at &lt; 0 {
+    err("missing END after WRITE body")
+  } else {
+    u:rest_after(lines, end_at + 1)?;
+    ok({tool: "write", path: path, body: u:strip_outer_fences(lines, start + 1, end_at)})
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2fda328" class="outline-3">
+<h3 id="org2fda328"><span class="section-number-3">7.21.</span> <code>u:find_marker</code></h3>
+<div class="outline-text-3" id="text-7-21">
+<p>
+A marker line is matched after trimming trailing blanks, so ~END ~ with a stray space still terminates.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:find_marker(lines, from, marker) {
+  "Index of the first line equal to marker at or after from, or -1.";
+  n = list_len(lines);
+  i = from;
+  found = -1;
+  while i &lt; n {
+    if str_eq(u:rtrim(unwrap(list_get(lines, i))), marker) {
+      found = i;
+      break
+    } else {
+      0
+    };
+    i = i + 1
+  };
+  found
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbe63941" class="outline-3">
+<h3 id="orgbe63941"><span class="section-number-3">7.22.</span> <code>u:parse_patch</code></h3>
+<div class="outline-text-3" id="text-7-22">
+<p>
+PATCH has three markers. <code>OLD</code> must be the very next line, <code>NEW</code> and <code>END</code> must follow in order, and the OLD block must not be empty, because an empty search text would match everywhere. Both blocks are joined with trailing newlines so they line up with file text.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:parse_patch(lines, start, path) {
+  "PATCH &lt;path&gt;, OLD, old lines, NEW, new lines, END: exact old text replaced by new text; err on any missing marker.";
+  old_at = u:find_marker(lines, start + 1, "OLD");
+  if old_at != start + 1 {
+    err("PATCH needs a line OLD directly after the path")
+  } else {
+    new_at = u:find_marker(lines, old_at + 1, "NEW");
+    if new_at &lt; 0 {
+      err("missing NEW after the OLD block")
+    } else {
+      end_at = u:find_marker(lines, new_at + 1, "END");
+      if end_at &lt; 0 {
+        err("missing END after the NEW block")
+      } else {
+        if new_at == old_at + 1 {
+          err("the OLD block must not be empty")
+        } else {
+          u:rest_after(lines, end_at + 1)?;
+          ok({tool: "patch", path: path, old: u:join_lines(lines, old_at + 1, new_at), new: u:join_lines(lines, new_at + 1, end_at)})
+        }
+      }
+    }
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc239cdb" class="outline-3">
+<h3 id="orgc239cdb"><span class="section-number-3">7.23.</span> <code>u:parse_done</code></h3>
+<div class="outline-text-3" id="text-7-23">
+<p>
+A summary may spill onto later lines; they are joined so nothing the model said about its work is lost.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:parse_done(lines, start, first) {
+  "Join the summary on the DONE line with any following non-blank lines.";
+  n = list_len(lines);
+  i = start + 1;
+  summary = first;
+  while i &lt; n {
+    line = u:rtrim(unwrap(list_get(lines, i)));
+    if str_len(u:trim(line)) &gt; 0 {
+      summary = str_join([summary, line], "\n")
+    } else {
+      0
+    };
+    i = i + 1
+  };
+  ok({tool: "done", summary: summary})
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org072d171" class="outline-3">
+<h3 id="org072d171"><span class="section-number-3">7.24.</span> <code>u:parse_action</code></h3>
+<div class="outline-text-3" id="text-7-24">
+<p>
+The entry point. Normalize newlines, find the first content line, drop a copied <code>ACTION:</code> header if the model echoed one, then dispatch on the verb. Each branch validates its argument and returns a record with a <code>tool</code> field. Read this function top to bottom and you have read the whole protocol.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:parse_action(text) {
+  "Parse exactly one protocol action from a model reply: ok(record) or err(reason).";
+  lines = str_split(u:normalize_newlines(text), "\n");
+  start = u:first_content_line(lines);
+  start = if start &gt;= 0 {
+    if str_eq(u:trim(unwrap(list_get(lines, start))), "ACTION:") { u:first_content_line_after(lines, start + 1) } else {
+      start
+    }
+  } else {
+    start
+  };
+  if start &lt; 0 {
+    err("empty reply")
+  } else {
+    line = u:trim(unwrap(list_get(lines, start)));
+    if u:has_verb(line, "READ") {
+      path = u:validate_path(u:argument_after(line, "READ"))?;
+      u:rest_after(lines, start + 1)?;
+      ok({tool: "read", path: path})
+    } else {
+      if u:has_verb(line, "SEARCH") {
+        query = u:argument_after(line, "SEARCH");
+        if str_len(query) == 0 {
+          err("empty search text")
+        } else {
+          u:rest_after(lines, start + 1)?;
+          ok({tool: "search", text: query})
+        }
+      } else {
+        if u:has_verb(line, "WRITE") {
+          path = u:validate_path(u:argument_after(line, "WRITE"))?;
+          u:parse_write(lines, start, path)
+        } else {
+          if u:has_verb(line, "PATCH") {
+            path = u:validate_path(u:argument_after(line, "PATCH"))?;
+            u:parse_patch(lines, start, path)
+          } else {
+            if u:has_verb(line, "RUN") {
+              command = u:argument_after(line, "RUN");
+              if str_len(command) == 0 {
+                err("empty command")
+              } else {
+                u:rest_after(lines, start + 1)?;
+                ok({tool: "run", argv: u:split_words(command)})
+              }
+            } else {
+              if u:has_verb(line, "DONE") {
+                u:parse_done(lines, start, u:argument_after(line, "DONE"))
+              } else {
+                err(str_concat("unknown verb: ", line))
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org689787b" class="outline-2">
+<h2 id="org689787b"><span class="section-number-2">8.</span> Mechanisms: running tests, searching, patching: <code>agents/tools.mlpl</code></h2>
+<div class="outline-text-2" id="text-8">
+<p>
+Mechanisms live here: what actually happens when an action is executed. The one piece of state in the whole agent is <code>agent_tools_root</code>, a module-level binding that the live entry sets after loading the Rust extension. Functions see the current value of a module binding when they run, which is why it can be assigned once in the entry and read everywhere.
+</p>
+</div>
+<div id="outline-container-orgef9a2a5" class="outline-3">
+<h3 id="orgef9a2a5"><span class="section-number-3">8.1.</span> Module header</h3>
+<div class="outline-text-3" id="text-8-1">
+<div class="org-src-container">
+<pre class="src src-mlpl"># RUN and SEARCH mechanisms: pure-MLPL run_script for mlpl files, the agent-tools extension for cargo, git, and search.
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd7470be" class="outline-3">
+<h3 id="orgd7470be"><span class="section-number-3">8.2.</span> Top level, part 1</h3>
+<div class="outline-text-3" id="text-8-2">
+<p>
+Empty until an entry loads the extension; every function that needs the extension checks it first.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl"># Project root handed to the agent-tools extension; empty until the entry loads the library.
+agent_tools_root = "";
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org767e166" class="outline-3">
+<h3 id="org767e166"><span class="section-number-3">8.3.</span> <code>u:run_kind</code></h3>
+<div class="outline-text-3" id="text-8-3">
+<p>
+RUN is classified by its first word. <code>mlpl</code> runs in pure MLPL, <code>cargo</code> and <code>git</code> go to the extension under their own permissions, and anything else is <code>shell</code>, which never executes.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:run_kind(argv) {
+  "Classify argv: mlpl (run_script), cargo or git (extension, separately permissioned), else shell.";
+  first = if list_len(argv) &gt; 0 {
+    unwrap(list_get(argv, 0))
+  } else {
+    ""
+  };
+  if str_eq(first, "mlpl") {
+    "mlpl"
+  } else {
+    if str_eq(first, "cargo") {
+      "cargo"
+    } else {
+      if str_eq(first, "git") {
+        "git"
+      } else {
+        "shell"
+      }
+    }
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb708cf0" class="outline-3">
+<h3 id="orgb708cf0"><span class="section-number-3">8.4.</span> <code>u:native_loaded</code></h3>
+<div class="outline-text-3" id="text-8-4">
+<p>
+A non-empty root means the extension is loaded. Without it the agent still works on MLPL projects; only SEARCH and RUN cargo/git are missing.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:native_loaded() {
+  "1 when the entry has loaded the agent-tools extension and set its root.";
+  if str_len(agent_tools_root) &gt; 0 {
+    1
+  } else {
+    0
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org5e88ba9" class="outline-3">
+<h3 id="org5e88ba9"><span class="section-number-3">8.5.</span> <code>u:render_native_run</code></h3>
+<div class="outline-text-3" id="text-8-5">
+<p>
+The extension answers a record with <code>status</code>, <code>stdout</code>, <code>stderr</code>, and <code>timed_out</code>. It is rendered into the plain text the model reads next turn; <code>status: 0</code> is the line the verifier looks for.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:render_native_run(outcome) {
+  "Observation text for an extension run: status, timeout flag, then stdout and stderr.";
+  head = str_join(["status: ", to_string(outcome.status), if outcome.timed_out {
+        " (timed out after 120 s)"
+      } else {
+        ""
+      }], "");
+  body = str_join(["stdout:", outcome.stdout, "stderr:", outcome.stderr], "\n");
+  str_join([head, body], "\n")
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3c4dec9" class="outline-3">
+<h3 id="org3c4dec9"><span class="section-number-3">8.6.</span> <code>u:native_result</code></h3>
+<div class="outline-text-3" id="text-8-6">
+<p>
+A call across the extension boundary answers either a record or, when the Rust side refused (for example a command outside its allow-list), an <code>err</code>. <code>type_of</code> tells the two apart so both become ordinary values here.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:native_result(result) {
+  "An extension call answers a record, or err(message) when Rust refused it; make both an observation-ready value.";
+  if str_eq(type_of(result), "result") {
+    if is_err(result) {
+      err(str_concat("ERROR: ", err_message(result)))
+    } else {
+      ok(unwrap(result))
+    }
+  } else {
+    ok(result)
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3a0714f" class="outline-3">
+<h3 id="org3a0714f"><span class="section-number-3">8.7.</span> <code>u:run_native</code></h3>
+<div class="outline-text-3" id="text-8-7">
+<p>
+cargo and git go through <code>_agent_tools:run</code>, which enforces the allow-list again in Rust, runs in the project root with a timeout, and never touches a shell.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:run_native(argv) {
+  "Run cargo or git through the extension inside the project root, or say the extension is not loaded.";
+  if u:native_loaded() {
+    outcome = u:native_result(_agent_tools:run(agent_tools_root, str_join(argv, " ")));
+    if is_err(outcome) {
+      err_message(outcome)
+    } else { u:render_native_run(unwrap(outcome)) }
+  } else {
+    str_join(["run: ", u:run_kind(argv), " needs the agent-tools extension (not loaded)"], "")
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org827176d" class="outline-3">
+<h3 id="org827176d"><span class="section-number-3">8.8.</span> <code>u:render_search</code></h3>
+<div class="outline-text-3" id="text-8-8">
+<p>
+Search results are rendered as a count and then <code>path:line:text</code> lines, bounded by the extension so a broad pattern cannot flood the context.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:render_search(found) {
+  "Observation text for a search record: count, truncation flag, then the path:line:text lines.";
+  if found.count == 0 {
+    "no matches"
+  } else {
+    str_join([to_string(found.count), " match(es)", if found.truncated {
+          " (truncated)"
+        } else {
+          ""
+        }, "\n", found.matches], "")
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org834d797" class="outline-3">
+<h3 id="org834d797"><span class="section-number-3">8.9.</span> <code>u:search_tool</code></h3>
+<div class="outline-text-3" id="text-8-9">
+<p>
+SEARCH is ripgrep over the project when the extension is loaded. It honours <code>.gitignore</code> and never follows symlinks.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:search_tool(text) {
+  "Search the project through the extension; without it observe that search is not available.";
+  if u:native_loaded() {
+    found = u:native_result(_agent_tools:search(agent_tools_root, text));
+    if is_err(found) {
+      err_message(found)
+    } else { u:render_search(unwrap(found)) }
+  } else {
+    "search needs the agent-tools extension (not loaded)"
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org89fb03b" class="outline-3">
+<h3 id="org89fb03b"><span class="section-number-3">8.10.</span> <code>u:run_refused</code></h3>
+<div class="outline-text-3" id="text-8-10">
+<p>
+The refusal is an observation the model can read and react to, not an exception.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:run_refused(argv) {
+  "The observation for a command outside the allow-list; nothing is executed.";
+  err(str_concat("run: command not allowed: ", str_join(argv, " ")))
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org847d382" class="outline-3">
+<h3 id="org847d382"><span class="section-number-3">8.11.</span> <code>u:run_allowed</code></h3>
+<div class="outline-text-3" id="text-8-11">
+<p>
+For MLPL projects only one shape is allowed: <code>mlpl &lt;path&gt;</code> with a path that passes the same validation as READ and WRITE.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:run_allowed(argv) {
+  "ok(path) only when argv is exactly mlpl &lt;relative path&gt; with a safe path; err otherwise.";
+  if list_len(argv) == 2 {
+    if str_eq(unwrap(list_get(argv, 0)), "mlpl") {
+      path = unwrap(list_get(argv, 1));
+      if is_ok(u:validate_path(path)) {
+        ok(path)
+      } else { u:run_refused(argv) }
+    } else {
+      u:run_refused(argv)
+    }
+  } else {
+    u:run_refused(argv)
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc5ed501" class="outline-3">
+<h3 id="orgc5ed501"><span class="section-number-3">8.12.</span> <code>u:render_event</code></h3>
+<div class="outline-text-3" id="text-8-12">
+<p>
+<code>run_script</code> captures the child's test events as JSON lines. Only <code>test_end</code> events are shown, one per line, with the diagnostic on failure; <code>parse_json</code> turns a line into a record.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:render_event(line) {
+  "One captured test event as a short line; only test_end events are rendered, others give an empty string.";
+  parsed = parse_json(line);
+  if is_err(parsed) {
+    ""
+  } else {
+    e = unwrap(parsed);
+    if str_eq(e.kind, "test_end") {
+      if str_eq(e.status, "failed") {
+        str_join(["failed: ", e.name, " -- ", e.diagnostic], "")
+      } else {
+        str_join([e.status, ": ", e.name], "")
+      }
+    } else {
+      ""
+    }
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orge349235" class="outline-3">
+<h3 id="orge349235"><span class="section-number-3">8.13.</span> <code>u:render_run</code></h3>
+<div class="outline-text-3" id="text-8-13">
+<p>
+The observation for an MLPL test run: status, the file's final value, any error, then the finished tests. This is what "run the tests" looks like to the model.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:render_run(outcome) {
+  "Observation text for a run_script outcome: status, value, error if any, then one line per finished test.";
+  lines = str_join(["status: ", outcome.status, "\n", "value: ", outcome.value], "");
+  lines = if str_len(outcome.error) &gt; 0 {
+    str_join([lines, "\n", "error: ", outcome.error], "")
+  } else {
+    lines
+  };
+  n = list_len(outcome.events);
+  i = 0;
+  while i &lt; n {
+    rendered = u:render_event(unwrap(list_get(outcome.events, i)));
+    lines = if str_len(rendered) &gt; 0 {
+      str_join([lines, "\n", rendered], "")
+    } else {
+      lines
+    };
+    i = i + 1
+  };
+  lines
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3876a15" class="outline-3">
+<h3 id="org3876a15"><span class="section-number-3">8.14.</span> <code>u:run_mlpl</code></h3>
+<div class="outline-text-3" id="text-8-14">
+<p>
+<code>run_script</code> executes an MLPL file in a fresh environment inside the sandbox and returns its outcome as data. The example project's tests run this way with no test runner installed, because the assertion library is vendored beside them.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:run_mlpl(path) {
+  "Execute one MLPL file inside the sandbox through run_script and render the outcome.";
+  result = run_script(path, {source_dir: ".", capture: 1});
+  if is_ok(result) { u:render_run(unwrap(result)) } else {
+    str_concat("ERROR: ", err_message(result))
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org948d7e1" class="outline-3">
+<h3 id="org948d7e1"><span class="section-number-3">8.15.</span> <code>u:run_tool</code></h3>
+<div class="outline-text-3" id="text-8-15">
+<p>
+Dispatch by kind. Note that <code>shell</code> is refused here regardless of the permission record; the permission only decides whether the refusal ends the run.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:run_tool(argv) {
+  "Dispatch by kind: mlpl through run_script, cargo and git through the extension, shell refused as an observation.";
+  kind = u:run_kind(argv);
+  if str_eq(kind, "mlpl") {
+    allowed = u:run_allowed(argv);
+    if is_ok(allowed) { u:run_mlpl(unwrap(allowed)) } else {
+      err_message(allowed)
+    }
+  } else {
+    if str_eq(kind, "shell") {
+      err_message(u:run_refused(argv))
+    } else { u:run_native(argv) }
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orga728aaa" class="outline-3">
+<h3 id="orga728aaa"><span class="section-number-3">8.16.</span> <code>u:apply_patch</code></h3>
+<div class="outline-text-3" id="text-8-16">
+<p>
+PATCH in pure MLPL: read the file, require the OLD block to occur exactly once, splice the NEW block in with three slices, and write atomically. Zero or several occurrences are reported and the file is left alone.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:apply_patch(path, old, new) {
+  "Replace exactly one occurrence of old with new in path via write_atomic; the observation names any mismatch.";
+  current = read_text(path);
+  if is_err(current) {
+    str_concat("ERROR: ", err_message(current))
+  } else {
+    text = unwrap(current);
+    hits = u:count_occurrences(text, old);
+    if hits != 1 {
+      str_join(["PATCH ERROR: the OLD block occurs ", to_string(hits), " time(s) in ", path, "; it must occur exactly once"], "")
+    } else {
+      at = str_find(text, old);
+      updated = str_join([str_slice(text, 0, at), new, str_slice(text, at + str_len(old), str_len(text))], "");
+      u:observe_result(write_atomic(path, updated), str_concat("patched ", path))
+    }
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org320dffb" class="outline-2">
+<h2 id="org320dffb"><span class="section-number-2">9.</span> The loop: <code>agents/loop.mlpl</code></h2>
+<div class="outline-text-2" id="text-9">
+<p>
+The loop is the agent. One record flows through pure functions: build the prompt, ask, parse, guard, authorize, execute, update. The three <code>include</code> lines pull in the model helpers, the parser, and the mechanisms; <code>include</code> resolves relative to this file.
+</p>
+</div>
+<div id="outline-container-org2785457" class="outline-3">
+<h3 id="org2785457"><span class="section-number-3">9.1.</span> Module header</h3>
+<div class="outline-text-3" id="text-9-1">
+<div class="org-src-container">
+<pre class="src src-mlpl"># Bounded coding-agent loop: observe, decide, act, update over one state record.
+include "model.mlpl";
+include "protocol.mlpl";
+include "tools.mlpl";
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org433e0a9" class="outline-3">
+<h3 id="org433e0a9"><span class="section-number-3">9.2.</span> <code>u:loop_initial_state</code></h3>
+<div class="outline-text-3" id="text-9-2">
+<p>
+The whole state of a run is one record. <code>history</code> is the transcript so far, <code>files</code> a newline-joined list of paths touched, <code>budget</code> the step limit, and <code>done</code>, <code>reason</code>, <code>answer</code> the outcome. <code>last_reply</code> and <code>repeats</code> feed the repeated-action guard.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:loop_initial_state(task, budget) {
+  "Fresh state: no history, no files touched, iteration 0, not stopped.";
+  {task: task, iteration: 0, history: "", files: "", budget: budget, done: 0, reason: "", answer: "", last_reply: "", repeats: 0}
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org76c987b" class="outline-3">
+<h3 id="org76c987b"><span class="section-number-3">9.3.</span> <code>u:build_context</code></h3>
+<div class="outline-text-3" id="text-9-3">
+<p>
+The prompt is the task plus the transcript so far. It is a pure function of the state, so tests pin its exact text.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:build_context(state) {
+  "Compose the prompt from task and history; pure so tests can pin the exact text.";
+  str_join(["TASK:", state.task, "", "WORK SO FAR:", state.history, "", "Choose the next action."], "\n")
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orga4d400c" class="outline-3">
+<h3 id="orga4d400c"><span class="section-number-3">9.4.</span> <code>u:authorize_run</code></h3>
+<div class="outline-text-3" id="text-9-4">
+<p>
+RUN permissions depend on the kind: git has its own field because it can change history, and shell is a separate field that defaults to deny.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:authorize_run(argv, permissions) {
+  "RUN policy by kind: mlpl and cargo under run, git under git, anything else under shell.";
+  kind = u:run_kind(argv);
+  if str_eq(kind, "git") {
+    permissions.git
+  } else {
+    if str_eq(kind, "shell") {
+      permissions.shell
+    } else {
+      permissions.run
+    }
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbaac308" class="outline-3">
+<h3 id="orgbaac308"><span class="section-number-3">9.5.</span> <code>u:authorize</code></h3>
+<div class="outline-text-3" id="text-9-5">
+<p>
+The single authorization point. It is a lookup from the action's tool into the permission record and returns <code>allow</code>, <code>ask</code>, or <code>deny</code>. PATCH is a write. DONE is always allowed here because completion is gated elsewhere.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:authorize(action, permissions) {
+  "Pure policy lookup: allow, ask, or deny for the action's tool; done is always allowed.";
+  if str_eq(action.tool, "read") {
+    permissions.read
+  } else {
+    if str_eq(action.tool, "search") {
+      permissions.search
+    } else {
+      if str_eq(action.tool, "write") {
+        permissions.write
+      } else {
+        if str_eq(action.tool, "patch") {
+          permissions.write
+        } else {
+          if str_eq(action.tool, "run") {
+            u:authorize_run(action.argv, permissions)
+          } else {
+            "allow"
+          }
+        }
+      }
+    }
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgdfa0b1b" class="outline-3">
+<h3 id="orgdfa0b1b"><span class="section-number-3">9.6.</span> <code>u:decide_yes</code></h3>
+<div class="outline-text-3" id="text-9-6">
+<p>
+One of the three answers to an <code>ask</code>: approve everything, used by tests and by <code>LOOP_APPROVE=1</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:decide_yes(action) {
+  "Approve every ask; used by tests and by LOOP_APPROVE=1.";
+  1
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb87c19d" class="outline-3">
+<h3 id="orgb87c19d"><span class="section-number-3">9.7.</span> <code>u:decide_no</code></h3>
+<div class="outline-text-3" id="text-9-7">
+<p>
+Refuse everything: the default for a run with no terminal, so a script can never make the agent write by accident.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:decide_no(action) {
+  "Refuse every ask; the live default so an unattended run never writes.";
+  0
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb1d22bc" class="outline-3">
+<h3 id="orgb1d22bc"><span class="section-number-3">9.8.</span> <code>u:observe_result</code></h3>
+<div class="outline-text-3" id="text-9-8">
+<p>
+Builtins answer <code>Result</code> values. This turns one into observation text: the success text on <code>ok</code>, an <code>ERROR:</code> line on <code>err</code>. Errors are information for the model, never crashes.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:observe_result(result, success_text) {
+  "Render a builtin Result as observation text: the payload or an ERROR line.";
+  if is_ok(result) {
+    success_text
+  } else {
+    str_concat("ERROR: ", err_message(result))
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb0d1f26" class="outline-3">
+<h3 id="orgb0d1f26"><span class="section-number-3">9.9.</span> <code>u:execute</code></h3>
+<div class="outline-text-3" id="text-9-9">
+<p>
+The only place side effects happen, and every branch is a sandboxed builtin or an extension call. Read returns the file, write and patch confirm the path, search and run delegate to the tool module.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:execute(action) {
+  "Run one authorized action inside the sandbox and return the observation text.";
+  if str_eq(action.tool, "read") {
+    result = read_text(action.path);
+    u:observe_result(result, unwrap_or(result, ""))
+  } else {
+    if str_eq(action.tool, "write") {
+      u:observe_result(write_atomic(action.path, action.body), str_concat("wrote ", action.path))
+    } else {
+      if str_eq(action.tool, "patch") {
+        u:apply_patch(action.path, action.old, action.new)
+      } else {
+        if str_eq(action.tool, "search") {
+          u:search_tool(action.text)
+        } else {
+          if str_eq(action.tool, "run") {
+            u:run_tool(action.argv)
+          } else {
+            "no-op"
+          }
+        }
+      }
+    }
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org7a5c6b9" class="outline-3">
+<h3 id="org7a5c6b9"><span class="section-number-3">9.10.</span> <code>u:touched_path</code></h3>
+<div class="outline-text-3" id="text-9-10">
+<p>
+Reads, writes, and patches record their path so the read-before-write guard can consult it.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:touched_path(action) {
+  "The path an action touches, or an empty string.";
+  if str_eq(action.tool, "read") {
+    action.path
+  } else {
+    if str_eq(action.tool, "write") {
+      action.path
+    } else {
+      if str_eq(action.tool, "patch") {
+        action.path
+      } else {
+        ""
+      }
+    }
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org0e8a8e0" class="outline-3">
+<h3 id="org0e8a8e0"><span class="section-number-3">9.11.</span> <code>u:advanced</code></h3>
+<div class="outline-text-3" id="text-9-11">
+<p>
+The state after a step that did not stop: the transcript grows by an <code>ACTION:</code> and <code>OBSERVATION:</code> entry, the touched path is appended, and <code>repeats</code> counts how many times in a row the model has sent the same reply. Records are values, so a new one is built rather than mutated.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:advanced(state, reply, observation, path) {
+  "The next state after a step: history grows, files may grow, repeats count identical replies, not stopped.";
+  entry = str_join(["", "", "ACTION:", reply, "", "OBSERVATION:", observation], "\n");
+  files = if str_len(path) == 0 {
+    state.files
+  } else {
+    str_concat(state.files, str_concat(path, "\n"))
+  };
+  repeats = if str_eq(reply, state.last_reply) {
+    state.repeats + 1
+  } else {
+    0
+  };
+  {task: state.task, iteration: state.iteration + 1, history: str_concat(state.history, entry), files: files, budget: state.budget, done: 0, reason: "", answer: "", last_reply: reply, repeats: repeats}
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orged0c151" class="outline-3">
+<h3 id="orged0c151"><span class="section-number-3">9.12.</span> <code>u:stopped</code></h3>
+<div class="outline-text-3" id="text-9-12">
+<p>
+A terminal state. The reason is data: <code>done</code>, <code>denied</code>, <code>budget</code>, or <code>stuck</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:stopped(state, iteration, reason, answer) {
+  "A terminal state carrying the stop reason as a value.";
+  {task: state.task, iteration: iteration, history: state.history, files: state.files, budget: state.budget, done: 1, reason: reason, answer: answer, last_reply: state.last_reply, repeats: state.repeats}
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org93df245" class="outline-3">
+<h3 id="org93df245"><span class="section-number-3">9.13.</span> <code>u:last_index</code></h3>
+<div class="outline-text-3" id="text-9-13">
+<p>
+Index of the last occurrence of a substring, written with a <code>while 1</code> loop and <code>break</code> because <code>str_find</code> only finds the first.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:last_index(s, needle) {
+  "Character index of the last occurrence of needle in s, or -1.";
+  found = -1;
+  offset = 0;
+  rest = s;
+  while 1 {
+    at = str_find(rest, needle);
+    if at &lt; 0 {
+      break
+    } else {
+      found = offset + at;
+      offset = offset + at + str_len(needle);
+      rest = str_slice(s, offset, str_len(s))
+    }
+  };
+  found
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd094197" class="outline-3">
+<h3 id="orgd094197"><span class="section-number-3">9.14.</span> <code>u:verify_always</code></h3>
+<div class="outline-text-3" id="text-9-14">
+<p>
+The permissive verifier: accept any DONE. Used where a task names no evidence.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:verify_always(state) {
+  "Accept every DONE; the default when a task names no evidence.";
+  ok(1)
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd6f1438" class="outline-3">
+<h3 id="orgd6f1438"><span class="section-number-3">9.15.</span> <code>u:last_edit_index</code></h3>
+<div class="outline-text-3" id="text-9-15">
+<p>
+The later of the last WRITE and the last PATCH in the transcript.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:last_edit_index(history) {
+  "Character index of the last WRITE or PATCH action in history, or -1.";
+  write_at = u:last_index(history, "\nACTION:\nWRITE ");
+  patch_at = u:last_index(history, "\nACTION:\nPATCH ");
+  if write_at &gt; patch_at {
+    write_at
+  } else {
+    patch_at
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgeb7ed2f" class="outline-3">
+<h3 id="orgeb7ed2f"><span class="section-number-3">9.16.</span> <code>u:last_passing_run</code></h3>
+<div class="outline-text-3" id="text-9-16">
+<p>
+A passing run is <code>status: ok</code> from an MLPL test file or <code>status: 0</code> from the extension.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:last_passing_run(history) {
+  "Character index of the last RUN observation that reported status ok (mlpl) or status 0 (extension), or -1.";
+  ok_at = u:last_index(history, "\nOBSERVATION:\nstatus: ok");
+  zero_at = u:last_index(history, "\nOBSERVATION:\nstatus: 0\n");
+  if ok_at &gt; zero_at {
+    ok_at
+  } else {
+    zero_at
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org9bb7147" class="outline-3">
+<h3 id="org9bb7147"><span class="section-number-3">9.17.</span> <code>u:run_reported_failure</code></h3>
+<div class="outline-text-3" id="text-9-17">
+<p>
+Even with a passing status, the run text may name a failed test: an MLPL <code>failed:</code> line or cargo's <code>FAILED</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:run_reported_failure(tail) {
+  "1 when the text after a passing status still names a failed test (mlpl failed: lines or cargo FAILED).";
+  if str_find(tail, "failed: ") &gt;= 0 {
+    1
+  } else {
+    if str_find(tail, "FAILED") &gt;= 0 {
+      1
+    } else {
+      0
+    }
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org5f92b7d" class="outline-3">
+<h3 id="org5f92b7d"><span class="section-number-3">9.18.</span> <code>u:verify_tests_passed</code></h3>
+<div class="outline-text-3" id="text-9-18">
+<p>
+Verified completion. A DONE is accepted only if something was written or patched, a run passed after the last edit, and that run named no failure. This exists because live models declared success without running anything; the loop now answers <code>NOT VERIFIED</code> and continues.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:verify_tests_passed(state) {
+  "Accept DONE only after at least one successful WRITE or PATCH and a passing RUN after the last edit with no failed test.";
+  edited = if str_find(state.history, "\nOBSERVATION:\nwrote ") &gt;= 0 {
+    1
+  } else {
+    str_find(state.history, "\nOBSERVATION:\npatched ") &gt;= 0
+  };
+  last_ok = u:last_passing_run(state.history);
+  if edited == 0 {
+    err("no file has been written yet")
+  } else {
+    if last_ok &lt; 0 {
+      err("no RUN observation with status: ok yet")
+    } else {
+      if last_ok &lt; u:last_edit_index(state.history) {
+        err("files changed after the last passing RUN; run the tests again")
+      } else {
+        if u:run_reported_failure(str_slice(state.history, last_ok, str_len(state.history) - last_ok)) {
+          err("the last RUN reported a failed test")
+        } else {
+          ok(1)
+        }
+      }
+    }
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org338f08d" class="outline-3">
+<h3 id="org338f08d"><span class="section-number-3">9.19.</span> <code>u:approved</code></h3>
+<div class="outline-text-3" id="text-9-19">
+<p>
+<code>allow</code> is yes, <code>deny</code> is no, and <code>ask</code> defers to the injected decision function through <code>call</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:approved(verdict, action, decide) {
+  "1 when the verdict is allow, or ask and the injected decision says yes.";
+  if str_eq(verdict, "allow") {
+    1
+  } else {
+    if str_eq(verdict, "ask") {
+      call(decide, action)
+    } else {
+      0
+    }
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org4309cbe" class="outline-3">
+<h3 id="org4309cbe"><span class="section-number-3">9.20.</span> <code>u:was_read</code></h3>
+<div class="outline-text-3" id="text-9-20">
+<p>
+The touched-files string is searched with newline delimiters on both sides so <code>lib.mlpl</code> does not match <code>lib.mlpl.bak</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:was_read(state, path) {
+  "1 when path appears in the files touched so far this run.";
+  if str_find(str_concat("\n", state.files), str_join(["\n", path, "\n"], "")) &gt;= 0 {
+    1
+  } else {
+    0
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org100c9ca" class="outline-3">
+<h3 id="org100c9ca"><span class="section-number-3">9.21.</span> <code>u:unread_write</code></h3>
+<div class="outline-text-3" id="text-9-21">
+<p>
+The read-before-write guard: editing an existing file that this run has not read is editing blind. New files are exempt, since there is nothing to read.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:unread_write(state, action) {
+  "1 when the action writes or patches an existing file that this run has not read: the model is editing blind.";
+  edits = if str_eq(action.tool, "write") {
+    1
+  } else {
+    str_eq(action.tool, "patch")
+  };
+  if edits {
+    if u:was_read(state, action.path) {
+      0
+    } else {
+      is_ok(read_text(action.path))
+    }
+  } else {
+    0
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org42a19c0" class="outline-3">
+<h3 id="org42a19c0"><span class="section-number-3">9.22.</span> <code>u:loop_step</code></h3>
+<div class="outline-text-3" id="text-9-22">
+<p>
+One transition. The repeated-action guard comes first: an identical reply is flagged once and stops the run the third time, which is what turned an endless thrash into a bounded failure.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:loop_step(state, ask, permissions, decide, verify) {
+  "One observe, decide, act, update transition; every outcome is a state value.";
+  reply = call(ask, u:build_context(state));
+  if str_eq(reply, state.last_reply) {
+    if state.repeats &gt;= 1 {
+      u:stopped(state, state.iteration + 1, "stuck", "the same action was sent three times in a row")
+    } else {
+      u:advanced(state, reply, "REPEATED ACTION: same as the previous step; change your approach", "")
+    }
+  } else {
+    u:loop_step_fresh(state, reply, permissions, decide, verify)
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd1b5c5d" class="outline-3">
+<h3 id="orgd1b5c5d"><span class="section-number-3">9.23.</span> <code>u:loop_step_fresh</code></h3>
+<div class="outline-text-3" id="text-9-23">
+<p>
+The normal path: parse, and on failure observe the parse error; on DONE consult the verifier; otherwise apply the read-before-write guard, authorize, and either execute or stop as denied. Every branch returns a state.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:loop_step_fresh(state, reply, permissions, decide, verify) {
+  "Handle a reply that differs from the previous one: parse, guard, authorize, execute.";
+  parsed = u:parse_action(reply);
+  if is_err(parsed) {
+    u:advanced(state, reply, str_concat("PARSE ERROR: ", err_message(parsed)), "")
+  } else {
+    action = unwrap(parsed);
+    if str_eq(action.tool, "done") {
+      evidence = call(verify, state);
+      if is_ok(evidence) {
+        u:stopped(state, state.iteration + 1, "done", action.summary)
+      } else {
+        u:advanced(state, reply, str_concat("NOT VERIFIED: ", err_message(evidence)), "")
+      }
+    } else {
+      if u:unread_write(state, action) {
+        u:advanced(state, reply, str_join(["read ", action.path, " before writing it"], ""), "")
+      } else {
+        if u:approved(u:authorize(action, permissions), action, decide) {
+          u:advanced(state, reply, u:execute(action), u:touched_path(action))
+        } else {
+          u:stopped(state, state.iteration + 1, "denied", str_concat("denied: ", reply))
+        }
+      }
+    }
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org8f14aca" class="outline-3">
+<h3 id="org8f14aca"><span class="section-number-3">9.24.</span> <code>u:run_loop</code></h3>
+<div class="outline-text-3" id="text-9-24">
+<p>
+Run steps until the state says it is done or the budget is spent. The budget check happens before each step so a run can never exceed it.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:run_loop(task, budget, ask, permissions, decide, verify) {
+  "Run steps until a verified done, a denial, or the spent budget; returns the final state.";
+  state = u:loop_initial_state(task, budget);
+  while state.done == 0 {
+    if state.iteration &gt;= state.budget {
+      state = u:stopped(state, state.iteration, "budget", "")
+    } else {
+      state = u:loop_step(state, ask, permissions, decide, verify)
+    }
+  };
+  state
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2f78b89" class="outline-3">
+<h3 id="org2f78b89"><span class="section-number-3">9.25.</span> <code>u:count_occurrences</code></h3>
+<div class="outline-text-3" id="text-9-25">
+<p>
+Non-overlapping substring count, used by the scripted model and by PATCH.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:count_occurrences(s, needle) {
+  "Number of non-overlapping occurrences of needle in s.";
+  count = 0;
+  rest = s;
+  step = str_len(needle);
+  while 1 {
+    at = str_find(rest, needle);
+    if at &lt; 0 {
+      break
+    } else {
+      count = count + 1;
+      rest = str_slice(rest, at + step, str_len(rest))
+    }
+  };
+  count
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd68cba1" class="outline-3">
+<h3 id="orgd68cba1"><span class="section-number-3">9.26.</span> <code>u:ask_transcript</code></h3>
+<div class="outline-text-3" id="text-9-26">
+<p>
+The scripted multi-turn model that tests and replays use. It is pure over the prompt: the number of <code>ACTION:</code> entries already in the transcript is the turn number, which selects the reply. Running out of replies yields a DONE so a test can never hang.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:ask_transcript(replies, prompt) {
+  "Scripted multi-turn model: reply number equals the count of prior ACTION entries in the prompt.";
+  turn = u:count_occurrences(prompt, "\nACTION:\n");
+  unwrap_or(list_get(replies, turn), "DONE transcript exhausted")
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org465f111" class="outline-2">
+<h2 id="org465f111"><span class="section-number-2">10.</span> Replaying a recorded run: <code>agents/replay_loop.mlpl</code></h2>
+<div class="outline-text-2" id="text-10">
+<p>
+A saved live transcript can be replayed through the real loop: the model's replies come from the file, everything else happens for real. The README demo is recorded this way, so it needs no model server.
+</p>
+</div>
+<div id="outline-container-org20cbc59" class="outline-3">
+<h3 id="org20cbc59"><span class="section-number-3">10.1.</span> Module header</h3>
+<div class="outline-text-3" id="text-10-1">
+<div class="org-src-container">
+<pre class="src src-mlpl"># Replay a saved live transcript through the real loop: recorded model replies, real parser, writes, and test runs.
+include "loop.mlpl";
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1918e3c" class="outline-3">
+<h3 id="org1918e3c"><span class="section-number-3">10.2.</span> <code>u:strip_trailing_newlines</code></h3>
+<div class="outline-text-3" id="text-10-2">
+<p>
+<code>u:rtrim</code> leaves newlines alone by design, so a separate helper drops them from an extracted reply.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:strip_trailing_newlines(s) {
+  "Drop trailing newline characters; u:rtrim leaves them alone.";
+  n = str_len(s);
+  while n &gt; 0 {
+    if str_eq(str_slice(s, n - 1, 1), "\n") {
+      n = n - 1
+    } else {
+      break
+    }
+  };
+  str_slice(s, 0, n)
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgcc62d9c" class="outline-3">
+<h3 id="orgcc62d9c"><span class="section-number-3">10.3.</span> <code>u:transcript_replies</code></h3>
+<div class="outline-text-3" id="text-10-3">
+<p>
+Each reply sits between an <code>ACTION:</code> header and the next <code>OBSERVATION:</code> header. The replies are collected into one string with a separator that cannot occur in a reply and split once, because string lists cannot be appended to.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:transcript_replies(text) {
+  "Extract the model replies from a saved transcript: the text between each ACTION: header and its OBSERVATION: header.";
+  entries = str_split(text, "\nACTION:\n");
+  n = list_len(entries);
+  i = 1;
+  joined = "";
+  while i &lt; n {
+    entry = unwrap(list_get(entries, i));
+    cut = str_find(entry, "\nOBSERVATION:\n");
+    raw = if cut &lt; 0 {
+      entry
+    } else {
+      str_slice(entry, 0, cut)
+    };
+    reply = u:strip_trailing_newlines(u:rtrim(raw));
+    joined = if i == 1 {
+      reply
+    } else {
+      str_join([joined, reply], "\n&lt;&lt;&lt;REPLY&gt;&gt;&gt;\n")
+    };
+    i = i + 1
+  };
+  str_split(joined, "\n&lt;&lt;&lt;REPLY&gt;&gt;&gt;\n")
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2a26fe9" class="outline-3">
+<h3 id="org2a26fe9"><span class="section-number-3">10.4.</span> <code>u:final_reply</code></h3>
+<div class="outline-text-3" id="text-10-4">
+<p>
+The transcript ends with the run's summary line rather than a recorded DONE, so the DONE is rebuilt from it.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:final_reply(text) {
+  "The DONE line a saved transcript ended with, rebuilt from its stopped-after summary line.";
+  at = str_find(text, "\nstopped after ");
+  if at &lt; 0 {
+    "DONE replay finished"
+  } else {
+    tail = str_slice(text, at + 1, str_len(text) - at - 1);
+    lines = str_split(tail, "\n");
+    if list_len(lines) &gt; 1 {
+      str_concat("DONE ", unwrap(list_get(lines, 1)))
+    } else {
+      "DONE replay finished"
+    }
+  }
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfffa3ef" class="outline-3">
+<h3 id="orgfffa3ef"><span class="section-number-3">10.5.</span> <code>u:replay_ask</code></h3>
+<div class="outline-text-3" id="text-10-5">
+<p>
+Compose the recorded replies and the rebuilt DONE into a scripted model. The result is a partial of <code>u:ask_transcript</code> and drops straight into <code>u:run_loop</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:replay_ask(transcript_path) {
+  "A scripted model built from a transcript fixture: its recorded replies, then its recorded DONE.";
+  text = unwrap(read_text(transcript_path));
+  replies = u:transcript_replies(text);
+  all = str_join([str_join(replies, "\n&lt;&lt;&lt;REPLY&gt;&gt;&gt;\n"), u:final_reply(text)], "\n&lt;&lt;&lt;REPLY&gt;&gt;&gt;\n");
+  call(:u:ask_transcript, str_split(all, "\n&lt;&lt;&lt;REPLY&gt;&gt;&gt;\n"))
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org2b3be96" class="outline-2">
+<h2 id="org2b3be96"><span class="section-number-2">11.</span> The smallest agent: <code>agents/v0_read_think.mlpl</code></h2>
+<div class="outline-text-2" id="text-11">
+<p>
+The smallest agent: read one file, ask once, print the answer. It has no loop and no protocol; it exists to show that a coding agent starts as READ then THINK.
+</p>
+</div>
+<div id="outline-container-org1541ab0" class="outline-3">
+<h3 id="org1541ab0"><span class="section-number-3">11.1.</span> Module header</h3>
+<div class="outline-text-3" id="text-11-1">
+<div class="org-src-container">
+<pre class="src src-mlpl"># v0 coding agent: read one file, think once, answer. The model is an injected function.
+include "model.mlpl";
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org739ec9e" class="outline-3">
+<h3 id="org739ec9e"><span class="section-number-3">11.2.</span> <code>u:v0_build_prompt</code></h3>
+<div class="outline-text-3" id="text-11-2">
+<p>
+Task, blank line, source. <code>str_join</code> with a newline separator is how multi-line text is assembled.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:v0_build_prompt(task, source) {
+  "Compose the TASK/SOURCE prompt the model sees; pure so tests can pin the exact text.";
+  str_join(["TASK:", task, "", "SOURCE:", source], "\n")
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd489f05" class="outline-3">
+<h3 id="orgd489f05"><span class="section-number-3">11.3.</span> <code>u:v0_system_prompt</code></h3>
+<div class="outline-text-3" id="text-11-3">
+<p>
+The system prompt is a file so it can be edited without touching code. <code>read_text</code> answers a <code>Result</code> and the caller decides what to do with an <code>err</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:v0_system_prompt() {
+  "Read the system prompt from prompts/think.md through the sandboxed read; ok(text) or err.";
+  read_text("prompts/think.md")
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org4c52f44" class="outline-3">
+<h3 id="org4c52f44"><span class="section-number-3">11.4.</span> <code>u:v0_think</code></h3>
+<div class="outline-text-3" id="text-11-4">
+<p>
+Read, build, ask. The <code>?</code> after <code>read_text</code> returns the read error as this function's value, so a missing file is reported without ever calling the model.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">def u:v0_think(task, path, ask) {
+  "Read path, build the prompt, and ask the injected model; a read err propagates as a value.";
+  source = read_text(path)?;
+  prompt = u:v0_build_prompt(task, source);
+  ok(call(ask, prompt))
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orge4d62c2" class="outline-2">
+<h2 id="orge4d62c2"><span class="section-number-2">12.</span> Entry: the v0 agent: <code>agents/run_v0.mlpl</code></h2>
+<div class="outline-text-2" id="text-12">
+<p>
+Entries are the only files with top-level statements. They read arguments, build the injected functions, and print. <code>args()</code> is the list of command-line arguments after <code>--</code>; <code>unwrap_or</code> supplies a default when an index is missing.
+</p>
+</div>
+<div id="outline-container-orgc3984e0" class="outline-3">
+<h3 id="orgc3984e0"><span class="section-number-3">12.1.</span> Module header</h3>
+<div class="outline-text-3" id="text-12-1">
+<div class="org-src-container">
+<pre class="src src-mlpl"># Live entry for the v0 agent: mlpl-repl --source-dir &lt;repo&gt; -f agents/run_v0.mlpl -- HOST MODEL [FILE] [TASK]
+include "v0_read_think.mlpl";
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org766324d" class="outline-3">
+<h3 id="org766324d"><span class="section-number-3">12.2.</span> Top level, part 1</h3>
+<div class="outline-text-3" id="text-12-2">
+<p>
+Defaults follow the plan's model section: a local Ollama and the 7B coder model.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">host = unwrap_or(list_get(args(), 0), "http://localhost:11434");
+model = unwrap_or(list_get(args(), 1), "qwen2.5-coder:7b");
+path = unwrap_or(list_get(args(), 2), "examples/tiny-rust-project/src/lib.rs");
+task = unwrap_or(list_get(args(), 3), "Explain what this file does, then name the single most useful unit test it is missing.");
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org612eec2" class="outline-3">
+<h3 id="org612eec2"><span class="section-number-3">12.3.</span> Top level, part 2</h3>
+<div class="outline-text-3" id="text-12-3">
+<p>
+The live model is a partial of <code>u:ask_live</code>; the agent function receives it like any other.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">system = unwrap(u:v0_system_prompt());
+ask = call(:u:ask_live, host, model, system);
+answer = u:v0_think(task, path, ask);
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org9322313" class="outline-3">
+<h3 id="org9322313"><span class="section-number-3">12.4.</span> Top level, part 3</h3>
+<div class="outline-text-3" id="text-12-4">
+<p>
+Print the answer or the error. The script's final value is its exit signal for the wrapper.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">print("model:", model);
+print("file:", path);
+print("task:", task);
+print("");
+if is_ok(answer) {
+  print(unwrap(answer))
+} else {
+  print("error:", err_message(answer))
+};
+is_ok(answer)
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org96787ba" class="outline-2">
+<h2 id="org96787ba"><span class="section-number-2">13.</span> Entry: the live loop: <code>agents/run_loop.mlpl</code></h2>
+<div class="outline-text-2" id="text-13">
+<p>
+The live entry for the bounded loop. Everything configurable arrives as an argument from <code>scripts/run-loop</code>.
+</p>
+</div>
+<div id="outline-container-org3c63d50" class="outline-3">
+<h3 id="org3c63d50"><span class="section-number-3">13.1.</span> Module header</h3>
+<div class="outline-text-3" id="text-13-1">
+<div class="org-src-container">
+<pre class="src src-mlpl"># Live entry for the bounded loop: mlpl-repl --source-dir &lt;repo&gt; -f agents/run_loop.mlpl -- HOST MODEL [TASK] [BUDGET] [APPROVE]
+include "loop.mlpl";
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2021a3f" class="outline-3">
+<h3 id="org2021a3f"><span class="section-number-3">13.2.</span> Top level, part 1</h3>
+<div class="outline-text-3" id="text-13-2">
+<p>
+Host, model, task, budget, approval mode, and verify mode, all with defaults.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">host = unwrap_or(list_get(args(), 0), "http://localhost:11434");
+model = unwrap_or(list_get(args(), 1), "qwen2.5-coder:7b");
+task = unwrap_or(list_get(args(), 2), "Read examples/tiny-rust-project/src/lib.rs and write tests/scratch/NOTES.md with a one-paragraph description of the crate.");
+budget = unwrap(to_number(unwrap_or(list_get(args(), 3), "8")));
+approve = unwrap_or(list_get(args(), 4), "0");
+verify_mode = unwrap_or(list_get(args(), 5), "always");
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc14daa1" class="outline-3">
+<h3 id="orgc14daa1"><span class="section-number-3">13.3.</span> Top level, part 2</h3>
+<div class="outline-text-3" id="text-13-3">
+<p>
+If the wrapper exported the built extension's path, load it and set the module-level root; otherwise say what will be missing. Then build the model, the decision function (approve all, prompt, or refuse), the permission record, and the verifier from the arguments.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">library = env("MLPLCODE_AGENT_TOOLS");
+if is_ok(library) {
+  load_extension(unwrap(library));
+  agent_tools_root = unwrap(env("MLPLCODE_ROOT"));
+  print("agent-tools: loaded, root", agent_tools_root)
+} else {
+  print("agent-tools: not loaded (SEARCH and RUN cargo/git unavailable)")
+};
+system = unwrap(read_text("prompts/act.md"));
+ask = call(:u:ask_live, host, model, system);
+decide = if str_eq(approve, "1") {
+  :u:decide_yes
+} else {
+  if str_eq(approve, "prompt") {
+    :u:decide_prompt
+  } else {
+    :u:decide_no
+  }
+};
+permissions = {read: "allow", search: "allow", write: "ask", run: "allow", git: "ask", shell: "deny"};
+verify = if str_eq(verify_mode, "tests") {
+  :u:verify_tests_passed
+} else {
+  :u:verify_always
+};
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2a2f325" class="outline-3">
+<h3 id="org2a2f325"><span class="section-number-3">13.4.</span> Top level, part 3</h3>
+<div class="outline-text-3" id="text-13-4">
+<p>
+Echo the configuration so a transcript is self-describing.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">print("model:", model);
+print("task:", task);
+print("budget:", budget, "approve writes:", approve, "verify:", verify_mode);
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org8d53de5" class="outline-3">
+<h3 id="org8d53de5"><span class="section-number-3">13.5.</span> Top level, part 4</h3>
+<div class="outline-text-3" id="text-13-5">
+<p>
+The loop is driven step by step here instead of through <code>u:run_loop</code> so each <code>ACTION:</code> and <code>OBSERVATION:</code> prints as it happens. The delta is the slice of history added by the step.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">state = u:loop_initial_state(task, budget);
+while state.done == 0 {
+  if state.iteration &gt;= state.budget {
+    state = u:stopped(state, state.iteration, "budget", "")
+  } else {
+    before = str_len(state.history);
+    state = u:loop_step(state, ask, permissions, decide, verify);
+    if state.done == 0 {
+      print(str_slice(state.history, before, str_len(state.history) - before))
+    } else {
+      0
+    }
+  }
+};
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org6098894" class="outline-3">
+<h3 id="org6098894"><span class="section-number-3">13.6.</span> Top level, part 5</h3>
+<div class="outline-text-3" id="text-13-6">
+<p>
+A denial is explained in terms the person can act on.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">print("");
+print("stopped after", state.iteration, "step(s):", state.reason);
+if str_eq(state.reason, "denied") {
+  print("the agent's next action was refused:");
+  print(unwrap(list_get(str_split(str_slice(state.answer, 8, str_len(state.answer)), "\n"), 0)));
+  print("answer y at the prompt, or run with LOOP_APPROVE=1 to approve every write")
+} else {
+  print(state.answer)
+};
+state.reason
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org012aea4" class="outline-2">
+<h2 id="org012aea4"><span class="section-number-2">14.</span> Entry: the replay: <code>agents/run_replay.mlpl</code></h2>
+<div class="outline-text-2" id="text-14">
+<p>
+The replay entry: the same step-by-step printing as the live entry, but the model is the recorded transcript and writes are pre-approved.
+</p>
+</div>
+<div id="outline-container-orgd5b9729" class="outline-3">
+<h3 id="orgd5b9729"><span class="section-number-3">14.1.</span> Module header</h3>
+<div class="outline-text-3" id="text-14-1">
+<div class="org-src-container">
+<pre class="src src-mlpl"># Replay entry: mlpl-repl --source-dir &lt;repo&gt; -f agents/run_replay.mlpl -- TRANSCRIPT [TASK] [BUDGET]
+include "replay_loop.mlpl";
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd16995e" class="outline-3">
+<h3 id="orgd16995e"><span class="section-number-3">14.2.</span> Top level, part 1</h3>
+<div class="outline-text-3" id="text-14-2">
+<p>
+Transcript path, task text, and budget.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">transcript = unwrap_or(list_get(args(), 0), "fixtures/transcripts/mlpl-mul-qwen2.5-coder-7b.txt");
+task = unwrap_or(list_get(args(), 1), "Add u:mul(a, b) to examples/tiny-mlpl-project/lib.mlpl with a test in tests/test_add.mlpl, run the tests, finish when they pass.");
+budget = unwrap(to_number(unwrap_or(list_get(args(), 2), "12")));
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org7bb7131" class="outline-3">
+<h3 id="org7bb7131"><span class="section-number-3">14.3.</span> Top level, part 2</h3>
+<div class="outline-text-3" id="text-14-3">
+<p>
+The recorded model and a permission record that allows what the recording did.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">ask = u:replay_ask(transcript);
+permissions = {read: "allow", search: "allow", write: "allow", run: "allow", git: "allow", shell: "deny"};
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org9fc9afc" class="outline-3">
+<h3 id="org9fc9afc"><span class="section-number-3">14.4.</span> Top level, part 3</h3>
+<div class="outline-text-3" id="text-14-4">
+<p>
+Announce what is real and what is replayed, so the demo is honest on screen.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">print("mlplcode replay: model replies from", transcript);
+print("parser, file writes, and test runs are live");
+print("task:", task);
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org9de0f68" class="outline-3">
+<h3 id="org9de0f68"><span class="section-number-3">14.5.</span> Top level, part 4</h3>
+<div class="outline-text-3" id="text-14-5">
+<p>
+Step and print, exactly as the live entry does.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">state = u:loop_initial_state(task, budget);
+while state.done == 0 {
+  if state.iteration &gt;= state.budget {
+    state = u:stopped(state, state.iteration, "budget", "")
+  } else {
+    before = str_len(state.history);
+    state = u:loop_step(state, ask, permissions, :u:decide_yes, :u:verify_tests_passed);
+    if state.done == 0 {
+      print(str_slice(state.history, before, str_len(state.history) - before))
+    } else {
+      0
+    }
+  }
+};
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org9cf523a" class="outline-3">
+<h3 id="org9cf523a"><span class="section-number-3">14.6.</span> Top level, part 5</h3>
+<div class="outline-text-3" id="text-14-6">
+<p>
+Final summary and stop reason.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mlpl">print("");
+print("stopped after", state.iteration, "step(s):", state.reason);
+print(state.answer);
+state.reason
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org00e7175" class="outline-2">
+<h2 id="org00e7175"><span class="section-number-2">15.</span> Where to go next</h2>
+<div class="outline-text-2" id="text-15">
+<ul class="org-ul">
+<li><code>tests/</code> holds the mlplunit suites that pin every function above with a
+scripted model; <code>just tests</code> runs them without a model server.</li>
+<li><code>docs/permissions.md</code> is the policy table that <code>u:authorize</code> implements.</li>
+<li><code>docs/progression.md</code> records what live models actually did, attempt by
+attempt, and why each guard exists.</li>
+<li><code>extensions/agent-tools/</code> is the Rust side: search and the allow-listed
+runner, proven by cargo tests and loaded with <code>load_extension</code>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Michael A Wright</p>
+<p class="date">Created: 2026-09-15 Tue 21:12</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

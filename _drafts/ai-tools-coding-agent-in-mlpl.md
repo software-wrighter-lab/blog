@@ -2,16 +2,16 @@
 layout: post
 title: "AI Tools #7: A Coding Agent Small Enough to Understand"
 categories: [tools, ai-agents, languages, machine-learning]
-tags: [ai-tools, coding-agent, sw-mlpl, mlpl, opencode, ollama, qwen2.5-coder, llm-call, agent-loop, permissions, sandbox, dogfooding, array-languages, emacs, org-babel]
-keywords: "coding agent, sw-MLPL, MLPL, OpenCode, agent loop, tool dispatch, action protocol, permissions allow ask deny, sandbox, llm_call, Ollama, qwen2.5-coder, local LLM, planner builder reviewer, org-babel, Emacs, dogfooding, capability ledger"
+tags: [ai-tools, coding-agent, mlplcode, sw-mlpl, mlpl, opencode, ollama, qwen2.5-coder, devstral, llm-call, agent-loop, permissions, sandbox, dogfooding, array-languages, literate-programming, org-mode, emacs]
+keywords: "coding agent, mlplcode, sw-MLPL, MLPL, OpenCode, agent loop, action protocol, tool dispatch, permissions allow ask deny, sandbox, verify gate, llm_call, Ollama, qwen2.5-coder, Devstral, local LLM, literate programming, org-babel, tangle, dogfooding, capability ledger"
 author: Software Wrighter
-abstract: "How little machinery does it take to turn an array language into a coding agent? demo-coding-agent is the experiment: the control loop in sw-MLPL, a local model for inference, and Rust only for the few filesystem and process mechanisms the language cannot express. One LLM primitive, six tools, a loop of a few hundred lines --- and a local 7B model that reads a project, adds a function and its test, runs the tests, and is not allowed to say it is done until they pass. OpenCode is the comparison point, not the thing being cloned."
+abstract: "Coding agents are usually described from the outside: a product with a terminal UI, a permission system, a dozen tools, and a model behind it all. mlplcode is the inside, kept small: the whole control loop in sw-MLPL, an array language, with Rust only for the mechanisms the language cannot express and a local model for inference. One LLM primitive, six verbs, about 1,200 lines --- and a verifier standing between the model's claim of success and the real thing, because a 7B model will say it ran the tests when it did not."
 series: "AI Tools"
 series_part: 7
 date: 2026-09-16 00:15:00 -0700
 repo_urls:
   - url: "https://github.com/sw-ml-study/demo-coding-agent"
-    title: "demo-coding-agent"
+    title: "demo-coding-agent (mlplcode)"
   - url: "https://github.com/sw-ml-study/sw-mlpl"
     title: "sw-mlpl"
 ---
@@ -24,16 +24,19 @@ Strip a coding agent down to what it actually does and there is not much left: b
 
 </div>
 
-**demo-coding-agent** builds the loop in the open and postpones the layers. It is an sw-MLPL project: the control loop, prompt construction, action parsing, permissions, retry, and stop logic are MLPL data and pure functions; a local model answers through the language's own `llm_call` builtin; and Rust supplies only the filesystem and process mechanisms the language cannot express. The question it exists to answer is not *can MLPL call a model* --- it can --- but **can MLPL itself express the control plane of an autonomous software agent?** The answer is one LLM primitive, six tools, and a loop of a few hundred lines of MLPL --- plus a parser that is longer than the loop, for reasons a real model supplied.
+**mlplcode** is that loop, built in the open, with the layers left off. It is the coding-agent demo in the [sw-MLPL](https://github.com/sw-ml-study/sw-mlpl) family, named in the spirit of [OpenCode](https://github.com/anomalyco/opencode), and it follows one rule: **MLPL owns every decision, Rust owns only the mechanisms MLPL cannot express, and a local model owns inference.** The question it answers is not *can MLPL call a model* --- it can --- but *can an array language express the control plane of an autonomous coding agent?* The answer is yes, in about 1,200 lines and 75 functions, and the interesting part is what those lines had to contain.
 
 <div class="resource-box" markdown="1">
 
 | Resource | Link |
 |----------|------|
-| **demo-coding-agent** | [sw-ml-study/demo-coding-agent](https://github.com/sw-ml-study/demo-coding-agent) |
-| **sw-MLPL** | [sw-ml-study/sw-mlpl](https://github.com/sw-ml-study/sw-mlpl) · [playground](https://sw-ml-study.github.io/sw-mlpl/) |
+| **mlplcode** | [sw-ml-study/demo-coding-agent](https://github.com/sw-ml-study/demo-coding-agent) |
+| **Read it as a book** | [mlplcode.org](https://github.com/sw-ml-study/demo-coding-agent/blob/main/docs/mlplcode.org) --- every function, with prose · [HTML]({{ '/assets/docs/mlplcode.html' | relative_url }}) · [PDF]({{ '/assets/docs/mlplcode.pdf' | relative_url }}) |
+| **Worked example** | [the transcript](https://github.com/sw-ml-study/demo-coding-agent/blob/main/fixtures/transcripts/mlpl-mul-qwen2.5-coder-7b.txt) of a 7B model adding a function and its test · [the project it edited](https://github.com/sw-ml-study/demo-coding-agent/tree/main/examples/tiny-mlpl-project) |
+| **The loop** | [agents/loop.mlpl](https://github.com/sw-ml-study/demo-coding-agent/blob/main/agents/loop.mlpl) · [protocol.mlpl](https://github.com/sw-ml-study/demo-coding-agent/blob/main/agents/protocol.mlpl) · [permissions](https://github.com/sw-ml-study/demo-coding-agent/blob/main/docs/permissions.md) |
+| **sw-MLPL** | [sw-ml-study/sw-mlpl](https://github.com/sw-ml-study/sw-mlpl) · [playground](https://sw-ml-study.github.io/sw-mlpl/) · [findings filed](https://github.com/sw-ml-study/demo-coding-agent/blob/main/docs/sw-mlpl-capabilities.md) |
 | **OpenCode** | [anomalyco/opencode](https://github.com/anomalyco/opencode) --- the comparison point |
-| **Model** | [qwen2.5-coder](https://ollama.com/library/qwen2.5-coder) on [Ollama](https://ollama.com/) |
+| **Models** | [qwen2.5-coder](https://ollama.com/library/qwen2.5-coder) · [devstral](https://ollama.com/library/devstral) on [Ollama](https://ollama.com/) |
 | **Prior posts** | [Pi, the minimal agent](/2026/05/16/pi-minimal-agent/) · [nono sandboxing](/2026/05/16/nono-sandbox-ai-agents/) · [local-llm-loop](/2026/09/09/ai-tools-local-llm-loop-model-evaluation/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
@@ -43,60 +46,41 @@ Strip a coding agent down to what it actually does and there is not much left: b
 
 Two reasons, and they are the same two reasons behind [last week's mixture-of-experts microscope](/2026/09/13/saw-building-a-tiny-mixture-of-experts/).
 
-**To understand the thing by owning a small one.** I use coding agents every day, and the earlier posts in this series looked at them from the outside: [Pi](/2026/05/16/pi-minimal-agent/), which is about as small as a useful agent gets; [nono](/2026/05/16/nono-sandbox-ai-agents/), which boxes one in; and [local-llm-loop](/2026/09/09/ai-tools-local-llm-loop-model-evaluation/), which measures local models inside a plan-execute-review loop. This one is the loop itself, written so that every decision is visible as data flowing through functions, in a language where the whole program fits on a screen. [OpenCode](https://github.com/anomalyco/opencode) is the architectural reference --- its conceptual core is exactly the loop above --- and the repository is explicit that it is not a port. It is the smallest loop that turns a task into observations, decisions, and file changes.
+**To understand the thing by owning a small one.** I use coding agents every day, and the earlier posts in this series looked at them from the outside: [Pi](/2026/05/16/pi-minimal-agent/), which is about as small as a useful agent gets; [nono](/2026/05/16/nono-sandbox-ai-agents/), which boxes one in; and [local-llm-loop](/2026/09/09/ai-tools-local-llm-loop-model-evaluation/), which measures local models inside a plan-execute-review loop. This one is the loop itself, written so that every decision is visible as data flowing through pure functions, in a language where the whole program can be read in an afternoon. OpenCode is the architectural reference --- its conceptual core is exactly the loop above --- and this is explicitly not a port of it.
 
-**To dogfood sw-MLPL on something that is not machine learning.** The ML demos stress tensor semantics. An agent stresses everything else: strings, records, `Result` values, function references, dispatch, sandboxed I/O, and now an extension boundary. Every gap the agent meets goes into a capability ledger with an executable probe, expected versus observed behavior, and the agent it affects --- and stays there, marked unavailable, until upstream ships a change. Nothing is worked around silently. Nine findings are recorded from the first week alone. `+` on two strings fails with a diagnostic about arrays; calling a function that does not exist reports the *same* array diagnostic, which hid the fact that `str_starts_with` and `str_trim` do not exist; `write_text` will not create a parent directory; `len` rejects a string list; the sandbox documentation says symlinks are never followed when the measured behavior is the more useful *symlinks that resolve outside the sandbox are refused*; `include` resolves paths differently under the interpreter and the test runner. And three that only an agent finds: dispatching on a record's tag takes a nested `if`/`else` chain because there is no `match`; there are no `&&`/`||` operators, so a permission check is written as nested conditionals; and every stdin builtin refuses a terminal, so an MLPL program cannot ask its user a question --- the interactive loop feeds its stdin from a FIFO that `cat /dev/tty` fills, so the language reads a pipe while the lines still come from the keyboard. None of those is the kind of thing a matrix benchmark turns up.
+**To dogfood sw-MLPL on something that is not machine learning.** The ML demos stress tensor semantics. An agent stresses everything else: strings, records, `Result` values, function references, dispatch, sandboxed I/O, and an extension boundary. Every gap the agent met went to the language's maintainer as a finding with an executable probe, expected versus observed behavior, and the agent it affected. Nine were filed. **Five shipped the same day**: `+` now concatenates strings, `len` works on string lists, an undefined function says so instead of producing an array error, `make_dir` exists, and a documentation line about symlinks is right. The one that hurt most was the undefined-function diagnostic, because it hid the fact that `str_trim` and `str_starts_with` did not exist; the parser carries its own trim. Still open, and worked around in the open: `include` resolves differently under the test runner and the CLI; a six-way choice needs six nested `if`s because there is no `else if` or `match`; and every stdin builtin refuses a terminal, so the interactive loop asks for write approval through a FIFO that the wrapper fills from `/dev/tty`. None of those is the kind of thing a matrix benchmark turns up.
 
-## MLPL owns policy, Rust owns mechanisms
+## The loop
 
-The governing principle is one sentence: **MLPL owns policy, Rust owns mechanisms, a local model owns inference.** Anything the model cannot see in a transcript should not exist.
+One step per model turn, over a single state record --- the task, the transcript so far, the files touched, the budget:
 
-```text
-                 MLPL (agents/*.mlpl)
-        +----------------------------------+
-        | agent loop                       |
-task -->| prompt / context construction    |
-        | action protocol parser           |
-        | permission policy (allow/ask/deny)|
-        | retry / budget / stop logic      |
-        +----------------+-----------------+
-                         |
-              +----------+-----------+
-              |                      |
-   sw-MLPL builtins          Rust agent-tools extension
-   read_text  fs_walk        search (ripgrep crates)
-   write_text write_atomic   run (argv allow-list)
-   run_script (MLPL only)    git_diff  git_status
-              |                      |
-              +----------+-----------+
-                         |
-                     project root
-                    (--source-dir)
+1. **Build the prompt.** The task, then every earlier `ACTION:` / `OBSERVATION:` pair, then *choose the next action*.
+2. **Ask the model.** The model is a function passed in. Live, it is `llm_call` against Ollama; under test, a scripted reply.
+3. **Parse the reply** into exactly one action. Anything else becomes a `PARSE ERROR` observation and the turn ends.
+4. **Guard.** A reply identical to the last one is flagged, and stops the run as `stuck` the third time. A write or patch to a file this run has not read is refused with *read it first*.
+5. **Authorize.** Look the tool up in the permission record: `allow`, `ask`, or `deny`. `ask` goes to a decision function --- a terminal prompt, always yes, or always no. `deny` ends the run.
+6. **Execute.** Read, atomic write, exact-match patch, `run_script` for an MLPL test file, or the Rust extension for ripgrep search and allow-listed `cargo`/`git`. Never a shell. A failure is an `ERROR` observation, not a crash.
+7. **Record.** Append the action and its observation to the transcript, note the touched file, count the repeat.
+8. **On `DONE`, verify.** Accept only if a file was edited and a test run passed after the last edit; otherwise the model sees `NOT VERIFIED` and keeps going.
 
-                    llm_call(url, prompt, model, system)
-                         |
-                   Ollama / llama.cpp
-```
-
-The order of preference for any capability is fixed: an existing sw-MLPL builtin first, then a function in the repository's own narrow Rust extension, then --- last, and only with a probe that proves the gap --- a change to the language. The MLPL coding run below uses no Rust at all: sw-MLPL already ships sandboxed `read_text`, `write_text`, `fs_walk`, and friends confined to the project root, and `RUN mlpl <path>` runs a test file through the language's own `run_script` and reads back its status and per-test results. The Rust extension, `agent-tools`, does only what the language genuinely cannot: search on the ripgrep crates, honoring `.gitignore`, with bounded `path:line:text` output; and a runner for exactly `cargo test`, `cargo check`, `cargo clippy`, `cargo fmt`, `git diff`, and `git status`, inside the project root, with a two-minute timeout and bounded output. It is a few hundred lines of Rust behind the same extension ABI the other sw-MLPL demos use, and it is what lets the same loop work a Rust crate.
-
-An agent step is a function from state to state, and the state is one record:
+The run stops with a reason as a value --- `done`, `denied`, `budget`, or `stuck` --- never an exception. As a pipeline:
 
 ```text
 state
   |> build_context
-  |> ask_model        (an injected function reference; a scripted fake under test)
-  |> parse_action     ("READ src/lib.rs" -> {tool: "read", path: "src/lib.rs"})
+  |> ask_model        (injected: llm_call live, a scripted reply under test)
+  |> parse_action     ("READ src/lib.mlpl" -> {tool: "read", path: "src/lib.mlpl"})
+  |> guard
   |> authorize        (action + policy -> allow | ask | deny)
   |> execute          (builtin or extension call -> observation)
   |> update_state
 ```
 
-That is the part I find most interesting about doing this in an array/functional language. A conventional agent accumulates classes --- Agent, Session, Provider, Tool, ToolCall, ToolResult, Permission, ContextManager --- and most of them are containers for state that could just be data. Here an agent is a functional pipeline with feedback, the loop repeats a bounded number of times, and every stop reason --- `DONE`, a denied action, a spent budget --- is a value rather than an exception.
+That is the part I find most interesting about doing this in an array/functional language. A conventional agent accumulates classes --- Agent, Session, Provider, Tool, ToolCall, ToolResult, Permission, ContextManager --- and most of them are containers for state that could just be data. Here an agent is a functional pipeline with feedback, and all of it is in [`agents/loop.mlpl`](https://github.com/sw-ml-study/demo-coding-agent/blob/main/agents/loop.mlpl), about 340 lines.
 
 ## The model speaks a tiny text protocol
 
-There is no native tool-calling JSON, on purpose. The model answers with exactly one action in plain text:
+There is no native tool-calling JSON, on purpose. The model answers with exactly one action in plain text, six verbs:
 
 ```text
 READ <path>
@@ -114,13 +98,15 @@ RUN <command>
 DONE <summary>
 ```
 
-A parser turns each reply into a record --- `{tool: "patch", path, old, new}` --- or an `err(...)`, and the mechanism stays readable in a transcript. `PATCH` is pure MLPL over `read_text`, `str_find`, and `write_atomic`: the `OLD` block must occur exactly once, and zero or several occurrences are observations, not edits. The parser is longer than the loop --- 412 lines against 339 --- because it is hardened against what real models do, each habit pinned by a test: it drops everything from a fabricated `OBSERVATION:` line onward once the action is complete, drops a copied `ACTION:` header, tolerates a blank line before an opening code fence and a fence-only line after `END`, and turns a malformed reply into a `PARSE ERROR:` observation the model sees on its next turn instead of a crash. It is also the one place the experiment has already pushed back on the language: what you want for actions is a tagged sum value and a `match` on its tag, and MLPL's records-plus-`Result` encoding is recorded as awkward rather than blocking. A stress test of a language is supposed to find things like that.
+A reply is one string; the parser turns it into a record such as `{tool: "read", path: "src/lib.mlpl"}` or an error naming the reason, and nothing downstream ever sees the raw text again. `PATCH` is pure MLPL over `read_text`, `str_find`, and `write_atomic`: the `OLD` block must occur exactly once, and zero or several occurrences are observations, not edits.
+
+The parser is longer than the loop --- about 410 lines against 340 --- because it has met real models, and each habit it tolerates is pinned by a test: it drops everything from a fabricated `OBSERVATION:` line onward once the action is complete, drops a copied `ACTION:` header, tolerates a blank line before an opening code fence and a fence-only line after `END`, and turns a malformed reply into an observation the model sees on its next turn instead of a crash.
 
 ## More constrained than OpenCode
 
-OpenCode is not sandboxed; its permission system is an interaction and awareness layer around powerful shell and filesystem access. This agent is more constrained, deliberately, in two layers.
+OpenCode is not sandboxed; its permission system is an interaction and awareness layer around powerful shell and filesystem access. mlplcode is more constrained, deliberately, in two layers.
 
-**Mechanism confinement** is not up to the model. Every filesystem builtin is confined by sw-MLPL to the `--source-dir` root and refuses anything that resolves outside it, symlinks included. The Rust extension runs only argv arrays that match a fixed allow-list --- `cargo test`, `cargo check`, `cargo clippy`, `cargo fmt`, `git diff`, `git status` --- matched on the argv prefix, never by handing a line to `/bin/sh -c`. There is no primitive that runs a model-generated string as a shell command.
+**Mechanism confinement** is not up to the model. Every filesystem builtin is confined by sw-MLPL to the `--source-dir` root and refuses anything that resolves outside it, symlinks included. The Rust extension, `agent-tools`, does only what the language genuinely cannot: search on the ripgrep crates, honoring `.gitignore`, with bounded output; and a runner for exactly `cargo test`, `cargo check`, `cargo clippy`, `cargo fmt`, `git diff`, and `git status`, inside the project root, with a two-minute timeout. That runner is about 250 lines of Rust. There is no shell anywhere.
 
 **Policy** is MLPL data:
 
@@ -135,20 +121,18 @@ permissions = {
 }
 ```
 
-`authorize(action, permissions)` is a pure function returning `allow`, `ask`, or `deny`, tested row by row without a model or a filesystem. `RUN` is classified by its first word: `mlpl` stays pure MLPL, `cargo` falls under `run`, `git` under `git`, and anything else is `shell` --- which is denied, and which `shell: "allow"` still refuses, because there is no mechanism underneath it to allow. `PATCH` is a `write`. An `ask` resolves through an injected decision function: at a terminal the agent prints the proposed action --- for a WRITE, the whole body --- and approves only `y` or `yes`; with no terminal on stdin it decides no, so a piped or scripted run never writes. A denial ends the run and names the refused action, so the model cannot probe the policy by retrying.
-
-Two more guards run before authorization, both pure functions over the state. A WRITE to an existing file this run has not READ is refused with *read it before writing it*, which stopped the model editing blind. A reply identical to the previous one is observed as `REPEATED ACTION` rather than executed, and a third identical reply stops the run with reason `stuck`. Each agent has its own record --- a planner that can read and search but not write or test, a builder that can write only by asking, a reviewer that can test and read git but not write --- which is OpenCode's useful distinction between full development agents and restricted plan or review agents, done with data instead of a framework.
+`authorize(action, permissions)` is a pure function returning `allow`, `ask`, or `deny`, tested row by row without a model or a filesystem. `RUN` is classified by its first word: `mlpl` stays pure MLPL, `cargo` falls under `run`, `git` under `git`, and anything else is `shell` --- which is denied, and which `shell: "allow"` still refuses, because there is no mechanism underneath it to allow. At a terminal the agent prints the proposed action --- for a WRITE, the whole body --- and approves only `y` or `yes`; with no terminal on stdin it decides no, so a piped or scripted run never writes. A denial ends the run and names the refused action, so the model cannot probe the policy by retrying.
 
 ## Watch it code
 
-The task: add `u:mul` and its test to a tiny MLPL project, run the tests, and finish when they pass. The model: `qwen2.5-coder:7b`, on a laptop, through Ollama. Writes approved, budget twelve steps.
+The task: add `u:mul` and its test to a one-function MLPL project, run the tests, finish when they pass. The model: `qwen2.5-coder:7b`, which fits a 12 GB card, through Ollama on a laptop.
 
 <figure class="no-invert">
-<video src="{{ '/assets/videos/coding-agent-loop.mp4' | relative_url }}" autoplay muted loop playsinline preload="auto" aria-label="Terminal recording of the coding agent reading the MLPL example, writing u:mul and its test, running the tests, and finishing"></video>
+<video src="{{ '/assets/videos/coding-agent-loop.mp4' | relative_url }}" autoplay muted loop playsinline preload="auto" aria-label="Terminal recording of mlplcode reading the MLPL example, writing u:mul and its test, running the tests, and finishing"></video>
 <figcaption>Six steps: read, write, read, write, run, done. The model replies are replayed from the saved <code>qwen2.5-coder:7b</code> transcript; the parser, the file writes, and the test run happen for real. Recorded with <a href="https://github.com/charmbracelet/vhs">VHS</a>.</figcaption>
 </figure>
 
-The run is the loop doing exactly what the diagram says. `READ lib.mlpl`. `WRITE lib.mlpl` with `u:add` kept verbatim and `u:mul` added beneath it. `READ tests/test_add.mlpl`. `WRITE` it back with the includes intact and a second test. `RUN mlpl tests/test_add.mlpl`, which comes back as an observation with one line per test:
+`READ lib.mlpl`. `WRITE lib.mlpl` with `u:add` kept verbatim and `u:mul` added beneath it. `READ tests/test_add.mlpl`. `WRITE` it back with the includes intact and a second test. `RUN mlpl tests/test_add.mlpl`, which comes back as an observation with one line per test:
 
 ```text
 status: ok
@@ -156,50 +140,47 @@ passed: add sums two numbers
 passed: mul multiplies two numbers
 ```
 
-Then `DONE`. The transcript is saved as a fixture, the example project is restored, and the same flow is proven offline by a test with a scripted model, so the demo cannot quietly stop working. The recording above is that replay: `just replay` plays the saved transcript through the real loop in any terminal, no model server needed, and `just mlpl-demo` runs the task live.
+Then `DONE`. The [transcript](https://github.com/sw-ml-study/demo-coding-agent/blob/main/fixtures/transcripts/mlpl-mul-qwen2.5-coder-7b.txt) is a committed fixture, the example project is restored afterwards, and the same flow is proven offline by a test with a scripted model, so the demo cannot quietly stop working. The recording above is that replay --- `just replay` plays the saved transcript through the real loop in any terminal, no model server needed, and shows the same six steps every time.
 
-The same task, same prompt, same guards, run once against each model: `qwen2.5-coder:7b` (4.7 GB) finishes in seven steps in about ninety seconds; `devstral:24b` (14 GB) and `devstral-small-2:24b` (15 GB) each finish in the minimum six, with no wasted step and no syntax slips --- and Devstral 2 was the first model to reach for `PATCH` instead of rewriting the whole library file, unprompted. The 7B model is the floor because it fits a 12 GB card; Devstral is the upgrade tier. With the extension built, the loop works a Rust crate the same way: read `src/lib.rs`, `PATCH` a `#[cfg(test)]` module onto the end so the rest of the file is untouched, `RUN cargo test` through the allow-listed runner, and `DONE` only when the observation shows `test result: ok`.
+## What the model actually did
 
-The part worth knowing is how it got to six clean steps, because the first five live attempts failed, each in an instructive way, and each changed exactly one thing. The model rewrote a file without its `def`. It put a fabricated `OBSERVATION: wrote ...` inside its own WRITE. It wrapped file bodies in code fences. Given a concrete example path in the prompt, it copied that path verbatim for every action and spent the whole budget on missing-directory errors. And in three of the five attempts it replied `DONE`, claiming the tests passed, **without ever having run them.**
+It took six live attempts to get that clean run, and each attempt changed exactly one thing.
 
-That last habit is why the loop has a verify gate. `DONE` is accepted only when an injected `verify` function finds the evidence in the history --- at least one successful WRITE and, after the last WRITE, a RUN observation with `status: ok` and no failed test. Otherwise the model is told `NOT VERIFIED` and the loop continues. What the failures taught, in one line: a 7B model follows a text protocol only with placeholder examples, a rule against writing its own observations, and a loop that refuses unverified success. Fabricated observations are the dominant failure, and the verifier is what makes the demo honest.
+The model wrote a fabricated `OBSERVATION:` block inside its own reply, then declared `DONE` claiming the tests passed when nothing had run. **Three of the six attempts failed that way.** The fix was not a prompt tweak. The loop takes an injected verify function, and `DONE` is accepted only when the transcript contains a successful edit followed by a test run that passed with no failure named; otherwise the model is told `NOT VERIFIED` and keeps working. Without this the demo would lie.
+
+It wrapped file bodies in markdown fences and dropped the `END` line. It copied a concrete example path from the prompt verbatim into every action and spent the whole budget on missing-directory errors. It sent the same failing write three times in a row. Each of those got a tolerance or a guard, with the test written first: fence lines are stripped, a write to a file the run has not read is refused, an identical reply is flagged once and stops the run as `stuck` the third time, and the system prompt lost its worked example and gained `<path>` placeholders. What the failures taught, in one line: a 7B model follows a text protocol only with placeholder examples, a rule against writing its own observations, and a loop that refuses unverified success.
+
+With those in place, the same task against larger models: `devstral:24b` did it in the minimum six steps once the parser learned to drop the `ACTION:` header it echoed, and `devstral-small-2:24b` did the same --- and was the first model to reach for `PATCH` rather than rewriting the file. On a Rust crate, asked to add a unit test and make `cargo test` pass through the extension, Devstral Small 2 took four steps. The 7B model omitted `use super::add`, hit the compile error, and thrashed on stale patches until the budget ended --- a Rust knowledge gap, not a protocol slip, and the guards stopped it at the budget with no false `DONE`.
+
+One run is worth describing. The demo's cleanup had reverted a fixture fix of mine, so the model's first `cargo test` failed with cargo's own message about a stray workspace member. It read `Cargo.toml`, added the empty `[workspace]` table cargo suggested, reran, and passed. A correct repair of a fault that was ours.
+
+And one kept example, because every other demo restores the files it touches. Asked to write a hello-world module and its test from scratch, Devstral Small 2 first invented `//` comments and left `def` off every function, because it had never seen MLPL. Told to read the example project's two files first, it wrote this, and the test passed, in six steps:
+
+```text
+# A simple greeting module.
+
+def u:hello(name) {
+  "Return a greeting string.";
+  str_concat("hello, ", name)
+}
+```
+
+That is the honest shape of a small model on an unfamiliar language: it imitates what it reads. Give it something to read.
 
 ## Tests need no model
 
-`llm_call` needs a running server, so no test calls it. Every agent takes its model as an injected function reference, and the scripted version replays a fixed transcript of replies, which makes every loop test deterministic and offline. Seventy-three native mlplunit tests pin the builtins, the parser, the guards, the permission table, and the loop: sandboxed reads, walks, writes, and removals; parent-directory and symlink escapes returning `err`; every stop reason; the ask decision on both its paths; parse-error recovery; and the whole add-a-function-and-test flow, driven by a scripted transcript model that picks its reply by counting the actions already in the prompt. `just check` never contacts a model server, so a fork without a GPU still gets a green gate.
+`llm_call` needs a running server, so no test calls it. The model is a function passed in, not a client wired in: a live run binds the Ollama host, model name, and system prompt into a one-argument function; a test binds a fixed reply, or an echo function that returns the prompt so the test can assert on exactly what the model would have seen. Eighty-four native mlplunit tests pin the builtins, the parser, the guards, the permission table row by row, and the loop --- every stop reason, the ask decision on both its paths, parse-error recovery, and the whole add-a-function-and-test flow, driven by a scripted transcript model that picks its reply by counting the actions already in the prompt. `just check` never contacts a model server, so a fork without a GPU still gets a green gate.
 
-Live runs are opt-in `just` recipes against a local Ollama. The floor is `qwen2.5-coder:7b`: it fits an RTX 3060 or a 16 GB Mac with room for context, and it keeps to the one-action protocol, where the 1.5B model drifts out of it. Bigger cards point the same variable at 14B or 32B, and any other provider plugs into the same injection seam --- the loop never learns which server answered.
+## Read it as a book
 
-## One file per capability
+The whole agent is written up as a literate document, [`mlplcode.org`](https://github.com/sw-ml-study/demo-coding-agent/blob/main/docs/mlplcode.org): every MLPL file, function by function, with the prose before each function and the function in an org-babel block that tangles back to the committed source. `just check` proves the tangle matches byte for byte, so the explanation cannot describe code that no longer exists. It opens with a ten-minute MLPL primer whose blocks you can evaluate in place, using sw-MLPL's own org-babel backend, and it exports to [HTML]({{ '/assets/docs/mlplcode.html' | relative_url }}), [PDF]({{ '/assets/docs/mlplcode.pdf' | relative_url }}), text, and Markdown without evaluating anything.
 
-The agent is not one program but a sequence of them. Each version is a separate MLPL file that adds one capability to the previous one, so a reader can diff the loop as it grows rather than read the finished thing and guess which lines matter:
+That is also why there is no terminal UI. sw-MLPL runs `#+begin_src mlpl` blocks in Emacs, so the interactive front end is an org file --- a lighter path than a TUI, and one that leaves the whole transcript behind as a document.
 
-| version | shape |
-|---------|-------|
-| v0 | READ, THINK |
-| v1 | READ, SEARCH, THINK |
-| v2 | READ, SEARCH, EDIT, TEST |
-| v3 | repeat until tests pass |
-| v4 | planner, builder, reviewer |
-| v5 | budgets, compaction, loop detection |
-| v6 | git diff and status, exact patch |
-| v7 | driven from an org file in Emacs |
-
-The smallest possible first proof is already a coding agent with one tool:
-
-```text
-task   = "Explain the most likely bug in src/lib.rs."
-source = unwrap(read_text("src/lib.rs"))
-prompt = str_concat("TASK:\n", str_concat(task, str_concat("\n\nSOURCE:\n", source)))
-answer = llm_call(HOST, prompt, MODEL, "You are a careful Rust programmer.")
-```
-
-Everything after it is iteration policy. And the last row is the one I like most: there is no terminal UI. sw-MLPL has an org-babel backend, so the front end is an org file in Emacs with `#+begin_src mlpl` blocks --- a lighter path to an interactive agent than a TUI, and one that leaves the whole transcript behind as a document. The same idea runs the other way too: the plan is a literate org document that explains every MLPL file of the agent with executable, tangle-checked source blocks, so the explanation and the program cannot drift apart.
-
-Deliberately left out, in OpenCode's terms: TUI, MCP, streaming, subagent concurrency, LSP, GitHub integration, session persistence, embeddings or RAG, automatic context compaction, arbitrary shell access. Each would obscure the experiment more than it would teach.
+Deliberately not here, in OpenCode's terms: TUI, MCP, multiple providers, streaming, subagent concurrency, LSP, GitHub integration, session persistence, embeddings or RAG, automatic context compaction, arbitrary shell access. Each would obscure the experiment more than it would teach.
 
 ## What it comes to
 
-Strip the loop down and it is what the first paragraph said: build context, ask, parse one action, authorize it, execute it, update the state, repeat until `DONE` or the budget runs out. The agent reads the project, edits files, runs the tests, and goes around again until they pass --- with every decision a value in a transcript, every mechanism confined by something other than the model's good behavior, a verifier standing between the model's claim of success and the real thing, and every test of the loop runnable without a model at all.
+Two example projects, one MLPL and one Rust, get a function and a passing test added by a local model through a loop you can read in an afternoon. Everything the model does passes through one authorization function and one verifier, every mechanism is confined by something other than the model's good behavior, every guard exists because a transcript showed it was needed, and every test of the loop runs without a model at all.
 
-One LLM primitive, six tools, a loop of a few hundred lines in an array language, and a parser that is longer than the loop because it has met real models. That is the answer to how little machinery it takes, and the reason the answer is worth having is that at this size you can read all of it.
+One LLM primitive, six verbs, about 1,200 lines of an array language. The loop is the agent; the rest is policy, and policy is data.
