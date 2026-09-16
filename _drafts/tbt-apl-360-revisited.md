@@ -1,0 +1,156 @@
+---
+layout: post
+title: "TBT #11: APL\\360 Revisited"
+categories: [tbt, programming-history, retrocomputing, languages]
+tags: [apl, apl360, throwback-thursday, iverson, ibm, mainframe, array-languages, rust, sw-apl, cor24, sw-mlpl, notation, interpreters]
+keywords: "APL\\360, APL, Kenneth Iverson, Adin Falkoff, IBM System/360, IBM 2741, Selectric typeball, array language, sw-apl, clean-room interpreter, Rust, workspaces, del editor, six-space prompt, APLSV, APL2, Dyalog, J, K, BQN, NumPy, notation as a tool of thought, COR24 APL, sw-MLPL"
+author: Software Wrighter
+abstract: "APL\\360 was the first APL you could actually type at --- IBM's 1968 implementation of Iverson's notation, used from a typewriter terminal with a special typeball. This is a look at what it did and did not do, why its ideas turned up in half the languages and libraries that followed, and a third APL of my own: sw-apl, a clean-room APL\\360 in Rust that keeps the glyphs, the six-space prompt, the del editor, and the workspaces, and is checked against the printed examples in IBM's own manuals."
+series: "Throwback Thursday"
+series_part: 11
+date: 2026-09-17 00:15:00 -0700
+repo_url: "https://github.com/sw-vibe-coding/sw-apl"
+repo_urls:
+  - url: "https://github.com/sw-vibe-coding/sw-apl"
+    title: "sw-apl"
+  - url: "https://github.com/sw-embed/sw-cor24-apl"
+    title: "sw-cor24-apl"
+  - url: "https://github.com/sw-ml-study/sw-mlpl"
+    title: "sw-mlpl"
+---
+
+<img src="{{ '/assets/images/posts/sw-apl-marker.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+
+<div style="overflow: hidden;" markdown="1">
+
+The first APL post here was [a horse race](/2026/01/29/tbt-apl-horse-race/) --- my first program, typed at an IBM 2741 in 1972. This one is about the language it was written in, APL\360, and about building one of my own: not the APL I use for machine learning, and not the tiny one that runs on an FPGA, but the original, as true to the 1968 system as the manuals allow.
+
+</div>
+
+**sw-apl** is a clean-room APL\360 interpreter written in Rust. It keeps what made the original what it was: the traditional glyphs, typed as Unicode; the six-space indent prompt and printer-style transcript; the del editor for defining functions; the caret under the point of an error; and the system commands for workspaces --- `)CLEAR`, `)SAVE`, `)LOAD`, `)FNS`, `)VARS`. It is deliberately not APL2 and not Dyalog: flat arrays only, no nested arrays, no each. Its behavior is checked against the printed examples in IBM's APL\360 and APLSV manuals.
+
+<div class="resource-box" markdown="1">
+
+| Resource | Link |
+|----------|------|
+| **sw-apl** | [sw-vibe-coding/sw-apl](https://github.com/sw-vibe-coding/sw-apl) · [language reference](https://github.com/sw-vibe-coding/sw-apl/blob/main/docs/language.md) · [glyph table](https://github.com/sw-vibe-coding/sw-apl/blob/main/docs/glyphs.txt) · [conformance samples](https://github.com/sw-vibe-coding/sw-apl/tree/main/samples) |
+| **The other two APLs** | [sw-cor24-apl](https://github.com/sw-embed/sw-cor24-apl) on the COR24 · [in the browser](https://sw-embed.github.io/web-sw-cor24-apl/) · [sw-MLPL](https://github.com/sw-ml-study/sw-mlpl) |
+| **IBM documents** | APL\360 User's Manual, APL\360 Primer, APLSV User's Manual --- scanned at [bitsavers](http://bitsavers.org/pdf/ibm/apl/) |
+| **Prior post** | [TBT #1: My First Program Was a Horse Race](/2026/01/29/tbt-apl-horse-race/) |
+| **GNU APL** | [gnu.org/software/apl](https://www.gnu.org/software/apl/) |
+| **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
+
+</div>
+
+## Three APLs
+
+I have now written three, and they are three different answers to what APL is for.
+
+The first is [sw-cor24-apl](https://github.com/sw-embed/sw-cor24-apl): a tiny integer-subset APL in C for the COR24, a 24-bit soft CPU on an FPGA, talking over a UART. It has integer scalars, vectors, and matrices, `iota`, `rho`, `take`, `drop`, reduce, and a bump-allocated heap of 4,096 words --- and because the target has no APL keyboard, it spells the primitives as ASCII keywords. It exists to prove that an array language fits in an embedded machine. It runs [in the browser](https://sw-embed.github.io/web-sw-cor24-apl/) on an emulated COR24.
+
+The second is [sw-MLPL](https://github.com/sw-ml-study/sw-mlpl), which is not an APL at all but a descendant: an APL2-inspired language for machine learning, with nested arrays, records, autograd, and native model helpers, written to be typed on an ordinary keyboard. It takes the whole-array way of thinking and points it at tensors.
+
+The third is sw-apl, and it goes the other direction --- back to the source. What I keep coming back to about APL\360 is that it is *simpler* than every descendant, and loses very little for it. The notation is small enough to hold in your head and powerful enough that most programs are one line. Every later APL added something, and each addition is defensible; but the 1968 language is the one where you can see the whole idea at once.
+
+## What APL\360 was
+
+Kenneth Iverson published *A Programming Language* in 1962 as a notation --- a way of writing algorithms on paper, used at Harvard and then at IBM to describe the System/360 itself. APL\360, built by Iverson, Adin Falkoff, and a small group at IBM's Watson Research Center and released in 1968, was the first implementation you could type at. It ran as a time-sharing system on a System/360, serving dozens of typewriter terminals, and it was interactive in a decade when most computing was a card deck submitted in the morning and a printout collected after lunch.
+
+You used it from an IBM 2741, a Selectric typewriter wired to a phone line, fitted with the APL typeball so that the keys produced `⍳` and `⍴` and `⌈` instead of the usual characters. The session was a piece of paper. APL\360 indented its prompt six spaces; you typed on the same line; the answer came back flush left. That layout is why an APL transcript is readable at a glance forty years later --- input is indented, output is not --- and it is why sw-apl prints exactly that way.
+
+```text
+      2+3×4
+14
+      ⍳10
+1 2 3 4 5 6 7 8 9 10
+      +/⍳10
+55
+      2 3⍴⍳6
+1 2 3
+4 5 6
+```
+
+The evaluation rule is the thing people remember: right to left, no operator precedence. `2+3×4` is 14 because `×` takes `4` on its right and `3` on its left, then `+` takes the result. A function's right argument is *everything* to its right; its left argument is the single array immediately to its left. It is the opposite of the school rule, and it is what makes a line like `(+/X)÷⍴X` --- the average --- read as a single thought.
+
+Everything worked on whole arrays. Scalar functions --- `+ - × ÷ ⌈ ⌊ * ⍟ | ! ○` and the comparisons --- extended element by element, with a scalar pairing against every element of a vector. Mixed functions rearranged: `⍳` generated indices, `⍴` gave or set a shape, `,` raveled or catenated, `⌽` reversed, `⍉` transposed, `↑` and `↓` took and dropped, `/` compressed, `⊥` and `⊤` decoded and encoded in any radix, `⍋` and `⍒` graded. Operators took functions as arguments: reduce `f/`, scan `f\`, inner product `f.g`, outer product `∘.f`. There was one numeric type as far as you could tell, comparison had a tolerance, and `0÷0` was 1.
+
+Functions were defined with the del editor. You typed `∇`, a header, and then lines that the editor numbered for you; `[3]` repositioned, `[⎕]` displayed, `∇` closed. Control flow was `→` --- branch to a line number, with the idiom `→(N>0)/LOOP` meaning *branch to LOOP if N>0, otherwise fall through*, because compressing a one-element vector by a false condition leaves nothing to branch to. Names were dynamically scoped: a local shadowed a global for everything called beneath it, as in LISP. And when something went wrong, you got the error name, the statement echoed, and a caret under the point of detection:
+
+```text
+      2 3+4 5 6
+LENGTH ERROR
+      2 3+4 5 6
+         ^
+```
+
+Your work lived in a workspace. `)SAVE` kept it under your account; `)LOAD` brought it back; `)LIB` listed a library; `)LOAD 1 CLASS` fetched a public workspace from library 1. Numbered public libraries were how IBM distributed teaching material and utilities, and library 1 held the workspaces a new user was told to load first. Those are the workspaces this project is ultimately for: to find the self-study material that taught APL to its first users, load it, and run it, without a mainframe emulator between you and it.
+
+## What it did not do
+
+The absences define it as much as the primitives. APL\360 had no nested arrays --- an element was a number or a character, never an array --- and so no `each`, no enclose, no pick. Those came with APL2 in 1984 and changed the language's character. There were no dfns, no diamonds, no lowercase, no strings other than character vectors. There were no user-defined operators. Files, in the sense a FORTRAN programmer meant, did not exist; the workspace was the persistence. System information came through I-beam functions, `⌶`, before APLSV in 1973 introduced the quad names --- `⎕IO`, `⎕PP`, `⎕CT` --- that every APL since has used, along with shared variables and the `⍎` execute and `⍕` format primitives.
+
+sw-apl draws the line where the documents do: APL\360's primitives and session, APLSV's quad system interface, and nothing from APL2 onward. The `)ORIGIN`, `)DIGITS`, and `)WIDTH` commands still work as aliases for the quad variables, because that is how a 1970 transcript sets them.
+
+## The idioms
+
+APL programmers accumulated one-liners the way other communities accumulate libraries, and a handful of them show what the language is like to think in. Each is one expression with no loop anywhere.
+
+```text
+      X←3 1 4 1 5 9 2 6
+      (+/X)÷⍴X                   ⍝ average
+3.875
+      X[⍋X]                      ⍝ sort: grade up, then index
+1 1 2 3 4 5 6 9
+      (X>3)/X                    ⍝ compress: keep the elements over 3
+4 5 9 6
+      +/X=1                      ⍝ how many ones
+2
+      (⍳5)∘.×⍳5                  ⍝ outer product: a times table
+1  2  3  4  5
+2  4  6  8 10
+3  6  9 12 15
+4  8 12 16 20
+5 10 15 20 25
+      2⊥1 0 1 1                  ⍝ decode: binary to decimal
+11
+      (2 2⍴1 2 3 4)+.×2 2⍴5 6 7 8   ⍝ inner product: matrix multiply
+19 22
+43 50
+```
+
+The sort idiom is the one I would show someone first. There is no sort primitive; `⍋X` gives the permutation that *would* sort `X`, and `X[⍋X]` applies it. Grade separates *the order* from *the rearrangement*, so sorting one array by another is `Y[⍋X]` and there is nothing more to learn. The compress idiom is the second: a boolean vector on the left of `/` selects, and since comparisons produce booleans, *keep the elements over 3* is written exactly as it is said. The outer product is the third, because a whole table falls out of a single `∘.×`, and because the same shape --- `∘.=` for a match matrix, `∘.<` for a comparison --- turns up everywhere once you have seen it.
+
+## Against its contemporaries, and ours
+
+In 1968 the alternatives were FORTRAN IV, COBOL, ALGOL 60, PL/I, LISP 1.5, and the year-old BASIC. Every one of them but LISP and BASIC was a batch language: you wrote a program, submitted it, and read the result later. APL\360 was a conversation. You typed an expression and the answer came back; a program was something you built up from expressions that had already worked. That alone made it the environment of choice for a lot of people who were not programmers --- actuaries, engineers, planners --- and APL time-sharing became a business (I.P. Sharp, STSC) on the strength of it.
+
+The deeper difference was the unit of work. FORTRAN operated on one number at a time and you wrote the loop; APL operated on the array and the loop was the interpreter's problem. That is the idea that outlived the notation. NumPy's broadcasting is APL's scalar extension. MATLAB is an APL whose glyphs were replaced with function names and whose arrays became matrices first. R's vectorized operations, spreadsheet array formulas, `reduce` and `scan` and `outer` in a dozen libraries, the tensor operations in every ML framework --- these are APL's primitives with the typeball removed. Iverson's 1979 Turing Award lecture was titled *Notation as a Tool of Thought*, and the tools of thought spread further than the notation did.
+
+The notation spread too, in a direct line. APL2 added nesting. J (Iverson and Roger Hui, 1990) kept the semantics and moved to ASCII. K and q (Arthur Whitney) stripped the language down again and put it under the world's financial data. Dyalog carried APL forward with lexical dfns and a modern runtime. BQN redesigned the glyphs from scratch in 2020. Each of them is an argument about what APL should have been. sw-apl is not an argument; it is a record of what it was.
+
+## How sw-apl does it
+
+The interpreter is written from the APL\360 and APLSV language descriptions and from observed terminal behavior, not by translating any existing implementation. The C interpreter for the COR24 and GNU APL are consulted only for expected results.
+
+**Glyphs only.** Input is Unicode. There are no keyword aliases --- no `rho` for `⍴` --- and no translation layer. The lexer accepts printable ASCII plus exactly the code points in the glyph table; anything else is `CHARACTER ERROR` naming the code point, and the message tells you which one you meant: `CHARACTER ERROR: U+03C1 (use ⍴ U+2374)` for a Greek rho that looks the same and is not. Typing the glyphs on a modern keyboard is handled outside the interpreter, with Espanso expansions and an Emacs keymap.
+
+**One number.** To the program there is one numeric type. Underneath, integers are exact in 64 bits and promote to floating point on overflow or a fractional result, and comparison is tolerant through `⎕CT` --- `1E¯13` by default --- the way APL defined it. Booleans are the numbers 0 and 1. Negative literals use the high minus, `¯5`; a leading ASCII minus is the subtract function.
+
+**Flat arrays, right to left.** A value is a shape and a flat vector of numbers or characters. Statements parse right to left with the long right scope; operators bind before functions and take their operands from the left; strands of numeric literals are vectors at lex time.
+
+**The session, as printed.** Six spaces, then your input on the same line; output from column one; definition mode prompts with `[n]`; errors as the three-line caret display; output wider than `⎕PW` wraps with a six-space continuation. Batch mode echoes each input line with the indent, so a transcript from a file reads exactly like a session.
+
+**Workspaces as text.** `)SAVE` writes a plain UTF-8 file --- settings, variables as APL expressions, functions as del definitions --- with a header carrying the workspace id and timestamp so `)LOAD` can print the `SAVED` line. It is human-readable, re-executable, and diffable in git. Numbered libraries map to directories, so `)LOAD 1 CLASS` means what it meant. Every shipped workspace defines a niladic `DESCRIBE` that says what it holds and how to start, and the session says so after a load.
+
+**Checked against the record.** The conformance corpus is a set of glyph-form APL programs, one feature area per file, each pinned as a transcript with reg-rs so that any change in behavior shows up as a diff. Beyond that, the interpreter is validated against the printed examples in IBM's own documents --- the worked expressions and their output in the APL\360 User's Manual and Primer and the APLSV manual, as scanned and found online. Where APL\360 and APLSV differ, APL\360 wins for primitives and APLSV wins for the quad system interface.
+
+## What it looks like
+
+<figure class="no-invert">
+<video src="{{ '/assets/videos/sw-apl-mvp.mp4' | relative_url }}" autoplay muted loop playsinline preload="auto" aria-label="Terminal recording of the sw-apl session: scalar arithmetic, iota, reduce, and reshape at the six-space prompt"></video>
+<figcaption>A session at the six-space prompt: arithmetic, <code>⍳</code>, <code>+/</code>, and <code>⍴</code> --- input indented, output flush left, as a 2741 would have printed it.</figcaption>
+</figure>
+
+<!-- VHS tape of the sw-apl CLI to replace the stand-in above when provided: assets/videos/sw-apl-<name>.mp4 -->
+
+That is the whole of it: a language small enough to hold in your head, an environment that answers when you type, and a session you can read afterwards as a page. It was true in 1968 at a 2741 and it is true now, at a terminal, without a mainframe in between.
