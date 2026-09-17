@@ -154,7 +154,7 @@ Because it was a mainframe interpreter, the whole language came along --- the sa
 
 <div class="aside-box outdent" markdown="1">
 
-**A mainframe under the desk.** IBM kept at that idea long after the 5100. The technical workstations were built on the XT and then the AT, each with its own system-unit-sized box standing alongside, joined by thick parallel cables. I spent 1982 to 1990 on MVS development --- MVS/370, MVS/XA, MVS/ESA --- and the years after that helping develop OS/390, before it shipped. It was on the AT-based IBM 7437 VM/SP Technical Workstation that I debugged that code locally: a genuinely strange thing to be able to do at your own desk, with no machine room and nobody else's job queue in front of yours.
+**A mainframe under the desk.** IBM kept at that idea long after the 5100. The technical workstations were built on the XT and then the AT, each with its own system-unit-sized box standing alongside, joined by thick parallel cables. I spent 1982 to 1990 on MVS development --- MVS/370, MVS/XA, MVS/ESA --- and the mid-nineties writing OS/390 subsystems before it shipped. It was on the AT-based IBM 7437 VM/SP Technical Workstation that I debugged that code locally: a genuinely strange thing to be able to do at your own desk, with no machine room and nobody else's job queue in front of yours.
 
 </div>
 
