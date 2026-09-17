@@ -84,7 +84,11 @@ Functions were defined with the del editor, a line editor rather than a screen o
 [2]   ∇
       AVG 3 1 4 1 5
 2.8
-``` Later you reopened the same function by name, and then the bracket became a command rather than a prompt: append a line, insert one between two others, change a line, delete a line, list one line, list the whole function, or edit the header. There was no cursor and nothing to scroll: you edited by naming a line number and saying what to do with it, and the terminal printed the result. And a closing `⍫` instead of `∇` locked the function so it could be run but never listed or edited again. sw-apl works the same way; the [del editor guide](https://github.com/sw-vibe-coding/sw-apl/blob/main/docs/del-editor-guide.md) in the repository is the how-to. Control flow was `→` --- branch to a line number, with the idiom `→(N>0)/LOOP` meaning *branch to LOOP if N>0, otherwise fall through*, because compressing a one-element vector by a false condition leaves nothing to branch to. Names were dynamically scoped: a local shadowed a global for everything called beneath it, as in LISP. And when something went wrong, you got the error name, the statement echoed, and a caret under the point of detection:
+```
+
+Later you reopened the same function by name, and then the bracket became a command rather than a prompt: append a line, insert one between two others, change a line, delete a line, list one line, list the whole function, or edit the header. There was no cursor and nothing to scroll: you edited by naming a line number and saying what to do with it, and the terminal printed the result. And a closing `⍫` instead of `∇` locked the function so it could be run but never listed or edited again. sw-apl works the same way; the [del editor guide](https://github.com/sw-vibe-coding/sw-apl/blob/main/docs/del-editor-guide.md) in the repository is the how-to.
+
+Control flow was `→` --- branch to a line number, with the idiom `→(N>0)/LOOP` meaning *branch to LOOP if N>0, otherwise fall through*, because compressing a one-element vector by a false condition leaves nothing to branch to. Names were dynamically scoped: a local shadowed a global for everything called beneath it, as in LISP. And when something went wrong, you got the error name, the statement echoed, and a caret under the point of detection:
 
 ```text
       2 3+4 5 6
