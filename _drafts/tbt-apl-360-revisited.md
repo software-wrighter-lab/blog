@@ -97,7 +97,9 @@ LENGTH ERROR
          ^
 ```
 
-Your work lived in a workspace. `)SAVE` kept it under your account; `)LOAD` brought it back; `)LIB` listed a library; `)LOAD 1 CLASS` fetched a public workspace from library 1. Numbered public libraries were how IBM distributed teaching material and utilities, and library 1 held the workspaces a new user was told to load first. Those are the workspaces this project is ultimately for: to find the self-study material that taught APL to its first users, load it, and run it, without a mainframe emulator between you and it.
+Your work lived in a workspace. `)SAVE` kept it under your account; `)LOAD` brought it back; `)LIB` listed a library; `)LOAD 1 CLASS` fetched a public workspace from library 1. Numbered public libraries were how IBM distributed teaching material and utilities, and library 1 held the workspaces a new user was told to load first. Six of them, all saved in July 1968: `ADVANCEDEX`, `APLCOURSE`, `NEWS`, `PLOTFORMAT`, `TYPEDRILL`, `WSFNS`.
+
+`1 APLCOURSE` is the one this project is ultimately for. Its two main functions are `TEACH` and `EASYDRILL` --- a self-paced drill in APL expressions that picks its problems at random, reveals the answer if you type `PLEASE`, and stops if you type `STOP`. That is the course I took as credit-free self-study in high school in 1972, and the same course was granting credit at a community college two years later. The goal here is to find that workspace, load it, and run it, without a mainframe emulator between you and it.
 
 ## What it did not do
 
