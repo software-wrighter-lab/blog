@@ -146,7 +146,7 @@ The difference that matters for this project is not the language but the paper. 
 
 <div class="aside-box wide" markdown="1">
 
-**A homemade APL terminal.** Some years later I was running an APL loaded from cassette on a TRS-80, and set about giving it the rest of the experience. First the glyphs: I burned an EEPROM with an APL character set and wired a toggle switch to the front of the machine to select between it and the supplied character generator ROM, so the screen could speak APL or English on demand. Then the paper: a custom interface from the parallel port to a used IBM 5741 Selectric terminal, so programs could be printed the way APL was meant to be read.
+**A homemade APL terminal.** Around 1980, before the PC, I was running an APL loaded from cassette on a TRS-80, and set about giving it the rest of the experience. First the glyphs: I burned an EEPROM with an APL character set and wired a toggle switch to the front of the machine to select between it and the supplied character generator ROM, so the screen could speak APL or English on demand. Then the paper: a custom interface from the parallel port to a used IBM 5741 Selectric terminal, so programs could be printed the way APL was meant to be read.
 
 Which is where it got interesting, because a good many APL glyphs are not characters at all but overstrikes --- quote-quad is `⎕`, a backspace, and `'` --- and the backspace on a used Selectric did not always take. So the driver buffered each line twice. The first pass printed only the base characters. Then a carriage return with no line feed, and a second pass that spaced across the line and struck just the overlays into place. Two passes, no backspaces, and the glyphs came out right.
 
