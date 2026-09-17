@@ -140,11 +140,9 @@ APL\360 was not the only APL of its era, and the interesting comparisons are not
 
 Then it went on a desk. The IBM 5100 of 1975 was a fifty-pound "portable" with a five-inch screen showing sixteen lines of sixty-four characters, a tape cartridge for storage, APL glyphs printed on the keys, and a switch on the front to choose between APL and BASIC. It came six years before the 5150, the one IBM called the PC. What makes it remarkable is how the language got in there: rather than write a new interpreter for a small machine, IBM put a processor card in it that emulated a System/360, and ran the mainframe APL interpreter on that. I serviced the 5100 series as an IBM customer engineer, and the part of that story you learn with the covers off is that the emulation was deliberately slowed --- fast enough to be a fine desktop APL, not fast enough to sell against the machines in the datacenter. The 5110 added a diskette drive in 1978 and the 5120 put the whole thing on a desk in 1980.
 
-Because it was a mainframe interpreter, the whole language came along --- the same primitives, the same `)SAVE` and `)LOAD`, the same workspace. But it came from the *later* mainframe: the 5100's APL had the quad system variables, `⎕SVO` among them, rather than APL\360's I-beams. That is the line sw-apl is drawn on. The APL most people met on a desk was already APLSV.
+<div class="aside-row" markdown="1">
 
-The difference that matters for this project is not the language but the paper. On a 2741 the session was a printout: you could read back through a morning's work, and the six-space indent existed so you could tell at a glance what you had typed from what the machine had answered. On the 5100 the session was sixteen lines of glass that scrolled away behind you. The convention survived the move --- the indent is still there in every APL since --- but its reason did not. sw-apl reproduces the printer, because that is the session APL\360 was designed around.
-
-<div class="aside-box wide" markdown="1">
+<div class="aside-box outdent-right" markdown="1">
 
 **A homemade APL terminal.** Around 1980, before the PC, I was running an APL loaded from cassette on a TRS-80, and set about giving it the rest of the experience. First the glyphs: I burned an EEPROM with an APL character set and wired a toggle switch to the front of the machine to select between it and the supplied character generator ROM, so the screen could speak APL or English on demand. Then the paper: a custom interface from the parallel port to a used IBM 5741 Selectric terminal, so programs could be printed the way APL was meant to be read.
 
@@ -152,7 +150,19 @@ Which is where it got interesting, because a good many APL glyphs are not charac
 
 </div>
 
-IBM kept at the idea of a mainframe on a desk long after the 5100. Later technical workstations were built on the XT and the AT with their own system-unit-sized box alongside, joined by thick parallel cables; on an IBM 7437 VM/SP Technical Workstation I debugged MVS/370 code locally, which at the time was a genuinely strange thing to be able to do. Every one of those machines put real System/370 hardware under the desk to run the software. This project is the other approach: keep the language, and let the mainframe go.
+Because it was a mainframe interpreter, the whole language came along --- the same primitives, the same `)SAVE` and `)LOAD`, the same workspace. But it came from the *later* mainframe: the 5100's APL had the quad system variables, `⎕SVO` among them, rather than APL\360's I-beams. That is the line sw-apl is drawn on. The APL most people met on a desk was already APLSV.
+
+The difference that matters for this project is not the language but the paper. On a 2741 the session was a printout: you could read back through a morning's work, and the six-space indent existed so you could tell at a glance what you had typed from what the machine had answered. On the 5100 the session was sixteen lines of glass that scrolled away behind you. The convention survived the move --- the indent is still there in every APL since --- but its reason did not. sw-apl reproduces the printer, because that is the session APL\360 was designed around.
+
+</div>
+
+<div class="aside-box outdent-right" markdown="1">
+
+**A mainframe under the desk.** IBM kept at that idea long after the 5100. Later technical workstations were built on the XT and the AT, each with its own system-unit-sized box standing alongside, joined by thick parallel cables. On an IBM 7437 VM/SP Technical Workstation I debugged MVS/370 code locally --- which at the time was a genuinely strange thing to be able to do at your own desk, with no machine room and nobody else's job queue in front of yours.
+
+</div>
+
+Every one of those machines solved the problem by putting real System/370 hardware under the desk. This project is the other approach: keep the language, and let the mainframe go.
 
 ## Against its contemporaries, and ours
 
