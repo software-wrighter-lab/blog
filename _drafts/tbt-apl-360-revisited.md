@@ -35,7 +35,7 @@ The first APL post here was [a horse race](/2026/01/29/tbt-apl-horse-race/) --- 
 |----------|------|
 | **sw-apl** | [sw-vibe-coding/sw-apl](https://github.com/sw-vibe-coding/sw-apl) · [language reference](https://github.com/sw-vibe-coding/sw-apl/blob/main/docs/language.md) · [del editor guide](https://github.com/sw-vibe-coding/sw-apl/blob/main/docs/del-editor-guide.md) · [glyph table](https://github.com/sw-vibe-coding/sw-apl/blob/main/docs/glyphs.txt) · [parity checklist](https://github.com/sw-vibe-coding/sw-apl/blob/main/docs/parity.md) · [samples](https://github.com/sw-vibe-coding/sw-apl/tree/main/samples) |
 | **The other two APLs** | [sw-cor24-apl](https://github.com/sw-embed/sw-cor24-apl) on the COR24 · [in the browser](https://sw-embed.github.io/web-sw-cor24-apl/) · [sw-MLPL](https://github.com/sw-ml-study/sw-mlpl) |
-| **IBM documents** | APL\360 User's Manual, APL\360 Primer --- scanned at [bitsavers](http://bitsavers.org/pdf/ibm/apl/) |
+| **IBM documents** | [APL\360 User's Manual](https://www.bitsavers.org/pdf/ibm/apl/GH20-0683-1_APL_360_Users_Manual_Mar70.pdf) (GH20-0683-1, 1970) · [APL\360 Primer](https://www.bitsavers.org/pdf/ibm/apl/GH20-0689-2_APL_360_Primer_Aug71.pdf) (GH20-0689-2) · [more at bitsavers](https://www.bitsavers.org/pdf/ibm/apl/) |
 | **Prior post** | [TBT #1: My First Program Was a Horse Race](/2026/01/29/tbt-apl-horse-race/) |
 | **GNU APL** | [gnu.org/software/apl](https://www.gnu.org/software/apl/) --- an APL2 implementation |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
@@ -140,7 +140,7 @@ The sort idiom is the one I would show someone first. There is no sort primitive
 
 <div class="aside-box outdent-right" markdown="1">
 
-**A homemade APL terminal.** Around 1980, before the PC, I was running an APL loaded from cassette on a TRS-80, and set about giving it the rest of the experience. First the glyphs: I burned an EEPROM with an APL character set and wired a toggle switch to the front of the machine to select between it and the supplied character generator ROM, so the screen could speak APL or English on demand. Then the paper: a custom interface from the parallel port to a used IBM 5741 Selectric terminal, so programs could be printed the way APL was meant to be read.
+**A homemade APL terminal.** Around 1980, before the PC, I was running an APL loaded from cassette on a TRS-80, and set about giving it the rest of the experience. First the glyphs: I burned an EEPROM with an APL character set and wired a toggle switch to the front of the machine to select between it and the supplied character generator ROM, so the screen could speak APL or English on demand. Then the paper: a used IBM 5471 printer-keyboard, the Selectric-based console from a System/3, wired to the TRS-80's parallel port through an interface I built out of TTL chips, so programs could be printed the way APL was meant to be read.
 
 Which is where it got interesting, because a good many APL glyphs are not characters at all but overstrikes --- quote-quad is `⎕`, a backspace, and `'` --- and the backspace on a used Selectric did not always take. So the driver buffered each line twice. The first pass printed only the base characters. Then a carriage return with no line feed, and a second pass that spaced across the line and struck just the overlays into place. Two passes, no backspaces, and the glyphs came out right.
 
