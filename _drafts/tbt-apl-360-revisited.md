@@ -144,6 +144,14 @@ Because it was a mainframe interpreter, the whole language came along --- the sa
 
 The difference that matters for this project is not the language but the paper. On a 2741 the session was a printout: you could read back through a morning's work, and the six-space indent existed so you could tell at a glance what you had typed from what the machine had answered. On the 5100 the session was sixteen lines of glass that scrolled away behind you. The convention survived the move --- the indent is still there in every APL since --- but its reason did not. sw-apl reproduces the printer, because that is the session APL\360 was designed around.
 
+<div class="aside-box wide" markdown="1">
+
+**A homemade APL terminal.** Some years later I was running an APL loaded from cassette on a TRS-80, and set about giving it the rest of the experience. First the glyphs: I burned an EEPROM with an APL character set and wired a toggle switch to the front of the machine to select between it and the supplied character generator ROM, so the screen could speak APL or English on demand. Then the paper: a custom interface from the parallel port to a used IBM 5741 Selectric terminal, so programs could be printed the way APL was meant to be read.
+
+Which is where it got interesting, because a good many APL glyphs are not characters at all but overstrikes --- quote-quad is `⎕`, a backspace, and `'` --- and the backspace on a used Selectric did not always take. So the driver buffered each line twice. The first pass printed only the base characters. Then a carriage return with no line feed, and a second pass that spaced across the line and struck just the overlays into place. Two passes, no backspaces, and the glyphs came out right.
+
+</div>
+
 IBM kept at the idea of a mainframe on a desk long after the 5100. Later technical workstations were built on the XT and the AT with their own system-unit-sized box alongside, joined by thick parallel cables; on an IBM 7437 VM/SP Technical Workstation I debugged MVS/370 code locally, which at the time was a genuinely strange thing to be able to do. Every one of those machines put real System/370 hardware under the desk to run the software. This project is the other approach: keep the language, and let the mainframe go.
 
 ## Against its contemporaries, and ours
