@@ -27,13 +27,13 @@ The first APL post here was [a horse race](/2026/01/29/tbt-apl-horse-race/) --- 
 
 </div>
 
-**sw-apl** is a clean-room APL\360 interpreter written in Rust. It keeps what made the original what it was: the traditional glyphs, typed as Unicode; the six-space indent prompt and printer-style transcript; the del editor for defining functions; the caret under the point of an error; and the system commands for workspaces --- `)CLEAR`, `)SAVE`, `)LOAD`, `)FNS`, `)VARS`. It is deliberately not APL2 and not Dyalog: flat arrays only, no nested arrays, no each. Its behavior is checked against the printed examples in IBM's APL\360 manuals.
+**sw-apl** is a clean-room APL\360 interpreter written in Rust. It keeps what made the original what it was: the traditional glyphs, typed as Unicode; the six-space indent prompt and printer-style transcript; defining functions with `∇` behind a numbered prompt; the caret under the point of an error; the settings as commands. Every APL\360 primitive and operator works on arrays of any rank, functions take locals and recurse, `→` branches to labels, and the horse race from 1972 runs. It is deliberately not APL2 and not Dyalog: flat arrays only, no nested arrays, no each. Its behavior is checked against the printed examples in IBM's APL\360 manuals, character for character.
 
 <div class="resource-box" markdown="1">
 
 | Resource | Link |
 |----------|------|
-| **sw-apl** | [sw-vibe-coding/sw-apl](https://github.com/sw-vibe-coding/sw-apl) · [language reference](https://github.com/sw-vibe-coding/sw-apl/blob/main/docs/language.md) · [glyph table](https://github.com/sw-vibe-coding/sw-apl/blob/main/docs/glyphs.txt) · [conformance samples](https://github.com/sw-vibe-coding/sw-apl/tree/main/samples) |
+| **sw-apl** | [sw-vibe-coding/sw-apl](https://github.com/sw-vibe-coding/sw-apl) · [language reference](https://github.com/sw-vibe-coding/sw-apl/blob/main/docs/language.md) · [glyph table](https://github.com/sw-vibe-coding/sw-apl/blob/main/docs/glyphs.txt) · [parity checklist](https://github.com/sw-vibe-coding/sw-apl/blob/main/docs/parity.md) · [samples](https://github.com/sw-vibe-coding/sw-apl/tree/main/samples) |
 | **The other two APLs** | [sw-cor24-apl](https://github.com/sw-embed/sw-cor24-apl) on the COR24 · [in the browser](https://sw-embed.github.io/web-sw-cor24-apl/) · [sw-MLPL](https://github.com/sw-ml-study/sw-mlpl) |
 | **IBM documents** | APL\360 User's Manual, APL\360 Primer --- scanned at [bitsavers](http://bitsavers.org/pdf/ibm/apl/) |
 | **Prior post** | [TBT #1: My First Program Was a Horse Race](/2026/01/29/tbt-apl-horse-race/) |
@@ -76,7 +76,17 @@ The evaluation rule is the thing people remember: right to left, no operator pre
 
 Everything worked on whole arrays. Scalar functions --- `+ - × ÷ ⌈ ⌊ * ⍟ | ! ○` and the comparisons --- extended element by element, with a scalar pairing against every element of a vector. Mixed functions rearranged: `⍳` generated indices, `⍴` gave or set a shape, `,` raveled or catenated, `⌽` reversed, `⍉` transposed, `↑` and `↓` took and dropped, `/` compressed, `⊥` and `⊤` decoded and encoded in any radix, `⍋` and `⍒` graded. Operators took functions as arguments: reduce `f/`, scan `f\`, inner product `f.g`, outer product `∘.f`. There was one numeric type as far as you could tell, comparison had a tolerance --- APL\360 called it fuzz --- and `0÷0` was 1. The session's settings were commands, not variables: `)ORIGIN 0` set the index origin, `)DIGITS` the print precision, `)WIDTH` the line width; and system information --- the time, the date, the workspace available, the line number --- came from the I-beam functions, `⌶` followed by a number.
 
-Functions were defined with the del editor. You typed `∇`, a header, and then lines that the editor numbered for you; `[3]` repositioned, `[⎕]` displayed, `∇` closed. Control flow was `→` --- branch to a line number, with the idiom `→(N>0)/LOOP` meaning *branch to LOOP if N>0, otherwise fall through*, because compressing a one-element vector by a false condition leaves nothing to branch to. Names were dynamically scoped: a local shadowed a global for everything called beneath it, as in LISP. And when something went wrong, you got the error name, the statement echoed, and a caret under the point of detection:
+Functions were defined with the del editor, which is not a text editor at all --- there was no screen to edit on. You typed `∇` and a header, and the system took over the session, prompting with a bracketed line number and taking one line at a time:
+
+```text
+      ∇R←AVG X
+[1]   R←(+/X)÷⍴X
+[2]   ∇
+      AVG 3 1 4 1 5
+2.8
+```
+
+The closing `∇` ends the definition and gives the session back. To change the function later you reopen it by name with `∇AVG`, and then the bracket is a command rather than a prompt: `[2]` moves to line 2 so the next thing you type replaces it, `[⎕]` prints the whole function with its numbers, `[2⎕]` prints from line 2 down, `[∆2]` deletes line 2, and `[0]` edits the header --- to add a local, say, or change the valence. Inserting is the clever part: line numbers are *numbers*, so `[1.5]` puts a line between 1 and 2, and `[1.51]` between those, as many times as you need; when you close with `∇` the lines are renumbered as integers. A closing `⍫` instead of `∇` locks the function so it can be run but never listed or edited again, which is how commercial APL workspaces shipped proprietary code. Control flow was `→` --- branch to a line number, with the idiom `→(N>0)/LOOP` meaning *branch to LOOP if N>0, otherwise fall through*, because compressing a one-element vector by a false condition leaves nothing to branch to. Names were dynamically scoped: a local shadowed a global for everything called beneath it, as in LISP. And when something went wrong, you got the error name, the statement echoed, and a caret under the point of detection:
 
 ```text
       2 3+4 5 6
@@ -138,21 +148,27 @@ The interpreter is written from the APL\360 language description and from observ
 
 **One number.** To the program there is one numeric type. Underneath, integers are exact in 64 bits and promote to floating point on overflow or a fractional result, and comparison is tolerant, the way APL\360's fuzz made it. Booleans are the numbers 0 and 1. Negative literals use the high minus, `¯5`; a leading ASCII minus is the subtract function.
 
-**Flat arrays, right to left.** A value is a shape and a flat vector of numbers or characters. Statements parse right to left with the long right scope; operators bind before functions and take their operands from the left; strands of numeric literals are vectors at lex time.
+**Flat arrays, right to left.** A value is a shape and a flat vector of numbers or characters. Statements parse right to left with the long right scope; operators bind before functions and take their operands from the left; strands of numeric literals are vectors at lex time. Every scalar and mixed function works at any rank, reduce and scan run along any axis, inner and outer products take any shapes, and axis brackets are accepted only in the seven places APL\360 allows them --- anywhere else is a SYNTAX ERROR with the caret under the bracket.
+
+**Functions, the del way.** `∇` and a header open definition mode; body lines arrive behind the `[n]` prompt; a closing `∇` ends it. Names after semicolons are local for the length of the call and come back when it returns, arguments bind into a fresh frame, and the result is whatever the header's result variable holds at exit. Labels are local constants holding their line number, and `→` takes the first element of its argument as the next line, an empty vector as *fall through*, and zero as *return* --- which is the whole of APL\360 control flow, and enough for the conditional branch `→LOOP×⍳COND`, empty and therefore falling through when the condition is false. Recursion works; a recursion with nothing to stop it reaches DEPTH ERROR rather than a crash.
 
 **The session, as printed.** Six spaces, then your input on the same line; output from column one; definition mode prompts with `[n]`; errors as the three-line caret display; output wider than the `)WIDTH` setting wraps with a six-space continuation. Batch mode echoes each input line with the indent, so a transcript from a file reads exactly like a session.
 
 **Workspaces as text.** `)SAVE` writes a plain UTF-8 file --- settings, variables as APL expressions, functions as del definitions --- with a header carrying the workspace id and timestamp so `)LOAD` can print the `SAVED` line. It is human-readable, re-executable, and diffable in git. Numbered libraries map to directories, so `)LOAD 1 CLASS` means what it meant. Every shipped workspace defines a niladic `DESCRIBE` that says what it holds and how to start, and the session says so after a load.
 
-**Checked against the record.** The conformance corpus is a set of glyph-form APL programs, one feature area per file, each pinned as a transcript with reg-rs so that any change in behavior shows up as a diff. Beyond that, the interpreter is validated against the printed examples in IBM's own documents --- the worked expressions and their output in the APL\360 User's Manual and the APL\360 Primer, as scanned and found online. Where a later manual differs, APL\360 wins.
+**Checked against the record.** There is no running APL\360 to test against, so the oracle is the paper. The IBM APL\360 User's Manual of 1968, with its 1970 supplement, is the reference, and the standard is that its worked examples --- transcribed into the sample corpus --- reproduce the printed output *character for character*: the indent, the spacing, the high minus, the error lines. Alongside them is a conformance corpus of glyph-form programs, one feature area per file, each pinned as a transcript with reg-rs so any change in behavior shows up as a diff. A parity checklist carries one row per APL\360 feature with the test or transcript that pins it, and it sets the bar plainly: every row done, every sample running without a NOT IMPLEMENTED, everything outside the APL\360 character set a CHARACTER ERROR, and the quad-named system variables of later APLs a SYNTAX ERROR --- because they are not in this language. GNU APL is the secondary oracle, but only where APL2 and APL\360 agree.
+
+What is not there yet is named in the same checklist rather than glossed over: the del editor's bracket commands, quad and quote-quad input, the workspace commands, the I-beams, and domino. The multi-user parts of a 1968 time-sharing system --- `)MSG`, `)PORTS`, sign-on numbers --- are deliberately out of scope and answer with honest stubs; there is no one else on this machine.
 
 ## What it looks like
 
 <figure class="no-invert">
 <video src="{{ '/assets/videos/sw-apl-mvp.mp4' | relative_url }}" autoplay muted loop playsinline preload="auto" aria-label="Terminal recording of the sw-apl session: scalar arithmetic, iota, reduce, and reshape at the six-space prompt"></video>
-<figcaption>A session at the six-space prompt: arithmetic, <code>⍳</code>, <code>+/</code>, and <code>⍴</code> --- input indented, output flush left, as a 2741 would have printed it.</figcaption>
+<figcaption>A session at the six-space prompt: arithmetic, <code>⍳</code>, <code>+/</code>, reshape, and a LENGTH ERROR --- input indented, output flush left, as a 2741 would have printed it. Recorded from the CLI with <a href="https://github.com/charmbracelet/vhs">VHS</a>.</figcaption>
 </figure>
 
-<!-- VHS tape of the sw-apl CLI to replace the stand-in above when provided: assets/videos/sw-apl-<name>.mp4 -->
+The last line of that session is deliberate: `1 2 3+4 5` is a LENGTH ERROR, and the error prints the way the manual prints it.
+
+Two programs are the real measure. `samples/50-horse-race.apl` is [the horse race](/2026/01/29/tbt-apl-horse-race/) rewritten in pure APL\360 --- the names in a character matrix, the output mixing text and numbers with semicolons, the loop written `→LOOP×⍳~∨/POS≥15` --- with no `⍕`, no `⊃`, nothing from a later APL. And `samples/54-life-function.apl` is Conway's Life on a six-by-six torus as two defined functions, the eight neighbours counted by eight explicit rotations, because `⊖` and `⌽` on a matrix are exactly that and there is nothing else to reach for. Both run. Ask sw-apl for the famous Dyalog Life one-liner instead and you get a CHARACTER ERROR that names the brace as a dfn, not APL\360 --- which is the point.
 
 That is the whole of it: a language small enough to hold in your head, an environment that answers when you type, and a session you can read afterwards as a page. It was true in 1968 at a 2741 and it is true now, at a terminal, without a mainframe in between.
