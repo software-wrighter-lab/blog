@@ -1228,16 +1228,29 @@ figure.gutter-img-right {
   margin-left: -66.667%;
 }
 
+// A heading that introduces an aside-row steps out with it, so the
+// section keeps one left edge.
+.post-content .stagger-1 > h2:has(+ .aside-row) {
+  margin-left: -33.333%;
+}
+
+.post-content .stagger-2 > h2:has(+ .aside-row) {
+  margin-left: -66.667%;
+}
+
+// Inside a row both variants are the same width, so boxes on opposite
+// margins line up with each other down the page.
 .post-content .aside-row > .aside-box.outdent,
 .post-content .aside-row > .aside-box.outdent-right {
-  margin-left: 1.8em;
-  margin-right: 0;
   width: 40%;
 }
 
 .post-content .aside-row > .aside-box.outdent {
-  margin-left: 0;
-  margin-right: 1.8em;
+  margin: 0.3em 1.8em 1.2em 0;
+}
+
+.post-content .aside-row > .aside-box.outdent-right {
+  margin: 0.3em 0 1.2em 1.8em;
 }
 
 @media (max-width: 900px) {
