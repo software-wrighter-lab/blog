@@ -5,7 +5,7 @@ categories: [tools, machine-learning, languages, projects]
 tags: [sharpen-the-saw, sw-atlas, jev, typesafe, needle, cactus, simple-attention-network, system-one, typed-decisions, semantic-index, wasm, rust, sw-mlpl, moe-microscope, sw-campus, retrieval, calibration, quantization, edge-ml]
 keywords: "sw-atlas, Jev, TypeSafe AI, System One model, Needle, Cactus Compute, Simple Attention Network, no feed-forward, typed decision, non-generative, intent classification, semantic index, snapshot, runtime class, WASM, Rust, sw-MLPL, moe-microscope, SetFit, Outlines, SGLang, LanceDB, HippoRAG, LLMRouter, calibration, abstention, INT4, offline compute"
 author: Software Wrighter
-abstract: "There is a class of model that never writes a sentence. You give it a question and a list of things it could be about, and it returns a typed decision --- an intent, some concepts, a confidence --- in a few hundred kilobytes and a few milliseconds. TypeSafe's Jev calls these System One models; Cactus's Needle is an open one you can read. sw-atlas applies the idea to my own corpus: one semantic index over the blog, the repositories, the demos, the campus and the videos, and a small model that turns a visitor's sentence into a decision about it. The facts live in the index. The model holds only the language."
+abstract: "There is a class of model that never writes a sentence. You give it a question and a list of things it could be about, and it returns a typed decision --- an intent, some concepts, a confidence --- in a few hundred kilobytes and a few milliseconds. TypeSafe's Jev calls these System One models; Cactus's Needle is an open one you can read. sw-atlas applies the idea to my own corpus: one semantic index over the blog, the repositories, the demos, the campus and the videos, and a small model that turns a visitor's sentence into a decision about it. The facts live in the index. The model holds only the language. The deterministic matcher is the floor of the ladder, not the destination."
 series: "Sharpen the Saw Sundays"
 series_part: 12
 date: 2026-09-20 00:15:00 -0700
@@ -28,12 +28,6 @@ I have a hundred and twenty-four blog posts, a hundred and thirty-odd public rep
 
 Answering that question well normally costs a large model, a server, and a second or two of somebody else's electricity. **sw-atlas** is a bet that almost all of the work can be done the night before instead, and that what is left over is small enough to run in the visitor's browser without a server anywhere.
 
-<div class="aside-box outdent-right" markdown="1">
-
-**Why "Saw"?** The name is Habit 7 from Stephen Covey's [*The 7 Habits of Highly Effective People*](https://en.wikipedia.org/wiki/The_7_Habits_of_Highly_Effective_People): stop cutting long enough to sharpen the blade. [This series](/series/#sharpen-the-saw-sundays) is where I routinely add tools and improve the ones I have, on the principle that time spent on the tools comes back many times over in everything built with them. This one sharpens the thing that finds everything else.
-
-</div>
-
 <div class="resource-box" markdown="1">
 
 | Resource | Link |
@@ -49,6 +43,12 @@ Answering that question well normally costs a large model, a server, and a secon
 </div>
 
 ## A model that does not write
+
+<div class="aside-box outdent-right" markdown="1">
+
+**Why "Saw"?** The name is Habit 7 from Stephen Covey's [*The 7 Habits of Highly Effective People*](https://en.wikipedia.org/wiki/The_7_Habits_of_Highly_Effective_People): stop cutting long enough to sharpen the blade. [This series](/series/#sharpen-the-saw-sundays) is where I routinely add tools and improve the ones I have, on the principle that time spent on the tools comes back many times over in everything built with them. This one sharpens the thing that finds everything else.
+
+</div>
 
 The vocabulary is worth learning even if you never build one, because it names a category that gets lost next to chatbots.
 
@@ -128,7 +128,7 @@ The design argument is that routing a query to a target is *alignment and copyin
 
 If there is no feed-forward layer, there is nowhere for a fact to be memorized. "Facts live in the index, language lives in the weights" stops being a discipline I have to maintain in the training data and becomes a property of the architecture. That is a much stronger guarantee, and it is testable rather than hopeful.
 
-It also has an awkward consequence I had to accept. Mixture-of-experts routes among *feed-forward experts*. A network with no FFN has no experts to route among --- so the MoE work from [last week's microscope](/2026/09/13/saw-building-a-tiny-mixture-of-experts/) comes off this project's critical path and stays where the research belongs. What survives is the residency question, which never depended on experts: an encoder with twenty attention blocks still has separable layers, and a browser can load depth incrementally just as well as it could load experts.
+It also has an awkward consequence I had to accept. Mixture-of-experts routes among *feed-forward experts*. A network with no FFN has no experts to route among --- so the MoE work from [last week's microscope](/2026/09/13/saw-building-a-tiny-mixture-of-experts/) comes off this project's critical path and stays where the research belongs. What survives, and matters more here, is the residency question, which never depended on experts: an encoder with twenty attention blocks still has separable layers, and a browser can pull depth in progressively and evict it under pressure just as well as it could experts. The tiered cache is the same idea either way --- what changes is only what the shards contain.
 
 ## Two heads, and a ladder
 
@@ -165,7 +165,7 @@ The published artifact is a snapshot of a few megabytes with a hash per file: th
 
 ## The honest scoreboard
 
-Here is the part that matters most, and it is not flattering.
+Every tier has to earn its place against the one below it, so the project starts by writing down what it has to beat.
 
 The [campus docent work](/2026/09/13/saw-building-a-tiny-mixture-of-experts/) already ran this experiment at small scale, and a deterministic keyword matcher beat the trained model on every measure that counts:
 
@@ -176,9 +176,11 @@ The [campus docent work](/2026/09/13/saw-building-a-tiny-mixture-of-experts/) al
 | Trained docent + word vectors | 0.407 | 0.407 | 0.30 | A2 |
 | Trained dense docent | 0.296 | 0.481 | 0.30 | A2 |
 
-Two hundred and eighty-four keyword signals, zero parameters, no training, and it is the champion. So that number is the bar, written into the plan as a test rather than an aspiration: **nothing neural ships until it beats 0.685 on the same held-out questions by twenty points.** A 26M-parameter model distilled from a frontier model is not exempt. If it cannot beat a keyword matcher on this corpus, that is the finding, and it gets published as one.
+Two hundred and eighty-four keyword signals, zero parameters, no training. That is the number to beat, and it is written into the plan as a test rather than an aspiration: **a tier ships when it beats 0.685 on the same held-out questions by twenty points**, and not before.
 
-The corollary is that A0 is never deleted. The deterministic matcher is a permanent runtime class, not scaffolding to be thrown away when the neural tier arrives.
+What that scoreboard does *not* say is that the neural tier is a long shot. It says the work to extract value from this approach has not been done yet. Those rows come from a dense model with a feed-forward network, trained on a nine-place campus, before any of the pieces this post is about: no Simple Attention Network, no contrastive head over resource cards, no generated question set at corpus scale, no calibration. Every one of those is a reason the number should move, and moving it is the project.
+
+The corollary is that A0 is never deleted --- but not because I expect to need it forever. It is the floor of a ladder. A visitor on a phone with 2 GiB gets the matcher and a working answer; a visitor on a laptop gets the encoder; the same page, the same index, a different rung. The matcher is what makes it safe to try the model, because there is always something underneath.
 
 ## What the microscope is being asked
 
@@ -194,4 +196,6 @@ Because the alternative is a hosted assistant that costs a second and a server p
 
 The thing I want is smaller and stranger: a few megabytes published nightly, a model that cannot memorize a fact and therefore cannot invent one, an index that holds every fact and is regenerated from sources I already maintain by hand, and a deterministic matcher underneath it all that works on any machine and is currently winning.
 
-Whether the neural tier ever earns its place is an open question with a number attached. That is the sharpest part of the tool: it can be shown to be a bad idea.
+That is the shape I am building toward: the matcher as the floor, a trained model in the browser wherever the machine can afford one, and a tiered cache that pulls the deeper shards in as they are needed and evicts them when they are not --- the same residency question the microscope has been asking about weights on a disk, asked again about weights in a browser.
+
+None of it is proven yet. The number to beat is written down, the architecture that should beat it is chosen, and the work is to go and do it.

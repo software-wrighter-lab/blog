@@ -22,12 +22,6 @@ The theme this week is *making tools talk to each other*---Emacs talking to CLI 
 
 </div>
 
-<div class="aside-box" markdown="1">
-
-**Why Sharpen the Saw?** --- The name comes from Covey's [Habit 7](https://en.wikipedia.org/wiki/The_7_Habits_of_Highly_Effective_People): stop cutting long enough to sharpen the blade. This series is the weekly checkpoint where I step back from feature work and invest in the tools themselves---smoother editor integration, better agent coordination, less friction between the moving parts. Four weeks in, the compound interest is showing.
-
-</div>
-
 <div class="resource-box" markdown="1">
 
 | Resource | Link |
@@ -37,6 +31,12 @@ The theme this week is *making tools talk to each other*---Emacs talking to CLI 
 | **All Together Now** | [sw-vibe-coding/all-together-now](https://github.com/sw-vibe-coding/all-together-now) |
 | **Prior Post** | [Saw #3: agentrail-rs --- From Walking Skeleton to Dual Memory](/2026/03/22/saw-agentrail-rs-icrl-dual-memory/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
+
+</div>
+
+<div class="aside-box" markdown="1">
+
+**Why Sharpen the Saw?** --- The name comes from Covey's [Habit 7](https://en.wikipedia.org/wiki/The_7_Habits_of_Highly_Effective_People): stop cutting long enough to sharpen the blade. This series is the weekly checkpoint where I step back from feature work and invest in the tools themselves---smoother editor integration, better agent coordination, less friction between the moving parts. Four weeks in, the compound interest is showing.
 
 </div>
 

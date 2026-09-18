@@ -22,12 +22,6 @@ Six threads, one idea: dogfood the stack and let the gaps---missing features, mi
 
 </div>
 
-<div class="aside-box" markdown="1">
-
-**Why Sharpen the Saw?** --- The name comes from Covey's [Habit 7](https://en.wikipedia.org/wiki/The_7_Habits_of_Highly_Effective_People): stop cutting long enough to sharpen the blade. This series tracks weekly investment in the tools themselves---agent orchestration, testing infrastructure, compiler toolchains, language platforms---so the feature work on top goes faster.
-
-</div>
-
 <div class="resource-box" markdown="1">
 
 | Resource | Link |
@@ -40,6 +34,12 @@ Six threads, one idea: dogfood the stack and let the gaps---missing features, mi
 | **Repos & Live Demos** | [Table below](#repos-and-live-demos) |
 | **Prior Post** | [Saw #7: Prolog, Many-Agent Isolation, Self-Hosting Assembler, and MLPL](/2026/04/19/saw-prolog-many-agents-self-hosting-mlpl/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
+
+</div>
+
+<div class="aside-box" markdown="1">
+
+**Why Sharpen the Saw?** --- The name comes from Covey's [Habit 7](https://en.wikipedia.org/wiki/The_7_Habits_of_Highly_Effective_People): stop cutting long enough to sharpen the blade. This series tracks weekly investment in the tools themselves---agent orchestration, testing infrastructure, compiler toolchains, language platforms---so the feature work on top goes faster.
 
 </div>
 

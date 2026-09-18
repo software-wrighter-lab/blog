@@ -22,12 +22,6 @@ It's a deep dive — every movement of a word from `.s` to `.fth` changes the bo
 
 </div>
 
-<div class="aside-box" markdown="1">
-
-**Why this matters** --- Self-hosting is the final test that a language is expressive enough for systems work. Moving Forth words from assembly into Forth itself shows exactly where the irreducible floor is: the primitives that *must* be machine code. Everything above that floor can, in principle, live in `.fth` source.
-
-</div>
-
 <div class="resource-box" markdown="1">
 
 | Resource | Link |
@@ -41,6 +35,12 @@ It's a deep dive — every movement of a word from `.s` to `.fth` changes the bo
 | **Prior Post** | [Embedded #2: COR24 Assembly Emulator](/2026/03/22/cor24-rs-assembly-emulator/) |
 | **Follow-on post** | [Rabbit-hole #2: FORTH --- FIND and the Cost of a Name](/2026/04/23/rabbit-hole-deep-dive-forth-find-cost-of-a-name/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
+
+</div>
+
+<div class="aside-box" markdown="1">
+
+**Why this matters** --- Self-hosting is the final test that a language is expressive enough for systems work. Moving Forth words from assembly into Forth itself shows exactly where the irreducible floor is: the primitives that *must* be machine code. Everything above that floor can, in principle, live in `.fth` source.
 
 </div>
 

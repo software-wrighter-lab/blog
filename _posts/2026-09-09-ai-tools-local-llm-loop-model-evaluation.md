@@ -20,6 +20,17 @@ repo_url: "https://github.com/softwarewrighter/local-llm-loop"
 
 </div>
 
+<div class="resource-box" markdown="1">
+
+| Resource | Link |
+|----------|------|
+| **local-llm-loop** | [softwarewrighter/local-llm-loop](https://github.com/softwarewrighter/local-llm-loop) |
+| **opencode** | [opencode.ai](https://opencode.ai) |
+| **Related** | [RLM: Recursive Language Models](/2026/02/13/rlm-recursive-language-models/) · [Pi minimal agent](/2026/05/16/pi-minimal-agent/) |
+| **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
+
+</div>
+
 <div class="aside-box" markdown="1">
 
 **TL;DR**
@@ -32,17 +43,6 @@ repo_url: "https://github.com/softwarewrighter/local-llm-loop"
 | **Fastest complete loop** | gpt-oss-20b MXFP4 on the 5060 Ti, **1m13s** to a `cargo test`-green crate |
 | **Main finding** | Tool-use reliability moves wall-clock more than tokens per second. A model that one-shots each envelope beats a faster model that retries |
 | **Caveat** | This ranks **speed only**, in this harness. Quality ranking is future work |
-
-</div>
-
-<div class="resource-box" markdown="1">
-
-| Resource | Link |
-|----------|------|
-| **local-llm-loop** | [softwarewrighter/local-llm-loop](https://github.com/softwarewrighter/local-llm-loop) |
-| **opencode** | [opencode.ai](https://opencode.ai) |
-| **Related** | [RLM: Recursive Language Models](/2026/02/13/rlm-recursive-language-models/) · [Pi minimal agent](/2026/05/16/pi-minimal-agent/) |
-| **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
 </div>
 

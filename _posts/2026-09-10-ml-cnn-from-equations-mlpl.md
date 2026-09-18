@@ -41,6 +41,18 @@ A convolutional layer arrives in the literature as a triple sum. Zhao, Wang, Wan
 | `x`, `y` | output positions | position in the output feature map |
 | `Q`, `M_w`, `N_w` | — | input channels, kernel height, kernel width |
 
+<div class="resource-box" markdown="1">
+
+| Resource | Link |
+|----------|------|
+| **sw-MLPL** | [sw-ml-study/sw-mlpl](https://github.com/sw-ml-study/sw-mlpl) |
+| **Playground** | [mlpl.softwarewrighter.com](https://mlpl.softwarewrighter.com/) --- 0.22.0; everything here runs in the browser |
+| **The demos** | [sw-ml-study/demo-ml-utils](https://github.com/sw-ml-study/demo-ml-utils) |
+| **The paper** | Zhao, Wang, Wang & Liu, [*Algorithms* 11(10):159, 2018](https://doi.org/10.3390/a11100159) |
+| **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
+
+</div>
+
 <div class="aside-box" markdown="1">
 
 **TL;DR** --- five additions to sw-MLPL, and what each one lets you write:
@@ -52,18 +64,6 @@ A convolutional layer arrives in the literature as a triple sum. Zhao, Wang, Wan
 | `reduce(:op, a, [2,3,4])` | Several summations collapsed in one pass, in any order |
 | `reduce(:op, a, "channel")` | Axes chosen by meaning instead of position |
 | `grad` through `windows` | The convolution stops being something you compute and becomes something you train |
-
-</div>
-
-<div class="resource-box" markdown="1">
-
-| Resource | Link |
-|----------|------|
-| **sw-MLPL** | [sw-ml-study/sw-mlpl](https://github.com/sw-ml-study/sw-mlpl) |
-| **Playground** | [mlpl.softwarewrighter.com](https://mlpl.softwarewrighter.com/) --- 0.22.0; everything here runs in the browser |
-| **The demos** | [sw-ml-study/demo-ml-utils](https://github.com/sw-ml-study/demo-ml-utils) |
-| **The paper** | Zhao, Wang, Wang & Liu, [*Algorithms* 11(10):159, 2018](https://doi.org/10.3390/a11100159) |
-| **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
 </div>
 

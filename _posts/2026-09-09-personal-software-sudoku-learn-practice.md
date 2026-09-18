@@ -20,6 +20,18 @@ Two reasons this exists. I was tired of ad-supported Sudoku apps, and I wanted t
 
 </div>
 
+<div class="resource-box" markdown="1">
+
+| Resource | Link |
+|----------|------|
+| **Play** | [sw-fun.github.io/sudoku](https://sw-fun.github.io/sudoku/) |
+| **Repository** | [sw-fun/sudoku](https://github.com/sw-fun/sudoku) |
+| **Difficulty evidence** | [docs/difficulty-stats.md](https://github.com/sw-fun/sudoku/blob/main/docs/difficulty-stats.md) |
+| **Offline / phone install** | [docs/offline-use.md](https://github.com/sw-fun/sudoku/blob/main/docs/offline-use.md) |
+| **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
+
+</div>
+
 <div class="aside-box" markdown="1">
 
 **TL;DR**
@@ -33,18 +45,6 @@ Two reasons this exists. I was tired of ad-supported Sudoku apps, and I wanted t
 | **Notes** | Three-state pencil marks --- off, user-entered, app-filled --- with fill, clear, hide, auto-prune |
 | **Engine** | Seeded generator that digs clues only while uniqueness holds; a grader that scores by hardest technique required |
 | **Built** | 2026-08-18 to 2026-08-26, 87 commits, now v0.7.2 |
-
-</div>
-
-<div class="resource-box" markdown="1">
-
-| Resource | Link |
-|----------|------|
-| **Play** | [sw-fun.github.io/sudoku](https://sw-fun.github.io/sudoku/) |
-| **Repository** | [sw-fun/sudoku](https://github.com/sw-fun/sudoku) |
-| **Difficulty evidence** | [docs/difficulty-stats.md](https://github.com/sw-fun/sudoku/blob/main/docs/difficulty-stats.md) |
-| **Offline / phone install** | [docs/offline-use.md](https://github.com/sw-fun/sudoku/blob/main/docs/offline-use.md) |
-| **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
 </div>
 
