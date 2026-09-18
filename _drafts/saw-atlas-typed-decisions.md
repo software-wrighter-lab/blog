@@ -9,6 +9,17 @@ abstract: "There is a class of model that never writes a sentence. You give it a
 series: "Sharpen the Saw Sundays"
 series_part: 12
 date: 2026-09-20 00:15:00 -0700
+papers:
+  - title: "Augmenting Self-attention with Persistent Memory"
+    url: "https://arxiv.org/abs/1907.01470"
+  - title: "Simplifying Transformer Blocks"
+    url: "https://arxiv.org/abs/2311.01906"
+  - title: "Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks"
+    url: "https://arxiv.org/abs/1908.10084"
+  - title: "Efficient Few-Shot Learning Without Prompts (SetFit)"
+    url: "https://arxiv.org/abs/2209.11055"
+  - title: "On Calibration of Modern Neural Networks"
+    url: "https://arxiv.org/abs/1706.04599"
 repo_urls:
   - url: "https://github.com/software-wrighter-lab/sw-atlas"
     title: "sw-atlas"
@@ -38,6 +49,7 @@ Answering that question well normally costs a large model, a server, and a secon
 | **Related work** | [moe-microscope](https://github.com/sw-ml-study/moe-microscope) · [the docent results](https://github.com/sw-ml-study/moe-microscope/blob/main/docs/reference/docent-results.md) |
 | **The corpus** | [the blog](https://blog.softwarewrighter.com/) · [the campus](https://software-wrighter-lab.github.io/sw-campus/#/) · [sw-campus](https://github.com/software-wrighter-lab/sw-campus) |
 | **Prior posts** | [A Tiny Mixture of Experts Microscope](/2026/09/13/saw-building-a-tiny-mixture-of-experts/) · [A Campus for the Public Work](/2026/09/12/software-wrighter-research-campus/) |
+| **Papers** | [Persistent Memory](https://arxiv.org/abs/1907.01470) · [Simplifying Transformer Blocks](https://arxiv.org/abs/2311.01906) · [Sentence-BERT](https://arxiv.org/abs/1908.10084) · [SetFit](https://arxiv.org/abs/2209.11055) · [Calibration](https://arxiv.org/abs/1706.04599) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
 </div>
@@ -54,7 +66,7 @@ The vocabulary is worth learning even if you never build one, because it names a
 
 TypeSafe calls Jev a **System One model**, borrowing Kahneman: fast, automatic, non-deliberative. The concrete meaning is that it is **non-generative**. It does not emit tokens one at a time and hope they parse. It samples a **typed decision** in parallel against a schema you supply --- a `Choice` from an enumeration, a `Score`, a `Boolean` --- and returns that, in something like 70 to 500 milliseconds, with a footprint measured in megabytes rather than gigabytes.
 
-That constraint is the whole point. A generative model asked "which of these is the user asking about?" can answer with a hallucinated option, a paragraph of preamble, or valid JSON describing a thing that does not exist. A model whose output *is* the schema cannot. The worst it can do is choose the wrong enum value --- and if it is calibrated, say so with a low number.
+That constraint is the whole point. A generative model asked "which of these is the user asking about?" can answer with a hallucinated option, a paragraph of preamble, or valid JSON describing a thing that does not exist. A model whose output *is* the schema cannot. The worst it can do is choose the wrong enum value --- and if it is [calibrated](https://arxiv.org/abs/1706.04599), say so with a low number.
 
 Set against the corpus I actually have, that is the right shape:
 
@@ -88,7 +100,7 @@ The near misses are instructive, because each one is genuinely good at something
 
 | Project | What it is | Why not |
 |---|---|---|
-| **SetFit** | few-shot contrastive fine-tuning of a sentence encoder; retrains on CPU in seconds | the cheapest possible semantic tier, and worth one measurement as a floor --- but Needle's contrastive head gives the same thing from a model already needed |
+| **[SetFit](https://arxiv.org/abs/2209.11055)** | few-shot contrastive fine-tuning of a [sentence encoder](https://arxiv.org/abs/1908.10084); retrains on CPU in seconds | the cheapest possible semantic tier, and worth one measurement as a floor --- but Needle's contrastive head gives the same thing from a model already needed |
 | **Outlines**, **SGLang** | grammar-constrained decoding; FSMs and CFGs over the logits | these force a *general* model into a schema. A model whose native output is the schema does not need forcing |
 | **LanceDB** | embedded, serverless vector database in Rust | 300 resources at 384 dimensions and INT8 is 115 KiB. A flat cosine scan beats any index structure at that size and needs no dependency |
 | **HippoRAG 2**, **A-Mem** | infer a knowledge graph from text | this corpus does not need inference. 65 posts declare a `repo_url`, 75 a `video_url`, 64 their papers, 123 a series. The relations are hand-written and already correct |
@@ -125,6 +137,8 @@ Needle's architecture is a **Simple Attention Network**, and the striking part i
 The design argument is that routing a query to a target is *alignment and copying*, not per-position feature transformation --- so the FFN is paying rent it does not earn. And the consequence for a project like mine is larger than the parameter saving:
 
 > **MLPs can be completely dropped from transformer networks, as long as the model relies on an external knowledge source.**
+
+That claim is not only Cactus's. Sukhbaatar and colleagues showed in 2019 that the feed-forward sub-layer can be [merged into attention as persistent memory vectors](https://arxiv.org/abs/1907.01470) --- a set of learned key-value pairs that play the same role --- and the feed-forward layer removed without degrading performance. He and Hofmann went further in [*Simplifying Transformer Blocks*](https://arxiv.org/abs/2311.01906), stripping skip connections, value and projection parameters and normalization layers to reach 15 percent fewer parameters and 15 percent faster training at the same quality. There is a real line of published work here, not just a vendor's design note, and what Needle adds is a trained checkpoint at the far end of it.
 
 If there is no feed-forward layer, there is nowhere for a fact to be memorized. "Facts live in the index, language lives in the weights" stops being a discipline I have to maintain in the training data and becomes a property of the architecture. That is a much stronger guarantee, and it is testable rather than hopeful.
 
