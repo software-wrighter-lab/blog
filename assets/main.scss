@@ -1156,15 +1156,19 @@ figure.gutter-img-right {
 
   // An aside that should read as a separate note rather than as part of
   // the argument: a portrait box floated into one of the page's margins,
-  // with the section's paragraphs running up beside it.
+  // with the section's paragraphs running up beside it. Each clears the
+  // one before, so two asides never sit side by side however tall the
+  // first happens to be.
   &.outdent {
     float: left;
+    clear: both;
     width: 66%;
     margin: 0.3em 1.8em 1.2em 0;
   }
 
   &.outdent-right {
     float: right;
+    clear: both;
     width: 46%;
     margin: 0.3em 0 1.2em 1.8em;
   }
@@ -1230,6 +1234,10 @@ figure.gutter-img-right {
 
 // A heading that introduces an aside-row steps out with it, so the
 // section keeps one left edge.
+.post-content .stagger-0 > h2:has(+ .aside-row) {
+  margin-right: -66.667%;
+}
+
 .post-content .stagger-1 > h2:has(+ .aside-row) {
   margin-left: -33.333%;
 }

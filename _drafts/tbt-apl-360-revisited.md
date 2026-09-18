@@ -156,12 +156,6 @@ Then it went on a desk. The [IBM 5100](https://en.wikipedia.org/wiki/IBM_5100) o
 
 Because it was a mainframe interpreter, the whole language came along --- the same primitives, the same `)SAVE` and `)LOAD`, the same workspace. But it came from the *later* mainframe: what shipped in the 5100 was APLSV, so it had the quad system variables, `⎕SVO` among them, rather than APL\360's I-beams. That is the line sw-apl is drawn on. The APL most people met on a desk was already APLSV.
 
-<div class="aside-box outdent" markdown="1">
-
-**A mainframe under the desk.** IBM kept at that idea long after the 5100. The technical workstations were built on the XT and then the AT, each with its own system-unit-sized box standing alongside, joined by thick parallel cables. As an MVS developer I debugged mainframe code locally on an AT-based IBM 7437 VM/SP Technical Workstation: a genuinely strange thing to be able to do at your own desk, with no machine room and nobody else's job queue in front of yours.
-
-</div>
-
 The difference that matters for this project is not the language but the paper. On a 2741 the session was a printout: you could read back through a morning's work, and the six-space indent existed so you could tell at a glance what you had typed from what the machine had answered. On the 5100 the session was sixteen lines of glass that scrolled away behind you. The convention survived the move --- the indent is still there in every APL since --- but its reason did not. sw-apl reproduces the printer, because that is the session APL\360 was designed around.
 
 Every one of those machines solved the problem by putting real System/370 hardware under the desk. This project is the other approach: keep the language, and let the mainframe go.
@@ -170,11 +164,21 @@ Every one of those machines solved the problem by putting real System/370 hardwa
 
 ## Against its contemporaries, and ours
 
+<div class="aside-row" markdown="1">
+
+<div class="aside-box outdent" markdown="1">
+
+**A mainframe under the desk.** IBM kept at that idea long after the 5100. The technical workstations were built on the XT and then the AT, each with its own system-unit-sized box standing alongside, joined by thick parallel cables. As an MVS developer I debugged mainframe code locally on an AT-based IBM 7437 VM/SP Technical Workstation: a genuinely strange thing to be able to do at your own desk, with no machine room and nobody else's job queue in front of yours.
+
+</div>
+
 In 1968 the alternatives were FORTRAN IV, COBOL, ALGOL 60, PL/I, LISP 1.5, and the year-old BASIC. Every one of them but LISP and BASIC was a batch language: you wrote a program, submitted it, and read the result later. APL\360 was a conversation. You typed an expression and the answer came back; a program was something you built up from expressions that had already worked. That alone made it the environment of choice for a lot of people who were not programmers --- actuaries, engineers, planners --- and APL time-sharing became a business (I.P. Sharp, STSC) on the strength of it.
 
 The deeper difference was the unit of work. FORTRAN operated on one number at a time and you wrote the loop; APL operated on the array and the loop was the interpreter's problem. That is the idea that outlived the notation. NumPy's broadcasting is APL's scalar extension. MATLAB is an APL whose glyphs were replaced with function names and whose arrays became matrices first. R's vectorized operations, spreadsheet array formulas, `reduce` and `scan` and `outer` in a dozen libraries, the tensor operations in every ML framework --- these are APL's primitives with the typeball removed. Iverson's 1979 Turing Award lecture was titled *Notation as a Tool of Thought*, and the tools of thought spread further than the notation did.
 
 The notation spread too, in a direct line. APL2 (IBM, 1984) added nesting, and it is the APL most people can run today: GNU APL is an APL2, and Dyalog started from it. J (Iverson and Roger Hui, 1990) kept the semantics and moved to ASCII. K and q (Arthur Whitney) stripped the language down again and put it under the world's financial data. Dyalog carried APL forward with lexical dfns and a modern runtime. BQN redesigned the glyphs from scratch in 2020. Each of them is an argument about what APL should have been. sw-apl is not an argument; it is a record of what it was.
+
+</div>
 
 ## How sw-apl does it
 
