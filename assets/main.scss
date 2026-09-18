@@ -1138,12 +1138,41 @@ figure.gutter-img-right {
     }
   }
 
-  strong, b, em, i, th, td, code {
+  strong, b, em, i, code {
     color: #1e3a5f;
   }
 
   code {
     background-color: rgba(30, 58, 95, 0.09);
+  }
+
+  // The site's tables are theme-aware: in dark mode the header and the
+  // even-row stripe get dark backgrounds. Inside this fixed warm panel
+  // that would put dark cells under the panel's navy text, so cells are
+  // transparent here, the header takes a light wash of the same navy,
+  // and the rules are drawn in the panel's own colour.
+  table {
+    border-color: rgba(30, 58, 95, 0.3);
+
+    th, td {
+      background-color: transparent;
+      border-color: rgba(30, 58, 95, 0.3);
+      color: #1e3a5f;
+    }
+
+    th {
+      background-color: rgba(30, 58, 95, 0.09);
+      font-weight: 600;
+    }
+
+    tr,
+    tr:nth-child(even) {
+      background-color: transparent;
+    }
+
+    strong, b {
+      color: #1e3a5f;
+    }
   }
 
   > :first-child { margin-top: 0; }
