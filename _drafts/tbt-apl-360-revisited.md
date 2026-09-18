@@ -162,7 +162,7 @@ Every one of those machines solved the problem by putting real System/370 hardwa
 
 </div>
 
-## Against its contemporaries, and ours
+<hr class="stagger-break">
 
 <div class="aside-row" markdown="1">
 
@@ -171,6 +171,8 @@ Every one of those machines solved the problem by putting real System/370 hardwa
 **A mainframe under the desk.** IBM kept at that idea long after the 5100. The technical workstations were built on the XT and then the AT, each with its own system-unit-sized box standing alongside, joined by thick parallel cables. As an MVS developer I debugged mainframe code locally on an AT-based IBM 7437 VM/SP Technical Workstation: a genuinely strange thing to be able to do at your own desk, with no machine room and nobody else's job queue in front of yours.
 
 </div>
+
+## Against its contemporaries, and ours
 
 In 1968 the alternatives were FORTRAN IV, COBOL, ALGOL 60, PL/I, LISP 1.5, and the year-old BASIC. Every one of them but LISP and BASIC was a batch language: you wrote a program, submitted it, and read the result later. APL\360 was a conversation. You typed an expression and the answer came back; a program was something you built up from expressions that had already worked. That alone made it the environment of choice for a lot of people who were not programmers --- actuaries, engineers, planners --- and APL time-sharing became a business (I.P. Sharp, STSC) on the strength of it.
 

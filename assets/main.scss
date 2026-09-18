@@ -1238,6 +1238,14 @@ figure.gutter-img-right {
   margin-right: -66.667%;
 }
 
+// Ends the preceding staggered section without drawing a rule, so what
+// follows sits at full content width and can carry its own heading past
+// a floated aside. The stagger script stops at an HR whether or not it
+// is displayed.
+hr.stagger-break {
+  display: none;
+}
+
 .post-content .stagger-1 > h2:has(+ .aside-row) {
   margin-left: -33.333%;
 }
