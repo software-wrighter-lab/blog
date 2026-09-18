@@ -1111,29 +1111,66 @@ figure.gutter-img-right {
   line-height: 1.4;
 }
 
-// A short aside that belongs in a box rather than the running text -- the
-// "Why Sharpen the Saw?" note that opens each Saw post, and similar. Not
-// floated: it takes the column width and sits between paragraphs.
+// An aside that belongs in a box rather than in the running text: the
+// "Why Sharpen the Saw?" note that opens each Saw post, an anecdote, a
+// breakdown. Same warm panel and fixed colours as .resource-box, so every
+// box on the site reads the same way in both themes. Not floated: it sits
+// between paragraphs rather than beside them.
 .aside-box {
   display: flow-root; // a block formatting context sits beside the TOC and
                       // link-box floats instead of running underneath them
   width: 33%;
   margin: 1.2em 0 1.5em;
-  padding: 0.7em 1em;
+  padding: 0.5em 1em;
   box-sizing: border-box;
-  border: 1px solid var(--border-color);
-  border-left: 4px solid var(--link-color);
   border-radius: 6px;
-  background-color: rgba(127, 127, 127, 0.08);
+  background-color: #ffe4c4;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  color: #1e3a5f;
   font-size: 1.05em;
   line-height: 1.45;
+
+  a {
+    color: #1a5490;
+
+    &:hover {
+      color: #0d3a6e;
+    }
+  }
+
+  strong, b, em, i, th, td, code {
+    color: #1e3a5f;
+  }
+
+  code {
+    background-color: rgba(30, 58, 95, 0.09);
+  }
 
   > :first-child { margin-top: 0; }
   > :last-child { margin-bottom: 0; }
 
-  // A full-column variant for an aside that holds a table.
+  // Full column, for an aside that carries a table.
   &.wide {
     width: auto;
+  }
+
+  // An aside that should read as a separate note rather than as part of
+  // the argument: a portrait box floated into one of the page's margins,
+  // with the section's paragraphs running up beside it. Each clears the
+  // one before, so two asides never sit side by side however tall the
+  // first happens to be.
+  &.outdent {
+    float: left;
+    clear: both;
+    width: 66%;
+    margin: 0.3em 1.8em 1.2em 0;
+  }
+
+  &.outdent-right {
+    float: right;
+    clear: both;
+    width: 46%;
+    margin: 0.3em 0 1.2em 1.8em;
   }
 
   table {
@@ -1143,6 +1180,109 @@ figure.gutter-img-right {
 
   @media (max-width: 900px) {
     width: auto;
+  }
+}
+
+[data-theme="dark"] .aside-box {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .aside-box {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+}
+
+// .stagger-N indents its section by N x 20% of the content width and is
+// 60% wide, so these percentages (of the section) cancel that indent and
+// put an outdented box back at one of the page's margins.
+.post-content .stagger-1 > .aside-box.outdent {
+  margin-left: -33.333%;
+}
+
+.post-content .stagger-2 > .aside-box.outdent {
+  margin-left: -66.667%;
+}
+
+.post-content .stagger-0 > .aside-box.outdent-right {
+  margin-right: -66.667%;
+}
+
+.post-content .stagger-1 > .aside-box.outdent-right {
+  margin-right: -33.333%;
+}
+
+// A block that steps out of the staggered column to the full content
+// width, so a floated aside can sit at one page margin with body text
+// running to the other. Same percentages as above, applied to the wrapper.
+.post-content .stagger > .aside-row {
+  display: flow-root;
+}
+
+.post-content .stagger-0 > .aside-row {
+  margin-right: -66.667%;
+}
+
+.post-content .stagger-1 > .aside-row {
+  margin-left: -33.333%;
+  margin-right: -33.333%;
+}
+
+.post-content .stagger-2 > .aside-row {
+  margin-left: -66.667%;
+}
+
+// A heading that introduces an aside-row steps out with it, so the
+// section keeps one left edge.
+.post-content .stagger-0 > h2:has(+ .aside-row) {
+  margin-right: -66.667%;
+}
+
+// Ends the preceding staggered section without drawing a rule, so what
+// follows sits at full content width and can carry its own heading past
+// a floated aside. The stagger script stops at an HR whether or not it
+// is displayed.
+hr.stagger-break {
+  display: none;
+}
+
+.post-content .stagger-1 > h2:has(+ .aside-row) {
+  margin-left: -33.333%;
+}
+
+.post-content .stagger-2 > h2:has(+ .aside-row) {
+  margin-left: -66.667%;
+}
+
+// Inside a row both variants are the same width, so boxes on opposite
+// margins line up with each other down the page.
+.post-content .aside-row > .aside-box.outdent,
+.post-content .aside-row > .aside-box.outdent-right {
+  width: 40%;
+}
+
+.post-content .aside-row > .aside-box.outdent {
+  margin: 0.3em 1.8em 1.2em 0;
+}
+
+.post-content .aside-row > .aside-box.outdent-right {
+  margin: 0.3em 0 1.2em 1.8em;
+}
+
+@media (max-width: 900px) {
+  .post-content .stagger > .aside-row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .post-content .stagger > .aside-box.outdent,
+  .post-content .stagger > .aside-box.outdent-right,
+  .post-content .aside-row > .aside-box.outdent,
+  .post-content .aside-row > .aside-box.outdent-right {
+    float: none;
+    width: auto;
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 
