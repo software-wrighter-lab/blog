@@ -22,12 +22,6 @@ Four threads, one idea: the way to scale vibe-coding isn't to run harder---it's 
 
 </div>
 
-<div class="aside-box" markdown="1">
-
-**Why Sharpen the Saw?** --- The name comes from Covey's [Habit 7](https://en.wikipedia.org/wiki/The_7_Habits_of_Highly_Effective_People): stop cutting long enough to sharpen the blade. This series tracks weekly investment in the tools themselves---agent orchestration, testing infrastructure, compiler toolchains---so the feature work on top goes faster.
-
-</div>
-
 <div class="resource-box" markdown="1">
 
 | Resource | Link |
@@ -37,6 +31,12 @@ Four threads, one idea: the way to scale vibe-coding isn't to run harder---it's 
 | **Language-Building Pattern** | [language-building-tech.md](https://github.com/sw-embed/web-sw-cor24-demos/blob/main/docs/language-building-tech.md) |
 | **Prior Post** | [Saw #6: Agent Coordination, Fuzzing Tests, Vendoring, and Emacs Graphics](/2026/04/12/saw-agent-coordination-fuzzit-vendoring/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
+
+</div>
+
+<div class="aside-box" markdown="1">
+
+**Why Sharpen the Saw?** --- The name comes from Covey's [Habit 7](https://en.wikipedia.org/wiki/The_7_Habits_of_Highly_Effective_People): stop cutting long enough to sharpen the blade. This series tracks weekly investment in the tools themselves---agent orchestration, testing infrastructure, compiler toolchains---so the feature work on top goes faster.
 
 </div>
 

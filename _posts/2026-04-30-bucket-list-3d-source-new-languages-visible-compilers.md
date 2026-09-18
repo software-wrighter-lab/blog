@@ -19,12 +19,6 @@ The first two posts in this series listed the things I always wanted to build ([
 
 </div>
 
-<div class="aside-box" markdown="1">
-
-**Why this matters** --- A bucket list is only useful if it grows as fast as it shrinks. Crossing things off without adding things back is how a list gets shorter than the curiosities of the person carrying it. The three categories below are what's been quietly moving from "interesting" to "I'm actually doing this" since the last post --- and they share a thread: each one is something a working engineer rarely gets to do (build a new programming language, sculpt a new authoring surface, or instrument a compiler so you can *watch* it think) because the day job never gives that kind of room. Retirement and AI agents jointly do.
-
-</div>
-
 <div class="resource-box" markdown="1">
 
 | Resource | Link |
@@ -37,6 +31,12 @@ The first two posts in this series listed the things I always wanted to build ([
 | **Bucket List** | [softwarewrighter/bucketlist](https://github.com/softwarewrighter/bucketlist) |
 | **Prior posts** | [Part 1](/2026/03/21/bucket-list-things-ive-always-wanted-to-build/) · [Part 2](/2026/04/03/bucket-list-software-tools-landing-page/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
+
+</div>
+
+<div class="aside-box" markdown="1">
+
+**Why this matters** --- A bucket list is only useful if it grows as fast as it shrinks. Crossing things off without adding things back is how a list gets shorter than the curiosities of the person carrying it. The three categories below are what's been quietly moving from "interesting" to "I'm actually doing this" since the last post --- and they share a thread: each one is something a working engineer rarely gets to do (build a new programming language, sculpt a new authoring surface, or instrument a compiler so you can *watch* it think) because the day job never gives that kind of room. Retirement and AI agents jointly do.
 
 </div>
 

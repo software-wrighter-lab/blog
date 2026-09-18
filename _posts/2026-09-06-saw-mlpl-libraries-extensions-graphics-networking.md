@@ -54,6 +54,20 @@ Most of that project time went to [sw-MLPL](https://github.com/sw-ml-study/sw-ml
 
 </div>
 
+<div class="resource-box" markdown="1">
+
+| Resource | Link |
+|----------|------|
+| **sw-MLPL** | [sw-ml-study/sw-mlpl](https://github.com/sw-ml-study/sw-mlpl) |
+| **Playground (stable)** | [mlpl.softwarewrighter.com](https://mlpl.softwarewrighter.com/) |
+| **Playground (latest)** | [sw-ml-study.github.io/sw-mlpl](https://sw-ml-study.github.io/sw-mlpl/) |
+| **Extensions** | [demo-extensions](https://github.com/sw-ml-study/demo-extensions) |
+| **Libraries** | [demo-mlpl-libraries](https://github.com/sw-ml-study/demo-mlpl-libraries) · [mlplunit](https://github.com/softwarewrighter/mlplunit) |
+| **Abstract algebra site** | [sw-ml-study.github.io/demo-abstract-algebra](https://sw-ml-study.github.io/demo-abstract-algebra/) |
+| **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
+
+</div>
+
 <div class="aside-box" markdown="1">
 
 **TL;DR**
@@ -67,20 +81,6 @@ Most of that project time went to [sw-MLPL](https://github.com/sw-ml-study/sw-ml
 | **Graphics** | `native3d` --- wgpu line and point scenes, retained across every interactive demo, driven from MLPL |
 | **Networking** | Bounded HTTP client, callback-free HTTP server, confined SQLite, and a persistent TodoMVC served from MLPL |
 | **Extension boundary** | Versioned C ABI, panic containment, arrays/handles/records across the boundary. `use <package>`, dynamic loading, and compiled-provider startup remain open contracts |
-
-</div>
-
-<div class="resource-box" markdown="1">
-
-| Resource | Link |
-|----------|------|
-| **sw-MLPL** | [sw-ml-study/sw-mlpl](https://github.com/sw-ml-study/sw-mlpl) |
-| **Playground (stable)** | [mlpl.softwarewrighter.com](https://mlpl.softwarewrighter.com/) |
-| **Playground (latest)** | [sw-ml-study.github.io/sw-mlpl](https://sw-ml-study.github.io/sw-mlpl/) |
-| **Extensions** | [demo-extensions](https://github.com/sw-ml-study/demo-extensions) |
-| **Libraries** | [demo-mlpl-libraries](https://github.com/sw-ml-study/demo-mlpl-libraries) · [mlplunit](https://github.com/softwarewrighter/mlplunit) |
-| **Abstract algebra site** | [sw-ml-study.github.io/demo-abstract-algebra](https://sw-ml-study.github.io/demo-abstract-algebra/) |
-| **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
 </div>
 

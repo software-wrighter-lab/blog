@@ -22,12 +22,6 @@ Four projects, one idea: build the infrastructure so that parallel work stays pa
 
 </div>
 
-<div class="aside-box" markdown="1">
-
-**Why Sharpen the Saw?** --- The name comes from Covey's [Habit 7](https://en.wikipedia.org/wiki/The_7_Habits_of_Highly_Effective_People): stop cutting long enough to sharpen the blade. This series tracks weekly investment in the tools themselves---agent orchestration, testing infrastructure, compiler toolchains---so the feature work on top goes faster.
-
-</div>
-
 <div class="resource-box" markdown="1">
 
 | Resource | Link |
@@ -35,6 +29,12 @@ Four projects, one idea: build the infrastructure so that parallel work stays pa
 | **Repos & Live Demos** | [Table below](#repos-and-live-demos) |
 | **Prior Post** | [Saw #5: Sagas, Languages, and Compiler Chains](/2026/04/05/saw-saga-archiving-mlpl-plsw-cor24-compilers/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
+
+</div>
+
+<div class="aside-box" markdown="1">
+
+**Why Sharpen the Saw?** --- The name comes from Covey's [Habit 7](https://en.wikipedia.org/wiki/The_7_Habits_of_Highly_Effective_People): stop cutting long enough to sharpen the blade. This series tracks weekly investment in the tools themselves---agent orchestration, testing infrastructure, compiler toolchains---so the feature work on top goes faster.
 
 </div>
 

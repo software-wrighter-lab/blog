@@ -20,12 +20,6 @@ When I say "vibe-coding," the quotes are doing real work. I am not turning the A
 
 </div>
 
-<div class="aside-box" markdown="1">
-
-**Why this matters** --- It is easy to confuse "the AI is fast" with "the AI is producing good code." Without forcing functions --- code metrics, a linter, a TDD loop --- a generative agent will happily emit a 600-line file with 12 functions per module and 9 modules per crate, none of which are technically wrong, all of which are technically a mess. The interesting question is not whether to spend on accidental complexity, but *which* accidental complexity earns its keep.
-
-</div>
-
 <div class="resource-box" markdown="1">
 
 | Resource | Link |
@@ -35,6 +29,12 @@ When I say "vibe-coding," the quotes are doing real work. I am not turning the A
 | **Rich Hickey --- Simple Made Easy** | [infoq.com/presentations/Simple-Made-Easy](https://www.infoq.com/presentations/Simple-Made-Easy/) |
 | **Related Personal Software post** | [pjmai-rs: Navigation History and Fuzzy Completion](/2026/03/07/pjmai-rs-navigation-history-and-fuzzy-completion/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
+
+</div>
+
+<div class="aside-box" markdown="1">
+
+**Why this matters** --- It is easy to confuse "the AI is fast" with "the AI is producing good code." Without forcing functions --- code metrics, a linter, a TDD loop --- a generative agent will happily emit a 600-line file with 12 functions per module and 9 modules per crate, none of which are technically wrong, all of which are technically a mess. The interesting question is not whether to spend on accidental complexity, but *which* accidental complexity earns its keep.
 
 </div>
 

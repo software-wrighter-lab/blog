@@ -36,19 +36,6 @@ Two items from the list ([part 1](/2026/03/21/bucket-list-things-ive-always-want
 
 </div>
 
-<div class="aside-box" markdown="1">
-
-**TL;DR**
-
-| Project | What it is | Where it stands |
-|---------|-----------|-----------------|
-| [**SWTOS**](https://github.com/sw-embed/sw-tos) | Preemptive microkernel for the COR24 FPGA soft CPU, written in PL/SW | Boots on real hardware and [in a browser](https://swtos.softwarewrighter.com/). All validated paths are UART-only. I2C, SPI, RTC, temp sensor, SD card and NAND flash are untested |
-| [**MesaOS**](https://github.com/softwarewrighter/MesaOS) (fork) | 64-bit hybrid kernel with a Ring 3 userspace, by another author | Reproducible QEMU/VNC setup done; running Ring 3 experiments in Rust `no_std` |
-| [**MLOS**](https://github.com/sw-ml-study/sw-os-ml) | New Rust kernel that virtualizes ML objects instead of memory pages | Boots to a shell (gate G1). Gates G2--G8 not started; the ML content begins at M2 |
-| [**emufpga**](https://github.com/sw-ml-study/emufpga) | Behavioral emulator for a Serial Parameter Machine --- weights streamed past the compute | Measured: 4 KiB resident vs 269 MB, bit-exact, five clients per weight pass. No HDL yet |
-
-</div>
-
 <div class="resource-box" markdown="1">
 
 | Resource | Link |
@@ -62,6 +49,19 @@ Two items from the list ([part 1](/2026/03/21/bucket-list-things-ive-always-want
 | **sw-MLPL playground** | [sw-ml-study.github.io/sw-mlpl](https://sw-ml-study.github.io/sw-mlpl/) |
 | **Bucket List** | [softwarewrighter/bucketlist](https://github.com/softwarewrighter/bucketlist) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
+
+</div>
+
+<div class="aside-box" markdown="1">
+
+**TL;DR**
+
+| Project | What it is | Where it stands |
+|---------|-----------|-----------------|
+| [**SWTOS**](https://github.com/sw-embed/sw-tos) | Preemptive microkernel for the COR24 FPGA soft CPU, written in PL/SW | Boots on real hardware and [in a browser](https://swtos.softwarewrighter.com/). All validated paths are UART-only. I2C, SPI, RTC, temp sensor, SD card and NAND flash are untested |
+| [**MesaOS**](https://github.com/softwarewrighter/MesaOS) (fork) | 64-bit hybrid kernel with a Ring 3 userspace, by another author | Reproducible QEMU/VNC setup done; running Ring 3 experiments in Rust `no_std` |
+| [**MLOS**](https://github.com/sw-ml-study/sw-os-ml) | New Rust kernel that virtualizes ML objects instead of memory pages | Boots to a shell (gate G1). Gates G2--G8 not started; the ML content begins at M2 |
+| [**emufpga**](https://github.com/sw-ml-study/emufpga) | Behavioral emulator for a Serial Parameter Machine --- weights streamed past the compute | Measured: 4 KiB resident vs 269 MB, bit-exact, five clients per weight pass. No HDL yet |
 
 </div>
 

@@ -22,12 +22,6 @@ The common thread is *dependency chains*---saga archiving lets agentrail manage 
 
 </div>
 
-<div class="aside-box" markdown="1">
-
-**Why Sharpen the Saw?** --- The name comes from Covey's [Habit 7](https://en.wikipedia.org/wiki/The_7_Habits_of_Highly_Effective_People): stop cutting long enough to sharpen the blade. This series tracks weekly investment in the tools themselves---compilers, languages, agent infrastructure---so the feature work that sits on top of them goes faster. Five weeks in, the dependency chains are getting shorter.
-
-</div>
-
 <div class="resource-box" markdown="1">
 
 | Resource | Link |
@@ -35,6 +29,12 @@ The common thread is *dependency chains*---saga archiving lets agentrail manage 
 | **Repos & Live Demos** | [Table below](#repos-and-live-demos) |
 | **Prior Post** | [Saw #4: All Together Now --- Emacs Meets the Multi-Agent Orchestra](/2026/03/29/saw-pjmai-reg-emacs-all-together-now/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
+
+</div>
+
+<div class="aside-box" markdown="1">
+
+**Why Sharpen the Saw?** --- The name comes from Covey's [Habit 7](https://en.wikipedia.org/wiki/The_7_Habits_of_Highly_Effective_People): stop cutting long enough to sharpen the blade. This series tracks weekly investment in the tools themselves---compilers, languages, agent infrastructure---so the feature work that sits on top of them goes faster. Five weeks in, the dependency chains are getting shorter.
 
 </div>
 

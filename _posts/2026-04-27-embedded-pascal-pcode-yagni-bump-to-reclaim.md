@@ -20,12 +20,6 @@ YAGNI --- *You Ain't Gonna Need It* --- is one of those rules that's easy to quo
 
 </div>
 
-<div class="aside-box" markdown="1">
-
-**Why Dogfooding?** --- The phrase comes from *"eating your own dog food"*: shipping software that you yourself rely on for real work. In this lab, dogfooding is also the *forcing function* that decides when an MVP has earned its build-out. The pattern is: implement the smallest thing that demonstrates the capability, ship a demo, move on --- then wait for a downstream project to put real load on the placeholder. This series captures the moments where that load finally arrives, what was missing, and what filling the gap looked like.
-
-</div>
-
 <div class="resource-box" markdown="1">
 
 | Resource | Link |
@@ -36,6 +30,12 @@ YAGNI --- *You Ain't Gonna Need It* --- is one of those rules that's easy to quo
 | **Related Post** | [Embedded #3: How Much of Forth Can Be Forth?](/2026/04/20/embedded-forth-self-hosting-spectrum/) |
 | **Related Post** | [Saw #8: Tuplet, Smalltalk-on-BASIC, Forth-from-Forth](/2026/04/26/saw-tuplet-smalltalk-forth-from-forth/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
+
+</div>
+
+<div class="aside-box" markdown="1">
+
+**Why Dogfooding?** --- The phrase comes from *"eating your own dog food"*: shipping software that you yourself rely on for real work. In this lab, dogfooding is also the *forcing function* that decides when an MVP has earned its build-out. The pattern is: implement the smallest thing that demonstrates the capability, ship a demo, move on --- then wait for a downstream project to put real load on the placeholder. This series captures the moments where that load finally arrives, what was missing, and what filling the gap looked like.
 
 </div>
 

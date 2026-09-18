@@ -23,12 +23,6 @@ The first three tools---Espanso, Kate's syntax-highlighting config, and the GitH
 
 <!--more-->
 
-<div class="aside-box" markdown="1">
-
-**Why Sharpen the Saw?** --- The name comes from Covey's [Habit 7](https://en.wikipedia.org/wiki/The_7_Habits_of_Highly_Effective_People): stop cutting long enough to sharpen the blade. This series tracks weekly investment in the tools themselves---editors, snippet expanders, screenshot pipelines, emulators, peripheral simulators---so the feature work on top goes faster.
-
-</div>
-
 <div class="resource-box" markdown="1">
 
 | Resource | Link |
@@ -39,6 +33,12 @@ The first three tools---Espanso, Kate's syntax-highlighting config, and the GitH
 | **COR24 Emulator** | [github.com/sw-embed/sw-cor24-emulator](https://github.com/sw-embed/sw-cor24-emulator) |
 | **Prior Post** | [Saw #8: Tuplet, Smalltalk, Forth-from-Forth, sw-MLPL Split, and I2C on COR24](/2026/04/26/saw-tuplet-smalltalk-forth-from-forth/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
+
+</div>
+
+<div class="aside-box" markdown="1">
+
+**Why Sharpen the Saw?** --- The name comes from Covey's [Habit 7](https://en.wikipedia.org/wiki/The_7_Habits_of_Highly_Effective_People): stop cutting long enough to sharpen the blade. This series tracks weekly investment in the tools themselves---editors, snippet expanders, screenshot pipelines, emulators, peripheral simulators---so the feature work on top goes faster.
 
 </div>
 

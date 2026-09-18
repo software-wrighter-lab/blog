@@ -20,12 +20,6 @@ The sw-embed monorepos cover ten-plus languages targeting the same COR24 emulato
 
 </div>
 
-<div class="aside-box" markdown="1">
-
-**Why this matters** --- AI coding agents working across multiple sw-embed repos do not have the patience or the pattern-matching to get the load plan right by inspection. They will happily write `cor24-run --load-binary out.bin@0 --load-binary app.p24@0x10000 --patch 0x12=0x10000 --entry 0` from scratch every time, sometimes inventing flags that don't exist. The fix is not better agent prompts; it is removing the freedom to invent. `sw-launch run <scenario>` is the only verb the agent gets, the TOML is the only place memory-layout decisions live, and the schema makes oversized heaps argue for themselves before the validator accepts them.
-
-</div>
-
 <div class="resource-box" markdown="1">
 
 | Resource | Link |
@@ -37,6 +31,12 @@ The sw-embed monorepos cover ten-plus languages targeting the same COR24 emulato
 | **Driven projects** | [sw-cor24-pcode](https://github.com/sw-embed/sw-cor24-pcode) · [sw-cor24-ocaml](https://github.com/sw-embed/sw-cor24-ocaml) · [sw-cor24-pascal](https://github.com/sw-embed/sw-cor24-pascal) · [sw-cor24-basic](https://github.com/sw-embed/sw-cor24-basic) |
 | **Related AI Tools post** | [AI Tools #3: sw-checklist --- Reining In AI Coding Agents With a Code-Metrics Ratchet](/2026/04/27/sw-checklist-ratchet-ai-coding-agents/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
+
+</div>
+
+<div class="aside-box" markdown="1">
+
+**Why this matters** --- AI coding agents working across multiple sw-embed repos do not have the patience or the pattern-matching to get the load plan right by inspection. They will happily write `cor24-run --load-binary out.bin@0 --load-binary app.p24@0x10000 --patch 0x12=0x10000 --entry 0` from scratch every time, sometimes inventing flags that don't exist. The fix is not better agent prompts; it is removing the freedom to invent. `sw-launch run <scenario>` is the only verb the agent gets, the TOML is the only place memory-layout decisions live, and the schema makes oversized heaps argue for themselves before the validator accepts them.
 
 </div>
 

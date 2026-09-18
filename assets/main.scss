@@ -1117,10 +1117,13 @@ figure.gutter-img-right {
 // box on the site reads the same way in both themes. Not floated: it sits
 // between paragraphs rather than beside them.
 .aside-box {
-  display: flow-root; // a block formatting context sits beside the TOC and
-                      // link-box floats instead of running underneath them
-  width: 33%;
-  margin: 1.2em 0 1.5em;
+  // Floated, and clearing whatever floated before it: an aside sits beside
+  // body paragraphs, never beside another box. Without the clear it would
+  // line up next to the link box, which is the one arrangement to avoid.
+  float: right;
+  clear: both;
+  width: 36%;
+  margin: 0.3em 0 1.2em 1.8em;
   padding: 0.5em 1em;
   box-sizing: border-box;
   border-radius: 6px;
@@ -1191,14 +1194,14 @@ figure.gutter-img-right {
   &.outdent {
     float: left;
     clear: both;
-    width: 66%;
+    width: 40%;
     margin: 0.3em 1.8em 1.2em 0;
   }
 
   &.outdent-right {
     float: right;
     clear: both;
-    width: 46%;
+    width: 40%;
     margin: 0.3em 0 1.2em 1.8em;
   }
 

@@ -20,12 +20,6 @@ The car is up on the lift. The mechanic is not building a new car; the mechanic 
 
 </div>
 
-<div class="aside-box" markdown="1">
-
-**Why this matters** --- "Vibe-coding" gets the headlines because it produces something visible: a new feature, a new demo, a new tool. Vibe-maintenance is the quieter half. It does not show up as a flashy commit message; it shows up as a green "Try it" badge that used to say "In dev," or as a closed-issues heatmap that is busier than the commits one. If your only frame for AI-assisted development is "the agent writes new code," you miss the half of the work where the agent is reading existing code, finding the assumption that was wrong, and patching it. Almost every senior engineer who has tried to use AI agents finds maintenance more useful than greenfield work; the post argues for why, and what the human still has to do.
-
-</div>
-
 <div class="resource-box" markdown="1">
 
 | Resource | Link |
@@ -36,6 +30,12 @@ The car is up on the lift. The mechanic is not building a new car; the mechanic 
 | **Prior Personal Software post** | [Personal Software #8: sw-launcher --- One Ring to Rule Them All](/2026/04/28/personal-software-sw-launcher-one-ring/) |
 | **Related AI Tools post** | [AI Tools #3: sw-checklist --- Reining In AI Coding Agents](/2026/04/27/sw-checklist-ratchet-ai-coding-agents/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
+
+</div>
+
+<div class="aside-box" markdown="1">
+
+**Why this matters** --- "Vibe-coding" gets the headlines because it produces something visible: a new feature, a new demo, a new tool. Vibe-maintenance is the quieter half. It does not show up as a flashy commit message; it shows up as a green "Try it" badge that used to say "In dev," or as a closed-issues heatmap that is busier than the commits one. If your only frame for AI-assisted development is "the agent writes new code," you miss the half of the work where the agent is reading existing code, finding the assumption that was wrong, and patching it. Almost every senior engineer who has tried to use AI agents finds maintenance more useful than greenfield work; the post argues for why, and what the human still has to do.
 
 </div>
 
