@@ -4,8 +4,7 @@ title: "Saw #12: A Model That Decides, and an Index That Knows"
 categories: [tools, machine-learning, languages, projects]
 tags: [sharpen-the-saw, sw-atlas, jev, typesafe, needle, cactus, simple-attention-network, system-one, typed-decisions, semantic-index, wasm, rust, sw-mlpl, moe-microscope, sw-campus, retrieval, calibration, quantization, edge-ml]
 keywords: "sw-atlas, Jev, TypeSafe AI, System One model, Needle, Cactus Compute, Simple Attention Network, no feed-forward, typed decision, non-generative, intent classification, semantic index, snapshot, runtime class, WASM, Rust, sw-MLPL, moe-microscope, SetFit, Outlines, SGLang, LanceDB, HippoRAG, LLMRouter, calibration, abstention, INT4, offline compute"
-author: Software Wrighter
-abstract: "There is a class of model that never writes a sentence. You give it a question and a list of things it could be about, and it returns a typed decision --- an intent, some concepts, a confidence --- in a few hundred kilobytes and a few milliseconds. TypeSafe's Jev calls these System One models; Cactus's Needle is an open one you can read. sw-atlas applies the idea to my own corpus: one semantic index over the blog, the repositories, the demos, the campus and the videos, and a small model that turns a visitor's sentence into a decision about it. The facts live in the index. The model holds only the language. The deterministic matcher is the floor of the ladder, not the destination."
+abstract: "There is a class of model that never writes a sentence. You give it a question and a list of things it could be about, and it returns a typed decision --- an intent, some concepts, a confidence --- in a few hundred kilobytes and well under a second. TypeSafe's Jev calls these System One models; Cactus's Needle is an open one you can read. sw-atlas applies the idea to my own corpus: one semantic index over the blog, the repositories, the demos, the campus and the videos, and a small model that turns a visitor's sentence into a decision about it. The facts live in the index. The model holds only the language. The deterministic matcher is the floor of the ladder, not the destination."
 series: "Sharpen the Saw Sundays"
 series_part: 12
 date: 2026-09-20 00:15:00 -0700
@@ -36,6 +35,8 @@ repo_urls:
 I have a hundred and twenty-four blog posts, a hundred and thirty-odd public repositories, a set of live demos, a campus map that indexes them, and seventy-five videos. Somebody asks "where was that thing about running experts from disk?" --- and the honest answer today is that I go and look, because I wrote it.
 
 </div>
+
+<!--more-->
 
 Answering that question well normally costs a large model, a server, and a second or two of somebody else's electricity. **sw-atlas** is a bet that almost all of the work can be done the night before instead, and that what is left over is small enough to run in the visitor's browser without a server anywhere.
 
@@ -103,7 +104,7 @@ The near misses are instructive, because each one is genuinely good at something
 | **[SetFit](https://arxiv.org/abs/2209.11055)** | few-shot contrastive fine-tuning of a [sentence encoder](https://arxiv.org/abs/1908.10084); retrains on CPU in seconds | the cheapest possible semantic tier, and worth one measurement as a floor --- but Needle's contrastive head gives the same thing from a model already needed |
 | **Outlines**, **SGLang** | grammar-constrained decoding; FSMs and CFGs over the logits | these force a *general* model into a schema. A model whose native output is the schema does not need forcing |
 | **LanceDB** | embedded, serverless vector database in Rust | 300 resources at 384 dimensions and INT8 is 115 KiB. A flat cosine scan beats any index structure at that size and needs no dependency |
-| **HippoRAG 2**, **A-Mem** | infer a knowledge graph from text | this corpus does not need inference. 65 posts declare a `repo_url`, 75 a `video_url`, 64 their papers, 123 a series. The relations are hand-written and already correct |
+| **HippoRAG 2**, **A-Mem** | infer a knowledge graph from text | this corpus does not need inference. 73 posts declare a `repo_url`, 77 a `video_url`, 64 their papers, 123 a series. The relations are hand-written and already correct |
 | **LLMRouter** | KNN and SVM routing over an embedding cache | precisely the cheap baseline tier, in a box. Nothing to adopt, but useful confirmation that the cheap tier is the right first tier |
 | **MobileBERT**, **TinyBERT** | 10--30 MB encoders for classification | kept as comparison rows, and as a sanity check that a 26M model earns its weight |
 
@@ -213,3 +214,5 @@ The thing I want is smaller and stranger: a few megabytes published nightly, a m
 That is the shape I am building toward: the matcher as the floor, a trained model in the browser wherever the machine can afford one, and a tiered cache that pulls the deeper shards in as they are needed and evicts them when they are not --- the same residency question the microscope has been asking about weights on a disk, asked again about weights in a browser.
 
 None of it is proven yet. The number to beat is written down, the architecture that should beat it is chosen, and the work is to go and do it.
+
+The rest of this week's sharpening was hardware. A new dev machine joins the lab: an HPE ProLiant DL380 Gen10 Plus running Arch Linux, waiting for ML work with 640 GB of Intel PMem 200 DIMMs --- silicon that can act as volatile RAM expansion behind a DRAM cache, as a very fast SSD, or, in App Direct mode, as byte-addressable memory that survives a power cut: one more rung on the same residency ladder this post keeps climbing. FreeToken, whose shape inspired last week's microscope, gets its first run on an RTX 3090's 24 GB. And much of what the lab built on the Mac in recent months is moving across to Arch, the same projects and the same tests, trading MLX for CUDA. None of that is proven yet either. It is all the same habit: stop, sharpen, cut better.
