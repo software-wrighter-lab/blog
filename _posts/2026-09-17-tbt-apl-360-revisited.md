@@ -4,7 +4,6 @@ title: "TBT #11: APL\\360 Revisited"
 categories: [tbt, programming-history, retrocomputing, languages]
 tags: [apl, apl360, throwback-thursday, iverson, ibm, mainframe, array-languages, rust, sw-apl, cor24, sw-mlpl, notation, interpreters]
 keywords: "APL\\360, APL, Kenneth Iverson, Adin Falkoff, IBM System/360, IBM 2741, Selectric typeball, array language, sw-apl, clean-room interpreter, Rust, workspaces, del editor, six-space prompt, I-beams, APL2, Dyalog, J, K, BQN, NumPy, notation as a tool of thought, COR24 APL, sw-MLPL"
-author: Software Wrighter
 abstract: "APL\\360 was the first APL you could actually type at --- IBM's 1968 implementation of Iverson's notation, used from a typewriter terminal with a special typeball. This is a look at what it did and did not do, why its ideas turned up in half the languages and libraries that followed, and a third APL of my own: sw-apl, a clean-room APL\\360 in Rust that keeps the glyphs, the six-space prompt, the del editor, and the workspaces, and is checked against the printed examples in IBM's own manuals."
 series: "Throwback Thursday"
 series_part: 11
@@ -34,6 +33,7 @@ The first APL post here was [a horse race](/2026/01/29/tbt-apl-horse-race/) --- 
 | Resource | Link |
 |----------|------|
 | **sw-apl** | [sw-vibe-coding/sw-apl](https://github.com/sw-vibe-coding/sw-apl) · [language reference](https://github.com/sw-vibe-coding/sw-apl/blob/main/docs/language.md) · [del editor guide](https://github.com/sw-vibe-coding/sw-apl/blob/main/docs/del-editor-guide.md) · [glyph table](https://github.com/sw-vibe-coding/sw-apl/blob/main/docs/glyphs.txt) · [parity checklist](https://github.com/sw-vibe-coding/sw-apl/blob/main/docs/parity.md) · [samples](https://github.com/sw-vibe-coding/sw-apl/tree/main/samples) |
+| **Live demo** | [sw-apl.softwarewrighter.com](https://sw-apl.softwarewrighter.com/) --- the interpreter as a PWA, in a desktop or phone browser |
 | **The other two APLs** | [sw-cor24-apl](https://github.com/sw-embed/sw-cor24-apl) on the COR24 · [in the browser](https://sw-embed.github.io/web-sw-cor24-apl/) · [sw-MLPL](https://github.com/sw-ml-study/sw-mlpl) |
 | **IBM documents** | [APL\360 User's Manual](https://www.bitsavers.org/pdf/ibm/apl/GH20-0683-1_APL_360_Users_Manual_Mar70.pdf) (GH20-0683-1, 1970) · [APL\360 Primer](https://www.bitsavers.org/pdf/ibm/apl/GH20-0689-2_APL_360_Primer_Aug71.pdf) (GH20-0689-2) · [more at bitsavers](https://www.bitsavers.org/pdf/ibm/apl/) |
 | **Prior post** | [TBT #1: My First Program Was a Horse Race](/2026/01/29/tbt-apl-horse-race/) |
@@ -50,7 +50,7 @@ The first is [sw-cor24-apl](https://github.com/sw-embed/sw-cor24-apl): a tiny in
 
 The second is [sw-MLPL](https://github.com/sw-ml-study/sw-mlpl), which is not an APL at all but a descendant: an APL2-inspired language for machine learning, with nested arrays, records, autograd, and native model helpers, written to be typed on an ordinary keyboard. It takes the whole-array way of thinking and points it at tensors.
 
-The third is sw-apl, and it goes the other direction --- back to the source. What I keep coming back to about APL\360 is that it is *simpler* than every descendant, and loses very little for it. The notation is small enough to hold in your head and powerful enough that most programs are one line. Every later APL added something, and each addition is defensible; but the 1968 language is the one where you can see the whole idea at once.
+The third is sw-apl, and it goes the other direction --- back to the source. What I keep coming back to about APL\360 is that it is *simpler* than every descendant, and loses very little for it. The notation is small enough to hold in your head and powerful enough that most programs are one line. Every later APL added something, and each addition is defensible; but the 1968 language is the one where you can see the whole idea at once. It runs [live in the browser](https://sw-apl.softwarewrighter.com/) --- a PWA that works on a desktop or a phone.
 
 ## What APL\360 was
 
