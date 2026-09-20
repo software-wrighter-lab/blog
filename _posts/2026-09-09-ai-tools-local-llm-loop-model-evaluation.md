@@ -4,7 +4,6 @@ title: "AI Tools #6: Evaluating Local Models in a Plan-Execute-Review Loop"
 categories: [ai-agents, llm, rust, tools]
 tags: [ai-tools, local-llm, local-llm-loop, opencode, llama-cpp, rust, agents, orchestration, rlm, benchmarks, gpu, vram, quantization, mtp, qwen, gpt-oss, gemma, ornith, model-evaluation]
 keywords: "local LLM, local-llm-loop, opencode, llama-server, llama.cpp, plan execute review, orchestrator, planner executor reviewer, Rust harness, agentic coding, tool calling, strict JSON, model evaluation, loop wall-clock, RTX 3060, RTX 5060 Ti, RTX 3090, M1 Max, VRAM, n-cpu-moe, MoE offload, MTP, multi-token prediction, MXFP4, Q4_K_M, MLX, GGUF, Qwen3-Coder, gpt-oss-20b, Gemma-4, Ornith, Qwen3.5, Qwen3.6, Qwen3.8, Devstral, recursive language models"
-author: Software Wrighter
 abstract: "local-llm-loop is a Rust harness that drives opencode against a local model in a plan, execute, review loop: Rust deterministically owns the plan cursor and history while three separate LLM calls do the planning, the coding, and the verification. This is what has been measured so far across a fleet of machines spanning 12 GB to 64 GB --- which models clear the two hardware-independent gates, how long a complete loop takes on each box, and why tool-use reliability moves wall-clock more than raw tokens per second."
 series: "AI Tools"
 series_part: 6

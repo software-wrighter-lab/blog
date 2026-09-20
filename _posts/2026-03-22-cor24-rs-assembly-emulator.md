@@ -5,7 +5,6 @@ date: 2026-03-22 00:15:00 -0800
 categories: [embedded-systems, rust]
 tags: [rust, wasm, assembly, fpga, emulator, education, embedded, vibe-coding]
 keywords: "COR24, assembly language, RISC architecture, FPGA, soft CPU, MakerLisp, Rust, WebAssembly, emulator, embedded systems, educational programming"
-author: Software Wrighter
 video_url: "https://www.youtube.com/watch?v=mi7mP-VVhik"
 video_title: "Browser-Based Assembly: COR24 RISC Emulator in Rust"
 abstract: "A Rust-based browser emulator for the COR24 instruction set architecture. Three tabs---Assembly, C, Rust---all running on the same COR24 CPU in your browser. Includes interactive tutorials, coding challenges, animated tours, self-test mode, realistic UART timing, and a complete ISA reference. No installation required."

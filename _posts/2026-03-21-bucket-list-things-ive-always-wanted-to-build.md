@@ -5,7 +5,6 @@ date: 2026-03-21 00:15:00 -0800
 categories: [personal, projects]
 tags: [bucket-list, retirement, learning, embedded, compilers, emulators, ai, creative-coding, home-automation]
 keywords: "bucket list, retirement projects, lifelong learning, FPGA, microcontrollers, compiler, emulator, fine-tuning, Blender, procedural audio, ternary computer, Rust, embedded, AI coding agents, vibe coding"
-author: Software Wrighter
 abstract: "A lifelong list of technical things I always wanted to learn and build---too busy during my career, too hard before AI. Now retired, I'm working through them for fun, no deadlines. This is the introduction to the list."
 series: "Bucket List"
 series_part: 1

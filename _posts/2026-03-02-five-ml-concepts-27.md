@@ -5,7 +5,6 @@ date: 2026-03-02 00:15:00 -0800
 categories: [llm, machine-learning, explainers]
 tags: [five-ml-concepts, continual-learning, elastic-weight-consolidation, replay-buffers, parameter-routing, memory-augmented-networks, model-editing, ml-concepts]
 keywords: "elastic weight consolidation, EWC, Fisher information, catastrophic forgetting, replay buffers, experience replay, parameter routing, mixture of experts, memory-augmented networks, external memory, model editing, knowledge editing, continual learning, machine learning concepts, 30-second explainers"
-author: Software Wrighter
 abstract: "Five ML concepts in under 30 seconds each: Elastic Weight Consolidation (protecting important parameters during new task learning), Replay Buffers (mixing past examples to prevent forgetting), Parameter Routing (activating task-specific parameter subsets), Memory-Augmented Networks (external memory modules for neural networks), Model Editing (targeted weight updates without full retraining)."
 series: "Five ML Concepts"
 series_part: 27

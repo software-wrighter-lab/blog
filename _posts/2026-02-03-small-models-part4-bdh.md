@@ -5,7 +5,6 @@ date: 2026-02-03 09:00:00 -0800
 categories: [llm, machine-learning, interpretability]
 tags: [bdh, baby-dragon-hatchling, sparse-activations, interpretable-ai]
 keywords: "Baby Dragon Hatchling, BDH, sparse activations, interpretable AI, sparse coding, neural interpretability, small language models"
-author: Software Wrighter
 abstract: "LLMs are black boxes. Baby Dragon Hatchling uses brain-inspired sparse coding with 80% sparsity, making only 20% of neurons active per token. When fewer neurons fire, each one carries interpretable meaning. Train it on Shakespeare and actually see what's happening inside."
 series: "Small Models, Big Brains"
 series_part: 4

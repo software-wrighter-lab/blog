@@ -5,7 +5,6 @@ date: 2026-02-02 00:00:00 -0800
 categories: [llm, machine-learning, research]
 tags: [deepseek, engram, transformers, apple-silicon, cuda, lora]
 keywords: "conditional memory, context extension, sparse attention, long context, memory retrieval"
-author: Software Wrighter
 abstract: "Implementing Deepseek's Engram paper on conditional memory. Instead of recomputing common patterns through O(n^2) attention, Engram provides O(1) lookup for cached results. Our LoRA-based behavioral approximation achieves 58% loss reduction in 10 seconds."
 series: "Deepseek Papers"
 series_part: 2

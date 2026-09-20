@@ -5,7 +5,6 @@ date: 2026-03-22 15:15:00 -0800
 categories: [rust, cli-tools, ai-agents]
 tags: [sharpen-the-saw, rust, cli, icrl, ai-agents, vibe-coding, agentrail, lisp, c-compiler]
 keywords: "agentrail, ICRL, in-context reinforcement learning, dual memory, skills, experiences, XSkill, saga, workflow, Rust CLI, AI agents, inference-time learning, knowledge distillation"
-author: Software Wrighter
 abstract: "agentrail-rs went from walking skeleton to ICRL core loop, dual memory, distillation, and a hybrid orchestrator---all in one weekend. Next up: domain-specific Layer 2 repos, tested against three new projects that require C, Rust, Lisp, and Web UI skills."
 series: "Sharpen the Saw Sundays"
 series_part: 3

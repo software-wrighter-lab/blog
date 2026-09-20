@@ -5,7 +5,6 @@ date: 2026-02-22 00:00:00 -0800
 categories: [machine-learning, llm, research]
 tags: [in-context-learning, icl, transformers, meta-learning, gpt, few-shot-learning]
 keywords: "in-context learning, ICL, transformers, meta-learning, few-shot learning, GPT-3, induction heads, gradient descent"
-author: Software Wrighter
 abstract: "ICL evolved from emergent surprise (2020) to mechanistic understanding (2022) to engineered capability (2026). Transformers implement implicit gradient descent during inference---they learn without weight updates. The frontier: models learning from their own feedback. Not magic. Meta-learning in plain sight."
 video_url: "https://www.youtube.com/shorts/zWKmRxChRlA"
 video_title: "Learning More About In-Context Learning"

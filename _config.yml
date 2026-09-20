@@ -2,7 +2,7 @@
 title: "Software Wrighter Lab Blog"
 email: ""
 description: "AI coding agents, systems programming, and practical machine learning"
-author: Mike Wright
+author: Software Wrighter
 github_username: softwarewrighter
 
 # Where the site is served from.
@@ -56,7 +56,7 @@ defaults:
       type: "posts"
     values:
       layout: "post"
-      author: "Mike Wright"
+      author: "Software Wrighter"
 
 # Exclude from processing
 exclude:

@@ -5,7 +5,6 @@ date: 2026-04-16 16:30:00 -0700
 categories: [tbt, programming-history, retrocomputing]
 tags: [throwback-thursday, basic, star-trek, trs-80, univac-1108, cor24, p-code-vm, pascal, integer-basic, retro-gaming, teletype, vibe-coding]
 keywords: "UNIVAC 1108 Star Trek BASIC, teletype Red Alert bell, TRS-80 magazine listing, text adventure, COR24 BASIC, integer-only BASIC, line-numbered BASIC, p-code virtual machine, Pascal interpreter, Robot Chase, time-sharing BASIC, retro computing, classic BASIC games"
-author: Software Wrighter
 abstract: "Three BASIC games from three eras---UNIVAC 1108 Startrek whose Red Alert bell telegraphed Klingon encounters across the teletype room, a 1980s Trek text adventure typed in from a magazine listing on a TRS-80, and Robot Chase added at a friend's request---all running in the browser on an emulated COR24 integer BASIC implemented on a p-code VM written in Pascal."
 series: "Throwback Thursday"
 series_part: 9

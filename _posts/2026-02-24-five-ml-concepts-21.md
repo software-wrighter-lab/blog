@@ -5,7 +5,6 @@ date: 2026-02-24 00:00:00 -0800
 categories: [llm, machine-learning, explainers]
 tags: [five-ml-concepts, prompt-injection, jailbreaks, gru, planning, prediction, mlops, ml-concepts]
 keywords: "prompt injection, jailbreaks, GRU, gated recurrent unit, planning vs prediction, production rollbacks, MLOps, machine learning concepts, 30-second explainers"
-author: Software Wrighter
 abstract: "Five ML concepts in under 30 seconds each: Prompt Injection (malicious instructions overriding AI behavior), Jailbreaks (bypassing safety constraints), GRU (gated recurrent units for sequences), Planning vs Prediction (action evaluation vs forecasting), Production Rollbacks (reverting to stable model versions)."
 series: "Five ML Concepts"
 series_part: 21

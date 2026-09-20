@@ -5,7 +5,6 @@ date: 2026-03-09 00:15:00 -0800
 categories: [machine-learning, research, explainers]
 tags: [ml-frontier, neural-collapse, deep-learning, representation-learning, transformers, resnets, geometry]
 keywords: "neural collapse, deep learning, representation learning, simplex geometry, simplex ETF, equiangular tight frame, class representations, transformers, ResNets, overparameterization, generalization, continual learning, catastrophic forgetting, weight decay, terminal phase training, feature collapse, NC1, NC2, NC3, NC4"
-author: Software Wrighter
 abstract: "Why do deep networks converge to elegant geometric structures? Neural collapse explains: during late training, class representations form a symmetric simplex structure. Research from 2024-2025 proves this is globally optimal in deep transformers and ResNets."
 series: "Machine Learning Frontier"
 series_part: 1

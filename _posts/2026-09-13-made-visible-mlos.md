@@ -4,7 +4,6 @@ title: "Made Visible #3: MLOS, Where Memory Means Something Else"
 categories: [systems, languages, rust, machine-learning]
 tags: [swtos, mesaos, mlos, sw-mlpl, native3d, visualization, 3d, memory-layout, operating-systems, array-languages, wgpu, json, weights, kv-cache, residency]
 keywords: "MLOS, sw-os-ml, ML operating system, resident model state, weight tiles, KV blocks, residency, tiering, memory layout visualization, sw-MLPL, native3d, columnar contract"
-author: Software Wrighter
 series: "Made Visible"
 series_part: 3
 video_url: "https://youtu.be/vRfXYOaxXbo"

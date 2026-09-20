@@ -5,7 +5,6 @@ date: 2026-05-16 00:15:00 -0700
 categories: [machine-learning, research, self-supervised-learning]
 tags: [jepa, energy-based-models, hopfield-networks, boltzmann-machines, self-supervised-learning, world-models, yann-lecun]
 keywords: "JEPA, Joint Embedding Predictive Architecture, Hopfield network, Boltzmann machine, energy based models, low energy optimization, self supervised learning, I-JEPA, V-JEPA, Yann LeCun"
-author: Software Wrighter
 abstract: "Energy-based learning frames intelligence as making compatible configurations low energy and incompatible ones high energy. Hopfield networks made memory an energy landscape, Boltzmann machines made that landscape stochastic and learnable, and JEPA carries the idea forward into representation-space prediction."
 series: "Machine Learning"
 series_part: 8

@@ -4,7 +4,6 @@ title: "AI Tools #7: A Coding Agent Small Enough to Understand"
 categories: [tools, ai-agents, languages, machine-learning]
 tags: [ai-tools, coding-agent, mlplcode, sw-mlpl, mlpl, opencode, ollama, qwen2.5-coder, devstral, llm-call, agent-loop, permissions, sandbox, dogfooding, array-languages, literate-programming, org-mode, emacs]
 keywords: "coding agent, mlplcode, sw-MLPL, MLPL, OpenCode, agent loop, action protocol, tool dispatch, permissions allow ask deny, sandbox, verify gate, llm_call, Ollama, qwen2.5-coder, Devstral, local LLM, literate programming, org-babel, tangle, dogfooding, capability ledger"
-author: Software Wrighter
 abstract: "Coding agents are usually described from the outside: a product with a terminal UI, a permission system, a dozen tools, and a model behind it all. mlplcode is the inside, kept small: the whole control loop in sw-MLPL, an array language, with Rust only for the mechanisms the language cannot express and a local model for inference. One LLM primitive, six verbs, about 850 lines of MLPL that matter and 220 of Rust --- and a verifier standing between the model's claim of success and the real thing, because a 7B model will say it ran the tests when it did not."
 series: "AI Tools"
 series_part: 7

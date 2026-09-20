@@ -5,7 +5,6 @@ date: 2026-02-24 08:00:00 -0800
 categories: [machine-learning, ai-agents]
 tags: [llm, learning, pretraining, fine-tuning, rag, in-context-learning, continuous-learning]
 keywords: "LLM learning, pretraining, fine-tuning, Retrieval-Augmented Generation, RAG, in-context learning, ICL, Low-Rank Adaptation, LoRA, adapters, AI memory"
-author: Software Wrighter
 abstract: "When people say 'AI learned something,' they usually mean one of four very different things. Understanding these time scales---from milliseconds to years---is essential for building AI systems that improve safely over time."
 series: "How AI Learns"
 series_part: 1

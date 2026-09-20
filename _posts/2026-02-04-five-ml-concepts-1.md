@@ -5,7 +5,6 @@ date: 2026-02-04 00:00:00 -0800
 categories: [llm, machine-learning, explainers]
 tags: [five-ml-concepts, backpropagation, transformer, mamba, hallucination, embedding, ml-concepts]
 keywords: "backpropagation, transformer architecture, Mamba SSM, hallucination, embeddings, machine learning concepts, 30-second explainers"
-author: Software Wrighter
 abstract: "Five ML concepts in under 30 seconds each: Backpropagation (learning by flowing error backward), Transformers (attention over all tokens), Mamba (linear-time sequence modeling), Hallucination (confident nonsense), and Embeddings (meaning as coordinates)."
 series: "Five ML Concepts"
 series_part: 1

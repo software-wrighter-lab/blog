@@ -5,7 +5,6 @@ date: 2026-02-18 00:00:00 -0800
 categories: [llm, machine-learning, explainers]
 tags: [five-ml-concepts, perplexity, catastrophic-forgetting, weight-initialization, curse-of-dimensionality, drift-detection, ml-concepts]
 keywords: "perplexity, catastrophic forgetting, weight initialization, curse of dimensionality, monitoring, drift detection, machine learning concepts, 30-second explainers"
-author: Software Wrighter
 abstract: "Five ML concepts in under 30 seconds each: Perplexity (how surprised by data), Catastrophic Forgetting (new learning erases old), Weight Initialization (starting values matter), Curse of Dimensionality (high-D makes data sparse), Monitoring (track performance and drift)."
 series: "Five ML Concepts"
 series_part: 15

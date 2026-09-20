@@ -5,7 +5,6 @@ date: 2026-03-07 00:15:00 -0800
 categories: [cli-tools, rust]
 tags: [pjmai, rust, cli, project-management, shell, developer-tools, personal-software]
 keywords: "pjmai, project manager, rust cli, shell integration, project switching, navigation history, fuzzy completion, subdirectory navigation, stack management, tab completion"
-author: Software Wrighter
 abstract: "New pjmai-rs features: navigation history to revisit recent projects, smarter fuzzy tab completion, subdirectory navigation, and improved stack management. Building on the TBT post with practical workflow enhancements."
 series: "Personal Software"
 series_part: 7

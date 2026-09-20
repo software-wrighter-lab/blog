@@ -5,7 +5,6 @@ date: 2026-03-29 15:15:00 -0800
 categories: [rust, cli-tools, ai-agents, emacs]
 tags: [sharpen-the-saw, rust, cli, emacs, elisp, multi-agent, pty, orchestration, vibe-coding]
 keywords: "emacs integration, elisp, pjmai-rs, reg-rs, all-together-now, multi-agent orchestration, PTY management, web dashboard, wiki coordination, Rust CLI, AI agents, program manager"
-author: Software Wrighter
 abstract: "Two CLI tools got full Emacs packages this week---pjmai-rs for project navigation and reg-rs for regression testing. Meanwhile, a new multi-agent Program Manager called All Together Now went from zero to four phases: PTY orchestration, web dashboard, and wiki-based agent coordination."
 series: "Sharpen the Saw Sundays"
 series_part: 4

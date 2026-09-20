@@ -5,7 +5,6 @@ date: 2026-02-06 00:00:00 -0800
 categories: [llm, machine-learning, explainers]
 tags: [five-ml-concepts, loss-function, overfitting, fine-tuning, lora, tokenization, ml-concepts]
 keywords: "loss function, overfitting, fine-tuning, LoRA, low-rank adaptation, tokenization, machine learning concepts, 30-second explainers"
-author: Software Wrighter
 abstract: "Five ML concepts in under 30 seconds each: Loss Function (how far off predictions are), Overfitting (memorizing vs learning), Fine-tuning (specializing pre-trained models), LoRA (efficient adaptation with small matrices), Tokenization (breaking text into digestible pieces)."
 series: "Five ML Concepts"
 series_part: 3

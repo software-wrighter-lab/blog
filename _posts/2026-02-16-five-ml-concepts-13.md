@@ -5,7 +5,6 @@ date: 2026-02-16 00:00:00 -0800
 categories: [llm, machine-learning, explainers]
 tags: [five-ml-concepts, calibration, shortcut-learning, early-stopping, universal-approximation, checkpointing, ml-concepts]
 keywords: "calibration, shortcut learning, early stopping, universal approximation theorem, checkpointing, machine learning concepts, 30-second explainers"
-author: Software Wrighter
 abstract: "Five ML concepts in under 30 seconds each: Calibration (predicted probabilities match outcomes), Shortcut Learning (exploiting spurious patterns), Early Stopping (halt when validation plateaus), Universal Approximation (NNs can fit any function), Checkpointing (save model state)."
 series: "Five ML Concepts"
 series_part: 13

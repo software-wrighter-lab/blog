@@ -5,7 +5,6 @@ date: 2026-03-08 10:00:00 -0800
 categories: [rust, tools, ai]
 tags: [rust, pjmai, rig, langchain, ai-agents, llm, sharpen-the-saw, cli, developer-tools]
 keywords: "sharpen the saw, pjmai-rs, rig framework, langchain-rust, rust ai, llm agents, project management, rust 2024 edition, type-safe agents, vector store, RAG"
-author: Software Wrighter
 abstract: "Sharpening the foundation: pjmai-rs gets critical Rust 2024 edition fixes and new features, plus a first look at Rig and langchain-rust---two Rust frameworks for building type-safe LLM agents and chain-based AI workflows."
 series: "Sharpen the Saw Sundays"
 series_part: 1

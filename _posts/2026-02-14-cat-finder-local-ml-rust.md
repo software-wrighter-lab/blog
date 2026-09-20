@@ -5,7 +5,6 @@ date: 2026-02-14 12:00:00 -0800
 categories: [rust, machine-learning, projects, vibe-coding]
 tags: [rust, yolo, onnx, object-detection, computer-vision, cli-tools, vibe-coding, personal-software, claude-code]
 keywords: "cat finder, YOLOv8, ONNX Runtime, Rust, object detection, computer vision, local ML, privacy-first, CLI tool, vibe coding, personal software, Claude Code"
-author: Software Wrighter
 abstract: "Personal Software via Vibe Coding: I needed to find cat photos scattered across my system. Instead of cloud services or app stores, I described what I wanted to Claude Code and got a working Rust CLI tool using YOLOv8 and ONNX Runtime. Privacy-first, locally-run, and mine to modify."
 video_url: "https://www.youtube.com/watch?v=pkhSwI97udw"
 video_title: "Local Cat Detection in Rust"

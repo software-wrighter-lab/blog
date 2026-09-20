@@ -5,7 +5,6 @@ date: 2026-02-10 00:00:00 -0800
 categories: [llm, machine-learning, explainers]
 tags: [five-ml-concepts, cross-validation, gpt, gqa, context-window, self-attention, ml-concepts]
 keywords: "cross-validation, k-fold, GPT, generative pre-trained transformer, GQA, grouped query attention, context window, self-attention, machine learning concepts, 30-second explainers"
-author: Software Wrighter
 abstract: "Five ML concepts in under 30 seconds each: Cross-Validation (rotate held-out data), GPT (predict next token at scale), GQA (shared keys/values for efficiency), Context Window (how much the model sees), Self-Attention (each token attends to all others)."
 series: "Five ML Concepts"
 series_part: 7

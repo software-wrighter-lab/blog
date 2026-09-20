@@ -5,7 +5,6 @@ date: 2026-02-28 00:15:00 -0800
 categories: [homelab, ai, hardware]
 tags: [lucy, ai-cluster, rtx-3090, voice-cloning, text-to-image, text-to-video, local-ai, homelab, voxcpm, flux, wan]
 keywords: "Lucy AI, home AI cluster, RTX 3090, local AI, voice cloning, VoxCPM, FLUX schnell, text-to-image, text-to-video, Wan 2.2, SVD, X99 motherboard, homelab, AI hardware, 24GB VRAM"
-author: Software Wrighter
 abstract: "Expanding my home AI cluster from 10% to 20% brain power with a new X99 motherboard and RTX 3090. Adding VoxCPM voice cloning, FLUX text-to-image, and Wan 2.2 text-to-video capabilities."
 video_url: "https://www.youtube.com/shorts/wJvmBYTge7U"
 video_title: "Home Lab AI Cluster: Lucy Levels Up"

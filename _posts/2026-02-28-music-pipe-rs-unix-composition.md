@@ -5,7 +5,6 @@ date: 2026-02-28 00:15:00 -0800
 categories: [tools, rust, vibe-coding]
 tags: [rust, midi, music, cli, unix-pipes, vibe-coding, personal-software, web-demo, garageband]
 keywords: "music-pipe-rs, MIDI, music, sound, audio, generative music, algorithmic composition, Euclidean rhythm, Bach, Baroque, GarageBand, multi-instrument, web demo, seq command, Unix pipes, DAW"
-author: Software Wrighter
 abstract: "Continuing the music-pipe-rs story: a web demo with Bach and Baroque arrangements, the seq command for explicit note sequences, and GarageBand integration. Plus the generative music resources that inspired this project."
 repo_url: "https://github.com/softwarewrighter/music-pipe-rs"
 demo_url: "https://softwarewrighter.github.io/music-pipe-rs/"

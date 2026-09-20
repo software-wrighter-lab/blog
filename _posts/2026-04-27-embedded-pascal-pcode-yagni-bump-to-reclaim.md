@@ -5,7 +5,6 @@ date: 2026-04-27 09:00:00 -0700
 categories: [embedded, programming-languages, compilers, dogfooding]
 tags: [dogfooding, yagni, pascal, p-code, vm, allocator, bump-allocator, free-list, ocaml, tuplet, mvp, vibe-coding]
 keywords: "dogfooding, YAGNI, Pascal p-code VM, bump allocator, no-op free, free list, reclaim, memory management, OCaml in Pascal, Tuplet language, lexer parser, heap exhaustion, sw-cor24-pascal, COR24, MVP, embedded VM, forcing function, eating your own dog food"
-author: Software Wrighter
 abstract: "First post in a new Dogfooding series. The Pascal p-code VM shipped with a bump allocator and a no-op free --- enough for small demos, intentionally not more. Then OCaml-in-Pascal (used to write the Tuplet lexer/parser) ran out of heap mid-parse, even after re-doubling the heap twice. YAGNI worked right up until I needed it. This post is about that crossing-over moment: what the bump allocator bought, what it cost, and what reclaim looks like when it finally has to ship."
 series: "Dogfooding"
 series_part: 1

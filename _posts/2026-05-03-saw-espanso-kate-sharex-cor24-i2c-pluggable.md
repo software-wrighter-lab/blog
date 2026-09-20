@@ -5,7 +5,6 @@ date: 2026-05-03 09:30:00 -0700
 categories: [tools, productivity, embedded, emulators, languages, language-design]
 tags: [sharpen-the-saw, espanso, kate-editor, sharex, gh-cli, gist, language-design, collaboration, pal, apl, tuplet, syntax-highlighting, ksyntaxhighlighting, cor24, i2c, spi, emulator, pluggable-devices, tmp101, ds3231, eeprom]
 keywords: "Espanso text expander, Kate editor syntax highlighting, KSyntaxHighlighting XML, gh gist create, GitHub CLI gist, language design collaboration, PAL language, APL glyphs, Tuplet glyphs, COR24 emulator, I2C pluggable devices, bit-banged GPIO emulation, TMP101 simulator, DS3231 RTC, EEPROM simulator, SPI emulator, three-layer architecture, language I/O examples, sharing language snippets, cross-platform editor"
-author: Software Wrighter
 abstract: "Three tools that turn out to be the same problem in disguise---Espanso for shared glyph input, Kate for one-XML-file syntax highlighting, and `gh gist create` standing in for ShareX---all earning their slot because they make collaborating on a new in-development language (PAL) cheap. Plus a deeper cut on the COR24 emulator: a three-layer I2C design (guest C apps / bit-banged bus state machine / pluggable device trait) that lets every COR24 language share the same I/O example library, with SPI sketched as a parallel phase 2."
 series: "Sharpen the Saw Sundays"
 series_part: 9

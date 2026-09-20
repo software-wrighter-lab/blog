@@ -5,7 +5,6 @@ date: 2026-02-14 00:00:00 -0800
 categories: [llm, machine-learning, explainers]
 tags: [five-ml-concepts, rnn, chain-of-thought, softmax, moe, distribution-shift, ml-concepts]
 keywords: "RNN, recurrent neural network, LSTM, long short-term memory, GRU, gated recurrent unit, chain of thought, CoT, softmax, MoE, mixture of experts, distribution shift, machine learning concepts, 30-second explainers"
-author: Software Wrighter
 abstract: "Five ML concepts in under 30 seconds each: RNN (sequential processing with memory), Chain of Thought (step-by-step reasoning), Softmax (scores to probabilities), MoE (route inputs to specialists), Distribution Shift (training vs deployment mismatch)."
 series: "Five ML Concepts"
 series_part: 11

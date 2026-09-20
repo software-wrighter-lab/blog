@@ -5,7 +5,6 @@ date: 2026-03-01 00:15:00 -0800
 categories: [llm, machine-learning, explainers]
 tags: [five-ml-concepts, data-augmentation, caching-strategies, constitutional-ai, goodharts-law, manifold-hypothesis, ml-concepts]
 keywords: "data augmentation, training transformations, caching strategies, inference latency, constitutional AI, AI alignment, Goodhart's law, optimization metrics, manifold hypothesis, dimensionality reduction, machine learning concepts, 30-second explainers"
-author: Software Wrighter
 abstract: "Five ML concepts in under 30 seconds each: Data Augmentation (expanding training data with transformations), Caching Strategies (reducing latency by reusing computation), Constitutional AI (training models to follow explicit principles), Goodhart's Law (optimizing metrics distorts objectives), Manifold Hypothesis (data lies on lower-dimensional structures)."
 series: "Five ML Concepts"
 series_part: 26

@@ -5,7 +5,6 @@ date: 2026-03-26 00:15:00 -0800
 categories: [tbt, rust, web]
 tags: [tbt, wiki, rust, wasm, yew, axum, sqlite, git, vibe-coding]
 keywords: "wiki, WikiWikiWeb, Ward Cunningham, TiKi, VQWiki, TiddlyWiki, GitHub Wiki, Rust, WebAssembly, Yew, Axum, SQLite, git storage, wiki history, flat file, browser storage"
-author: Software Wrighter
 abstract: "Six wiki implementations in Rust, tracing thirty years of storage evolution from flat files to git commits. What started as a throwback project became infrastructure for multi-agent AI coordination---with a Compare-and-Swap API that lets multiple AI agents safely share state through wiki pages."
 series: "Throwback Thursday"
 series_part: 8

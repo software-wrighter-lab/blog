@@ -5,7 +5,6 @@ date: 2026-02-28 00:15:00 -0800
 categories: [llm, machine-learning, explainers]
 tags: [five-ml-concepts, label-smoothing, miscalibration, representation-learning, adversarial-examples, double-descent, ml-concepts]
 keywords: "label smoothing, soft labels, miscalibration, confidence calibration, representation learning, feature learning, adversarial examples, adversarial attacks, double descent, interpolation threshold, machine learning concepts, 30-second explainers"
-author: Software Wrighter
 abstract: "Five ML concepts in under 30 seconds each: Label Smoothing (softening targets to reduce overconfidence), Miscalibration (confidence not matching accuracy), Representation Learning (automatically learning useful features), Adversarial Examples (inputs crafted to cause errors), Double Descent (test error decreasing twice with model size)."
 series: "Five ML Concepts"
 series_part: 25

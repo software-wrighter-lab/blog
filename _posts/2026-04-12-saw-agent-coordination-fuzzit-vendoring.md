@@ -5,7 +5,6 @@ date: 2026-04-12 09:30:00 -0700
 categories: [rust, ai-agents, testing, compilers, emacs]
 tags: [sharpen-the-saw, rust, all-together-now, fuzzit, vendoring, plsw, snobol4, cor24, multi-agent, fuzzing, emacs, svg, paperbanana]
 keywords: "agent coordination, multi-agent orchestration, Claude Code, opencode, GLM-5, mailboxes, wiki, fuzz testing, fuzzit, vendoring, PL/SW, SNOBOL4, Fortran compiler, COR24, parallel development, Emacs graphics, SVG, PaperBanana, elisp"
-author: Software Wrighter
 abstract: "All Together Now gained a multi-panel Web UI for coordinating Claude Code and opencode/GLM-5 agents. Fuzzit became an LLM-guided fuzzing tool that stress-tests CLIs and APIs. Vendoring in the COR24 compiler chain lets PL/SW and SNOBOL4 evolve independently. Emacs Graphics brings PaperBanana-styled SVG charts, menus, and presentations to Emacs buffers."
 series: "Sharpen the Saw Sundays"
 series_part: 6

@@ -5,7 +5,6 @@ date: 2026-02-18 14:00:00 -0800
 categories: [llm, machine-learning, research]
 tags: [knowledge-graphs, multi-hop-reasoning, mlx, rsft, distribution-matching, smollm]
 keywords: "RSFT, distribution matching, SmolLM-360M, rejection sampling, continual learning"
-author: Software Wrighter
 abstract: "RSFT on easy examples made performance worse---27% vs 37% SFT baseline. Training distribution must match evaluation distribution. Easy examples teach shortcuts that fail on hard problems. The fix is one flag change."
 series: "Multi-Hop Reasoning"
 series_part: 2

@@ -5,7 +5,6 @@ date: 2026-02-24 17:30:00 -0800
 categories: [machine-learning, research, vibe-coding]
 tags: [reinforcement-learning, exploration, sparse-rewards, scouts, intrinsic-rewards, curiosity]
 keywords: "intrinsic rewards, curiosity-driven exploration, count-based novelty, optimistic initialization, exploration strategies, many-eyes learning, scout diversity, Q-learning, shared Q-table, epsilon decay"
-author: Software Wrighter
 abstract: "Expanding many-eyes learning with intrinsic rewards and a new web visualization. CuriousScout uses count-based novelty, OptimisticScout uses optimistic initialization. The key trade-off: diversity helps during exploration, but once Q-values converge, all scouts should follow the same optimal policy. Strategy quality matters more than diversity in simple environments."
 series: "Machine Learning"
 series_part: 6

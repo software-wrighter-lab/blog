@@ -5,7 +5,6 @@ date: 2026-03-03 00:15:00 -0800
 categories: [llm, machine-learning, explainers]
 tags: [five-ml-concepts, lottery-ticket-hypothesis, sparse-activation, conditional-computation, inference-parallelism, compute-optimality, ml-concepts]
 keywords: "lottery ticket hypothesis, neural network pruning, sparse activation, mixture of experts, conditional computation, dynamic routing, inference parallelism, tensor parallelism, pipeline parallelism, compute optimality, Chinchilla scaling laws, efficient scaling, machine learning concepts, 30-second explainers"
-author: Software Wrighter
 abstract: "Five ML concepts in under 30 seconds each: Lottery Ticket Hypothesis (small winning subnetworks within large models), Sparse Activation (using only part of a model per input), Conditional Computation (dynamically routing inputs for efficiency), Inference Parallelism (distributing inference across devices), Compute Optimality (balancing model size, data, and compute)."
 series: "Five ML Concepts"
 series_part: 28

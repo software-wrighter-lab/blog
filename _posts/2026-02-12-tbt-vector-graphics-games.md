@@ -5,7 +5,6 @@ date: 2026-02-12 16:30:00 -0800
 categories: [tbt, programming-history, vibe-coding]
 tags: [vector-graphics, throwback-thursday, retrocomputing, arcade, rust, wasm, asteroids, tempest, battlezone, vibe-coding, claude-code]
 keywords: "vector graphics, arcade games, Asteroids, Tempest, BattleZone, Lunar Lander, Pong, IBM 2250, CRT, phosphor, Rust, WebAssembly, wgpu"
-author: Software Wrighter
 abstract: "Before pixels, there were vectors. Vibe Coding classic arcade games (Asteroids, BattleZone, Tempest) in Rust/WebAssembly with wgpu rendering---from my first encounter with an IBM 2250 to playable browser demos, all built in one day with Claude Code."
 series: "Throwback Thursday"
 series_part: 3

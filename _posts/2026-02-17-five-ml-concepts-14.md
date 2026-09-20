@@ -5,7 +5,6 @@ date: 2026-02-17 00:00:00 -0800
 categories: [llm, machine-learning, explainers]
 tags: [five-ml-concepts, roc-auc, spurious-correlations, gradient-clipping, loss-landscapes, cold-start, ml-concepts]
 keywords: "ROC, AUC, spurious correlations, gradient clipping, loss landscapes, cold start problem, machine learning concepts, 30-second explainers"
-author: Software Wrighter
 abstract: "Five ML concepts in under 30 seconds each: ROC/AUC (performance across thresholds), Spurious Correlations (coincidental patterns), Gradient Clipping (limit gradients for stability), Loss Landscapes (error surface over parameters), Cold Start (no history for new users)."
 series: "Five ML Concepts"
 series_part: 14

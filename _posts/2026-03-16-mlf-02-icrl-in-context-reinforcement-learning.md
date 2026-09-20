@@ -5,7 +5,6 @@ date: 2026-03-16 00:15:00 -0800
 categories: [machine-learning, research, explainers]
 tags: [ml-frontier, icrl, reinforcement-learning, transformers, decision-transformer, in-context-learning, ai-agents]
 keywords: "in-context reinforcement learning, ICRL, decision transformer, temporal difference learning, OmniRL, reflexion, voyager, RL without training, in-context learning, trajectory examples, reward-based learning, AI agents, prompt-based RL, sequence modeling"
-author: Software Wrighter
 abstract: "Transformers can learn reinforcement learning policies from trajectory examples in the prompt---no weight updates, no gradient descent. ICRL turns agents from amnesiacs into learners by injecting successful execution traces into context."
 series: "Machine Learning Frontier"
 series_part: 2

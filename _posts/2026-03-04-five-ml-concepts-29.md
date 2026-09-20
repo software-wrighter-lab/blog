@@ -5,7 +5,6 @@ date: 2026-03-04 00:15:00 -0800
 categories: [llm, machine-learning, explainers]
 tags: [five-ml-concepts, neural-collapse, grokking, sharpness-aware-minimization, mechanistic-interpretability, self-training-instability, ml-concepts]
 keywords: "neural collapse, class representation geometry, grokking, delayed generalization, SAM, sharpness-aware minimization, flat minima, mechanistic interpretability, neural network circuits, self-training instability, feedback loops, machine learning concepts, 30-second explainers"
-author: Software Wrighter
 abstract: "Five ML concepts in under 30 seconds each: Neural Collapse (late-stage geometric convergence of class representations), Grokking (sudden generalization after prolonged memorization), SAM (optimizing for flat loss regions under perturbations), Mechanistic Interpretability (analyzing internal circuits of neural networks), Self-Training Instability (feedback loops that amplify errors in self-generated data)."
 series: "Five ML Concepts"
 series_part: 29

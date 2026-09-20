@@ -5,7 +5,6 @@ date: 2026-04-23 00:15:00 -0700
 categories: [machine-learning, research, explainers]
 tags: [ml-frontier, grokking, generalization, mechanistic-interpretability, weight-decay, phase-transition, deep-learning]
 keywords: "grokking, delayed generalization, memorization, overfitting, weight decay, regularization, mechanistic interpretability, progress measures, phase transition, lazy training, rich training, algorithmic datasets, modular arithmetic, Power 2022, Nanda 2023, Omnigrok, small networks, LLM pretraining"
-author: Software Wrighter
 abstract: "Train a small network past the point of zero training loss and sometimes --- thousands of steps later --- test accuracy suddenly jumps from random to near perfect. The model didn't just memorize; it discovered the rule. This is grokking, and the research explaining it reframes generalization as a phase transition."
 series: "Machine Learning Frontier"
 series_part: 5

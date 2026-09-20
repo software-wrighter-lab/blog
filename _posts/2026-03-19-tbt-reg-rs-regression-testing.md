@@ -5,7 +5,6 @@ date: 2026-03-19 00:15:00 -0800
 categories: [tbt, cli-tools, rust, testing]
 tags: [tbt, regression-testing, rust, cli, sqlite, testing, developer-tools]
 keywords: "regression testing, reg-rs, regress, jregress, Forte Software, Sun Microsystems, Oracle, Rust CLI, SQLite, golden file testing, snapshot testing, test automation, parallel testing, binary testing, AI test generation"
-author: Software Wrighter
 abstract: "reg-rs is a Rust CLI that captures command output as golden baselines and detects regressions on re-run. A clean-room rewrite of a tool I first used at Forte Software in 2000, later reimplemented as jregress at Sun (still maintained at Oracle), and now open-sourced in Rust with shell aliases, text-based test files, and AI-assisted test creation and maintenance."
 series: "Throwback Thursday"
 series_part: 7

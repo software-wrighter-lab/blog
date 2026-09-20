@@ -5,7 +5,6 @@ date: 2026-02-23 00:00:00 -0800
 categories: [llm, machine-learning, explainers]
 tags: [five-ml-concepts, vae, uncertainty-estimation, interpretability, gradient-noise, human-in-the-loop, ml-concepts]
 keywords: "VAE, variational autoencoders, uncertainty estimation, interpretability, gradient noise, human-in-the-loop, machine learning concepts, 30-second explainers"
-author: Software Wrighter
 abstract: "Five ML concepts in under 30 seconds each: VAEs (generative with structured latents), Uncertainty Estimation (know when you don't know), Interpretability (distributed representations resist explanation), Gradient Noise (mini-batch variation), Human-in-the-Loop (human oversight for critical decisions)."
 series: "Five ML Concepts"
 series_part: 20

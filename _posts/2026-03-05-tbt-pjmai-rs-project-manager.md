@@ -5,7 +5,6 @@ date: 2026-03-05 00:15:00 -0800
 categories: [tbt, cli-tools, rust]
 tags: [tbt, pjmai, rust, cli, project-management, shell, developer-tools]
 keywords: "pjmai, project manager, rust cli, shell integration, project switching, developer tools, exit codes, directory navigation"
-author: Software Wrighter
 abstract: "PJMAI-RS is a Rust CLI tool that maintains a registry of your projects and lets you switch between them instantly with short aliases. The clever part: it uses exit codes to signal a shell wrapper, allowing a subprocess to change your working directory."
 series: "Throwback Thursday"
 series_part: 6

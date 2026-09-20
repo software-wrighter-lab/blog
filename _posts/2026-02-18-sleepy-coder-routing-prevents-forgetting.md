@@ -5,7 +5,6 @@ date: 2026-02-18 12:00:00 -0800
 categories: [llm, machine-learning, research]
 tags: [share-algorithm, continual-learning, rust, lora, sleepy-coder, svd]
 keywords: "Share algorithm, continual learning, catastrophic forgetting, LoRA routing, SVD, coefficient training"
-author: Software Wrighter
 abstract: "Part 2 of implementing the Share algorithm: after fixing critical bugs (zero-gradient saddle point, half-parameter training), routing-based coefficient selection achieves zero regressions. Result handling improved 40% to 50%. We're 60% through verifying the paper's claims."
 series: "Towards Continuous LLM Learning"
 series_part: 2

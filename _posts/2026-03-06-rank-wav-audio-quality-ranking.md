@@ -5,7 +5,6 @@ date: 2026-03-06 00:15:00 -0800
 categories: [cli-tools, rust, audio]
 tags: [rust, cli, audio, fft, signal-processing, wav]
 keywords: "rank-wav, audio ranking, spectral analysis, WAV files, Rust CLI, FFT, acoustic features, sound quality"
-author: Software Wrighter
 abstract: "rank-wav is a Rust CLI that ranks WAV files by acoustic features like spectral centroid, bandwidth, and RMS energy. It computes 'pleasing' and 'best' scores to help you quickly triage audio samples, synthesis outputs, or sound design variants."
 video_url: "https://www.youtube.com/watch?v=F8iP4JLzQ80"
 video_title: "Find Your Best Sound Fast"

@@ -4,7 +4,6 @@ title: "Made Visible #2: MesaOS, the Conventional One"
 categories: [systems, languages, rust]
 tags: [swtos, mesaos, mlos, sw-mlpl, native3d, visualization, 3d, memory-layout, operating-systems, array-languages, wgpu, json, ring-3, elf, paging]
 keywords: "MesaOS, memory layout visualization, physical memory manager, virtual memory manager, HHDM, kernel heap, Ring 3, ELF, limine, sw-MLPL, native3d, columnar contract"
-author: Software Wrighter
 series: "Made Visible"
 series_part: 2
 video_url: "https://youtu.be/JnlhHDtXWGg"

@@ -5,7 +5,6 @@ date: 2026-02-25 00:15:00 -0800
 categories: [llm, machine-learning, explainers]
 tags: [five-ml-concepts, rsft, rejection-sampling, steerability, lstm, data-scaling, system-reliability, ml-concepts]
 keywords: "RSFT, Rejection Sampling Fine-Tuning, model steerability, LSTM, Long Short-Term Memory, data scaling, more data beats better models, system reliability, MLOps, machine learning concepts, 30-second explainers"
-author: Software Wrighter
 abstract: "Five ML concepts in under 30 seconds each: RSFT (rejection sampling fine-tuning with filtered outputs), Model Steerability (adjusting behavior at inference time), LSTM (long short-term memory for sequences), Why More Data Beats Better Models (data scale trumps architecture tweaks), System Reliability vs Model Quality (balancing accuracy with uptime)."
 series: "Five ML Concepts"
 series_part: 22

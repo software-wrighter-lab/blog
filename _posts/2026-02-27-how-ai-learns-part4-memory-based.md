@@ -5,7 +5,6 @@ date: 2026-02-27 00:15:00 -0800
 categories: [machine-learning, ai-agents]
 tags: [llm, rag, cag, engram, vector-database, memory, retrieval]
 keywords: "Retrieval-Augmented Generation, RAG, Cache-Augmented Generation, CAG, Engram, vector database, external memory, model editing"
-author: Software Wrighter
 abstract: "Modern AI systems increasingly rely on external memory. RAG, CAG, and Engram-style modules shift 'learning' away from weights. The brain stays stable. The notebook grows."
 series: "How AI Learns"
 series_part: 4

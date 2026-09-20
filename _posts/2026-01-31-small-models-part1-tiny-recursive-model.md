@@ -5,7 +5,6 @@ date: 2026-01-31 00:00:00 -0800
 categories: [llm, machine-learning, research]
 tags: [trm, tiny-recursive-model, maze-solving, recursive-reasoning]
 keywords: "maze solving, 976 parameters, recursive depth, efficiency, Shakespeare training"
-author: Software Wrighter
 abstract: "The best LLMs score zero on hard mazes. A model with 976 parameters scores 85%. The Tiny Recursive Model uses think-act cycles with deep supervision, proving iteration beats scale for tasks requiring backtracking and spatial reasoning."
 series: "Small Models, Big Brains"
 series_part: 1

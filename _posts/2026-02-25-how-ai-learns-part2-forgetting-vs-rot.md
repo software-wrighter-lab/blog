@@ -5,7 +5,6 @@ date: 2026-02-25 00:15:00 -0800
 categories: [machine-learning, ai-agents]
 tags: [llm, catastrophic-forgetting, context-rot, continuous-learning, attention, memory]
 keywords: "catastrophic forgetting, context rot, attention dilution, LLM failure modes, stability plasticity tradeoff"
-author: Software Wrighter
 abstract: "Two fundamentally different failure modes plague AI systems. Catastrophic forgetting destroys old knowledge when learning new skills. Context rot loses early instructions in long conversations. Different problems, different solutions."
 series: "How AI Learns"
 series_part: 2

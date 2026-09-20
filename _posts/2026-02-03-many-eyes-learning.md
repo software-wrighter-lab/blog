@@ -5,7 +5,6 @@ date: 2026-02-03 09:00:00 -0800
 categories: [llm, machine-learning, research]
 tags: [reinforcement-learning, exploration, sparse-rewards, scouts, dqn]
 keywords: "sparse rewards, multi-agent exploration, scout-based learning, DQN, exploration strategies, information bottleneck"
-author: Software Wrighter
 abstract: "Single explorer: 0% success. Five explorers: 60% success. Sparse rewards are an information problem, not a compute problem. Using multiple scouts with different exploration strategies, we gather diverse discoveries that benefit a shared learner."
 video_url: "https://www.youtube.com/shorts/KgtiBy4rdm4"
 video_title: "Given enough eyeballs..."

@@ -5,7 +5,6 @@ date: 2026-02-26 00:15:00 -0800
 categories: [machine-learning, ai-agents]
 tags: [llm, pretraining, fine-tuning, lora, rlhf, dpo, distillation, alignment]
 keywords: "pretraining, fine-tuning, Low-Rank Adaptation, LoRA, Reinforcement Learning from Human Feedback, RLHF, Direct Preference Optimization, DPO, distillation, alignment, Parameter-Efficient Fine-Tuning, PEFT, Supervised Fine-Tuning, SFT, adapters"
-author: Software Wrighter
 abstract: "Weight-based learning modifies the neural network itself. Pretraining, fine-tuning, LoRA, alignment methods, distillation---each changes the brain permanently. Slow to change, but forms the stable core."
 series: "How AI Learns"
 series_part: 3

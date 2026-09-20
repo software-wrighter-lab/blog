@@ -5,7 +5,6 @@ date: 2026-03-15 10:00:00 -0800
 categories: [rust, tools, developer-workflow]
 tags: [rust, reg-rs, avoid-compaction, agentrail-rs, sharpen-the-saw, cli, developer-tools, ai-agents, regression-testing, workflow]
 keywords: "sharpen the saw, reg-rs, avoid-compaction, agentrail-rs, regression testing, context management, ICRL, in-context reinforcement learning, Rust CLI, agent workflow, saga, git-friendly testing, structured handoffs"
-author: Software Wrighter
 abstract: "Three Rust CLI tools getting foundational upgrades: reg-rs moves to git-friendly text-based test definitions, avoid-compaction structures multi-session AI workflows with saga/step handoffs, and agentrail-rs adds in-context reinforcement learning to push agent reliability from 75% toward deterministic."
 series: "Sharpen the Saw Sundays"
 series_part: 2

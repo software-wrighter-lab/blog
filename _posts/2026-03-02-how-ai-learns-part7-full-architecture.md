@@ -5,7 +5,6 @@ date: 2026-03-02 00:15:00 -0800
 categories: [machine-learning, ai-agents]
 tags: [llm, agent, architecture, continuous-learning, safety, evaluation, deployment]
 keywords: "AI agent architecture, continuous learning, layered architecture, logging, feedback loops, evaluation, safety, deployment, Recursive Language Models, RLM, Low-Rank Adaptation, LoRA, Parameter-Efficient Fine-Tuning, PEFT, Retrieval-Augmented Generation, RAG"
-author: Software Wrighter
 abstract: "A robust architecture: core model (rarely updated) + adapters (modular skills) + external memory (facts) + context manager (RLM-style) + logging and evaluation loop. Errors feed into memory first. Only recurring, validated improvements reach adapters."
 series: "How AI Learns"
 series_part: 7

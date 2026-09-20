@@ -5,7 +5,6 @@ date: 2026-02-05 09:00:00 -0800
 categories: [llm, benchmarks, efficiency]
 tags: [phi-2, gemma, smollm, efficient-llm, benchmarks]
 keywords: "Phi-2, Gemma-2B, SmolLM, efficient frontier, small language models, MMLU benchmark, synthetic training data, efficient LLM"
-author: Software Wrighter
 abstract: "Which small AI fits your laptop? Benchmarking Phi-2, Gemma-2B, and SmolLM on the 2-3B efficient frontier. Phi-2 achieves 61.7% MMLU with only 2.7B parameters, beating models 5x larger through synthetic textbook training. Data quality beats parameters."
 series: "Small Models, Big Brains"
 series_part: 6

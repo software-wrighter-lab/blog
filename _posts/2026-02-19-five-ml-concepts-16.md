@@ -5,7 +5,6 @@ date: 2026-02-19 00:00:00 -0800
 categories: [llm, machine-learning, explainers]
 tags: [five-ml-concepts, train-val-test, overconfidence, batch-normalization, generalization, ab-testing, ml-concepts]
 keywords: "train validation test split, overconfidence, batch normalization, optimization, generalization, A/B testing, machine learning concepts, 30-second explainers"
-author: Software Wrighter
 abstract: "Five ML concepts in under 30 seconds each: Train/Val/Test Split (separate data roles), Overconfidence (high probability wrong predictions), Batch Normalization (stable training), Optimization vs Generalization (low train loss doesn't mean good test), A/B Testing (compare with experiments)."
 series: "Five ML Concepts"
 series_part: 16

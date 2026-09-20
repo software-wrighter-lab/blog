@@ -5,7 +5,6 @@ date: 2026-04-24 00:15:00 -0700
 categories: [rabbit-hole, programming-languages, forth, deep-dive]
 tags: [rabbit-hole, forth, cor24, dictionary, find, lookup-cache, numeric-fast-path, recent-hit-cache, hot-token-cache, instrumentation, optimization, self-hosting]
 keywords: "Forth, FIND, lookup optimization, numeric fast path, recent-hit cache, circular buffer, hot-token cache, top-K cache, instrumentation, source lookup count, execution count, dictionary, COR24, sw-cor24-forth, forth-from-forth"
-author: Software Wrighter
 abstract: "Phase 4 of the COR24 Forth ships without the XMX hash. What replaces it? A layered set of cheap optimizations --- numeric fast path, recent-hit cache, hot-token cache --- that target the interactive hot path without rebuilding the hash subsystem. Plus the instrumentation you need to know which words to actually cache."
 series: "Down the Rabbit-Hole"
 series_part: 3

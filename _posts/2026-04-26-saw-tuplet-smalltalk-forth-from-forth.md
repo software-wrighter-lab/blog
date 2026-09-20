@@ -5,7 +5,6 @@ date: 2026-04-26 09:30:00 -0700
 categories: [languages, compilers, forth, smalltalk, emacs, machine-learning]
 tags: [sharpen-the-saw, tuplet, smalltalk, cor24, basic, forth, forth-from-forth, espanso, gnu-apl, emacs, glyphs, wasm, dogfooding, ocaml, i2c, mlpl, mlx, cuda]
 keywords: "Tuplet language, significant whitespace, glyph input, Espanso, GNU APL, Emacs glyph entry, integer Smalltalk, COR24 BASIC, dogfooding languages, forcing function, Forth-from-Forth, WebAssembly Forth, OCaml features, language playground, I2C COR24 emulator, sw-MLPL, MLX backend, CUDA backend, project compartmentalization, parallel development, demo site status tab, org-mode babel"
-author: Software Wrighter
 abstract: "Tuplet is a new experimental PoC language with significant whitespace and glyphs, set up as a playground for future language experiments---and the reason for installing Espanso and configuring Emacs as a shared glyph-input layer (also useful for GNU APL). An integer/toy Smalltalk written in COR24 BASIC works as a forcing function for BASIC; Tuplet plays the same role for OCaml and Forth. A new Forth-from-Forth runs in the browser via WASM. sw-MLPL splits into Linux/CUDA, Mac/MLX, and Web UI repos after its build dir crossed 35 GB. The COR24 emulator gains I2C support with examples, and the demo site's Status tab tracks the new languages with commits and issues."
 series: "Sharpen the Saw Sundays"
 series_part: 8

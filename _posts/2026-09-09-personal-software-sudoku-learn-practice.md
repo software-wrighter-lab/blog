@@ -4,7 +4,6 @@ title: "Personal Software #10: A Sudoku That Teaches You the Strategies"
 categories: [personal, projects, rust, games]
 tags: [personal-software, sudoku, rust, yew, wasm, pwa, vibe-coding, puzzle-generation, constraint-solving, tdd, agentrail, teaching, offline]
 keywords: "Sudoku, Rust, Yew, WASM, WebAssembly, PWA, progressive web app, offline, puzzle generator, uniqueness, backtracking solver, most constrained cell, SplitMix64, seeded generation, clue digging, point symmetry, difficulty grading, naked single, hidden single, pointing, claiming, naked pair, hidden pair, X-Wing, XY-Wing, swordfish, pencil marks, notes, ad-free, vibe coding, TDD, AgentRail, cargo workspace"
-author: Software Wrighter
 abstract: "I was tired of ad-supported Sudoku apps, and I wanted to learn the more advanced solving strategies. So I vibe coded a browser Sudoku in Rust, Yew, and WASM --- first the game, then the part I actually wanted: a Learn mode that finds every strategy applicable to the live board and walks it step by step with animated highlighting, and a Show me mode that solves the board itself while explaining one technique at a time. A pencil-notes system followed from user feedback. The generator is seeded and fail-closed, and every puzzle it accepts has exactly one solution."
 series: "Personal Software"
 series_part: 10

@@ -4,7 +4,6 @@ title: "Saw #10: sw-MLPL General-Purpose Features, Libraries, Extensions, Graphi
 categories: [languages, machine-learning, projects]
 tags: [sharpen-the-saw, sw-mlpl, mlpl, array-languages, apl, rust, wasm, compilers, extensions, wgpu, http, sqlite, mlx, cuda, linear-algebra, category-theory, abstract-algebra, design-patterns, combinators]
 keywords: "sw-MLPL, MLPL, array language, APL, APL2, BQN, J, Rust, WASM, compile to Rust, language extensions, C ABI, cdylib, wgpu, native3d, HTTP server, HTTP client, SQLite, TodoMVC, mlplunit, include, libraries, linear algebra, abstract algebra, category theory, design patterns, combinators, functional pipelines, file processing, Safetensors, GGUF, MLX, Metal, CUDA, Candle, Engram, autograd"
-author: Software Wrighter
 abstract: "Four months of sw-MLPL work across fifteen repositories: 2,720 commits since June. The core language grew the general-purpose surface an array ML language normally lacks --- strings, records, sandboxed byte and filesystem I/O, JSON/TOML decoding, first-class function references, partial application, guaranteed-teardown error handling, and a compile-to-Rust path. Around it, thirteen companion repositories exercise that surface on mathematics, general programming, and ML tooling, and a native extension repository adds wgpu graphics, an HTTP client and server, and SQLite through a versioned C ABI."
 series: "Sharpen the Saw Sundays"
 series_part: 10
