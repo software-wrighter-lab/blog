@@ -153,6 +153,79 @@ img.abstract-thumb {
   display: none;
 }
 
+/* Client-side pagination over the sorted+filtered card set. `hidden` is the
+   filter's class; `paged` hides cards outside the current page, so a card is
+   on screen only when it passes the filters AND falls inside the page. */
+.abstract-card.paged {
+  display: none;
+}
+
+.abstracts-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1em;
+  margin-bottom: 1.25em;
+  padding: 0.75em 1em;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-secondary);
+}
+
+.abstracts-pagination label {
+  font-size: 0.9em;
+  color: var(--text-secondary);
+}
+
+.abstracts-pagination select {
+  padding: 0.4em 0.8em;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-size: 0.9em;
+}
+
+.page-numbers {
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
+  flex-wrap: wrap;
+}
+
+.page-numbers button {
+  padding: 0.4em 0.8em;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--bg-color);
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 0.9em;
+  min-width: 2.5em;
+}
+
+.page-numbers button:hover:not(:disabled) {
+  border-color: var(--link-color);
+  color: var(--link-color);
+}
+
+.page-numbers button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.page-numbers button.active {
+  background: var(--link-color);
+  border-color: var(--link-color);
+  color: #fff;
+}
+
+.page-info {
+  font-size: 0.85em;
+  color: var(--text-secondary);
+}
+
 .no-results {
   text-align: center;
   color: var(--text-secondary);
@@ -185,6 +258,20 @@ img.abstract-thumb {
   <div style="flex: 1;">
     <input type="text" id="text-filter" class="abstracts-filter" placeholder="Filter by title or content...">
   </div>
+</div>
+
+<div class="abstracts-pagination" id="abstracts-pagination">
+  <div>
+    <label for="per-page-select">Abstracts per page:</label>
+    <select id="per-page-select">
+      <option value="10" selected>10</option>
+      <option value="25">25</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
+    </select>
+  </div>
+  <div class="page-numbers" id="page-numbers"></div>
+  <div class="page-info" id="page-info"></div>
 </div>
 
 <div id="abstracts-container">
@@ -268,6 +355,14 @@ img.abstract-thumb {
   const seriesFilter = document.getElementById('series-filter');
   const textFilter = document.getElementById('text-filter');
   const noResults = document.getElementById('no-results');
+  const perPageSelect = document.getElementById('per-page-select');
+  const pageNumbers = document.getElementById('page-numbers');
+  const pageInfo = document.getElementById('page-info');
+  const paginationBar = document.getElementById('abstracts-pagination');
+
+  let perPage = 10;
+  let currentPage = 1;
+  let visible = [];
 
   function sortCards() {
     const sortBy = sortSelect.value;
@@ -295,35 +390,113 @@ img.abstract-thumb {
     cards.forEach(card => container.appendChild(card));
   }
 
-  function filterCards() {
+  function applyView(resetPage) {
     const seriesValue = seriesFilter.value.toLowerCase();
     const textValue = textFilter.value.toLowerCase().trim();
-    let visibleCount = 0;
 
+    visible = [];
     cards.forEach(card => {
       const matchesSeries = !seriesValue || card.dataset.series.toLowerCase() === seriesValue;
       const matchesText = !textValue || card.dataset.searchable.includes(textValue);
 
       if (matchesSeries && matchesText) {
         card.classList.remove('hidden');
-        visibleCount++;
+        visible.push(card);
       } else {
         card.classList.add('hidden');
       }
     });
 
-    noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+    noResults.style.display = visible.length === 0 ? 'block' : 'none';
+    if (resetPage) currentPage = 1;
+    applyPagination();
+  }
+
+  function applyPagination() {
+    const totalPages = Math.max(1, Math.ceil(visible.length / perPage));
+    if (currentPage > totalPages) currentPage = totalPages;
+
+    const start = (currentPage - 1) * perPage;
+    visible.forEach((card, i) => {
+      card.classList.toggle('paged', i < start || i >= start + perPage);
+    });
+
+    updateControls(totalPages, start);
+  }
+
+  function updateControls(totalPages, start) {
+    const end = Math.min(currentPage * perPage, visible.length);
+    pageInfo.textContent = `Showing ${start + 1}-${end} of ${visible.length}`;
+
+    pageNumbers.innerHTML = '';
+
+    const prevBtn = document.createElement('button');
+    prevBtn.textContent = '< Prev';
+    prevBtn.disabled = currentPage === 1;
+    prevBtn.onclick = () => goTo(currentPage - 1);
+    pageNumbers.appendChild(prevBtn);
+
+    const maxButtons = 7;
+    let startPage = Math.max(1, currentPage - 3);
+    let endPage = Math.min(totalPages, startPage + maxButtons - 1);
+    if (endPage - startPage < maxButtons - 1) {
+      startPage = Math.max(1, endPage - maxButtons + 1);
+    }
+
+    if (startPage > 1) {
+      addPageButton(1);
+      if (startPage > 2) addEllipsis();
+    }
+    for (let i = startPage; i <= endPage; i++) addPageButton(i);
+    if (endPage < totalPages) {
+      if (endPage < totalPages - 1) addEllipsis();
+      addPageButton(totalPages);
+    }
+
+    const nextBtn = document.createElement('button');
+    nextBtn.textContent = 'Next >';
+    nextBtn.disabled = currentPage === totalPages;
+    nextBtn.onclick = () => goTo(currentPage + 1);
+    pageNumbers.appendChild(nextBtn);
+  }
+
+  function addPageButton(page) {
+    const btn = document.createElement('button');
+    btn.textContent = page;
+    if (page === currentPage) btn.classList.add('active');
+    btn.onclick = () => goTo(page);
+    pageNumbers.appendChild(btn);
+  }
+
+  function addEllipsis() {
+    const span = document.createElement('span');
+    span.textContent = ' ... ';
+    span.style.padding = '0 0.25em';
+    pageNumbers.appendChild(span);
+  }
+
+  function goTo(page) {
+    currentPage = page;
+    applyPagination();
+    paginationBar.scrollIntoView({ behavior: 'smooth' });
   }
 
   sortSelect.addEventListener('change', () => {
     sortCards();
-    filterCards();
+    applyView(true);
   });
 
-  seriesFilter.addEventListener('change', filterCards);
-  textFilter.addEventListener('input', filterCards);
+  seriesFilter.addEventListener('change', () => applyView(true));
+  textFilter.addEventListener('input', () => applyView(true));
 
-  // Initial sort
+  perPageSelect.addEventListener('change', () => {
+    perPage = parseInt(perPageSelect.value, 10);
+    currentPage = 1;
+    applyPagination();
+  });
+
+  // Initial sort and view
   sortCards();
+  applyView(true);
 })();
 </script>
