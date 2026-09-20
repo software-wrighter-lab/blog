@@ -5,7 +5,6 @@ date: 2026-03-13 14:00:00 -0800
 categories: [embedded-systems, rust]
 tags: [rust, assembly, msp430, cor24, embedded, compiler, translation]
 keywords: "Rust, COR24, MSP430, assembly, cross-compilation, unsupported target, ISA translation, embedded systems, RISC, no_std, FPGA"
-author: Software Wrighter
 video_url: ""
 video_title: ""
 abstract: "How to compile Rust for a CPU that rustc doesn't support---by targeting one it does. Uses MSP430 as a 16-bit stepping stone to generate code for the 24-bit COR24 RISC architecture, then traces the full pipeline from source to registers."

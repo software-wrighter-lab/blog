@@ -5,7 +5,6 @@ date: 2026-04-24 00:15:00 -0700
 categories: [llm, machine-learning, research]
 tags: [machine-learning, large-language-monkeys, repeated-sampling, inference-scaling, verification, swe-bench, small-models, agents, coverage, scaling-laws]
 keywords: "Large Language Monkeys, repeated sampling, inference scaling, coverage, pass@k, SWE-bench, DeepSeek-Coder, verification, infinite monkey theorem, majority voting, reward models, Groq, Llama 3, binary search, power law, Brown 2024"
-author: Software Wrighter
 abstract: "Brown et al. (2024) show that repeatedly sampling a small model --- and letting an automatic verifier pick the best candidate --- can beat single-shot frontier models at a fraction of the cost. DeepSeek-Coder-V2-Instruct jumps from 15.9% to 56% on SWE-bench Lite with 250 samples. Coverage scales log-linearly across four orders of magnitude. This post walks the paper, reproduces the shape of the result on an 8B vs 70B binary_search demo, and asks what changes when inference itself is the scaling axis."
 series: "Machine Learning"
 series_part: 7

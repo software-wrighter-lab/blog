@@ -5,7 +5,6 @@ date: 2026-03-23 00:15:00 -0800
 categories: [machine-learning, research, explainers]
 tags: [ml-frontier, chain-of-thought, reasoning, prompting, latent-reasoning, ai-agents]
 keywords: "chain of thought, CoT, reasoning, prompting, latent reasoning, adaptive reasoning, faithfulness, step-by-step reasoning, language models, LLMs, AI agents, conditional reasoning, tool use, reinforcement learning"
-author: Software Wrighter
 abstract: "Chain of Thought prompting transformed AI reasoning in 2022. By 2026, the frontier has shifted from making CoT better to asking whether it reflects real reasoning at all---and when step-by-step thinking helps versus hurts."
 series: "Machine Learning Frontier"
 series_part: 4

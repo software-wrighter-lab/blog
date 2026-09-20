@@ -5,7 +5,6 @@ date: 2026-04-27 02:00:00 -0700
 categories: [cli-tools, rust, ai-tools]
 tags: [sw-checklist, personal-software, rust, cli, code-metrics, accidental-complexity, essential-complexity, brooks, mythical-man-month, no-silver-bullet, hickey, simple-made-easy, tech-debt, ratchet, vibe-coding, ai-coding, tdd, linter, forcing-function]
 keywords: "sw-checklist, accidental complexity, essential complexity, Fred Brooks, No Silver Bullet, Mythical Man-Month, Rich Hickey, Simple Made Easy, complect, decomplect, tech debt, ratchet, vibe-coding, AI coding agents, code metrics, function LOC, module coupling, TDD, linter, forcing function, personal software, Rust CLI"
-author: Software Wrighter
 abstract: "sw-checklist is a personal-software Rust CLI I wrote to rein in AI coding agents: function/file/module/crate size limits enforced as warnings and failures. The post threads Brooks (essential vs accidental complexity) and Hickey (simple vs easy, complect vs decomplect) through that tool. The metrics are an accidental cost, but they pay rent --- AI agents that started out reacting to violations eventually anticipate them, and the long-run code stays focused on essential complexity. The metaphor for tech debt is a ratchet: clicks back are sometimes allowed, but the wrench only turns one way."
 series: "AI Tools"
 series_part: 3

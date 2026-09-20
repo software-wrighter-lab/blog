@@ -5,7 +5,6 @@ date: 2026-02-05 12:00:00 -0800
 categories: [tbt, programming-history]
 tags: [pipelines, throwback-thursday, retrocomputing, ibm, mainframe, rust, os390, mvs, cms, vibe-coding]
 keywords: "CMS Pipelines, TSO Pipelines, OS/390, MVS, mainframe, IBM S/390, record-at-a-time, dataflow, Rust, 1996 Olympics, vibe coding"
-author: Software Wrighter
 abstract: "Unix invented pipes. Mainframes reinvented them for records, not bytes. This Throwback Thursday recreates CMS/TSO Pipelines in Rust with a visual debugger, demonstrating record-oriented dataflow from the 1996 Olympics web server era."
 series: "Throwback Thursday"
 series_part: 2

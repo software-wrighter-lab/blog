@@ -5,7 +5,6 @@ date: 2026-01-30 09:00:00 -0800
 categories: [meta, introduction]
 tags: [about, rust, ai-agents, machine-learning, wasm]
 keywords: "blog, YouTube, Discord, GitHub, coding agents, systems programming"
-author: Software Wrighter
 abstract: "Introduction to Software Wrighter Lab: a blog, YouTube channel, and GitHub repos exploring AI coding agents, systems programming in Rust, and practical ML implementations. Written by Mike Wright, a software engineer with 40+ years of experience from mainframes to modern AI."
 pinned: true
 toc: false

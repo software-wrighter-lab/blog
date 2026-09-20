@@ -5,7 +5,6 @@ date: 2026-04-23 00:15:00 -0700
 categories: [ai-agents, cli-tools, rust]
 tags: [ai-tools, agentrail, rust, cli, ai-agents, vibe-coding, dogfooding, workflow, saga, parallel-development]
 keywords: "agentrail, AgentRail, mid-saga, insert, reorder, reopen, audit, snapshot, archive, maintenance mode, AI coding agents, parallel development, saga workflow, dogfooding, git history, recovery, ICRL, Rust CLI, AI Tools"
-author: Software Wrighter
 abstract: "Sagas assume linear plans. Daily use across parallel repos assumes surprises. The April AgentRail features --- insert/reorder/reopen, audit/snapshot, maintenance mode --- are what you only design after you actually live with the tool."
 series: "AI Tools"
 series_part: 2

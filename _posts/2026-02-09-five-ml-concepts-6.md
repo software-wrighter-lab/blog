@@ -5,7 +5,6 @@ date: 2026-02-09 00:00:00 -0800
 categories: [llm, machine-learning, explainers]
 tags: [five-ml-concepts, regularization, bert, rope, prompting, positional-encoding, ml-concepts]
 keywords: "regularization, L2 weight decay, dropout, BERT, bidirectional encoder, RoPE, rotary positional embeddings, prompting, prompt engineering, positional encoding, machine learning concepts, 30-second explainers"
-author: Software Wrighter
 abstract: "Five ML concepts in under 30 seconds each: Regularization (constraints to prevent overfitting), BERT (bidirectional masked language modeling), RoPE (position via rotation in attention), Prompting (craft inputs to steer outputs), Positional Encoding (tell model where tokens are)."
 series: "Five ML Concepts"
 series_part: 6

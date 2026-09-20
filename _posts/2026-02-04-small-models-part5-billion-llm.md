@@ -5,7 +5,6 @@ date: 2026-02-04 09:00:00 -0800
 categories: [llm, benchmarks, efficiency]
 tags: [tinyllama, llama, pythia, stablelm, fine-tuning, speculative-decoding]
 keywords: "TinyLlama, Llama-3.2-1B, StableLM, Pythia, one billion parameters, Low-Rank Adaptation, LoRA, speculative decoding, efficient LLM"
-author: Software Wrighter
 abstract: "One billion parameters: the sweet spot for AI. Big enough to reason, small enough to run anywhere. Comparing TinyLlama, Llama-3.2-1B, StableLM, and Pythia with LoRA fine-tuning in minutes and speculative decoding for 2-3x speedups."
 series: "Small Models, Big Brains"
 series_part: 5

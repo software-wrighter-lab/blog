@@ -5,7 +5,6 @@ date: 2026-03-05 00:15:00 -0800
 categories: [llm, machine-learning, explainers]
 tags: [five-ml-concepts, ml-concepts, series-milestone, machine-learning-education]
 keywords: "machine learning concepts, ML education, 30-second explainers, backpropagation, scaling laws, dropout, distribution shift, RAG, reward hacking, neural networks, deep learning, alignment, deployment, five ML concepts series, frontier ML thinking"
-author: Software Wrighter
 abstract: "Episode 30 marks a milestone: 145 machine learning concepts covered across 30 episodes. From backpropagation to scaling laws, dropout to distribution shift, RAG to reward hacking. This retrospective celebrates the journey and announces what's next: Frontier ML Thinking—one concept, two minutes, deeper implications."
 series: "Five ML Concepts"
 series_part: 30

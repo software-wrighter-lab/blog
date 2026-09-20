@@ -5,7 +5,6 @@ date: 2026-04-26 00:15:00 -0700
 categories: [rabbit-hole, programming-languages, forth, deep-dive]
 tags: [rabbit-hole, forth, cor24, codegen, retargetable-compiler, forward-references, mutual-recursion, linker, assembler, self-hosting, compiler-backend]
 keywords: "Forth, retargetable code generation, forward references, mutual recursion, self-hosted compiler, COR24, WASM, RV32I, System/360, compiler backend, Forth composer, unresolved symbols, fixups, relocation"
-author: Software Wrighter
 abstract: "After dictionary compaction turns one Forth source tree into different vertical profiles, the next rabbit trail goes horizontal: how does the same self-hosted Forth compiler target COR24, WASM, RV32I, or S/360 without forking the language, and how do forward references and mutually recursive words survive that split?"
 series: "Down the Rabbit-Hole"
 series_part: 5

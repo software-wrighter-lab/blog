@@ -4,7 +4,6 @@ title: "Personal Software #11: A Campus for the Public Work"
 categories: [personal, projects, rust, webassembly]
 tags: [campus, discoverability, portfolio, yew, wasm, rust, svg, isometric, visualization, github, information-architecture]
 keywords: "Software Wrighter Research Campus, project discoverability, isometric map, Yew, WASM, Rust, SVG, stable URLs, GitHub organizations, information architecture, public work index"
-author: Software Wrighter
 series: "Personal Software"
 series_part: 11
 repo_url: "https://github.com/software-wrighter-lab/sw-campus"

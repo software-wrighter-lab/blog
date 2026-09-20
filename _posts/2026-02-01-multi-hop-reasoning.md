@@ -5,7 +5,6 @@ date: 2026-02-01 12:00:00 -0800
 categories: [llm, machine-learning, research]
 tags: [knowledge-graphs, multi-hop-reasoning, mlx, apple-silicon, lora, smollm, rejection-sampling]
 keywords: "knowledge graphs, RSFT, fine-tuning, SmolLM-135M, scaffolded training"
-author: Software Wrighter
 abstract: "A 135M parameter model goes from 0% to 75% accuracy in 5 minutes. Using knowledge graph-guided training with rejection sampling, we teach multi-hop reasoning with scaffolding during training, then remove it at inference."
 series: "Multi-Hop Reasoning"
 series_part: 1

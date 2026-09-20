@@ -5,7 +5,6 @@ date: 2026-03-17 00:15:00 -0800
 categories: [embedded-systems, rust]
 tags: [embedded, bmp280, i2c, pressure-sensor, raspberry-pi, no_std, embedded-hal, multiplexer]
 keywords: "BMP280, pressure sensor, I2C, embedded Rust, no_std, embedded-hal, TCA9548A, multiplexer, Raspberry Pi, BMP581, sensor array, calibration, barometric pressure, MIKROE Pressure 21 Click"
-author: Software Wrighter
 abstract: "A no_std Rust driver for the BMP280 pressure sensor, extended to support dozens of sensors via I2C multiplexers for a patent proof-of-concept. The journey from single-sensor to multi-mux arrays, and the eventual upgrade to BMP581."
 series: "Embedded"
 series_part: 1

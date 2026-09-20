@@ -5,7 +5,6 @@ date: 2026-04-29 12:00:00 -0700
 categories: [ai-tools, cli-tools, embedded]
 tags: [vibe-maintenance, vibe-coding, personal-software, ai-coding, ai-agents, cor24, sw-embed, bug-fixes, regression-tests, agentrail, status-dashboard]
 keywords: "vibe-maintenance, vibe-coding, AI coding agents, AI bug fixing, sw-embed, COR24, web-sw-cor24-demos, status dashboard, closed-issues heatmap, commit heatmap, regression tests, AgentRail, capacity-limit bumps, codegen bugs, BASIC, Pascal, PL/SW, p-code, OCaml, SNOBOL4, Forth, tinyc, Personal Software, issue tracker"
-author: Software Wrighter
 abstract: "The corollary to vibe-coding is vibe-maintenance --- AI agents not just writing new code, but fixing bugs in the constellation of demos, compilers, interpreters, and runtimes that the lab has accumulated. Twenty-eight sw-embed repos closed 141 issues in eighteen days. The web-sw-cor24-demos Status tab visualizes that activity as a closed-issues heatmap and a commit heatmap, alongside repo-level Try-it / In-dev badges. The post walks through the four bug-fix patterns the activity reveals (capacity-limit bumps, subtle codegen bugs, surface-level language features rolling in, and cross-cutting tooling bugs), and the human skill the cadence does not eliminate: writing an issue title that names the symptom precisely enough for the agent to act on it."
 series: "Personal Software"
 series_part: 9

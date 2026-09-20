@@ -5,7 +5,6 @@ date: 2026-04-03 00:15:00 -0800
 categories: [personal, projects]
 tags: [bucket-list, cor24, compilers, languages, emulators, tools, vibe-coding, agentrail-rs]
 keywords: "bucket list, COR24, software tools, Lisp, garbage collector, p-code VM, PL/SW, SWS, monitor, debugger, shell, editor, compiler, interpreter, linker, vibe coding, agentrail-rs"
-author: Software Wrighter
 abstract: "Two weeks of vibe-coding with agentrail-rs produced a landing page for the COR24 Software Tools ecosystem---a portfolio of bucket list items that are actually getting done: a Lisp with garbage collection, a p-code VM, two programming languages, a monitor, an editor, and more."
 series: "Bucket List"
 series_part: 2

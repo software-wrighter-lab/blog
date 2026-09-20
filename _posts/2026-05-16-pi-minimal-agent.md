@@ -5,7 +5,6 @@ date: 2026-05-16 00:15:00 -0700
 categories: [llm, agents, tools]
 tags: [pi, coding-agents, minimal-agent, local-llm, ollama, mario-zechner, ai-tools]
 keywords: "Pi agent, Mario Zechner, minimal coding agent, four tools, local LLM agent, Ollama agent, Gemma, pi web search, coding agents"
-author: Software Wrighter
 abstract: "Pi is interesting because it does not try to become an IDE, platform, or operating system. After using it with a local Ollama model and one small package, the useful slant is simpler: a minimal agent loop uses the model's available context efficiently, and the lack of ceremony is the feature."
 series: "AI Tools"
 series_part: 4

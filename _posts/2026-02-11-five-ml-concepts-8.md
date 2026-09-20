@@ -5,7 +5,6 @@ date: 2026-02-11 00:00:00 -0800
 categories: [llm, machine-learning, explainers]
 tags: [five-ml-concepts, bias-variance, diffusion, kv-cache, mixed-precision, mla, ml-concepts]
 keywords: "bias-variance tradeoff, diffusion models, KV cache, key-value cache, mixed precision training, MLA, multi-head latent attention, machine learning concepts, 30-second explainers"
-author: Software Wrighter
 abstract: "Five ML concepts in under 30 seconds each: Bias-Variance Tradeoff (balance under/overfitting), Diffusion (generate by learning to denoise), KV Cache (store past keys/values), Mixed Precision (lower precision for speed), MLA (compress attention into latent space)."
 series: "Five ML Concepts"
 series_part: 8

@@ -5,7 +5,6 @@ date: 2026-02-26 00:15:00 -0800
 categories: [tbt, vibe-coding, rust, webassembly, computer-history]
 tags: [tbt, ibm-1130, emulator, rust, wasm, yew, educational, retro-computing, minicomputer, console, keypunch, printer]
 keywords: "IBM 1130, system emulator, console panel, indicator lights, keypunch, IBM 029, IBM 1442, punch cards, Hollerith, printer, assembly language, Rust, WebAssembly, Yew, educational, retro computing, minicomputer, 1965, 16-bit, TBT, Throwback Thursday"
-author: Software Wrighter
 abstract: "A browser-based IBM 1130 system emulator with authentic console panel indicator lights, keypunch, printer, and assembly game. Experience the full 1965 minicomputer ecosystem through interactive simulations. Work in progress."
 series: "Throwback Thursday"
 series_part: 5

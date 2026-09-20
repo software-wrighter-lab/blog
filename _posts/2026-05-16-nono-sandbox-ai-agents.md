@@ -5,7 +5,6 @@ date: 2026-05-16 00:15:00 -0700
 categories: [security, agents, tools]
 tags: [nono, pi, ollama, gemma, qwen, mistral, sandboxing, landlock, seatbelt, ai-agents, local-llm]
 keywords: "nono sandbox, Pi agent, Ollama, Gemma, Qwen, Mistral, local LLM agents, Landlock, Seatbelt, AI agent security, kernel sandbox"
-author: Software Wrighter
 abstract: "nono is attractive because AI coding agents need real boundaries, but making nono, Pi, Ollama, and local models work together took iteration. The usable shape was not to wrap every layer. It was to sandbox Pi, let Pi call Ollama, and then find models that actually act instead of merely describing what they plan to do."
 series: "AI Tools"
 series_part: 5

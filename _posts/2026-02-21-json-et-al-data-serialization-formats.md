@@ -5,7 +5,6 @@ date: 2026-02-21 14:00:00 -0800
 categories: [data-formats, fundamentals]
 tags: [json, jsonb, jsonl, protobuf, yaml, toml, serialization]
 keywords: "JSON, JSONL, JSONB, NDJSON, Protocol Buffers, Protobuf, ASN.1, YAML, TOML, TOON, MessagePack, CBOR, Avro, Parquet, data serialization, binary formats"
-author: Software Wrighter
 video_url: "https://www.youtube.com/shorts/3ezjk1CnZEU"
 video_title: "JSON or Something Better?"
 abstract: "JSON is everywhere, but it's not the only option. This post explores data formats beyond basic JSON—JSONL for streaming, JSONB for fast queries, Protocol Buffers for compact wire formats, YAML/TOML for human editing, and TOON for LLM efficiency. Each has trade-offs: pick two of readability, compactness, or speed."

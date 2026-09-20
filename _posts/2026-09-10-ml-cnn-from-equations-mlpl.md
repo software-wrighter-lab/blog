@@ -4,7 +4,6 @@ title: "Machine Learning #9: Teaching an Array Language to Say CNN"
 categories: [machine-learning, languages, rust]
 tags: [machine-learning, sw-mlpl, mlpl, cnn, convolution, array-languages, apl, reduction, sliding-window, broadcasting, axis-labels, autograd, conv2d]
 keywords: "CNN, convolutional neural network, convolution, cross-correlation, array language, sw-MLPL, MLPL, APL, windows, sliding window, moving average, stencil, trailing-axis broadcasting, multi-axis reduction, named axis reduction, axis labels, reduce, matmul, im2col, conv2d, autograd, trainable convolution, Zhao 2018"
-author: Software Wrighter
 abstract: "A CNN layer is defined with three nested summations. Saying that in an array language takes four pieces of vocabulary that sw-MLPL did not have: a sliding-window rearrangement, broadcasting a small kernel against a large stack of patches, reduction over several axes at once, and reduction by axis name. This is what each one lets you write --- and a fifth, differentiating through the window, that turns the result from a convolution you can compute into one you can train."
 series: "Machine Learning"
 series_part: 9

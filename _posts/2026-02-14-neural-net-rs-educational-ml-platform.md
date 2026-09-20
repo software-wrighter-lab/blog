@@ -5,7 +5,6 @@ date: 2026-02-14 18:00:00 -0800
 categories: [rust, machine-learning, projects, vibe-coding]
 tags: [rust, neural-networks, backpropagation, wasm, cli-tools, vibe-coding, personal-software, claude-code, education]
 keywords: "neural network, Rust, backpropagation, XOR problem, WebAssembly, WASM, machine learning education, vibe coding, personal software, Claude Code"
-author: Software Wrighter
 abstract: "Personal Software for education: a neural network platform where every step is visible---no framework magic. CLI with progress bars, web UI with real-time loss charts, WASM for browser execution. Built via Vibe Coding to watch XOR training reveal why hidden layers matter."
 repo_url: "https://github.com/sw-ml-study/neural-net-rs"
 video_url: "https://www.youtube.com/watch?v=UNrzf4Wgbv4"

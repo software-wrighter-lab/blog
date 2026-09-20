@@ -5,7 +5,6 @@ date: 2026-04-25 00:15:00 -0700
 categories: [rabbit-hole, programming-languages, forth, deep-dive]
 tags: [rabbit-hole, forth, cor24, dictionary, compaction, image-building, runtime-image, dev-image, composer, self-hosting, profile-driven-optimization]
 keywords: "Forth, dictionary compaction, runtime image, dev image, Forth composer, shadowed words, bootstrap words, pointer rewriting, xt fixup, PROFILE-ON, SAVE-IMAGE, whole-app specialization, forth-from-forth, COR24, sw-cor24-forth, three optimization layers"
-author: Software Wrighter
 abstract: "After optimizing FIND (rabbit-hole 2 and 3), the next move is to eliminate FIND entirely for deployment. This post walks the jump from dev image to runtime image: pruning shadowed redefinitions, dropping the compiler/REPL/instrumentation for production builds, and the pointer-rewriting work that actually makes compaction safe. Frames the whole thing as a Forth composer — one small core plus pluggable feature modules plus target profiles."
 series: "Down the Rabbit-Hole"
 series_part: 4

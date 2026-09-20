@@ -5,7 +5,6 @@ date: 2026-04-30 16:00:00 -0700
 categories: [tbt, programming-history, retrocomputing, compilers]
 tags: [throwback-thursday, mass-compile, pl-edit, plsw, plx, mvs, aq-system, "3270", batch-jobs, time-sharing, ibm-mainframe, retro-computing, cor24]
 keywords: "Mass Compile, PL/EDIT, AQ system, MVS/ESA, time-sharing, PL/X, IBM 3270, green screen terminal, batch compile job, batch queue, write lock, edit lock, template editor, hotkey expansion, COR24, PL/SW, web demo, retro tooling, IBM internal tools, productivity tools, before IDEs, before Emacs"
-author: Software Wrighter
 abstract: "In the 1980s, I worked at IBM on PL/X systems code for an MVS/ESA time-sharing service called AQ --- hundreds of developers editing source on green-screen 3270 terminals, submitting batch compile jobs, sometimes waiting an hour for results. Two colleagues built productivity tools that absolutely changed the workflow: PL/EDIT, a template-driven editor that expanded common PL/X forms via hotkeys long before IDEs or Emacs were common, and Mass Compile, a batch-queue scheduler that let you submit compile jobs for code you had not written yet. Both have just landed in my COR24 PL/SW live demo. This post tells the original story and shows what was rebuilt."
 series: "Throwback Thursday"
 series_part: 10

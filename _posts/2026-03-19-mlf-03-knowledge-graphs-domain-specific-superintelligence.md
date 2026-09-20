@@ -5,7 +5,6 @@ date: 2026-03-19 00:15:00 -0800
 categories: [machine-learning, research, explainers]
 tags: [ml-frontier, knowledge-graphs, reinforcement-learning, neurosymbolic, domain-specific, sft, reward-model]
 keywords: "knowledge graphs, domain-specific superintelligence, DSS, implicit reward model, supervised fine-tuning, reinforcement learning, compositional reasoning, zero-shot scaling, GraphMERT, multi-hop reasoning, Princeton, neurosymbolic AI, structured knowledge"
-author: Software Wrighter
 abstract: "What if scaling AI didn't require bigger models---but better structure? Princeton research proposes Domain-Specific Superintelligence: smaller expert models grounded in Knowledge Graphs, where the graph itself serves as both curriculum and reward model for verifiable multi-hop reasoning."
 series: "Machine Learning Frontier"
 series_part: 3

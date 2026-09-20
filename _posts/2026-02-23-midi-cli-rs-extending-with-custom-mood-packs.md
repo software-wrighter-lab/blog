@@ -5,7 +5,6 @@ date: 2026-02-23 14:00:00 -0800
 categories: [tools, rust, ai-agents, vibe-coding]
 tags: [rust, midi, music, ai-agents, cli, plugins, extensibility, vibe-coding, personal-software]
 keywords: "MIDI, music, sound, audio, music generation, plugins, mood packs, TOML, extensibility, Rust, CLI, custom moods, synthwave, chillout, electronic, generative music"
-author: Software Wrighter
 abstract: "Personal Software grows. midi-cli-rs now supports custom mood packs---TOML files that extend built-in moods with your own musical variations. No Rust required. Define tempo, key, intensity, and let the generators handle the rest."
 video_url: "https://www.youtube.com/watch?v=f13s4K60mV8"
 video_title: "Drop-in Mood Packs: No Code Required"

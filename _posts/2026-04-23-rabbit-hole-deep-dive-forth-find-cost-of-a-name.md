@@ -5,7 +5,6 @@ date: 2026-04-23 00:15:00 -0700
 categories: [rabbit-hole, programming-languages, forth, deep-dive]
 tags: [rabbit-hole, forth, cor24, dictionary, find, hashing, xmx, lookaside-cache, interpret-mode, compile-mode, self-hosting]
 keywords: "Forth, FIND, dictionary lookup, XMX hash, 2-round XMX, lookaside cache, interpret mode, compile mode, COR24, sw-cor24-forth, forth-in-forth, forth-on-forthish, forth-from-forth, dictionary header, colon definition, staged optimization"
-author: Software Wrighter
 abstract: "A rabbit hole on FORTH, following the phase-4 direction set out in the self-hosting spectrum post. Dictionary lookup is the price Forth pays for readability: this post walks through what FIND does, how the all-asm kernel made it fast with a 2-round XMX hash and a 1-entry lookaside cache, and why phase 4 (forth-from-forth) is dropping the whole subsystem now that FIND lives in high-level Forth."
 series: "Down the Rabbit-Hole"
 series_part: 2

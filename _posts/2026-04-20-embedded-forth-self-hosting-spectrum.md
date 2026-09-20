@@ -5,7 +5,6 @@ date: 2026-04-20 18:30:00 -0700
 categories: [embedded, programming-languages, deep-dive]
 tags: [embedded, forth, self-hosting, cor24, assembler, kernel, bootstrapping, vibe-coding, language-building, threaded-code]
 keywords: "Forth self-hosting, Forth kernel, threaded code, COR24, sw-cor24-forth, forth-in-forth, forth-on-forthish, forth-from-forth, NAND primitive, DOCOL, NEXT, EXIT, SP@, bootstrapping, primitive set, minimal kernel, meta-circular"
-author: Software Wrighter
 abstract: "How much of a Forth kernel can be written in Forth instead of assembly? Four points along that spectrum, from a 3000-line all-asm kernel to a Forth-hosted cross-compiler that emits its own .s file. This post walks through phase 1 (all-asm), phase 2 (forth-in-forth, shipped with XMX-hashed FIND and a 1-entry lookaside cache), phase 3 (forth-on-forthish, first two subsets shipping — ,DOCOL plus Forth : and ;), and phase 4 (forth-from-forth, future). Plus the performance work — hashing, cache, adaptive web pump-loop, build-time snapshot."
 series: "Embedded"
 series_part: 3

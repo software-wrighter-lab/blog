@@ -5,7 +5,6 @@ date: 2026-02-28 00:15:00 -0800
 categories: [machine-learning, ai-agents]
 tags: [llm, context, rlm, recursive-language-models, in-context-learning, attention, tool-use]
 keywords: "in-context learning, ICL, RLM, recursive language models, context engineering, attention, tool use, context management"
-author: Software Wrighter
 abstract: "Large context windows are not a complete solution. As context grows, attention dilutes and instructions drift. Recursive Language Models treat context as a dynamic environment, rebuilding focus each step instead of dragging everything forward."
 series: "How AI Learns"
 series_part: 5

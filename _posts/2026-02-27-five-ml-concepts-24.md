@@ -5,7 +5,6 @@ date: 2026-02-27 00:15:00 -0800
 categories: [llm, machine-learning, explainers]
 tags: [five-ml-concepts, warmup, data-leakage, mode-collapse, blue-green-deployment, reward-hacking, ml-concepts]
 keywords: "warmup, learning rate warmup, data leakage, training contamination, mode collapse, generative models, blue/green deployment, MLOps, reward hacking, alignment, machine learning concepts, 30-second explainers"
-author: Software Wrighter
 abstract: "Five ML concepts in under 30 seconds each: Warmup (gradually increasing learning rate at start), Data Leakage (training on unavailable deployment info), Mode Collapse (limited generative output variety), Blue/Green Deployment (switching between parallel production environments), Reward Hacking (exploiting reward function flaws)."
 series: "Five ML Concepts"
 series_part: 24

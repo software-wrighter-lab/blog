@@ -5,7 +5,6 @@ date: 2026-02-26 00:15:00 -0800
 categories: [llm, machine-learning, explainers]
 tags: [five-ml-concepts, emergent-behavior, tool-use, loss-surface, learning-rate, canary-deployment, ml-concepts]
 keywords: "emergent behavior, emergent capabilities, tool use, AI tool calling, loss surface sharpness, flat minima, learning rate schedules, cosine annealing, canary deployment, MLOps, machine learning concepts, 30-second explainers"
-author: Software Wrighter
 abstract: "Five ML concepts in under 30 seconds each: Emergent Behavior (capabilities appearing at scale), Tool Use (AI calling external tools), Loss Surface Sharpness (flatter minima generalize better), Learning Rate Schedules (adjusting learning rate during training), Canary Deployment (gradually rolling out new models safely)."
 series: "Five ML Concepts"
 series_part: 23

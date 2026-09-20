@@ -5,7 +5,6 @@ date: 2026-03-01 00:15:00 -0800
 categories: [machine-learning, ai-agents]
 tags: [llm, continuous-learning, replay, ella, share, adapters, consolidation]
 keywords: "continuous learning, lifelong learning, replay, Efficient Lifelong Learning Algorithm, ELLA, Share, subspace regularization, adapter evolution, consolidation, Recursive Language Models, RLM, Parameter-Efficient Fine-Tuning, PEFT"
-author: Software Wrighter
 abstract: "Continuous learning aims to absorb new information and skills over time without losing old capabilities. The key: learn often in memory, consolidate carefully in weights. Periodic consolidation, not constant updates."
 series: "How AI Learns"
 series_part: 6

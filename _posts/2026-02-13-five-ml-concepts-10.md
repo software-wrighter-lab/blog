@@ -5,7 +5,6 @@ date: 2026-02-13 00:00:00 -0800
 categories: [llm, machine-learning, explainers]
 tags: [five-ml-concepts, cnn, encoder-decoder, rag, few-shot-learning, distillation, ml-concepts]
 keywords: "CNN, convolutional neural network, encoder-decoder, RAG, retrieval-augmented generation, few-shot learning, distillation, machine learning concepts, 30-second explainers"
-author: Software Wrighter
 abstract: "Five ML concepts in under 30 seconds each: CNN (sliding filters for image features), Encoder-Decoder (compress then generate), RAG (retrieve context before generating), Few-shot Learning (learn from prompt examples), Distillation (small student mimics large teacher)."
 series: "Five ML Concepts"
 series_part: 10

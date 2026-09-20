@@ -5,7 +5,6 @@ date: 2026-02-22 00:00:00 -0800
 categories: [llm, machine-learning, explainers]
 tags: [five-ml-concepts, autoencoders, correlation-causation, curriculum-learning, failure-analysis, covariate-shift, ml-concepts]
 keywords: "autoencoders, correlation vs causation, curriculum learning, failure analysis, covariate shift, machine learning concepts, 30-second explainers"
-author: Software Wrighter
 abstract: "Five ML concepts in under 30 seconds each: Autoencoders (compress and reconstruct), Correlation vs Causation (co-occurrence isn't cause), Curriculum Learning (easy to hard), Failure Analysis (categorize errors), Covariate Shift (new inputs, same task)."
 series: "Five ML Concepts"
 series_part: 19

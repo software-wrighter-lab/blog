@@ -5,7 +5,6 @@ date: 2026-03-17 00:15:00 -0800
 categories: [ai-agents, research, tools]
 tags: [ai-tools, xskill, multimodal, continual-learning, memory, tool-use, agents]
 keywords: "XSkill, multimodal agents, continual learning, skill library, experience bank, tool use, memory layer, agent memory, GPT-4o, Gemini, VisualToolBench, MMSearch, zero-shot transfer, AI agents, structured workflow"
-author: Software Wrighter
 abstract: "XSkill gives multimodal agents persistent memory---Skills for structured workflows and Experiences for tactical lessons---improving tool use by 2-6 points across five benchmarks without retraining."
 series: "AI Tools"
 series_part: 1

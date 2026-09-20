@@ -4,7 +4,6 @@ title: "Bucket List #4: Three Operating Systems and an ML Hardware Emulator"
 categories: [personal, projects, operating-systems, hardware]
 tags: [bucket-list, operating-systems, microkernel, swtos, mesaos, mlos, rust, plsw, cor24, fpga, emufpga, serial-parameter-machine, quantization, ring-3, qemu, minix, ml-hardware]
 keywords: "bucket list, operating systems, microkernel, SWTOS, MesaOS, MLOS, sw-os-ml, emufpga, Serial Parameter Machine, SPM, COR24, MakerLisp, PL/SW, MINIX, IPC, message passing, preemptive multitasking, interrupt register, Ring 3, ELF loader, QEMU, arm64, Rust no_std, FPGA, Gowin, Sipeed Tang Nano, low-bit inference, mixture of experts, MoE, streaming weights"
-author: Software Wrighter
 abstract: "Status report on two bucket list items: developing operating systems, and building ML hardware. Three operating systems are in flight --- SWTOS, a preemptive microkernel running on a COR24 FPGA soft CPU and in the browser; a MesaOS fork used for Ring 3 experiments; and MLOS, a Rust kernel that virtualizes model state rather than memory pages. The hardware item is emufpga, a behavioral emulator for a Serial Parameter Machine that streams weights past the compute: 4 KiB resident instead of 269 MB on a 135M model, bit-exact, five clients served off one pass."
 series: "Bucket List"
 series_part: 4

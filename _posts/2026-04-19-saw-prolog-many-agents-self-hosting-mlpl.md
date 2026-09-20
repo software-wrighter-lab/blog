@@ -5,7 +5,6 @@ date: 2026-04-19 09:30:00 -0700
 categories: [rust, ai-agents, compilers, machine-learning]
 tags: [sharpen-the-saw, rust, prolog, all-together-now, mosh, tmux, arch-linux, cor24, assembler, self-hosting, mlpl, multi-agent]
 keywords: "Prolog in Rust, reference implementation, COR24, PL/SW, SNOBOL4, multi-agent orchestration, agent isolation, mosh, tmux, Arch Linux, per-user sandboxing, self-hosting assembler, bootstrapping compiler, sw-MLPL, language building, vibe coding"
-author: Software Wrighter
 abstract: "Rust-to-Prolog solves the classic Lion and Unicorn logic puzzles---a reference implementation that sets up a self-hosting COR24 port: PL/SW for the WAM-style runtime, SNOBOL4 for the lexer and parser. All-Together-Now scales to many concurrent agents with mosh, tmux, and per-user isolation on Arch Linux. The COR24 assembler begins self-hosting. sw-MLPL advances in parallel."
 series: "Sharpen the Saw Sundays"
 series_part: 7

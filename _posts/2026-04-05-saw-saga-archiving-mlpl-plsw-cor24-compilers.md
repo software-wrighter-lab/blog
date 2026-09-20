@@ -5,7 +5,6 @@ date: 2026-04-05 10:30:00 -0700
 categories: [rust, compilers, languages, ai-agents]
 tags: [sharpen-the-saw, rust, agentrail, mlpl, apl, plsw, pascal, basic, c-compiler, cor24, fpga, vibe-coding]
 keywords: "saga archiving, agentrail-rs, MLPL, machine learning language, APL, PL/SW, PL/I, macros, COR24, FPGA soft CPU, C compiler, Pascal compiler, BASIC interpreter, compiler toolchain"
-author: Software Wrighter
 abstract: "Agentrail-rs gained saga archiving for multi-saga projects. Meanwhile, a new ML language (MLPL) took shape, PL/SW got macros, and two compiler-chain fixes unblocked APL and BASIC on COR24."
 series: "Sharpen the Saw Sundays"
 series_part: 5

@@ -5,7 +5,6 @@ date: 2026-02-12 00:30:00 -0800
 categories: [llm, machine-learning, research]
 tags: [lora, fine-tuning, continual-learning, rust, catastrophic-forgetting]
 keywords: "LoRA, fine-tuning, continual learning, catastrophic forgetting, Share algorithm, UWSH, negative result, SVD, Singular Value Decomposition"
-author: Software Wrighter
 series: "Towards Continuous LLM Learning"
 series_part: 1
 video_url: "https://youtu.be/YhAbOvWEkzE"

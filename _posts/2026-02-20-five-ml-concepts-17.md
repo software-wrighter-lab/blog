@@ -5,7 +5,6 @@ date: 2026-02-20 00:00:00 -0800
 categories: [llm, machine-learning, explainers]
 tags: [five-ml-concepts, benchmark-leakage, concept-drift, data-drift, weight-decay, scaling-laws, shadow-deployment, ml-concepts]
 keywords: "benchmark leakage, concept drift, data drift, weight decay, L2 regularization, scaling laws, shadow deployment, machine learning concepts, 30-second explainers"
-author: Software Wrighter
 abstract: "Five ML concepts in under 30 seconds each: Benchmark Leakage (test data contamination), Concept vs Data Drift (changed relationships vs inputs), Weight Decay (L2 penalty for simplicity), Scaling Laws (predictable performance growth), Shadow Deployment (test alongside production)."
 series: "Five ML Concepts"
 series_part: 17

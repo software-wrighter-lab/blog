@@ -5,7 +5,6 @@ date: 2026-02-15 00:00:00 -0800
 categories: [llm, machine-learning, explainers]
 tags: [five-ml-concepts, precision-recall, ood, batch-size, inductive-bias, latency-throughput, ml-concepts]
 keywords: "precision, recall, out-of-distribution, OOD, batch size, inductive bias, latency, throughput, machine learning concepts, 30-second explainers"
-author: Software Wrighter
 abstract: "Five ML concepts in under 30 seconds each: Precision vs Recall (correct positives vs finding all), OOD Inputs (data unlike training), Batch Size (examples per update), Inductive Bias (built-in assumptions), Latency vs Throughput (speed vs capacity)."
 series: "Five ML Concepts"
 series_part: 12

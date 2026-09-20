@@ -4,7 +4,6 @@ title: "Made Visible #1: A Microkernel's Storage, Drawn"
 categories: [systems, languages, rust, embedded]
 tags: [swtos, mesaos, mlos, sw-mlpl, native3d, visualization, 3d, memory-layout, operating-systems, array-languages, wgpu, json, cor24]
 keywords: "memory layout visualization, storage layout, 3D memory map, FlashViz, SWTOS, sw-MLPL, native3d, wgpu, COR24, W25Q32, columnar contract, struct of arrays, parse_json, array programming, picking, block map"
-author: Software Wrighter
 series: "Made Visible"
 series_part: 1
 video_url: "https://www.youtube.com/watch?v=nCi2uGWd7f0"
