@@ -48,6 +48,7 @@ Answering that question well normally costs a large model, a server, and a secon
 | **Jev** | [TypeSafe AI](https://typesafe.ai/) --- the System One framing |
 | **Needle** | [cactus-compute/needle](https://github.com/cactus-compute/needle) --- MIT, weights and trainer open |
 | **Related work** | [moe-microscope](https://github.com/sw-ml-study/moe-microscope) · [the docent results](https://github.com/sw-ml-study/moe-microscope/blob/main/docs/reference/docent-results.md) |
+| **Typed decision lab** | [sw-ml-study/demo-decision-model](https://github.com/sw-ml-study/demo-decision-model) --- Choice, Noul and Scale as sw-MLPL primitives; ELIZA as demo 01 |
 | **The corpus** | [the blog](https://blog.softwarewrighter.com/) · [the campus](https://software-wrighter-lab.github.io/sw-campus/#/) · [sw-campus](https://github.com/software-wrighter-lab/sw-campus) |
 | **Prior posts** | [A Tiny Mixture of Experts Microscope](/2026/09/13/saw-building-a-tiny-mixture-of-experts/) · [A Campus for the Public Work](/2026/09/12/software-wrighter-research-campus/) |
 | **Papers** | [Persistent Memory](https://arxiv.org/abs/1907.01470) · [Simplifying Transformer Blocks](https://arxiv.org/abs/2311.01906) · [Sentence-BERT](https://arxiv.org/abs/1908.10084) · [SetFit](https://arxiv.org/abs/2209.11055) · [Calibration](https://arxiv.org/abs/1706.04599) |
