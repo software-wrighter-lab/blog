@@ -107,6 +107,47 @@ for f in "${posts[@]}"; do
   done
 done
 
+# Dark-mode contrast guard: a CSS rule that hardcodes a background colour must
+# pin a text colour in the same rule. Panels like .resource-box are fixed warm
+# cards in BOTH themes; when the text colour is left to the theme, dark mode
+# renders light text on the light panel and the box goes unreadable. This has
+# shipped more than once, so it is checked here rather than trusted to review.
+# Allowlisted: striped table cells (colour inherited), code blocks (governed by
+# --code-bg overrides), and decorative surfaces with no text of their own.
+css="${_SITE_CSS:-_site/assets/main.css}"
+if [[ ! -f "$css" && -f assets/main.scss ]] && command -v bundle >/dev/null; then
+  tmpcss=$(mktemp -d)
+  bundle exec jekyll build -d "$tmpcss" -q >/dev/null 2>&1 || true
+  css="$tmpcss/assets/main.css"
+fi
+if [[ -f "$css" ]]; then
+  lint_hits=$(python3 - "$css" <<'PY'
+import re, sys
+css = open(sys.argv[1]).read()
+allow = [
+    r'(th|td|tr|thead|tbody)',            # striped table cells: colour inherited
+    r'pre|code|highlight',                # code blocks: governed by --code-bg
+    r'site-nav',                          # nav pins link colours in its own dark rules
+    r'backdrop|post-marker|(^|[^a-z-])img\b|scrollbar',  # decorative, no text
+]
+bad = []
+for sel, body in re.findall(r'([^{}]+)\{([^{}]*)\}', css):
+    if not re.search(r'background(?:-color)?:\s*(?!transparent|none)(#|rgb)', body):
+        continue
+    if re.search(r'(?<![-a-z])color\s*:', body):
+        continue
+    s = ' '.join(sel.split())
+    if any(re.search(a, s, re.I) for a in allow):
+        continue
+    bad.append(s[:60])
+print('; '.join(bad))
+PY
+)
+  if [[ -n "$lint_hits" ]]; then
+    err "css: hardcoded background without pinned text colour in: $lint_hits (light-on-light in dark mode)"
+  fi
+fi
+
 echo
 if [[ $errors -gt 0 ]]; then
   echo "$errors error(s), $warnings warning(s)"
