@@ -4,6 +4,48 @@
 
 @import "minima";
 
+// ============================================
+// Warm-panel palette (shared)
+// ============================================
+// The floating link/aside boxes are fixed warm cards in BOTH themes. A panel
+// that hardcodes its background but inherits its text from the theme goes
+// light-on-light in dark mode --- the .resource-box shipped that way and the
+// bug is invisible until someone opens the site at night. Every panel class
+// therefore includes this mixin, which pins text, links, code and table
+// cells to the panel's own navy. New panel classes must include it too; the
+// CSS guard in scripts/validate fails any hardcoded-background rule that
+// does not set a colour of its own.
+@mixin warm-panel-colours {
+  color: #1e3a5f;
+
+  a {
+    color: #1a5490;
+
+    &:hover {
+      color: #0d3a6e;
+    }
+  }
+
+  strong, b, em, i, code {
+    color: #1e3a5f;
+  }
+
+  code {
+    background-color: rgba(30, 58, 95, 0.09);
+    border-color: transparent;
+  }
+
+  table {
+    th, td {
+      color: #1e3a5f;
+    }
+
+    strong, b {
+      color: #1e3a5f;
+    }
+  }
+}
+
 // Custom Dark Mode Styles
 // Uses CSS custom properties for theme switching
 
@@ -787,6 +829,10 @@ article.post .resource-box,
   line-height: 1.4;
   overflow: visible;
 
+  // Fixed warm panel in both themes: pin text, link and code colours to the
+  // panel (see warm-panel-colours) instead of inheriting theme text.
+  @include warm-panel-colours;
+
   table {
     margin: 0;
     width: 100%;
@@ -1129,38 +1175,24 @@ figure.gutter-img-right {
   border-radius: 6px;
   background-color: #ffe4c4;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  color: #1e3a5f;
+
+  // Same warm panel as .resource-box, so the shared mixin pins text, links,
+  // code and table cells to the panel's navy in both themes.
+  @include warm-panel-colours;
+
   font-size: 1.05em;
   line-height: 1.45;
-
-  a {
-    color: #1a5490;
-
-    &:hover {
-      color: #0d3a6e;
-    }
-  }
-
-  strong, b, em, i, code {
-    color: #1e3a5f;
-  }
-
-  code {
-    background-color: rgba(30, 58, 95, 0.09);
-  }
 
   // The site's tables are theme-aware: in dark mode the header and the
   // even-row stripe get dark backgrounds. Inside this fixed warm panel
   // that would put dark cells under the panel's navy text, so cells are
-  // transparent here, the header takes a light wash of the same navy,
-  // and the rules are drawn in the panel's own colour.
+  // transparent here and the header takes a light wash of the same navy.
   table {
     border-color: rgba(30, 58, 95, 0.3);
 
     th, td {
       background-color: transparent;
       border-color: rgba(30, 58, 95, 0.3);
-      color: #1e3a5f;
     }
 
     th {
@@ -1171,10 +1203,6 @@ figure.gutter-img-right {
     tr,
     tr:nth-child(even) {
       background-color: transparent;
-    }
-
-    strong, b {
-      color: #1e3a5f;
     }
   }
 
