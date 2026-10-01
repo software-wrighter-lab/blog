@@ -19,7 +19,7 @@ _includes/        head, header, footer, toc, search, post-meta, youtube-embed,
                   toggles
 _sass/            custom-dark.scss
 assets/           main.scss, js/, images/
-scripts/          new-post, preview, publish, validate
+scripts/          new-post, placeholder-marker, preview, publish, validate
 docs/             this file (excluded from the build)
 *.html            the index pages: abstracts, series, categories, tags,
                   index-all, search
@@ -60,6 +60,15 @@ that every post has a title, date, and abstract; that the filename date matches
 the front matter date; that a post with a `series` also has a `series_part`
 (without it, `series.html` sorts nil against Integer and the whole build dies);
 and that the time of day will not make a *scheduled* post slip a day.
+
+It also enforces the first-paragraph image rule: every post and draft leads
+with its own `post-marker` image, and no two may share one (a single pair,
+`block-graph.webp`, is grandfathered). On the drafts branch it reads
+`_drafts/` too, so run it before starting a draft as well as before publishing.
+A draft with no lead image is an error; when no unused image is available,
+`scripts/placeholder-marker <slug> <YYYY-MM-DD>` writes a unique card that says
+it is temporary and names the date the real image is due. A placeholder that
+reaches `_posts/` is an error, so `publish` refuses it.
 
 ## Front matter that drives the indexes
 

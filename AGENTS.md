@@ -48,3 +48,9 @@ rN      GRID → TOUR → END
 - `.aside-box` has `clear: both` by house design (never beside another box).
 - `.aside-box` house margins assume a right float (`0.3em 0 1.2em 1.8em`); when KEYS is floated left, set `margin: 0.3em 1.8em 1.2em 0` inline or body text abuts it.
 - The first flowing section after the hero (the overview clearfix div) needs `clear: both` or its text squeezes into the gap between REEL and LINKS.
+
+## First-paragraph image (STAMP) rules
+
+- **Never reuse a first-paragraph image.** Every post and every draft leads with its own `class="post-marker"` image; one that another post or draft already uses is off limits, even as a stand-in. `scripts/validate` errors on a duplicate across `_posts/` and `_drafts/` (one grandfathered pair, `block-graph.webp`).
+- **Run the check before creating a draft and before publishing.** `scripts/validate` covers both: it reads `_drafts/` when present (the drafts branch) and `_posts/` always, and `scripts/publish` runs it again on main.
+- **No unused image means Mike will supply one later.** Do not hunt for an unused block print to stand in. Instead generate a unique placeholder with `scripts/placeholder-marker <slug> <YYYY-MM-DD>`; it writes `assets/images/posts/placeholder-<slug>.webp`, a card that says it is temporary and names the planned post date, and the draft points at that. A placeholder in `_posts/` is a validate error, so it cannot ship by accident.

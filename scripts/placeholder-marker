@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# Make a unique, obviously temporary first-paragraph image for a draft.
+#
+#   scripts/placeholder-marker <slug> <YYYY-MM-DD>
+#
+# Writes assets/images/posts/placeholder-<slug>.webp: a plain card that says
+# TEMPORARY, names the slug, and gives the date the real image is due (the
+# post's planned date). Use it whenever no unused image is available --- never
+# reuse another post's lead image. scripts/validate refuses to publish a post
+# whose lead image is still a placeholder. Needs ImageMagick (magick) and cwebp.
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+
+if [[ $# -ne 2 ]] || ! [[ "$2" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+  echo "usage: scripts/placeholder-marker <slug> <YYYY-MM-DD>" >&2
+  exit 1
+fi
+
+slug="$1"; due="$2"
+out="assets/images/posts/placeholder-${slug}.webp"
+
+font=""
+for f in "/System/Library/Fonts/Supplemental/Arial Bold.ttf" \
+         /usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf \
+         /usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf; do
+  [[ -f "$f" ]] && { font="$f"; break; }
+done
+[[ -n "$font" ]] || { echo "error: no usable TTF font found" >&2; exit 1; }
+
+tmp=$(mktemp -d); trap 'rm -rf "$tmp"' EXIT
+magick -size 574x590 xc:"#f4efe6" -font "$font" -fill "#3a3a3a" -gravity center \
+  -pointsize 62 -annotate +0-170 "TEMPORARY" \
+  -pointsize 34 -annotate +0-95 "first-paragraph image" \
+  -pointsize 26 -annotate +0+10 "$slug" \
+  -pointsize 30 -annotate +0+110 "replace on or before" \
+  -pointsize 46 -annotate +0+175 "$due" \
+  -stroke "#3a3a3a" -strokewidth 6 -fill none -draw "rectangle 12,12 561,577" \
+  "$tmp/marker.png"
+cwebp -quiet -q 80 "$tmp/marker.png" -o "$out"
+echo "wrote $out"
+echo "use:   <img src=\"{{ '/$out' | relative_url }}\" class=\"post-marker no-invert\" alt=\"\" style=\"width: 205px;\">"

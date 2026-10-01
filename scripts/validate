@@ -107,29 +107,53 @@ for f in "${posts[@]}"; do
   done
 done
 
-# First-paragraph image uniqueness: every post leads with its own image. A new
-# post reusing a published post's lead image is an error; the one allowlisted
-# pair predates the rule and stays as-is. Generate a unique placeholder
-# instead --- never point a new post at another post's lead image.
-dup_hits=$(python3 - <<'PY'
+# First-paragraph image uniqueness: every post and every draft leads with its
+# own image. Reusing another post's (or draft's) lead image is an error; the
+# one allowlisted pair predates the rule and stays as-is. A draft with no lead
+# image is an error too --- generate a placeholder with
+# scripts/placeholder-marker rather than borrowing an image --- and a
+# placeholder that reaches _posts/ is an error, so it cannot ship by accident.
+# _drafts/ exists only on the drafts branch; on main this checks posts alone.
+img_hits=$(python3 - <<'PY'
 import re, glob
-first = {}
-for f in sorted(glob.glob('_posts/*.md')):
+first, missing, placeholders = {}, [], []
+files = sorted(glob.glob('_posts/*.md')) + sorted(glob.glob('_drafts/*.md'))
+for f in files:
+    if f.endswith('README.md'):
+        continue
     try:
         body = open(f).read().split('---', 2)[-1]
     except OSError:
         continue
     m = re.search(r"<img[^>]*src=\"\{\{ '?(/assets/[^'\"}]+)'? \|\s*relative_url", body)
-    if m:
-        first.setdefault(m.group(1), []).append(f.split('/')[-1])
+    name = f.split('/', 1)[1] if f.startswith('_posts/') else f
+    if not m:
+        if f.startswith('_drafts/'):
+            missing.append(name)
+        continue
+    img = m.group(1)
+    first.setdefault(img, []).append(name)
+    if f.startswith('_posts/') and '/placeholder-' in img:
+        placeholders.append(f"{name} -> {img}")
 allow = {'/assets/images/posts/block-graph.webp'}   # 2026-02-14 + 2026-03-16, grandfathered
-bad = [f"{img}: {', '.join(ps)}" for img, ps in sorted(first.items())
+dup = [f"{img}: {', '.join(ps)}" for img, ps in sorted(first.items())
        if len(ps) > 1 and img not in allow]
-print('; '.join(bad))
+print('DUP=' + '; '.join(dup))
+print('MISSING=' + '; '.join(missing))
+print('PLACEHOLDER=' + '; '.join(placeholders))
 PY
 )
+dup_hits=$(printf '%s\n' "$img_hits" | sed -n 's/^DUP=//p')
+missing_hits=$(printf '%s\n' "$img_hits" | sed -n 's/^MISSING=//p')
+placeholder_hits=$(printf '%s\n' "$img_hits" | sed -n 's/^PLACEHOLDER=//p')
 if [[ -n "$dup_hits" ]]; then
-  err "images: posts share the same first-paragraph image --- $dup_hits"
+  err "images: posts/drafts share the same first-paragraph image --- $dup_hits"
+fi
+if [[ -n "$missing_hits" ]]; then
+  err "images: draft has no first-paragraph image (run scripts/placeholder-marker <slug> <date>) --- $missing_hits"
+fi
+if [[ -n "$placeholder_hits" ]]; then
+  err "images: placeholder first-paragraph image must be replaced before publishing --- $placeholder_hits"
 fi
 
 # Dark-mode contrast guard: a CSS rule that hardcodes a background colour must

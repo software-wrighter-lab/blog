@@ -93,5 +93,6 @@ Body.
 EOF
 
 echo "created $file"
+echo "lead image: scripts/placeholder-marker '$slug' <YYYY-MM-DD> if no unused image is available (never reuse one)"
 echo "preview with: scripts/preview"
 echo "publish with: scripts/publish $slug"
