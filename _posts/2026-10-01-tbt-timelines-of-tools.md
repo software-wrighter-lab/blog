@@ -237,6 +237,7 @@ In 1985 IDEs were a Macintosh and Smalltalk lab curiosity; the big Java IDEs mad
 <div class="tl-row" data-name="IBM VisualAge for Java" data-spans="1998-2000"></div>
 <div class="tl-row" data-name="Emacs as IDE" data-spans="1998-2003"></div>
 <div class="tl-row" data-name="NetBeans" data-spans="2001-2009"></div>
+<div class="tl-row" data-name="Blender (3D)" data-spans="2002-2026"></div>
 <div class="tl-row" data-name="Eclipse" data-spans="2004-2012"></div>
 <div class="tl-row" data-name="IntelliJ" data-spans="2012-2025"></div>
 <div class="tl-row" data-name="Android Studio" data-spans="2014-2026"></div>
@@ -303,6 +304,8 @@ JES2 batch first: a job is a deck, a step is a program, and a dataset is a contr
 <div class="tl-row" data-name="make" data-spans="1991-2002"></div>
 <div class="tl-row" data-name="ant, maven" data-spans="2001-2012"></div>
 <div class="tl-row" data-name="Gradle, Docker" data-spans="2012-2025"></div>
+<div class="tl-row" data-name="Node.js, Deno" data-spans="2013-2026"></div>
+<div class="tl-row" data-name="webpack, JS bundlers" data-spans="2014-2026"></div>
 <div class="tl-row" data-name="sbt" data-spans="2017-2017"></div>
 <div class="tl-row" data-name="cargo" data-spans="2018-2026"></div>
 <div class="tl-row" data-name="GitHub Actions" data-spans="2020-2026"></div>
@@ -313,9 +316,44 @@ JES2 batch first: a job is a deck, a step is a program, and a dataset is a contr
 
 <div class="clearfix" markdown="1">
 
+## Tech stacks
+
+The tools above rarely arrived one at a time. They came as stacks --- a machine, an operating system, a language, a store, a server, a build --- and each employer or project meant learning the next bundle, from the mainframe stack through LAMP and MEAN to the one I use now, where the build runs in the cloud and an agent does half the typing.
+
+<div class="tl" data-start="1972" data-end="2026">
+<div class="tl-row" data-name="IBM mainframe" data-spans="1981-1999"></div>
+<div class="tl-row" data-name="VM/CMS" data-spans="1982-2000"></div>
+<div class="tl-row" data-name="PC-DOS / OS/2 desktop" data-spans="1982-1996"></div>
+<div class="tl-row" data-name="Early web (CGI)" data-spans="1996-2001"></div>
+<div class="tl-row" data-name="Forte 4GL" data-spans="2000-2005"></div>
+<div class="tl-row" data-name="LAMP" data-spans="2001-2010"></div>
+<div class="tl-row" data-name="Java EE" data-spans="2001-2009"></div>
+<div class="tl-row" data-name="Rails era wiki stack" data-spans="2001-2008"></div>
+<div class="tl-row" data-name="Open ESB / SOA" data-spans="2005-2011"></div>
+<div class="tl-row" data-name="Ext JS" data-spans="2009-2011"></div>
+<div class="tl-row" data-name="Clojure web" data-spans="2010-2014"></div>
+<div class="tl-row" data-name="Cloud VMs" data-spans="2010-2026"></div>
+<div class="tl-row" data-name="Visualization" data-spans="2012-2026"></div>
+<div class="tl-row" data-name="Guidewire platform" data-spans="2012-2018"></div>
+<div class="tl-row" data-name="Build & release" data-spans="2012-2020"></div>
+<div class="tl-row" data-name="MEAN / MERN" data-spans="2013-2018"></div>
+<div class="tl-row" data-name="Node frameworks" data-spans="2013-2018"></div>
+<div class="tl-row" data-name="Android" data-spans="2014-2018"></div>
+<div class="tl-row" data-name="Next.js, Meteor, Firebase" data-spans="2015-2018"></div>
+<div class="tl-row" data-name="Rust + WASM" data-spans="2018-2026"></div>
+<div class="tl-row" data-name="Local ML" data-spans="2023-2026"></div>
+<div class="tl-row" data-name="Static site" data-spans="2024-2026"></div>
+<div class="tl-row" data-name="Embedded" data-spans="2024-2026"></div>
+<div class="tl-row" data-name="Agentic dev" data-spans="2025-2026"></div>
+</div>
+
+</div>
+
+<div class="clearfix" markdown="1">
+
 ## Debugging and testing
 
-Dumps, an oscilloscope, a debugger, a regression report. I have written the same regression tool four times in four languages, and a unit-test framework for each language that arrived without one --- Forte 4GL, Gosu, sw-MLPL --- which says something about what stays constant when everything else on this page changes. Not on a bar of their own, but in use the whole way: fuzzed input, and error injection to test the recovery paths.
+Dumps, an oscilloscope, a debugger, Chrome's DevTools, a regression report. I have written the same regression tool four times in four languages, and a unit-test framework for each language that arrived without one --- Forte 4GL, Gosu, sw-MLPL --- which says something about what stays constant when everything else on this page changes. Not on a bar of their own, but in use the whole way: fuzzed input, and error injection to test the recovery paths.
 
 <div class="tl" data-start="1972" data-end="2026">
 <div class="tl-row" data-name="Oscilloscope, console lights" data-spans="1977-1981"></div>
@@ -326,7 +364,11 @@ Dumps, an oscilloscope, a debugger, a regression report. I have written the same
 <div class="tl-row" data-name="regress (C/C++)" data-spans="2000-2001"></div>
 <div class="tl-row" data-name="ForteUnit (mine)" data-spans="2000-2005"></div>
 <div class="tl-row" data-name="jregress (Java)" data-spans="2001-2009"></div>
+<div class="tl-row" data-name="Chrome DevTools" data-spans="2010-2026"></div>
 <div class="tl-row" data-name="GosuUnit (mine)" data-spans="2012-2018"></div>
+<div class="tl-row" data-name="Jest, Wallaby.js, Cucumber" data-spans="2014-2018"></div>
+<div class="tl-row" data-name="Storybook" data-spans="2016-2018"></div>
+<div class="tl-row" data-name="Playwright" data-spans="2020-2026"></div>
 <div class="tl-row" data-name="rtt1 (Rust)" data-spans="2020-2024"></div>
 <div class="tl-row" data-name="mlplunit (sw-MLPL, mine)" data-spans="2025-2026"></div>
 <div class="tl-row" data-name="reg-rs" data-spans="2025-2026"></div>
