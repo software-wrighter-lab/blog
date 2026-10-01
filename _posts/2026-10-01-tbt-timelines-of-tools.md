@@ -399,6 +399,33 @@ How the writing got done, which is its own list of hand-overs: markup that ran o
 
 <div class="clearfix" markdown="1">
 
+## Data formats
+
+What the data looked like on the way in and out: card images, then fixed and variable EBCDIC records, then the markup lineage from GML through SGML to HTML and XML, then the plain-text formats that config files and APIs settled on. Five of these are still in daily use.
+
+<div class="tl" data-start="1972" data-end="2026">
+<div class="tl-row" data-name="Punched cards, 80 columns" data-spans="1973-1982"></div>
+<div class="tl-row" data-name="EBCDIC records: fixed, variable, VSAM" data-spans="1981-2002"></div>
+<div class="tl-row" data-name="GML, SCRIPT" data-spans="1981-1995"></div>
+<div class="tl-row" data-name="CSV" data-spans="1982-2026"></div>
+<div class="tl-row" data-name="SGML, BookMaster" data-spans="1985-1999"></div>
+<div class="tl-row" data-name="SQL: DB2, Oracle, MySQL, SQLite" data-spans="1985-2026"></div>
+<div class="tl-row" data-name="ASN.1" data-spans="1990-1999"></div>
+<div class="tl-row" data-name="ISIL" data-spans="1990-1999"></div>
+<div class="tl-row" data-name="HTML" data-spans="1995-2026"></div>
+<div class="tl-row" data-name="XML, SOAP, WSDL, XSLT" data-spans="1998-2012"></div>
+<div class="tl-row" data-name="JSON" data-spans="2006-2026"></div>
+<div class="tl-row" data-name="YAML" data-spans="2010-2020"></div>
+<div class="tl-row" data-name="SVG" data-spans="2012-2026"></div>
+<div class="tl-row" data-name="TOML" data-spans="2018-2026"></div>
+<div class="tl-row" data-name="JSONL" data-spans="2020-2026"></div>
+<div class="tl-row" data-name="safetensors, GGUF, MLPB" data-spans="2025-2026"></div>
+</div>
+
+</div>
+
+<div class="clearfix" markdown="1">
+
 ## Working with other people
 
 Memos, then office mail, then the wiki, then the video call in three generations, then the closed chat rooms --- and, this month, IRC, because that is where the people who write operating systems still are.
