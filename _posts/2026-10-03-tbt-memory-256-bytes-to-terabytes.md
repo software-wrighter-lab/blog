@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Rabbit-hole #7: 256 Bytes to 640 Gigabytes --- Fifty Years of Memory, in Constant Dollars"
-categories: [rabbit-hole, programming-history, retrocomputing, hardware, embedded]
-tags: [rabbit-hole, memory, ram, dram, core-memory, cosmac-elf, elf-ii, rca-1802, trs-80, ibm-5100, ibm-1130, ibm-1800, ibm-pc, ems, xms, ibm-308x, ibm-3090, rs-6000, pmem, optane, raspberry-pi, esp32, arduino, cor24, inflation, charts]
+title: "256 Bytes to 640 Gigabytes: Fifty Years of Memory, in Constant Dollars"
+categories: [hardware, programming-history, retrocomputing, embedded]
+tags: [memory, ram, dram, core-memory, cosmac-elf, elf-ii, rca-1802, trs-80, ibm-5100, ibm-1130, ibm-1800, ibm-pc, ems, xms, ibm-308x, ibm-3090, rs-6000, pmem, optane, raspberry-pi, esp32, arduino, cor24, inflation, charts]
 keywords: "memory size history, RAM price history, dollars per megabyte, McCallum memory prices, constant dollars, CPI, Netronics ELF II 256 bytes, 4K static RAM board price, TRS-80 Expansion Interface 48K, IBM 5100 64K, IBM 1130 core memory words, IBM 1800, IBM PC 640K, EMS expanded memory, IBM 308X 4MB, IBM 3090 Model 200, RS/6000 1GB, Optane PMem 200, Arduino SRAM, ESP32 PSRAM, Raspberry Pi RAM, Luckfox Pico, LicheeRV Nano, Milk-V Duo, Atomic Pi, COR24-TB"
 abstract: "The first computer I built from a kit had 256 bytes of memory. The biggest machine on my bench today has 640 gigabytes. In between: core memory counted in words, a 4K static RAM card that cost nearly as much as the computer, the 640K wall and the memory that went around it, mainframes measured in megabytes, and a 1996 workstation with a gigabyte. Three charts --- how much, what it cost, how fast --- with the cost restated in 1977, 1985, 1995 and 2016 dollars; the past year, when memory prices went up fivefold for the first time in the series; a second table for the embedded boards, where memory still comes in four distinct sizes; and a question: should we be efficient with memory again?"
-series: "Down the Rabbit-Hole"
-series_part: 7
+series: "General Technology"
+series_part: 4
 date: 2026-10-03 00:15:00 -0700
 ---
 
@@ -28,7 +28,7 @@ The first computer I built from a kit had 256 bytes of memory. Not kilobytes: by
 | **The last year** | [DDR5 up fivefold in a year](https://xenospectrum.com/en/ddr5-prices-5x-ai-hbm-memory-shortage-2026/) · [server modules fivefold in ten months](https://finance.biggo.com/news/05b5c7a3-e572-46db-bb87-487510fd762c) · [a 32 GB kit at $429](https://tech-insider.org/ddr5-ram-prices-2026-pc-builders/) · [why: HBM for AI](https://www.worldstream.com/en/ddr5-price-surge-server-infrastructure-budget-2026/) |
 | **Inflation** | [BLS CPI-U annual averages](https://www.minneapolisfed.org/about-us/monetary-policy/inflation-calculator/consumer-price-index-1913-) via the Minneapolis Fed |
 | **The machines** | [ELF II](https://en.wikipedia.org/wiki/ELF_II) · [TRS-80 Model I](https://www.trs-80.com/sub-models-model1.htm) · [IBM 5100](https://en.wikipedia.org/wiki/IBM_5100) · [IBM 1130 System Summary](https://www.bitsavers.org/pdf/ibm/1130/GA26-5917-9_1130_System_Summary_Dec71.pdf) · [IBM 1800](https://ethw.org/IBM_1800) · [IBM PC](https://en.wikipedia.org/wiki/IBM_Personal_Computer) · [Expanded memory](https://en.wikipedia.org/wiki/Expanded_memory) · [IBM 3090](https://en.wikipedia.org/wiki/IBM_3090) · [RS/6000 SP](https://en.wikipedia.org/wiki/IBM_RS/6000_SP) |
-| **Earlier posts** | [Rabbit-hole #6: The Sage Bird](/2026/09/21/rabbit-hole-sage-y-combinator/) · [TBT #13: timelines of the tools](/2026/10/01/tbt-timelines-of-tools/) · [IBM 1130 emulator](/2026/02/26/ibm-1130-system-emulator/) · [TBT #8: BASIC on the TRS-80](/2026/04/16/tbt-cor24-basic-startrek-trs80-robot-chase/) |
+| **Earlier posts** | [TBT #13: timelines of the tools](/2026/10/01/tbt-timelines-of-tools/) · [IBM 1130 emulator](/2026/02/26/ibm-1130-system-emulator/) · [TBT #8: BASIC on the TRS-80](/2026/04/16/tbt-cor24-basic-startrek-trs80-robot-chase/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
 </div>
