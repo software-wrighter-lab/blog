@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "TBT #14: 256 Bytes to Eight Terabytes --- Fifty Years of Memory, in Constant Dollars"
+title: "TBT #14: 256 Bytes to 640 Gigabytes --- Fifty Years of Memory, in Constant Dollars"
 categories: [tbt, programming-history, retrocomputing, hardware, embedded]
 tags: [throwback-thursday, memory, ram, dram, core-memory, cosmac-elf, elf-ii, rca-1802, trs-80, ibm-5100, ibm-1130, ibm-1800, ibm-pc, ems, xms, ibm-308x, ibm-3090, rs-6000, pmem, optane, raspberry-pi, esp32, arduino, cor24, inflation, charts]
-keywords: "memory size history, RAM price history, dollars per megabyte, McCallum memory prices, constant dollars, CPI, Netronics ELF II 256 bytes, 4K static RAM board price, TRS-80 Expansion Interface 48K, IBM 5100 64K, IBM 1130 core memory words, IBM 1800, IBM PC 640K, EMS expanded memory, IBM 308X 4MB, IBM 3090 Model 200, RS/6000 1GB, Optane PMem 200, 8 TB, Arduino SRAM, ESP32 PSRAM, Raspberry Pi RAM, Luckfox Pico, LicheeRV Nano, Milk-V Duo, Atomic Pi, COR24-TB"
-abstract: "The first computer I built from a kit had 256 bytes of memory. The biggest machine on my bench today takes eight terabytes. In between: core memory counted in words, a 4K static RAM card that cost nearly as much as the computer, the 640K wall and the memory that went around it, mainframes measured in megabytes, and a 1996 workstation with a gigabyte. Three charts --- how much, what it cost, how fast --- with the cost restated in 1977, 1985, 1995 and 2016 dollars; the past year, when memory prices went up fivefold for the first time in the series; a second table for the embedded boards, where memory still comes in four distinct sizes; and a question: should we be efficient with memory again?"
+keywords: "memory size history, RAM price history, dollars per megabyte, McCallum memory prices, constant dollars, CPI, Netronics ELF II 256 bytes, 4K static RAM board price, TRS-80 Expansion Interface 48K, IBM 5100 64K, IBM 1130 core memory words, IBM 1800, IBM PC 640K, EMS expanded memory, IBM 308X 4MB, IBM 3090 Model 200, RS/6000 1GB, Optane PMem 200, Arduino SRAM, ESP32 PSRAM, Raspberry Pi RAM, Luckfox Pico, LicheeRV Nano, Milk-V Duo, Atomic Pi, COR24-TB"
+abstract: "The first computer I built from a kit had 256 bytes of memory. The biggest machine on my bench today has 640 gigabytes. In between: core memory counted in words, a 4K static RAM card that cost nearly as much as the computer, the 640K wall and the memory that went around it, mainframes measured in megabytes, and a 1996 workstation with a gigabyte. Three charts --- how much, what it cost, how fast --- with the cost restated in 1977, 1985, 1995 and 2016 dollars; the past year, when memory prices went up fivefold for the first time in the series; a second table for the embedded boards, where memory still comes in four distinct sizes; and a question: should we be efficient with memory again?"
 series: "Throwback Thursday"
 series_part: 14
 date: 2026-10-03 00:15:00 -0700
@@ -14,7 +14,7 @@ date: 2026-10-03 00:15:00 -0700
 
 <div style="overflow: hidden;" markdown="1">
 
-The first computer I built from a kit had 256 bytes of memory. Not kilobytes: bytes. It was a Netronics COSMAC ELF II, an RCA 1802 on a board with a hex keypad, and the first thing I bought for it was more memory. The biggest machine on my bench today, a refurbished rack server with persistent memory modules, takes eight terabytes. This post is the road between those two numbers --- what the machines I used had, what a megabyte cost along the way in the money of the day and in constant dollars, and how long an access took --- and then a separate look at the embedded boards, where memory still comes in four distinct sizes.
+The first computer I built from a kit had 256 bytes of memory. Not kilobytes: bytes. It was a Netronics COSMAC ELF II, an RCA 1802 on a board with a hex keypad, and the first thing I bought for it was more memory. The biggest machine on my bench today, a refurbished rack server, has 640 gigabytes. This post is the road between those two numbers --- what the machines I used had, what a megabyte cost along the way in the money of the day and in constant dollars, and how long an access took --- and then a separate look at the embedded boards, where memory still comes in four distinct sizes.
 
 </div>
 
@@ -27,7 +27,7 @@ The first computer I built from a kit had 256 bytes of memory. Not kilobytes: by
 | **Price data** | [John C. McCallum's memory price series](https://jcmit.net/memoryprice.htm), as mirrored and extended by the [memory-index project](https://github.com/fromknowware/memory-index/blob/main/research/ram-prices.md) and [AI Impacts](https://aiimpacts.org/trends-in-dram-price-per-gigabyte/) |
 | **The last year** | [DDR5 up fivefold in a year](https://xenospectrum.com/en/ddr5-prices-5x-ai-hbm-memory-shortage-2026/) · [server modules fivefold in ten months](https://finance.biggo.com/news/05b5c7a3-e572-46db-bb87-487510fd762c) · [a 32 GB kit at $429](https://tech-insider.org/ddr5-ram-prices-2026-pc-builders/) · [why: HBM for AI](https://www.worldstream.com/en/ddr5-price-surge-server-infrastructure-budget-2026/) |
 | **Inflation** | [BLS CPI-U annual averages](https://www.minneapolisfed.org/about-us/monetary-policy/inflation-calculator/consumer-price-index-1913-) via the Minneapolis Fed |
-| **The machines** | [ELF II](https://en.wikipedia.org/wiki/ELF_II) · [TRS-80 Model I](https://www.trs-80.com/sub-models-model1.htm) · [IBM 5100](https://en.wikipedia.org/wiki/IBM_5100) · [IBM 1130 System Summary](https://www.bitsavers.org/pdf/ibm/1130/GA26-5917-9_1130_System_Summary_Dec71.pdf) · [IBM 1800](https://ethw.org/IBM_1800) · [IBM PC](https://en.wikipedia.org/wiki/IBM_Personal_Computer) · [Expanded memory](https://en.wikipedia.org/wiki/Expanded_memory) · [IBM 3090](https://en.wikipedia.org/wiki/IBM_3090) · [RS/6000 SP](https://en.wikipedia.org/wiki/IBM_RS/6000_SP) · [DL380 Gen10 Plus QuickSpecs](https://www.fbcinc.com/source/virtualhall_images/NLIT_June_21/Holmans/DL380_Gen_10_(1).pdf) |
+| **The machines** | [ELF II](https://en.wikipedia.org/wiki/ELF_II) · [TRS-80 Model I](https://www.trs-80.com/sub-models-model1.htm) · [IBM 5100](https://en.wikipedia.org/wiki/IBM_5100) · [IBM 1130 System Summary](https://www.bitsavers.org/pdf/ibm/1130/GA26-5917-9_1130_System_Summary_Dec71.pdf) · [IBM 1800](https://ethw.org/IBM_1800) · [IBM PC](https://en.wikipedia.org/wiki/IBM_Personal_Computer) · [Expanded memory](https://en.wikipedia.org/wiki/Expanded_memory) · [IBM 3090](https://en.wikipedia.org/wiki/IBM_3090) · [RS/6000 SP](https://en.wikipedia.org/wiki/IBM_RS/6000_SP) |
 | **Earlier posts** | [TBT #13: timelines of the tools](/2026/10/01/tbt-timelines-of-tools/) · [IBM 1130 emulator](/2026/02/26/ibm-1130-system-emulator/) · [TBT #8: BASIC on the TRS-80](/2026/04/16/tbt-cor24-basic-startrek-trs80-robot-chase/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
@@ -35,7 +35,7 @@ The first computer I built from a kit had 256 bytes of memory. Not kilobytes: by
 
 <div class="aside-box" markdown="1">
 
-**On the numbers.** Machine sizes are the configurations I used or the documented maximums, as labeled; the refurbished machines are dated by their hardware, not by when I bought them. Prices are McCallum's lowest quoted price per megabyte for each year, in that year's dollars; the 1978 point is my own purchase. Constant dollars use CPI-U annual averages. Access times are typical for the technology of the year, not a measurement. Hover a point for its source line.
+**On the numbers.** Machine sizes are the configurations I used or the documented maximums, as labeled; the refurbished machines are dated by when I acquired them, with the hardware's year in the table. Prices are McCallum's lowest quoted price per megabyte for each year, in that year's dollars; the 1978 point is my own purchase. Constant dollars use CPI-U annual averages. Access times are typical for the technology of the year, not a measurement. Hover a point for its source line.
 
 </div>
 
@@ -64,107 +64,102 @@ The IBM 1130s I installed and repaired were the other direction: core memory, co
 
 The IBM PC started at 16 KB or 64 KB on the motherboard in 1981 and hit the 640 KB wall by 1984. The way around it came in 1985, Lotus, Intel and Microsoft's Expanded Memory Specification, which bank-switched up to 8 MB through a window in the top 384 KB; extended memory above 1 MB followed with the 286 and the XMS specification in 1988. The mainframes I worked on in the 1980s were a different world, though not as different as people assume: the 308X system I worked on first, a 3083 or 3084, had 4 MB, in a family that ran to 32 MB; later I had half of a partitioned 3090 Model 200, a 64 MB machine, so 32 MB was mine; the top 3090s of 1988 reached 512 MB. In 1996 I worked on an RS/6000 with a gigabyte, which was a number people came to look at; the SP wide nodes of those years took 1 or 2 GB.
 
-Then the curve goes vertical. A 2016 laptop had 16 GB; the refurbished M1 Max MacBook I write this on has 64 GB, unified, so the GPU draws on the same pool. My largest systems now are refurbished: a Dell T7910 workstation with 576 GB, an HP DL380 Gen10 Plus 2U server with 640 GB, and another DL380 Gen10 Plus with Intel Optane Persistent Memory 200 modules, which that server will take to 8 TB fully populated. Mine is configured for a couple of terabytes and will go further. The whole first table in one figure:
+Then the curve goes vertical. A 2016 laptop had 16 GB; the refurbished M1 Max MacBook I write this on has 64 GB, unified, so the GPU draws on the same pool. My largest systems now are refurbished: a Dell T7910 workstation with 576 GB, bought in 2024, and this year an HP DL380 Gen10 Plus 2U server with 640 GB. A DL380 with Intel Optane Persistent Memory 200 modules could go past 2 TB, and is in the cube figure below for that reason. The whole first table in one figure:
 
 </div>
 
 <figure>
-<svg class="memviz" viewBox="0 0 860 420" role="img" aria-label="Memory in the machines I used, 1977 to 2024, log scale">
-<title>Memory in the machines I used, 1977 to 2024, log scale</title>
-<line class="grid" x1="72" x2="840" y1="362.9" y2="362.9"/>
-<text class="tick" x="66" y="366.9" text-anchor="end">256 B</text>
-<line class="grid" x1="72" x2="840" y1="324.4" y2="324.4"/>
-<text class="tick" x="66" y="328.4" text-anchor="end">4 KB</text>
-<line class="grid" x1="72" x2="840" y1="285.8" y2="285.8"/>
-<text class="tick" x="66" y="289.8" text-anchor="end">64 KB</text>
-<line class="grid" x1="72" x2="840" y1="247.3" y2="247.3"/>
-<text class="tick" x="66" y="251.3" text-anchor="end">1 MB</text>
-<line class="grid" x1="72" x2="840" y1="199.1" y2="199.1"/>
-<text class="tick" x="66" y="203.1" text-anchor="end">32 MB</text>
-<line class="grid" x1="72" x2="840" y1="150.9" y2="150.9"/>
-<text class="tick" x="66" y="154.9" text-anchor="end">1 GB</text>
-<line class="grid" x1="72" x2="840" y1="102.7" y2="102.7"/>
-<text class="tick" x="66" y="106.7" text-anchor="end">32 GB</text>
-<line class="grid" x1="72" x2="840" y1="54.5" y2="54.5"/>
-<text class="tick" x="66" y="58.5" text-anchor="end">1 TB</text>
-<line class="grid" x1="72" x2="840" y1="25.6" y2="25.6"/>
-<text class="tick" x="66" y="29.6" text-anchor="end">8 TB</text>
-<text class="tick" x="101.5" y="394" text-anchor="middle">1977</text>
-<text class="tick" x="219.7" y="394" text-anchor="middle">1985</text>
-<text class="tick" x="367.4" y="394" text-anchor="middle">1995</text>
-<text class="tick" x="515.1" y="394" text-anchor="middle">2005</text>
-<text class="tick" x="677.5" y="394" text-anchor="middle">2016</text>
-<text class="tick" x="795.7" y="394" text-anchor="middle">2024</text>
+<svg class="memviz" viewBox="0 0 860 420" role="img" aria-label="Memory in the machines I used, 1977 to 2026, log scale">
+<title>Memory in the machines I used, 1977 to 2026, log scale</title>
+<line class="grid" x1="72" x2="840" y1="361.8" y2="361.8"/>
+<text class="tick" x="66" y="365.8" text-anchor="end">256 B</text>
+<line class="grid" x1="72" x2="840" y1="319.9" y2="319.9"/>
+<text class="tick" x="66" y="323.9" text-anchor="end">4 KB</text>
+<line class="grid" x1="72" x2="840" y1="278.0" y2="278.0"/>
+<text class="tick" x="66" y="282.0" text-anchor="end">64 KB</text>
+<line class="grid" x1="72" x2="840" y1="236.0" y2="236.0"/>
+<text class="tick" x="66" y="240.0" text-anchor="end">1 MB</text>
+<line class="grid" x1="72" x2="840" y1="183.7" y2="183.7"/>
+<text class="tick" x="66" y="187.7" text-anchor="end">32 MB</text>
+<line class="grid" x1="72" x2="840" y1="131.3" y2="131.3"/>
+<text class="tick" x="66" y="135.3" text-anchor="end">1 GB</text>
+<line class="grid" x1="72" x2="840" y1="78.9" y2="78.9"/>
+<text class="tick" x="66" y="82.9" text-anchor="end">32 GB</text>
+<line class="grid" x1="72" x2="840" y1="26.5" y2="26.5"/>
+<text class="tick" x="66" y="30.5" text-anchor="end">1 TB</text>
+<text class="tick" x="101.0" y="394" text-anchor="middle">1977</text>
+<text class="tick" x="216.9" y="394" text-anchor="middle">1985</text>
+<text class="tick" x="361.8" y="394" text-anchor="middle">1995</text>
+<text class="tick" x="506.7" y="394" text-anchor="middle">2005</text>
+<text class="tick" x="666.1" y="394" text-anchor="middle">2016</text>
+<text class="tick" x="811.0" y="394" text-anchor="middle">2026</text>
 <g class="pt"><title>1977: IBM 1130, 8K words of core</title>
-<circle cx="101.5" cy="305.1" r="6.5" fill="var(--bg-color)"/><circle cx="101.5" cy="305.1" r="4.5" fill="var(--s1)"/>
-<text class="lbl" x="109.5" y="319.1" text-anchor="start">1130, 16 KB</text>
+<circle cx="101.0" cy="298.9" r="6.5" fill="var(--bg-color)"/><circle cx="101.0" cy="298.9" r="4.5" fill="var(--s1)"/>
+<text class="lbl" x="109.0" y="312.9" text-anchor="start">1130, 16 KB</text>
 </g>
 <g class="pt"><title>1977: IBM 1800, 64K words max</title>
-<circle cx="101.5" cy="276.2" r="6.5" fill="var(--bg-color)"/><circle cx="101.5" cy="276.2" r="4.5" fill="var(--s1)"/>
-<text class="lbl" x="109.5" y="268.2" text-anchor="start">1800, 128 KB</text>
+<circle cx="101.0" cy="267.5" r="6.5" fill="var(--bg-color)"/><circle cx="101.0" cy="267.5" r="4.5" fill="var(--s1)"/>
+<text class="lbl" x="109.0" y="259.5" text-anchor="start">1800, 128 KB</text>
 </g>
 <g class="pt"><title>1977: IBM 5100, 64 KB max</title>
-<circle cx="101.5" cy="285.8" r="6.5" fill="var(--bg-color)"/><circle cx="101.5" cy="285.8" r="4.5" fill="var(--s1)"/>
+<circle cx="101.0" cy="278.0" r="6.5" fill="var(--bg-color)"/><circle cx="101.0" cy="278.0" r="4.5" fill="var(--s1)"/>
 </g>
 <g class="pt"><title>1978: ELF II as built, 256 bytes</title>
-<circle cx="116.3" cy="362.9" r="6.5" fill="var(--bg-color)"/><circle cx="116.3" cy="362.9" r="4.5" fill="var(--s1)"/>
-<text class="lbl" x="124.3" y="366.9" text-anchor="start">256 bytes: ELF II</text>
+<circle cx="115.5" cy="361.8" r="6.5" fill="var(--bg-color)"/><circle cx="115.5" cy="361.8" r="4.5" fill="var(--s1)"/>
+<text class="lbl" x="123.5" y="365.8" text-anchor="start">256 bytes: ELF II</text>
 </g>
 <g class="pt"><title>1978: ELF II + 4K static RAM card</title>
-<circle cx="116.3" cy="323.5" r="6.5" fill="var(--bg-color)"/><circle cx="116.3" cy="323.5" r="4.5" fill="var(--s1)"/>
-<text class="lbl" x="124.3" y="335.5" text-anchor="start">ELF II + 4K card</text>
+<circle cx="115.5" cy="319.0" r="6.5" fill="var(--bg-color)"/><circle cx="115.5" cy="319.0" r="4.5" fill="var(--s1)"/>
+<text class="lbl" x="123.5" y="331.0" text-anchor="start">ELF II + 4K card</text>
 </g>
 <g class="pt"><title>1979: TRS-80 Model I, 4K to 16K</title>
-<circle cx="131.1" cy="305.1" r="6.5" fill="var(--bg-color)"/><circle cx="131.1" cy="305.1" r="4.5" fill="var(--s1)"/>
+<circle cx="130.0" cy="298.9" r="6.5" fill="var(--bg-color)"/><circle cx="130.0" cy="298.9" r="4.5" fill="var(--s1)"/>
 </g>
 <g class="pt"><title>1980: TRS-80 + Expansion Interface, 48K</title>
-<circle cx="145.8" cy="289.8" r="6.5" fill="var(--bg-color)"/><circle cx="145.8" cy="289.8" r="4.5" fill="var(--s1)"/>
-<text class="lbl" x="185.8" y="293.8" text-anchor="start">TRS-80, 48 KB</text>
+<circle cx="144.5" cy="282.3" r="6.5" fill="var(--bg-color)"/><circle cx="144.5" cy="282.3" r="4.5" fill="var(--s1)"/>
+<text class="lbl" x="184.5" y="286.3" text-anchor="start">TRS-80, 48 KB</text>
 </g>
 <g class="pt"><title>1982: IBM PC, 64 KB</title>
-<circle cx="175.4" cy="285.8" r="6.5" fill="var(--bg-color)"/><circle cx="175.4" cy="285.8" r="4.5" fill="var(--s1)"/>
+<circle cx="173.4" cy="278.0" r="6.5" fill="var(--bg-color)"/><circle cx="173.4" cy="278.0" r="4.5" fill="var(--s1)"/>
 </g>
 <g class="pt"><title>1984: IBM PC, 640 KB</title>
-<circle cx="204.9" cy="253.8" r="6.5" fill="var(--bg-color)"/><circle cx="204.9" cy="253.8" r="4.5" fill="var(--s1)"/>
-<text class="lbl" x="212.9" y="257.8" text-anchor="start">PC, 640 KB</text>
+<circle cx="202.4" cy="243.2" r="6.5" fill="var(--bg-color)"/><circle cx="202.4" cy="243.2" r="4.5" fill="var(--s1)"/>
+<text class="lbl" x="210.4" y="247.2" text-anchor="start">PC, 640 KB</text>
 </g>
 <g class="pt"><title>1986: PC + EMS 3.2, 8 MB</title>
-<circle cx="234.5" cy="218.4" r="6.5" fill="var(--bg-color)"/><circle cx="234.5" cy="218.4" r="4.5" fill="var(--s1)"/>
-<text class="lbl" x="242.5" y="222.4" text-anchor="start">PC + EMS, 8 MB</text>
+<circle cx="231.4" cy="204.6" r="6.5" fill="var(--bg-color)"/><circle cx="231.4" cy="204.6" r="4.5" fill="var(--s1)"/>
+<text class="lbl" x="239.4" y="208.6" text-anchor="start">PC + EMS, 8 MB</text>
 </g>
 <g class="pt"><title>1983: IBM 308X, 4 MB</title>
-<circle cx="190.2" cy="228.0" r="6.5" fill="var(--bg-color)"/><circle cx="190.2" cy="228.0" r="4.5" fill="var(--s1)"/>
-<text class="lbl" x="182.2" y="232.0" text-anchor="end">308X, 4 MB</text>
+<circle cx="187.9" cy="215.1" r="6.5" fill="var(--bg-color)"/><circle cx="187.9" cy="215.1" r="4.5" fill="var(--s1)"/>
+<text class="lbl" x="179.9" y="219.1" text-anchor="end">308X, 4 MB</text>
 </g>
 <g class="pt"><title>1987: IBM 3090 Model 200, my half of 64 MB</title>
-<circle cx="249.2" cy="199.1" r="6.5" fill="var(--bg-color)"/><circle cx="249.2" cy="199.1" r="4.5" fill="var(--s1)"/>
-<text class="lbl" x="257.2" y="203.1" text-anchor="start">3090-200, half: 32 MB</text>
+<circle cx="245.9" cy="183.7" r="6.5" fill="var(--bg-color)"/><circle cx="245.9" cy="183.7" r="4.5" fill="var(--s1)"/>
+<text class="lbl" x="253.9" y="187.7" text-anchor="start">3090-200, half: 32 MB</text>
 </g>
 <g class="pt"><title>1996: RS/6000, 1 GB</title>
-<circle cx="382.2" cy="150.9" r="6.5" fill="var(--bg-color)"/><circle cx="382.2" cy="150.9" r="4.5" fill="var(--s1)"/>
-<text class="lbl" x="390.2" y="154.9" text-anchor="start">RS/6000, 1 GB</text>
+<circle cx="376.3" cy="131.3" r="6.5" fill="var(--bg-color)"/><circle cx="376.3" cy="131.3" r="4.5" fill="var(--s1)"/>
+<text class="lbl" x="384.3" y="135.3" text-anchor="start">RS/6000, 1 GB</text>
 </g>
 <g class="pt"><title>2016: a laptop, 16 GB</title>
-<circle cx="677.5" cy="112.4" r="6.5" fill="var(--bg-color)"/><circle cx="677.5" cy="112.4" r="4.5" fill="var(--s1)"/>
-<text class="lbl" x="669.5" y="126.4" text-anchor="end">laptop, 16 GB</text>
+<circle cx="666.1" cy="89.3" r="6.5" fill="var(--bg-color)"/><circle cx="666.1" cy="89.3" r="4.5" fill="var(--s1)"/>
+<text class="lbl" x="658.1" y="103.3" text-anchor="end">laptop, 16 GB</text>
 </g>
-<g class="pt"><title>2021: M1 Max MacBook, 64 GB unified (2021 hardware, bought refurbished)</title>
-<circle cx="751.4" cy="93.1" r="6.5" fill="var(--bg-color)"/><circle cx="751.4" cy="93.1" r="4.5" fill="var(--s1)"/>
-<text class="lbl" x="743.4" y="107.1" text-anchor="end">M1 Max, 64 GB</text>
+<g class="pt"><title>2024: Dell T7910 workstation, 576 GB (2016 hardware, refurbished)</title>
+<circle cx="782.0" cy="35.2" r="6.5" fill="var(--bg-color)"/><circle cx="782.0" cy="35.2" r="4.5" fill="var(--s1)"/>
+<text class="lbl" x="774.0" y="49.2" text-anchor="end">T7910, 576 GB</text>
 </g>
-<g class="pt"><title>2016: Dell T7910 workstation, 576 GB (2016 hardware, bought refurbished)</title>
-<circle cx="677.5" cy="62.5" r="6.5" fill="var(--bg-color)"/><circle cx="677.5" cy="62.5" r="4.5" fill="var(--s1)"/>
-<text class="lbl" x="669.5" y="66.5" text-anchor="end">T7910, 576 GB</text>
+<g class="pt"><title>2026: M1 Max MacBook, 64 GB unified (2021 hardware, refurbished)</title>
+<circle cx="811.0" cy="68.4" r="6.5" fill="var(--bg-color)"/><circle cx="811.0" cy="68.4" r="4.5" fill="var(--s1)"/>
+<text class="lbl" x="803.0" y="82.4" text-anchor="end">M1 Max, 64 GB</text>
 </g>
-<g class="pt"><title>2021: HP DL380 Gen10 Plus, 640 GB (2021 hardware, bought refurbished)</title>
-<circle cx="751.4" cy="61.1" r="6.5" fill="var(--bg-color)"/><circle cx="751.4" cy="61.1" r="4.5" fill="var(--s1)"/>
-<text class="lbl" x="743.4" y="65.1" text-anchor="end">DL380, 640 GB</text>
-</g>
-<g class="pt"><title>2021: HP DL380 Gen10 Plus + PMem 200, up to 8 TB (2021 hardware)</title>
-<circle cx="751.4" cy="25.6" r="6.5" fill="var(--bg-color)"/><circle cx="751.4" cy="25.6" r="4.5" fill="var(--s1)"/>
+<g class="pt"><title>2026: HP DL380 Gen10 Plus, 640 GB (2021 hardware, refurbished)</title>
+<circle cx="811.0" cy="33.6" r="6.5" fill="var(--bg-color)"/><circle cx="811.0" cy="33.6" r="4.5" fill="var(--s1)"/>
+<text class="lbl" x="803.0" y="27.6" text-anchor="end">DL380, 640 GB</text>
 </g>
 </svg>
-<figcaption style="font-size: 0.85em;">Each dot is a machine I used, at the memory I had or the maximum the model took, placed at the year I used it --- except the refurbished machines at the right, which sit at the year their hardware was built, since that is when that much memory became ordinary; I bought them later. The axis is logarithmic: every gridline is a step of 4 to 32 times. Hover a dot for the detail.</figcaption>
+<figcaption style="font-size: 0.85em;">Each dot is a machine I used, at the memory I had or the maximum the model took, placed at the year I first used it; the refurbished machines at the right are older hardware, dated by when they reached my bench. The axis is logarithmic: every gridline is a step of 4 to 32 times. Hover a dot for the detail.</figcaption>
 </figure>
 
 | Year | Machine | Memory | Note |
@@ -181,10 +176,9 @@ Then the curve goes vertical. A 2016 laptop had 16 GB; the refurbished M1 Max Ma
 | 1983 | IBM 308X, a 3083 or 3084 | 4 MB | the family ran to 32 MB |
 | 1987 | IBM 3090 Model 200 | 64 MB, my half 32 MB | a partitioned machine; the top 3090s reached 512 MB |
 | 1996 | IBM RS/6000 | 1 GB | SP wide nodes took 1 or 2 GB |
-| 2016 | Dell T7910 workstation | 576 GB | 2016 hardware, bought refurbished later |
-| 2021 | M1 Max MacBook Pro | 64 GB unified | 2021 hardware, bought refurbished; CPU and GPU share it |
-| 2021 | HP DL380 Gen10 Plus, 2U server | 640 GB | 2021 hardware, bought refurbished later |
-| 2021 | HP DL380 Gen10 Plus + PMem 200 | 8 TB max | 16 modules of 512 GB; mine is partway there |
+| 2024 | Dell T7910 workstation | 576 GB | 2016 hardware, refurbished |
+| 2026 | M1 Max MacBook Pro | 64 GB unified | 2021 hardware, refurbished; CPU and GPU share it |
+| 2026 | HP DL380 Gen10 Plus, 2U server | 640 GB | 2021 hardware, refurbished; the biggest on the bench |
 
 Logarithmic axes hide how big these numbers are. So, with apologies to xkcd: let 4 KB, the card I added to the ELF II, be a cube one centimeter on a side, a sugar cube, and build everything else out of sugar cubes. The 256 bytes I started with is a sixteenth of one.
 
@@ -225,14 +219,14 @@ Logarithmic axes hide how big these numbers are. So, with apologies to xkcd: let
 <text class="lbl" x="356.2" y="584.0" text-anchor="middle">5.5 m on a side</text>
 <polygon points="440,536 570.0398941772348,536 570.0398941772348,405.9601058227652 440,405.9601058227652" fill="var(--s2)" stroke="var(--ink)" stroke-width="1.5" stroke-linejoin="round"/><polygon points="570.0398941772348,536 635.0598412658522,470.9800529113826 635.0598412658522,340.94015873414776 570.0398941772348,405.9601058227652" fill="var(--s2d)" stroke="var(--ink)" stroke-width="1.5" stroke-linejoin="round"/><polygon points="440,405.9601058227652 570.0398941772348,405.9601058227652 635.0598412658522,340.94015873414776 505.0199470886174,340.94015873414776" fill="var(--s2t)" stroke="var(--ink)" stroke-width="1.5" stroke-linejoin="round"/>
 <text class="lbl" x="537.5" y="554.0" text-anchor="middle">2 TB</text>
-<text class="lbl" x="537.5" y="569.0" text-anchor="middle">the PMem server</text>
+<text class="lbl" x="537.5" y="569.0" text-anchor="middle">where the PMem server could go</text>
 <text class="lbl" x="537.5" y="584.0" text-anchor="middle">8.1 m on a side</text>
 <circle cx="680" cy="509.792" r="2.592" fill="none" stroke="var(--ink)" stroke-width="2"/><line x1="680" y1="512.384" x2="680" y2="523.904" stroke="var(--ink)" stroke-width="2"/><line x1="674.816" y1="518.144" x2="685.184" y2="516.992" stroke="var(--ink)" stroke-width="2"/><line x1="680" y1="523.904" x2="675.968" y2="536" stroke="var(--ink)" stroke-width="2"/><line x1="680" y1="523.904" x2="684.032" y2="536" stroke="var(--ink)" stroke-width="2"/>
 <text class="lbl" x="680.0" y="554.0" text-anchor="middle">1.8 m</text>
 <rect x="710" y="456.0" width="128.0" height="80.0" fill="none" stroke="var(--ink2)" stroke-width="2"/><polygon points="704,456.0 774.0,408.0 844.0,456.0" fill="none" stroke="var(--ink2)" stroke-width="2"/>
 <text class="lbl" x="774.0" y="554.0" text-anchor="middle">a house, 8 m</text>
 </svg>
-<figcaption style="font-size: 0.85em;">One sugar cube is 4 KB. The ELF II's 256 bytes is a 4 mm chip off one. The PC's 640 KB is 160 cubes, a block 5 cm on a side; a 1990s PC's 16 MB is 16 cm, bigger than the mug. Then the zoom: the 1996 gigabyte is a 64 cm cube, up to your waist; 640 GB is 5.5 m on a side, a two-story house; 2 TB is 8 m, the house to its ridge. Side of each cube is the cube root of bytes over 4,096, in centimeters.</figcaption>
+<figcaption style="font-size: 0.85em;">One sugar cube is 4 KB. The ELF II's 256 bytes is a 4 mm chip off one. The PC's 640 KB is 160 cubes, a block 5 cm on a side; a 1990s PC's 16 MB is 16 cm, bigger than the mug. Then the zoom: the 1996 gigabyte is a 64 cm cube, up to your waist; the M1 Max's 64 GB of unified memory is 2.6 m, taller than the room; the server's 640 GB is 5.5 m on a side, a two-story house; and 2 TB, where a persistent-memory server could go, is 8 m, the house to its ridge. Side of each cube is the cube root of bytes over 4,096, in centimeters.</figcaption>
 </figure>
 
 <div class="clearfix" markdown="1">
@@ -520,8 +514,10 @@ Speed moved less than size or price, and that gap is most of what computer archi
 <text class="lbl" x="787.7" y="186.1" text-anchor="end">Optane PMem 200, ~300 ns</text>
 </g>
 </svg>
-<figcaption style="font-size: 0.85em;">Typical access time for the memory technology of each machine, log scale. Three orders of magnitude in fifty years, against twelve for capacity and seven for price.</figcaption>
+<figcaption style="font-size: 0.85em;">Typical access time for the memory technology of each machine, log scale. Three orders of magnitude in fifty years, against nine for capacity and seven for price.</figcaption>
 </figure>
+
+<div class="clearfix" markdown="1">
 
 <div class="clearfix" markdown="1">
 
@@ -602,9 +598,13 @@ The tiny class is the ELF II's world with better tools: the Uno's 2 KB is eight 
 
 <div class="clearfix" markdown="1">
 
+</div>
+
+<div class="clearfix" markdown="1">
+
 ## What the fifty years say
 
-Three curves, three different slopes. Capacity went up twelve orders of magnitude, from 256 bytes to 8 terabytes. Price per megabyte fell seven, from $23,000 to a fraction of a cent, and in constant dollars a bit more. Access time improved by about three, and then stopped, which is why every machine since the 1990s has been mostly cache. The embedded table is the reminder that all four of those eras are still for sale, at the same time, for under fifty dollars each --- and that choosing a board is choosing which decade of memory you want to program in.
+Three curves, three different slopes. Capacity went up nine orders of magnitude, from 256 bytes to 640 gigabytes. Price per megabyte fell seven, from $23,000 to a fraction of a cent, and in constant dollars a bit more. Access time improved by about three, and then stopped, which is why every machine since the 1990s has been mostly cache. The embedded table is the reminder that all four of those eras are still for sale, at the same time, for under fifty dollars each --- and that choosing a board is choosing which decade of memory you want to program in.
 
 And the last year adds a fourth slope, pointing the wrong way. For my whole career the right answer to a memory problem was to wait: the next machine would have more, cheaper. Programs were written on that assumption, and so were languages, runtimes, frameworks and browsers. If a megabyte now costs five times what it did a year ago and the people who make it say that holds until 2028, the assumption is off for a while, and the skill that the 256-byte ELF II, the 4K core 1130 and the 2 KB Arduino all demand --- knowing what every byte is for --- is worth having again. Maybe we should be more efficient with memory, again. The tiny and small boards in the table above are a good place to practice, and an array language that keeps a whole computation in a few typed arrays is not a bad one either.
 
