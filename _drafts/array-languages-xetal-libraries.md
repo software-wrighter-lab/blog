@@ -4,7 +4,7 @@ title: "Array Languages #3: X_eTaL-libraries, Extending the Vocabulary and the L
 categories: [languages, language-design, machine-learning, tools]
 tags: [array-languages, xetal, x-etal, apl, libraries, macros, extensibility, metaprogramming, dyalog, j, bqn]
 keywords: "X_eTaL libraries, array language libraries, u_se macro, xtlm macro libraries, source-to-source macros, user-defined macros, procedural macros, Forth parsing words, APL execute, Dyalog dfns, J addons, BQN bqn-libs, Check library, Strings, Sets, Matrix, Random"
-abstract: "Third in the Array Languages series: X_eTaL-libraries, where the E in the name gets its first two meanings. Nineteen libraries written in X_eTaL are ready, every one with a live, editable demo, and six of them now carry macros: date literals checked at compile time, math notation compiled, a graph whose node names become variables. The macros are source-to-source functions written in X_eTaL, type-checked after expansion, and placed here among Rust, Forth and APL's own execute."
+abstract: "Third in the Array Languages series: X_eTaL-libraries, where the E in the name gets its first two meanings. Nineteen libraries, 166 functions, every one with tests, a live editable demo and a reference page in a cross-reference site searchable by type; six of them carry macros: date literals checked at compile time, math notation compiled, a graph whose node names become variables. The macros are source-to-source functions written in X_eTaL, type-checked after expansion, and placed here among Rust, Forth and APL's own execute."
 series: "Array Languages"
 series_part: 3
 date: 2026-10-09 00:15:00 -0700
@@ -30,6 +30,7 @@ Extensible has three meanings in X_eTaL: libraries extend the vocabulary, macros
 |----------|------|
 | **The repo** | [softwarewrighter/X_eTaL-libraries](https://github.com/softwarewrighter/X_eTaL-libraries) · [the macro design notes](https://github.com/softwarewrighter/X_eTaL-libraries/blob/main/docs/plan.md) |
 | **Live demo** | [softwarewrighter.github.io/X_eTaL-libraries](https://softwarewrighter.github.io/X_eTaL-libraries/) --- every library's demos, editable and runnable |
+| **Reference** | [the cross-reference site](https://softwarewrighter.github.io/X_eTaL-libraries/doc/) --- every library, macro library and demo, searchable by name or by type |
 | **Prior post** | [Array Languages #2: X_eTaL-demos](/2026/10/08/array-languages-xetal-demos/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
@@ -37,7 +38,7 @@ Extensible has three meanings in X_eTaL: libraries extend the vocabulary, macros
 
 ## Nineteen libraries, live
 
-The standard libraries --- Combinators, Maybe, Stats, Turtle --- are built into the interpreter; this repo holds ordinary X_eTaL files any program imports the same way, with `"t:" u̲se< "Strings"` and then `ᵗu̲pper "hello"`. Nineteen are ready, about 170 functions in all, each with a recommended alias that clashes with nothing else, in four groups:
+The standard libraries --- Combinators, Maybe, Stats, Turtle --- are built into the interpreter; this repo holds ordinary X_eTaL files any program imports the same way, with `"t:" u̲se< "Strings"` and then `ᵗu̲pper "hello"`. Nineteen are ready, 166 functions in all, each with tests, demos and a reference page, and each with a recommended alias that clashes with nothing else, in four groups:
 
 | Group | Libraries |
 |---|---|
@@ -46,11 +47,18 @@ The standard libraries --- Combinators, Maybe, Stats, Turtle --- are built into 
 | Mathematics | Numbers, Combinatorics, Matrix, Polynomials, Geometry, Graphs, Bits, Random |
 | Output | Format, Plot |
 
-Every library has a [live demo](https://softwarewrighter.github.io/X_eTaL-libraries/): its programs editable and runnable in the browser, with the reference, the source and the types one tab away. Many are ports from the libraries of other array languages --- Dyalog's dfns workspace, J's addons, BQN's bqn-libs --- reimplemented from their documented behavior and credited on each library's page. And ordinary libraries are now frozen for the launch: the repo's own note is that nineteen is enough, and the one that matters next is a different kind.
+Every library has a [live demo](https://softwarewrighter.github.io/X_eTaL-libraries/): its programs editable and runnable in the browser, with the reference, the source and the types one tab away. Many are ports from the libraries of other array languages --- Dyalog's dfns workspace, J's addons, BQN's bqn-libs --- reimplemented from their documented behavior and credited on each library's page. Ordinary libraries are frozen for the launch --- the repo's own note is that nineteen is enough --- with one exception made for a sibling: Plot gained line charts with axes, labels and several lines because the machine-learning repo asked for them. Inside each library, helper functions are now private, spelled with the language's new `h:` prefix, so only the documented functions are exported.
+
+The reference is the newest piece. `xetal doc` builds a [cross-reference site](https://softwarewrighter.github.io/X_eTaL-libraries/doc/) from all fifty files --- every library, macro library and demo --- indexed, every call linked to its definition, and searchable by name or by type, so you can look for a function by the shape of what it takes and returns. The first build showed only signatures and source, because the libraries used plain `#` comments, which the tool ignores; within a day every library was rewritten with `##` documentation comments and `###` sections, so the pages now explain what each function does. The next step is planned, not started: worked examples under each comment that `xetal doc --test` runs and checks, the way the language's own standard libraries already do.
 
 <figure>
-<img src="{{ '/assets/images/posts/xetal-libraries-live.webp' | relative_url }}" class="no-invert" alt="The X_eTaL libraries live demo: the libraries down the left, one library's demo open with its program, and Run, Edit, Reset and Seed buttons">
-<figcaption style="font-size: 0.85em;">The libraries' live demo: the Bits library's Nim example, the winning move as the xor of the heaps worked out for every heap at once, runnable and editable in the page.</figcaption>
+<img src="{{ '/assets/images/posts/xetal-libraries-doc.webp' | relative_url }}" class="no-invert" alt="The X_eTaL-libraries cross-reference site: a search box for a name or a type, a list of files, and each library described with its import line">
+<figcaption style="font-size: 0.85em;">The <a href="https://softwarewrighter.github.io/X_eTaL-libraries/doc/">cross-reference site</a>, built by <code>xetal doc</code>: search by a name or a type.</figcaption>
+</figure>
+
+<figure>
+<img src="{{ '/assets/images/posts/xetal-libraries-live.webp' | relative_url }}" class="no-invert" alt="The X_eTaL libraries live demo opening on its Start here page: the libraries down the left, a two-line import example, the three ways X_eTaL extends, and cards for each library by group">
+<figcaption style="font-size: 0.85em;">The libraries' <a href="https://softwarewrighter.github.io/X_eTaL-libraries/">live demo</a> opens on a Start here page: one line imports a library, the three ways X_eTaL extends, and a card per library. Pick one and its demos run, editable, in the page.</figcaption>
 </figure>
 
 The README makes a distinction worth repeating: the *Extensible* in the name has three sides. Libraries extend the vocabulary; macros extend the language; native extensions extend the machine. This post is the first two; a planned post covers the third.
@@ -101,4 +109,4 @@ What is *not* here is as telling. A Control library of `if`, `unless` and `each`
 
 ## Next in the series
 
-Native extensions: Rust behind an X_eTaL facade, and the extension ABI.
+A planned post covers the third meaning of *Extensible*: native extensions, Rust behind an X_eTaL facade, and the extension ABI.
