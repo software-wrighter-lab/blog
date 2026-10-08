@@ -150,7 +150,7 @@ The literate document that walks through them puts the trade-off in one line: "T
 
 <figure>
 <img src="{{ '/assets/images/posts/xetal-hanoi.svg' | relative_url }}" class="no-invert" alt="Four disks moving between three pegs, drawn by the X_eTaL Hanoi program as an animated SVG" style="width: 100%; max-width: 648px;">
-<figcaption style="font-size: 0.85em;">Four disks, fifteen moves, drawn by the X_eTaL program itself.</figcaption>
+<figcaption style="font-size: 0.85em;">Four disks, fifteen moves, drawn by the program itself with <code>⎕S̲HOW ⎕G̲RID</code>.</figcaption>
 </figure>
 
 </div>
