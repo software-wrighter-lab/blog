@@ -67,6 +67,11 @@ The original's solver is a multi-phase A\* search that works layer by layer, as 
 
 ## APLSV, 1975
 
+<figure style="float: left; clear: none; margin: 0 1.5em 0.6em 0; max-width: 17%;">
+<img src="{{ '/assets/images/posts/eigencube-aplsv-gutter.webp' | relative_url }}" class="no-invert" alt="sw-apl in its B '75 mode: )LOAD 2 RUBIK, SCRAMBLE 2 printing the turns U and L, then SOLVE printing two moves, l and u, with the cube's net after each, and SOLVED">
+<figcaption style="font-size: 0.85em;">RUBIK in sw-apl's '75 mode: a two-turn scramble, and <code>SOLVE</code> undoing it in two moves, printing the net after each.</figcaption>
+</figure>
+
 APLSV ran on the IBM 5100 the year it shipped, and sw-apl's (B) '75 mode runs it now. The [sw-apl-workspaces](https://github.com/sw-vibe-coding/sw-apl-workspaces) library has two workspaces for this, each running in both of sw-apl's modes.
 
 **EIGENCUBE** is the geometry kernel, in the original's terms. The 26 cubelets come from base-3 encoding all 27 points and compressing away the hidden center, and a turn is a matrix product with exact integer quarter-turn matrices:
@@ -81,9 +86,12 @@ R←P+.×⍉M
 
 **RUBIK** is the playable cube, entirely in text. It draws the cube as a net of face letters that works on the 2741 terminal and in the browser, and it takes the classic approach for the turns themselves: 54 stickers, each face turn one permutation, with the EIGENCUBE geometry copied in. `)LOAD 2 RUBIK`, then `SCRAMBLE 3`, `SHOW`, `STEP`: each step undoes one recorded turn and prints the net. `SOLVE` ignores the history and searches the current stickers, to a depth of six and at most 5,000 positions, saying `SEARCH BUDGET EXHAUSTED` rather than running forever. The workspace is careful to call that a bounded search, not a general solver.
 
-<!-- [CAPTURE] sw-apl on the 2741 terminal: )LOAD 2 RUBIK, SCRAMBLE 3, SHOW, SOLVE -->
-
 Side by side, the two workspaces are the contrast this post is about: the sticker model a 1975 programmer would reach for, and the geometric one the Eigencube makes possible, in the same language.
+
+<figure style="clear: both; max-width: 75%; margin: 1em auto;">
+<img src="{{ '/assets/images/posts/eigencube-aplsv-wide.webp' | relative_url }}" class="no-invert" alt="sw-apl listing the RUBIK workspace: )WSID shows RUBIK, )FNS lists APPLY DESCRIBE GEOM GEOTURN GRESET GSTATE GTURN NORM RESET ROT SCRAMBLE SEARCH SHOW SOLVE SOLVED STEP TURN UNDO, and )VARS lists its variables">
+<figcaption style="font-size: 0.85em;">The whole RUBIK workspace: <code>)FNS</code> lists its functions, among them <code>GEOTURN</code> and <code>ROT</code> copied in from EIGENCUBE, and <code>)VARS</code> its variables.</figcaption>
+</figure>
 
 </div>
 
