@@ -119,6 +119,10 @@ That is where an array language pays off. A search keeps a beam of candidate cub
 
 The port is in progress as this is written: the model, the turns and the search are there, and the demo that runs them end to end is not yet published.
 
+<!-- [TUPLES] Placeholder, to be updated once the tuple version of the search is tested: show the state before (boxes) and after (a tuple and a pattern), rendered with `xetal render`, and say whether it ran. -->
+
+The search is also being reworked to use tuples, a feature that is new to X_eTaL. Each stage of the search carries several arrays of different shapes: the beam of cubes, each candidate's parent, the move that made it, and their scores. Every X_eTaL array has a single element type, so the port packs that state by hand, boxing each array and concatenating the boxes, and unpacks it again by position at every step. Tuples, with patterns that name the parts, have just landed in X_eTaL, and the eigencube port is one of the programs moving to them. This section will be updated once that version is tested.
+
 ### A cube you can see
 
 The APLSV version is text only, and the solver above prints moves. A third piece, in progress in the [X_eTaL-extensions](https://github.com/softwarewrighter/X_eTaL-extensions) repository, draws the cube. Its scene extension, which renders 3D in a native window, already builds voxel worlds; the next voxel demo is a Rubik's cube. Its X_eTaL library, `Rubik.xtl`, takes a third approach to the turns: the cube is its 54 stickers, each with its cubelet's position and the direction it faces, and each quarter turn is a permutation of the 54 that is *computed from the geometry*, by rotating one layer's stickers and matching them back, rather than typed in. Next come turns by keys, a valid scramble, undo back to solved, and on-screen buttons for all twelve turns.
