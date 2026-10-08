@@ -2,7 +2,7 @@
 layout: post
 title: "Eigencube: Solving a Rubik's Cube with Linear Algebra, in APLSV and X_eTaL"
 categories: [languages, programming-history, retrocomputing, math]
-tags: [rubiks-cube, eigencube, linear-algebra, rotation-matrices, apl, aplsv, sw-apl, xetal, x-etal, array-languages, python, beam-search]
+tags: [rubiks-cube, eigencube, linear-algebra, rotation-matrices, apl, aplsv, sw-apl, xetal, x-etal, array-languages, python, beam-search, voxels]
 keywords: "Eigencube, Rubik's cube solver, linear algebra, rotation matrices, Rodrigues formula, cubelets as vectors, functional pearl, Steffen Smolka, 3Blue1Brown Essence of Linear Algebra, APLSV, (B) '75, sw-apl, sw-apl-workspaces, X_eTaL, batched matrix product, beam search"
 abstract: "Steffen Smolka's Eigencube solves a Rubik's cube in under 400 lines of Python by treating it as linear algebra: each of 26 cubelets is an integer vector, its orientation a rotation matrix, and a turn one matrix product. This post follows the idea into two array languages: APLSV as it ran in 1975, through the sw-apl-workspaces library, and X_eTaL, where a whole batch of cubes is one array and every turn of every cube in a search is two matrix products."
 series: "General Technology"
@@ -18,7 +18,7 @@ repo_urls:
 ---
 
 <!-- DRAFT (2026-10-08). To do before publishing:
-     - Screen captures: (1) the original's film or GUI; (2) APLSV RUBIK in sw-apl: SCRAMBLE, SHOW, SOLVE on the 2741 terminal;
+     - Screen captures (the user will provide): (1) the original's video or GUI; (2) APLSV RUBIK in sw-apl: SCRAMBLE, SHOW, SOLVE on the 2741 terminal;
        (3) X_eTaL: the cube solved, once the demo has output or a page. Placeholders below are marked [CAPTURE].
      - X_eTaL code lives today in an untracked X_eTaL-demos worktree (.claude/worktrees/eigencube, branch feat-xetal);
        the user said eigencube-fork. Confirm where it will be published, then link it.
@@ -30,7 +30,7 @@ repo_urls:
 
 <div style="overflow: hidden;" markdown="1">
 
-Most Rubik's cube solvers are bookkeeping: 54 stickers in flat arrays, permutation tables, pattern databases of a hundred megabytes. Steffen Smolka's [Eigencube](https://github.com/smolkaj/eigencube) does it with linear algebra instead, in under 400 lines of Python, and credits the idea to 3Blue1Brown's *Essence of Linear Algebra*. Linear algebra is what array languages were built for, so this post follows the idea into two of them: APLSV as it ran in 1975, and X_eTaL, the typed array language I have been building.
+Most Rubik's cube solvers are bookkeeping: 54 stickers in flat arrays, permutation tables, pattern databases of a hundred megabytes. Steffen Smolka's [Eigencube](https://github.com/smolkaj/eigencube) does it with linear algebra instead, in under 400 lines of Python. He calls it a *functional pearl*, the functional-programming community's name for a short program written to be read for its idea, and credits the idea to 3Blue1Brown's *Essence of Linear Algebra* videos. Linear algebra is what array languages were built for, so this post follows the idea into two of them: APLSV as it ran in 1975, and X_eTaL, the typed array language I have been building.
 
 </div>
 
@@ -40,10 +40,10 @@ Most Rubik's cube solvers are bookkeeping: 54 stickers in flat arrays, permutati
 
 | Resource | Link |
 |----------|------|
-| **The original** | [smolkaj/eigencube](https://github.com/smolkaj/eigencube) --- the Python functional pearl, and a 16-minute film that explains it |
+| **The original** | [smolkaj/eigencube](https://github.com/smolkaj/eigencube) --- the Python solver, under 400 lines, with a 16-minute explainer video in its README |
 | **The fork** | [softwarewrighter/eigencube-fork](https://github.com/softwarewrighter/eigencube-fork) |
 | **APLSV** | [sw-vibe-coding/sw-apl-workspaces](https://github.com/sw-vibe-coding/sw-apl-workspaces) --- the RUBIK and EIGENCUBE workspaces, run by [sw-apl](https://github.com/sw-vibe-coding/sw-apl) |
-| **X_eTaL** | [Array Languages #1: X_eTaL](/2026/10/07/array-languages-xetal/) |
+| **X_eTaL** | [Array Languages #1: X_eTaL](/2026/10/07/array-languages-xetal/) --- the language; the eigencube demo and the voxel cube are not published yet |
 | **Earlier** | [TBT #12: the IBM 5100's APLSV](/2026/09/24/tbt-aplsv-birds-tttml/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
@@ -53,13 +53,13 @@ Most Rubik's cube solvers are bookkeeping: 54 stickers in flat arrays, permutati
 
 ## The idea: cubelets are vectors
 
-Put the cube's core at the origin. Each of the 26 visible cubelets has a home address, an integer vector c with coordinates in {−1, 0, 1}. Its 1-norm, |x| + |y| + |z|, is how many stickers it has: 1 for a center, 2 for an edge, 3 for a corner. The six centers never move, so they are the colors: ±x, ±y, ±z, each an eigenvector of the turns around it, which is where the name comes from.
+Put the cube's core at the origin. Each of the 26 visible cubelets has a home address, an integer vector c whose coordinates are each −1, 0 or 1. Add up the sizes of its coordinates, ignoring signs, and you get how many stickers it has: 1 for a center, 2 for an edge, 3 for a corner. The six centers never move, so they are the colors: ±x, ±y, ±z, each an eigenvector of the turns around it, which is where the name comes from.
 
 The state is one rotation matrix R per cubelet, and the cubelet sits now at R c. A move turns the face whose outward axis is v: every cubelet with v · (R c) > 0 is in that face, and its R becomes M R, where M is the quarter-turn matrix. The cube is solved when every R leaves its cubelet's stickers where they belong. That is the whole model: vectors, a dot product to select a face, and matrix products to turn it.
 
-The original's solver is a multi-phase A\* search that works layer by layer, as a person would, with no precomputed databases.
+The original's solver is a multi-phase A\* search that works layer by layer, as a person would, with no precomputed databases. Its README explains all of this in a 16-minute video, made with the repository's own animation code, which is worth watching before going further.
 
-<!-- [CAPTURE] the original: a frame from its film, or its GUI solving a cube -->
+<!-- [CAPTURE] the original: a frame from its explainer video, or its GUI solving a cube -->
 
 </div>
 
@@ -79,7 +79,7 @@ R←P+.×⍉M
 ∇
 ```
 
-**RUBIK** is the playable cube. It draws a letter net that works on the 2741 terminal and in the browser, and it takes the classic approach for the turns themselves: 54 stickers, each face turn one permutation, with the EIGENCUBE geometry copied in. `)LOAD 2 RUBIK`, then `SCRAMBLE 3`, `SHOW`, `STEP`: each step undoes one recorded turn and prints the net. `SOLVE` ignores the history and searches the current stickers, to a depth of six and at most 5,000 positions, saying `SEARCH BUDGET EXHAUSTED` rather than running forever. The workspace is careful to call that a bounded search, not a general solver.
+**RUBIK** is the playable cube, entirely in text. It draws the cube as a net of face letters that works on the 2741 terminal and in the browser, and it takes the classic approach for the turns themselves: 54 stickers, each face turn one permutation, with the EIGENCUBE geometry copied in. `)LOAD 2 RUBIK`, then `SCRAMBLE 3`, `SHOW`, `STEP`: each step undoes one recorded turn and prints the net. `SOLVE` ignores the history and searches the current stickers, to a depth of six and at most 5,000 positions, saying `SEARCH BUDGET EXHAUSTED` rather than running forever. The workspace is careful to call that a bounded search, not a general solver.
 
 <!-- [CAPTURE] sw-apl on the 2741 terminal: )LOAD 2 RUBIK, SCRAMBLE 3, SHOW, SOLVE -->
 
@@ -115,12 +115,20 @@ and then every turn of every cube in the batch is one inner product with that st
 
 That is where an array language pays off. A search keeps a beam of candidate cubes; expanding the beam by every possible move is the same few lines whether the beam holds one cube or a thousand. The solver is a staged beam search on top of that, scoring each candidate by which cubelets are home.
 
-<!-- [CAPTURE] X_eTaL: the solved cube, or the move list, once the demo runs end to end (and its page, if it gets one) -->
+<!-- [CAPTURE] X_eTaL: the solved cube, or the move list, once the demo runs end to end. LINK: the demo, once published (today: untracked work in X_eTaL-demos). -->
 
 The port is in progress as this is written: the model, the turns and the search are there, and the demo that runs them end to end is not yet published.
+
+### A cube you can see
+
+The APLSV version is text only, and the solver above prints moves. A third piece, in progress in the [X_eTaL-extensions](https://github.com/softwarewrighter/X_eTaL-extensions) repository, draws the cube. Its scene extension, which renders 3D in a native window, already builds voxel worlds; the next voxel demo is a Rubik's cube. Its X_eTaL library, `Rubik.xtl`, takes a third approach to the turns: the cube is its 54 stickers, each with its cubelet's position and the direction it faces, and each quarter turn is a permutation of the 54 that is *computed from the geometry*, by rotating one layer's stickers and matching them back, rather than typed in. Next come turns by keys, a valid scramble, undo back to solved, and on-screen buttons for all twelve turns.
+
+That demo shows and turns the cube; it doesn't solve it. The obvious next step is to put the two together: the eigencube solver choosing the moves, the voxel cube playing them.
+
+<!-- [CAPTURE] the voxel cube in the scene window, once voxels-rubik is done. LINK: its recording on the extensions site, if one is made. -->
 
 </div>
 
 ## Three languages, one idea
 
-The idea survives every translation because it is mathematics, not code: vectors for places, matrices for turns, a dot product to pick a face. What changes is how much of the bookkeeping each language makes you write. Python spells the loops. APLSV in 1975 already had the inner product and the encode that the geometry needs, though the playable workspace still turns stickers. And X_eTaL lets the batch, not the cube, be the unit, so the search expands every candidate in one product.
+The idea survives every translation because it is mathematics, not code: vectors for places, matrices for turns, a dot product to pick a face. What changes is how much of the bookkeeping each language makes you write. Python spells the loops. APLSV in 1975 already had the inner product and the encode that the geometry needs, though the playable workspace still turns stickers. And X_eTaL lets the batch, not the cube, be the unit, so the search expands every candidate in one product --- and, in a separate demo, computes the sticker permutations from the same geometry so the cube can be drawn and turned.
