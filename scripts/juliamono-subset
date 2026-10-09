@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Rebuild the self-hosted JuliaMono subsets in assets/fonts/ from the
+# official release, keeping every character in scripts/juliamono-unicodes.txt.
+#
+#   scripts/juliamono-subset [VERSION]      # default v0.63.2
+#
+# To cover a new symbol, append its code point (U+XXXX) to the list and rerun.
+# Needs gh and fonttools with brotli (pip install fonttools brotli).
+set -euo pipefail
+ver=${1:-v0.63.2}
+here=$(cd "$(dirname "$0")/.." && pwd)
+tmp=$(mktemp -d); trap 'rm -rf "$tmp"' EXIT
+gh release download "$ver" -R cormullion/juliamono -p 'JuliaMono-ttf.tar.gz' -D "$tmp"
+tar xzf "$tmp/JuliaMono-ttf.tar.gz" -C "$tmp"
+for w in Regular Bold; do
+  pyftsubset "$tmp/JuliaMono-$w.ttf" --unicodes-file="$here/scripts/juliamono-unicodes.txt" \
+    --layout-features='*' --flavor=woff2 --output-file="$here/assets/fonts/JuliaMono-$w.subset.woff2"
+  echo "wrote assets/fonts/JuliaMono-$w.subset.woff2"
+done
