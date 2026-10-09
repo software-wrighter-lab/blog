@@ -88,8 +88,8 @@ R←P+.×⍉M
 
 Side by side, the two workspaces are the contrast this post is about: the sticker model a 1975 programmer would reach for, and the geometric one the Eigencube makes possible, in the same language.
 
-<figure style="clear: both; max-width: 75%; margin: 1em auto;">
-<img src="{{ '/assets/images/posts/eigencube-aplsv-wide.webp' | relative_url }}" class="no-invert" alt="sw-apl listing the RUBIK workspace: )WSID shows RUBIK, )FNS lists APPLY DESCRIBE GEOM GEOTURN GRESET GSTATE GTURN NORM RESET ROT SCRAMBLE SEARCH SHOW SOLVE SOLVED STEP TURN UNDO, and )VARS lists its variables">
+<figure style="clear: none; display: flow-root; margin: 1em 0;">
+<img src="{{ '/assets/images/posts/eigencube-aplsv-wide.webp' | relative_url }}" class="no-invert" style="display: block; max-width: 85%; margin: 0 auto;" alt="sw-apl listing the RUBIK workspace: )WSID shows RUBIK, )FNS lists APPLY DESCRIBE GEOM GEOTURN GRESET GSTATE GTURN NORM RESET ROT SCRAMBLE SEARCH SHOW SOLVE SOLVED STEP TURN UNDO, and )VARS lists its variables">
 <figcaption style="font-size: 0.85em;">The whole RUBIK workspace: <code>)FNS</code> lists its functions, among them <code>GEOTURN</code> and <code>ROT</code> copied in from EIGENCUBE, and <code>)VARS</code> its variables.</figcaption>
 </figure>
 
