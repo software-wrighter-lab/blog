@@ -105,7 +105,7 @@ Here is the exposed-face test in X_eTaL, as it renders. `o̲-₁` is rotation al
 }
 ```
 
-It is longer than the APL line, six rotations written out where APL has an outer product, but it is the same idea. Water, block 5, doesn't count as solid, so the ground under a lake still shows.
+It is the same idea, written longer. X_eTaL has an outer product too, `t̲able`, the counterpart of APL's `∘.`, but this demo spells the six rotations out one per line, and it marks the wrapped plane as air with a comparison where the APL line pads and drops a plane. Water, block 5, doesn't count as solid, so the ground under a lake still shows.
 
 Three things changed, each for a measured reason:
 
