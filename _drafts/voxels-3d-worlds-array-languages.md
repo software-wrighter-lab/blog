@@ -111,7 +111,7 @@ Three things changed, each for a measured reason:
 
 - **Chunks are cubes.** They are 16 by 16 by 16, not 16 by 128 by 16. The face mask costs about the same per cell at either size, so a smaller chunk means an edit remeshes a small cube rather than a tall column.
 - **Faces cross into Rust once per change, never per frame.** The bridge between X_eTaL and Rust carries arrays as text, which rules out sending a frame of pixels. A face crosses as five numbers: where its block is, which way it faces, and what the block is. Rust builds the quad, and each frame only the camera crosses.
-- **An edit is a row in a list.** X_eTaL values are immutable, with no indexed assignment, so the world can't be written into the way the original sets a block to air, in place. In the endless world a dig is recorded as a row of position and block, and every column is generated with its edits replayed over it. The edit list doubles as the save file.
+- **An edit is a row in a list.** X_eTaL values are immutable, with no indexed assignment, so the world can't be written into the way the original sets a block to air in place, with `(blk⌷chunks)←0`. In the endless world a dig is recorded as a row of position and block, and every column is generated with its edits replayed over it. The edit list doubles as the save file.
 
 The benchmark behind the first change, the face mask in X_eTaL at both sizes:
 
