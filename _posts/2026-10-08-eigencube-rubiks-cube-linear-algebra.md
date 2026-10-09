@@ -2,8 +2,8 @@
 layout: post
 title: "Eigencube: Solving a Rubik's Cube with Linear Algebra, in APLSV and X_eTaL"
 categories: [languages, programming-history, retrocomputing, math]
-tags: [rubiks-cube, eigencube, linear-algebra, rotation-matrices, apl, aplsv, sw-apl, xetal, x-etal, array-languages, python, beam-search, voxels]
-keywords: "Eigencube, Rubik's cube solver, linear algebra, rotation matrices, Rodrigues formula, cubelets as vectors, functional pearl, Steffen Smolka, 3Blue1Brown Essence of Linear Algebra, APLSV, (B) '75, sw-apl, sw-apl-workspaces, X_eTaL, batched matrix product, beam search"
+tags: [rubiks-cube, eigencube, linear-algebra, rotation-matrices, apl, aplsv, sw-apl, xetal, x-etal, array-languages, python, a-star-search, voxels]
+keywords: "Eigencube, Rubik's cube solver, linear algebra, rotation matrices, Rodrigues formula, cubelets as vectors, functional pearl, Steffen Smolka, 3Blue1Brown Essence of Linear Algebra, APLSV, (B) '75, sw-apl, sw-apl-workspaces, X_eTaL, batched matrix product, A* search, X_eTaL-demos"
 abstract: "Steffen Smolka's Eigencube solves a Rubik's cube in under 400 lines of Python by treating it as linear algebra: each of 26 cubelets is an integer vector, its orientation a rotation matrix, and a turn one matrix product. This post follows the idea into two array languages: APLSV as it ran in 1975, through the sw-apl-workspaces library, and X_eTaL, where a whole batch of cubes is one array and every turn of every cube in a search is two matrix products."
 series: "General Technology"
 series_part: 5
@@ -15,16 +15,12 @@ repo_urls:
     title: "eigencube-fork"
   - url: "https://github.com/sw-vibe-coding/sw-apl-workspaces"
     title: "sw-apl-workspaces"
+  - url: "https://github.com/softwarewrighter/X_eTaL-demos/tree/main/demos/eigencube"
+    title: "X_eTaL-demos: eigencube"
 ---
 
-<!-- DRAFT (2026-10-08). To do before publishing:
-     - Screen captures (the user will provide): (1) the original's video or GUI; (2) APLSV RUBIK in sw-apl: SCRAMBLE, SHOW, SOLVE on the 2741 terminal;
-       (3) X_eTaL: the cube solved, once the demo has output or a page. Placeholders below are marked [CAPTURE].
-     - X_eTaL code lives today in an untracked X_eTaL-demos worktree (.claude/worktrees/eigencube, branch feat-xetal);
-       the user said eigencube-fork. Confirm where it will be published, then link it.
-     - X_eTaL port: defines the model, turns and beam search; nothing calls u:s_olve yet. Re-check before publishing.
-     - APLSV RUBIK: turns are sticker permutations; EIGENCUBE is the geometry kernel it imports; SOLVE is a bounded
-       iterative-deepening search (depth 6, 5,000 nodes). Re-check, the workspace changed several times on 10-08. -->
+<!-- Open items (2026-10-08): a capture of the original's video or GUI ([CAPTURE] below); the voxel cube with a solver,
+     if X_eTaL-extensions gets one; a link to the voxel recording if the extensions site publishes one. -->
 
 <img src="{{ '/assets/images/posts/block-rubiks-cube.webp' | relative_url }}" class="post-marker" alt="" style="width: 205px;">
 
@@ -43,7 +39,7 @@ Most Rubik's cube solvers are bookkeeping: 54 stickers in flat arrays, permutati
 | **The original** | [smolkaj/eigencube](https://github.com/smolkaj/eigencube) --- the Python solver, under 400 lines, with a 16-minute explainer video in its README |
 | **The fork** | [softwarewrighter/eigencube-fork](https://github.com/softwarewrighter/eigencube-fork) |
 | **APLSV** | [sw-vibe-coding/sw-apl-workspaces](https://github.com/sw-vibe-coding/sw-apl-workspaces) --- the RUBIK and EIGENCUBE workspaces, run by [sw-apl](https://github.com/sw-vibe-coding/sw-apl) |
-| **X_eTaL** | [Array Languages #1: X_eTaL](/2026/10/07/array-languages-xetal/) --- the language; the eigencube demo and the voxel cube are not published yet |
+| **X_eTaL** | [the Eigencube page](https://softwarewrighter.github.io/X_eTaL-demos/eigencube/) --- scramble, solve, and step through the solution in the browser; [its source](https://github.com/softwarewrighter/X_eTaL-demos/tree/main/demos/eigencube); the language in [Array Languages #1](/2026/10/07/array-languages-xetal/) |
 | **Earlier** | [TBT #12: the IBM 5100's APLSV](/2026/09/24/tbt-aplsv-birds-tttml/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
@@ -129,21 +125,38 @@ and then every turn of every cube in the batch is one inner product with that st
 }
 ```
 
-That is where an array language pays off. A search keeps a beam of candidate cubes; expanding the beam by every possible move is the same few lines whether the beam holds one cube or a thousand. The solver is a staged beam search on top of that, scoring each candidate by which cubelets are home.
+That is where an array language pays off. A search expands its candidate cubes by every possible move, and that is the same few lines whether it holds one cube or a thousand.
 
-<!-- [CAPTURE] X_eTaL: the solved cube, or the move list, once the demo runs end to end. LINK: the demo, once published (today: untracked work in X_eTaL-demos). -->
+<figure style="float: left; clear: none; margin: 0.3em 1.5em 0.6em 0; max-width: 42%;">
+<img src="{{ '/assets/images/posts/eigencube-xetal-solver.webp' | relative_url }}" class="no-invert" alt="The X_eTaL Eigencube web page: the unfolded cube after a 25-move scramble, and the solution of 125 moves, found in 2.0 seconds, paused at move 70 with the current move highlighted">
+<figcaption style="font-size: 0.85em;">The <a href="https://softwarewrighter.github.io/X_eTaL-demos/eigencube/">Eigencube page</a>: a 25-move scramble, and X_eTaL's solution of 125 moves, found in 2.0 s, paused at move 70.</figcaption>
+</figure>
 
-The port is in progress as this is written: the model, the turns and the search are there, and the demo that runs them end to end is not yet published.
+The solver works, in a 2D web page in the [X_eTaL-demos catalog](https://softwarewrighter.github.io/X_eTaL-demos/): turn the faces, scramble, solve, then step through the solution or play it. Each click runs the X_eTaL program in the browser and draws the stickers it prints.
 
-<!-- [TUPLES] Placeholder, to be updated once the tuple version of the search is tested: show the state before (boxes) and after (a tuple and a pattern), rendered with `xetal render`, and say whether it ran. -->
+It follows eigencube.py's stages. The top and middle layers are solved a cubelet at a time, then the bottom edges and the bottom corners' places, each stage an A\* search, and eigencube.py's corner twist finishes the bottom. The goals and the heuristic are matrix products too: a stage counts the solved cubelets it cares about, and the heuristic sums the square roots of each cubelet's distance from home.
 
-The search is also being reworked to use tuples, a feature that is new to X_eTaL. Each stage of the search carries several arrays of different shapes: the beam of cubes, each candidate's parent, the move that made it, and their scores. Every X_eTaL array has a single element type, so the port packs that state by hand, boxing each array and concatenating the boxes, and unpacks it again by position at every step. Tuples, with patterns that name the parts, have just landed in X_eTaL, and the eigencube port is one of the programs moving to them. This section will be updated once that version is tested.
+One thing differs from the original. eigencube.py finds every maneuver by search, which is quick for the top layer. A middle or bottom cubelet needs a maneuver of about ten moves that breaks the solved layers and mends them, and the heuristic only gets worse along the way. Searching that one turn at a time takes minutes in X_eTaL. So the page searches the middle and bottom stages over known sequences instead: D turns, and the ones a person solving by hand uses, such as inserting a middle edge, Sune, and a corner cycle. The goals, the heuristic and the search are still eigencube.py's, and a stage now needs one to four of those sequences.
+
+The solutions are long. A layer method that places one cubelet at a time makes long solutions in the original too, and the sequences are joined as they are, so a D next to a D' is not canceled. The demo's notes put a 20- to 30-move scramble at 2 to 3 seconds and 112 to 176 moves at the command line, and about 3 seconds in the page.
+
+The solver also uses tuples, a feature that just landed in X_eTaL. Each stage carries several arrays of different shapes, and every X_eTaL array has a single element type, so without tuples that state had to be boxed by hand and unpacked by position. Now a tuple carries it through `p̲ower`, and patterns name its parts:
+
+<div style="clear: both;"></div>
+
+```text
+ᵘs̲olve ← { hybrid S →
+  (S1, ms, lens) ← 29 '{ st → hybrid ᵘs̲tage st } p̲ower (S, o̲ffsets 0, o̲ffsets 0)
+  (_, all) ← ᵘf̲inish 4 'ᵘc̲orner p̲ower (S1, ms)
+  (all, lens, (t̲ally all) − t̲ally ms)
+}
+```
 
 ### A cube you can see
 
-The APLSV version is text only, and the solver above prints moves. A third piece, in progress in the [X_eTaL-extensions](https://github.com/softwarewrighter/X_eTaL-extensions) repository, draws the cube. Its scene extension, which renders 3D in a native window, already builds voxel worlds; the next voxel demo is a Rubik's cube. Its X_eTaL library, `Rubik.xtl`, takes a third approach to the turns: the cube is its 54 stickers, each with its cubelet's position and the direction it faces, and each quarter turn is a permutation of the 54 that is *computed from the geometry*, by rotating one layer's stickers and matching them back, rather than typed in. Next come turns by keys, a valid scramble, undo back to solved, and on-screen buttons for all twelve turns.
+The APLSV version is text only, and the solver above draws a flat, unfolded cube. A third piece, in progress in the [X_eTaL-extensions](https://github.com/softwarewrighter/X_eTaL-extensions) repository, draws the cube. Its scene extension, which renders 3D in a native window, already builds voxel worlds; the next voxel demo is a Rubik's cube. Its X_eTaL library, `Rubik.xtl`, takes a third approach to the turns: the cube is its 54 stickers, each with its cubelet's position and the direction it faces, and each quarter turn is a permutation of the 54 that is *computed from the geometry*, by rotating one layer's stickers and matching them back, rather than typed in. Next come turns by keys, a valid scramble, undo back to solved, and on-screen buttons for all twelve turns.
 
-That demo shows and turns the cube; it doesn't solve it. The obvious next step is to put the two together: the eigencube solver choosing the moves, the voxel cube playing them.
+That demo shows and turns the cube; it doesn't solve it yet. The obvious next step is to put the two together: the eigencube solver choosing the moves, the voxel cube playing them.
 
 <!-- The voxel cube's capture is the video at the top of the X_eTaL section. LINK: its recording on the extensions site, if one is made. -->
 
