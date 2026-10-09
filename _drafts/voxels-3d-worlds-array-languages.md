@@ -2,9 +2,9 @@
 layout: post
 title: "Voxels in an Array Language: A 3D World in Dyalog APL and X_eTaL"
 categories: [languages, graphics, games, programming]
-tags: [voxels, 3d-graphics, game-development, apl, dyalog-apl, xetal, x-etal, array-languages, game-of-life, cellular-automata, rust, sdl3, rubiks-cube]
+tags: [voxels, 3d-graphics, game-development, apl, dyalog-apl, xetal, x-etal, array-languages, game-of-life, cellular-automata, rust, sdl3, rubiks-cube, water-simulation]
 keywords: "voxel game, Dyalog APL, avoxelgame, Kyle Croarkin, X_eTaL, X_eTaL-extensions, voxels, chunks, exposed faces, six rotations, Game of Life, Iverson suggestivity, CPU rasterizer, Rust, SDL3 GPU, frustum culling, ray march, endless world, flowing water, lighting, cellular automaton, voxel Rubik's cube"
-abstract: "Kyle Croarkin wrote a voxel game in Dyalog APL on a bet with himself that APL's notation would make it easier. The heart of it is one line: a chunk of blocks is an array, and the faces worth drawing come from rotating that array six ways and comparing, the same move as the one-line Game of Life. This post follows the idea into X_eTaL, where a ladder of ten demos builds a world from one chunk to an endless landscape you can fly over and dig into, drawn by a CPU rasterizer in Rust. By the way, the same voxels also draw a Rubik's cube."
+abstract: "Kyle Croarkin wrote a voxel game in Dyalog APL on a bet with himself that APL's notation would make it easier. The heart of it is one line: a chunk of blocks is an array, and the faces worth drawing come from rotating that array six ways and comparing, the same move as the one-line Game of Life. This post follows the idea into X_eTaL, where a ladder of demos builds a world from one chunk to an endless landscape you can fly over, dig into and flood, drawn by a CPU rasterizer in Rust. By the way, the same voxels also draw a Rubik's cube."
 series: "General Technology"
 series_part: 6
 date: 2026-10-09 12:00:00 -0700
@@ -21,7 +21,7 @@ repo_urls:
      - Captures, marked [CAPTURE] below (the user may provide): the original game in Dyalog; an X_eTaL demo or two
        (voxels-world, voxels-dig); the recordings exist on the extensions site.
      - Re-check the demo ladder against X_eTaL-extensions docs/plan.md (Saga 14) and the fork's derived-work.md:
-       water, light, rubik-buttons and the game were "to do" on 2026-10-09. -->
+       on 2026-10-09 afternoon water was done; rubik-buttons, rubik-solve, light and the game were to do, in that order. -->
 
 <img src="{{ '/assets/images/posts/voxels-fly-xetal.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
@@ -134,6 +134,7 @@ The demos build on each other, each one adding a single capability, and each has
 | `voxels-endless` | no edges: terrain computed from coordinates, columns built ahead and dropped behind, fog and a curved horizon |
 | `voxels-fly` | flying over the endless world, still colliding with it (the image at the top) |
 | `voxels-dig` | picking a block by marching a ray, digging and building, a hotbar and a crosshair |
+| `voxels-water` | water that flows: it falls, spreads and fills what you dig, drawn translucent |
 
 <!-- [CAPTURE] X_eTaL: voxels-world (the island) or voxels-dig (a hole dug, blocks placed) -->
 
@@ -141,13 +142,24 @@ Running it turned up things the plan didn't predict. The renderer stayed on the 
 
 ### The two walls
 
-Light and water are still to come, and they are the interesting part, because they are the two problems the original's author says didn't fit. The plan in the extensions repo argues that both walls come mostly from the chunk's height, not from the array style:
+<figure style="float: right; clear: none; margin: 0.2em 0 0.6em 1.5em; max-width: 42%;">
+<video autoplay muted loop playsinline preload="auto" class="no-invert" aria-label="The voxels-water demo: a lake on the terrace of a stepped hill, its rim dug away, and the water running down the steps toward the sea">
+<source src="{{ '/assets/videos/voxels-water.webm' | relative_url }}" type="video/webm">
+<source src="{{ '/assets/videos/voxels-water.mp4' | relative_url }}" type="video/mp4">
+</video>
+<figcaption style="font-size: 0.85em;"><code>voxels-water</code>: a lake on a stepped hill, its rim dug away, runs down the steps.</figcaption>
+</figure>
+
+Light and water are the interesting part, because they are the two problems the original's author says didn't fit. The plan in the extensions repo argues that both walls come mostly from the chunk's height, not from the array style.
+
+Water is now built. It runs as a cellular automaton on a frontier, the cells water has just reached, rather than over whole chunks. Each tick a frontier cell falls into air below it, or, resting on something solid, spreads one level lower into the air on its four sides, down to level 1 of 7. The sea and lakes are sources that never empty. The cells water reaches become edits, the same rows as a dig, so it stays where it ran, and ticks run at most every six frames. Dig beside water and the hole fills. Water is drawn translucent, so the seabed shows through.
+
+Light is still a design with a time budget, not a result:
 
 - **Sky light** stops being a fixpoint. A running or-scan down each column marks every cell under a solid block as shaded, in one pass.
 - **Block light**, a torch's glow, becomes bounded: rounds of "the brightest neighbor, minus one", at most 15 rounds over a 16-cube, run only after a change.
-- **Water** becomes a cellular automaton on levels 1 to 7: water falls into air below it, or spreads sideways one level lower. That is the six-rotation idiom a third time, after the Game of Life and the face mask.
 
-Those are designs with time budgets, not results. A planned post, or an update to this one, will say how they hold up. After them comes the game itself, Gem Hunt: a seeded island, ten gems buried in stone, three minutes to dig them out, and water filling any hole it touches.
+A planned post, or an update to this one, will say how light holds up. After it comes the game itself, Gem Hunt: a seeded island, ten gems buried in stone, three minutes to dig them out, and water filling any hole it touches.
 
 </div>
 
@@ -159,6 +171,6 @@ Those are designs with time budgets, not results. A planned post, or an update t
 
 The voxel drawing turned out general enough to point at something that isn't a world. Two of the demos draw a Rubik's cube, its 26 cubelets as voxels. The interesting array there isn't a grid of blocks but a permutation: the cube is 54 stickers, each with a position and the direction it faces, and each quarter turn is a permutation of the 54 computed from the geometry. The second demo animates the turns, rotating a layer's nine cubelets a little each frame with one inner product.
 
-That cube is the one in the [Eigencube post](/2026/10/08/eigencube-rubiks-cube-linear-algebra/), where a separate X_eTaL program solves the cube with rotation matrices in a 2D web page. The voxel cube turns and scrambles, but it doesn't solve itself yet. Joining the two is the obvious next step.
+That cube is the one in the [Eigencube post](/2026/10/08/eigencube-rubiks-cube-linear-algebra/), where a separate X_eTaL program solves the cube with rotation matrices in a 2D web page. The voxel cube turns and scrambles, but it doesn't solve itself yet. Joining the two is the next step planned in the extensions repo: the Eigencube solver driving the voxel cube, with buttons to scramble, solve, step and play.
 
 </div>
