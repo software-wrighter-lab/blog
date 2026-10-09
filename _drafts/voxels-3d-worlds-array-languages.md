@@ -153,6 +153,8 @@ Those are designs with time budgets, not results. A planned post, or an update t
 
 <div class="clearfix" markdown="1">
 
+<img src="{{ '/assets/images/posts/voxels-rubik-solved.webp' | relative_url }}" class="no-invert" alt="A solved Rubik's cube drawn in voxels by the X_eTaL scene extension: white on top, blue in front, red on the left" title="The voxel cube in the scene window, solved" style="float: right; height: 14.5em; width: auto; margin: 0 0 0.5em 1.5em;">
+
 ## By the way: a Rubik's cube of voxels
 
 The voxel drawing turned out general enough to point at something that isn't a world. Two of the demos draw a Rubik's cube, its 26 cubelets as voxels. The interesting array there isn't a grid of blocks but a permutation: the cube is 54 stickers, each with a position and the direction it faces, and each quarter turn is a permutation of the 54 computed from the geometry. The second demo animates the turns, rotating a layer's nine cubelets a little each frame with one inner product.
