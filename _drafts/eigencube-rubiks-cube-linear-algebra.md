@@ -99,6 +99,14 @@ Side by side, the two workspaces are the contrast this post is about: the sticke
 
 ## X_eTaL: a batch of cubes is one array
 
+<figure style="float: right; clear: none; margin: 0 0 0.6em 1.5em; max-width: 30%;">
+<video autoplay muted loop playsinline preload="auto" class="no-invert" aria-label="A 3D voxel Rubik's cube in the X_eTaL-extensions scene window, turning one face at a time until it is solved">
+<source src="{{ '/assets/videos/eigencube-voxel-turns.webm' | relative_url }}" type="video/webm">
+<source src="{{ '/assets/videos/eigencube-voxel-turns.mp4' | relative_url }}" type="video/mp4">
+</video>
+<figcaption style="font-size: 0.85em;">The voxel cube from X_eTaL-extensions, turning a face at a time until it is solved. It plays turns, and the solver isn't connected to it yet.</figcaption>
+</figure>
+
 The X_eTaL port goes further than the original in one direction: it never handles one cube at a time. A batch of n cubes is one array of shape n × 26 × 3 × 3, a rotation matrix for every cubelet of every cube. The cubelets come out the same way as in APL:
 
 ```text
@@ -137,7 +145,7 @@ The APLSV version is text only, and the solver above prints moves. A third piece
 
 That demo shows and turns the cube; it doesn't solve it. The obvious next step is to put the two together: the eigencube solver choosing the moves, the voxel cube playing them.
 
-<!-- [CAPTURE] the voxel cube in the scene window, once voxels-rubik is done. LINK: its recording on the extensions site, if one is made. -->
+<!-- The voxel cube's capture is the video at the top of the X_eTaL section. LINK: its recording on the extensions site, if one is made. -->
 
 </div>
 
