@@ -3,8 +3,8 @@ layout: post
 title: "Array Languages #3: X_eTaL-libraries, Extending the Vocabulary and the Language"
 categories: [languages, language-design, machine-learning, tools]
 tags: [array-languages, xetal, x-etal, apl, libraries, macros, extensibility, metaprogramming, dyalog, j, bqn]
-keywords: "X_eTaL libraries, array language libraries, u_se macro, xtlm macro libraries, source-to-source macros, user-defined macros, procedural macros, Forth parsing words, APL execute, Dyalog dfns, J addons, BQN bqn-libs, Check library, Strings, Sets, Matrix, Random"
-abstract: "Third in the Array Languages series: X_eTaL-libraries, where the E in the name gets its first two meanings. Nineteen libraries, 166 functions, every one with tests, a live editable demo and a reference page in a cross-reference site searchable by type; six of them carry macros: date literals checked at compile time, math notation compiled, a graph whose node names become variables. The macros are source-to-source functions written in X_eTaL, type-checked after expansion, and placed here among Rust, Forth and APL's own execute."
+keywords: "X_eTaL libraries, X_eTaL tuples, array language libraries, u_se macro, xtlm macro libraries, source-to-source macros, user-defined macros, procedural macros, Forth parsing words, APL execute, Dyalog dfns, J addons, BQN bqn-libs, Check library, Strings, Sets, Matrix, Random"
+abstract: "Third in the Array Languages series: X_eTaL-libraries, where the E in the name gets its first two meanings. Nineteen libraries, 168 functions, every one with tests, a live editable demo and a reference page in a cross-reference site searchable by type; six of them carry macros: date literals checked at compile time, math notation compiled, a graph whose node names become variables. The macros are source-to-source functions written in X_eTaL, type-checked after expansion, and placed here among Rust, Forth and APL's own execute."
 series: "Array Languages"
 series_part: 3
 date: 2026-10-09 00:15:00 -0700
@@ -38,7 +38,7 @@ Extensible has three meanings in X_eTaL: libraries extend the vocabulary, macros
 
 ## Nineteen libraries, live
 
-The standard libraries --- Combinators, Maybe, Stats, Turtle --- are built into the interpreter; this repo holds ordinary X_eTaL files any program imports the same way, with `"t:" u̲se< "Strings"` and then `ᵗu̲pper "hello"`. Nineteen are ready, 166 functions in all, each with tests, demos and a reference page, and each with a recommended alias that clashes with nothing else, in four groups:
+The standard libraries --- Combinators, Maybe, Stats, Turtle --- are built into the interpreter; this repo holds ordinary X_eTaL files any program imports the same way, with `"t:" u̲se< "Strings"` and then `ᵗu̲pper "hello"`. Nineteen are ready, 168 functions in all, each with tests, demos and a reference page, and each with a recommended alias that clashes with nothing else, in four groups:
 
 | Group | Libraries |
 |---|---|
@@ -47,12 +47,20 @@ The standard libraries --- Combinators, Maybe, Stats, Turtle --- are built into 
 | Mathematics | Numbers, Combinatorics, Matrix, Polynomials, Geometry, Graphs, Bits, Random |
 | Output | Format, Plot |
 
-Every library has a [live demo](https://softwarewrighter.github.io/X_eTaL-libraries/): its programs editable and runnable in the browser, with the reference, the source and the types one tab away. Many are ports from the libraries of other array languages --- Dyalog's dfns workspace, J's addons, BQN's bqn-libs --- reimplemented from their documented behavior and credited on each library's page. Ordinary libraries are frozen for the launch --- the repo's own note is that nineteen is enough --- with one exception made for a sibling: Plot gained line charts with axes, labels and several lines because the machine-learning repo asked for them. Inside each library, helper functions are now private, spelled with the language's new `h:` prefix, so only the documented functions are exported.
+Every library has a [live demo](https://softwarewrighter.github.io/X_eTaL-libraries/): its programs editable and runnable in the browser, with the reference, the source and the types one tab away. Many are ports from the libraries of other array languages --- Dyalog's dfns workspace, J's addons, BQN's bqn-libs --- reimplemented from their documented behavior and credited on each library's page. Ordinary libraries are frozen for the launch --- the repo's own note is that nineteen is enough --- with one exception made for a sibling: Plot gained line charts with axes, labels and several lines because the machine-learning repo asked for them. Inside each library, helper functions are now private, spelled with the language's new `h:` prefix, so only the documented functions are exported. And the hand-typed strings of digits and capital letters that several libraries used for parsing are gone, replaced by the language's built-in `⎕D` and `⎕A`.
 
-The reference is the newest piece. `xetal doc` builds a [cross-reference site](https://softwarewrighter.github.io/X_eTaL-libraries/doc/) from all fifty files --- every library, macro library and demo --- indexed, every call linked to its definition, and searchable by name or by type, so you can look for a function by the shape of what it takes and returns. The first build showed only signatures and source, because the libraries used plain `#` comments, which the tool ignores; within a day every library was rewritten with `##` documentation comments and `###` sections, so the pages now explain what each function does. The next step is planned, not started: worked examples under each comment that `xetal doc --test` runs and checks, the way the language's own standard libraries already do.
+**Tuples, where they earn it.** X_eTaL got tuples this week, and the repo has already written down when to use them, in a rule decided with me: this is a typed *array* language, so the array is the default. A tuple is worth it only where it adds something an array cannot: type safety, convenience, or notation, and most of all parts of different types, which one array cannot hold. A point in Geometry stays an array, because it gets added to, scaled and rotated with other points, and a tuple can't take arithmetic. An audit of the types of all 168 exported functions found no case yet of different-typed parts, since the domain is mostly numbers and text, but it found two where a tuple's fixed arity pays. Strings' replace takes its pair of texts as a boxed list today, so the wrong count slips through:
+
+```text
+"a" "b" "c" ᵗr̲eplace "abc"        ⍝ bbc: the third text is silently ignored
+```
+
+As a tuple, `("cat", "dog") ᵗr̲eplace "hot dog"`, a third part would be a type error. Statistics' fit returns its intercept and slope packed in one array; as a tuple, a caller can write `(intercept, slope) ← x ˢˣf̲it y`. Both are planned, not started, because each changes an exported signature and every call site, page, test and baseline with it.
+
+The reference is the newest piece. `xetal doc` builds a [cross-reference site](https://softwarewrighter.github.io/X_eTaL-libraries/doc/) from all fifty files --- every library, macro library and demo --- indexed, every call linked to its definition, and searchable by name or by type, so you can look for a function by the shape of what it takes and returns. Its side bar now groups the files by directory, library by library. The first build showed only signatures and source, because the libraries used plain `#` comments, which the tool ignores; within a day every library was rewritten with `##` documentation comments and `###` sections, so the pages now explain what each function does. The next step is planned, not started: worked examples under each comment that `xetal doc --test` runs and checks, the way the language's own standard libraries already do.
 
 <figure>
-<img src="{{ '/assets/images/posts/xetal-libraries-doc.webp' | relative_url }}" class="no-invert" alt="The X_eTaL-libraries cross-reference site: a search box for a name or a type, a list of files, and each library described with its import line">
+<img src="{{ '/assets/images/posts/xetal-libraries-doc.webp' | relative_url }}" class="no-invert" alt="The X_eTaL-libraries cross-reference site: a search box for a name or a type, the files grouped by directory in the side bar, and each library described with its import line">
 <figcaption style="font-size: 0.85em;">The <a href="https://softwarewrighter.github.io/X_eTaL-libraries/doc/">cross-reference site</a>, built by <code>xetal doc</code>: search by a name or a type.</figcaption>
 </figure>
 
