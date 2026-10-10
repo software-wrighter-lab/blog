@@ -140,6 +140,8 @@ The pieces are these. [sw-MLPL](https://github.com/sw-ml-study/sw-mlpl) has the 
 
 The repo's next stretch is libraries first, then the demos that need them. Quantization, convolution and attention move out of their demos into libraries of their own, followed by layer norm and sampling. Then a MicroGPT: its forward pass in X_eTaL on weights trained elsewhere, sampling names. Then an embedding explorer, PCA from 64 dimensions to a 3D cloud you can turn, an optimizer library, and the libraries on the live site. A world model and diffusion from noise stay deferred, waiting on training speed and a learned denoiser.
 
+Alongside that plan, experiments are under way with new macros for writing ML equations in X_eTaL: an equation written close to the way it appears on paper, expanding, like the Net macros, into ordinary typed X_eTaL that `xetal expand` can show. It is the question [ML #9](/2026/09/10/ml-cnn-from-equations-mlpl/) ended on, approached through the macro layer. The experiments are early, and this post will be updated when there is something to show.
+
 A few things wait on the language, filed as asks rather than worked around: a grade per row, arrays passed in and out of the browser engine, and `e̲ach` returning arrays. Speed is measured and guarded, and the CNN's whole program runs in about a third of a second.
 
 ## Next in the series
