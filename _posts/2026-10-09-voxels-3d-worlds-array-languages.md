@@ -4,7 +4,7 @@ title: "Voxels in an Array Language: A 3D World in Dyalog APL and X_eTaL"
 categories: [languages, graphics, games, programming]
 tags: [voxels, 3d-graphics, game-development, apl, dyalog-apl, xetal, x-etal, array-languages, game-of-life, cellular-automata, rust, sdl3, rubiks-cube, water-simulation]
 keywords: "voxel game, Dyalog APL, avoxelgame, Kyle Croarkin, X_eTaL, X_eTaL-extensions, voxels, chunks, exposed faces, six rotations, Game of Life, Iverson suggestivity, CPU rasterizer, Rust, SDL3 GPU, frustum culling, ray march, endless world, flowing water, lighting, cellular automaton, voxel Rubik's cube"
-abstract: "Kyle Croarkin wrote a voxel game in Dyalog APL on a bet with himself that APL's notation would make it easier. The heart of it is one line: a chunk of blocks is an array, and the faces worth drawing come from rotating that array six ways and comparing, the same move as the one-line Game of Life. This post follows the idea into X_eTaL, where a ladder of demos builds a world from one chunk to an endless landscape you can fly over, dig into and flood, drawn by a CPU rasterizer in Rust. By the way, the same voxels also draw a Rubik's cube."
+abstract: "Kyle Croarkin wrote a voxel game in Dyalog APL on a bet with himself that APL's notation would make it easier. The heart of it is one line: a chunk of blocks is an array, and the faces worth drawing come from rotating that array six ways and comparing, the same move as the one-line Game of Life. This post follows the idea into X_eTaL, where a ladder of demos builds a world from one chunk to an endless landscape you can fly over, dig into, flood and light, with a game on top, drawn by a CPU rasterizer in Rust. By the way, the same voxels also draw a Rubik's cube."
 series: "General Technology"
 series_part: 6
 date: 2026-10-09 00:15:00 -0700
@@ -21,7 +21,7 @@ repo_urls:
      - Captures, marked [CAPTURE] below (the user may provide): the original game in Dyalog; an X_eTaL demo or two
        (voxels-world, voxels-dig); the recordings exist on the extensions site.
      - Re-check the demo ladder against X_eTaL-extensions docs/plan.md (Saga 14) and the fork's derived-work.md:
-       on 2026-10-09 water, rubik-buttons and rubik-solve were done; light and the game were to do. -->
+       updated 2026-10-10: the voxel saga is done, light and Gem Hunt included (X_eTaL-extensions 811fb99). -->
 
 <img src="{{ '/assets/images/posts/voxels-fly-xetal.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
@@ -135,6 +135,8 @@ The demos build on each other, each one adding a single capability, and each has
 | `voxels-fly` | flying over the endless world, still colliding with it (the image at the top) |
 | `voxels-dig` | picking a block by marching a ray, digging and building, a hotbar and a crosshair |
 | `voxels-water` | water that flows and is conserved: a lake drains a layer at a time when its rim is dug |
+| `voxels-light` | sunlight and lamplight, and day and night |
+| `voxels-game` | Gem Hunt: ten buried gems and three minutes to dig them out |
 
 <!-- [CAPTURE] X_eTaL: voxels-world (the island) or voxels-dig (a hole dug, blocks placed) -->
 
@@ -154,12 +156,9 @@ Light and water are the interesting part, because they are the two problems the 
 
 Water is now built, and the amount of it is conserved. Each cell of moving water holds an amount, 64 units to a full block, and the direction it is moving. A tick never makes or loses water. It falls first, as much as fits below, then spreads toward cells with less, by at most half the difference, with a larger share the way it was already moving and toward an edge with a drop. The sea is the one source that never empties, and the one sink. When a tick moves nothing, the water rests until something changes. So a lake behaves like a lake: dig its rim and the top layer drains to a thin film and stops at the bottom of the breach, and digging the trench one deeper lets the next layer go. The run-off goes down one face of the hill as a thin stream into the sea. Water is drawn translucent, so what's under it shows through. The flow is the "Moving water" section of the endless-world library, [`Endless.xtl`](https://github.com/softwarewrighter/X_eTaL-extensions/blob/eb47622/extensions/scene/demos/Endless.xtl#L333-L519), with its fall and spread steps; the demo is [`voxels-water`](https://softwarewrighter.github.io/X_eTaL-extensions/#scene-voxels-water), and here is [its source](https://github.com/softwarewrighter/X_eTaL-extensions/blob/eb47622/extensions/scene/demos/voxels-water.xtl).
 
-Light is still a design with a time budget, not a result:
+Light is built too. Sunlight is one scan down each column: an open cell sees the sky when every cell above it is open. From there light spreads through open cells in rounds, each cell taking its brightest neighbor less 3, so along a tunnel off a sunlit shaft the light runs 15, 12, 9, 6, 3, 0. Lamps spread the same way for five rounds. A column's light is one more stage of making the column, about 20 ms, and an edit remakes its column, light and all. Day and night is a single number, the daylight, that scales the sunlight on every face. The code is the "Light" section of [`Voxels.xtl`](https://github.com/softwarewrighter/X_eTaL-extensions/blob/811fb99/extensions/scene/demos/Voxels.xtl#L490-L552), and the demo is [`voxels-light`](https://softwarewrighter.github.io/X_eTaL-extensions/#scene-voxels-light).
 
-- **Sky light** stops being a fixpoint. A running or-scan down each column marks every cell under a solid block as shaded, in one pass.
-- **Block light**, a torch's glow, becomes bounded: rounds of "the brightest neighbor, minus one", at most 15 rounds over a 16-cube, run only after a change.
-
-A planned post, or an update to this one, will say how light holds up. After it comes the game itself, Gem Hunt: a seeded island, ten gems buried in stone, three minutes to dig them out, and water filling any hole it touches.
+With both walls down came the game, [Gem Hunt](https://softwarewrighter.github.io/X_eTaL-extensions/#scene-voxels-game) ([its source](https://github.com/softwarewrighter/X_eTaL-extensions/blob/811fb99/extensions/scene/demos/voxels-game.xtl)). Ten gems glow in the lit endless world, buried around the start: the first four blocks straight down, the rest within a dozen blocks and two to six under the ground. You have three minutes, every voxel control from digging and lamps to water and night, and a line across the top with the gems found, the time left and the distance to the nearest gem. A slower stone, a sound for a find and a high-score table were in the first plan and are not done.
 
 </div>
 
