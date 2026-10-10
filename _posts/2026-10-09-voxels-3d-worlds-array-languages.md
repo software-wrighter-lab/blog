@@ -165,7 +165,10 @@ A planned post, or an update to this one, will say how light holds up. After it 
 
 <div class="clearfix" markdown="1">
 
-<img src="{{ '/assets/images/posts/voxels-rubik-solved.webp' | relative_url }}" class="no-invert" alt="A solved Rubik's cube drawn in voxels by the X_eTaL scene extension: white on top, blue in front, red on the left" title="The voxel cube in the scene window, solved" style="float: right; height: 14.5em; width: auto; margin: 0 0 0.5em 1.5em;">
+<video autoplay muted loop playsinline preload="auto" class="no-invert" title="The voxel cube in the scene window, turned by its on-screen buttons" aria-label="The voxel Rubik's cube in the X_eTaL-extensions scene window, its layers turned by the six on-screen buttons below it: U, U', R, R', F and F'" style="float: right; height: 19em; width: auto; margin: 0 0 0.5em 1.5em; border-radius: 4px;">
+<source src="{{ '/assets/videos/voxels-rubik-buttons.webm' | relative_url }}" type="video/webm">
+<source src="{{ '/assets/videos/voxels-rubik-buttons.mp4' | relative_url }}" type="video/mp4">
+</video>
 
 ## By the way: a Rubik's cube of voxels
 
