@@ -19,7 +19,7 @@ _includes/        head, header, footer, toc, search, post-meta, youtube-embed,
                   toggles
 _sass/            custom-dark.scss
 assets/           main.scss, js/, images/
-scripts/          new-post, preview, publish, validate
+scripts/          check-thumbnails, new-post, preview, publish, validate
 docs/             this file (excluded from the build)
 *.html            the index pages: abstracts, series, categories, tags,
                   index-all, search
@@ -60,6 +60,12 @@ that every post has a title, date, and abstract; that the filename date matches
 the front matter date; that a post with a `series` also has a `series_part`
 (without it, `series.html` sorts nil against Integer and the whole build dies);
 and that the time of day will not make a *scheduled* post slip a day.
+
+`scripts/check-thumbnails` checks that the abstracts view shows each post with
+the same lead image the post shows: same file, same `no-invert` flag, and the
+same light/dark theme pair when the marker is a pair. It compares a built site
+(`_site`, or a temporary build with drafts and future posts) against every
+post page; `validate` runs it when a build is available.
 
 ## Front matter that drives the indexes
 

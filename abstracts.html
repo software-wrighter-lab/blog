@@ -110,6 +110,16 @@ img.abstract-thumb {
 [data-theme="dark"] img.abstract-thumb:not(.no-invert) {
   filter: invert(1);
 }
+
+/* A light/dark pair: main.scss hides .theme-dark-only by default and swaps the
+   pair in dark mode with display: inline; the thumb must stay a flex item. */
+img.abstract-thumb.theme-dark-only { display: none; }
+[data-theme="dark"] img.abstract-thumb.theme-light-only { display: none; }
+[data-theme="dark"] img.abstract-thumb.theme-dark-only { display: block; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) img.abstract-thumb.theme-light-only { display: none; }
+  :root:not([data-theme="light"]) img.abstract-thumb.theme-dark-only { display: block; }
+}
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) img.abstract-thumb:not(.no-invert) {
     filter: invert(1);
@@ -171,6 +181,13 @@ img.abstract-thumb {
   border: 1px solid var(--border-color);
   border-radius: 8px;
   background: var(--bg-secondary);
+}
+
+/* The same controls repeat below the list, so paging on from the last card
+   needs no scroll back up; a page change scrolls to the top bar. */
+.abstracts-pagination-bottom {
+  margin-top: 1.25em;
+  margin-bottom: 0;
 }
 
 .abstracts-pagination label {
@@ -300,9 +317,19 @@ img.abstract-thumb {
     a silent no-op, which is why this only shows up once the site is served
     from a subpath.
   {%- endcomment -%}
+  {%- comment -%}
+    A lead image may be a light/dark PAIR (theme-light-only + theme-dark-only,
+    see main.scss): then both images are emitted, each keeping its theme class,
+    so the card shows the same file the post shows in either theme.
+    scripts/check-thumbnails enforces that the card matches the post.
+  {%- endcomment -%}
   {%- assign img_split = post.content | split: '<img ' -%}
   {%- assign thumb_src = '' -%}
   {%- assign thumb_noinvert = false -%}
+  {%- assign thumb_theme = '' -%}
+  {%- assign thumb2_src = '' -%}
+  {%- assign thumb2_noinvert = false -%}
+  {%- assign thumb2_theme = '' -%}
   {%- if img_split.size > 1 -%}
     {%- assign first_img = img_split[1] | split: '>' | first -%}
     {%- assign after_src = first_img | split: 'src="' -%}
@@ -314,12 +341,37 @@ img.abstract-thumb {
         {%- if first_img contains 'no-invert' -%}
           {%- assign thumb_noinvert = true -%}
         {%- endif -%}
+        {%- if first_img contains 'theme-light-only' -%}
+          {%- assign thumb_theme = 'theme-light-only' -%}
+        {%- elsif first_img contains 'theme-dark-only' -%}
+          {%- assign thumb_theme = 'theme-dark-only' -%}
+        {%- endif -%}
+      {%- endif -%}
+    {%- endif -%}
+    {%- if thumb_theme != '' and img_split.size > 2 -%}
+      {%- assign second_img = img_split[2] | split: '>' | first -%}
+      {%- assign after_src2 = second_img | split: 'src="' -%}
+      {%- if after_src2.size > 1 -%}
+        {%- assign candidate2 = after_src2[1] | split: '"' | first -%}
+        {%- if candidate2 contains '/assets/' and candidate2 contains '.' -%}
+          {%- if thumb_theme == 'theme-light-only' and second_img contains 'theme-dark-only' -%}
+            {%- assign thumb2_src = candidate2 -%}{%- assign thumb2_theme = 'theme-dark-only' -%}
+          {%- elsif thumb_theme == 'theme-dark-only' and second_img contains 'theme-light-only' -%}
+            {%- assign thumb2_src = candidate2 -%}{%- assign thumb2_theme = 'theme-light-only' -%}
+          {%- endif -%}
+          {%- if second_img contains 'no-invert' -%}
+            {%- assign thumb2_noinvert = true -%}
+          {%- endif -%}
+        {%- endif -%}
       {%- endif -%}
     {%- endif -%}
   {%- endif -%}
   <div class="abstract-body">
     {%- if thumb_src != '' -%}
-    <img class="abstract-thumb{% if thumb_noinvert %} no-invert{% endif %}" src="{{ thumb_src }}" alt="">
+    <img class="abstract-thumb{% if thumb_noinvert %} no-invert{% endif %}{% if thumb_theme != '' %} {{ thumb_theme }}{% endif %}" src="{{ thumb_src }}" alt="">
+    {%- endif -%}
+    {%- if thumb2_src != '' -%}
+    <img class="abstract-thumb{% if thumb2_noinvert %} no-invert{% endif %} {{ thumb2_theme }}" src="{{ thumb2_src }}" alt="">
     {%- endif -%}
     <div class="abstract-main">
       {% if post.series %}
@@ -343,6 +395,20 @@ img.abstract-thumb {
 {% endfor %}
 </div>
 
+<div class="abstracts-pagination abstracts-pagination-bottom" id="abstracts-pagination-bottom">
+  <div>
+    <label for="per-page-select-bottom">Abstracts per page:</label>
+    <select id="per-page-select-bottom">
+      <option value="10" selected>10</option>
+      <option value="25">25</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
+    </select>
+  </div>
+  <div class="page-numbers" id="page-numbers-bottom"></div>
+  <div class="page-info" id="page-info-bottom"></div>
+</div>
+
 <div id="no-results" class="no-results" style="display: none;">
   No posts match your filters.
 </div>
@@ -355,9 +421,9 @@ img.abstract-thumb {
   const seriesFilter = document.getElementById('series-filter');
   const textFilter = document.getElementById('text-filter');
   const noResults = document.getElementById('no-results');
-  const perPageSelect = document.getElementById('per-page-select');
-  const pageNumbers = document.getElementById('page-numbers');
-  const pageInfo = document.getElementById('page-info');
+  const perPageSelects = [document.getElementById('per-page-select'), document.getElementById('per-page-select-bottom')].filter(Boolean);
+  const pageNumberBars = [document.getElementById('page-numbers'), document.getElementById('page-numbers-bottom')].filter(Boolean);
+  const pageInfos = [document.getElementById('page-info'), document.getElementById('page-info-bottom')].filter(Boolean);
   const paginationBar = document.getElementById('abstracts-pagination');
 
   let perPage = 10;
@@ -426,8 +492,11 @@ img.abstract-thumb {
 
   function updateControls(totalPages, start) {
     const end = Math.min(currentPage * perPage, visible.length);
-    pageInfo.textContent = `Showing ${start + 1}-${end} of ${visible.length}`;
+    pageInfos.forEach(el => { el.textContent = `Showing ${start + 1}-${end} of ${visible.length}`; });
+    pageNumberBars.forEach(bar => renderPageButtons(bar, totalPages));
+  }
 
+  function renderPageButtons(pageNumbers, totalPages) {
     pageNumbers.innerHTML = '';
 
     const prevBtn = document.createElement('button');
@@ -444,13 +513,13 @@ img.abstract-thumb {
     }
 
     if (startPage > 1) {
-      addPageButton(1);
-      if (startPage > 2) addEllipsis();
+      addPageButton(pageNumbers, 1);
+      if (startPage > 2) addEllipsis(pageNumbers);
     }
-    for (let i = startPage; i <= endPage; i++) addPageButton(i);
+    for (let i = startPage; i <= endPage; i++) addPageButton(pageNumbers, i);
     if (endPage < totalPages) {
-      if (endPage < totalPages - 1) addEllipsis();
-      addPageButton(totalPages);
+      if (endPage < totalPages - 1) addEllipsis(pageNumbers);
+      addPageButton(pageNumbers, totalPages);
     }
 
     const nextBtn = document.createElement('button');
@@ -460,7 +529,7 @@ img.abstract-thumb {
     pageNumbers.appendChild(nextBtn);
   }
 
-  function addPageButton(page) {
+  function addPageButton(pageNumbers, page) {
     const btn = document.createElement('button');
     btn.textContent = page;
     if (page === currentPage) btn.classList.add('active');
@@ -468,7 +537,7 @@ img.abstract-thumb {
     pageNumbers.appendChild(btn);
   }
 
-  function addEllipsis() {
+  function addEllipsis(pageNumbers) {
     const span = document.createElement('span');
     span.textContent = ' ... ';
     span.style.padding = '0 0.25em';
@@ -489,11 +558,12 @@ img.abstract-thumb {
   seriesFilter.addEventListener('change', () => applyView(true));
   textFilter.addEventListener('input', () => applyView(true));
 
-  perPageSelect.addEventListener('change', () => {
-    perPage = parseInt(perPageSelect.value, 10);
+  perPageSelects.forEach(sel => sel.addEventListener('change', () => {
+    perPage = parseInt(sel.value, 10);
+    perPageSelects.forEach(other => { other.value = sel.value; });
     currentPage = 1;
     applyPagination();
-  });
+  }));
 
   // Initial sort and view
   sortCards();
