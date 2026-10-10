@@ -61,6 +61,8 @@ the front matter date; that a post with a `series` also has a `series_part`
 (without it, `series.html` sorts nil against Integer and the whole build dies);
 and that the time of day will not make a *scheduled* post slip a day.
 
+`scripts/check-conflict-markers` refuses merge-conflict markers and unmerged paths. The versioned hooks in `.githooks/` run it before every commit (the staged content) and every push (each pushed commit's tree), and `validate` runs it over the tracked tree. Enable the hooks once per clone with `git config core.hooksPath .githooks`.
+
 `scripts/check-thumbnails` checks that the abstracts view shows each post with
 the same lead image the post shows: same file, same `no-invert` flag, and the
 same light/dark theme pair when the marker is a pair. It compares a built site

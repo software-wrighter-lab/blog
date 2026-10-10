@@ -148,6 +148,14 @@ PY
   fi
 fi
 
+# No merge-conflict markers or unmerged paths anywhere in the tracked tree.
+if [[ -x scripts/check-conflict-markers ]]; then
+  if ! cm_out=$(scripts/check-conflict-markers 2>&1); then
+    echo "$cm_out" | grep -v "^check-conflict-markers:"
+    errors=$((errors + 1))
+  fi
+fi
+
 # The abstracts view must show each post's own lead image, including light/dark
 # pairs. scripts/check-thumbnails compares the built abstracts page with every
 # built post; it reuses the build above when there is one.
