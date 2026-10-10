@@ -96,11 +96,11 @@ Side by side, the two workspaces are the contrast this post is about: the sticke
 ## X_eTaL: a batch of cubes is one array
 
 <figure style="float: right; clear: none; margin: 0 0 0.6em 1.5em; max-width: 30%;">
-<video autoplay muted loop playsinline preload="auto" class="no-invert" aria-label="A 3D voxel Rubik's cube in the X_eTaL-extensions scene window, turning one face at a time until it is solved">
-<source src="{{ '/assets/videos/eigencube-voxel-turns.webm' | relative_url }}" type="video/webm">
-<source src="{{ '/assets/videos/eigencube-voxel-turns.mp4' | relative_url }}" type="video/mp4">
+<video autoplay muted loop playsinline preload="auto" class="no-invert" aria-label="A 3D voxel Rubik's cube in the X_eTaL-extensions scene window: a 20-turn scramble, then the Eigencube solver's solution played a turn at a time until the cube is solved, with turn buttons and Scramble, Solve, Back, Step and Play below">
+<source src="{{ '/assets/videos/eigencube-voxel-solve.webm' | relative_url }}" type="video/webm">
+<source src="{{ '/assets/videos/eigencube-voxel-solve.mp4' | relative_url }}" type="video/mp4">
 </video>
-<figcaption style="font-size: 0.85em;">The voxel cube from X_eTaL-extensions, turning a face at a time until it is solved. It plays turns, and the solver isn't connected to it yet.</figcaption>
+<figcaption style="font-size: 0.85em;">The voxel cube from X_eTaL-extensions: a 20-turn scramble, then the Eigencube solver's solution, played a turn at a time.</figcaption>
 </figure>
 
 The X_eTaL port goes further than the original in one direction: it never handles one cube at a time. A batch of n cubes is one array of shape n × 26 × 3 × 3, a rotation matrix for every cubelet of every cube. The cubelets come out the same way as in APL:
@@ -154,11 +154,9 @@ The solver also uses tuples, a feature that just landed in X_eTaL. Each stage ca
 
 ### A cube you can see
 
-The APLSV version is text only, and the solver above draws a flat, unfolded cube. A third piece, in progress in the [X_eTaL-extensions](https://github.com/softwarewrighter/X_eTaL-extensions) repository, draws the cube. Its scene extension, which renders 3D in a native window, already builds voxel worlds; the next voxel demo is a Rubik's cube. Its X_eTaL library, `Rubik.xtl`, takes a third approach to the turns: the cube is its 54 stickers, each with its cubelet's position and the direction it faces, and each quarter turn is a permutation of the 54 that is *computed from the geometry*, by rotating one layer's stickers and matching them back, rather than typed in. Next come turns by keys, a valid scramble, undo back to solved, and on-screen buttons for all twelve turns.
+The APLSV version is text only, and the solver above draws a flat, unfolded cube. A third piece, in the [X_eTaL-extensions](https://github.com/softwarewrighter/X_eTaL-extensions) repository, draws the cube in 3D. Its scene extension renders in a native window and already builds voxel worlds, and its Rubik's cube library, `Rubik.xtl`, takes a third approach to the turns: the cube is its 54 stickers, each with its cubelet's position and the direction it faces, and each quarter turn is a permutation of the 54 that is *computed from the geometry*, by rotating one layer's stickers and matching them back, rather than typed in. Its demos turn the cube by keys or on-screen buttons, animated a layer at a time.
 
-That demo shows and turns the cube; it doesn't solve it yet. The obvious next step is to put the two together: the eigencube solver choosing the moves, the voxel cube playing them.
-
-<!-- The voxel cube's capture is the video at the top of the X_eTaL section. LINK: its recording on the extensions site, if one is made. -->
+The solver is now connected to it. The eigencube solver above has become a library in [X_eTaL-libraries](https://github.com/softwarewrighter/X_eTaL-libraries), and the extensions' `voxels-rubik-solve` demo uses it, as in the video at the top of this section. Scramble makes 20 random turns, Solve finds a solution in two to three seconds, about 150 turns long, and Step and Play animate it on the voxel cube until it is solved. A test checks that the two models, stickers and rotation matrices, agree on 40 random move lists.
 
 </div>
 
