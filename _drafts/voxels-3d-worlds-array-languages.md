@@ -21,7 +21,7 @@ repo_urls:
      - Captures, marked [CAPTURE] below (the user may provide): the original game in Dyalog; an X_eTaL demo or two
        (voxels-world, voxels-dig); the recordings exist on the extensions site.
      - Re-check the demo ladder against X_eTaL-extensions docs/plan.md (Saga 14) and the fork's derived-work.md:
-       on 2026-10-09 afternoon water was done; rubik-buttons, rubik-solve, light and the game were to do, in that order. -->
+       on 2026-10-09 water, rubik-buttons and rubik-solve were done; light and the game were to do. -->
 
 <img src="{{ '/assets/images/posts/voxels-fly-xetal.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
@@ -169,8 +169,8 @@ A planned post, or an update to this one, will say how light holds up. After it 
 
 ## By the way: a Rubik's cube of voxels
 
-The voxel drawing turned out general enough to point at something that isn't a world. Two of the demos draw a Rubik's cube, its 26 cubelets as voxels. The interesting array there isn't a grid of blocks but a permutation: the cube is 54 stickers, each with a position and the direction it faces, and each quarter turn is a permutation of the 54 computed from the geometry. The second demo animates the turns, rotating a layer's nine cubelets a little each frame with one inner product.
+The voxel drawing turned out general enough to point at something that isn't a world. Four of the demos draw a Rubik's cube, its 26 cubelets as voxels. The interesting array there isn't a grid of blocks but a permutation: the cube is 54 stickers, each with a position and the direction it faces, and each quarter turn is a permutation of the 54 computed from the geometry. The demos animate the turns, rotating a layer's nine cubelets a little each frame with one inner product, and add on-screen buttons for them.
 
-That cube is the one in the [Eigencube post](/2026/10/08/eigencube-rubiks-cube-linear-algebra/), where a separate X_eTaL program solves the cube with rotation matrices in a 2D web page. The voxel cube turns and scrambles, but it doesn't solve itself yet. Joining the two is the next step planned in the extensions repo: the Eigencube solver driving the voxel cube, with buttons to scramble, solve, step and play.
+The last of the four connects the solver from the [Eigencube post](/2026/10/08/eigencube-rubiks-cube-linear-algebra/), first written for a 2D web page and now a library in X_eTaL-libraries. Scramble makes 20 random turns, Solve finds a solution in two to three seconds, about 150 turns long, and Step and Play animate it on the voxel cube until it is solved. A test checks that the two models, stickers and rotation matrices, agree on 40 random move lists.
 
 </div>
