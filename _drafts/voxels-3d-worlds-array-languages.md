@@ -134,7 +134,7 @@ The demos build on each other, each one adding a single capability, and each has
 | `voxels-endless` | no edges: terrain computed from coordinates, columns built ahead and dropped behind, fog and a curved horizon |
 | `voxels-fly` | flying over the endless world, still colliding with it (the image at the top) |
 | `voxels-dig` | picking a block by marching a ray, digging and building, a hotbar and a crosshair |
-| `voxels-water` | water that flows: it falls, spreads and fills what you dig, drawn translucent |
+| `voxels-water` | water that flows and is conserved: a lake drains a layer at a time when its rim is dug |
 
 <!-- [CAPTURE] X_eTaL: voxels-world (the island) or voxels-dig (a hole dug, blocks placed) -->
 
@@ -143,16 +143,16 @@ Running it turned up things the plan didn't predict. The renderer stayed on the 
 ### The two walls
 
 <figure style="float: right; clear: none; margin: 0.2em 0 0.6em 1.5em; max-width: 42%;">
-<video autoplay muted loop playsinline preload="auto" class="no-invert" aria-label="The voxels-water demo: a lake on the terrace of a stepped hill, its rim dug away, and the water running down the steps toward the sea">
+<video autoplay muted loop playsinline preload="auto" class="no-invert" aria-label="The voxels-water demo: a lake on top of a terraced hill, its rim dug, draining down one face of the hill as a thin stream toward the sea">
 <source src="{{ '/assets/videos/voxels-water.webm' | relative_url }}" type="video/webm">
 <source src="{{ '/assets/videos/voxels-water.mp4' | relative_url }}" type="video/mp4">
 </video>
-<figcaption style="font-size: 0.85em;"><code>voxels-water</code>: a lake on a stepped hill, its rim dug away, runs down the steps.</figcaption>
+<figcaption style="font-size: 0.85em;"><code>voxels-water</code>: dig a lake's rim and it drains a layer at a time, down one face of the hill.</figcaption>
 </figure>
 
 Light and water are the interesting part, because they are the two problems the original's author says didn't fit. The plan in the extensions repo argues that both walls come mostly from the chunk's height, not from the array style.
 
-Water is now built. It runs as a cellular automaton on a frontier, the cells water has just reached, rather than over whole chunks. Each tick a frontier cell falls into air below it, or, resting on something solid, spreads one level lower into the air on its four sides, down to level 1 of 7. The sea and lakes are sources that never empty. The cells water reaches become edits, the same rows as a dig, so it stays where it ran, and ticks run at most every six frames. Dig beside water and the hole fills. Water is drawn translucent, so the seabed shows through.
+Water is now built, and the amount of it is conserved. Each cell of moving water holds an amount, 64 units to a full block, and the direction it is moving. A tick never makes or loses water. It falls first, as much as fits below, then spreads toward cells with less, by at most half the difference, with a larger share the way it was already moving and toward an edge with a drop. The sea is the one source that never empties, and the one sink. When a tick moves nothing, the water rests until something changes. So a lake behaves like a lake: dig its rim and the top layer drains to a thin film and stops at the bottom of the breach, and digging the trench one deeper lets the next layer go. The run-off goes down one face of the hill as a thin stream into the sea. Water is drawn translucent, so what's under it shows through.
 
 Light is still a design with a time budget, not a result:
 
