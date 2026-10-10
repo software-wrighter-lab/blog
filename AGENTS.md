@@ -55,3 +55,7 @@ rN      GRID → TOUR → END
 - **Run the check before creating a draft and before publishing.** `scripts/validate` covers both: it reads `_drafts/` when present (the drafts branch) and `_posts/` always, and `scripts/publish` runs it again on main.
 - **No unused image means Mike will supply one later.** Do not hunt for an unused block print to stand in. Instead generate a unique placeholder with `scripts/placeholder-marker <slug> <YYYY-MM-DD>`; it writes `assets/images/posts/placeholder-<slug>.webp`, a card that says it is temporary and names the planned post date, and the draft points at that. A placeholder in `_posts/` is a validate error, so it cannot ship by accident.
 - **Light/dark marker pairs** (`theme-light-only` + `theme-dark-only`) are emitted as a pair by `abstracts.html` too; `scripts/check-thumbnails` fails if the abstracts card differs from the post's lead image. Run it after touching a marker or the abstracts template.
+
+## Never commit or push conflict markers
+
+- `scripts/check-conflict-markers` runs from `.githooks/pre-commit` and `.githooks/pre-push` (`git config core.hooksPath .githooks`, set once per clone) and from `scripts/validate`. Never bypass it with `--no-verify`; resolve the conflict.

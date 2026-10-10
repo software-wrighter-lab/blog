@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# Fail if merge-conflict markers or unmerged paths would be committed or pushed.
+#
+#   scripts/check-conflict-markers            # the working tree's tracked files
+#   scripts/check-conflict-markers --staged   # what the next commit would contain (pre-commit)
+#   scripts/check-conflict-markers REV...     # the trees of these commits (pre-push)
+#
+# A marker is a line that starts with <<<<<<<, ||||||| or >>>>>>> (alone or
+# followed by a space). A bare ======= is not flagged on its own, since
+# Markdown and text use it; a real conflict always has the other markers too.
+set -uo pipefail
+cd "$(dirname "$0")/.."
+pat='^(<<<<<<<|\|\|\|\|\|\|\||>>>>>>>)( |$)'
+found=0
+report() { echo "  ERROR   conflict marker: $1"; found=1; }
+
+if [[ -n "$(git ls-files -u)" ]]; then
+  git ls-files -u | awk '{print $4}' | sort -u | while read -r f; do echo "  ERROR   unmerged path: $f"; done
+  found=1
+fi
+
+if [[ "${1:-}" == "--staged" ]]; then
+  while IFS= read -r f; do
+    [[ -n "$f" ]] || continue
+    git show ":$f" 2>/dev/null | LC_ALL=C grep -I -n -E "$pat" | head -3 | while IFS= read -r l; do echo "  ERROR   conflict marker: $f:$l"; done
+    git show ":$f" 2>/dev/null | LC_ALL=C grep -I -q -E "$pat" && found=1
+  done < <(git diff --cached --name-only --diff-filter=ACMR)
+elif [[ $# -gt 0 ]]; then
+  for rev in "$@"; do
+    out=$(git grep -n -I -E "$pat" "$rev" -- . 2>/dev/null | head -20)
+    [[ -n "$out" ]] && { while IFS= read -r l; do report "$l"; done <<< "$out"; }
+  done
+else
+  out=$(git grep -n -I -E "$pat" -- . 2>/dev/null | head -20)
+  [[ -n "$out" ]] && { while IFS= read -r l; do report "$l"; done <<< "$out"; }
+fi
+
+if [[ $found -ne 0 ]]; then
+  echo "check-conflict-markers: refusing; resolve the conflicts first"
+  exit 1
+fi
+exit 0

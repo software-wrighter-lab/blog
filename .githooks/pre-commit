@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Refuse a commit that would contain merge-conflict markers or unmerged paths.
+exec "$(git rev-parse --show-toplevel)/scripts/check-conflict-markers" --staged

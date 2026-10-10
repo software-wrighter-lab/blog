@@ -70,6 +70,8 @@ A draft with no lead image is an error; when no unused image is available,
 it is temporary and names the date the real image is due. A placeholder that
 reaches `_posts/` is an error, so `publish` refuses it.
 
+`scripts/check-conflict-markers` refuses merge-conflict markers and unmerged paths. The versioned hooks in `.githooks/` run it before every commit (the staged content) and every push (each pushed commit's tree), and `validate` runs it over the tracked tree. Enable the hooks once per clone with `git config core.hooksPath .githooks`.
+
 `scripts/check-thumbnails` checks that the abstracts view shows each post with
 the same lead image the post shows: same file, same `no-invert` flag, and the
 same light/dark theme pair when the marker is a pair. It compares a built site
