@@ -19,7 +19,7 @@ _includes/        head, header, footer, toc, search, post-meta, youtube-embed,
                   toggles
 _sass/            custom-dark.scss
 assets/           main.scss, js/, images/
-scripts/          new-post, placeholder-marker, preview, publish, validate
+scripts/          check-thumbnails, new-post, placeholder-marker, preview, publish, validate
 docs/             this file (excluded from the build)
 *.html            the index pages: abstracts, series, categories, tags,
                   index-all, search
@@ -69,6 +69,12 @@ A draft with no lead image is an error; when no unused image is available,
 `scripts/placeholder-marker <slug> <YYYY-MM-DD>` writes a unique card that says
 it is temporary and names the date the real image is due. A placeholder that
 reaches `_posts/` is an error, so `publish` refuses it.
+
+`scripts/check-thumbnails` checks that the abstracts view shows each post with
+the same lead image the post shows: same file, same `no-invert` flag, and the
+same light/dark theme pair when the marker is a pair. It compares a built site
+(`_site`, or a temporary build with drafts and future posts) against every
+post page; `validate` runs it when a build is available.
 
 ## Front matter that drives the indexes
 

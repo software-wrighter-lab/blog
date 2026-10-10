@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+# The abstracts view must show every post with the same lead image(s) the post
+# itself shows: same files, same no-invert flag, and the same light/dark theme
+# pairing. A post whose marker is a theme pair must get both images on its
+# abstract card, each keeping its theme-light-only / theme-dark-only class.
+#
+#   scripts/check-thumbnails            # builds the site (drafts and future posts included) into a temp dir
+#   scripts/check-thumbnails _site      # checks an existing build
+set -uo pipefail
+cd "$(dirname "$0")/.."
+
+site="${1:-}"
+if [[ -z "$site" ]]; then
+  site=$(mktemp -d)
+  trap 'rm -rf "$site"' EXIT
+  # Prefer Homebrew's Ruby (the one scripts/preview runs under) over the system one.
+  bundle=bundle
+  for b in /opt/homebrew/opt/ruby/bin/bundle /opt/homebrew/bin/bundle; do [[ -x "$b" ]] && { bundle="$b"; break; }; done
+  "$bundle" exec jekyll build -d "$site" --drafts --future -q >/dev/null 2>&1 || { echo "  ERROR   check-thumbnails: jekyll build failed"; exit 1; }
+fi
+
+python3 - "$site" <<'PY'
+import re, sys, glob, os, html
+site = sys.argv[1]
+abstracts = open(os.path.join(site, 'abstracts', 'index.html')).read()
+img_re = re.compile(r'<img\b[^>]*>', re.S)
+def attrs(tag):
+    src = re.search(r'src="([^"]*)"', tag); cls = re.search(r'class="([^"]*)"', tag)
+    classes = set((cls.group(1) if cls else '').split())
+    theme = 'light' if 'theme-light-only' in classes else 'dark' if 'theme-dark-only' in classes else 'both'
+    return (src.group(1) if src else '', 'no-invert' in classes, theme)
+# abstracts: card href -> list of thumb attrs
+cards = {}
+for card in abstracts.split('<div class="abstract-card')[1:]:
+    href = re.search(r'<h3 class="abstract-title"><a href="([^"]*)"', card)
+    if not href: continue
+    thumbs = [attrs(t) for t in img_re.findall(card) if 'abstract-thumb' in t]
+    cards[href.group(1)] = thumbs
+bad = 0
+for page in sorted(glob.glob(os.path.join(site, '2*', '*', '*', '*', 'index.html'))):
+    url = '/' + os.path.relpath(os.path.dirname(page), site) + '/'
+    body = open(page).read()
+    m = re.search(r'<div class="post-content"[^>]*>(.*)', body, re.S)
+    content = m.group(1) if m else body
+    imgs = img_re.findall(content)
+    markers = [attrs(t) for t in imgs if 'post-marker' in t]
+    if markers:
+        # the lead image is the first marker; a light/dark theme pair counts as one lead image
+        want = [markers[0]]
+        if markers[0][2] != 'both':
+            for m2 in markers[1:]:
+                if m2[2] == 'both' or m2[2] == markers[0][2]: break
+                want.append(m2); break
+    else:
+        first = [attrs(t) for t in imgs[:1] if '/assets/' in t]
+        want = first
+    got = cards.get(url)
+    if got is None:
+        continue  # not listed on the abstracts page (e.g. excluded); nothing to compare
+    if sorted(want) != sorted(got):
+        bad += 1
+        def show(l): return ', '.join(f"{s.split('/')[-1]}[{'no-invert' if n else 'invert'},{t}]" for s, n, t in l) or '(none)'
+        print(f"  ERROR   thumbnail mismatch {url}\n          post shows:      {show(want)}\n          abstracts shows: {show(got)}")
+print(f"check-thumbnails: {len(cards)} cards compared, {bad} mismatch(es)")
+sys.exit(1 if bad else 0)
+PY
