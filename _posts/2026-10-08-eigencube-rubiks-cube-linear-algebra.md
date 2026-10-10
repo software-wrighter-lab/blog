@@ -22,7 +22,7 @@ repo_urls:
 <!-- Open items (2026-10-08): a capture of the original's video or GUI ([CAPTURE] below); the voxel cube with a solver,
      if X_eTaL-extensions gets one; a link to the voxel recording if the extensions site publishes one. -->
 
-<img src="{{ '/assets/images/posts/block-rubiks-cube.webp' | relative_url }}" class="post-marker" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/voxels-rubik-solved.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
 <div style="overflow: hidden;" markdown="1">
 
