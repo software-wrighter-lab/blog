@@ -14,9 +14,9 @@ repo_urls:
 ---
 
 <!-- DRAFT (2026-10-11), started from X_eTaL-extensions Saga 15 (blender):
-     steps 1 (blender-ext) and 2 (bpy-gen) committed; step 3 (blender-cubes) done, its video already published with Saw #14
-     (assets/videos/saw-blender-orbit.mp4, the demo's own work/cubes/out/orbit.mp4). demos/cubes.xtl was not yet pushed
-     on 2026-10-11: link the demo's source once it is; step 4 (release) to do.
+     steps 1 (blender-ext) and 2 (bpy-gen) committed; step 3 (blender-cubes) done. Its orbit video belongs to Saw #14 only:
+     this post gets entirely new videos, marked [VIDEO]. demos/cubes.xtl was not yet pushed on 2026-10-11: link its source
+     once it is; step 4 (release) to do.
      Many new Blender use-cases are planned: add each as it lands (see "What comes next"). -->
 
 <img src="{{ '/assets/images/posts/block-3d-head.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
@@ -74,12 +74,7 @@ The corners are an outer product: each center plus each of a unit cube's eight c
 
 ## The first scene: how big is a thousand?
 
-<figure style="float: right; clear: none; margin: 0.2em 0 0.6em 1.5em; max-width: 45%;">
-<video autoplay muted loop playsinline preload="auto" class="no-invert" aria-label="Blender's render of an X_eTaL scene: one cube labeled 1, a ten by ten slab labeled 100 and a ten by ten by ten block labeled 1000, the camera orbiting once around them">
-<source src="{{ '/assets/videos/saw-blender-orbit.mp4' | relative_url }}" type="video/mp4">
-</video>
-<figcaption style="font-size: 0.85em;">The cubes demo: 1, 100 and 1,000 cubes, built as arrays by X_eTaL and rendered by EEVEE, the camera orbiting once.</figcaption>
-</figure>
+<!-- [VIDEO] New videos for this post go here (not the orbit video from Saw #14): one per Blender use-case as it lands. -->
 
 The first demo is a size comparison in the xkcd style: one cube, a 10 by 10 slab of a hundred, and a 10 by 10 by 10 block of a thousand, side by side and labeled. The cells of each block come from one expression over its index range, and the camera turns once around them in ten seconds, evenly, so the video loops. The block of a thousand alone is 8,000 vertices.
 
