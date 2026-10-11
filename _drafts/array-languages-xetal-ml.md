@@ -4,7 +4,7 @@ title: "Array Languages #5: X_eTaL-ML, Where the Machine Learning Is"
 categories: [languages, language-design, machine-learning, tools]
 tags: [array-languages, xetal, x-etal, apl, machine-learning, neural-networks, backpropagation, cnn, attention, mixture-of-experts, ternary, k-means, tuples, macros, tttml, sw-mlpl, rosetta-m]
 keywords: "X_eTaL ML, machine learning in an array language, neural networks, backpropagation, Tiny CNN, MNIST, training in the browser, Adam, tuples, attention microscope, mixture of experts, 1.58-bit ternary network, k-means, PCA, Net macro library, NN library, Learn library, TTTML, sw-MLPL, Rosetta M"
-abstract: "Fifth in the Array Languages series: the machine learning the whole project exists for. X_eTaL-ML now has nine live demos, and three of them train in X_eTaL itself, a small CNN among them, in the browser. Its libraries are a neural-network vocabulary, classic machine learning, and a macro library that writes a network and its training step from one line. Here is what runs, what the code looks like, what comes next, and how X_eTaL, sw-MLPL and Rosetta M fit together on the way to a later language."
+abstract: "Fifth in the Array Languages series: the machine learning the whole project exists for. X_eTaL-ML now has ten live demos, and three of them train in X_eTaL itself, a small CNN among them, in the browser. Its six libraries range from a neural-network vocabulary, quantization, convolution and word embeddings to classic machine learning and a macro library that writes a network and its training step from one line. Here is what runs, what the code looks like, what comes next, and how X_eTaL, sw-MLPL and Rosetta M fit together on the way to a later language."
 series: "Array Languages"
 series_part: 5
 demo_url: "https://softwarewrighter.github.io/X_eTaL-ML/"
@@ -20,7 +20,7 @@ repo_urls:
 
 <img src="{{ '/assets/images/posts/block-158.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
-<!-- DRAFT for review (2026-10-10), refreshed from X_eTaL-ML at the start of its post-launch saga (catalog-toc done).
+<!-- DRAFT for review, refreshed 2026-10-11 from X_eTaL-ML (post-launch steps 0c embedding-explorer, 1 quant, 2 conv done; 3 attention-lib next).
      sw-mlpl (last change 2026-10-03) and m-poc (2026-09-26) are unchanged since the first draft. -->
 
 <div style="overflow: hidden;" markdown="1">
@@ -36,7 +36,7 @@ repo_urls:
 | Resource | Link |
 |----------|------|
 | **The repo** | [softwarewrighter/X_eTaL-ML](https://github.com/softwarewrighter/X_eTaL-ML) --- machine-learning demos and the ML libraries they are made of |
-| **Live** | [the catalog](https://softwarewrighter.github.io/X_eTaL-ML/) --- all nine demos in your browser; [start with the Tiny CNN](https://softwarewrighter.github.io/X_eTaL-ML/cnn-digits/) |
+| **Live** | [the catalog](https://softwarewrighter.github.io/X_eTaL-ML/) --- all ten demos in your browser; [start with the Tiny CNN](https://softwarewrighter.github.io/X_eTaL-ML/cnn-digits/) |
 | **Run and read** | [run them yourself](https://softwarewrighter.github.io/X_eTaL-ML/recorded/) · [the code, cross-referenced](https://softwarewrighter.github.io/X_eTaL-ML/doc/) |
 | **The pieces** | [sw-ml-study/sw-mlpl](https://github.com/sw-ml-study/sw-mlpl) · [Rosetta M](https://sw-ml-study.github.io/m-poc/) · [X_eTaL](https://github.com/softwarewrighter/X_eTaL) |
 | **The thread** | [ML #9](/2026/09/10/ml-cnn-from-equations-mlpl/) · [Made Visible #4](/2026/09/25/made-visible-rosetta-m/) |
@@ -53,10 +53,10 @@ The repo's README makes the case in a paragraph. Most of what an ML framework hi
 
 ## What runs today
 
-Nine demos, all live in the browser and all runnable at the command line from a clone. Each page shows all the code it runs, beside the arrays that code computed. Each tile links to its live page:
+Ten demos, all live in the browser and all runnable at the command line from a clone. Each page shows all the code it runs, beside the arrays that code computed. Each tile links to its live page:
 
 <style>
-.ml-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 1em 0 1.4em; }
+.ml-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 1em 0 1.4em; }
 .ml-grid a { display: block; text-decoration: none; }
 .ml-grid img { display: block; width: 100%; height: auto; border-radius: 4px; }
 .ml-grid span { display: block; text-align: center; font-size: 0.85em; margin-top: 0.3em; }
@@ -72,14 +72,20 @@ Nine demos, all live in the browser and all runnable at the command line from a 
 <a class="no-external-icon" href="https://softwarewrighter.github.io/X_eTaL-ML/moe-router/"><img src="{{ '/assets/images/posts/xetal-ml-moe-router.webp' | relative_url }}" class="no-invert" alt="A sentence's tokens routed to their top two of 16 experts"><span>MoE routing</span></a>
 <a class="no-external-icon" href="https://softwarewrighter.github.io/X_eTaL-ML/net-macro/"><img src="{{ '/assets/images/posts/xetal-ml-net-macro.webp' | relative_url }}" class="no-invert" alt="A network written as one line, and the function the macro wrote for it"><span>network macro</span></a>
 <a class="no-external-icon" href="https://softwarewrighter.github.io/X_eTaL-ML/k-means/"><img src="{{ '/assets/images/posts/xetal-ml-k-means.webp' | relative_url }}" class="no-invert" alt="Clustering five blobs step by step, the centers moving to their points' means"><span>k-means</span></a>
+<a class="no-external-icon" href="https://softwarewrighter.github.io/X_eTaL-ML/embedding-explorer/"><img src="{{ '/assets/images/posts/xetal-ml-embedding-explorer.webp' | relative_url }}" class="no-invert" alt="Word embeddings made from counts, turned in 3D: animals, foods, colors, numbers and places gathering in clusters"><span>embedding explorer</span></a>
 <a class="no-external-icon" href="https://softwarewrighter.github.io/X_eTaL-ML/ternary-net/"><img src="{{ '/assets/images/posts/xetal-ml-ternary-net.webp' | relative_url }}" class="no-invert" alt="One classifier with FP32, FP16, INT8 and ternary weights compared"><span>1.58-bit network</span></a>
 </div>
 
-They fall into three kinds:
+They fall into four kinds:
 
 - **Watching a model think.** The [Tiny CNN](https://softwarewrighter.github.io/X_eTaL-ML/cnn-digits/) reads a digit you draw, every 3 by 3 window of the picture taken at once as nine rotated copies of it. The [attention microscope](https://softwarewrighter.github.io/X_eTaL-ML/attention/) shows one head over your sentence, and "tired" finds the animal. The [MoE router](https://softwarewrighter.github.io/X_eTaL-ML/moe-router/) sends each token to two of 16 experts, and the [1.58-bit network](https://softwarewrighter.github.io/X_eTaL-ML/ternary-net/) compares one classifier at four precisions, down to weights of -1, 0 and +1.
 - **Training, in X_eTaL.** Three demos train. The [backprop microscope](https://softwarewrighter.github.io/X_eTaL-ML/backprop/) shows one step with every array, and checks every gradient by nudging its weight. [Training live](https://softwarewrighter.github.io/X_eTaL-ML/train-live/) fits a spiral with Adam while the decision regions bend to follow it. [CNN training](https://softwarewrighter.github.io/X_eTaL-ML/cnn-backprop/) trains a small CNN from random weights on 600 handwritten digits, in your browser, through softmax, a dense layer, max-pooling, ReLU and the convolution, every gradient checked by finite differences.
 - **Classic machine learning.** [k-means](https://softwarewrighter.github.io/X_eTaL-ML/k-means/) clusters five blobs step by step, and shows a poor start settling wrong where a farthest-first start finds all five.
+- **Embeddings.** The [embedding explorer](https://softwarewrighter.github.io/X_eTaL-ML/embedding-explorer/) makes word embeddings from counts, in X_eTaL: 4,000 short sentences over 75 words, each word described by 64 numbers from the words that occur near it. PCA turns the 64 dimensions into 3, and in the cloud you can turn, animals, foods, colors, numbers and places gather. The whole embedding table is one line:
+
+  ```text
+  E ← ᵉᵐu̲nit 64 ᵉᵐp̲roject ᵉᵐp̲pmi (v, 2) ᵉᵐc̲ooccur ids
+  ```
 
 The lines that do the work stay short. Every 3 by 3 window of a picture, and a convolution layer's gradient over a whole batch:
 
@@ -92,11 +98,14 @@ GK ← DM '+ '× i̲nner o̲\ V
 
 <div class="clearfix" markdown="1">
 
-## Three libraries, and a network in one line
+## Six libraries, and a network in one line
 
-The demos are made of three libraries in the repo:
+The demos are made of six libraries in the repo. Three are new this week: Quant and Conv were moved out of the demos that first needed them, so the next demo can use them, and Embed arrived with the embedding explorer.
 
 - **NN** is the vocabulary: activations, softmax by row at any rank, dense layers, argmax, one-hot, loss and accuracy.
+- **Quant** puts weights in fewer bits: FP16 and bfloat16 rounding, symmetric integers, and ternary codes with their scale. The 1.58-bit network now runs on it.
+- **Conv** is convolution for a batch of pictures: 3 by 3 windows, the filters as one matrix product, max-pooling, and their backward passes. The CNN training demo now runs on it.
+- **Embed** makes word embeddings from counts: co-occurrence counted by sorting, PPMI, a fixed projection, and cosine neighbors.
 - **Learn** is classic machine learning, each method a fit and a predict: k-means, k nearest neighbors, PCA and logistic regression.
 - **Net** is a macro library, the second meaning of *Extensible* from [post #3](/2026/10/09/array-languages-xetal-libraries/) put to work. One line writes a network:
 
@@ -138,7 +147,7 @@ The pieces are these. [sw-MLPL](https://github.com/sw-ml-study/sw-mlpl) has the 
 
 ## What comes next
 
-The repo's next stretch is libraries first, then the demos that need them. Quantization, convolution and attention move out of their demos into libraries of their own, followed by layer norm and sampling. Then a MicroGPT: its forward pass in X_eTaL on weights trained elsewhere, sampling names. Then an embedding explorer, PCA from 64 dimensions to a 3D cloud you can turn, an optimizer library, and the libraries on the live site. A world model and diffusion from noise stay deferred, waiting on training speed and a learned denoiser.
+The repo's next stretch is libraries first, then the demos that need them. Quantization, convolution and embeddings are done. Attention moves into a library of its own next, followed by layer norm and sampling. Then a MicroGPT: its forward pass in X_eTaL on weights trained elsewhere, sampling names. Then an optimizer library and the libraries on the live site. A world model and diffusion from noise stay deferred, waiting on training speed and a learned denoiser.
 
 Alongside that plan, experiments are under way with new macros for writing ML equations in X_eTaL: an equation written close to the way it appears on paper, expanding, like the Net macros, into ordinary typed X_eTaL that `xetal expand` can show. It is the question [ML #9](/2026/09/10/ml-cnn-from-equations-mlpl/) ended on, approached through the macro layer. The experiments are early, and this post will be updated when there is something to show.
 
