@@ -7,7 +7,7 @@ keywords: "X_eTaL FPGA, array language to hardware, Verilog-2005 emitter, netlis
 abstract: "Eighth in the Array Languages series, a placeholder until the repository reaches critical mass: X_eTaL-fpga turns X_eTaL programs into circuits. An elementwise add on eight numbers becomes eight adders, a reduction becomes a tree of adders, and a step function over a state vector becomes registers and an ALU, built with the open Gowin flow onto Sipeed's Tang Nano and Tang Primer boards."
 series: "Array Languages"
 series_part: 8
-date: 2026-10-13 00:15:00 -0700
+date: 2026-10-14 00:15:00 -0700
 ---
 
 <!-- PLACEHOLDER (2026-10-07): flesh out once X_eTaL-fpga reaches critical mass. Date is provisional; publish sets it.

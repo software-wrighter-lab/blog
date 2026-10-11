@@ -7,7 +7,7 @@ keywords: "X_eTaL GPU, array language on GPU, OpenCL C 1.2 kernels, accelerator 
 abstract: "Seventh in the Array Languages series, a placeholder until the repository reaches critical mass: X_eTaL-gpu runs X_eTaL programs on GPUs, including the Kepler-to-Ampere cards that current CUDA toolkits have retired, through OpenCL. Whole-array operations already expose their parallelism, so the same typed program can run on the evaluator or as thousands of GPU threads, with the same answer."
 series: "Array Languages"
 series_part: 7
-date: 2026-10-31 00:15:00 -0700
+date: 2026-10-13 00:15:00 -0700
 repo_urls:
   - url: "https://github.com/softwarewrighter/X_eTaL-gpu"
     title: "X_eTaL-gpu"
@@ -18,7 +18,7 @@ repo_urls:
      Outline: the accelerator IR; kernels emitted as OpenCL C 1.2; the host runtime; scheduling; the old cards and why;
      a demo program, its kernel, and the same answer on CPU and GPU; what the language had to give the IR. -->
 
-<img src="{{ '/assets/images/posts/placeholder-array-languages-xetal-gpu.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-nvidia-p4.webp' | relative_url }}" class="post-marker" alt="" style="width: 205px;">
 
 <div style="overflow: hidden;" markdown="1">
 
