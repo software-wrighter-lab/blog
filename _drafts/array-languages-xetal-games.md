@@ -131,6 +131,18 @@ The newest games, the dungeon, side-scroller, racer and asteroids, share one ide
 
 It is the series' two meanings of *Extensible* again: a library for the systems, and a macro for the layout.
 
+## Games in the other repos
+
+Two more games live outside this repo, next to the machinery they show off:
+
+| Game | Where | The array idea |
+|---|---|---|
+| [Gem Hunt](https://softwarewrighter.github.io/X_eTaL-extensions/#scene-voxels-game) | X_eTaL-extensions, a native 3D window | a voxel world as arrays: faces found by six rotations, sunlight by one scan down each column, a dig recorded as a row |
+| [The voxel Rubik's cube](https://softwarewrighter.github.io/X_eTaL-extensions/#scene-voxels-rubik-solve) | X_eTaL-extensions | each quarter turn a permutation of 54 stickers computed from the geometry, with buttons to turn, scramble and solve |
+| [Eigencube](https://softwarewrighter.github.io/X_eTaL-demos/eigencube/) | X_eTaL-demos, in the browser; its solver now a library in X_eTaL-libraries | cubelets as vectors and turns as rotation matrices; a batch of cubes as one array, every turn of every cube one product |
+
+Both have posts of their own: [the voxel world and Gem Hunt](/2026/10/09/voxels-3d-worlds-array-languages/), and [the Eigencube](/2026/10/08/eigencube-rubiks-cube-linear-algebra/), whose solver also drives the voxel cube. And [TTTML](/2026/09/24/tbt-aplsv-birds-tttml/), the tic-tac-toe machine that learns by playing itself, is a demo in the language repo.
+
 ## Dogfooding the language
 
 The games are also how the language gets tested on ordinary programs. A demo computes and draws. A game keeps state between moves, reads a player's input, answers clicks, keeps time, loads its data from files, and has to stay fast enough to play. Each of those has pushed on the language:
