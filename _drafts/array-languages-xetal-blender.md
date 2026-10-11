@@ -17,9 +17,9 @@ repo_urls:
      steps 1 (blender-ext) and 2 (bpy-gen) committed; step 3 (blender-cubes) done, its video already published with Saw #14
      (assets/videos/saw-blender-orbit.mp4, the demo's own work/cubes/out/orbit.mp4). demos/cubes.xtl was not yet pushed
      on 2026-10-11: link the demo's source once it is; step 4 (release) to do.
-     Many new Blender use-cases are planned: add each as it lands (see "What comes next"). Lead image is a placeholder. -->
+     Many new Blender use-cases are planned: add each as it lands (see "What comes next"). -->
 
-<img src="{{ '/assets/images/posts/placeholder-array-languages-xetal-blender.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-3d-head.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
 <div style="overflow: hidden;" markdown="1">
 
