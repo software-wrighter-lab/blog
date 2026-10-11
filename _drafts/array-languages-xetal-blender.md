@@ -4,7 +4,7 @@ title: "Array Languages #9: X_eTaL and Blender, Scenes and Animation from Arrays
 categories: [languages, language-design, graphics, tools]
 tags: [array-languages, xetal, x-etal, apl, blender, bpy, 3d-graphics, animation, rendering, eevee, gltf, code-generation, extensions]
 keywords: "X_eTaL Blender, array language 3D graphics, Blender batch rendering, bpy code generation, EEVEE, glTF export, OBJ export, mesh from arrays, camera orbit animation, X_eTaL-extensions, procedural 3D scenes"
-abstract: "Ninth in the Array Languages series: X_eTaL drives Blender. An X_eTaL program writes the Python that Blender runs in the background, works out the geometry as arrays, and gets back rendered stills, videos and 3D files. The first scene answers how big a thousand is; the use-cases ahead are scenes, animation, possibly physics, and rendering."
+abstract: "Ninth in the Array Languages series: X_eTaL drives Blender. An X_eTaL program writes the Python that Blender runs in the background, works out the geometry as arrays, and gets back rendered stills, videos and 3D files. The use-cases ahead are scenes, animation, possibly physics, and rendering."
 series: "Array Languages"
 series_part: 9
 date: 2026-10-15 00:15:00 -0700
@@ -14,9 +14,8 @@ repo_urls:
 ---
 
 <!-- DRAFT (2026-10-11), started from X_eTaL-extensions Saga 15 (blender):
-     steps 1 (blender-ext) and 2 (bpy-gen) committed; step 3 (blender-cubes) done. Its orbit video belongs to Saw #14 only:
-     this post gets entirely new videos, marked [VIDEO]. demos/cubes.xtl was not yet pushed on 2026-10-11: link its source
-     once it is; step 4 (release) to do.
+     steps 1 (blender-ext) and 2 (bpy-gen) committed; step 3 (blender-cubes) done. The cubes demo and its orbit video
+     belong to Saw #14 only: this post covers the new use-cases, with entirely new videos, marked [VIDEO].
      Many new Blender use-cases are planned: add each as it lands (see "What comes next"). -->
 
 <img src="{{ '/assets/images/posts/block-3d-head.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
@@ -72,21 +71,9 @@ The corners are an outer product: each center plus each of a unit cube's eight c
 
 <div class="clearfix" markdown="1">
 
-## The first scene: how big is a thousand?
-
-<!-- [VIDEO] New videos for this post go here (not the orbit video from Saw #14): one per Blender use-case as it lands. -->
-
-The first demo is a size comparison in the xkcd style: one cube, a 10 by 10 slab of a hundred, and a 10 by 10 by 10 block of a thousand, side by side and labeled. The cells of each block come from one expression over its index range, and the camera turns once around them in ten seconds, evenly, so the video loops. The block of a thousand alone is 8,000 vertices.
-
-Blender draws thin outlines on every edge and keeps the labels turned toward the camera, and a render from scratch takes about five minutes, most of it the outlines. The same run writes the scene as files to open elsewhere: `.glb` for glTF viewers and the web, `.obj` with its materials, and `.blend` for Blender itself.
-
-Tests run Blender too. One pins the Python the library writes. Another sends two cubes and a label through Blender end to end and checks what came back: 16 vertices, 12 faces, the objects, a still and each export.
-
-</div>
-
-<div class="clearfix" markdown="1">
-
 ## What comes next
+
+<!-- [VIDEO] New videos for this post go here, one per Blender use-case as it lands. -->
 
 <!-- TODO: fill in as each new Blender use-case lands in X_eTaL-extensions (Saga 15 and after). -->
 
