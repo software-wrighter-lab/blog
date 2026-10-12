@@ -3,7 +3,7 @@ layout: post
 title: "Array Languages #7: X_eTaL-gpu, One Array Program on Old GPUs"
 categories: [languages, language-design, gpu, hardware]
 tags: [array-languages, xetal, x-etal, apl, gpu, opencl, maxwell, pascal, turing, ampere, ada-lovelace, blackwell, accelerator-ir, parallelism]
-keywords: "X_eTaL GPU, array language on GPU, OpenCL C 1.2 kernels, kernel fusion, tree reduction, accelerator IR, retired CUDA cards, Maxwell, Pascal, Turing, Ampere, Ada Lovelace, Blackwell, Tesla M10, Tesla P4, GTX 1660 Super, RTX 3090, RTX 4070, RTX 5060, A2, whole-array parallelism, GPU native extension"
+keywords: "X_eTaL GPU, array language on GPU, OpenCL C 1.2 kernels, kernel fusion, tree reduction, accelerator IR, retired CUDA cards, Maxwell, Pascal, Turing, Ampere, Ada Lovelace, Blackwell, Apple M1 Max, Apple M3 Pro, Tesla M10, Tesla P4, GTX 1660 Super, RTX 3090, RTX 4070, RTX 5060, A2, whole-array parallelism, GPU native extension"
 abstract: "Seventh in the Array Languages series: X_eTaL-gpu runs X_eTaL programs on GPUs through OpenCL, aiming at old and new cards alike, from Maxwell and Pascal Teslas that the newest CUDA toolkits retire to Turing through Blackwell. Whole-array operations already say what can run in parallel, so the same typed program runs on the evaluator or as GPU threads, with the same answer. So far it runs on a laptop GPU: a chain of operations becomes one fused kernel, a sum becomes a tree, a 512 by 512 matrix product runs in a fraction of a second, and X_eTaL calls the GPU itself. Next come a tiny model's whole inference and the old cards."
 series: "Array Languages"
 series_part: 7
@@ -109,6 +109,7 @@ OpenCL is the one runtime that reaches all of them, old and new. These are the c
 | Card | Architecture | Memory | Its role |
 |---|---|---|---|
 | Apple M1 Max | Apple GPU | shared | development, and every check so far |
+| Apple M3 Pro | Apple GPU | shared | a second Apple GPU, a newer generation |
 | Tesla M10 | Maxwell | four GPUs of 8 GB | an old card the newest CUDA toolkits retire; each GPU its own device |
 | Tesla P4 | Pascal | 8 GB | an old card the newest CUDA toolkits retire |
 | GTX 1660 Super | Turing | 6 GB | the least memory: the case where weights stay on the host |
