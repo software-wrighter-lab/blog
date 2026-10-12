@@ -110,7 +110,7 @@ OpenCL is the one runtime that reaches all of them, old and new. These are the c
 |---|---|---|---|
 | Apple M1 Max | Apple GPU | 64 GB unified | development, and every check so far; the higher memory bandwidth |
 | Apple M3 Pro | Apple GPU | 18 GB unified | a newer generation, with less memory and less bandwidth |
-| Tesla M10 | Maxwell | four GPUs of 8 GB | an old card the newest CUDA toolkits retire; each GPU its own device |
+| Tesla M10 | Maxwell | four GPUs of 8 GB | an old card the newest CUDA toolkits retire; built to stream many remote desktops, not to run LLMs; each GPU its own device |
 | Tesla P4 | Pascal | 8 GB | an old card the newest CUDA toolkits retire |
 | GTX 1660 Super | Turing | 6 GB | the least memory: the case where weights stay on the host |
 | RTX 3090 | Ampere | 24 GB | a current card, and the most memory |
