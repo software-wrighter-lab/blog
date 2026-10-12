@@ -105,16 +105,26 @@ A GPU is not automatically faster. Every offload pays fixed costs before a singl
 
 So the GPU wins only when the work is big enough to hide those costs. The measurements show where that line falls:
 
-| Work | Machine | X_eTaL evaluator | GPU | Verdict |
-|---|---|---|---|---|
-| a thousand items | RTX 5060 Ti | 0.17 s | 1.29 s | too small: setup costs more than the work |
-| a million items, elementwise, through the bridge | M1 Max | 0.19 s | 2.4 s | loses: moving the numbers costs more than the arithmetic |
-| a million items, elementwise, through the bridge | RTX 5060 Ti | 0.25 s | 1.44 s | loses, the same way |
-| a 512 by 512 product, through the bridge | M1 Max | 14.5 s | 0.46 s | 31 times faster |
-| a 512 by 512 product, through the bridge | RTX 5060 Ti | 25.0 s | 0.98 s | 25 times faster |
-| a 512 by 512 product, the whole checked program | RTX 5060 Ti | 55 s | 0.30 s | about 180 times faster |
-| the world model, all 1,936 states as one batch | M1 Max | 9.9 s | 0.11 s | about 90 times faster |
-| the world model, all 1,936 states as one batch | RTX 5060 Ti | 15.1 s | 0.16 s | about 95 times faster |
+<style>
+.pays td.v-bad  { background: rgba(214, 69, 65, 0.22); }
+.pays td.v-even { background: rgba(230, 170, 30, 0.24); }
+.pays td.v-good { background: rgba(46, 160, 67, 0.22); }
+</style>
+
+<table class="pays">
+<thead><tr><th>Work</th><th>Machine</th><th>X_eTaL evaluator</th><th>GPU</th><th>Verdict</th></tr></thead>
+<tbody>
+<tr><td>a thousand items</td><td>RTX 5060 Ti</td><td>0.17 s</td><td>1.29 s</td><td class="v-bad">too small: setup costs more than the work</td></tr>
+<tr><td>a million items, elementwise, through the bridge</td><td>M1 Max</td><td>0.19 s</td><td>2.4 s</td><td class="v-bad">loses: moving the numbers costs more than the arithmetic</td></tr>
+<tr><td>a million items, elementwise, through the bridge</td><td>RTX 5060 Ti</td><td>0.25 s</td><td>1.44 s</td><td class="v-bad">loses, the same way</td></tr>
+<tr><td>the small ML benchmarks: a dense layer, a wide inner product, a softmax</td><td>M1 Max</td><td>59 to 179 ms</td><td>about 90 ms</td><td class="v-even">about even: setup is nearly all of the GPU’s time</td></tr>
+<tr><td>a 512 by 512 product, through the bridge</td><td>M1 Max</td><td>14.5 s</td><td>0.46 s</td><td class="v-good">31 times faster</td></tr>
+<tr><td>a 512 by 512 product, through the bridge</td><td>RTX 5060 Ti</td><td>25.0 s</td><td>0.98 s</td><td class="v-good">25 times faster</td></tr>
+<tr><td>a 512 by 512 product, the whole checked program</td><td>RTX 5060 Ti</td><td>55 s</td><td>0.30 s</td><td class="v-good">about 180 times faster</td></tr>
+<tr><td>the world model, all 1,936 states as one batch</td><td>M1 Max</td><td>9.9 s</td><td>0.11 s</td><td class="v-good">about 90 times faster</td></tr>
+<tr><td>the world model, all 1,936 states as one batch</td><td>RTX 5060 Ti</td><td>15.1 s</td><td>0.16 s</td><td class="v-good">about 95 times faster</td></tr>
+</tbody>
+</table>
 
 The world model's GPU times are whole runs, setup included; its kernels alone take 0.09 ms on the M1 Max and 0.24 ms on the 5060 Ti. The evaluator times differ because the machines do.
 
