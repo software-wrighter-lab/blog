@@ -135,7 +135,7 @@ It is the series' two meanings of *Extensible* again: a library for the systems,
 
 ## Games in the other repos
 
-Two more games live outside this repo, next to the machinery they show off:
+Three more games live outside this repo, next to the machinery they show off:
 
 | Game | Where | The array idea |
 |---|---|---|
@@ -143,7 +143,20 @@ Two more games live outside this repo, next to the machinery they show off:
 | [The voxel Rubik's cube](https://softwarewrighter.github.io/X_eTaL-extensions/#scene-voxels-rubik-solve) | X_eTaL-extensions | each quarter turn a permutation of 54 stickers computed from the geometry, with buttons to turn, scramble and solve |
 | [Eigencube](https://softwarewrighter.github.io/X_eTaL-demos/eigencube/) | X_eTaL-demos, in the browser; its solver now a library in X_eTaL-libraries | cubelets as vectors and turns as rotation matrices; a batch of cubes as one array, every turn of every cube one product |
 
-The repos also work together. Tower defense, the newest game, asked X_eTaL-extensions for 3D towers and creeps, and its Blender pipeline made them: twelve pieces as `.glb` files, each with its animations as named clips, rendered and [published](https://softwarewrighter.github.io/X_eTaL-extensions/blender/td/). The game's X_eTaL program then writes a 3D scene, the camera, the tiles, and every piece's model, place, heading, clip and moment, and the page draws it with three.js. Without WebGL the flat picture stays, and the labels, toolbar and clicks are the program's own SVG either way.
+### Tower defense's pieces, made by Blender
+
+<figure style="float: right; clear: none; margin: 0.2em 0 0.6em 1.5em; max-width: 46%;">
+<img src="{{ '/assets/images/posts/xetal-games-td-pieces.webp' | relative_url }}" class="no-invert" alt="The twelve tower defense pieces rendered by Blender and lined up on green: arrow, cannon and frost towers at three levels each, and the shield, brute and runner creeps, each labeled">
+<figcaption style="font-size: 0.85em;">The twelve pieces, from <a href="https://softwarewrighter.github.io/X_eTaL-extensions/#blender-game-assets">the game-assets recording</a>: three towers at three levels, and three creeps.</figcaption>
+</figure>
+
+The newest game is also a case of two repos building one thing together. Tower defense wanted 3D towers and creeps, so X_eTaL-games filed an ask with X_eTaL-extensions, and the Blender support there answered it.
+
+The pieces are described in X_eTaL, as parts that the Bpy library turns into Blender's Python: an arrow, a cannon and a frost tower, each at three levels, and three creeps, a runner, a brute and a shield. Each sits on one tile, from about a hundred triangles to about twelve hundred. Each carries its animations as named clips: an idle loop for every piece, a fire for the towers that kicks back or swells, and a walk and a hit for the creeps. The [td-models demo](https://softwarewrighter.github.io/X_eTaL-extensions/#blender-td-models) writes them as `.glb` files and reads every clip back.
+
+A second demo, [game assets](https://softwarewrighter.github.io/X_eTaL-extensions/#blender-game-assets), makes them in earnest. Blender renders each piece alone on a transparent background and the twelve lined up as a short video. X_eTaL then hashes every file with the digest extension into a manifest and writes a page with each piece in a 3D viewer and its clips on buttons. The result is [published](https://softwarewrighter.github.io/X_eTaL-extensions/blender/td/) where the game can fetch it.
+
+The game does the rest. Its X_eTaL program writes the whole 3D scene into the picture it draws: the camera, the tiles, and every piece's model, place, heading, clip and moment, so a tower fires just after its shot and a creep walks facing along the road. The page draws that scene with three.js from the published `.glb` files. Without WebGL the flat picture stays, and the labels, toolbar and clicks are the program's own SVG either way. So one game draws on two repos: its rules from X_eTaL-games, and its pieces from X_eTaL-extensions, made by the Blender extension and checked by the digest extension.
 
 Both have posts of their own: [the voxel world and Gem Hunt](/2026/10/09/voxels-3d-worlds-array-languages/), and [the Eigencube](/2026/10/08/eigencube-rubiks-cube-linear-algebra/), whose solver also drives the voxel cube. And [TTTML](/2026/09/24/tbt-aplsv-birds-tttml/), the tic-tac-toe machine that learns by playing itself, is a demo in the language repo.
 
