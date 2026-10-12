@@ -14,7 +14,7 @@ repo_urls:
     title: "X_eTaL-gpu"
 ---
 
-<!-- DRAFT, IN PROGRESS: refreshed 2026-10-12 from X_eTaL-gpu at 56be679 (hardware table corrected; saga 4 gpu-models active, steps 0-0c done)
+<!-- DRAFT, IN PROGRESS: refreshed 2026-10-12 from X_eTaL-gpu at 5d1a29a (README's plain wording; docs/ml-results.md, the ml-bench step on the M1 Max)
      and X_eTaL-ML's docs/gpu-asks.md and plan.md "Combined with X_eTaL-gpu" (0ff84e8).
      More changes are expected before publishing (saga 4's tiny model, then saga 5 on NVIDIA cards): re-check the status
      and numbers then. To do: cross-link the companion hardware blog (https://blog.hardwarewrighter.com/) once its posts exist.
@@ -59,7 +59,7 @@ Every example is an X_eTaL program first, and the X_eTaL evaluator is the refere
                   the same arrays
 ```
 
-For now each twin is written by hand, and a check proves it equal to the evaluator's output. Lowering X_eTaL to the IR belongs in the language, and is filed there as an ask; when it lands, the twins go, and the goal is one command, `xetal run --device opencl:0`.
+So, plainly: what runs on the GPU today is not X_eTaL code itself. It is a hand-written translation of each program, and the checks prove each translation gives the evaluator's output, exactly on the interpreter and within 32-bit float tolerance on the GPU. The twins are trusted only as far as those checks reach. Translating X_eTaL automatically, the lowering to the IR, belongs in the language and is filed there as an ask. When it lands, the twins go, and the goal is one command, `xetal run --device opencl:0`.
 
 ## From a line of X_eTaL to a kernel
 
@@ -97,14 +97,14 @@ All of it so far runs on the GPU in this Mac, through Apple's OpenCL 1.2:
 - **Array algebra.** Reductions along an axis: row sums, column sums and row maxima. Inner products, untiled and in tiles. And a tiny two-layer network, dense, ReLU, dense and softmax, whose output on the GPU matches the evaluator's.
 - **The GPU as an extension.** Through the bridge from [post #4](/2026/10/10/array-languages-xetal-extensions/), an X_eTaL program calls the GPU itself.
 
-A 512 by 512 matrix product, measured twice:
+One X_eTaL program, measured on the M1 Max, calls the GPU through the bridge, which carries arrays as text:
 
-| Run | X_eTaL evaluator | GPU |
+| Work | X_eTaL evaluator | GPU, through the bridge |
 |---|---|---|
-| the `xetal-gpu` tool | 29 s | 0.13 s |
-| called from X_eTaL, through the bridge | 14.5 s | 0.46 s, 0.42 s of it the bridge |
+| a 512 by 512 matrix product | 14.5 s | 0.46 s, 31 times faster |
+| a million items, elementwise, then summed | 0.19 s | 2.4 s, 13 times slower |
 
-Even through the bridge the GPU wins, 31 times over, but most of its time is spent moving numbers across the bridge as text. That cost comes up again below.
+Products gain even through the bridge. Elementwise work does not, because moving a million numbers across as text costs more than the arithmetic. That cost comes up again below.
 
 ## The cards
 
@@ -136,6 +136,16 @@ Three workloads come first, because they need only operations the GPU side alrea
 1. **A world model** that predicts a ball's next frame from the last three: 432 pixels in, 64 ReLU units, 144 sigmoid pixels out, with all 1,936 states of its world run as one batch. The program prints a single integer, how many next frames it predicts exactly, and that integer must be the same on the evaluator and on every card.
 2. **The benchmarks:** a dense layer, a wide inner product and a softmax, with a GPU column beside the evaluator's, first for the M1 Max and M3 Pro, then for each NVIDIA card.
 3. **A learned denoiser:** twenty steps from noise to 256 pictures at once. That is twenty calls, not one, so it shows what a call's fixed cost does inside a loop.
+
+The benchmarks have already run, on the M1 Max, as of this writing. All three agree with the evaluator, within a relative 1e-5 in 32-bit floats:
+
+| Benchmark | What it computes | Evaluator | GPU kernels | Each GPU run |
+|---|---|---|---|---|
+| dense | a dense layer's product, 1024 by 16 times 16 by 16, four times | 116 ms | 0.004 ms | 89 ms |
+| inner-wide | the CNN's dense layer, 1 by 1352 times 1352 by 10, forty times | 59 ms | 0.56 ms | 89 ms |
+| softmax | softmax by row on 1000 by 64, ten times | 179 ms | 0.04 ms | 85 ms |
+
+The kernels themselves take a fraction of a millisecond. Each run takes about 90 ms because the kernels are compiled again on every run, with no cache yet, so the column to compare across cards is the kernels' own time.
 
 The rule for every result is the same decision always, and numbers within 1e-5 in 32-bit floats, since Apple's OpenCL has none wider. On cards with 64-bit floats the bound is 1e-9, measured against the trainers' own Rust models. The results come back as one table: model, card, decision, the largest difference, and the device's time and the bridge's, listed separately.
 
