@@ -3,26 +3,27 @@ layout: post
 title: "Array Languages #7: X_eTaL-gpu, One Array Program on Old GPUs"
 categories: [languages, language-design, gpu, hardware]
 tags: [array-languages, xetal, x-etal, apl, gpu, opencl, kepler, maxwell, pascal, turing, ampere, accelerator-ir, parallelism]
-keywords: "X_eTaL GPU, array language on GPU, OpenCL C 1.2 kernels, accelerator IR, retired CUDA cards, Kepler, Maxwell, Pascal, Turing, Ampere, whole-array parallelism"
-abstract: "Seventh in the Array Languages series, a placeholder until the repository reaches critical mass: X_eTaL-gpu runs X_eTaL programs on GPUs, including the Kepler-to-Ampere cards that current CUDA toolkits have retired, through OpenCL. Whole-array operations already expose their parallelism, so the same typed program can run on the evaluator or as thousands of GPU threads, with the same answer."
+keywords: "X_eTaL GPU, array language on GPU, OpenCL C 1.2 kernels, kernel fusion, tree reduction, accelerator IR, retired CUDA cards, Kepler, Maxwell, Pascal, Turing, Ampere, K80, M40, P40, P100, whole-array parallelism, GPU native extension"
+abstract: "Seventh in the Array Languages series: X_eTaL-gpu runs X_eTaL programs on GPUs through OpenCL, aiming at the Kepler-to-Ampere cards that current CUDA toolkits have retired. Whole-array operations already say what can run in parallel, so the same typed program runs on the evaluator or as GPU threads, with the same answer. So far it runs on a laptop GPU: a chain of operations becomes one fused kernel, a sum becomes a tree, a 512 by 512 matrix product runs in a fraction of a second, and X_eTaL calls the GPU itself. Next come a tiny model's whole inference and the old cards."
 series: "Array Languages"
 series_part: 7
 date: 2026-10-13 00:15:00 -0700
+demo_url: "https://softwarewrighter.github.io/X_eTaL-gpu/"
 repo_urls:
   - url: "https://github.com/softwarewrighter/X_eTaL-gpu"
     title: "X_eTaL-gpu"
 ---
 
-<!-- PLACEHOLDER (2026-10-07): flesh out once X_eTaL-gpu reaches critical mass. Date is provisional; publish sets it.
-     To do: cross-link the companion hardware blog (https://blog.hardwarewrighter.com/) once its posts exist.
-     Outline: the accelerator IR; kernels emitted as OpenCL C 1.2; the host runtime; scheduling; the old cards and why;
-     a demo program, its kernel, and the same answer on CPU and GPU; what the language had to give the IR. -->
+<!-- DRAFT, IN PROGRESS: refreshed 2026-10-12 from X_eTaL-gpu (last commit 2026-10-08; saga 4 gpu-models active, steps 0-0c done).
+     More changes are expected before publishing (saga 4's tiny model, then saga 5 on NVIDIA cards): re-check the status
+     and numbers then. To do: cross-link the companion hardware blog (https://blog.hardwarewrighter.com/) once its posts exist.
+     The lead image is a Tesla P4 (Pascal); the plan names K80, M40, P40, P100, GTX 1660, RTX 2060 and up. -->
 
 <img src="{{ '/assets/images/posts/block-nvidia-p4.webp' | relative_url }}" class="post-marker" alt="" style="width: 205px;">
 
 <div style="overflow: hidden;" markdown="1">
 
-X_eTaL states a computation as whole-array operations, `c ← a + b`, `'+ r̲/ c`, and those operations already say what can run in parallel. X_eTaL-gpu takes that literally: the same typed program runs on the evaluator, one step at a time, or on a GPU as thousands of threads, and gives the same answer. The target is deliberately old hardware: Kepler, Maxwell, Pascal, Turing and Ampere cards that the current CUDA toolkits have retired, reached through OpenCL. The goal is the concept, not speed.
+X_eTaL states a computation as whole-array operations, `c ← a + b`, `'+ r̲/ c`, and those operations already say what can run in parallel. X_eTaL-gpu takes that literally: the same typed program runs on the evaluator, one step at a time, or on a GPU as thousands of threads, and gives the same answer. The target is deliberately old hardware, Kepler to Ampere cards that the current CUDA toolkits have retired, reached through OpenCL. The goal is the concept, not speed.
 
 </div>
 
@@ -33,23 +34,82 @@ X_eTaL states a computation as whole-array operations, `c ← a + b`, `'+ r̲/ c
 | Resource | Link |
 |----------|------|
 | **The repo** | [softwarewrighter/X_eTaL-gpu](https://github.com/softwarewrighter/X_eTaL-gpu) |
-| **The language** | [Array Languages #1: X_eTaL](/2026/10/07/array-languages-xetal/) |
+| **Live site** | [what it is and the measured results](https://softwarewrighter.github.io/X_eTaL-gpu/) · [the documentation](https://softwarewrighter.github.io/X_eTaL-gpu/doc/) |
+| **Prior post** | [Array Languages #6: X_eTaL-games](/2026/10/12/array-languages-xetal-games/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
 </div>
 
-## What it is
+<div class="clearfix" markdown="1" style="clear: both;">
 
-The repository's parts, from its README:
+## One program, three ways to run it
 
-| Part | What it holds |
+Every example is an X_eTaL program first, and the X_eTaL evaluator is the reference. The program also has a twin in a small accelerator IR, typed arrays with elementwise maps and reductions, and that twin runs two more ways: in a reference interpreter, and as OpenCL on a GPU. All three must give the same arrays, integers exactly and floats within 1e-5.
+
+```text
+                X_eTaL program (.xtl)
+                        |
+          +-------------+-------------+
+          v             v             v
+      evaluator    IR interpreter   OpenCL on a GPU
+          |             |             |
+          +-------------+-------------+
+                        v
+                  the same arrays
+```
+
+For now each twin is written by hand, and a check proves it equal to the evaluator's output. Lowering X_eTaL to the IR belongs in the language, and is filed there as an ask; when it lands, the twins go, and the goal is one command, `xetal run --device opencl:0`.
+
+## From a line of X_eTaL to a kernel
+
+Here is one of the examples, from the Accel library, the subset of X_eTaL a device can run:
+
+```text
+ˡp̲ipeline ← { x w → ˡs̲um ˡr̲elu x + x × w }
+```
+
+The scheduler fuses the whole elementwise chain, a multiply, an add and a ReLU, into one kernel, one work-item per element, and lays out the sum as a tree in local memory:
+
+```c
+// k0: 8 elements, one work-item each; computes %xw %s %pos
+__kernel void k0(__global const long* b_x, __global const long* b_w, __global long* b_pos) {
+    size_t i = get_global_id(0);
+    if (i >= 8) return;
+    long t_xw = (b_x[i] * b_w[i]);
+    long t_s = (b_x[i] + t_xw);
+    long t_pos = max(t_s, 0L);
+    b_pos[i] = t_pos;
+}
+```
+
+The tool shows each step: `xetal-gpu kernel` prints the OpenCL C, and `xetal-gpu explain` says which X_eTaL values became which kernels. How a device runs a program, its widths, work-group and tiles, is a schedule kept as one TOML file per device.
+
+</div>
+
+<div class="clearfix" markdown="1">
+
+## What runs today
+
+All of it so far runs on the GPU in this Mac, through Apple's OpenCL 1.2:
+
+- **The foundation.** Five example programs, each reproduced on the GPU, and reductions checked at a million items against the evaluator.
+- **Array algebra.** Reductions along an axis: row sums, column sums and row maxima. Inner products, untiled and in tiles. And a tiny two-layer network, dense, ReLU, dense and softmax, whose output on the GPU matches the evaluator's.
+- **The GPU as an extension.** Through the bridge from [post #4](/2026/10/10/array-languages-xetal-extensions/), an X_eTaL program calls the GPU itself.
+
+| A 512 by 512 matrix product | Time |
 |---|---|
-| Accel library | the subset of X_eTaL a device can run, as an ordinary typed and tested library |
-| Accelerator IR | typed arrays, elementwise maps and reductions, with a text form and a reference interpreter |
-| OpenCL emitter | the schedule, and OpenCL C 1.2 kernels generated from the IR |
-| Host runtime | devices, buffers and kernels: arrays to the device and back |
-| `xetal-gpu` | the command-line tool: devices, check, run, kernel, explain |
+| X_eTaL evaluator | 29 s |
+| on the GPU | 0.13 s |
+| called from X_eTaL, through the bridge | 31 times faster than the evaluator |
 
-## Still to come
+## The old cards
 
-This post will grow as the repository does: a program, the kernel it becomes, and the same answer from the evaluator and from a card that CUDA no longer supports.
+The point of OpenCL is the cards CUDA left behind: the plan names a K80, M40, P40 and P100, and GTX 1660 and RTX 2060 and up, Kepler through Ampere. The work moves next to an Arch Linux machine with a newer GPU, then to the old NVIDIA cards. Nothing in the code changes for that: the OpenCL library is loaded when the program runs, and the checks use every device they find. The plan from there is an M40 or P40 first, then one program across every generation present with a table of what ran where, and then smaller numbers: 16-bit floats, 8-bit integers, and finally ternary weights packed two bits apiece.
+
+## What comes next
+
+Before the cards, a model. The next stage is a tiny typed-decision model: a small transformer-like classifier, trained from scratch, that sorts a request into one of five decisions, such as drawing, querying an array or explaining. Its inference is written as X_eTaL array code, embedding lookup, attention as array operations, normalization, a feed-forward layer and a classifier, and the whole of it is scheduled as OpenCL kernels, with the same decision on the CPU and the GPU and a picture of which X_eTaL operations became which kernels.
+
+This post will be updated as that lands.
+
+</div>
