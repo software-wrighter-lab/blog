@@ -122,7 +122,7 @@ The rule the repo has settled on: the batch is the array, and the work is produc
 
 That is also how X_eTaL is meant to be written anyway. The world model's program runs every state of its world as one array, with one product per layer, and that whole-array shape is exactly what the GPU rewards. Writing the same model one state at a time, in a loop, would hand the GPU a thousand tiny jobs and lose.
 
-That is the point of this work. It is not a race with large, new GPUs. It is to show that an array language, extended with a native extension and the macros that write its facade, one line per GPU function, can get real value out of older and smaller GPUs on machine-learning tasks. The kernels are a sliver of each run here, so the old, small cards should win wherever these two do, just by less. The K4200, M10 and P4 are next, and they will test that.
+That is the point of this work. It is not a race with large, new GPUs. It is to show that an array language, extended with a native extension and the macros that write its facade, one line per GPU function, can get real value out of older and smaller GPUs on machine-learning tasks. The kernels are a sliver of each run here, so the old, small cards should win wherever these two do, just by less. The order is deliberate: first confidence in the use-cases and the measurements on these two GPUs, then the older, smaller cards, the K4200, M10 and P4 among them, to test that.
 
 ## The ML models on the GPUs
 
@@ -170,7 +170,7 @@ OpenCL is the one runtime that reaches all of them, old and new. These are the c
 | RTX 5060 Ti | Blackwell | 16 GB | the newest generation; measured, the first NVIDIA card |
 | A2 | Ampere | 16 GB | a small, low-power data-center card |
 
-Each card runs a program by a schedule file. The 5060 Ti has its own two, in 32-bit and 64-bit floats, with work-groups of 256: the card allows 1,024, but its compiled reduction kernel allows only 256, and the runtime reported that limit rather than failing. The other NVIDIA cards share templates, untested until a card runs them. Nothing in the code changed for the move to Linux. The plan for the hardware is the M3 Pro and the other cards, the older K4200, M10 and P4 among them, then one program on every card present, Kepler to Blackwell, with a table of what ran where and how fast, and then 16-bit floats, 8-bit integers and ternary weights.
+Each card runs a program by a schedule file. The 5060 Ti has its own two, in 32-bit and 64-bit floats, with work-groups of 256: the card allows 1,024, but its compiled reduction kernel allows only 256, and the runtime reported that limit rather than failing. The other NVIDIA cards share templates, untested until a card runs them. Nothing in the code changed for the move to Linux. The plan for the hardware follows the same order: settle the use-cases and measurements on the M1 Max and the 5060 Ti first, then the older, smaller cards, the K4200, M10 and P4 among them, and the rest of the table, then one program on every card present, Kepler to Blackwell, with a table of what ran where and how fast, and then 16-bit floats, 8-bit integers and ternary weights.
 
 ## What the work asks for
 
