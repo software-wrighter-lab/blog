@@ -114,7 +114,7 @@ OpenCL is the one runtime that reaches all of them, old and new. These are the c
 | Tesla M10 | Maxwell | four GPUs of 8 GB | an old card the newest CUDA toolkits retire; built to stream many remote desktops, not to run LLMs; each GPU its own device |
 | Tesla P4 | Pascal | 8 GB | an old card the newest CUDA toolkits retire |
 | GTX 1660 Super | Turing | 6 GB | the oldest of the newer generations, and little memory |
-| RTX 3090 | Ampere | 24 GB | a current card, and the most memory |
+| RTX 3090 | Ampere | 24 GB | a current card, and the most memory of the NVIDIA cards |
 | RTX 4070 Laptop GPU | Ada Lovelace | 8 GB | a current generation, in an Asus ROG laptop |
 | RTX 5060 Ti | Blackwell | 16 GB | the newest generation |
 | A2 | Ampere | 16 GB | a small, low-power data-center card |
