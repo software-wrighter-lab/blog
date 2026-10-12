@@ -3,7 +3,7 @@ layout: post
 title: "Array Languages #7: X_eTaL-gpu, One Array Program on Old GPUs"
 categories: [languages, language-design, gpu, hardware]
 tags: [array-languages, xetal, x-etal, apl, gpu, opencl, kepler, maxwell, pascal, turing, ampere, accelerator-ir, parallelism]
-keywords: "X_eTaL GPU, array language on GPU, OpenCL C 1.2 kernels, kernel fusion, tree reduction, accelerator IR, retired CUDA cards, Kepler, Maxwell, Pascal, Turing, Ampere, K80, M40, P40, P100, whole-array parallelism, GPU native extension"
+keywords: "X_eTaL GPU, array language on GPU, OpenCL C 1.2 kernels, kernel fusion, tree reduction, accelerator IR, retired CUDA cards, Kepler, Maxwell, Pascal, Turing, Ampere, K80, M40, P40, P100, GTX 1660, whole-array parallelism, GPU native extension"
 abstract: "Seventh in the Array Languages series: X_eTaL-gpu runs X_eTaL programs on GPUs through OpenCL, aiming at the Kepler-to-Ampere cards that current CUDA toolkits have retired. Whole-array operations already say what can run in parallel, so the same typed program runs on the evaluator or as GPU threads, with the same answer. So far it runs on a laptop GPU: a chain of operations becomes one fused kernel, a sum becomes a tree, a 512 by 512 matrix product runs in a fraction of a second, and X_eTaL calls the GPU itself. Next come a tiny model's whole inference and the old cards."
 series: "Array Languages"
 series_part: 7
@@ -17,7 +17,7 @@ repo_urls:
 <!-- DRAFT, IN PROGRESS: refreshed 2026-10-12 from X_eTaL-gpu (last commit 2026-10-08; saga 4 gpu-models active, steps 0-0c done).
      More changes are expected before publishing (saga 4's tiny model, then saga 5 on NVIDIA cards): re-check the status
      and numbers then. To do: cross-link the companion hardware blog (https://blog.hardwarewrighter.com/) once its posts exist.
-     The lead image is a Tesla P4 (Pascal); the plan names K80, M40, P40, P100, GTX 1660, RTX 2060 and up. -->
+     The lead image is a Tesla P4 (Pascal); the repo's plan also names an RTX 2060, which Mike neither owns nor plans to test: left out here. -->
 
 <img src="{{ '/assets/images/posts/block-nvidia-p4.webp' | relative_url }}" class="post-marker" alt="" style="width: 205px;">
 
@@ -104,7 +104,7 @@ All of it so far runs on the GPU in this Mac, through Apple's OpenCL 1.2:
 
 ## The old cards
 
-The point of OpenCL is the cards CUDA left behind: the plan names a K80, M40, P40 and P100, and GTX 1660 and RTX 2060 and up, Kepler through Ampere. The work moves next to an Arch Linux machine with a newer GPU, then to the old NVIDIA cards. Nothing in the code changes for that: the OpenCL library is loaded when the program runs, and the checks use every device they find. The plan from there is an M40 or P40 first, then one program across every generation present with a table of what ran where, and then smaller numbers: 16-bit floats, 8-bit integers, and finally ternary weights packed two bits apiece.
+The point of OpenCL is the cards CUDA left behind: the plan names a K80, M40, P40 and P100, and a GTX 1660, Kepler through Ampere. The work moves next to an Arch Linux machine with a newer GPU, then to the old NVIDIA cards. Nothing in the code changes for that: the OpenCL library is loaded when the program runs, and the checks use every device they find. The plan from there is an M40 or P40 first, then one program across every generation present with a table of what ran where, and then smaller numbers: 16-bit floats, 8-bit integers, and finally ternary weights packed two bits apiece.
 
 ## What comes next
 
