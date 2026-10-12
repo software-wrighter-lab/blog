@@ -3,7 +3,7 @@ layout: post
 title: "Array Languages #7: X_eTaL-gpu, One Array Program on Old GPUs"
 categories: [languages, language-design, gpu, hardware]
 tags: [array-languages, xetal, x-etal, apl, gpu, opencl, kepler, maxwell, pascal, turing, ampere, ada-lovelace, blackwell, accelerator-ir, parallelism]
-keywords: "X_eTaL GPU, array language on GPU, OpenCL C 1.2 kernels, kernel fusion, tree reduction, accelerator IR, retired CUDA cards, Kepler, Maxwell, Pascal, Turing, Ampere, Ada Lovelace, Blackwell, Apple M1 Max, Apple M3 Pro, Quadro K4200, Tesla M10, Tesla P4, GTX 1660 Super, RTX 3090, RTX 4070 Laptop GPU, RTX 5060 Ti, A2, whole-array parallelism, GPU native extension"
+keywords: "X_eTaL GPU, array language on GPU, OpenCL C 1.2 kernels, kernel fusion, tree reduction, accelerator IR, retired CUDA cards, Kepler, Maxwell, Pascal, Turing, Ampere, Ada Lovelace, Blackwell, Apple M1 Max, Apple M3 Pro, Quadro K4200, Tesla M10, Tesla P4, GTX 1660 Super, RTX 3060, RTX 3060 Laptop GPU, RTX 3090, RTX 4070 Laptop GPU, RTX 5060 Ti, A2, whole-array parallelism, GPU native extension"
 abstract: "Seventh in the Array Languages series: X_eTaL-gpu runs X_eTaL programs on GPUs through OpenCL, aiming at old and new cards alike, from a Kepler Quadro and Maxwell and Pascal Teslas that the newest CUDA toolkits retire to Turing through Blackwell. Whole-array operations already say what can run in parallel, so the same typed program runs on the evaluator or as GPU threads, with the same answer. So far it runs on a laptop GPU: a chain of operations becomes one fused kernel, a sum becomes a tree, a 512 by 512 matrix product runs in a fraction of a second, and X_eTaL calls the GPU itself. Next come a tiny model's whole inference and the old cards."
 series: "Array Languages"
 series_part: 7
@@ -114,6 +114,8 @@ OpenCL is the one runtime that reaches all of them, old and new. These are the c
 | Tesla M10 | Maxwell | four GPUs of 8 GB | an old card the newest CUDA toolkits retire; built to stream many remote desktops, not to run LLMs; each GPU its own device |
 | Tesla P4 | Pascal | 8 GB | an old card the newest CUDA toolkits retire |
 | GTX 1660 Super | Turing | 6 GB | the oldest of the newer generations, and little memory |
+| RTX 3060 | Ampere | 12 GB | a current card, PCIe |
+| RTX 3060 Laptop GPU | Ampere | 6 GB | a current generation, in a System76 laptop |
 | RTX 3090 | Ampere | 24 GB | a current card, and the most memory of the NVIDIA cards |
 | RTX 4070 Laptop GPU | Ada Lovelace | 8 GB | a current generation, in an Asus ROG laptop |
 | RTX 5060 Ti | Blackwell | 16 GB | the newest generation |
