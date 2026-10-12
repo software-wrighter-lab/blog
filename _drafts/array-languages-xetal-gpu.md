@@ -3,8 +3,8 @@ layout: post
 title: "Array Languages #7: X_eTaL-gpu, Array Programs on GPUs Old and New"
 categories: [languages, language-design, gpu, hardware]
 tags: [array-languages, xetal, x-etal, apl, gpu, opencl, kepler, maxwell, pascal, turing, ampere, ada-lovelace, blackwell, accelerator-ir, parallelism]
-keywords: "X_eTaL GPU, array language on GPU, OpenCL C 1.2 kernels, kernel fusion, tree reduction, accelerator IR, retired CUDA cards, Kepler, Maxwell, Pascal, Turing, Ampere, Ada Lovelace, Blackwell, Apple M1 Max, Apple M3 Pro, Quadro K4200, Tesla M10, Tesla P4, GTX 1660 Super, RTX 3060, RTX 3060 Laptop GPU, RTX 3090, RTX 4070 Laptop GPU, RTX 5060 Ti, A2, whole-array parallelism, GPU native extension"
-abstract: "Seventh in the Array Languages series: X_eTaL-gpu runs X_eTaL programs on GPUs through OpenCL, from a Kepler Quadro to a Blackwell RTX. The aim is to show that an array language, with its macros and extensions, can get real value from older and smaller GPUs on machine-learning tasks, and this post is about when that value appears. Offloading has fixed costs, setting up the device, compiling kernels and moving arrays, so small and elementwise jobs lose. Large, product-heavy work in big batches wins by an order of magnitude or more, measured so far on an M1 Max and an RTX 5060 Ti, including a machine-learning model 50 to 100 times faster. Next come the fixes that shrink the fixed costs, the older cards, and bigger models."
+keywords: "X_eTaL GPU, array language on GPU, OpenCL C 1.2 kernels, kernel fusion, tree reduction, accelerator IR, retired CUDA cards, Kepler, Maxwell, Pascal, Turing, Ampere, Ada Lovelace, Blackwell, Apple M1 Max, Apple M3 Pro, Tesla P100, Tesla M40, Quadro K4200, Tesla M10, Tesla P4, GTX 1660 Super, RTX 3060, RTX 3060 Laptop GPU, RTX 3090, RTX 4070 Laptop GPU, RTX 5060 Ti, A2, whole-array parallelism, GPU native extension"
+abstract: "Seventh in the Array Languages series: X_eTaL-gpu runs X_eTaL programs on GPUs through OpenCL, old and new. The aim is to show that an array language, with its macros and extensions, can get real value from older and smaller GPUs on machine-learning tasks, and this post is about when that value appears. Offloading has fixed costs, setting up the device, compiling kernels and moving arrays, so small and elementwise jobs lose. Large, product-heavy work in big batches wins by an order of magnitude or more, measured so far on an M1 Max and an RTX 5060 Ti, including a machine-learning model 50 to 100 times faster. Next come the fixes that shrink the fixed costs, the older cards, and bigger models."
 series: "Array Languages"
 series_part: 7
 date: 2026-10-13 00:15:00 -0700
@@ -20,13 +20,14 @@ repo_urls:
      and X_eTaL-ML's docs/gpu-asks.md and plan.md "Combined with X_eTaL-gpu" (0ff84e8).
      More changes are expected before publishing (saga 4's tiny model, then saga 5 on NVIDIA cards): re-check the status
      and numbers then. To do: cross-link the companion hardware blog (https://blog.hardwarewrighter.com/) once its posts exist.
-     The lead image is a Tesla P4 (Pascal), one of Mike's cards. The cards table follows X_eTaL-gpu's docs/plan.md hardware table (329b879, 2026-10-12). -->
+     The lead image is a Tesla P4 (Pascal), one of Mike's cards. Card groups (Mike, 2026-10-12): first M1 Max, RTX 3090, RTX 5060 Ti, RTX 3060;
+     follow-on one or two of P4, A2, P100, M40 (P100 and M40 memory to be confirmed); future maybe K4200, 1660 Super, then the rest. -->
 
 <img src="{{ '/assets/images/posts/block-nvidia-p4.webp' | relative_url }}" class="post-marker" alt="" style="width: 205px;">
 
 <div style="overflow: hidden;" markdown="1">
 
-X_eTaL states a computation as whole-array operations, `c ← a + b`, `'+ r̲/ c`, and those operations already say what can run in parallel. X_eTaL-gpu takes that literally: the same typed program runs on the evaluator, one step at a time, or on a GPU as thousands of threads, and gives the same answer. The targets are old and new cards alike, all reached through OpenCL: a Kepler Quadro and Maxwell and Pascal Teslas that the newest CUDA toolkits retire, and Turing through Blackwell. The goal is the concept, not speed.
+X_eTaL states a computation as whole-array operations, `c ← a + b`, `'+ r̲/ c`, and those operations already say what can run in parallel. X_eTaL-gpu takes that literally: the same typed program runs on the evaluator, one step at a time, or on a GPU as thousands of threads, and gives the same answer. The targets are old and new cards alike, all reached through OpenCL: current RTX cards, and older Maxwell and Pascal data-center cards that the newest CUDA toolkits retire. The goal is the concept, not speed.
 
 </div>
 
@@ -132,7 +133,7 @@ The rule the repo has settled on: the batch is the array, and the work is produc
 
 That is also how X_eTaL is meant to be written anyway. The world model's program runs every state of its world as one array, with one product per layer, and that whole-array shape is exactly what the GPU rewards. Writing the same model one state at a time, in a loop, would hand the GPU a thousand tiny jobs and lose.
 
-That is the point of this work. It is not a race with large, new GPUs. It is to show that an array language, extended with a native extension and the macros that write its facade, one line per GPU function, can get real value out of older and smaller GPUs on machine-learning tasks. The kernels are a sliver of each run here, so the old, small cards should win wherever these two do, just by less. The order is deliberate: first confidence in the use-cases and the measurements on these two GPUs, then the older, smaller cards, the K4200, M10 and P4 among them, to test that.
+That is the point of this work. It is not a race with large, new GPUs. It is to show that an array language, extended with a native extension and the macros that write its facade, one line per GPU function, can get real value out of older and smaller GPUs on machine-learning tasks. The kernels are a sliver of each run here, so the old, small cards should win wherever these two do, just by less. The order is deliberate: first confidence in the use-cases and the measurements on a few current GPUs, then one or two older data-center cards to test that.
 
 ## The ML models on the GPUs
 
@@ -163,24 +164,38 @@ Once a run costs little more than its kernels, the plan moves to work large enou
 
 ## The cards
 
-OpenCL is the one runtime that reaches all of them, old and new. These are the cards the work is aimed at, from the repo's hardware table:
+OpenCL is the one runtime that reaches all of them, old and new. Testing every card takes a long time: most need to be fitted into a machine, and some of those machines are themselves being repaired. So the cards come in three groups.
+
+**First:** the cards being measured now. The M1 Max and the RTX 5060 Ti have run; the 3090 and 3060 follow.
 
 | Card | Architecture | Memory | Its role |
 |---|---|---|---|
 | Apple M1 Max | Apple GPU | 64 GB unified | development; measured; the higher memory bandwidth |
-| Apple M3 Pro | Apple GPU | 18 GB unified | a newer generation, with less memory and less bandwidth |
-| Quadro K4200 | Kepler | 4 GB | the oldest generation and the least memory: the case where weights stay on the host; several of them |
-| Tesla M10 | Maxwell | four GPUs of 8 GB | an old card the newest CUDA toolkits retire; built to stream many remote desktops, not to run LLMs; each GPU its own device |
-| Tesla P4 | Pascal | 8 GB | an old card the newest CUDA toolkits retire |
-| GTX 1660 Super | Turing | 6 GB | with the RTX 3060 Laptop GPU, the least memory of the current cards |
-| RTX 3060 | Ampere | 12 GB | current PCIe cards; several of them |
-| RTX 3060 Laptop GPU | Ampere | 6 GB | a current generation, in a System76 laptop |
-| RTX 3090 | Ampere | 24 GB | a current card, and the most memory of the NVIDIA cards |
-| RTX 4070 Laptop GPU | Ada Lovelace | 8 GB | a current generation, in an Asus ROG laptop |
 | RTX 5060 Ti | Blackwell | 16 GB | the newest generation; measured, the first NVIDIA card |
-| A2 | Ampere | 16 GB | a small, low-power data-center card |
+| RTX 3090 | Ampere | 24 GB | the most memory of the NVIDIA cards |
+| RTX 3060 | Ampere | 12 GB | a mid-range current card; several of them |
 
-Each card runs a program by a schedule file. The 5060 Ti has its own two, in 32-bit and 64-bit floats, with work-groups of 256: the card allows 1,024, but its compiled reduction kernel allows only 256, and the runtime reported that limit rather than failing. The other NVIDIA cards share templates, untested until a card runs them. Nothing in the code changed for the move to Linux. The plan for the hardware follows the same order: settle the use-cases and measurements on the M1 Max and the 5060 Ti first, then the older, smaller cards, the K4200, M10 and P4 among them, and the rest of the table, then one program on every card present, Kepler to Blackwell, with a table of what ran where and how fast, and then 16-bit floats, 8-bit integers and ternary weights.
+**Follow-on:** once the use-cases and measurements are settled on those, one or two of these older or smaller data-center cards:
+
+| Card | Architecture | Memory | Its role |
+|---|---|---|---|
+| Tesla P4 | Pascal | 8 GB | an old, low-power card the newest CUDA toolkits retire |
+| A2 | Ampere | 16 GB | a small, low-power data-center card |
+| Tesla P100 | Pascal | to be confirmed | an old data-center card the newest CUDA toolkits retire |
+| Tesla M40 | Maxwell | to be confirmed | an old data-center card the newest CUDA toolkits retire |
+
+**Future, maybe:** cards that may be tested later, the K4200 and the 1660 Super the most likely:
+
+| Card | Architecture | Memory | Its role |
+|---|---|---|---|
+| Quadro K4200 | Kepler | 4 GB | the oldest generation and the least memory: the case where weights stay on the host |
+| GTX 1660 Super | Turing | 6 GB | a small current card |
+| Tesla M10 | Maxwell | four GPUs of 8 GB | built to stream many remote desktops, not to run LLMs; each GPU its own device |
+| Apple M3 Pro | Apple GPU | 18 GB unified | a newer Apple generation, with less memory and less bandwidth |
+| RTX 3060 Laptop GPU | Ampere | 6 GB | in a System76 laptop |
+| RTX 4070 Laptop GPU | Ada Lovelace | 8 GB | in an Asus ROG laptop |
+
+Each card runs a program by a schedule file. The 5060 Ti has its own two, in 32-bit and 64-bit floats, with work-groups of 256: the card allows 1,024, but its compiled reduction kernel allows only 256, and the runtime reported that limit rather than failing. The other NVIDIA cards share templates, untested until a card runs them. Nothing in the code changed for the move to Linux. After each group comes a table of what ran where and how fast, and then smaller numbers: 16-bit floats, 8-bit integers and ternary weights.
 
 ## What the work asks for
 
