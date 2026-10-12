@@ -1,26 +1,27 @@
 ---
 layout: post
-title: "Array Languages #8: X_eTaL-fpga, One Array Program as a Circuit"
+title: "Array Languages #8: X_eTaL-fpga, Array Programs as Circuits"
 categories: [languages, language-design, fpga, hardware]
-tags: [array-languages, xetal, x-etal, apl, fpga, verilog, gowin, tang-nano, tang-primer, yosys, nextpnr, apicula, hardware-description]
-keywords: "X_eTaL FPGA, array language to hardware, Verilog-2005 emitter, netlist cycle simulator, Sipeed Tang Nano, Tang Primer, Gowin FPGAs, Gowin open flow, Yosys, nextpnr, Apicula, openFPGALoader, space versus time lanes"
-abstract: "Eighth in the Array Languages series, a placeholder until the repository reaches critical mass: X_eTaL-fpga turns X_eTaL programs into circuits. An elementwise add on eight numbers becomes eight adders, a reduction becomes a tree of adders, and a step function over a state vector becomes registers and an ALU, built with the open Gowin flow onto Sipeed's Tang Nano and Tang Primer boards."
+tags: [array-languages, xetal, x-etal, apl, fpga, verilog, gowin, tang-nano, tang-primer, yosys, nextpnr, apicula, hardware-description, tms1000, uart]
+keywords: "X_eTaL FPGA, array language to hardware, Verilog-2005 emitter, netlist, cycle simulator, space versus time, lanes, reduction tree, clocked circuits, UART, HEX1000, TMS1000, 4-bit machine, calculator, Sipeed Tang Nano, Tang Primer, Gowin FPGAs, Yosys, nextpnr, Apicula, openFPGALoader"
+abstract: "Eighth in the Array Languages series: X_eTaL-fpga turns X_eTaL programs into circuits. An add on eight numbers becomes eight adders, a sum becomes a tree of adders or one adder used over eight clocks, and a step function over a state vector becomes registers. Every circuit is simulated and must give the evaluator's answer bit for bit. Next is HEX1000, a 4-bit calculator machine in the spirit of the TMS1000, headed for Sipeed's Tang Nano and Tang Primer boards."
 series: "Array Languages"
 series_part: 8
 date: 2026-10-14 00:15:00 -0700
 ---
 
-<!-- PLACEHOLDER (2026-10-07): flesh out once X_eTaL-fpga reaches critical mass. Date is provisional; publish sets it.
-     The repo hardwarewrighter/X_eTaL-fpga is PRIVATE today (GitHub 404): add repo_urls and a link once it is public.
-     To do: cross-link the companion hardware blog (https://blog.hardwarewrighter.com/), which may carry the hardware side.
-     Outline: from array operation to netlist; the cycle simulator; Verilog emitted; lanes, space versus time;
-     the Tang Nano and Tang Primer boards (1K, 4K, 9K, 20K, 25K) and the open toolchain; a calculator as a step function; the same answer in software and in silicon. -->
+<!-- DRAFT, IN PROGRESS: refreshed 2026-10-12 from hardwarewrighter/X_eTaL-fpga (last commit 2026-10-08; saga 3 nibble-machine
+     active: steps isa, radix-lib, doc-site done; machine-lib next). More changes are expected over the next two days.
+     The repo is PRIVATE (GitHub): no repo link or repo_urls until it is public.
+     Boards (Mike, 2026-10-11): Sipeed Tang Nano and Tang Primer, 1K, 4K, 9K, 20K, 25K; the repo's README names only a Tang Nano 1K or 4K.
+     Nothing has run on an FPGA or through iverilog/Yosys yet (the tools go on the Arch machine): re-check before publishing.
+     To do: cross-link the companion hardware blog (https://blog.hardwarewrighter.com/). -->
 
 <img src="{{ '/assets/images/posts/block-tang-primer.webp' | relative_url }}" class="post-marker" alt="" style="width: 205px;">
 
 <div style="overflow: hidden;" markdown="1">
 
-The same whole-array program that runs on the X_eTaL evaluator, or as threads on a GPU, can also be a circuit. X_eTaL-fpga makes it one: `c ← a + b` on eight 16-bit numbers becomes eight adders, `'+ r̲/ v` becomes a tree of adders, and a calculator written as a step function over a state vector becomes registers, a decoder and an ALU. The open Gowin flow --- Yosys, nextpnr, Apicula and openFPGALoader --- puts it on Sipeed's small Gowin boards, a mix of Tang Nano and Tang Primer from the 1K to the 25K. As with the GPU work, the goal is the concept: one typed array program, realized as sequential time, parallel threads or physical space, with the same answer.
+The same whole-array program that runs on the X_eTaL evaluator, or as threads on a GPU in [post #7](/2026/10/13/array-languages-xetal-gpu/), can also be a circuit. X_eTaL-fpga makes it one: `c ← a + b` on eight 16-bit numbers becomes eight adders, `'+ r̲/ v` becomes a tree of adders, and a machine written as a step function over a state vector becomes registers, a decoder and an ALU. As with the GPU work, the goal is the concept: one typed array program realized as time, as parallel threads, or as physical space, with the same answer.
 
 </div>
 
@@ -30,16 +31,79 @@ The same whole-array program that runs on the X_eTaL evaluator, or as threads on
 
 | Resource | Link |
 |----------|------|
-| **The repo** | X_eTaL-fpga, in the hardwarewrighter organization (to be published) |
+| **The repo** | X_eTaL-fpga, in the hardwarewrighter organization --- private for now; linked here once it is public |
+| **The GPU side** | [Array Languages #7: X_eTaL-gpu](/2026/10/13/array-languages-xetal-gpu/) |
 | **The language** | [Array Languages #1: X_eTaL](/2026/10/07/array-languages-xetal/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
 </div>
 
-## What it is
+<div class="clearfix" markdown="1" style="clear: both;">
 
-From the repository's README: a small accelerator IR; a netlist with a cycle simulator; a Verilog-2005 emitter; a schedule that decides how much of a computation is space and how much is time, in lanes; and the open Gowin toolchain to the board. It lives in a different organization on purpose. The software side maps array programs onto hardware someone else designed; this side uses the array program to describe the hardware itself.
+## One program, four ways to run it
 
-## Still to come
+As with the GPU, every example is an X_eTaL program first, and the evaluator is the reference. Each also has a hand-written twin in a small accelerator IR, and every realization must reproduce the evaluator's answer bit for bit: the IR's interpreter, a simulation of the circuit's netlist, and the generated Verilog.
 
-This post will grow as the repository does: one program, its netlist, the simulated cycles, and the board giving the answer the evaluator gave.
+```text
+                X_eTaL program (.xtl)
+                        |
+      +---------+-------+--------+-----------+
+      v         v                v           v
+  evaluator  IR interpreter   netlist sim  Verilog
+      |         |                |           |
+      +---------+-------+--------+-----------+
+                        v
+                  the same arrays
+```
+
+The hardware models are ordinary X_eTaL libraries. Fixed gives two's complement numbers of a stated width, so the evaluator computes exactly what a 16-bit adder would. Datapath holds the example programs at that width. Here is its sum, a tree written as a recursion that halves the vector, wrapping to the width at every adder:
+
+```text
+ˡs̲um ← { w x →
+  n ← t̲ally x
+  n = 1 ? f̲irst x
+  1 = n m̲od 2 ? w ˡs̲um x c̲at 0
+  h ← n d̲iv 2
+  w ˡs̲um w ᶠˣw̲rap (h t̲ake x) + h d̲rop x
+}
+```
+
+## Space or time
+
+The interesting decision is how much of a computation becomes space and how much becomes time. The schedule chooses the number of lanes. With eight lanes, the sum of eight numbers is combinational: a tree of adders, done in no clocks at all. With one lane it adds one number per clock, with a counter and a register, done after eight clocks. Both come from the same program, and both are pinned as generated Verilog. The eight-lane add is as plain as it sounds:
+
+```verilog
+// vector_add: generated by xetal-fpga from an X_eTaL program; do not edit.
+// Spatial schedule: 8 lane(s), combinational.
+module vector_add (
+  input  wire [127:0] in_a,
+  input  wire [127:0] in_b,
+  output wire [127:0] out_c
+);
+  ...
+  wire signed [15:0] n16 = n0 + n8;
+  wire signed [15:0] n17 = n1 + n9;
+  ...
+```
+
+</div>
+
+<div class="clearfix" markdown="1">
+
+## Circuits with state
+
+The second stage added clocks. Clocked circuits are step functions in X_eTaL, a state in and a state out, and the Clocked library holds the specifications: a counter, an accumulator, a shift register, a sequence detector and a RAM, with a harness that clocks them. The IR, the netlist, the simulator and the Verilog all learned registers, input streams, ROMs and a RAM's write port. Then came a serial port: a UART's transmitter and receiver, written as step functions and looped back, from X_eTaL to a clocked circuit. Testbenches check every clock and write waveforms to look at.
+
+## HEX1000: a 4-bit machine
+
+The current stage is a whole machine. HEX1000 is a 4-bit machine in the spirit of the TMS1000, Texas Instruments' 4-bit microcontroller of the 1970s: an original design of about the same size and complexity, not a replica. It keeps the TMS1000's shape: a 4-bit accumulator, a 64 by 4-bit RAM, a ROM of 1,024 eight-bit instructions in 16 pages, and a program counter that steps as a feedback shift register rather than a binary counter. Its ROM program makes it a calculator, hexadecimal first, then octal and decimal, and it talks to a terminal over the UART.
+
+The specification comes first. The Radix library is an eight-digit calculator in any radix, written as plain X_eTaL, and the machine's ROM program has to match it key for key. Next the machine itself is written in X_eTaL, as a pure step function and an assembler, then its calculator program, then the machine hand-lowered to a circuit and simulated with that program, every key sequence reproduced, with the Verilog pinned and a resource estimate against the smallest board.
+
+## The boards
+
+Nothing has run on an FPGA yet. So far every circuit is proven by the simulator of its own netlist. The Verilog tools, iverilog, Verilator and Yosys, and the open Gowin flow to the boards, nextpnr, Apicula and openFPGALoader, go on the Arch machine where the boards are. The boards are Sipeed's small Gowin boards, a mix of Tang Nano and Tang Primer from the 1K to the 25K. HEX1000 is sized for the smallest of them.
+
+This post will be updated as the machine comes together.
+
+</div>
