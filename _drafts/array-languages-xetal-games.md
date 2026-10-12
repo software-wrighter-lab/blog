@@ -4,7 +4,7 @@ title: "Array Languages #6: X_eTaL-games, Rules That Are Arrays"
 categories: [languages, language-design, games, tools]
 tags: [array-languages, xetal, x-etal, apl, games, dogfooding, idioms, entity-component-system, cor24, basic, star-trek, horse-race, wasm]
 keywords: "X_eTaL games, array language idioms, dogfooding a language, outer product, inner product, reduction, scan, compress, rotate, fixed point, grade, masks, trains, GF(2), entity-component system as arrays, horse race APL, Star Trek BASIC, Minesweeper, 2048, Sudoku, lights out, falling blocks, asteroids"
-abstract: "Sixth in the Array Languages series: X_eTaL-games, where every game illustrates an array-language idea and happens to be playable. Nineteen are live in the browser, from the horse race this blog began with to falling blocks and asteroids, and each one maps to a concept: a vector moved by one expression, an outer product of comparisons, rotation and reduction, compress, a fixed point, a product mod 2, an entity-component system as one matrix. The games are also how the language gets dogfooded: they hold state, take input and keep time, and what they cannot do yet goes back to the language as an ask."
+abstract: "Sixth in the Array Languages series: X_eTaL-games, where every game illustrates an array-language idea and happens to be playable. Twenty are live in the browser, from the horse race this blog began with to asteroids and a tower defense in 3D, and each one maps to a concept: a vector moved by one expression, an outer product of comparisons, rotation and reduction, compress, a fixed point, a product mod 2, an entity-component system as one matrix. The games are also how the language gets dogfooded: they hold state, take input and keep time, and what they cannot do yet goes back to the language as an ask."
 series: "Array Languages"
 series_part: 6
 date: 2026-10-12 00:15:00 -0700
@@ -16,7 +16,7 @@ repo_urls:
 
 <img src="{{ '/assets/images/posts/block-robots-game.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
-<!-- DRAFT for review, refreshed 2026-10-11 from X_eTaL-games (19 games live; the repo README's status paragraph still says nine). -->
+<!-- DRAFT for review, refreshed 2026-10-12 from X_eTaL-games (20 games live, tower defense the newest; the repo README's status paragraph still says nine). -->
 
 <div style="overflow: hidden;" markdown="1">
 
@@ -31,16 +31,16 @@ The demos show what array programming looks like. The games show what it can car
 | Resource | Link |
 |----------|------|
 | **The repo** | [softwarewrighter/X_eTaL-games](https://github.com/softwarewrighter/X_eTaL-games) --- one sub-project per game, each with its rules as a library |
-| **Live catalog** | [all nineteen games](https://softwarewrighter.github.io/X_eTaL-games/) in the browser · [the code, cross-referenced](https://softwarewrighter.github.io/X_eTaL-games/doc/) |
+| **Live catalog** | [all twenty games](https://softwarewrighter.github.io/X_eTaL-games/) in the browser · [the code, cross-referenced](https://softwarewrighter.github.io/X_eTaL-games/doc/) |
 | **The originals** | [TBT #1: a horse race in APL, 1972](/2026/01/29/tbt-apl-horse-race/) · [TBT #8: the COR24 BASIC games](/2026/04/16/tbt-cor24-basic-startrek-trs80-robot-chase/) |
 | **Prior post** | [Array Languages #5: X_eTaL-ML](/2026/10/11/array-languages-xetal-ml/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
 </div>
 
-<div class="clearfix" markdown="1">
+<div class="clearfix" markdown="1" style="clear: both;">
 
-## Nineteen games, live
+## Twenty games, live
 
 Each game's rules are a small X_eTaL library, and its page shows only what X_eTaL prints or draws: the game in a terminal, its scripted run as a notebook, and the source. Each tile links to its page:
 
@@ -72,6 +72,7 @@ Each game's rules are a small X_eTaL library, and its page shows only what X_eTa
 <a class="no-external-icon" href="https://softwarewrighter.github.io/X_eTaL-games/blocks/"><img src="{{ '/assets/images/posts/xetal-games-blocks.webp' | relative_url }}" class="no-invert" alt="The falling blocks game's page in the X_eTaL games catalog"><span>falling blocks</span></a>
 <a class="no-external-icon" href="https://softwarewrighter.github.io/X_eTaL-games/racer/"><img src="{{ '/assets/images/posts/xetal-games-racer.webp' | relative_url }}" class="no-invert" alt="The racer game's page in the X_eTaL games catalog"><span>racer</span></a>
 <a class="no-external-icon" href="https://softwarewrighter.github.io/X_eTaL-games/asteroids/"><img src="{{ '/assets/images/posts/xetal-games-asteroids.webp' | relative_url }}" class="no-invert" alt="The asteroids game's page in the X_eTaL games catalog"><span>asteroids</span></a>
+<a class="no-external-icon" href="https://softwarewrighter.github.io/X_eTaL-games/tower-defense/"><img src="{{ '/assets/images/posts/xetal-games-tower-defense.webp' | relative_url }}" class="no-invert" alt="The tower defense game's isometric board, with its money, lives, wave and time across the top and the tower buttons below"><span>tower defense</span></a>
 </div>
 
 </div>
@@ -103,6 +104,7 @@ This is the point of the repo: a game is chosen because its rules are array-shap
 | [Side-scroller](https://softwarewrighter.github.io/X_eTaL-games/scroller/) | gravity and collision for every body at once, ticked by the clock | whole-column systems, a mask used as a number |
 | [Racer](https://softwarewrighter.github.io/X_eTaL-games/racer/) | every car against every track segment; places by comparing every pair | outer product, reduction |
 | [Asteroids](https://softwarewrighter.github.io/X_eTaL-games/asteroids/) | shots and rocks spawned and despawned in the free slots | masks, outer product of hits, replicate |
+| [Tower defense](https://softwarewrighter.github.io/X_eTaL-games/tower-defense/) | every tower against every creep in one table, every shot against every creep in another | outer product, flood for the road, a linear map for the board and its inverse for clicks |
 
 A few of those ideas, in the games' own code:
 
@@ -123,7 +125,7 @@ The same few shapes recur across games that look nothing alike: rotate and reduc
 
 ## An entity-component system as arrays
 
-The newest games, the dungeon, side-scroller, racer and asteroids, share one idea from game engines, written array first. A world is one matrix: a row per entity, a column for each component's fields, and a column saying whether the slot is alive. A system is a whole-column expression over every entity with the components it needs, at once. Spawning is writing into the free slots a mask finds. A macro library writes a world's layout, its getters, setters and masks, from one line:
+The newest games, the dungeon, side-scroller, racer, asteroids and tower defense, share one idea from game engines, written array first. A world is one matrix: a row per entity, a column for each component's fields, and a column saying whether the slot is alive. A system is a whole-column expression over every entity with the components it needs, at once. Spawning is writing into the free slots a mask finds. A macro library writes a world's layout, its getters, setters and masks, from one line:
 
 ```text
 "h" ᵉᶜc̲omponents< "pos:2 hp atk kind chase heal gold player goal"
@@ -140,6 +142,8 @@ Two more games live outside this repo, next to the machinery they show off:
 | [Gem Hunt](https://softwarewrighter.github.io/X_eTaL-extensions/#scene-voxels-game) | X_eTaL-extensions, a native 3D window | a voxel world as arrays: faces found by six rotations, sunlight by one scan down each column, a dig recorded as a row |
 | [The voxel Rubik's cube](https://softwarewrighter.github.io/X_eTaL-extensions/#scene-voxels-rubik-solve) | X_eTaL-extensions | each quarter turn a permutation of 54 stickers computed from the geometry, with buttons to turn, scramble and solve |
 | [Eigencube](https://softwarewrighter.github.io/X_eTaL-demos/eigencube/) | X_eTaL-demos, in the browser; its solver now a library in X_eTaL-libraries | cubelets as vectors and turns as rotation matrices; a batch of cubes as one array, every turn of every cube one product |
+
+The repos also work together. Tower defense, the newest game, asked X_eTaL-extensions for 3D towers and creeps, and its Blender pipeline made them: twelve pieces as `.glb` files, each with its animations as named clips, rendered and [published](https://softwarewrighter.github.io/X_eTaL-extensions/blender/td/). The game's X_eTaL program then writes a 3D scene, the camera, the tiles, and every piece's model, place, heading, clip and moment, and the page draws it with three.js. Without WebGL the flat picture stays, and the labels, toolbar and clicks are the program's own SVG either way.
 
 Both have posts of their own: [the voxel world and Gem Hunt](/2026/10/09/voxels-3d-worlds-array-languages/), and [the Eigencube](/2026/10/08/eigencube-rubiks-cube-linear-algebra/), whose solver also drives the voxel cube. And [TTTML](/2026/09/24/tbt-aplsv-birds-tttml/), the tic-tac-toe machine that learns by playing itself, is a demo in the language repo.
 
