@@ -4,7 +4,7 @@ title: "Array Languages #7: X_eTaL-gpu, Array Programs on GPUs Old and New"
 categories: [languages, language-design, gpu, hardware]
 tags: [array-languages, xetal, x-etal, apl, gpu, opencl, kepler, maxwell, pascal, turing, ampere, ada-lovelace, blackwell, accelerator-ir, parallelism]
 keywords: "X_eTaL GPU, array language on GPU, OpenCL C 1.2 kernels, kernel fusion, tree reduction, accelerator IR, retired CUDA cards, Kepler, Maxwell, Pascal, Turing, Ampere, Ada Lovelace, Blackwell, Apple M1 Max, Apple M3 Pro, Tesla P100, Tesla M40, Quadro K4200, Tesla M10, Tesla P4, GTX 1660 Super, RTX 3060, RTX 3060 Laptop GPU, RTX 3090, RTX 4070 Laptop GPU, RTX 5060 Ti, A2, whole-array parallelism, GPU native extension"
-abstract: "Seventh in the Array Languages series: X_eTaL-gpu runs X_eTaL programs on GPUs through OpenCL, old and new. The aim is to show that an array language, with its macros and extensions, can get real value from older and smaller GPUs on machine-learning tasks, and this post is about when that value appears. Offloading has fixed costs, so small and elementwise jobs lose. Large, product-heavy work in big batches runs 25 to 180 times faster than X_eTaL's own evaluator. Against tuned CPU code the bar is higher: a small trained model does not beat OpenBLAS yet, and the work ahead, bigger models and training with the weights kept on the GPU, is aimed at clearing that bar."
+abstract: "Seventh in the Array Languages series: X_eTaL-gpu runs X_eTaL programs on GPUs through OpenCL, old and new. The aim is to show that an array language, with its macros and extensions, can get real value from older and smaller GPUs on machine-learning tasks, and this post is about when that value appears. Offloading has fixed costs, so small and elementwise jobs lose. Large, product-heavy work in big batches runs 25 to 220 times faster than X_eTaL's own evaluator. Against tuned CPU code the bar is higher: a small trained model does not beat a tuned CPU library yet, on either GPU, and the work ahead, bigger models and training with the weights kept on the GPU, is aimed at clearing that bar."
 series: "Array Languages"
 series_part: 7
 date: 2026-10-13 00:15:00 -0700
@@ -15,7 +15,7 @@ repo_urls:
 ---
 
 <!-- DRAFT, IN PROGRESS: refreshed 2026-10-12 night from X_eTaL-gpu at bc90eff (sessions and the OpenBLAS comparison: docs/rtx5060-session-results.md,
-     docs/gpu-sessions.md; windows done), X_eTaL-ML 1eded2a (the denoiser). Before that: X_eTaL-gpu c67895c (ml-results.md, rtx5060-results.md, rtx5060-ml-results.md,
+     docs/gpu-sessions.md; windows done), X_eTaL-ML 1eded2a, then 866c217 (the denoiser committed); X_eTaL-gpu 0c04f21 (the M1 Max against Accelerate: docs/m1max-session-results.md). Before that: X_eTaL-gpu c67895c (ml-results.md, rtx5060-results.md, rtx5060-ml-results.md,
      rtx5060-binary-results.md, binary-arrays.md; transpose done; plan sagas 5 to 11), X_eTaL-ML fac586c (world model committed), X_eTaL 27b3fd0.
      Focus (Mike, 2026-10-12): effective use of X_eTaL to run ML tasks faster on a GPU, even an old small one, for tasks worth offloading.
      and X_eTaL-ML's docs/gpu-asks.md and plan.md "Combined with X_eTaL-gpu" (0ff84e8).
@@ -126,6 +126,7 @@ X_eTaL's evaluator is the reference, written for clarity, not speed. Against it,
 <tr><td>the small ML benchmarks: a dense layer, a wide inner product, a softmax</td><td>M1 Max</td><td>59 to 179 ms</td><td>about 90 ms</td><td class="v-even">about even: setup is nearly all of the GPU’s time</td></tr>
 <tr><td>a 512 by 512 product, through the bridge</td><td>M1 Max</td><td>14.5 s</td><td>0.46 s</td><td class="v-good">31 times faster</td></tr>
 <tr><td>a 512 by 512 product, through the bridge</td><td>RTX 5060 Ti</td><td>25.0 s</td><td>0.98 s</td><td class="v-good">25 times faster</td></tr>
+<tr><td>a 512 by 512 product, the whole checked program</td><td>M1 Max</td><td>28.75 s</td><td>0.13 s</td><td class="v-good">about 220 times faster</td></tr>
 <tr><td>a 512 by 512 product, the whole checked program</td><td>RTX 5060 Ti</td><td>55 s</td><td>0.30 s</td><td class="v-good">about 180 times faster</td></tr>
 <tr><td>the world model, all 1,936 states as one batch</td><td>M1 Max</td><td>9.9 s</td><td>0.11 s</td><td class="v-good">about 90 times faster</td></tr>
 <tr><td>the world model, all 1,936 states as one batch</td><td>RTX 5060 Ti</td><td>15.1 s</td><td>0.16 s</td><td class="v-good">about 95 times faster</td></tr>
@@ -136,20 +137,20 @@ The GPU times are whole runs, setup included. The world model's kernels alone ta
 
 ### Against tuned CPU code
 
-The stronger test is a CPU running optimized code. The GPU repo ran the trained world model, both layers with their biases, ReLU and sigmoid, on the 5060 Ti and against NumPy with OpenBLAS on the same machine's 12-thread Xeon, taking the fastest thread count for each batch. Every run gives the same counts. The GPU keeps its kernels and weights resident in a session, and uploads each new batch:
+The stronger test is a CPU running optimized code. The GPU repo ran the trained world model, both layers with their biases, ReLU and sigmoid, on both GPUs, each against its own machine's tuned CPU library: NumPy with Apple's Accelerate on the M1 Max, and NumPy with OpenBLAS on the 5060 Ti's 12-thread Xeon, taking the fastest thread count for each batch. Every run gives the same counts. The GPU keeps its kernels and weights resident in a session and uploads each new batch; the times are medians of repeated calls:
 
 <table class="pays">
-<thead><tr><th>World model, batch</th><th>OpenBLAS, best of 1, 6 or 12 threads</th><th>RTX 5060 Ti, new batch each call</th><th>Against tuned CPU code</th></tr></thead>
+<thead><tr><th>World model, batch</th><th>M1 Max: Accelerate (ms)</th><th>M1 Max: GPU (ms)</th><th>GPU against CPU</th><th>5060 Ti machine: OpenBLAS (ms)</th><th>RTX 5060 Ti (ms)</th><th>GPU against CPU</th></tr></thead>
 <tbody>
-<tr><td>1 state</td><td>0.07 ms</td><td>0.21 ms</td><td class="v-bad">about a third of the CPU’s speed</td></tr>
-<tr><td>64 states</td><td>0.23 ms</td><td>0.30 ms</td><td class="v-even">0.76 times the CPU’s speed</td></tr>
-<tr><td>256 states</td><td>0.47 ms</td><td>0.66 ms</td><td class="v-even">0.72 times</td></tr>
-<tr><td>1,936 states, the whole world</td><td>1.94 ms</td><td>2.97 ms</td><td class="v-even">0.65 times</td></tr>
-<tr><td>8,192 states</td><td>8.6 ms</td><td>10.5 ms</td><td class="v-even">0.82 times</td></tr>
+<tr><td>1 state</td><td>0.022</td><td>1.54</td><td class="v-bad">0.01 times</td><td>0.073</td><td>0.21</td><td class="v-bad">0.35 times</td></tr>
+<tr><td>64 states</td><td>0.10</td><td>1.79</td><td class="v-bad">0.06 times</td><td>0.23</td><td>0.30</td><td class="v-even">0.76 times</td></tr>
+<tr><td>256 states</td><td>0.31</td><td>1.78</td><td class="v-bad">0.17 times</td><td>0.47</td><td>0.66</td><td class="v-even">0.72 times</td></tr>
+<tr><td>1,936 states, the whole world</td><td>1.29</td><td>2.51</td><td class="v-even">0.51 times</td><td>1.94</td><td>2.97</td><td class="v-even">0.65 times</td></tr>
+<tr><td>8,192 states</td><td>4.68</td><td>5.50</td><td class="v-even">0.85 times</td><td>8.64</td><td>10.53</td><td class="v-even">0.82 times</td></tr>
 </tbody>
 </table>
 
-The world model does not beat OpenBLAS at any batch size measured. The GPU's kernels are fast, from a tenth of a millisecond to half a millisecond, but uploading each new batch costs about as much as the CPU's whole computation: at 8,192 states the upload alone takes 9.9 ms, against 8.6 ms for OpenBLAS to do everything. Running the same batch again without uploading takes 0.56 ms, but repeating identical inputs is not real work, and the repo refuses to count it. The gap narrows as the batch grows, from about a third of the CPU’s speed to about four fifths.
+The world model does not beat the tuned CPU library at any batch size measured, on either machine. The GPU's kernels are fast: for the whole world of 1,936 states the 5060 Ti's kernels take 0.24 ms. But each call also pays for its launches and for uploading the new batch, and that is about as much as the CPU's whole computation. At 8,192 states the 5060 Ti's upload alone takes 9.9 ms, against 8.6 ms for OpenBLAS to do everything. Apple's OpenCL adds about 1.3 ms to every call, even with nothing to upload, which is why the M1 Max is so far behind on small batches. Running a batch already on the device is cheaper, but repeating identical inputs is not real work, and the repo refuses to count it. On both machines the gap narrows as the batch grows, to 0.85 of the CPU’s speed on the M1 Max and 0.82 on the 5060 Ti at 8,192 states.
 
 The reason is the model's size. A 432 to 64 to 144 network does little arithmetic for each number it is sent, and a well-tuned CPU library is very good at small products. The rule the repo has settled on still holds, the batch is the array and the work is products, but against a good CPU library the products have to be big enough, or the data has to stay on the device, for the arithmetic to outweigh the upload.
 
@@ -161,7 +162,7 @@ The machine-learning models from [post #5](/2026/10/11/array-languages-xetal-ml/
 
 - **The world model** predicts a ball's next frame from the last three: 432 pixels in, 64 ReLU units, 144 sigmoid pixels out. Over all 1,936 states it predicts 1,897 next frames exactly, and 348 of the 387 it never trained on, with the same counts on the evaluator, both GPUs and OpenBLAS.
 - **The benchmarks,** a dense layer, a wide inner product and a softmax, agree on both GPUs within a relative 1e-5. They are small, and at best break even with the evaluator.
-- **A learned denoiser,** new in X_eTaL-ML this week, draws 10 by 10 pictures, a disk, a hollow square or a cross, from noise in ten steps, 128 pictures at once, in 6.3 s in the evaluator. Its network is wider, 256 hidden units, and the ten steps are ten calls, so it will show what a session saves inside a loop. It has not run on a GPU yet.
+- **A learned denoiser,** new in X_eTaL-ML this week, draws 10 by 10 pictures, a disk, a hollow square or a cross, from noise in ten steps, 128 pictures at once, in 6.3 s in the evaluator. Its network is wider, 256 hidden units, and the ten steps are ten calls, so it will show what a session saves inside a loop. It is now committed in X_eTaL-ML, so its run on the GPUs is next.
 
 ## Shrinking the fixed costs
 
@@ -176,11 +177,12 @@ What remains is the upload of each new batch, which the comparison above shows i
 
 That is why the plan moves to larger work next:
 
-1. **A tiny GPT.** X_eTaL-ML's MicroGPT, one layer with four heads, its forward pass as one program on a batch of prompts, written into the GPU's form by a generator rather than by hand, measured in tokens per second on each card. The typed-decision classifier is the same block with a classification head.
-2. **Training.** A training step, forward, backward and Adam, as one program per step with the weights resident. Training is where products dominate most, and the weights and their gradients stay on the device between steps, so only each batch moves. Each line of a backward pass is a product with a transpose, which is why transpose came first. The tiny GPT trained from scratch, then GPT-2 small fine-tuned on a small corpus, with the memory each card needs.
-3. **The CNNs.** The convolution's windows are now in the GPU's form, so the Tiny CNN and CNN training can follow.
-4. **A conditional memory** after DeepSeek's Engram, hashed n-grams looked up in a table. On a GPU that is a gather, so the point there is X_eTaL's concision and the table's size, not speed.
-5. **A mixture of experts,** first the array way, every expert computing and the router's mask keeping what was chosen, and a sparse version only if that measures too slow.
+1. **Retrieval against a resident index.** The next workload the repo names: batched embedding retrieval, a large document index kept on the GPU and each query compared with all of it, followed by a reduction or a top-k. Each number uploaded buys many comparisons, which is the shape the measurements say wins. The step under way now, lookup, adds the indexing it needs: rows of a matrix chosen by a vector of integers, the same gather every transformer's embedding uses.
+2. **A tiny GPT.** X_eTaL-ML's MicroGPT, one layer with four heads, its forward pass as one program on a batch of prompts, written into the GPU's form by a generator rather than by hand, measured in tokens per second on each card. The typed-decision classifier is the same block with a classification head.
+3. **Training.** A training step, forward, backward and Adam, as one program per step with the weights resident. Training is where products dominate most, and the weights and their gradients stay on the device between steps, so only each batch moves. Each line of a backward pass is a product with a transpose, which is why transpose came first. The tiny GPT trained from scratch, then GPT-2 small fine-tuned on a small corpus, with the memory each card needs.
+4. **The CNNs.** The convolution's windows are now in the GPU's form, so the Tiny CNN and CNN training can follow.
+5. **A conditional memory** after DeepSeek's Engram, hashed n-grams looked up in a table. On a GPU that is a gather, so the point there is X_eTaL's concision and the table's size, not speed.
+6. **A mixture of experts,** first the array way, every expert computing and the router's mask keeping what was chosen, and a sparse version only if that measures too slow.
 
 Each of these will be measured against both baselines, the evaluator and tuned CPU code.
 
