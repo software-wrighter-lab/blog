@@ -110,7 +110,7 @@ The tool shows each step: `xetal-gpu kernel` prints the OpenCL C, and `xetal-gpu
 
 ## What runs today
 
-Two GPUs have run it so far: the M1 Max in this Mac, through Apple's OpenCL 1.2, and an RTX 5060 Ti in an Arch Linux machine, through NVIDIA's OpenCL. On both, every check agrees with the evaluator: the example programs, reductions from a thousand items to a million, axis reductions, tiled matrix products, a tiny two-layer network, and, new this week, transpose, the convolution's windows, lookup, the embedding gather, and top-k, each row's largest few. That set is now enough for the machine-learning models ahead. On the 5060 Ti the checks also pass in 64-bit floats, which Apple's OpenCL lacks. Through the bridge from [post #4](/2026/10/10/array-languages-xetal-extensions/), an X_eTaL program calls the GPU itself.
+Two GPUs have run it so far: the M1 Max in my main Mac, through Apple's OpenCL 1.2, and an RTX 5060 Ti in an Arch Linux machine, through NVIDIA's OpenCL. On both, every check agrees with the evaluator: the example programs, reductions from a thousand items to a million, axis reductions, tiled matrix products, a tiny two-layer network, and, new this week, transpose, the convolution's windows, lookup, the embedding gather, and top-k, each row's largest few. That set is now enough for the machine-learning models ahead. On the 5060 Ti the checks also pass in 64-bit floats, which Apple's OpenCL lacks. Through the bridge from [post #4](/2026/10/10/array-languages-xetal-extensions/), an X_eTaL program calls the GPU itself.
 
 ## When the GPU pays
 
@@ -216,8 +216,8 @@ OpenCL is the one runtime that reaches all of them, old and new. Testing every c
 | Card | Architecture | Memory | Its role |
 |---|---|---|---|
 | Apple M1 Max | Apple GPU | 64 GB unified | development; measured; the higher memory bandwidth |
-| RTX 5060 Ti | Blackwell | 16 GB | the newest generation; measured, the first NVIDIA card |
-| RTX 3090 | Ampere | 24 GB | the most memory of the NVIDIA cards |
+| RTX 5060 Ti | Blackwell | 16 GB | the newest generation of these cards; measured, the first NVIDIA card |
+| RTX 3090 | Ampere | 24 GB | the most memory of the NVIDIA cards I’m working with |
 | RTX 3060 | Ampere | 12 GB | a mid-range current card; several of them |
 
 **Follow-on:** once the use-cases and measurements are settled on those, a second Apple GPU, and one or two of these older or smaller data-center cards:
@@ -234,7 +234,7 @@ OpenCL is the one runtime that reaches all of them, old and new. Testing every c
 
 | Card | Architecture | Memory | Its role |
 |---|---|---|---|
-| Quadro K4200 | Kepler | 4 GB | the oldest generation and the least memory: the case where weights stay on the host |
+| Quadro K4200 | Kepler | 4 GB | the oldest and smallest of these cards: the case where weights stay on the host |
 | GTX 1660 Super | Turing | 6 GB | a small current card |
 | Tesla M10 | Maxwell | four GPUs of 8 GB | built to stream many remote desktops, not to run LLMs; each GPU its own device |
 | RTX 3060 Laptop GPU | Ampere | 6 GB | in a System76 laptop |
