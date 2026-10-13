@@ -58,7 +58,7 @@ A GPU program should be just X_eTaL. The plan is that a function is marked for t
 ᵘs̲core ← ᵍᵖa̲ccel< { q d → q '+ '× i̲nner o̲\ d }
 ```
 
-`gp:a_ccel<` is a macro, and like every X_eTaL macro it is a function from source text to source text. It rewrites the function into one that hands its body to the GPU extension, which lowers it to the GPU's form, binds the arguments, runs it and reads the answer back. Weights bound once stay on the device across calls. The lowering goes through X_eTaL's own compiler crates, so library functions and the program's structure come from the language itself, not from a second parser. And the macro is meant to plug into other runners as well: the FPGA work in the next post takes the same one.
+`gp:a_ccel<` is a macro, and like every X_eTaL macro it is a function from source text to source text. It rewrites the function into one that hands its body to the GPU extension, which lowers it to the GPU's form, binds the arguments, runs it and reads the answer back. Weights bound once stay on the device across calls. The lowering goes through X_eTaL's own compiler crates, so library functions and the program's structure come from the language itself, not from a second parser. The FPGA work in the next post takes a similar approach, though its target is very different: an FPGA is small, with very little memory, and suits a stream of calculations more than parallel execution at a GPU's scale.
 
 This is the next stretch of work, not yet built. The rest of this post is what was built and measured on the way, the pieces the macro will stand on.
 
