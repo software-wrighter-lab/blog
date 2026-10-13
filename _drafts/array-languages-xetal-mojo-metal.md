@@ -17,7 +17,8 @@ repo_urls:
      (it may be part of an existing repo rather than a new one). Facts about Mojo are from the fork's own docs
      (softwarewrighter/modular-fork, Mojo 1.2 development build, 2026-10-13): release notes v0.25.6 (2025-09-22),
      v1.0.0b1 (2026-05-07), v1.1.0 (2026-09-17), the nightly changelog, and Mojo/proposals/c-abi-proposal.md.
-     Lead image is a placeholder. Re-check everything against the code once work starts. -->
+     Chips to test: M1 Max, M3 Pro (Mojo targets apple-m1, apple-m3; no M5 yet); RTX 3060/3090 (sm_86), RTX 5060 Ti (sm_120),
+     per Mojo/stdlib/std/_plugin/metal/metal_targets.mojo and _gpu/host/_builtin_targets.mojo. Lead image is a placeholder. Re-check everything against the code once work starts. -->
 
 <img src="{{ '/assets/images/posts/placeholder-array-languages-xetal-mojo-metal.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
@@ -49,7 +50,7 @@ Today the X_eTaL-gpu work reaches every GPU it uses through OpenCL, the M1 Max a
 - **OpenCL on macOS is frozen.** Apple deprecated it in favor of Metal, and it stays at version 1.2.
 - **It is slow to call.** Post #7 measured about 1.3 ms of fixed cost on every call on the M1 Max, even with nothing to upload, against about 0.2 ms on the RTX 5060 Ti. That fixed cost is a large part of why the M1 Max lost to Apple's tuned CPU library on small batches.
 - **Its profiling is hard to trust.** Apple's OpenCL reports kernel times of a few hundredths of a millisecond for everything, which no second clock has confirmed.
-- **The newest hardware is reached through Metal.** Mojo, for one, reaches the matrix multiply units of Apple's M5 chips through Metal, and Apple's own GPU work goes there, not to OpenCL.
+- **The newest hardware is reached through Metal.** Mojo, for one, reaches the matrix multiply units of Apple's M5 chips through Metal, and Apple's own GPU work goes there, not to OpenCL. The chips here, an M1 Max and an M3 Pro, have no such units, so for them the gain to look for is the cost of a call, not new hardware.
 
 ## Why Mojo
 
@@ -83,9 +84,13 @@ def add(a: Int32, b: Int32) abi("C") -> Int32:
 
 With that, a Mojo library can present the same kind of C boundary the Rust extensions do, and X_eTaL loads it like any other extension. To an X_eTaL program, and to X_eTaL-ML's models, nothing changes. The program is written once, lowered once, and runs on Metal or OpenCL depending on which runner is plugged in.
 
+## The same backend on NVIDIA
+
+Mojo is not only for Apple. It compiles GPU kernels for NVIDIA cards by architecture, and its target list covers the cards being tested first: sm_86, the Ampere architecture of the RTX 3060 and RTX 3090, and sm_120, the Blackwell architecture of the RTX 5060 Ti. It also lists Maxwell, Pascal and Turing, the generations of the older cards. So one Mojo backend could reach both the Macs and the NVIDIA cards, through Metal on one and NVIDIA's own driver on the other, and set beside the OpenCL path on the same cards. A target in a list is not a tested card, though; each will be confirmed by running it.
+
 ## What would be measured
 
-The checks stay the same: the X_eTaL evaluator is the reference, and every result must match it, integers exactly and floats within 1e-5. The measurements are the ones post #7 already has for OpenCL, repeated through Metal on the same two Apple GPUs, the M1 Max and the M3 Pro:
+The checks stay the same: the X_eTaL evaluator is the reference, and every result must match it, integers exactly and floats within 1e-5. The measurements are the ones post #7 already has for OpenCL, repeated through Metal on the same two Apple GPUs, the M1 Max and the M3 Pro, and then through Mojo on the NVIDIA cards:
 
 - **The fixed cost per call.** Whether Metal cuts the 1.3 ms Apple's OpenCL charges, which is what keeps small batches from paying.
 - **The upload.** Apple silicon's CPU and GPU share one memory, so how much a batch costs to hand over is an open question worth measuring, not assuming.
