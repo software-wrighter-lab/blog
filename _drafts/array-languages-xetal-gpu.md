@@ -17,7 +17,8 @@ repo_urls:
 <!-- DRAFT, IN PROGRESS: 2026-10-13 morning, the change of direction (Mike): X_eTaL source run on the GPU through a macro, no hand coding;
      plan decision A4b and saga 4 steps 0n to 0q (core-to-xir, run-from-source, accel-macro, models-from-source) ahead of retrieval; top-k done (620058b);
      core-to-xir begun (2e70b04; uncommitted work in progress 2026-10-13 late morning); gpu-pipeline queued after the lowering steps (8bf756c);
-     X_eTaL-ML 20676a0 (what its workloads offer the pipeline) and 65567f9 (the denoiser's network as one function, u:n_et).
+     X_eTaL-ML 20676a0 (what its workloads offer the pipeline), 65567f9 (the denoiser's network as one function, u:n_et),
+     c5434cc (cnn-digits and micro-gpt batch programs, rows 4 and 5). No new X_eTaL-gpu PRs since #4 as of 2026-10-13 noon.
      Earlier: refreshed 2026-10-12 night from X_eTaL-gpu at bc90eff (sessions and the OpenBLAS comparison: docs/rtx5060-session-results.md,
      docs/gpu-sessions.md; windows done), X_eTaL-ML 1eded2a, then 866c217 (the denoiser committed); X_eTaL-gpu 0c04f21 (the M1 Max against Accelerate: docs/m1max-session-results.md), de299fc (the rule for a compelling example; retrieval after top-k; the GPT width sweep), c130f30 (lookup); top-k in the working tree, not committed, 2026-10-13 morning. Before that: X_eTaL-gpu c67895c (ml-results.md, rtx5060-results.md, rtx5060-ml-results.md,
      rtx5060-binary-results.md, binary-arrays.md; transpose done; plan sagas 5 to 11), X_eTaL-ML fac586c (world model committed), X_eTaL 27b3fd0.
@@ -182,6 +183,7 @@ The machine-learning models from [post #5](/2026/10/11/array-languages-xetal-ml/
 - **The world model** predicts a ball's next frame from the last three: 432 pixels in, 64 ReLU units, 144 sigmoid pixels out. Over all 1,936 states it predicts 1,897 next frames exactly, and 348 of the 387 it never trained on, with the same counts on the evaluator, both GPUs and OpenBLAS.
 - **The benchmarks,** a dense layer, a wide inner product and a softmax, agree on both GPUs within a relative 1e-5. They are small, and at best break even with the evaluator.
 - **A learned denoiser,** new in X_eTaL-ML this week, draws 10 by 10 pictures, a disk, a hollow square or a cross, from noise in ten steps, 128 pictures at once, in 6.3 s in the evaluator. Its network is wider, 256 hidden units, and the ten steps are ten calls, so it will show what a session saves inside a loop. It is committed in X_eTaL-ML, and its network has been reshaped into a single function of arrays inside the subset the lowering handles, ready for the macro, with its pictures unchanged byte for byte.
+- **Two more batch programs** are ready for the GPU, written as X_eTaL in X_eTaL-ML and checked against their Rust trainers. The Tiny CNN reads the first 1,000 MNIST test digits as one batch, every picture's windows and one product for the whole batch, and gets 971 right, as its trainer does, in about 9 s in the evaluator. MicroGPT scores the first 1,000 names, matching its trainer's loss to 1e-9 and predicting 2,098 of 7,000 next letters, in about 3.5 s. The CNN fits what the lowering is being built to handle; MicroGPT's attention heads join arrays in a way the first version of the lowering will not cover yet.
 
 ## Shrinking the fixed costs
 
