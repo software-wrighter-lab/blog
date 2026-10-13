@@ -19,7 +19,7 @@ repo_urls:
      core-to-xir begun (2e70b04; uncommitted work in progress 2026-10-13 late morning); gpu-pipeline queued after the lowering steps (8bf756c);
      X_eTaL-ML 20676a0 (what its workloads offer the pipeline), 65567f9 (the denoiser's network as one function, u:n_et),
      c5434cc (cnn-digits and micro-gpt batch programs, rows 4 and 5), d09886e (top-k's finite shift).
-     X_eTaL-gpu 28c91a9 (the lowering landed; twins deleted; README and landing page: "X_eTaL source, lowered"), 7977809 (ML pin c032768).
+     X_eTaL-gpu 3a6321e (run from source, 13 demos), 28c91a9 (the lowering landed; twins deleted; README and landing page: "X_eTaL source, lowered"), 7977809 (ML pin c032768).
      Earlier: refreshed 2026-10-12 night from X_eTaL-gpu at bc90eff (sessions and the OpenBLAS comparison: docs/rtx5060-session-results.md,
      docs/gpu-sessions.md; windows done), X_eTaL-ML 1eded2a, then 866c217 (the denoiser committed); X_eTaL-gpu 0c04f21 (the M1 Max against Accelerate: docs/m1max-session-results.md), de299fc (the rule for a compelling example; retrieval after top-k; the GPT width sweep), c130f30 (lookup); top-k in the working tree, not committed, 2026-10-13 morning. Before that: X_eTaL-gpu c67895c (ml-results.md, rtx5060-results.md, rtx5060-ml-results.md,
      rtx5060-binary-results.md, binary-arrays.md; transpose done; plan sagas 5 to 11), X_eTaL-ML fac586c (world model committed), X_eTaL 27b3fd0.
@@ -65,7 +65,7 @@ A GPU program should be just X_eTaL. The plan is that a function is marked for t
 
 `gp:a_ccel<` is a macro, and like every X_eTaL macro it is a function from source text to source text. It rewrites the function into one that hands its body to the GPU extension, which lowers it to the GPU's form, binds the arguments, runs it and reads the answer back. Weights bound once stay on the device across calls. The lowering goes through X_eTaL's own compiler crates, so library functions and the program's structure come from the language itself, not from a second parser. The FPGA work in the next post takes a similar approach, though its target is very different: an FPGA is small, with very little memory, and suits a stream of calculations more than parallel execution at a GPU's scale.
 
-The lowering underneath it landed today: every example program now reaches the GPU from its own X_eTaL source. The macro itself is the next step. The rest of this post is what was built and measured on the way, the pieces the macro stands on.
+The pieces underneath it landed today: every example program now reaches the GPU from its own X_eTaL source, and a program can be run straight from its `.xtl` file. The macro itself is the next step. The rest of this post is what was built and measured on the way, the pieces the macro stands on.
 
 ## One program, three ways to run it
 
@@ -205,7 +205,7 @@ What remains is the upload of each new batch, which the comparison above shows i
 First the direction, then the examples built to beat the CPU:
 
 1. **The lowering, done.** X_eTaL source and the shapes of its inputs in, a program in the GPU's form out, through X_eTaL's own crates, with a reason given for anything outside the subset. Every example now runs this way.
-2. **Running from source.** `xetal-gpu run program.xtl --device opencl:0`: the program's own statements prepare the data, the accelerated function is lowered and run, and the answer prints as X_eTaL prints it. `explain` shows each X_eTaL line beside the kernel it became.
+2. **Running from source, done.** `xetal-gpu run program.xtl --device opencl:0` runs a program straight from its source. A statement the GPU cannot take, a sort or a `where`, no longer stops the program: the evaluator computes it and hands the result to the GPU as an input, and everything after it runs on the device. `explain` shows the X_eTaL line each kernel came from. Thirteen examples now agree with the evaluator this way on the M1 Max.
 3. **The macro.** `gp:a_ccel<`, as above, with the weights resident across calls.
 4. **The models from their own source.** The world model and the benchmarks run from X_eTaL-ML's own programs through the macro, and the results tables say they were run from source.
 5. **Pipelining.** Chunks of a batch overlapping their upload, compute and download, as above, measured as sustained items per second.
@@ -216,7 +216,9 @@ First the direction, then the examples built to beat the CPU:
 10. **A conditional memory** after DeepSeek's Engram, hashed n-grams looked up in a table. On a GPU that is a gather, so the point there is X_eTaL's concision and the table's size, not speed.
 11. **A mixture of experts,** first the array way, every expert computing and the router's mask keeping what was chosen, and a sparse version only if that measures too slow.
 
-Each of these will be measured against both baselines, the evaluator and tuned CPU code. In the end the language itself takes over the IR and the lowering, and the whole thing becomes one command: `xetal run --device opencl:0 program.xtl`.
+Each of these will be measured against both baselines, the evaluator and tuned CPU code.
+
+On Apple silicon there is one more question. Apple deprecated OpenCL years ago in favor of Metal, and the M1 Max pays about 1.3 ms a call through it. A planned post explores using Modular's MAX and Mojo in place of OpenCL, running on Metal on the Macs, for another round of performance measurements on the same chips. In the end the language itself takes over the IR and the lowering, and the whole thing becomes one command: `xetal run --device opencl:0 program.xtl`.
 
 ## The cards
 
