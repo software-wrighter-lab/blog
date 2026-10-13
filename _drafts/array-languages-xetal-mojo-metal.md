@@ -2,9 +2,9 @@
 layout: post
 title: "Array Languages #10: X_eTaL on Metal, Through Mojo"
 categories: [languages, language-design, gpu, tools]
-tags: [array-languages, xetal, x-etal, apl, gpu, mojo, metal, apple-silicon, modular, extensions, c-abi, opencl]
-keywords: "X_eTaL Mojo backend, X_eTaL Metal, array language on Apple silicon GPU, Mojo GPU programming, Mojo Apple GPU, Metal backend, OpenCL deprecated on macOS, Mojo C ABI, abi C effect, @export, X_eTaL extension ABI, M1 Max, M3 Pro"
-abstract: "Tenth in the Array Languages series, a plan before there is code: a second GPU backend for X_eTaL. The GPU work in post #7 reaches Apple silicon through OpenCL, which Apple deprecated years ago and which costs about 1.3 ms a call on an M1 Max. Mojo, from Modular, compiles GPU code for Apple's own Metal, and it can now export a plain C interface, which is what X_eTaL's extensions speak. So the same lowered X_eTaL could be emitted as Mojo and run on Metal, plugged in as an extension, with the X_eTaL-gpu and X_eTaL-ML programs unchanged."
+tags: [array-languages, xetal, x-etal, apl, gpu, mojo, metal, apple-silicon, modular, extensions, c-abi, opencl, mlx]
+keywords: "X_eTaL Mojo backend, MLX, Apple MLX array framework, X_eTaL Metal, array language on Apple silicon GPU, Mojo GPU programming, Mojo Apple GPU, Metal backend, OpenCL deprecated on macOS, Mojo C ABI, abi C effect, @export, X_eTaL extension ABI, M1 Max, M3 Pro"
+abstract: "Tenth in the Array Languages series, a plan before there is code: a second GPU backend for X_eTaL. The GPU work in post #7 reaches Apple silicon through OpenCL, which Apple deprecated in 2018 and which costs about 1.3 ms a call on an M1 Max; on a Mac, Metal is the real path to the GPU. Mojo, from Modular, compiles GPU code for Metal and for NVIDIA cards, and it can now export the plain C interface X_eTaL's extensions speak. Apple's own MLX is the other candidate, an array framework whose operations match the lowered programs one for one. Either could run the same lowered X_eTaL, plugged in as an extension, with the programs unchanged."
 series: "Array Languages"
 series_part: 10
 date: 2026-10-16 00:15:00 -0700
@@ -24,7 +24,7 @@ repo_urls:
 
 <div style="overflow: hidden;" markdown="1">
 
-[Post #7](/2026/10/13/array-languages-xetal-gpu/) took X_eTaL programs to GPUs through OpenCL, lowered from their own source. On a Mac that works, but through an API Apple stopped developing years ago. This post is a plan, written before the code: a second backend that reaches Apple's GPUs through Metal, their own API, by way of Mojo.
+[Post #7](/2026/10/13/array-languages-xetal-gpu/) took X_eTaL programs to GPUs through OpenCL, lowered from their own source. On a Mac that works, but through an API Apple stopped developing years ago. On Apple silicon, OpenCL is a leftover and Metal is the real path to the GPU. This post is a plan, written before the code: a second backend that reaches Apple's GPUs through Metal, by way of Mojo, with Apple's own MLX as the other candidate.
 
 </div>
 
@@ -47,7 +47,7 @@ repo_urls:
 
 Today the X_eTaL-gpu work reaches every GPU it uses through OpenCL, the M1 Max and M3 Pro included. That was the right first choice: one runtime that reaches old and new cards from every vendor. On Apple silicon, though, it has costs:
 
-- **OpenCL on macOS is frozen.** Apple deprecated it in favor of Metal, and it stays at version 1.2.
+- **OpenCL on macOS is a leftover.** Apple deprecated it in 2018, with macOS 10.14, in favor of Metal. It still ships, so existing programs keep running, but it is frozen at version 1.2 and gets no new work.
 - **It is slow to call.** Post #7 measured about 1.3 ms of fixed cost on every call on the M1 Max, even with nothing to upload, against about 0.2 ms on the RTX 5060 Ti. That fixed cost is a large part of why the M1 Max lost to Apple's tuned CPU library on small batches.
 - **Its profiling is hard to trust.** Apple's OpenCL reports kernel times of a few hundredths of a millisecond for everything, which no second clock has confirmed.
 - **The newest hardware is reached through Metal.** Mojo, for one, reaches the matrix multiply units of Apple's M5 chips through Metal, and Apple's own GPU work goes there, not to OpenCL. The chips here, an M1 Max and an M3 Pro, have no such units, so for them the gain to look for is the cost of a call, not new hardware.
@@ -99,8 +99,16 @@ The checks stay the same: the X_eTaL evaluator is the reference, and every resul
 
 And the same rule applies: the work worth offloading is products in big batches, with little uploaded and the data kept on the GPU.
 
+## What about MLX?
+
+Mojo is not the only way onto Metal. Apple's own machine-learning group publishes MLX, an array framework for Apple silicon, and in some ways it is the closest thing to X_eTaL already on the Mac: whole-array operations, evaluation deferred until a result is needed so a whole computation can be compiled and fused, and memory the CPU and GPU share, so an array does not have to be copied to the device. It has a C interface, so it could sit behind X_eTaL's extension ABI just as a Mojo library could.
+
+It would also fit the lowering in a different way. Every operation the lowered programs use has a direct MLX counterpart: elementwise maps, reductions, matrix products, transposes, `take` for lookup, `roll` for rotation and `topk`. So an MLX runner would not need to generate kernels at all. It could walk the lowered program and call MLX for each operation, and let MLX compile and fuse the result, with its own custom Metal kernels as an escape hatch.
+
+The trade-off is reach. MLX is built for Apple silicon, where Mojo also reaches the NVIDIA cards. Mojo generates kernels, which is closer to what the OpenCL emitter does today; MLX executes operations, which is closer to what the reference interpreter does. Both are worth measuring on the same M1 Max and M3 Pro: the cost per call, the upload, or with shared memory perhaps no upload at all, and the kernels themselves.
+
 ## Where it stands
 
-Nothing is built yet. The fork of Modular's repository is pinned to a current development build of Mojo, and where the X_eTaL side will live is not settled: it may become part of an existing repository rather than a new one. The first step is small: one X_eTaL example, lowered as it is today, emitted as Mojo, run on the M1 Max through Metal, and checked against the evaluator. If that works, the rest of post #7's examples and X_eTaL-ML's batch models follow, and the two backends can be compared on the same chips. This post will be updated, or followed by another, when there is code.
+Nothing is built yet. The fork of Modular's repository is pinned to a current development build of Mojo, and where the X_eTaL side will live is not settled: it may become part of an existing repository rather than a new one. The first step is small: one X_eTaL example, lowered as it is today, emitted as Mojo, run on the M1 Max through Metal, and checked against the evaluator. The same example through MLX would make the comparison from the start. If that works, the rest of post #7's examples and X_eTaL-ML's batch models follow, and the two backends can be compared on the same chips. This post will be updated, or followed by another, when there is code.
 
 </div>
