@@ -16,7 +16,8 @@ repo_urls:
 
 <!-- DRAFT, IN PROGRESS: 2026-10-13 morning, the change of direction (Mike): X_eTaL source run on the GPU through a macro, no hand coding;
      plan decision A4b and saga 4 steps 0n to 0q (core-to-xir, run-from-source, accel-macro, models-from-source) ahead of retrieval; top-k done (620058b);
-     core-to-xir begun (2e70b04); gpu-pipeline queued after the lowering steps (8bf756c).
+     core-to-xir begun (2e70b04; uncommitted work in progress 2026-10-13 late morning); gpu-pipeline queued after the lowering steps (8bf756c);
+     X_eTaL-ML 20676a0 (what its workloads offer the pipeline) and 65567f9 (the denoiser's network as one function, u:n_et).
      Earlier: refreshed 2026-10-12 night from X_eTaL-gpu at bc90eff (sessions and the OpenBLAS comparison: docs/rtx5060-session-results.md,
      docs/gpu-sessions.md; windows done), X_eTaL-ML 1eded2a, then 866c217 (the denoiser committed); X_eTaL-gpu 0c04f21 (the M1 Max against Accelerate: docs/m1max-session-results.md), de299fc (the rule for a compelling example; retrieval after top-k; the GPT width sweep), c130f30 (lookup); top-k in the working tree, not committed, 2026-10-13 morning. Before that: X_eTaL-gpu c67895c (ml-results.md, rtx5060-results.md, rtx5060-ml-results.md,
      rtx5060-binary-results.md, binary-arrays.md; transpose done; plan sagas 5 to 11), X_eTaL-ML fac586c (world model committed), X_eTaL 27b3fd0.
@@ -180,7 +181,7 @@ The machine-learning models from [post #5](/2026/10/11/array-languages-xetal-ml/
 
 - **The world model** predicts a ball's next frame from the last three: 432 pixels in, 64 ReLU units, 144 sigmoid pixels out. Over all 1,936 states it predicts 1,897 next frames exactly, and 348 of the 387 it never trained on, with the same counts on the evaluator, both GPUs and OpenBLAS.
 - **The benchmarks,** a dense layer, a wide inner product and a softmax, agree on both GPUs within a relative 1e-5. They are small, and at best break even with the evaluator.
-- **A learned denoiser,** new in X_eTaL-ML this week, draws 10 by 10 pictures, a disk, a hollow square or a cross, from noise in ten steps, 128 pictures at once, in 6.3 s in the evaluator. Its network is wider, 256 hidden units, and the ten steps are ten calls, so it will show what a session saves inside a loop. It is now committed in X_eTaL-ML, so its run on the GPUs is next.
+- **A learned denoiser,** new in X_eTaL-ML this week, draws 10 by 10 pictures, a disk, a hollow square or a cross, from noise in ten steps, 128 pictures at once, in 6.3 s in the evaluator. Its network is wider, 256 hidden units, and the ten steps are ten calls, so it will show what a session saves inside a loop. It is committed in X_eTaL-ML, and its network has been reshaped into a single function of arrays inside the subset the lowering handles, ready for the macro, with its pictures unchanged byte for byte.
 
 ## Shrinking the fixed costs
 
@@ -192,6 +193,8 @@ Two of the fixes have landed:
 What remains is the upload of each new batch, which the comparison above shows is now the main cost. Two things answer it: work that does more arithmetic per number uploaded, which is what the next examples are built for, and hiding the upload behind the work, which is the next fix.
 
 - **Pipelining, planned.** The aim shifts from how fast one call returns to how many items per second a stream of calls sustains. The batch is cut into chunks, so that while one chunk computes, the next is uploading and the one before is coming back, and the transfers overlap the work instead of waiting for it. The upload itself gets faster too. Today the 5060 Ti moves a 3.3 MB batch in 2.7 ms, about 1.2 GB/s, far below what its PCIe link can carry, with the host converting every number from 64-bit to 32-bit floats along the way. Pinned 32-bit buffers and transfers that do not block are meant to take that conversion off the critical path. `explain` will show the stages, and the measurements will report sustained items per second, first for the world model against OpenBLAS and Accelerate, then for retrieval.
+
+  The ML models give pipelining two kinds of work. The world model is a stream of independent batches of any size, the plain case for chunking. The denoiser has ten dependent steps per batch, so a stream of batches pipelines step by step: one batch at step t while the next is at step t minus 1. Neither needs anything new from the ML side, since how a batch is cut is the schedule's choice, and both give the same answers however it is cut.
 
 ## The road from here
 
