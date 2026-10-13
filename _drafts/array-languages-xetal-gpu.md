@@ -4,7 +4,7 @@ title: "Array Languages #7: X_eTaL-gpu, Array Programs on GPUs Old and New"
 categories: [languages, language-design, gpu, hardware]
 tags: [array-languages, xetal, x-etal, apl, gpu, opencl, kepler, maxwell, pascal, turing, ampere, ada-lovelace, blackwell, accelerator-ir, parallelism]
 keywords: "X_eTaL GPU, array language on GPU, OpenCL C 1.2 kernels, kernel fusion, tree reduction, accelerator IR, retired CUDA cards, Kepler, Maxwell, Pascal, Turing, Ampere, Ada Lovelace, Blackwell, Apple M1 Max, Apple M3 Pro, Tesla P100, Tesla M40, Quadro K4200, Tesla M10, Tesla P4, GTX 1660 Super, RTX 3060, RTX 3060 Laptop GPU, RTX 3090, RTX 4070 Laptop GPU, RTX 5060 Ti, A2, whole-array parallelism, GPU native extension"
-abstract: "Seventh in the Array Languages series: X_eTaL-gpu takes X_eTaL programs to GPUs through OpenCL, old and new, and the direction is now set: mark an X_eTaL function with a macro, and it is lowered from its own source and runs on the GPU, with no GPU code written by hand. On the way there the GPU side has been built and measured on an M1 Max and an RTX 5060 Ti. Large, product-heavy work in big batches runs 25 to 220 times faster than X_eTaL's own evaluator; against tuned CPU code a small model does not win yet, and the next examples are built to the rule the measurements give: upload little, keep the data on the GPU, and do a lot of arithmetic per byte."
+abstract: "Seventh in the Array Languages series: X_eTaL-gpu takes X_eTaL programs to GPUs through OpenCL, old and new. The direction is set and the first piece has landed: programs now reach the GPU lowered from their own X_eTaL source, and next a macro will mark which functions run there. Measured so far on an M1 Max and an RTX 5060 Ti, large, product-heavy work in big batches runs 25 to 220 times faster than X_eTaL's own evaluator. Against tuned CPU code a small model does not win yet, and the next examples are built to the rule the measurements give: upload little, keep the data on the GPU, and do a lot of arithmetic per byte."
 series: "Array Languages"
 series_part: 7
 date: 2026-10-13 00:15:00 -0700
@@ -18,7 +18,8 @@ repo_urls:
      plan decision A4b and saga 4 steps 0n to 0q (core-to-xir, run-from-source, accel-macro, models-from-source) ahead of retrieval; top-k done (620058b);
      core-to-xir begun (2e70b04; uncommitted work in progress 2026-10-13 late morning); gpu-pipeline queued after the lowering steps (8bf756c);
      X_eTaL-ML 20676a0 (what its workloads offer the pipeline), 65567f9 (the denoiser's network as one function, u:n_et),
-     c5434cc (cnn-digits and micro-gpt batch programs, rows 4 and 5). No new X_eTaL-gpu PRs since #4 as of 2026-10-13 noon.
+     c5434cc (cnn-digits and micro-gpt batch programs, rows 4 and 5), d09886e (top-k's finite shift).
+     X_eTaL-gpu 28c91a9 (the lowering landed; twins deleted; README and landing page: "X_eTaL source, lowered"), 7977809 (ML pin c032768).
      Earlier: refreshed 2026-10-12 night from X_eTaL-gpu at bc90eff (sessions and the OpenBLAS comparison: docs/rtx5060-session-results.md,
      docs/gpu-sessions.md; windows done), X_eTaL-ML 1eded2a, then 866c217 (the denoiser committed); X_eTaL-gpu 0c04f21 (the M1 Max against Accelerate: docs/m1max-session-results.md), de299fc (the rule for a compelling example; retrieval after top-k; the GPT width sweep), c130f30 (lookup); top-k in the working tree, not committed, 2026-10-13 morning. Before that: X_eTaL-gpu c67895c (ml-results.md, rtx5060-results.md, rtx5060-ml-results.md,
      rtx5060-binary-results.md, binary-arrays.md; transpose done; plan sagas 5 to 11), X_eTaL-ML fac586c (world model committed), X_eTaL 27b3fd0.
@@ -44,7 +45,8 @@ X_eTaL states a computation as whole-array operations, `c ← a + b`, `'+ r̲/ c
 | Resource | Link |
 |----------|------|
 | **The repo** | [softwarewrighter/X_eTaL-gpu](https://github.com/softwarewrighter/X_eTaL-gpu) |
-| **Live site** | [what it is and the measured results](https://softwarewrighter.github.io/X_eTaL-gpu/) · [the documentation](https://softwarewrighter.github.io/X_eTaL-gpu/doc/) |
+| **Live site** | [what runs today and the measured results](https://softwarewrighter.github.io/X_eTaL-gpu/) · [the documentation](https://softwarewrighter.github.io/X_eTaL-gpu/doc/) |
+| **The lowering** | [X_eTaL source to the GPU's form](https://github.com/softwarewrighter/X_eTaL-gpu/tree/main/components/lower) |
 | **Prior post** | [Array Languages #6: X_eTaL-games](/2026/10/12/array-languages-xetal-games/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
@@ -63,7 +65,7 @@ A GPU program should be just X_eTaL. The plan is that a function is marked for t
 
 `gp:a_ccel<` is a macro, and like every X_eTaL macro it is a function from source text to source text. It rewrites the function into one that hands its body to the GPU extension, which lowers it to the GPU's form, binds the arguments, runs it and reads the answer back. Weights bound once stay on the device across calls. The lowering goes through X_eTaL's own compiler crates, so library functions and the program's structure come from the language itself, not from a second parser. The FPGA work in the next post takes a similar approach, though its target is very different: an FPGA is small, with very little memory, and suits a stream of calculations more than parallel execution at a GPU's scale.
 
-This is the next stretch of work, not yet built. The rest of this post is what was built and measured on the way, the pieces the macro will stand on.
+The lowering underneath it landed today: every example program now reaches the GPU from its own X_eTaL source. The macro itself is the next step. The rest of this post is what was built and measured on the way, the pieces the macro stands on.
 
 ## One program, three ways to run it
 
@@ -81,11 +83,11 @@ Every example is an X_eTaL program first, and the X_eTaL evaluator is the refere
                   the same arrays
 ```
 
-To build the GPU side before the lowering existed, each example was also written out in the IR alongside it. That was scaffolding: it let each operation be built and proven against the evaluator one at a time. Those written-out versions now become the test oracle for the lowering that replaces them, and are retired as it passes them.
+Now the IR is produced from the X_eTaL source itself. The lowering takes a program's Core, its libraries included, from X_eTaL's own compiler crates and builds the program the device runs; anything outside the subset it handles is refused with a reason naming the construct. Before it existed, each example was also written out in the IR alongside its source, as scaffolding to build and prove each operation one at a time. Those served as the lowering's test oracle: all twelve examples, lowered from source, give the evaluator's answers on the M1 Max, and the written-out versions are gone.
 
 ## From a line of X_eTaL to a kernel
 
-Here is where a line of X_eTaL ends up, for one of the examples from the Accel library, the subset of X_eTaL a device can run. Once the lowering is built, this is the path every marked function takes:
+Here is where a line of X_eTaL ends up, for one of the examples from the Accel library, the subset of X_eTaL a device can run. This is the path every program now takes:
 
 ```text
 ˡp̲ipeline ← { x w → ˡs̲um ˡr̲elu x + x × w }
@@ -113,7 +115,7 @@ The tool shows each step: `xetal-gpu kernel` prints the OpenCL C, and `xetal-gpu
 
 ## What runs today
 
-Two GPUs have run it so far: the M1 Max in my main Mac, through Apple's OpenCL 1.2, and an RTX 5060 Ti in an Arch Linux machine, through NVIDIA's OpenCL. On both, every check agrees with the evaluator: the example programs, reductions from a thousand items to a million, axis reductions, tiled matrix products, a tiny two-layer network, and, new this week, transpose, the convolution's windows, lookup, the embedding gather, and top-k, each row's largest few. That set is now enough for the machine-learning models ahead. On the 5060 Ti the checks also pass in 64-bit floats, which Apple's OpenCL lacks. Through the bridge from [post #4](/2026/10/10/array-languages-xetal-extensions/), an X_eTaL program calls the GPU itself.
+Two GPUs have run it so far: the M1 Max in my main Mac, through Apple's OpenCL 1.2, and an RTX 5060 Ti in an Arch Linux machine, through NVIDIA's OpenCL. On both, every check agrees with the evaluator: the example programs, reductions from a thousand items to a million, axis reductions, tiled matrix products, a tiny two-layer network, and, new this week, transpose, the convolution's windows, lookup, the embedding gather, and top-k, each row's largest few. That set is now enough for the machine-learning models ahead. Lowering real programs also turned up a real bug: X_eTaL-ML's top-k subtracted 1e300 to take an item out of a row, which is infinity in a GPU's 32-bit floats and turned the row into NaN, while the CPU's 64-bit floats hid it. The idiom now shifts by the row's range, and the runtime refuses a number too large for 32 bits, naming the fix. On the 5060 Ti the checks also pass in 64-bit floats, which Apple's OpenCL lacks. Through the bridge from [post #4](/2026/10/10/array-languages-xetal-extensions/), an X_eTaL program calls the GPU itself.
 
 ## When the GPU pays
 
@@ -178,7 +180,7 @@ That is the point of this work. It is not a race with large, new GPUs, or with t
 
 ## The ML models on the GPUs
 
-The machine-learning models from [post #5](/2026/10/11/array-languages-xetal-ml/) are the work this is for. X_eTaL-ML writes no GPU code. It hands over each model as a batch X_eTaL program, with its weights and expected outputs, and X_eTaL-gpu runs it on each device, soon straight from that program's own source through the macro, at the command line, since the live pages run X_eTaL as WebAssembly, which cannot reach OpenCL.
+The machine-learning models from [post #5](/2026/10/11/array-languages-xetal-ml/) are the work this is for. X_eTaL-ML writes no GPU code. It hands over each model as a batch X_eTaL program, with its weights and expected outputs, and X_eTaL-gpu runs it on each device, soon from that program's own source through the macro, as the examples already are, at the command line, since the live pages run X_eTaL as WebAssembly, which cannot reach OpenCL.
 
 - **The world model** predicts a ball's next frame from the last three: 432 pixels in, 64 ReLU units, 144 sigmoid pixels out. Over all 1,936 states it predicts 1,897 next frames exactly, and 348 of the 387 it never trained on, with the same counts on the evaluator, both GPUs and OpenBLAS.
 - **The benchmarks,** a dense layer, a wide inner product and a softmax, agree on both GPUs within a relative 1e-5. They are small, and at best break even with the evaluator.
@@ -202,7 +204,7 @@ What remains is the upload of each new batch, which the comparison above shows i
 
 First the direction, then the examples built to beat the CPU:
 
-1. **The lowering, under way now.** X_eTaL source and the shapes of its inputs in, a program in the GPU's form out, through X_eTaL's own crates, covering the subset the models use, with a reason given for anything outside it.
+1. **The lowering, done.** X_eTaL source and the shapes of its inputs in, a program in the GPU's form out, through X_eTaL's own crates, with a reason given for anything outside the subset. Every example now runs this way.
 2. **Running from source.** `xetal-gpu run program.xtl --device opencl:0`: the program's own statements prepare the data, the accelerated function is lowered and run, and the answer prints as X_eTaL prints it. `explain` shows each X_eTaL line beside the kernel it became.
 3. **The macro.** `gp:a_ccel<`, as above, with the weights resident across calls.
 4. **The models from their own source.** The world model and the benchmarks run from X_eTaL-ML's own programs through the macro, and the results tables say they were run from source.
@@ -257,7 +259,7 @@ The asks between the repositories show where each layer of the stack still falls
 
 - **Of X_eTaL-gpu, from X_eTaL-ML:** run its models from a pinned commit, now done for the world model and the benchmarks; transpose and the convolution's windows, both now done.
 - **Of X_eTaL-extensions:** a newer X_eTaL inside the bridge, since the ML libraries use private helpers and tuples its version lacks; and arrays across the bridge in binary, now half done for inputs.
-- **Of the language:** the accelerator IR, the lowering to it, and array shapes known when a program is compiled. Rather than wait, the GPU repo builds the lowering itself for now, through X_eTaL's own crates, and it moves into the language when the language takes it on.
+- **Of the language:** the accelerator IR, the lowering to it, and array shapes known when a program is compiled. Rather than wait, the GPU repo has built the lowering itself, through X_eTaL's own crates, and it moves into the language when the language takes it on.
 
 This post will be updated as the models land on the cards.
 
