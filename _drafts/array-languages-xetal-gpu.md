@@ -15,7 +15,7 @@ repo_urls:
 ---
 
 <!-- DRAFT, IN PROGRESS: refreshed 2026-10-12 night from X_eTaL-gpu at bc90eff (sessions and the OpenBLAS comparison: docs/rtx5060-session-results.md,
-     docs/gpu-sessions.md; windows done), X_eTaL-ML 1eded2a, then 866c217 (the denoiser committed); X_eTaL-gpu 0c04f21 (the M1 Max against Accelerate: docs/m1max-session-results.md), de299fc (the rule for a compelling example; retrieval after top-k; the GPT width sweep). Before that: X_eTaL-gpu c67895c (ml-results.md, rtx5060-results.md, rtx5060-ml-results.md,
+     docs/gpu-sessions.md; windows done), X_eTaL-ML 1eded2a, then 866c217 (the denoiser committed); X_eTaL-gpu 0c04f21 (the M1 Max against Accelerate: docs/m1max-session-results.md), de299fc (the rule for a compelling example; retrieval after top-k; the GPT width sweep), c130f30 (lookup); top-k in the working tree, not committed, 2026-10-13 morning. Before that: X_eTaL-gpu c67895c (ml-results.md, rtx5060-results.md, rtx5060-ml-results.md,
      rtx5060-binary-results.md, binary-arrays.md; transpose done; plan sagas 5 to 11), X_eTaL-ML fac586c (world model committed), X_eTaL 27b3fd0.
      Focus (Mike, 2026-10-12): effective use of X_eTaL to run ML tasks faster on a GPU, even an old small one, for tasks worth offloading.
      and X_eTaL-ML's docs/gpu-asks.md and plan.md "Combined with X_eTaL-gpu" (0ff84e8).
@@ -95,7 +95,7 @@ The tool shows each step: `xetal-gpu kernel` prints the OpenCL C, and `xetal-gpu
 
 ## What runs today
 
-Two GPUs have run it so far: the M1 Max in this Mac, through Apple's OpenCL 1.2, and an RTX 5060 Ti in an Arch Linux machine, through NVIDIA's OpenCL. On both, every check agrees with the evaluator: the example programs, reductions from a thousand items to a million, axis reductions, tiled matrix products, a tiny two-layer network, and transpose, new this week, as a gather or in tiles. On the 5060 Ti the checks also pass in 64-bit floats, which Apple's OpenCL lacks. Through the bridge from [post #4](/2026/10/10/array-languages-xetal-extensions/), an X_eTaL program calls the GPU itself.
+Two GPUs have run it so far: the M1 Max in this Mac, through Apple's OpenCL 1.2, and an RTX 5060 Ti in an Arch Linux machine, through NVIDIA's OpenCL. On both, every check agrees with the evaluator: the example programs, reductions from a thousand items to a million, axis reductions, tiled matrix products, a tiny two-layer network, and, new this week, transpose, as a gather or in tiles, and lookup, the embedding gather. On the 5060 Ti the checks also pass in 64-bit floats, which Apple's OpenCL lacks. Through the bridge from [post #4](/2026/10/10/array-languages-xetal-extensions/), an X_eTaL program calls the GPU itself.
 
 ## When the GPU pays
 
@@ -179,7 +179,7 @@ What remains is the upload of each new batch, which the comparison above shows i
 
 That is why the plan moves to larger work next:
 
-1. **Retrieval against a resident index.** The first example built to beat the CPU's library: an index of hundreds of thousands of documents, each embedded as 256 numbers, kept on the GPU through a session. A batch of queries is scored against all of it with one product, and the best few for each query are kept by a top-k, measured against NumPy's library with fresh queries on every call. Each number uploaded buys a great many comparisons, the shape the rule asks for. Two steps come first: lookup, under way now, picks rows of a matrix by a vector of integers, the gather every transformer's embedding uses; then top-k.
+1. **Retrieval against a resident index.** The first example built to beat the CPU's library: an index of hundreds of thousands of documents, each embedded as 256 numbers, kept on the GPU through a session. A batch of queries is scored against all of it with one product, and the best few for each query are kept by a top-k, measured against NumPy's library with fresh queries on every call. Each number uploaded buys a great many comparisons, the shape the rule asks for. Two steps come first. Lookup, now done, picks rows of a matrix by a vector of integers, the gather every transformer's embedding uses; positions outside the table are refused on the host before the GPU sees them. Top-k, keeping each row's largest few, is under way.
 2. **A GPT, swept by width.** X_eTaL-ML's MicroGPT is the trained anchor, but at 4,192 weights it is below every card's crossover. So the same program runs at widths from 16 to 1,024 and from one layer to four, on a batch of prompts with only token ids uploaded and the weights resident, measured in tokens per second against NumPy's library. Where each card overtakes the CPU is then measured, not claimed. The typed-decision classifier is the same block with a classification head.
 3. **Training.** A training step, forward, backward and Adam, as one program per step with the weights resident. Training is where products dominate most, and the weights and their gradients stay on the device between steps, so only each batch moves. Each line of a backward pass is a product with a transpose, which is why transpose came first. The tiny GPT trained from scratch, then GPT-2 small fine-tuned on a small corpus, with the memory each card needs.
 4. **The CNNs.** The convolution's windows are now in the GPU's form, so the Tiny CNN and CNN training can follow.
