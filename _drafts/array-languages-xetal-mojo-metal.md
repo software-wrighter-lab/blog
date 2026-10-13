@@ -18,9 +18,9 @@ repo_urls:
      (softwarewrighter/modular-fork, Mojo 1.2 development build, 2026-10-13): release notes v0.25.6 (2025-09-22),
      v1.0.0b1 (2026-05-07), v1.1.0 (2026-09-17), the nightly changelog, and Mojo/proposals/c-abi-proposal.md.
      Chips to test: M1 Max, M3 Pro (Mojo targets apple-m1, apple-m3; no M5 yet); RTX 3060/3090 (sm_86), RTX 5060 Ti (sm_120),
-     per Mojo/stdlib/std/_plugin/metal/metal_targets.mojo and _gpu/host/_builtin_targets.mojo. Lead image is a placeholder. Re-check everything against the code once work starts. -->
+     per Mojo/stdlib/std/_plugin/metal/metal_targets.mojo and _gpu/host/_builtin_targets.mojo. Re-check everything against the code once work starts. -->
 
-<img src="{{ '/assets/images/posts/placeholder-array-languages-xetal-mojo-metal.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-modular-max-mojo.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
 <div style="overflow: hidden;" markdown="1">
 
