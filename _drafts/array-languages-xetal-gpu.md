@@ -21,7 +21,7 @@ repo_urls:
      More changes are expected before publishing (saga 4's tiny model, then saga 5 on NVIDIA cards): re-check the status
      and numbers then. To do: cross-link the companion hardware blog (https://blog.hardwarewrighter.com/) once its posts exist.
      The lead image is a Tesla P4 (Pascal), one of Mike's cards. Card groups (Mike, 2026-10-12): first M1 Max, RTX 3090, RTX 5060 Ti, RTX 3060;
-     follow-on one or two of P4, A2, P100, M40 (both P100s: 12 and 16 GB; both M40s: 12 and 24 GB); future maybe K4200, 1660 Super, then the rest. -->
+     follow-on the M3 Pro, and one or two of P4, A2, P100, M40 (both P100s: 12 and 16 GB; both M40s: 12 and 24 GB); future maybe K4200, 1660 Super, then the rest. -->
 
 <img src="{{ '/assets/images/posts/block-nvidia-p4.webp' | relative_url }}" class="post-marker" alt="" style="width: 205px;">
 
@@ -175,10 +175,11 @@ OpenCL is the one runtime that reaches all of them, old and new. Testing every c
 | RTX 3090 | Ampere | 24 GB | the most memory of the NVIDIA cards |
 | RTX 3060 | Ampere | 12 GB | a mid-range current card; several of them |
 
-**Follow-on:** once the use-cases and measurements are settled on those, one or two of these older or smaller data-center cards:
+**Follow-on:** once the use-cases and measurements are settled on those, a second Apple GPU, and one or two of these older or smaller data-center cards:
 
 | Card | Architecture | Memory | Its role |
 |---|---|---|---|
+| Apple M3 Pro | Apple GPU | 18 GB unified | a newer Apple generation, with less memory and less bandwidth |
 | Tesla P4 | Pascal | 8 GB | an old, low-power card the newest CUDA toolkits retire |
 | A2 | Ampere | 16 GB | a small, low-power data-center card |
 | Tesla P100 | Pascal | 12 GB and 16 GB, one of each | an old data-center card the newest CUDA toolkits retire |
@@ -191,7 +192,6 @@ OpenCL is the one runtime that reaches all of them, old and new. Testing every c
 | Quadro K4200 | Kepler | 4 GB | the oldest generation and the least memory: the case where weights stay on the host |
 | GTX 1660 Super | Turing | 6 GB | a small current card |
 | Tesla M10 | Maxwell | four GPUs of 8 GB | built to stream many remote desktops, not to run LLMs; each GPU its own device |
-| Apple M3 Pro | Apple GPU | 18 GB unified | a newer Apple generation, with less memory and less bandwidth |
 | RTX 3060 Laptop GPU | Ampere | 6 GB | in a System76 laptop |
 | RTX 4070 Laptop GPU | Ada Lovelace | 8 GB | in an Asus ROG laptop |
 
