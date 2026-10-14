@@ -1,0 +1,58 @@
+<script>
+// Lightbox: an image or video marked .zoomable (or inside a figure.zoomable)
+// in a post opens, on click, in a near full-screen <dialog>. Escape, the close
+// button or a click outside the media closes it. Opt-in: nothing else changes.
+(function () {
+  function media(el) {
+    if (el.matches('img, video')) return el;
+    return el.querySelector('img, video');
+  }
+  function open(src) {
+    var d = document.createElement('dialog');
+    d.className = 'lightbox';
+    var c = src.cloneNode(true);
+    c.removeAttribute('style');
+    c.removeAttribute('width');
+    c.removeAttribute('height');
+    c.classList.remove('zoomable');
+    if (c.tagName === 'VIDEO') {
+      c.controls = true; c.muted = true; c.autoplay = true; c.loop = true;
+      c.setAttribute('playsinline', '');
+    }
+    var b = document.createElement('button');
+    b.className = 'lightbox-close';
+    b.type = 'button';
+    b.setAttribute('aria-label', 'Close');
+    b.textContent = '×';
+    b.addEventListener('click', function () { d.close(); });
+    var cap = src.closest('figure') && src.closest('figure').querySelector('figcaption');
+    d.appendChild(b);
+    d.appendChild(c);
+    if (cap) {
+      var fc = document.createElement('p');
+      fc.className = 'lightbox-caption';
+      fc.innerHTML = cap.innerHTML.replace(/\s*Click to enlarge\.?\s*$/, '');
+      d.appendChild(fc);
+    }
+    d.addEventListener('click', function (e) { if (e.target === d) d.close(); });
+    d.addEventListener('close', function () { d.remove(); });
+    document.body.appendChild(d);
+    d.showModal();
+    if (c.tagName === 'VIDEO') { var p = c.play(); if (p && p.catch) p.catch(function () {}); }
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.post-content .zoomable').forEach(function (el) {
+      var m = media(el);
+      if (!m) return;
+      m.classList.add('zoomable-media');
+      m.setAttribute('tabindex', '0');
+      m.setAttribute('role', 'button');
+      m.setAttribute('title', m.getAttribute('title') || 'Click to enlarge');
+      m.addEventListener('click', function (e) { e.preventDefault(); open(m); });
+      m.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(m); }
+      });
+    });
+  });
+})();
+</script>

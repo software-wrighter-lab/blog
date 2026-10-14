@@ -1892,3 +1892,53 @@ $external-icon-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/200
     }
   }
 }
+
+// Lightbox (_includes/lightbox.html): a .zoomable image or video opens in a
+// near full-screen dialog. The page behind dims; the media keeps its aspect.
+.post-content .zoomable-media { cursor: zoom-in; }
+dialog.lightbox {
+  width: 96vw;
+  height: 94vh;
+  max-width: 96vw;
+  max-height: 94vh;
+  padding: 2.2em 1em 1em;
+  border: none;
+  border-radius: 8px;
+  background: #111318;
+  color: #e6e6e6;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+}
+dialog.lightbox:not([open]) { display: none; }
+dialog.lightbox::backdrop { background: rgba(0, 0, 0, 0.78); }
+dialog.lightbox img,
+dialog.lightbox video {
+  width: 100%;
+  height: calc(94vh - 7em);
+  max-width: 100%;
+  object-fit: contain;
+  filter: none !important;
+}
+dialog.lightbox .lightbox-caption {
+  margin: 0;
+  max-width: 70em;
+  text-align: center;
+  font-size: 0.9em;
+  color: #c9c9c9;
+}
+dialog.lightbox .lightbox-caption a { color: #9cc4ff; }
+dialog.lightbox .lightbox-close {
+  position: absolute;
+  top: 0.3em;
+  right: 0.5em;
+  font-size: 1.8em;
+  line-height: 1;
+  background: none;
+  border: none;
+  color: #e6e6e6;
+  cursor: pointer;
+}
