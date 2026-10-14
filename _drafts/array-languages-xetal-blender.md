@@ -4,7 +4,7 @@ title: "Array Languages #9: X_eTaL and Blender, Scenes and Animation from Arrays
 categories: [languages, language-design, graphics, tools]
 tags: [array-languages, xetal, x-etal, apl, blender, bpy, 3d-graphics, animation, rendering, eevee, gltf, code-generation, extensions]
 keywords: "X_eTaL Blender, array language 3D graphics, Blender batch rendering, bpy code generation, EEVEE, glTF export, OBJ export, mesh from arrays, camera orbit animation, X_eTaL-extensions, procedural 3D scenes"
-abstract: "Ninth in the Array Languages series: X_eTaL drives Blender. An X_eTaL program writes the Python that Blender runs in the background, works out the geometry as arrays, and gets back rendered stills, videos and 3D files. The use-cases ahead are scenes, animation, possibly physics, and rendering."
+abstract: "Ninth in the Array Languages series: X_eTaL drives Blender. An X_eTaL program writes the Python that Blender runs in the background, works out the geometry as arrays, and gets back renders, animations and 3D files. It has already made the tower-defense game's animated pieces. Next it turns to the rest of the series: videos of an X_eTaL program becoming a Blender model, a calculator machine running on an FPGA, and a kernel running on a GPU, each built from the real data those repos produce."
 series: "Array Languages"
 series_part: 9
 date: 2026-10-15 00:15:00 -0700
@@ -13,10 +13,10 @@ repo_urls:
     title: "X_eTaL-extensions"
 ---
 
-<!-- DRAFT (2026-10-11), started from X_eTaL-extensions Saga 15 (blender):
-     steps 1 (blender-ext) and 2 (bpy-gen) committed; step 3 (blender-cubes) done. The cubes demo and its orbit video
-     belong to Saw #14 only: this post covers the new use-cases, with entirely new videos, marked [VIDEO].
-     Many new Blender use-cases are planned: add each as it lands (see "What comes next"). -->
+<!-- DRAFT, IN PROGRESS: refreshed 2026-10-14 from X_eTaL-extensions Saga 15: steps 1 to 10 done (the extension, Bpy, cubes, release,
+     shapes, actions, td-models, game-assets, gate-speed, td-sheets; last c620482, 6db1bc1); step 11 blender-pipeline IN PROGRESS (uncommitted),
+     the video planned for THIS post; steps 13 to 18 (257639a, 71abf4e): explainer videos of HEX1000 and the GPU work, then a trailer.
+     The cubes demo and its orbit video belong to Saw #14 only; the TD pieces' lineup frame belongs to post #6: this post gets new videos, marked [VIDEO]. -->
 
 <img src="{{ '/assets/images/posts/block-3d-head.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
@@ -35,6 +35,7 @@ The extensions in [post #4](/2026/10/10/array-languages-xetal-extensions/) gave 
 | **The extension** | [X_eTaL-extensions: blender](https://github.com/softwarewrighter/X_eTaL-extensions/tree/main/extensions/blender) --- the facade, the bpy writer, the demos |
 | **First look** | [Saw #14](/2026/10/11/saw-guards-lints-macros-blender/) |
 | **Prior posts** | [Array Languages #4: X_eTaL-extensions](/2026/10/10/array-languages-xetal-extensions/) · [the voxel world](/2026/10/09/voxels-3d-worlds-array-languages/) |
+| **What it shows** | [the GPU, #7](/2026/10/13/array-languages-xetal-gpu/) · [the FPGA, #8](/2026/10/14/array-languages-xetal-fpga/) · [the tower-defense pieces](https://softwarewrighter.github.io/X_eTaL-extensions/blender/td/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
 </div>
@@ -71,19 +72,28 @@ The corners are an outer product: each center plus each of a unit cube's eight c
 
 <div class="clearfix" markdown="1">
 
-## What comes next
+## What it has made so far
 
-<!-- [VIDEO] New videos for this post go here, one per Blender use-case as it lands. -->
+Since the first scene the library has grown into a small toolkit. Pieces are built from parts that hang from a pivot, so a turret turns about its own axis: boxes, cylinders, cones, spheres and tori from Blender's builders, plus shapes worked out in X_eTaL as arrays, an octahedron and a lathe. Parts can glow. And models can carry named animations, idle, walk, fire and hit, exported as clips inside a `.glb` file and checked by reading the file back.
 
-<!-- TODO: fill in as each new Blender use-case lands in X_eTaL-extensions (Saga 15 and after). -->
+The first real customer was another repo. The tower-defense game in [post #6](/2026/10/12/array-languages-xetal-games/) asked for 3D towers and creeps, and Blender made twelve of them with their animation clips, rendered and published on the [extensions site](https://softwarewrighter.github.io/X_eTaL-extensions/blender/td/). Since then it also makes each piece's fallback sheets for a page without WebGL: sixteen frames of the piece turning, and eight frames of it seen from the game's own isometric angle, each sheet one short Blender render joined into a single picture, listed with its checksum beside the models.
 
-The extension's release step comes first: recordings, its page and the catalog. After that, many new Blender use-cases are planned, along these lines:
+## The pipeline, in Blender
 
-- **Scenes:** more than cubes, toward more advanced meshes and effects.
-- **Animation:** more than a camera on an orbit.
-- **Physics,** possibly: Blender can simulate, and X_eTaL can set the scene up.
-- **Rendering:** stills, video and 3D files as the outputs a program asks for.
+<!-- [VIDEO] The blender-pipeline video (extensions Saga 15 step 11, in progress): an X_eTaL program becoming its Python, Blender building the model part by part beside the lines that make each part, the .glb, the renders and the clips. -->
 
-The pattern stays the same: X_eTaL works out the arrays, writes the Python, and Blender does what it is best at.
+The video for this post is being made now, by the extension itself, from real artifacts: one of the tower-defense pieces as it is written in X_eTaL, the Python launcher and Blender script that program writes, Blender running it in the background, and the model built part by part, each part appearing beside the X_eTaL and Python lines that made it, through to the exported `.glb`, the renders, the sheets and the animations. It is 1080p, with captions in the scene and a cue sheet so it can be narrated later.
+
+## Blender for the rest of the series
+
+The same toolkit then turns to the other repos, to show their work rather than tell it. Each video is built from data those repos produce, read at pinned commits, so what is on screen is what the code did:
+
+- **HEX1000 running,** from [post #8](/2026/10/14/array-languages-xetal-fpga/): `C0DE+BEEF=` arriving over the serial line bit by bit, the key matrix, the program counter hopping through a ROM page in its shift-register order, the accumulator, RAM and ALU, and the digits strobed out to a 3D calculator's display, all driven from the circuit simulation's trace. The render refuses to finish unless the display shows the evaluator's answer.
+- **HEX1000 being built:** its X_eTaL step function, the generated Verilog, the netlist, and its 2,828 lookup tables and 791 flip-flops flown to their places on the Gowin die and routed, then the bitstream going into a modeled Tang Nano 9K.
+- **The GPU being built,** from [post #7](/2026/10/13/array-languages-xetal-gpu/): a program lowered to the accelerator IR, the elementwise chain fused into one real OpenCL kernel, and the schedules for the M1 Max and the RTX 5060 Ti.
+- **The GPU running:** arrays uploaded, over PCIe to the RTX and in place in the M1 Max's unified memory, work-groups spread across the compute units, a reduction folding in local memory, and the result read back and checked, timed by the GPU's own profiling.
+- **A 60-second trailer** cut from them: one X_eTaL program, and three things it drives, a GPU, an FPGA and Blender.
+
+They are made for this series first and perhaps a narrated YouTube video later. Blender is also good at things this post has not reached yet, physics among them, and those stay on the list. The pattern stays the same throughout: X_eTaL works out the arrays, writes the Python, and Blender does what it is best at.
 
 </div>
