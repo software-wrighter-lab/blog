@@ -4,17 +4,20 @@ title: "Array Languages #8: X_eTaL-fpga, Array Programs as Circuits"
 categories: [languages, language-design, fpga, hardware]
 tags: [array-languages, xetal, x-etal, apl, fpga, verilog, gowin, tang-nano, tang-primer, yosys, nextpnr, apicula, hardware-description, tms1000, uart]
 keywords: "X_eTaL FPGA, array language to hardware, Verilog-2005 emitter, netlist, cycle simulator, space versus time, lanes, reduction tree, clocked circuits, UART, HEX1000, TMS1000, 4-bit machine, calculator, Sipeed Tang Nano, Tang Primer, Gowin FPGAs, Yosys, nextpnr, Apicula, openFPGALoader"
-abstract: "Eighth in the Array Languages series: X_eTaL-fpga turns X_eTaL programs into circuits. An add on eight numbers becomes eight adders, a sum becomes a tree of adders or one adder used over eight clocks, and a step function over a state vector becomes registers. Every circuit is simulated and must give the evaluator's answer bit for bit. Next is HEX1000, a 4-bit calculator machine in the spirit of the TMS1000, headed for Sipeed's Tang Nano and Tang Primer boards."
+abstract: "Eighth in the Array Languages series: X_eTaL-fpga turns X_eTaL programs into circuits. An add on eight numbers becomes eight adders, a sum becomes a tree of adders or one adder used over eight clocks, and a step function over a state vector becomes registers. Every circuit is checked against the evaluator's answer, bit for bit, through layers of simulation and now through the standard Verilog tools. All of it runs on a Mac so far; next come an Arch Linux machine and real boards, Sipeed's Tang Nano and Tang Primer, starting with HEX1000, a 4-bit calculator machine in the spirit of the TMS1000."
 series: "Array Languages"
 series_part: 8
 date: 2026-10-14 00:15:00 -0700
 ---
 
-<!-- DRAFT, IN PROGRESS: refreshed 2026-10-12 from hardwarewrighter/X_eTaL-fpga (last commit 2026-10-08; saga 3 nibble-machine
+<!-- DRAFT, IN PROGRESS: refreshed 2026-10-14 from hardwarewrighter/X_eTaL-fpga: a4a07b3 (docs/boards.md, 2026-10-12) and UNCOMMITTED work in the
+     working tree (the verilog-tools step: iverilog, Verilator, Yosys on the Mac, 17 modules pass, one emitter bug fixed; docs/hardware.md; `just fit`;
+     the board saga reworked: flow, cell-sim, machine-board, round-trip, lanes-board). Re-check once committed. Mac only (Mike, 2026-10-14):
+     Arch Linux and the boards are next. Earlier: refreshed 2026-10-12 (last commit 2026-10-08; saga 3 nibble-machine
      active: steps isa, radix-lib, doc-site done; machine-lib next). More changes are expected over the next two days.
      The repo is PRIVATE (GitHub): no repo link or repo_urls until it is public.
      Boards (Mike, 2026-10-11): Sipeed Tang Nano and Tang Primer, 1K, 4K, 9K, 20K, 25K; the repo's README names only a Tang Nano 1K or 4K.
-     Nothing has run on an FPGA or through iverilog/Yosys yet (the tools go on the Arch machine): re-check before publishing.
+     Nothing has run on an FPGA yet; the Verilog tools now run on the Mac (uncommitted, 2026-10-14): re-check before publishing.
      To do: cross-link the companion hardware blog (https://blog.hardwarewrighter.com/). -->
 
 <img src="{{ '/assets/images/posts/block-tang-primer.webp' | relative_url }}" class="post-marker" alt="" style="width: 205px;">
@@ -94,6 +97,22 @@ module vector_add (
 
 The second stage added clocks. Clocked circuits are step functions in X_eTaL, a state in and a state out, and the Clocked library holds the specifications: a counter, an accumulator, a shift register, a sequence detector and a RAM, with a harness that clocks them. The IR, the netlist, the simulator and the Verilog all learned registers, input streams, ROMs and a RAM's write port. Then came a serial port: a UART's transmitter and receiver, written as step functions and looped back, from X_eTaL to a clocked circuit. Testbenches check every clock and write waveforms to look at.
 
+## Checked in software, layer by layer
+
+Nothing here has touched a board yet, so everything is checked in software first, and the checks go deep. Each layer must give the evaluator's answer:
+
+| Layer | What runs | Checked by | Status |
+|---|---|---|---|
+| 1. the specification | the X_eTaL program | the X_eTaL evaluator | done |
+| 2. the IR | the program in the accelerator IR | the IR's interpreter | done |
+| 3. the netlist | the scheduled cells | the repo's own cycle simulator | done |
+| 4. the Verilog | the emitted Verilog | Icarus Verilog's testbenches, Verilator's lint, Yosys's synthesis | done this week, on the Mac |
+| 5. Gowin cells | what Yosys maps to the FPGA's lookup tables, flip-flops and block RAM | Yosys, with a report of what each module takes on a Tang Nano 1K | done this week, on the Mac |
+| 6. Gowin cells, simulated | that mapped netlist, run | a cell-level simulator | planned |
+| 7. the bitstream | the placed, routed and packed file for a board | unpacked back to Verilog by Project Apicula, then simulated | planned |
+
+Layers 4 and 5 are new. The standard open tools now run on the Mac, and all 17 of the repo's pinned modules pass Icarus Verilog's self-checking testbenches, Verilator's lint and Yosys's synthesis. The tools earned their place at once: they found a bug in the Verilog emitter, which is fixed. Layers 6 and 7 close the gap between "the Verilog is right" and "the board will do it", before a board is ever involved.
+
 ## HEX1000: a 4-bit machine
 
 The current stage is a whole machine. HEX1000 is a 4-bit machine in the spirit of the TMS1000, Texas Instruments' 4-bit microcontroller of the 1970s: an original design of about the same size and complexity, not a replica. It keeps the TMS1000's shape: a 4-bit accumulator, a 64 by 4-bit RAM, a ROM of 1,024 eight-bit instructions in 16 pages, and a program counter that steps as a feedback shift register rather than a binary counter. Its ROM program makes it a calculator, hexadecimal first, then octal and decimal, and it talks to a terminal over the UART.
@@ -102,7 +121,21 @@ The specification comes first. The Radix library is an eight-digit calculator in
 
 ## The boards
 
-Nothing has run on an FPGA yet. So far every circuit is proven by the simulator of its own netlist. The Verilog tools, iverilog, Verilator and Yosys, and the open Gowin flow to the boards, nextpnr, Apicula and openFPGALoader, go on the Arch machine where the boards are. The boards are Sipeed's small Gowin boards, a mix of Tang Nano and Tang Primer from the 1K to the 25K. HEX1000 is sized for the smallest of them.
+All of this runs on a Mac so far. The next move is to an Arch Linux machine where the boards are, and then to actual hardware testing.
+
+The boards are Sipeed's Tang boards, all built on Gowin FPGAs, and Gowin's chip family decides both what a board can hold and what software it needs:
+
+| Family | Boards | The open flow: Yosys, nextpnr, Apicula, openFPGALoader |
+|---|---|---|
+| GW1N | Tang Nano 1K, 4K and 9K | supported |
+| GW2A | Tang Nano 20K, Tang Primer 20K | supported |
+| GW5A | Tang Primer 25K | not yet: Gowin's own IDE until the open flow covers it |
+
+They are small. The Tang Nano 1K has 1,152 four-input lookup tables, 864 flip-flops and 72 Kbit of block RAM; the Primer 25K, the largest here, about 23,000 of each and about a megabit of block RAM. A design goes to the smallest board that holds it: HEX1000 to the Nano 1K first, the 4K if it does not fit, and larger machines to the 9K and 20K boards later.
+
+The plan for the boards follows the checks: wrappers that synthesize, place, pack and load a design; a constraints file for each board; the cell-level simulator and the bitstream round trip from the table above; then HEX1000 on a board, keys in and digits out over a serial line, driven from the host with the same test key sequences the evaluator checks; and the vector datapath at several lane counts, to measure the space-time trade-off in real lookup tables and registers.
+
+The boards are also hard to damage. Loading a design into the FPGA's working memory is the default, and it is volatile: a power cycle brings back whatever was there before. Writing to the board's flash happens only when asked.
 
 This post will be updated as the machine comes together.
 
