@@ -50,6 +50,10 @@ The same whole-array program that runs on the X_eTaL evaluator, or as threads on
 
 ## One program, four ways to run it
 
+<div class="aside-box" style="float: left; clear: none; margin: 0.3em 1.8em 1.2em 0; max-width: 260px;" markdown="1">
+**Which board?** The block print at the top is a Tang Primer. Development is on a Tang Nano 9K, because it has USB programming and a USB serial port on board, with no adapter. HEX1000's target is the smaller Tang Nano 1K: the machine is simple enough to fit the smallest board.
+</div>
+
 As with the GPU, every example is an X_eTaL program first, and the evaluator is the reference. Each also has a hand-written twin in a small accelerator IR, and every realization must reproduce the evaluator's answer bit for bit: the IR's interpreter, a simulation of the circuit's netlist, and the generated Verilog.
 
 ```text
