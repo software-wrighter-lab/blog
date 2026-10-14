@@ -16,7 +16,8 @@ repo_urls:
 <!-- DRAFT, IN PROGRESS: refreshed 2026-10-14 from X_eTaL-extensions Saga 15: steps 1 to 10 done (the extension, Bpy, cubes, release,
      shapes, actions, td-models, game-assets, gate-speed, td-sheets; last c620482, 6db1bc1); step 11 blender-pipeline IN PROGRESS (uncommitted),
      the video planned for THIS post; steps 13 to 18 (257639a, 71abf4e): explainer videos of HEX1000 and the GPU work, then a trailer.
-     The cubes demo and its orbit video belong to Saw #14 only; the TD pieces' lineup frame belongs to post #6: this post gets new videos, marked [VIDEO]. -->
+     The cubes demo and its orbit video belong to Saw #14 only; the TD pieces' lineup frame belongs to post #6: this post gets new videos, marked [VIDEO].
+     Media in this post: gutter figures with class zoomable (the site's lightbox, _includes/lightbox.html), each explained in its section. -->
 
 <img src="{{ '/assets/images/posts/block-3d-head.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
@@ -44,7 +45,17 @@ The extensions in [post #4](/2026/10/10/array-languages-xetal-extensions/) gave 
 
 ## The chain
 
+<figure class="zoomable" style="float: right; clear: none; margin: 0.2em 0 0.6em 1.5em; max-width: 44%;">
+<video autoplay muted loop playsinline preload="auto" class="no-invert" poster="{{ '/assets/images/posts/xetal-blender-hello-poster.webp' | relative_url }}" aria-label="A terminal recording of the hello demo: the X_eTaL program, the Python launcher and Blender script it writes as text, the run, and the report Blender wrote: objects: Camera Cube Light">
+<source src="{{ '/assets/videos/xetal-blender-hello.webm' | relative_url }}" type="video/webm">
+<source src="{{ '/assets/videos/xetal-blender-hello.mp4' | relative_url }}" type="video/mp4">
+</video>
+<figcaption style="font-size: 0.85em;">The hello demo: X_eTaL writes the Python, runs Blender, and reads back what Blender found. Click to enlarge.</figcaption>
+</figure>
+
 Blender is scripted in Python, through its `bpy` module, and it can run without a window. So the extension does not call Blender directly. An X_eTaL program writes two Python scripts as text: a short launcher that starts Blender in the background with its factory settings, and the `bpy` script Blender runs inside. The extension writes them to disk, runs the launcher under a timeout, keeps the whole output in a log, and answers with the exit status and the last lines. The program then reads back what was made.
+
+The smallest demo, `hello`, runs the whole chain once, and the recording beside this section shows it at a terminal. The X_eTaL program holds the launcher and the Blender script as two strings of Python, writes them to files, and runs the launcher. Blender starts in the background with its factory settings, the script lists the objects in its starting scene and writes them to a report, and the X_eTaL program reads that report back: `objects: Camera Cube Light`. Nothing is drawn; the point is that every link in the chain works.
 
 ```text
 X_eTaL  →  blender extension  →  python3  →  Blender, in the background  →  Python inside Blender
@@ -74,9 +85,26 @@ The corners are an outer product: each center plus each of a unit cube's eight c
 
 ## What it has made so far
 
+<figure class="zoomable" style="float: left; clear: none; margin: 0.2em 1.5em 0.6em 0; max-width: 42%;">
+<video autoplay muted loop playsinline preload="auto" class="no-invert" poster="{{ '/assets/images/posts/xetal-blender-td-models-poster.webp' | relative_url }}" aria-label="A recording of the twelve tower-defense pieces built by X_eTaL in Blender, each shown in turn playing its named animation clips: idle, fire, walk and hit">
+<source src="{{ '/assets/videos/xetal-blender-td-models.webm' | relative_url }}" type="video/webm">
+<source src="{{ '/assets/videos/xetal-blender-td-models.mp4' | relative_url }}" type="video/mp4">
+</video>
+<figcaption style="font-size: 0.85em;">The twelve tower-defense pieces, each playing its clips: idle, then fire for towers, walk and hit for creeps. Click to enlarge.</figcaption>
+</figure>
+
 Since the first scene the library has grown into a small toolkit. Pieces are built from parts that hang from a pivot, so a turret turns about its own axis: boxes, cylinders, cones, spheres and tori from Blender's builders, plus shapes worked out in X_eTaL as arrays, an octahedron and a lathe. Parts can glow. And models can carry named animations, idle, walk, fire and hit, exported as clips inside a `.glb` file and checked by reading the file back.
 
-The first real customer was another repo. The tower-defense game in [post #6](/2026/10/12/array-languages-xetal-games/) asked for 3D towers and creeps, and Blender made twelve of them with their animation clips, rendered and published on the [extensions site](https://softwarewrighter.github.io/X_eTaL-extensions/blender/td/). Since then it also makes each piece's fallback sheets for a page without WebGL: sixteen frames of the piece turning, and eight frames of it seen from the game's own isometric angle, each sheet one short Blender render joined into a single picture, listed with its checksum beside the models.
+The first real customer was another repo. The tower-defense game in [post #6](/2026/10/12/array-languages-xetal-games/) asked for 3D towers and creeps, and Blender made twelve of them with their animation clips, rendered and published on the [extensions site](https://softwarewrighter.github.io/X_eTaL-extensions/blender/td/). The recording beside this section is the `td-models` demo: each piece in turn, playing the clips it carries. A tower idles and then fires, its barrel kicking back or its crystal swelling; a creep idles, walks with its feet in pairs and its body bobbing, and flinches when hit. Every part and every keyframe came from X_eTaL arrays; Blender built and rendered them.
+
+<figure class="zoomable" style="float: right; clear: none; margin: 0.2em 0 0.6em 1.5em; max-width: 30%;">
+<img src="{{ '/assets/images/posts/xetal-blender-cannon-3-turn.webp' | relative_url }}" class="no-invert" alt="A four by four sheet of sixteen frames: the level-three cannon tower turning a full circle, 22.5 degrees a frame, on a transparent background">
+<figcaption style="font-size: 0.85em;">The level-three cannon's turn sheet: sixteen frames, one picture. Click to enlarge.</figcaption>
+</figure>
+
+Since then it also makes each piece's fallback sheets for a page without WebGL: sixteen frames of the piece turning, and eight frames of it seen from the game's own isometric angle, each sheet one short Blender render joined into a single picture, listed with its checksum beside the models. The sheet beside this paragraph is the level-three cannon's turn sheet: read left to right and top to bottom, the turret comes round 22.5 degrees a frame on a transparent background, so a page can step through the frames as a flipbook when it cannot draw the model in 3D.
+
+<div style="clear: both;"></div>
 
 ## The pipeline, in Blender
 
