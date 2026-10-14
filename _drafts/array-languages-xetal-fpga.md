@@ -4,15 +4,16 @@ title: "Array Languages #8: X_eTaL-fpga, Array Programs as Circuits"
 categories: [languages, language-design, fpga, hardware]
 tags: [array-languages, xetal, x-etal, apl, fpga, verilog, gowin, tang-nano, tang-primer, yosys, nextpnr, apicula, hardware-description, tms1000, uart]
 keywords: "X_eTaL FPGA, array language to hardware, Verilog-2005 emitter, netlist, cycle simulator, space versus time, lanes, reduction tree, clocked circuits, UART, HEX1000, TMS1000, 4-bit machine, calculator, Sipeed Tang Nano, Tang Primer, Gowin FPGAs, Yosys, nextpnr, Apicula, openFPGALoader"
-abstract: "Eighth in the Array Languages series: X_eTaL-fpga turns X_eTaL programs into circuits. An add on eight numbers becomes eight adders, a sum becomes a tree of adders or one adder used over eight clocks, and a step function over a state vector becomes registers. Every circuit is checked against the evaluator's answer, bit for bit, through layers of simulation and now through the standard Verilog tools. All of it runs on a Mac so far; next come an Arch Linux machine and real boards, Sipeed's Tang Nano and Tang Primer, starting with HEX1000, a 4-bit calculator machine in the spirit of the TMS1000."
+abstract: "Eighth in the Array Languages series: X_eTaL-fpga turns X_eTaL programs into circuits. An add on eight numbers becomes eight adders, a sum becomes a tree of adders or one adder used over eight clocks, and a step function over a state vector becomes registers. Every circuit is checked against the evaluator's answer, bit for bit, through layers of simulation and now through the standard Verilog tools. HEX1000, a 4-bit calculator machine in the spirit of the TMS1000, already calculates in X_eTaL. The software runs on a Mac, and work on real boards, Sipeed's Tang Nano and Tang Primer, has begun on an Arch Linux machine."
 series: "Array Languages"
 series_part: 8
 date: 2026-10-14 00:15:00 -0700
 ---
 
 <!-- DRAFT, IN PROGRESS: refreshed 2026-10-14 from hardwarewrighter/X_eTaL-fpga: a4a07b3 (docs/boards.md, 2026-10-12) and UNCOMMITTED work in the
-     working tree (the verilog-tools step: iverilog, Verilator, Yosys on the Mac, 17 modules pass, one emitter bug fixed; docs/hardware.md; `just fit`;
-     the board saga reworked: flow, cell-sim, machine-board, round-trip, lanes-board). Re-check once committed. Mac only (Mike, 2026-10-14):
+     working tree, since committed (67b9892: the Verilog tools, 17 modules, one emitter bug; docs/hardware.md; `just fit`), then 2026-10-14 morning:
+     473160b and ebf7768 (HEX1000 in X_eTaL, and its calculator: 33 sequences; Radix's overflow fixed), c6d0a26 and 717e9fe (two lanes, sw on the Mac
+     and board on Arch; hardware starts on the Nano 9K, 1K sizing deferred), 5759fb9 (docs/linux-nvidia.md, Arch setup). Mac only (Mike, 2026-10-14):
      Arch Linux and the boards are next. Earlier: refreshed 2026-10-12 (last commit 2026-10-08; saga 3 nibble-machine
      active: steps isa, radix-lib, doc-site done; machine-lib next). More changes are expected over the next two days.
      The repo is PRIVATE (GitHub): no repo link or repo_urls until it is public.
@@ -117,11 +118,15 @@ Layers 4 and 5 are new. The standard open tools now run on the Mac, and all 17 o
 
 The current stage is a whole machine. HEX1000 is a 4-bit machine in the spirit of the TMS1000, Texas Instruments' 4-bit microcontroller of the 1970s: an original design of about the same size and complexity, not a replica. It keeps the TMS1000's shape: a 4-bit accumulator, a 64 by 4-bit RAM, a ROM of 1,024 eight-bit instructions in 16 pages, and a program counter that steps as a feedback shift register rather than a binary counter. Its ROM program makes it a calculator, hexadecimal first, then octal and decimal, and it talks to a terminal over the UART.
 
-The specification comes first. The Radix library is an eight-digit calculator in any radix, written as plain X_eTaL, and the machine's ROM program has to match it key for key. Next the machine itself is written in X_eTaL, as a pure step function and an assembler, then its calculator program, then the machine hand-lowered to a circuit and simulated with that program, every key sequence reproduced, with the Verilog pinned and a resource estimate against the smallest board.
+The specification came first. The Radix library is an eight-digit calculator in any radix, written as plain X_eTaL, and the machine's ROM program has to match it key for key.
+
+HEX1000 now runs and calculates, in X_eTaL. The machine is written as its state, a step function that runs one instruction, a harness that runs it, and an assembler. Its ROM program is an eight-digit hexadecimal calculator, adding, subtracting and multiplying, about 330 of HEX1000's own instructions on 7 pages, reading a key matrix and driving the display digit by digit. All 33 test key sequences give the specification's display. The slowest takes 16,406 instructions, about 1.2 ms at the machine's 13.5 million instructions a second. The tests also caught the specification itself: multiplying FFFFFFFF by FFFFFFFF overflowed a 64-bit integer inside the Radix library, which now multiplies in two halves.
+
+Next come octal and decimal, then the machine as a circuit: lowered, simulated with its calculator program, every key sequence reproduced, the Verilog pinned, and a measure of what it takes on a board.
 
 ## The boards
 
-All of this runs on a Mac so far. The next move is to an Arch Linux machine where the boards are, and then to actual hardware testing.
+The software runs on a Mac. A second line of work has just started on an Arch Linux machine, where the boards are, to bring the open toolchain up and begin actual hardware testing, starting with the Tang Nano 9K.
 
 The boards are Sipeed's Tang boards, all built on Gowin FPGAs, and Gowin's chip family decides both what a board can hold and what software it needs:
 
@@ -131,7 +136,7 @@ The boards are Sipeed's Tang boards, all built on Gowin FPGAs, and Gowin's chip 
 | GW2A | Tang Nano 20K, Tang Primer 20K | supported |
 | GW5A | Tang Primer 25K | not yet: Gowin's own IDE until the open flow covers it |
 
-They are small. The Tang Nano 1K has 1,152 four-input lookup tables, 864 flip-flops and 72 Kbit of block RAM; the Primer 25K, the largest here, about 23,000 of each and about a megabit of block RAM. A design goes to the smallest board that holds it: HEX1000 to the Nano 1K first, the 4K if it does not fit, and larger machines to the 9K and 20K boards later.
+They are small. The Tang Nano 1K has 1,152 four-input lookup tables, 864 flip-flops and 72 Kbit of block RAM; the Primer 25K, the largest here, about 23,000 of each and about a megabit of block RAM. The first hardware work is on the Tang Nano 9K. Fitting HEX1000 onto the smallest board, the 1K, comes later, and the larger 20K boards are for larger machines.
 
 The plan for the boards follows the checks: wrappers that synthesize, place, pack and load a design; a constraints file for each board; the cell-level simulator and the bitstream round trip from the table above; then HEX1000 on a board, keys in and digits out over a serial line, driven from the host with the same test key sequences the evaluator checks; and the vector datapath at several lane counts, to measure the space-time trade-off in real lookup tables and registers.
 
