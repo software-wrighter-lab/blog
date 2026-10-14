@@ -124,6 +124,11 @@ Layers 4 and 5 are new. The standard open tools now run on the Mac, and all 17 o
 
 ## HEX1000: a 4-bit machine
 
+<figure style="float: right; clear: none; margin: 0.2em 0 0.6em 1.5em; max-width: 40%;">
+<a class="no-external-icon" href="https://hardwarewrighter.github.io/X_eTaL-fpga/calc/"><img src="{{ '/assets/images/posts/xetal-fpga-hex1000-browser.webp' | relative_url }}" class="no-invert" alt="HEX1000 in the browser: a terminal showing DEADBEEF on the machine's eight-digit display, the instructions the last key took, and a hexadecimal keypad below"></a>
+<figcaption style="font-size: 0.85em;"><a href="https://hardwarewrighter.github.io/X_eTaL-fpga/calc/">HEX1000 in the browser</a>: every key goes through the machine's key matrix into its ROM program, run in X_eTaL. The time per key is the page’s estimate for a Tang Nano; the machine is not on a board yet.</figcaption>
+</figure>
+
 The current stage is a whole machine. HEX1000 is a 4-bit machine in the spirit of the TMS1000, Texas Instruments' 4-bit microcontroller of the 1970s: an original design of about the same size and complexity, not a replica. It keeps the TMS1000's shape: a 4-bit accumulator, a 64 by 4-bit RAM, a ROM of 1,024 eight-bit instructions in 16 pages, and a program counter that steps as a feedback shift register rather than a binary counter. Its ROM program makes it a calculator, hexadecimal first, then octal and decimal, and it talks to a terminal over the UART.
 
 The specification came first. The Radix library is an eight-digit calculator in any radix, written as plain X_eTaL, and the machine's ROM program has to match it key for key.
