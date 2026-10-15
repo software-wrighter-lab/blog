@@ -247,6 +247,16 @@ Rendering is the slow part. A video is hundreds of frames, and each frame is its
 
 It fits the series. The GPU work in [post #7](/2026/10/13/array-languages-xetal-gpu/) is about getting value out of a mixed collection of GPUs, old and new, and a render farm is another use for the same cards. This is a plan, not yet started.
 
+## Further out: machine learning, step by step
+
+The larger goal is to start from the math. Take an ML equation, or a whole ML transformation pipeline, and produce an interactive 3D visualization of each step and each interim result, showing in painful detail what is actually happening:
+
+- **A CNN's triple sum,** the convolution [ML #9](/2026/09/10/ml-cnn-from-equations-mlpl/) ended on, every product and every partial sum where you can see it.
+- **Mixture-of-experts dispatch:** each token scored, its top experts chosen, and its work routed to them and gathered back.
+- **An Engram lookup:** recent tokens hashed into a memory table and the retrieved rows gated into the model.
+
+And eventually every part of a modern LLM runtime, across many use-cases, inference and fine-tuning both. The ReLU, softmax and matrix-product videos above are the first small steps in that direction. Since the X_eTaL programs computing these steps are the same ones running on the GPUs in [post #7](/2026/10/13/array-languages-xetal-gpu/), each picture would show real values, not an illustration.
+
 ## What comes next
 
 These previews become finished explainer videos, each from the real data of the repo it explains: HEX1000 running, from its circuit simulation, with a render that refuses to finish unless the display shows the evaluator's answer; HEX1000 being built, its lookup tables flown to their places on the Gowin die; the GPU kernel being built and then running; and a short trailer, one X_eTaL program driving three things, a GPU, an FPGA and Blender. They are made for this series first, and perhaps a narrated YouTube video later. The pattern stays the same throughout: X_eTaL works out the arrays, writes the Python, and Blender does what it is best at.
