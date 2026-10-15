@@ -18,6 +18,9 @@ repo_urls:
      previews from work/, not yet committed in the repo: re-check them, and swap in the final renders when they land. The game material
      belongs to post #6 and is left out (Mike), except the lead image: the runner creep's walk clip, rendered from runner.glb in Blender
      (transparent, 24 frames, animated WebP). Every figure is a zoomable gutter figure explained by the text beside it.
+     2026-10-15 late morning: relu-softmax is now the FINAL render (extensions/blender/videos/relu-softmax.webm, untracked) and has a literate
+     document, docs/literate/relu-softmax.org (untracked): its page https://softwarewrighter.github.io/X_eTaL-extensions/literate/relu-softmax.html is LINKED BUT NOT LIVE YET (404); Mike: the literate pages go to GitHub Pages late morning 10/15, this post publishes that afternoon:
+     verify it is pushed before publishing.
      2026-10-15: Video.xtl, alias vd: (renamed from Film.xtl; untracked in the extensions repo; link it once committed) and the org-mode literate documents for Blender (in progress;
      link them early in the post when they land; docs/literate/water.org is the existing model). -->
 
@@ -67,7 +70,7 @@ boxes('bar', nums('0.0 0.0 1.0 1.0 1.0 2.0 1.0 1.0 1.0 1.0', 10), 'solid')
 
 Other examples check the details a video needs: `vd:l_inear 255 128 0` converts an sRGB color to the linear values Blender's renderer works in, `1.0 0.2195197180748679 0.0`, and `vd:c_ontrast` measures how readable a caption will be against its plate, 21 for white on black, the most a color pair can have.
 
-The same path is being written up as literate documents in Emacs Org mode, where the prose, the X_eTaL code, the Python it produces and the rendered result sit together, each block run to produce what follows it. The extensions repo already has one for another demo, [Water that drains](https://github.com/softwarewrighter/X_eTaL-extensions/blob/main/docs/literate/water.org), built from a row of five cups up to the code that runs in the game; the Blender ones, showing array code becoming Python becoming a Blender render, are in progress and will be linked here when they land.
+The whole path is written up as a literate document in Emacs Org mode, where the prose, the X_eTaL code, the Python it produces and the rendered result sit together, each block run to produce what follows it. The first one for Blender is [ReLU and softmax, arrays to video](https://softwarewrighter.github.io/X_eTaL-extensions/literate/relu-softmax.html), the video near the end of this post, built with no hand-written Python. It goes in order: the network's arrays from the GPU work's Accel library, softmax a step at a time, the animation at a high level and then in detail, the captions and camera, the tables turned into Python, the fixed player Blender runs, and the render. It sits in the extensions repo's [collection of literate documents](https://softwarewrighter.github.io/X_eTaL-extensions/literate/), beside one on [water that drains](https://github.com/softwarewrighter/X_eTaL-extensions/blob/main/docs/literate/water.org) in the voxel world.
 
 </div>
 
@@ -224,20 +227,20 @@ At this size the arithmetic dwarfs the cost of moving the data, which is why pro
 ## Video: ReLU and softmax
 
 <figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 46%;">
-<video autoplay muted loop playsinline preload="metadata" class="no-invert" poster="{{ '/assets/images/posts/xetal-blender-relu-softmax-poster.webp' | relative_url }}" aria-label="ReLU and softmax animated: a field of positive and negative values where every negative becomes zero; then exponentials, each row's largest value 1; then each row of p 4 by 2 shares out 1">
+<video autoplay muted loop playsinline preload="metadata" class="no-invert" poster="{{ '/assets/images/posts/xetal-blender-relu-softmax-poster.webp' | relative_url }}" aria-label="ReLU and softmax animated: z1 as orange positive and blue negative bars on a glass floor, the negatives turning red and shrinking to zero; then softmax's four steps on z2, ending as four columns of two shares, each exactly 1 tall">
 <source src="{{ '/assets/videos/xetal-blender-relu-softmax.webm' | relative_url }}" type="video/webm">
 <source src="{{ '/assets/videos/xetal-blender-relu-softmax.mp4' | relative_url }}" type="video/mp4">
 </video>
 <figcaption style="font-size: 0.85em;">ReLU, then softmax: each row shares out 1. Click to enlarge.</figcaption>
 </figure>
 
-The last two steps of the tiny network from the still above, animated, with the real numbers it computed on the bars.
+The last two steps of the tiny network from the still above, animated with the real values the network computed. This video has its own [literate document](https://softwarewrighter.github.io/X_eTaL-extensions/literate/relu-softmax.html), which explains every step of how it was made.
 
-1. **ReLU.** The hidden layer is a grid of bars on a plate, positive values standing up in yellow and negative ones in red. Every red bar drops to zero: that is all a ReLU does, and it is one elementwise step on the GPU.
-2. **Softmax, step one: shift and exponentiate.** Each row of the output has its largest value subtracted, then every value is exponentiated. Every value is now positive, and the largest in each row is exactly 1.
-3. **Softmax, step two: share out 1.** Each row is divided by its own sum, so the two values in each row of `p`, 4 by 2, stack up to exactly 1: the network's two probabilities for each of the four inputs.
+1. **ReLU, 0 to 11 seconds.** The first layer's output `z1`, 4 by 5, stands as bars on a glass floor: twenty values, positive ones orange and standing up, the nine negative ones blue and hanging below. The negatives turn red and shrink to zero, leaving only their outlines. What is left is `h`, the ReLU's output: the negatives gone, everything else unchanged.
+2. **Softmax, 11.5 to 30 seconds.** The second layer's output `z2`, a row of two scores for each of the four examples, stands as four pairs of bars, and softmax's four steps happen to all of them at once: subtract each row's largest value, raise e to each value, add up each row, shown as a white bar, and divide by that sum.
+3. **The result.** Each row ends as one column of its two shares, every column exactly 1 tall: `p`, the network's two probabilities for each example.
 
-Subtracting the largest value first is the standard way to keep the exponentials from overflowing, and it does not change the answer.
+The point is the shape of the computation: which values change, which do not, and why softmax's results add up to 1, told by the arrays themselves. Subtracting the largest value first keeps the exponentials from overflowing, and it does not change the answer.
 
 <div style="clear: both;"></div>
 
