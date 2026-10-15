@@ -16,9 +16,10 @@ repo_urls:
 <!-- DRAFT, IN PROGRESS (2026-10-14): rebuilt around X_eTaL-extensions/extensions/blender/work/pipeline/preview (Saga 15 step 11 and the
      explainer steps): blender-arrays, fpga-arrays, gpu-arrays, gpu-tinynet (PNG) and matmul-steps, matmul-fly, relu-softmax (MP4), all
      previews from work/, not yet committed in the repo: re-check them, and swap in the final renders when they land. The game material
-     belongs to post #6 and is left out (Mike). Every figure is a zoomable gutter figure explained by the text beside it. -->
+     belongs to post #6 and is left out (Mike), except the lead image: the runner creep's walk clip, rendered from runner.glb in Blender
+     (transparent, 24 frames, animated WebP). Every figure is a zoomable gutter figure explained by the text beside it. -->
 
-<img src="{{ '/assets/images/posts/block-3d-head.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-td-runner-walk.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
 <div style="overflow: hidden;" markdown="1">
 
