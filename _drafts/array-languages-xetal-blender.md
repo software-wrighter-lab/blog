@@ -84,7 +84,7 @@ The corners are an outer product: each center plus each of a unit cube's eight c
 
 ## Blender draws the series
 
-The extension's next job is to show the rest of this series rather than tell it. Each picture and video below was made by Blender, from data the other X_eTaL programs produce, so what is on screen is what the code computed. These are previews of explainer videos still being made.
+The extension's next job is to show the rest of this series rather than tell it. Each picture and video below was made by Blender, from data the other X_eTaL programs produce, so what is on screen is what the code computed. These are previews of explainer videos still being made. The four stills come first, then three short videos, each with a section of its own.
 
 <figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 46%;">
 <img src="{{ '/assets/images/posts/xetal-blender-blender-arrays.webp' | relative_url }}" class="no-invert" alt="Blender's own process in five stages: a profile of 6 points by 2, corners of 96 by 3, faces of 80 by 4, the finished cannon piece, and sixteen rendered frames">
@@ -114,6 +114,10 @@ The extension's next job is to show the rest of this series rather than tell it.
 
 **A tiny network, stage by stage.** The two-layer network from the GPU work, every array drawn with its shape: a batch `x` of 4 by 3, times the weights `W1` plus a bias to give `z1`, the ReLU to give `h`, then `W2` and a softmax to give the probabilities `p`, 4 by 2. Yellow cells are positive, blue negative, and gray the zeros the ReLU made. The bar along the bottom is what the GPU actually did: 17 kernel launches, each as wide as its work, colored by kind, matrix products, elementwise steps, slices, tables and reductions.
 
+<div style="clear: both;"></div>
+
+## Video: a matrix product, item by item
+
 <figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 46%;">
 <video autoplay muted loop playsinline preload="metadata" class="no-invert" poster="{{ '/assets/images/posts/xetal-blender-matmul-steps-poster.webp' | relative_url }}" aria-label="An animated 3D matrix product: one item of C is a row of A times a column of B, four products added; then the next item; then on the GPU all six items at once, one work-item each">
 <source src="{{ '/assets/videos/xetal-blender-matmul-steps.webm' | relative_url }}" type="video/webm">
@@ -122,7 +126,20 @@ The extension's next job is to show the rest of this series rather than tell it.
 <figcaption style="font-size: 0.85em;">A matrix product, item by item, then all at once on the GPU. Click to enlarge.</figcaption>
 </figure>
 
-**A matrix product, one item at a time.** Matrix products are where the GPU pays, so this video takes one apart. The two matrices sit on the faces of a box and the result grows inside it. One item of the result is a row of `A` times a column of `B`: four products, added. Then the next item, and the next. Then the GPU's way: all six items at once, one work-item each.
+Matrix products are where the GPU pays off, so this video takes a small one apart. The two input matrices sit on two faces of a box, `A` on the left wall and `B` across the top, each cell labeled with its number, and the result `C` grows inside the box where a row of `A` and a column of `B` meet.
+
+It goes in four steps:
+
+1. **One item.** A row of `A` and a column of `B` light up, and a line runs from each pair of cells to the item of `C` they make.
+2. **Four products, added.** The pairs multiply, four products in all, and the products stack and add into that one item of `C`.
+3. **The next item, and the next.** The highlight moves on, one item at a time, the way a loop on a CPU would compute them.
+4. **The GPU's way.** Then all six items of `C` appear at once, each computed by its own work-item, the same arithmetic done in parallel.
+
+The point is the shape of the work: every item of `C` is independent of the others, which is exactly what lets a GPU compute them all at the same time.
+
+<div style="clear: both;"></div>
+
+## Video: the 512 by 512 product
 
 <figure class="zoomable" style="float: left; clear: both; margin: 0.2em 1.5em 0.6em 0; max-width: 46%;">
 <video autoplay muted loop playsinline preload="metadata" class="no-invert" poster="{{ '/assets/images/posts/xetal-blender-matmul-fly-poster.webp' | relative_url }}" aria-label="A fly-through of a 512 by 512 matrix product: 134 million multiply-adds; one item of C as 512 products added from the far end; a work-group as a 16 by 16 tile of C; every item of C, 262,144 sums, a work-group at a time">
@@ -132,7 +149,20 @@ The extension's next job is to show the rest of this series rather than tell it.
 <figcaption style="font-size: 0.85em;">The 512 by 512 product from post #7: 134 million multiply-adds. Click to enlarge.</figcaption>
 </figure>
 
-**The same, at scale.** The 512 by 512 product that ran 31 times faster on the M1 Max: 512 × 512 × 512, or 134 million multiply-adds. The camera follows one item of the result, 512 products added from the far end, then pulls back to a work-group, a 16 by 16 tile of the result computed together, and then to all 262,144 items, filled a work-group at a time.
+The same idea at the size that matters: the 512 by 512 product from [post #7](/2026/10/13/array-languages-xetal-gpu/), the one that ran 31 times faster on the M1 Max than in X_eTaL's evaluator. The inputs are drawn as heat maps on the box's faces, and the result fills the box.
+
+The camera flies through it in four moves:
+
+1. **The whole job.** 512 × 512 × 512: about 134 million multiply-adds, labeled as the box comes into view.
+2. **One item of the result.** The camera dives along one line through the box: 512 products, drawn as bars, added one at a time from the far end into a single number.
+3. **One work-group.** It pulls back to a 16 by 16 tile of the result, the block of 256 items one GPU work-group computes together, sharing the inputs it reads in fast local memory.
+4. **Every item.** Then all 262,144 items of the result, filled in a work-group at a time.
+
+At this size the arithmetic dwarfs the cost of moving the data, which is why products are the work worth sending to a GPU.
+
+<div style="clear: both;"></div>
+
+## Video: ReLU and softmax
 
 <figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 46%;">
 <video autoplay muted loop playsinline preload="metadata" class="no-invert" poster="{{ '/assets/images/posts/xetal-blender-relu-softmax-poster.webp' | relative_url }}" aria-label="ReLU and softmax animated: a field of positive and negative values where every negative becomes zero; then exponentials, each row's largest value 1; then each row of p 4 by 2 shares out 1">
@@ -142,7 +172,13 @@ The extension's next job is to show the rest of this series rather than tell it.
 <figcaption style="font-size: 0.85em;">ReLU, then softmax: each row shares out 1. Click to enlarge.</figcaption>
 </figure>
 
-**ReLU and softmax.** The last two steps of the tiny network, animated. The ReLU is the simplest: every negative value drops to zero. The softmax takes three steps: each row has its largest value subtracted and is exponentiated, so every value is positive and the largest is 1; then each row is divided by its sum, so the two probabilities in each row of `p` add to 1. The numbers on the bars are the real ones the network computed.
+The last two steps of the tiny network from the still above, animated, with the real numbers it computed on the bars.
+
+1. **ReLU.** The hidden layer is a grid of bars on a plate, positive values standing up in yellow and negative ones in red. Every red bar drops to zero: that is all a ReLU does, and it is one elementwise step on the GPU.
+2. **Softmax, step one: shift and exponentiate.** Each row of the output has its largest value subtracted, then every value is exponentiated. Every value is now positive, and the largest in each row is exactly 1.
+3. **Softmax, step two: share out 1.** Each row is divided by its own sum, so the two values in each row of `p`, 4 by 2, stack up to exactly 1: the network's two probabilities for each of the four inputs.
+
+Subtracting the largest value first is the standard way to keep the exponentials from overflowing, and it does not change the answer.
 
 <div style="clear: both;"></div>
 
