@@ -44,6 +44,7 @@ The extensions in [post #4](/2026/10/10/array-languages-xetal-extensions/) gave 
 | Resource | Link |
 |----------|------|
 | **The extension** | [X_eTaL-extensions: blender](https://github.com/softwarewrighter/X_eTaL-extensions/tree/main/extensions/blender) --- the facade, the bpy writer, the demos |
+| **Literate docs** | [ReLU and softmax](https://softwarewrighter.github.io/X_eTaL-extensions/literate/relu-softmax.html) · [Matrix multiply](https://softwarewrighter.github.io/X_eTaL-extensions/literate/matmul.html) · [all documents](https://softwarewrighter.github.io/X_eTaL-extensions/literate/) --- arrays to Python to a Blender video, step by step |
 | **First look** | [Saw #14](/2026/10/11/saw-guards-lints-macros-blender/) |
 | **Prior posts** | [Array Languages #4: X_eTaL-extensions](/2026/10/10/array-languages-xetal-extensions/) · [the voxel world](/2026/10/09/voxels-3d-worlds-array-languages/) |
 | **What it shows** | [the GPU, #7](/2026/10/13/array-languages-xetal-gpu/) · [the FPGA, #8](/2026/10/14/array-languages-xetal-fpga/) |
