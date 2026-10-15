@@ -4,7 +4,7 @@ title: "Array Languages #9: X_eTaL and Blender, Scenes and Animation from Arrays
 categories: [languages, language-design, graphics, tools]
 tags: [array-languages, xetal, x-etal, apl, blender, bpy, 3d-graphics, animation, rendering, eevee, gltf, code-generation, extensions]
 keywords: "X_eTaL Blender, array language 3D graphics, Blender batch rendering, bpy code generation, EEVEE, glTF export, OBJ export, mesh from arrays, camera orbit animation, X_eTaL-extensions, procedural 3D scenes"
-abstract: "Ninth in the Array Languages series: X_eTaL drives Blender. An X_eTaL program writes the Python that Blender runs in the background, works out the geometry as arrays, and gets back renders, animations and 3D files. Here Blender turns to the rest of the series and draws what the other repos compute: arrays becoming a model, the HEX1000 machine's memory, a kernel on two GPUs, a tiny network stage by stage, and a matrix product and a softmax, animated, each from the real data those programs produce."
+abstract: "Ninth in the Array Languages series: X_eTaL drives Blender. An X_eTaL program works out a scene as arrays, every object's place, size and color, every key it moves to, the camera's path and the captions, and a small library writes those arrays into Python as numbers for a fixed player script that Blender runs. Literate documents in progress show the whole path, X_eTaL to Python to a Blender render. Then Blender draws the rest of the series: arrays becoming a model, the HEX1000 machine's memory, a kernel on two GPUs, a tiny network stage by stage, and a matrix product and a softmax, animated."
 series: "Array Languages"
 series_part: 9
 date: 2026-10-15 00:15:00 -0700
@@ -17,7 +17,9 @@ repo_urls:
      explainer steps): blender-arrays, fpga-arrays, gpu-arrays, gpu-tinynet (PNG) and matmul-steps, matmul-fly, relu-softmax (MP4), all
      previews from work/, not yet committed in the repo: re-check them, and swap in the final renders when they land. The game material
      belongs to post #6 and is left out (Mike), except the lead image: the runner creep's walk clip, rendered from runner.glb in Blender
-     (transparent, 24 frames, animated WebP). Every figure is a zoomable gutter figure explained by the text beside it. -->
+     (transparent, 24 frames, animated WebP). Every figure is a zoomable gutter figure explained by the text beside it.
+     2026-10-15: Film.xtl (untracked in the extensions repo; link it once committed) and the org-mode literate documents for Blender (in progress;
+     link them early in the post when they land; docs/literate/water.org is the existing model). -->
 
 <figure style="float: left; width: 205px; margin: 0.8em 2em 1em 0.5em;">
 <a href="/2026/10/12/array-languages-xetal-games/"><img src="{{ '/assets/images/posts/block-td-runner-walk.webp' | relative_url }}" class="post-marker no-invert" alt="The runner, a green tower-defense creep, walking" style="width: 205px; float: none; margin: 0 !important; padding: 0;"></a>
@@ -41,6 +43,31 @@ The extensions in [post #4](/2026/10/10/array-languages-xetal-extensions/) gave 
 | **Prior posts** | [Array Languages #4: X_eTaL-extensions](/2026/10/10/array-languages-xetal-extensions/) · [the voxel world](/2026/10/09/voxels-3d-worlds-array-languages/) |
 | **What it shows** | [the GPU, #7](/2026/10/13/array-languages-xetal-gpu/) · [the FPGA, #8](/2026/10/14/array-languages-xetal-fpga/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
+
+</div>
+
+<div class="clearfix" markdown="1" style="clear: both;">
+
+## From arrays to a film
+
+Every picture and video in this post comes out of the same pipeline, and it is short to describe. An X_eTaL program works out a scene as arrays: every object's place, size and color, the seconds it is on screen, every key it moves to, the camera's path, and the captions. A library, `Film.xtl`, turns each of those arrays into a line of Python that carries it as plain numbers. And a fixed Python script, the player, reads the numbers and makes the objects and keyframes in Blender, which renders the frames. The player decides nothing: what a film shows is all in the numbers X_eTaL computed.
+
+The library documents itself with examples that run, so each function shows exactly what it writes. Here is one, a group of boxes, each a row of a table: where its middle is, its width, depth and height, its color from 0 to 255, and how brightly it glows. One white bar, two units tall, standing on the floor:
+
+```text
+"fm:" u̲se< "Film"
+("bar", 1 10 r̲eshape 0 0 1 1 1 2 255 255 255 1) ᶠᵐb̲oxes 0
+```
+
+and the line of Python it writes, which the player turns into the bar:
+
+```text
+boxes('bar', nums('0.0 0.0 1.0 1.0 1.0 2.0 1.0 1.0 1.0 1.0', 10), 'solid')
+```
+
+Other examples check the details a film needs: `fm:l_inear 255 128 0` converts an sRGB color to the linear values Blender's renderer works in, `1.0 0.2195197180748679 0.0`, and `fm:c_ontrast` measures how readable a caption will be against its plate, 21 for white on black, the most a color pair can have.
+
+The same path is being written up as literate documents in Emacs Org mode, where the prose, the X_eTaL code, the Python it produces and the rendered result sit together, each block run to produce what follows it. The extensions repo already has one for another demo, [Water that drains](https://github.com/softwarewrighter/X_eTaL-extensions/blob/main/docs/literate/water.org), built from a row of five cups up to the code that runs in the game; the Blender ones, showing array code becoming Python becoming a Blender render, are in progress and will be linked here when they land.
 
 </div>
 
