@@ -43,9 +43,11 @@ The extensions in [post #4](/2026/10/10/array-languages-xetal-extensions/) gave 
 
 <div class="clearfix" markdown="1">
 
+<div style="clear: both;"></div>
+
 ## The chain
 
-<figure class="zoomable" style="float: right; clear: none; margin: 0.2em 0 0.6em 1.5em; max-width: 44%;">
+<figure class="zoomable" style="float: left; clear: both; margin: 0.2em 1.5em 0.6em 0; max-width: 44%;">
 <video autoplay muted loop playsinline preload="auto" class="no-invert" poster="{{ '/assets/images/posts/xetal-blender-hello-poster.webp' | relative_url }}" aria-label="A terminal recording of the hello demo: the X_eTaL program, the Python launcher and Blender script it writes as text, the run, and the report Blender wrote: objects: Camera Cube Light">
 <source src="{{ '/assets/videos/xetal-blender-hello.webm' | relative_url }}" type="video/webm">
 <source src="{{ '/assets/videos/xetal-blender-hello.mp4' | relative_url }}" type="video/mp4">
