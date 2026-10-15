@@ -18,7 +18,9 @@ repo_urls:
      previews from work/, not yet committed in the repo: re-check them, and swap in the final renders when they land. The game material
      belongs to post #6 and is left out (Mike), except the lead image: the runner creep's walk clip, rendered from runner.glb in Blender
      (transparent, 24 frames, animated WebP). Every figure is a zoomable gutter figure explained by the text beside it.
-     2026-10-15 late morning: relu-softmax is now the FINAL render (extensions/blender/videos/relu-softmax.webm, untracked) and has a literate
+     2026-10-15 13:00: fe4f698 committed and pushed Video.xtl, the three final videos (now used here) and relu-softmax.org and matmul.org;
+     the literate PAGES were still 404 on GitHub Pages at 13:00: verify both links before publishing.
+     Earlier: relu-softmax is now the FINAL render (extensions/blender/videos/relu-softmax.webm, untracked) and has a literate
      document, docs/literate/relu-softmax.org (untracked): its page https://softwarewrighter.github.io/X_eTaL-extensions/literate/relu-softmax.html is LINKED BUT NOT LIVE YET (404); Mike: the literate pages go to GitHub Pages late morning 10/15, this post publishes that afternoon:
      verify it is pushed before publishing.
      2026-10-15: Video.xtl, alias vd: (renamed from Film.xtl; untracked in the extensions repo; link it once committed) and the org-mode literate documents for Blender (in progress;
@@ -53,7 +55,7 @@ The extensions in [post #4](/2026/10/10/array-languages-xetal-extensions/) gave 
 
 ## From arrays to a video
 
-Every picture and video in this post comes out of the same pipeline, and it is short to describe. An X_eTaL program works out a scene as arrays: every object's place, size and color, the seconds it is on screen, every key it moves to, the camera's path, and the captions. A library, `Video.xtl`, turns each of those arrays into a line of Python that carries it as plain numbers. And a fixed Python script, the player, reads the numbers and makes the objects and keyframes in Blender, which renders the frames. The player decides nothing: what a video shows is all in the numbers X_eTaL computed.
+Every picture and video in this post comes out of the same pipeline, and it is short to describe. An X_eTaL program works out a scene as arrays: every object's place, size and color, the seconds it is on screen, every key it moves to, the camera's path, and the captions. A library, [`Video.xtl`](https://github.com/softwarewrighter/X_eTaL-extensions/blob/main/extensions/blender/lib/Video.xtl), turns each of those arrays into a line of Python that carries it as plain numbers. And a fixed Python script, the player, reads the numbers and makes the objects and keyframes in Blender, which renders the frames. The player decides nothing: what a video shows is all in the numbers X_eTaL computed.
 
 The library documents itself with examples that run, so each function shows exactly what it writes. Here is one, a group of boxes, each a row of a table: where its middle is, its width, depth and height, its color from 0 to 255, and how brightly it glows. One white bar, two units tall, standing on the floor:
 
@@ -70,7 +72,12 @@ boxes('bar', nums('0.0 0.0 1.0 1.0 1.0 2.0 1.0 1.0 1.0 1.0', 10), 'solid')
 
 Other examples check the details a video needs: `vd:l_inear 255 128 0` converts an sRGB color to the linear values Blender's renderer works in, `1.0 0.2195197180748679 0.0`, and `vd:c_ontrast` measures how readable a caption will be against its plate, 21 for white on black, the most a color pair can have.
 
-The whole path is written up as a literate document in Emacs Org mode, where the prose, the X_eTaL code, the Python it produces and the rendered result sit together, each block run to produce what follows it. The first one for Blender is [ReLU and softmax, arrays to video](https://softwarewrighter.github.io/X_eTaL-extensions/literate/relu-softmax.html), the video near the end of this post, built with no hand-written Python. It goes in order: the network's arrays from the GPU work's Accel library, softmax a step at a time, the animation at a high level and then in detail, the captions and camera, the tables turned into Python, the fixed player Blender runs, and the render. It sits in the extensions repo's [collection of literate documents](https://softwarewrighter.github.io/X_eTaL-extensions/literate/), beside one on [water that drains](https://github.com/softwarewrighter/X_eTaL-extensions/blob/main/docs/literate/water.org) in the voxel world.
+The whole path is written up as literate documents in Emacs Org mode, where the prose, the X_eTaL code, the Python it produces and the rendered result sit together, each block run to produce what follows it. Two cover the videos in this post, both built with no hand-written Python:
+
+- [**ReLU and softmax, arrays to video**](https://softwarewrighter.github.io/X_eTaL-extensions/literate/relu-softmax.html): the network's arrays from the GPU work's Accel library, softmax a step at a time, the animation at a high level and then in detail, the captions and camera, the tables turned into Python, the fixed player Blender runs, and the render.
+- [**Matrix multiply, arrays to video**](https://softwarewrighter.github.io/X_eTaL-extensions/literate/matmul.html): one product a step at a time, then 134 million of them as a fly-through, with every product worked out first and then animated.
+
+They sit in the extensions repo's [collection of literate documents](https://softwarewrighter.github.io/X_eTaL-extensions/literate/), beside one on [water that drains](https://github.com/softwarewrighter/X_eTaL-extensions/blob/main/docs/literate/water.org) in the voxel world.
 
 </div>
 
@@ -181,44 +188,40 @@ The bar along the bottom is what the GPU actually did to compute it: 17 kernel l
 ## Video: a matrix product, item by item
 
 <figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 46%;">
-<video autoplay muted loop playsinline preload="metadata" class="no-invert" poster="{{ '/assets/images/posts/xetal-blender-matmul-steps-poster.webp' | relative_url }}" aria-label="An animated 3D matrix product: one item of C is a row of A times a column of B, four products added; then the next item; then on the GPU all six items at once, one work-item each">
+<video autoplay muted loop playsinline preload="metadata" class="no-invert" poster="{{ '/assets/images/posts/xetal-blender-matmul-steps-poster.webp' | relative_url }}" aria-label="An animated 3D matrix product, A 3 by 4 times B 4 by 2: A on the left wall, B on the ceiling, C on the back wall, every product in the cube between; item by item, then all six at once">
 <source src="{{ '/assets/videos/xetal-blender-matmul-steps.webm' | relative_url }}" type="video/webm">
 <source src="{{ '/assets/videos/xetal-blender-matmul-steps.mp4' | relative_url }}" type="video/mp4">
 </video>
 <figcaption style="font-size: 0.85em;">A matrix product, item by item, then all at once on the GPU. Click to enlarge.</figcaption>
 </figure>
 
-Matrix products are where the GPU pays off, so this video takes a small one apart. The two input matrices sit on two faces of a box, `A` on the left wall and `B` across the top, each cell labeled with its number, and the result `C` grows inside the box where a row of `A` and a column of `B` meet.
+A matrix product is the work a GPU does most, in a network's layers, in attention and in graphics, so this video takes a small one apart. It is the GPU work's matmul demo: `A`, 3 by 4, times `B`, 4 by 2. `A` stands on the left wall, `B` on the ceiling and the result `C` on the back wall, and the cube between them holds every product. Its [literate document](https://softwarewrighter.github.io/X_eTaL-extensions/literate/matmul.html) explains how each part was made.
 
-It goes in four steps:
+1. **One item.** A row of `A` and a column of `B` light up. Their four products appear in the cube, each with lines back to its two factors.
+2. **Added into `C`.** The four products fly into one item of `C` and become its sum.
+3. **The next item, quicker.** The first item is slow; the next ones go faster, one after another, the way a loop on a CPU would compute them.
+4. **All at once.** Then all six items light at the same time: on a GPU, every item of `C` is a work-item of its own.
 
-1. **One item.** A row of `A` and a column of `B` light up, and a line runs from each pair of cells to the item of `C` they make.
-2. **Four products, added.** The pairs multiply, four products in all, and the products stack and add into that one item of `C`.
-3. **The next item, and the next.** The highlight moves on, one item at a time, the way a loop on a CPU would compute them.
-4. **The GPU's way.** Then all six items of `C` appear at once, each computed by its own work-item, the same arithmetic done in parallel.
-
-The point is the shape of the work: every item of `C` is independent of the others, which is exactly what lets a GPU compute them all at the same time.
+The point is the shape of the work: each item of `C` needs one row and one column and nothing else, which is exactly what lets a GPU compute them all at the same time.
 
 <div style="clear: both;"></div>
 
 ## Video: the 512 by 512 product
 
 <figure class="zoomable" style="float: left; clear: both; margin: 0.2em 1.5em 0.6em 0; max-width: 46%;">
-<video autoplay muted loop playsinline preload="metadata" class="no-invert" poster="{{ '/assets/images/posts/xetal-blender-matmul-fly-poster.webp' | relative_url }}" aria-label="A fly-through of a 512 by 512 matrix product: 134 million multiply-adds; one item of C as 512 products added from the far end; a work-group as a 16 by 16 tile of C; every item of C, 262,144 sums, a work-group at a time">
+<video autoplay muted loop playsinline preload="metadata" class="no-invert" poster="{{ '/assets/images/posts/xetal-blender-matmul-fly-poster.webp' | relative_url }}" aria-label="A fly-through of a 512 by 512 matrix product: the whole scale, a 16 by 16 work-group tile and the rows and columns it reads, one work-item's 512 products along a beam summed from far to near, then C filling a work-group at a time">
 <source src="{{ '/assets/videos/xetal-blender-matmul-fly.webm' | relative_url }}" type="video/webm">
 <source src="{{ '/assets/videos/xetal-blender-matmul-fly.mp4' | relative_url }}" type="video/mp4">
 </video>
 <figcaption style="font-size: 0.85em;">The 512 by 512 product from post #7: 134 million multiply-adds. Click to enlarge.</figcaption>
 </figure>
 
-The same idea at the size that matters: the 512 by 512 product from [post #7](/2026/10/13/array-languages-xetal-gpu/), the one that ran 31 times faster on the M1 Max than in X_eTaL's evaluator. The inputs are drawn as heat maps on the box's faces, and the result fills the box.
+The same construct at the size that matters: the 512 by 512 product from [post #7](/2026/10/13/array-languages-xetal-gpu/), the one that ran 31 times faster on the M1 Max than in X_eTaL's evaluator. Each wall now holds 262,144 cells, and the cube 134 million multiply-adds. It is also in the [matrix-multiply document](https://softwarewrighter.github.io/X_eTaL-extensions/literate/matmul.html).
 
-The camera flies through it in four moves:
-
-1. **The whole job.** 512 × 512 × 512: about 134 million multiply-adds, labeled as the box comes into view.
-2. **One item of the result.** The camera dives along one line through the box: 512 products, drawn as bars, added one at a time from the far end into a single number.
-3. **One work-group.** It pulls back to a 16 by 16 tile of the result, the block of 256 items one GPU work-group computes together, sharing the inputs it reads in fast local memory.
-4. **Every item.** Then all 262,144 items of the result, filled in a work-group at a time.
+1. **The scale.** The camera starts far out, to show how much there is.
+2. **One work-group.** It flies in to a 16 by 16 tile of `C`, the block one GPU work-group computes together, and the rows of `A` and columns of `B` that tile reads.
+3. **One work-item.** Then in to a single item: its 512 products stand as bars along a beam through the cube, and a running sum moves from the far end to the near one, where it becomes that one item of `C`.
+4. **Every item.** Then `C` fills in, a work-group at a time.
 
 At this size the arithmetic dwarfs the cost of moving the data, which is why products are the work worth sending to a GPU.
 
