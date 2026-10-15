@@ -30,7 +30,7 @@ repo_urls:
      The lead image is a Tesla P4 (Pascal), one of Mike's cards. Card groups (Mike, 2026-10-12): first M1 Max, RTX 3090, RTX 5060 Ti, RTX 3060;
      follow-on the M3 Pro, and one or two of P4, A2, P100, M40 (both P100s: 12 and 16 GB; both M40s: 12 and 24 GB); future maybe K4200, 1660 Super, then the rest. -->
 
-<img src="{{ '/assets/images/posts/block-nvidia-p4.webp' | relative_url }}" class="post-marker" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-nvidia-green.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
 <div style="overflow: hidden;" markdown="1">
 
