@@ -241,6 +241,12 @@ Subtracting the largest value first is the standard way to keep the exponentials
 
 <div style="clear: both;"></div>
 
+## Further out: a render farm
+
+Rendering is the slow part. A video is hundreds of frames, and each frame is its own render, so the work splits naturally: frame 1 does not wait for frame 2. The plan is another extension that hands the Blender work to a render farm instead of the one machine running the program, a cluster of Arch Linux servers with a mix of GPUs, each rendering its share of the frames in parallel. To an X_eTaL program it would look the same as rendering locally: the same Python, the same scene, just more machines doing the frames.
+
+It fits the series. The GPU work in [post #7](/2026/10/13/array-languages-xetal-gpu/) is about getting value out of a mixed collection of GPUs, old and new, and a render farm is another use for the same cards. This is a plan, not yet started.
+
 ## What comes next
 
 These previews become finished explainer videos, each from the real data of the repo it explains: HEX1000 running, from its circuit simulation, with a render that refuses to finish unless the display shows the evaluator's answer; HEX1000 being built, its lookup tables flown to their places on the Gowin die; the GPU kernel being built and then running; and a short trailer, one X_eTaL program driving three things, a GPU, an FPGA and Blender. They are made for this series first, and perhaps a narrated YouTube video later. The pattern stays the same throughout: X_eTaL works out the arrays, writes the Python, and Blender does what it is best at.
