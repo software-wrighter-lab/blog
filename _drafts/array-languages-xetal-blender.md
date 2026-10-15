@@ -89,33 +89,59 @@ The corners are an outer product: each center plus each of a unit cube's eight c
 
 The extension's next job is to show the rest of this series rather than tell it. Each picture and video below was made by Blender, from data the other X_eTaL programs produce, so what is on screen is what the code computed. These are previews of explainer videos still being made. The four stills come first, then three short videos, each with a section of its own.
 
+<div style="clear: both;"></div>
+
+### Arrays become a model
+
 <figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 46%;">
 <img src="{{ '/assets/images/posts/xetal-blender-blender-arrays.webp' | relative_url }}" class="no-invert" alt="Blender's own process in five stages: a profile of 6 points by 2, corners of 96 by 3, faces of 80 by 4, the finished cannon piece, and sixteen rendered frames">
 <figcaption style="font-size: 0.85em;">Arrays become a model: profile, corners, faces, the piece, the renders. Click to enlarge.</figcaption>
 </figure>
 
-**Arrays become a model.** This is the extension's own pipeline, left to right. X_eTaL starts from a profile, six points in two columns, and spins it into 96 corners, three coordinates each, then 80 faces of four corners each. Those arrays are all Blender gets: the Python carries them over as numbers, and Blender builds the piece from them and renders it, here as sixteen frames of it turning. The caption at the bottom of the frame says it in one line: X_eTaL computes the arrays, Python carries them, Blender builds and renders.
+This is the extension's own pipeline, left to right, and it is here because it is the whole idea of the post in one frame. X_eTaL starts from a profile, six points in two columns, and spins it into 96 corners, three coordinates each, then 80 faces of four corners each. Those arrays are all Blender gets: the Python carries them over as numbers, and Blender builds the piece from them and renders it, here as sixteen frames of it turning.
+
+The caption along the bottom of the frame says it in one line: X_eTaL computes the arrays, Python carries them, Blender builds and renders.
+
+<div style="clear: both;"></div>
+
+### HEX1000 as arrays
 
 <figure class="zoomable" style="float: left; clear: both; margin: 0.2em 1.5em 0.6em 0; max-width: 46%;">
 <img src="{{ '/assets/images/posts/xetal-blender-fpga-arrays.webp' | relative_url }}" class="no-invert" alt="HEX1000's RAM as arrays: a snapshot after each key of C0DE+BEEF=, the RAM after the sum as bars, four files of sixteen nibbles, and a seven-segment display reading 17FCd, the same answer as the Tang Nano 9K">
 <figcaption style="font-size: 0.85em;">HEX1000 as arrays: its RAM after each key, and the answer. Click to enlarge.</figcaption>
 </figure>
 
-**The HEX1000 machine as arrays.** From [post #8](/2026/10/14/array-languages-xetal-fpga/): the calculator's whole memory is four files of sixteen 4-bit nibbles, and this picture draws it. Across the top, one small grid per key of `C0DE+BEEF=`, from reset to the equals sign, shows the memory changing as the program runs. Below, the memory after the sum is drawn as bars, its first file holding the digits D C F 7 1, and the display shows `17FCd`, the answer the Tang Nano 9K gave on real hardware.
+From [post #8](/2026/10/14/array-languages-xetal-fpga/). The calculator's whole memory is four files of sixteen 4-bit nibbles, and this picture draws that memory as the machine computes `C0DE+BEEF=`.
+
+Across the top is one small grid per key, from reset to the equals sign, so you can watch the memory change as the program runs. Below, the memory after the sum is drawn as bars, its first file holding the digits D C F 7 1. On the right, the display shows `17FCd`. It is shown because it is the same answer the Tang Nano 9K gave on real hardware: Blender is drawing the X_eTaL specification, and the board agreed with it.
+
+<div style="clear: both;"></div>
+
+### One kernel on two GPUs
 
 <figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 46%;">
 <img src="{{ '/assets/images/posts/xetal-blender-gpu-arrays.webp' | relative_url }}" class="no-invert" alt="Two vectors x and y as bars, one OpenCL kernel of eight work-items computing 2x + y, and the work spread to an Apple M1 Max in unified memory and an NVIDIA RTX 5060 Ti over PCIe">
 <figcaption style="font-size: 0.85em;">One kernel, eight work-items, on two GPUs. Click to enlarge.</figcaption>
 </figure>
 
-**Arrays on two GPUs.** From [post #7](/2026/10/13/array-languages-xetal-gpu/): two vectors of eight numbers, `x` and `y`, become `2x + y` in a single fused kernel of eight work-items, one per number. The lines fan out to the two GPUs it ran on, the M1 Max, where the arrays sit in memory the CPU and GPU share, and the RTX 5060 Ti, where they cross PCIe. The row of numbers at the bottom is the evaluator's answer, the one both GPUs must match.
+From [post #7](/2026/10/13/array-languages-xetal-gpu/). This is the smallest possible GPU program, shown because it makes one point visible: the same X_eTaL line runs unchanged on two very different GPUs.
+
+On the left, two vectors of eight numbers, `x` and `y`, drawn as bars, become `2x + y` in a single fused kernel, the purple band, with eight work-items, one per number. The lines fan out to the two GPUs it ran on. On the Apple M1 Max the arrays sit in memory the CPU and GPU share. On the NVIDIA RTX 5060 Ti they have to cross the PCIe bus first. The row of numbers along the bottom is X_eTaL's own evaluator's answer, the one both GPUs must match exactly.
+
+<div style="clear: both;"></div>
+
+### A tiny network, stage by stage
 
 <figure class="zoomable" style="float: left; clear: both; margin: 0.2em 1.5em 0.6em 0; max-width: 46%;">
 <img src="{{ '/assets/images/posts/xetal-blender-gpu-tinynet.webp' | relative_url }}" class="no-invert" alt="A tiny neural network on the GPU, stage by stage: x 4 by 3, times W1 plus b gives z1 4 by 5, relu gives h, times W2 plus b gives z2 4 by 2, softmax gives p 4 by 2; colored cells mark positive, negative and zero values; a bar below shows the 17 GPU launches by kind">
 <figcaption style="font-size: 0.85em;">A tiny network on the GPU, stage by stage, and its 17 kernel launches. Click to enlarge.</figcaption>
 </figure>
 
-**A tiny network, stage by stage.** The two-layer network from the GPU work, every array drawn with its shape: a batch `x` of 4 by 3, times the weights `W1` plus a bias to give `z1`, the ReLU to give `h`, then `W2` and a softmax to give the probabilities `p`, 4 by 2. Yellow cells are positive, blue negative, and gray the zeros the ReLU made. The bar along the bottom is what the GPU actually did: 17 kernel launches, each as wide as its work, colored by kind, matrix products, elementwise steps, slices, tables and reductions.
+Also from post #7: the two-layer neural network the GPU work runs, every array drawn with its shape. It is shown because it is where the GPU work is heading, machine learning, and because it makes a forward pass something you can see rather than a page of numbers.
+
+Read it left to right. A batch `x` of four examples with three features each is multiplied by the weights `W1` and given a bias, making `z1`, four by five. The ReLU zeroes the negatives, making `h`. A second layer, `W2` and its bias, makes `z2`, four by two, and the softmax turns each row into two probabilities, `p`. Yellow cells are positive, blue negative, and gray the zeros the ReLU made.
+
+The bar along the bottom is what the GPU actually did to compute it: 17 kernel launches, each drawn as wide as its work and colored by kind, matrix products, elementwise steps, slices, tables and reductions.
 
 <div style="clear: both;"></div>
 
