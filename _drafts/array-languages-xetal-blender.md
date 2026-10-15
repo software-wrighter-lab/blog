@@ -19,7 +19,7 @@ repo_urls:
      belongs to post #6 and is left out (Mike), except the lead image: the runner creep's walk clip, rendered from runner.glb in Blender
      (transparent, 24 frames, animated WebP). Every figure is a zoomable gutter figure explained by the text beside it.
      2026-10-15 13:00: fe4f698 committed and pushed Video.xtl, the three final videos (now used here) and relu-softmax.org and matmul.org;
-     the literate PAGES were still 404 on GitHub Pages at 13:00: verify both links before publishing.
+     the literate pages went LIVE on GitHub Pages at about 13:05 (both 200).
      Earlier: relu-softmax is now the FINAL render (extensions/blender/videos/relu-softmax.webm, untracked) and has a literate
      document, docs/literate/relu-softmax.org (untracked): its page https://softwarewrighter.github.io/X_eTaL-extensions/literate/relu-softmax.html is LINKED BUT NOT LIVE YET (404); Mike: the literate pages go to GitHub Pages late morning 10/15, this post publishes that afternoon:
      verify it is pushed before publishing.
