@@ -18,7 +18,7 @@ repo_urls:
      previews from work/, not yet committed in the repo: re-check them, and swap in the final renders when they land. The game material
      belongs to post #6 and is left out (Mike), except the lead image: the runner creep's walk clip, rendered from runner.glb in Blender
      (transparent, 24 frames, animated WebP). Every figure is a zoomable gutter figure explained by the text beside it.
-     2026-10-15: Film.xtl (untracked in the extensions repo; link it once committed) and the org-mode literate documents for Blender (in progress;
+     2026-10-15: Film.xtl (Mike may have it renamed, e.g. Animation.xtl: update the name and the fm: code if so; untracked in the extensions repo; link it once committed) and the org-mode literate documents for Blender (in progress;
      link them early in the post when they land; docs/literate/water.org is the existing model). -->
 
 <figure style="float: left; width: 205px; margin: 0.8em 2em 1em 0.5em;">
@@ -48,9 +48,9 @@ The extensions in [post #4](/2026/10/10/array-languages-xetal-extensions/) gave 
 
 <div class="clearfix" markdown="1" style="clear: both;">
 
-## From arrays to a film
+## From arrays to an animation
 
-Every picture and video in this post comes out of the same pipeline, and it is short to describe. An X_eTaL program works out a scene as arrays: every object's place, size and color, the seconds it is on screen, every key it moves to, the camera's path, and the captions. A library, `Film.xtl`, turns each of those arrays into a line of Python that carries it as plain numbers. And a fixed Python script, the player, reads the numbers and makes the objects and keyframes in Blender, which renders the frames. The player decides nothing: what a film shows is all in the numbers X_eTaL computed.
+Every picture and video in this post comes out of the same pipeline, and it is short to describe. An X_eTaL program works out a scene as arrays: every object's place, size and color, the seconds it is on screen, every key it moves to, the camera's path, and the captions. A library, `Film.xtl`, turns each of those arrays into a line of Python that carries it as plain numbers. And a fixed Python script, the player, reads the numbers and makes the objects and keyframes in Blender, which renders the frames. The player decides nothing: what an animation shows is all in the numbers X_eTaL computed.
 
 The library documents itself with examples that run, so each function shows exactly what it writes. Here is one, a group of boxes, each a row of a table: where its middle is, its width, depth and height, its color from 0 to 255, and how brightly it glows. One white bar, two units tall, standing on the floor:
 
@@ -65,7 +65,7 @@ and the line of Python it writes, which the player turns into the bar:
 boxes('bar', nums('0.0 0.0 1.0 1.0 1.0 2.0 1.0 1.0 1.0 1.0', 10), 'solid')
 ```
 
-Other examples check the details a film needs: `fm:l_inear 255 128 0` converts an sRGB color to the linear values Blender's renderer works in, `1.0 0.2195197180748679 0.0`, and `fm:c_ontrast` measures how readable a caption will be against its plate, 21 for white on black, the most a color pair can have.
+Other examples check the details an animation needs: `fm:l_inear 255 128 0` converts an sRGB color to the linear values Blender's renderer works in, `1.0 0.2195197180748679 0.0`, and `fm:c_ontrast` measures how readable a caption will be against its plate, 21 for white on black, the most a color pair can have.
 
 The same path is being written up as literate documents in Emacs Org mode, where the prose, the X_eTaL code, the Python it produces and the rendered result sit together, each block run to produce what follows it. The extensions repo already has one for another demo, [Water that drains](https://github.com/softwarewrighter/X_eTaL-extensions/blob/main/docs/literate/water.org), built from a row of five cups up to the code that runs in the game; the Blender ones, showing array code becoming Python becoming a Blender render, are in progress and will be linked here when they land.
 
