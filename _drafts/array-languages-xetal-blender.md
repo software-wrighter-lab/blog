@@ -257,6 +257,10 @@ The larger goal is to start from the math. Take an ML equation, or a whole ML tr
 
 And eventually every part of a modern LLM runtime, across many use-cases, inference and fine-tuning both. The ReLU, softmax and matrix-product videos above are the first small steps in that direction. Since the X_eTaL programs computing these steps are the same ones running on the GPUs in [post #7](/2026/10/13/array-languages-xetal-gpu/), each picture would show real values, not an illustration.
 
+## Even further out: a distributed X_eTaL
+
+The longest-term aim reaches past Blender and past any one machine: X_eTaL as a distributed language, running on a custom, virtualized, ML-oriented guest operating system. There it would manage what a large model's runtime has to juggle, the weights, the caches, the activations and the routing, across a mixed cluster of compute and storage: CPUs, GPUs, SSDs, hard drives and the networks between them. The GPU, FPGA and render-farm work in this series are the first pieces of that, each one putting a different kind of hardware behind the same array language.
+
 ## What comes next
 
 These previews become finished explainer videos, each from the real data of the repo it explains: HEX1000 running, from its circuit simulation, with a render that refuses to finish unless the display shows the evaluator's answer; HEX1000 being built, its lookup tables flown to their places on the Gowin die; the GPU kernel being built and then running; and a short trailer, one X_eTaL program driving three things, a GPU, an FPGA and Blender. They are made for this series first, and perhaps a narrated YouTube video later. The pattern stays the same throughout: X_eTaL works out the arrays, writes the Python, and Blender does what it is best at.
