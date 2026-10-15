@@ -19,7 +19,10 @@ repo_urls:
      belongs to post #6 and is left out (Mike), except the lead image: the runner creep's walk clip, rendered from runner.glb in Blender
      (transparent, 24 frames, animated WebP). Every figure is a zoomable gutter figure explained by the text beside it. -->
 
-<img src="{{ '/assets/images/posts/block-td-runner-walk.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<figure style="float: left; width: 205px; margin: 0.8em 2em 1em 0.5em;">
+<a href="/2026/10/12/array-languages-xetal-games/"><img src="{{ '/assets/images/posts/block-td-runner-walk.webp' | relative_url }}" class="post-marker no-invert" alt="The runner, a green tower-defense creep, walking" style="width: 205px; float: none; margin: 0 !important; padding: 0;"></a>
+<figcaption style="font-size: 0.8em; text-align: center; margin-top: 0.3em;">The runner, one of the tower-defense creeps, walking: its <code>walk</code> clip, rendered by Blender. From the <a href="/2026/10/12/array-languages-xetal-games/">games post</a>.</figcaption>
+</figure>
 
 <div style="overflow: hidden;" markdown="1">
 
