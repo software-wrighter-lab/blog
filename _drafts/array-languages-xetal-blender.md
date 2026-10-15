@@ -259,7 +259,7 @@ And eventually every part of a modern LLM runtime, across many use-cases, infere
 
 ## Even further out: a distributed X_eTaL
 
-The longest-term aim reaches past Blender and past any one machine: X_eTaL as a distributed language, running on a custom, virtualized, ML-oriented guest operating system. There it would manage what a large model's runtime has to juggle, the weights, the caches, the activations and the routing, across a mixed cluster of compute and storage: CPUs, GPUs, SSDs, hard drives and the networks between them. The GPU, FPGA and render-farm work in this series are the first pieces of that, each one putting a different kind of hardware behind the same array language.
+The longest-term aim reaches past Blender and past any one machine: X_eTaL as a distributed language, running on a custom, virtualized, ML-oriented guest operating system. There it would manage what a large model's runtime has to juggle, the weights, the caches, the activations and the routing, across a mixed cluster of compute and storage: CPUs, GPUs, custom FPGAs and NPUs, SSDs, hard drives and the networks between them. The GPU, FPGA and render-farm work in this series are the first pieces of that, each one putting a different kind of hardware behind the same array language.
 
 ## What comes next
 
