@@ -117,7 +117,7 @@ Then `mojo build --emit shared-lib` makes it a library with C entry points, cach
 <figcaption style="font-size: 0.85em;">One X_eTaL file, through Mojo on two GPUs, and the evaluator's answer. Click to enlarge.</figcaption>
 </figure>
 
-One run shows the whole path. The two terminals at the top run the same command, `just run-mojo libs/Accel/demos/reduce-sum.xtl`, on the Mac and on the Arch box. The command lowers the X_eTaL file, has the Mojo backend write and build its kernels, and runs them. The blue line names the GPU that ran it, `api=metal` and the M1 Max on the left, `api=cuda` and the RTX 5060 Ti on the right, and the green lines are the program's five results: a sum, a largest value, a dot product and two float sums. The strip below is the X_eTaL evaluator running the same file on the CPU. All three print the same five numbers.
+One run shows the whole path. The two terminals at the top run the same command, `just run-mojo libs/Accel/demos/reduce-sum.xtl`, on the Mac and on the Arch box. The command lowers the X_eTaL file, has the Mojo backend write and build its kernels, and runs them. The blue line names the GPU that ran it, `api=metal` and the M1 Max on the left, `api=cuda` and the RTX 5060 Ti on the right, and the green lines are the program's five results: a sum, a largest value, a dot product, then a float sum and a sum of squares. The strip below is the X_eTaL evaluator running the same file on the CPU. All three print the same five numbers.
 
 Both runs reused a library already built, which is why the build reads 0. The Arch box's run is an unedited capture from that machine.
 
