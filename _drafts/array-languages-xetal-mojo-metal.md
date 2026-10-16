@@ -1,30 +1,31 @@
 ---
 layout: post
-title: "Array Languages #10: X_eTaL on Metal, Through Mojo"
+title: "Array Languages #10: Array Code on Metal and CUDA, Through Mojo"
 categories: [languages, language-design, gpu, tools]
-tags: [array-languages, xetal, x-etal, apl, gpu, mojo, metal, apple-silicon, modular, extensions, c-abi, opencl, mlx]
-keywords: "X_eTaL Mojo backend, MLX, Apple MLX array framework, X_eTaL Metal, array language on Apple silicon GPU, Mojo GPU programming, Mojo Apple GPU, Metal backend, OpenCL deprecated on macOS, Mojo C ABI, abi C effect, @export, X_eTaL extension ABI, M1 Max, M3 Pro"
-abstract: "Tenth in the Array Languages series, a plan before there is code: a second GPU backend for X_eTaL. The GPU work in post #7 reaches Apple silicon through OpenCL, which Apple deprecated in 2018 and which costs about 1.3 ms a call on an M1 Max; on a Mac, Metal is the real path to the GPU. Mojo, from Modular, compiles GPU code for Metal and for NVIDIA cards, and it can now export the plain C interface X_eTaL's extensions speak. Apple's own MLX is the other candidate, an array framework whose operations match the lowered programs one for one. Either could run the same lowered X_eTaL, plugged in as an extension, with the programs unchanged."
+tags: [array-languages, xetal, x-etal, apl, gpu, mojo, metal, cuda, apple-silicon, nvidia, modular, c-abi, opencl, mlx]
+keywords: "X_eTaL Mojo backend, Mojo GPU programming, Mojo Apple GPU, Mojo Metal, Mojo NVIDIA without CUDA toolkit, PTX ptxas libcuda, Rust generates Mojo, mojo build emit shared-lib, Mojo C ABI, abi C, OpenCL deprecated on macOS, M1 Max, RTX 5060 Ti, MLX"
+abstract: "Tenth in the Array Languages series: a first proof of a second GPU backend for X_eTaL. Post #7's GPU work reaches every card through OpenCL, which Apple deprecated in 2018. Here a small Rust tool reads programs in X_eTaL-gpu's accelerator IR, writes the Mojo a person would write for them, builds it into a library with a C interface, and runs it. Mojo picks the GPU: Metal on an Apple M1 Max, NVIDIA's driver on an RTX 5060 Ti, from the same generated code. Five programs agree with a reference on both. X_eTaL's own front end is not connected yet, and the older cards stay with OpenCL unless Mojo can be configured for them."
 series: "Array Languages"
 series_part: 10
 date: 2026-10-16 00:15:00 -0700
 repo_urls:
-  - url: "https://github.com/softwarewrighter/modular-fork"
-    title: "modular-fork (Mojo and MAX)"
+  - url: "https://github.com/softwarewrighter/modular-fork/tree/experimental/rust-demo"
+    title: "modular-fork: rust-demo (Rust writes Mojo, Mojo runs the GPU)"
 ---
 
-<!-- DRAFT, A PLAN (2026-10-13): no X_eTaL code for this exists yet, and where it will live is not settled
-     (it may be part of an existing repo rather than a new one). Facts about Mojo are from the fork's own docs
-     (softwarewrighter/modular-fork, Mojo 1.2 development build, 2026-10-13): release notes v0.25.6 (2025-09-22),
-     v1.0.0b1 (2026-05-07), v1.1.0 (2026-09-17), the nightly changelog, and Mojo/proposals/c-abi-proposal.md.
-     Chips to test: M1 Max, M3 Pro (Mojo targets apple-m1, apple-m3; no M5 yet); RTX 3060/3090 (sm_86), RTX 5060 Ti (sm_120),
-     per Mojo/stdlib/std/_plugin/metal/metal_targets.mojo and _gpu/host/_builtin_targets.mojo. Re-check everything against the code once work starts. -->
+<!-- DRAFT (rewritten 2026-10-16 from a plan into a first proof). Sources: softwarewrighter/modular-fork, branch experimental:
+     261316e573 (rust-demo, Apple M1 Max via Metal, 2026-10-13) and 12d3d05ba9 (RTX 5060 Ti via CUDA, Arch box large12, 2026-10-16);
+     rust-demo/README.md, doc/results.md, doc/rtx5060-handoff.md, doc/older-gpus.md, doc/evidence/rtx5060-20261016/;
+     Modular's GPU compatibility table, docs/max/packages.mdx; Mojo's target table, Mojo/stdlib/std/_gpu/host/_builtin_targets.mojo.
+     The generated saxpy kernel below is from the Mac's rust-demo/work/saxpy/saxpy.mojo. Mojo 1.2.0.dev2026101305 on both machines.
+     The README of modular-fork is being reworked by its own agent; recheck links into it before publishing.
+     VISUALS: placeholders marked [VISUAL n] below; none exist yet. -->
 
 <img src="{{ '/assets/images/posts/block-modular-max-mojo.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
 <div style="overflow: hidden;" markdown="1">
 
-[Post #7](/2026/10/13/array-languages-xetal-gpu/) took X_eTaL programs to GPUs through OpenCL, lowered from their own source. On a Mac that works, but through an API Apple stopped developing years ago. On Apple silicon, OpenCL is a leftover and Metal is the real path to the GPU. This post is a plan, written before the code: a second backend that reaches Apple's GPUs through Metal, by way of Mojo, with Apple's own MLX as the other candidate.
+[Post #7](/2026/10/13/array-languages-xetal-gpu/) took X_eTaL array programs to GPUs through OpenCL. On a Mac that works, but through an API Apple stopped developing years ago. This post is a first proof of another way: a small Rust tool writes Mojo for the same kind of array code, and Mojo runs it through Metal on an Apple M1 Max and through NVIDIA's own driver on an RTX 5060 Ti, from the same generated source.
 
 </div>
 
@@ -34,9 +35,10 @@ repo_urls:
 
 | Resource | Link |
 |----------|------|
-| **Mojo and MAX** | [modular/modular](https://github.com/modular/modular), Modular's repository · [softwarewrighter/modular-fork](https://github.com/softwarewrighter/modular-fork), the fork this plan reads |
-| **The GPU work** | [Array Languages #7: X_eTaL-gpu](/2026/10/13/array-languages-xetal-gpu/) |
-| **The extension ABI** | [Array Languages #4: X_eTaL-extensions](/2026/10/10/array-languages-xetal-extensions/) |
+| **The demo** | [rust-demo](https://github.com/softwarewrighter/modular-fork/tree/experimental/rust-demo) in softwarewrighter/modular-fork, branch `experimental` |
+| **Results** | [per device](https://github.com/softwarewrighter/modular-fork/blob/experimental/rust-demo/doc/results.md) · [RTX 5060 Ti logs](https://github.com/softwarewrighter/modular-fork/tree/experimental/rust-demo/doc/evidence/rtx5060-20261016) |
+| **Mojo and MAX** | [modular/modular](https://github.com/modular/modular), Modular's repository |
+| **The OpenCL work** | [Array Languages #7: X_eTaL-gpu](/2026/10/13/array-languages-xetal-gpu/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
 </div>
@@ -45,70 +47,129 @@ repo_urls:
 
 ## Why another way onto the same GPU
 
-Today the X_eTaL-gpu work reaches every GPU it uses through OpenCL, the M1 Max and M3 Pro included. That was the right first choice: one runtime that reaches old and new cards from every vendor. On Apple silicon, though, it has costs:
+The X_eTaL-gpu work reaches every GPU it uses through OpenCL, the M1 Max included. That was the right first choice: one runtime for old and new cards from every vendor. On Apple silicon, though, it has costs:
 
-- **OpenCL on macOS is a leftover.** Apple deprecated it in 2018, with macOS 10.14, in favor of Metal. It still ships, so existing programs keep running, but it is frozen at version 1.2 and gets no new work.
-- **It is slow to call.** Post #7 measured about 1.3 ms of fixed cost on every call on the M1 Max, even with nothing to upload, against about 0.2 ms on the RTX 5060 Ti. That fixed cost is a large part of why the M1 Max lost to Apple's tuned CPU library on small batches.
+- **OpenCL on macOS is a leftover.** Apple deprecated it in 2018, with macOS 10.14, in favor of Metal. It still ships, frozen at version 1.2.
+- **It is slow to call.** Post #7 measured about 1.3 ms of fixed cost on every call on the M1 Max, against about 0.2 ms on the RTX 5060 Ti, a large part of why the M1 Max lost to Apple's tuned CPU library on small batches.
 - **Its profiling is hard to trust.** Apple's OpenCL reports kernel times of a few hundredths of a millisecond for everything, which no second clock has confirmed.
-- **The newest hardware is reached through Metal.** Mojo, for one, reaches the matrix multiply units of Apple's M5 chips through Metal, and Apple's own GPU work goes there, not to OpenCL. The chips here, an M1 Max and an M3 Pro, have no such units, so for them the gain to look for is the cost of a call, not new hardware.
 
 ## Why Mojo
 
-Mojo is Modular's systems language, Python-like in its surface, built for writing high-performance code for CPUs and accelerators. One Mojo program can target NVIDIA, AMD and Apple GPUs, and on Apple silicon it compiles to Metal. Its Apple support has grown quickly, according to its own release notes:
+Mojo is Modular's systems language, Python-like on the surface, built for high-performance code on CPUs and accelerators. One Mojo program can target NVIDIA, AMD and Apple GPUs. Two things made it a fit:
 
-- **September 2025, v0.25.6:** initial support for programming Apple silicon GPUs, with many hardware features still to come.
-- **Since then:** warp operations such as shuffles mapped onto Metal's own SIMD-group operations, and more of the standard library's GPU support on Apple.
-- **May 2026, v1.0 beta:** Apple Metal "a much more capable Mojo target", with `print` working in kernels, dynamic threadgroup memory, the matrix multiply-accumulate units of Apple's M5 chips, and Metal 4 features by default.
+- **It reaches Apple's GPUs through Metal.** Support began in September 2025, with v0.25.6, and by the v1.0 beta in May 2026 Apple Metal was "a much more capable Mojo target".
+- **It speaks C.** X_eTaL's native extensions, from [post #4](/2026/10/10/array-languages-xetal-extensions/), are shared libraries with a C interface. Mojo's `@export` now takes an `abi("C")` effect, so a Mojo library can present exactly that boundary.
 
-Two limits matter for X_eTaL. Apple GPUs have no 64-bit floats, so `float64` is not supported there, the same as under OpenCL; X_eTaL's GPU work already runs in 32-bit floats on Apple and checks against the evaluator within 1e-5. And Modular's MAX graph engine was not enabled on Apple GPUs when Apple support began, so the plan uses Mojo kernels directly rather than MAX.
+## What was built
 
-## How it would plug in
+<!-- [VISUAL 1] Left gutter, zoomable: the path as a diagram. One box column: "XIR text" → "Rust emitter" → "generated Mojo" →
+     "shared library (C ABI)" → "Mojo DeviceContext", then forking to two boxes: "Metal → Apple M1 Max" and "PTX → ptxas → libcuda →
+     RTX 5060 Ti", with a dotted "Rust reference" arrow back to a "compare" box. Why: the post's one claim is one generated source,
+     two vendors; the fork in the picture is that claim. Text beside it: the paragraph below. -->
 
-The GPU work is already in layers. The program and its lowering stay as they are, and only the layers below them change:
+The tool, `rust-demo`, is a simpler cousin of X_eTaL-gpu's `gp:a_ccel<` macro and OpenCL emitter. It reads a program in the text form of X_eTaL-gpu's accelerator IR, checks it, and writes Mojo: elementwise steps fused into one kernel, split where a reduction needs the whole array, reductions as two-pass trees in shared memory. `mojo build --emit shared-lib` turns that into a library with C entry points; Rust loads it and calls it; Mojo's `DeviceContext` opens whatever GPU the machine has. Every output is checked against a reference evaluator written in Rust.
 
-| Layer | Through OpenCL, today | Through Mojo, the plan |
-|---|---|---|
-| the program | X_eTaL source | the same |
-| lowering | X_eTaL to the accelerator IR, through X_eTaL's own crates | the same |
-| schedule | how a device runs the IR | the same idea, Metal's limits |
-| emitter | OpenCL C kernels | Mojo kernels |
-| runtime | the OpenCL host runtime | a Mojo library, compiled for Metal |
-| X_eTaL's view | the gpu extension, through the extension ABI | another extension, the same ABI |
+A program is a few lines. SAXPY, `y = a x + b`:
 
-The piece that makes this possible arrived recently. X_eTaL's native extensions, from [post #4](/2026/10/10/array-languages-xetal-extensions/), are shared libraries that speak the C ABI: each exports one C descriptor of its functions. Until lately Mojo's `@export` produced its own struct-flattening convention rather than the platform's C ABI. Mojo now has an `abi` effect, and `@export` requires one, so a Mojo function can be written to be callable from C exactly as C expects. From Mojo's own proposal:
-
-```mojo
-def add(a: Int32, b: Int32) abi("C") -> Int32:
-    return a + b
+```text
+%x = input f32 [8]
+%a = const f32 [] 2.0
+%b = const f32 [] 1.0
+%ax = map mul %a %x
+%y = map add %ax %b
+output %y
 ```
 
-With that, a Mojo library can present the same kind of C boundary the Rust extensions do, and X_eTaL loads it like any other extension. To an X_eTaL program, and to X_eTaL-ML's models, nothing changes. The program is written once, lowered once, and runs on Metal or OpenCL depending on which runner is plugged in.
+And the kernel Rust writes for it, ordinary Mojo a person could keep:
 
-## The same backend on NVIDIA
+```mojo
+def stage0(
+    b_x: Pointer[Float32, ImmutAnyOrigin],
+    b_y: Pointer[Float32, MutAnyOrigin],
+    n: Int32,
+):
+    """Stage 0: %ax, %y fused, one thread per element."""
+    var i = Int(block_idx.x * block_dim.x + thread_idx.x)
+    if i < Int(n):
+        var v_x = b_x[unsafe_offset=i]
+        var v_ax = Float32(2.0) * v_x
+        var v_y = v_ax + Float32(1.0)
+        b_y[unsafe_offset=i] = v_y
+```
 
-Mojo is not only for Apple. It compiles GPU kernels for NVIDIA cards by architecture, and its target list covers the cards being tested first: sm_86, the Ampere architecture of the RTX 3060 and RTX 3090, and sm_120, the Blackwell architecture of the RTX 5060 Ti. It also lists Maxwell, Pascal and Turing, the generations of the older cards. So one Mojo backend could reach both the Macs and the NVIDIA cards, through Metal on one and NVIDIA's own driver on the other, and set beside the OpenCL path on the same cards. A target in a list is not a tested card, though; each will be confirmed by running it.
+The other four programs cover comparisons and selection, sums and extremes of a thousand values, a softmax written the way X_eTaL-ML's NN library writes it, and a mean and variance.
 
-## What would be measured
+## Proving the GPU ran it
 
-The checks stay the same: the X_eTaL evaluator is the reference, and every result must match it, integers exactly and floats within 1e-5. The measurements are the ones post #7 already has for OpenCL, repeated through Metal on the same two Apple GPUs, the M1 Max and the M3 Pro, and then through Mojo on the NVIDIA cards:
+<!-- [VISUAL 2] Right gutter, zoomable: the two terminals side by side, `just run softmax` (or reduce) on the Mac and on the Arch box:
+     the "device: api=metal name=Apple M1 Max" and "device: api=cuda name=NVIDIA GeForce RTX 5060 Ti" lines, the launch and proof lines,
+     and "RESULT: ... agree". Real screenshots from each machine (Mike captures; the Linux log is in doc/evidence/). Why: the evidence
+     a skeptical reader wants, on screen, in the tool's own words. -->
 
-- **The fixed cost per call.** Whether Metal cuts the 1.3 ms Apple's OpenCL charges, which is what keeps small batches from paying.
-- **The upload.** Apple silicon's CPU and GPU share one memory, so how much a batch costs to hand over is an open question worth measuring, not assuming.
-- **The kernels,** timed by a clock that can be trusted.
-- **Against tuned CPU code.** The same world model and benchmarks against Apple's Accelerate, the comparison the OpenCL path lost on small batches.
+A result that matches could have come from the CPU. So each run prints the device the library opened, the grid it launched, and, from an extra kernel, which block and thread computed each element. On the thousand-element programs, both GPUs ran four blocks of 256 threads, the last one 232 wide, and element 999 came from block 3, thread 231. The assembly the device compiler received is printed too: Metal AIR for `air64-apple-macosx26.0.0` on the Mac, PTX for `sm_120a` on the NVIDIA card.
 
-And the same rule applies: the work worth offloading is products in big batches, with little uploaded and the data kept on the GPU.
+<!-- [VISUAL 3] Left gutter, zoomable: a provenance strip. 1000 cells in a row (or a 40 by 25 grid), colored by the block that computed
+     each element (four colors, the last block visibly shorter), with element 0 and 999 labeled "block 0, thread 0" and "block 3,
+     thread 231". Generated from the log's numbers (an X_eTaL + Video.xtl still would keep it in the family). Why: the provenance
+     argument is about which thread did which element; a strip shows it at a glance where a sentence asks the reader to imagine it. -->
+
+## Results
+
+| Program | What it exercises | Apple M1 Max, Metal | RTX 5060 Ti, CUDA |
+|---|---|---|---|
+| saxpy | fused elementwise | exact | exact |
+| threshold | comparisons, bools, select | exact | exact |
+| reduce | sum, max, min of 1000 values | exact | exact |
+| softmax | two stages split by reductions | within 5e-7 | within 4.77e-7 |
+| stats | mean and variance | within 6.6e-6 | within 6.56e-6 |
+
+The reductions differ in the last places because the GPU adds as a tree and the reference adds from the right, and all are within the tolerance. Nothing changed for NVIDIA: the same Rust, the same programs, the same generated Mojo, built as a `.so` on Linux where the Mac builds a `.dylib`. Building each program took about 2.6 s on the Mac and 4.5 s on the Arch box; one run took 40 to 55 ms and about 0.4 s. Those run times include compiling each kernel on first use and setting up the device, on a single run, so they are not a measure of either GPU, and not comparable with OpenCL's per-call cost yet.
+
+## How Mojo reaches each GPU
+
+<!-- [VISUAL 4, optional] Right gutter: a two-lane strip, "Apple: Mojo → Metal AIR → Metal" and "NVIDIA: Mojo → PTX → ptxas → machine
+     code → libcuda (driver)", with "no CUDA toolkit, no nvcc, no OpenCL" crossed-out chips. Could be merged into VISUAL 1 instead.
+     Why: readers expect "NVIDIA means CUDA C"; the lane shows what Mojo actually uses. -->
+
+- **Apple silicon:** Mojo compiles kernels to Metal's intermediate form, AIR, and runs them through Metal. No OpenCL.
+- **NVIDIA:** Mojo compiles kernels with its own LLVM backend to PTX, NVIDIA's portable GPU assembly; its bundled `ptxas` assembles that to machine code, and the CUDA driver library, `libcuda`, which comes with the driver, loads and launches it. No CUDA toolkit or `nvcc` is needed, only driver 580 or newer, or another `ptxas` named by `MODULAR_NVPTX_COMPILER_PATH`.
+- **AMD:** through ROCm. Not tried here.
+
+## The cards: Mojo or OpenCL
+
+<!-- [VISUAL 5] Full-width or right gutter, zoomable: an architecture timeline, Kepler → Maxwell → Pascal → Turing → Ampere → Ada →
+     Blackwell, with each of Mike's cards placed on it, and three bands: "Mojo, listed" (Turing and newer), "Mojo compiler target,
+     unlisted" (Maxwell, Pascal), "OpenCL" (Kepler); the 5060 Ti marked verified. Why: the table below is right but dense; the
+     timeline shows the split between the two backends at a glance, and why both stay. Follow the dataviz rules: status colors with
+     labels, not color alone. -->
+
+Modular lists the RTX 30, 40 and 50 series and the Turing generation as compatible for Mojo development. Mojo's compiler also has targets for the older Maxwell and Pascal generations, which the docs do not list as supported, and none for Kepler. My plan is to support the older GPUs through X_eTaL-gpu's OpenCL path if I cannot configure Mojo for them.
+
+| Card | Generation | Mojo | Plan |
+|---|---|---|---|
+| RTX 5060 Ti 16 GB | Blackwell, sm_120 | listed, ran it | Mojo |
+| RTX 4070 Laptop 8 GB | Ada, sm_89 | listed | Mojo |
+| RTX 3090 24 GB, RTX 3060 12 GB, RTX 3060 Laptop | Ampere, sm_86 | listed | Mojo |
+| A2 16 GB | Ampere, sm_86 | generation listed | Mojo, to confirm |
+| GTX 1660 Super | Turing, sm_75 | generation listed | Mojo, to confirm |
+| Tesla P100, P4 | Pascal | compiler target only | try Mojo, else OpenCL |
+| Tesla M40, M10 | Maxwell | compiler target only | try Mojo, else OpenCL |
+| Tesla K80, Quadro K4200 | Kepler | none | OpenCL |
+
+The M3 Pro is the other Mac to try; Mojo lists M1 through M5.
+
+## What it is not yet
+
+The five programs were written by hand in a small subset of the IR: f32 only, one vector length per program, elementwise steps and whole-array reductions, no matrix product, no axes, no gathers. X_eTaL's own front end is not connected, so no X_eTaL source has gone through this path yet, and X_eTaL-gpu's OpenCL runtime is not replaced. Every call sets up the device and uploads its inputs again, with none of the sessions and resident weights X_eTaL-gpu already has.
 
 ## What about MLX?
 
-Mojo is not the only way onto Metal. Apple's own machine-learning group publishes MLX, an array framework for Apple silicon, and in some ways it is the closest thing to X_eTaL already on the Mac: whole-array operations, evaluation deferred until a result is needed so a whole computation can be compiled and fused, and memory the CPU and GPU share, so an array does not have to be copied to the device. It has a C interface, so it could sit behind X_eTaL's extension ABI just as a Mojo library could.
+Apple's own MLX is the other way onto Metal, and in some ways the closest thing to X_eTaL already on the Mac: whole-array operations, evaluation deferred so a computation can be compiled and fused, memory the CPU and GPU share, and a C interface. Every operation the lowered programs use has an MLX counterpart, so an MLX runner could call MLX for each operation instead of generating kernels. The trade-off is reach: MLX is for Apple silicon, and Mojo just ran the same code on an NVIDIA card. Both are worth measuring on the same Macs.
 
-It would also fit the lowering in a different way. Every operation the lowered programs use has a direct MLX counterpart: elementwise maps, reductions, matrix products, transposes, `take` for lookup, `roll` for rotation and `topk`. So an MLX runner would not need to generate kernels at all. It could walk the lowered program and call MLX for each operation, and let MLX compile and fuse the result, with its own custom Metal kernels as an escape hatch.
+And FPGAs? Mojo compiles for CPUs and GPUs; it has no way to describe hardware, so the Tang boards stay with X_eTaL-fpga.
 
-The trade-off is reach. MLX is built for Apple silicon, where Mojo also reaches the NVIDIA cards. Mojo generates kernels, which is closer to what the OpenCL emitter does today; MLX executes operations, which is closer to what the reference interpreter does. Both are worth measuring on the same M1 Max and M3 Pro: the cost per call, the upload, or with shared memory perhaps no upload at all, and the kernels themselves.
+## Next
 
-## Where it stands
-
-Nothing is built yet. The fork of Modular's repository is pinned to a current development build of Mojo, and where the X_eTaL side will live is not settled: it may become part of an existing repository rather than a new one. The first step is small: one X_eTaL example, lowered as it is today, emitted as Mojo, run on the M1 Max through Metal, and checked against the evaluator. The same example through MLX would make the comparison from the start. If that works, the rest of post #7's examples and X_eTaL-ML's batch models follow, and the two backends can be compared on the same chips. This post will be updated, or followed by another, when there is code.
+Connect the real lowering: X_eTaL source through X_eTaL-gpu's IR into this emitter, so the programs from post #7 run here as written. Then add sessions, measure the cost of a call with the kernels already built, set that beside OpenCL's 1.3 ms on the M1 Max, and try the other cards, oldest last.
 
 </div>
