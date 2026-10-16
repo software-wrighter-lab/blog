@@ -83,6 +83,8 @@ y ← 1.0 ᵃᶜs̲cale 1.0 0.5 0.25 0.125 0.0 -0.125 -0.25 -0.5
 (2.0 ᵃᶜs̲cale x) ᵃᶜv̲add y
 ```
 
+<div style="clear: both;"></div>
+
 The only change is the device: `xetal-gpu run saxpy.xtl --device mojo` in place of `--device opencl:0`. The Mojo backend fuses the divide, the two scales and the add into one kernel, and writes it as ordinary Mojo a person could read:
 
 ```mojo
