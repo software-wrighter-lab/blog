@@ -17,7 +17,9 @@ repo_urls:
      expected outputs), docs/eq-rationale.md (seven ways to write the call), docs/spatial-equations-review.md, docs/type-check-macros.md,
      docs/spatial-poc/ (proof of concept, old call syntax, checked against an oracle), spec/spatial/; decisions 3a72ef94 (D154).
      Pipelines (e:p_ipe<, D155, committed 3fad8892 on 10/15, with raw strings ST4) were split out to #12 (_drafts/array-languages-xetal-pipelines.md) per Mike.
-     Rechecked 10/16: no equation-library code yet (demos/spatial/ absent); next step is 100 raw-strings, then the library.
+     Rechecked 10/16 evening: no X_eTaL commits since 71e074d3 (10/15 14:49); raw strings (step 100) in progress, uncommitted;
+     demos/spatial/ still absent; steps 102 oracle, 103 capture, 104 lowering, 105 latex, 107 shape lint pending; 101 integrals plan pending.
+     NOTE: docs/plan.md rows 4-5 still name the pre-D154 macros (e:s_um<, "e:q_< (the pair)"); docs/spatial.md (D154) is followed here.
      The library itself (demos/spatial/) is NOT written yet: no claims that it runs; the numbers below are the proof of concept's.
      Date provisional (after #10 on Friday 10/16). Lead image: Mike's chalkboard of the stable softmax, not inverted, not transparent. -->
 
@@ -108,8 +110,10 @@ The call's form was not the first idea. The design compares seven ways of writin
 
 ## What comes next
 
-The order from here: write the library, so the call above runs and the proof of concept's outputs become its tests; then the parts deliberately left out for now, padding, strides and dilation for convolutions, and shape checks that catch a wrong shape before a program runs rather than after. Anything a macro cannot cover is reviewed and decided, never assumed.
+The library is built in a fixed order, each step with its tests first. First an oracle, an independent version of the convolution written with rotations, a transpose and one inner product, which must reproduce the three fixtures. Then reading the call: splitting its strings, pairing each sum's bounds with its index, and rejecting a malformed call when it expands. Then the lowering, the grids, gathers and reductions above, which must match the oracle. Then the LaTeX, from the same parse, checked by a typesetter. After that come the parts deliberately left out for now: padding, strides and dilation for convolutions, and a shape check that catches a wrong shape before a program runs rather than after. Anything a macro cannot cover is reviewed and decided, never assumed.
 
-Equations are one half of the notation ML needs. The other is the data flow a model runs, layer after layer, which reads left to right where X_eTaL reads right to left; a pipeline macro for it is the subject of a planned post. Both lower to ordinary X_eTaL, so what they produce can run on the GPUs of [post #7](/2026/10/13/array-languages-xetal-gpu/) and be drawn step by step in Blender, as the softmax and matrix-product videos in [post #9](/2026/10/15/array-languages-xetal-blender/) already are.
+Sums are not the only operator an equation needs. A continuous convolution is an integral, and integrals are planned as well, with the numerical method stated in the program rather than assumed; they too are the subject of a planned post.
+
+Equations are one half of the notation ML needs. The other is the data flow a model runs, layer after layer, which reads left to right where X_eTaL reads right to left; a pipeline macro for it is the subject of a planned post. Both lower to ordinary X_eTaL, so what they produce can run on the GPUs of [post #7](/2026/10/13/array-languages-xetal-gpu/), through OpenCL or, as of [post #10](/2026/10/16/array-languages-xetal-mojo-metal/), Mojo, and be drawn step by step in Blender, as the softmax and matrix-product videos in [post #9](/2026/10/15/array-languages-xetal-blender/) already are.
 
 </div>
