@@ -16,7 +16,8 @@ repo_urls:
 <!-- DRAFT, A PLAN (2026-10-15): from X_eTaL Saga 41, spatial equations. Committed: docs/spatial.md (the call, lowering, errors,
      expected outputs), docs/eq-rationale.md (seven ways to write the call), docs/spatial-equations-review.md, docs/type-check-macros.md,
      docs/spatial-poc/ (proof of concept, old call syntax, checked against an oracle), spec/spatial/; decisions 3a72ef94 (D154).
-     Pipelines (e:p_ipe<, D155, uncommitted on 10/15) were split out to #12 (_drafts/array-languages-xetal-pipelines.md) per Mike.
+     Pipelines (e:p_ipe<, D155, committed 3fad8892 on 10/15, with raw strings ST4) were split out to #12 (_drafts/array-languages-xetal-pipelines.md) per Mike.
+     Rechecked 10/16: no equation-library code yet (demos/spatial/ absent); next step is 100 raw-strings, then the library.
      The library itself (demos/spatial/) is NOT written yet: no claims that it runs; the numbers below are the proof of concept's.
      Date provisional (after #10 on Friday 10/16). Lead image: Mike's chalkboard of the stable softmax, not inverted, not transparent. -->
 
@@ -45,7 +46,7 @@ repo_urls:
 
 ## Macros first, syntax only when justified
 
-An ML-focused language could add notation for sums to its grammar. The approach here is the opposite. X_eTaL's macros are functions from source text to source text, and the bet is that they are a sufficient mechanism to express ML concisely and idiomatically, so the grammar changes only when a change is justified. This work is the test of that bet, and it is deliberately a library on the language as it is: no file in the compiler changes.
+An ML-focused language could add notation for sums to its grammar. The approach here is the opposite. X_eTaL's macros are functions from source text to source text, and the bet is that they are a sufficient mechanism to express ML concisely and idiomatically, so the grammar changes only when a change is justified. This work is the test of that bet, and it is deliberately a library on the language as it is: nothing in the compiler changes for the equations.
 
 ## An equation, as the paper prints it
 
