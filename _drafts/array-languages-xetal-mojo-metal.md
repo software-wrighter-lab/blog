@@ -24,7 +24,7 @@ repo_urls:
      Saga gpu-mojo steps still PENDING: 024 mojo-ints-shapes, 025 mojo-structure, 026 mojo-device, 027 mojo-results.
      The saxpy source and Mojo kernel below: xetal render libs/Accel/demos/saxpy.xtl and just mojo-kernel, on the Mac, 2026-10-16.
      VISUALS: path (current), thread map (rust-demo run), terminals (rust-demo run; REDO with `just run-mojo` on both machines,
-     needs an Arch transcript), cards timeline still a placeholder. -->
+     needs an Arch transcript), cards timeline done 2026-10-16. -->
 
 <img src="{{ '/assets/images/posts/block-modular-max-mojo.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
@@ -162,11 +162,12 @@ So on NVIDIA, Mojo does go through CUDA's driver, even though no CUDA is written
 
 ## The cards: Mojo or OpenCL
 
-<!-- [VISUAL 5] Full-width or right gutter, zoomable: an architecture timeline, Kepler → Maxwell → Pascal → Turing → Ampere → Ada →
-     Blackwell, with each of Mike's cards placed on it, and three bands: "Mojo, listed" (Turing and newer), "Mojo compiler target,
-     unlisted" (Maxwell, Pascal), "OpenCL" (Kepler); the 5060 Ti marked verified. Status colors with labels, not color alone. -->
+<figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 50%;">
+<img src="{{ '/assets/images/posts/xetal-mojo-cards.webp' | relative_url }}" class="no-invert" alt="My GPUs by NVIDIA generation, oldest to newest: Kepler, the Quadro K4200 and Tesla K80, OpenCL only, no Mojo target; Maxwell, the Tesla M10 and M40, and Pascal, the Tesla P100 and P4, Mojo compiler targets not listed by Modular, so try Mojo, else OpenCL; Turing, the GTX 1660 Super, generation listed; Ampere, the RTX 3090, RTX 3060, RTX 3060 Laptop and A2, Ada, the RTX 4070 Laptop, and Blackwell, the RTX 5060 Ti, listed, Mojo; the RTX 5060 Ti marked as having run X_eTaL demos through Mojo. Below, Apple silicon through Metal: Mojo listed for M1 to M5, the M1 Max marked as run, the M3 Pro still to try">
+<figcaption style="font-size: 0.85em;">My cards by generation: where Mojo reaches, and where OpenCL stays. Click to enlarge.</figcaption>
+</figure>
 
-Modular lists the RTX 30, 40 and 50 series and the Turing generation as compatible for Mojo development. Mojo's compiler also has targets for the older Maxwell and Pascal generations, which the docs do not list as supported, and none for Kepler. My plan is to support the older GPUs through X_eTaL-gpu's OpenCL path if I cannot configure Mojo for them.
+Modular lists the RTX 30, 40 and 50 series and the Turing generation as compatible for Mojo development. Mojo's compiler also has targets for the older Maxwell and Pascal generations, which the docs do not list as supported, and none for Kepler. My plan is to support the older GPUs through X_eTaL-gpu's OpenCL path if I cannot configure Mojo for them. The picture puts each of my cards on NVIDIA's line of generations, oldest on the left: gray where Mojo has no target at all, amber where its compiler has one that Modular does not list, green where it is listed. The two outlined cards, the RTX 5060 Ti and, below, the M1 Max, are the ones that have run X_eTaL through Mojo.
 
 | Card | Generation | Mojo | Plan |
 |---|---|---|---|
@@ -180,6 +181,8 @@ Modular lists the RTX 30, 40 and 50 series and the Turing generation as compatib
 | Tesla K80, Quadro K4200 | Kepler | none | OpenCL |
 
 The M3 Pro is the other Mac to try; Mojo lists M1 through M5.
+
+<div style="clear: both;"></div>
 
 ## What is still to do
 
