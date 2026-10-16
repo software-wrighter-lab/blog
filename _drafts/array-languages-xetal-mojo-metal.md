@@ -110,12 +110,12 @@ The other four programs cover comparisons and selection, sums and extremes of a 
 
 ## Proving the GPU ran it
 
-<figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 40%;">
-<img src="{{ '/assets/images/posts/xetal-mojo-terminals.webp' | relative_url }}" class="no-invert" alt="Two terminal runs of xir-mojo run programs/reduce.xir, one above the other: on the Apple M1 Max the device line reads api=metal, on the RTX 5060 Ti api=cuda; both launch 4 blocks of 256 threads, both report element 999 computed by block 3 thread 231, and both end with 3 of 3 outputs agreeing with the Rust reference">
+<figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 50%;">
+<img src="{{ '/assets/images/posts/xetal-mojo-terminals.webp' | relative_url }}" class="no-invert" alt="Two terminal runs of xir-mojo run programs/reduce.xir side by side: on the Apple M1 Max the device line reads api=metal, on the RTX 5060 Ti api=cuda; both launch 4 blocks of 256 threads, both report element 999 computed by block 3 thread 231, and both end with 3 of 3 outputs agreeing with the Rust reference">
 <figcaption style="font-size: 0.85em;">The same program on both GPUs, the tool's own output: the Mac's run from today, the Arch box's from its committed log. Click to enlarge.</figcaption>
 </figure>
 
-A result that matches could have come from the CPU. So each run prints the device the library opened, the grid it launched, and, from an extra kernel, which block and thread computed each element. The two terminals show the same program, `reduce`, the sum, largest and smallest of a thousand values, run by the same command on each machine. Read the orange line first: `api=metal` and the M1 Max in the top run, `api=cuda` and the RTX 5060 Ti in the bottom one. Everything after it matches, line for line, down to the last green line: three of three outputs agree with the reference.
+A result that matches could have come from the CPU. So each run prints the device the library opened, the grid it launched, and, from an extra kernel, which block and thread computed each element. The two terminals show the same program, `reduce`, the sum, largest and smallest of a thousand values, run by the same command on each machine. Read the orange line first: `api=metal` and the M1 Max on the left, `api=cuda` and the RTX 5060 Ti on the right. Everything below it matches, line for line, down to the last green line: three of three outputs agree with the reference.
 
 The times differ, and they are not a race. The Mac's run reused a kernel it had already compiled; the Arch box's was its first. The assembly the device compiler received can be printed too: Metal AIR for `air64-apple-macosx26.0.0` on the Mac, PTX for `sm_120a` on the NVIDIA card.
 
