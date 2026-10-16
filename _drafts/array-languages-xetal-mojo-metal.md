@@ -23,8 +23,8 @@ repo_urls:
      5566c667e7 (ten programs on the 5060 Ti); rust-demo/doc/results.md and doc/evidence/.
      Saga gpu-mojo steps still PENDING: 024 mojo-ints-shapes, 025 mojo-structure, 026 mojo-device, 027 mojo-results.
      The saxpy source and Mojo kernel below: xetal render libs/Accel/demos/saxpy.xtl and just mojo-kernel, on the Mac, 2026-10-16.
-     VISUALS: path (current), thread map (rust-demo run), terminals (rust-demo run; REDO with `just run-mojo` on both machines,
-     needs an Arch transcript), cards timeline done 2026-10-16. -->
+     VISUALS: path (current), thread map (rust-demo run), terminals (rust-demo run, in The first proof), source terminals (just run-mojo on both: Mac 2026-10-16 here,
+     Arch from modular-fork 9cb4ca0521 rust-demo/doc/evidence/rtx5060-20261016-source-terminal/), cards timeline done 2026-10-16. -->
 
 <img src="{{ '/assets/images/posts/block-modular-max-mojo.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
@@ -111,6 +111,17 @@ Then `mojo build --emit shared-lib` makes it a library with C entry points, cach
 <div style="clear: both;"></div>
 
 ## Five demos, two GPUs
+
+<figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 50%;">
+<img src="{{ '/assets/images/posts/xetal-mojo-source-terminals.webp' | relative_url }}" class="no-invert" alt="Three terminals. Top left, the Apple M1 Max: just run-mojo libs/Accel/demos/reduce-sum.xtl reports api=metal, name=Apple M1 Max, and prints 108, 24, 408, 4.5, 3.1875. Top right, the RTX 5060 Ti on Arch Linux: the same command reports api=cuda, name=NVIDIA GeForce RTX 5060 Ti, and prints the same five numbers. Below, the X_eTaL evaluator on the CPU prints 108 24 408 4.5 3.1875">
+<figcaption style="font-size: 0.85em;">One X_eTaL file, through Mojo on two GPUs, and the evaluator's answer. Click to enlarge.</figcaption>
+</figure>
+
+One run shows the whole path. The two terminals at the top run the same command, `just run-mojo libs/Accel/demos/reduce-sum.xtl`, on the Mac and on the Arch box. The command lowers the X_eTaL file, has the Mojo backend write and build its kernels, and runs them. The blue line names the GPU that ran it, `api=metal` and the M1 Max on the left, `api=cuda` and the RTX 5060 Ti on the right, and the green lines are the program's five results: a sum, a largest value, a dot product and two float sums. The strip below is the X_eTaL evaluator running the same file on the CPU. All three print the same five numbers.
+
+Both runs reused a library already built, which is why the build reads 0. The Arch box's run is an unedited capture from that machine.
+
+<div style="clear: both;"></div>
 
 | Demo | What it exercises | Apple M1 Max, Metal | RTX 5060 Ti, CUDA driver |
 |---|---|---|---|
