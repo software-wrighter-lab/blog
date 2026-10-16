@@ -19,7 +19,14 @@ repo_urls:
      Modular's GPU compatibility table, docs/max/packages.mdx; Mojo's target table, Mojo/stdlib/std/_gpu/host/_builtin_targets.mojo.
      The generated saxpy kernel below is from the Mac's rust-demo/work/saxpy/saxpy.mojo. Mojo 1.2.0.dev2026101305 on both machines.
      The README of modular-fork is being reworked by its own agent; recheck links into it before publishing.
-     VISUALS: placeholders marked [VISUAL n] below; none exist yet. -->
+     VISUALS: placeholders marked [VISUAL n] below; none exist yet.
+     ON HOLD (Mike, 2026-10-16): do not publish until X_eTaL-gpu saga gpu-mojo lands (queued after models-from-source, ahead of
+     gpu-pipeline): 1 components/mojo emitter + runtime, f32 elementwise and reductions (saxpy, threshold, reduce-sum, pipeline);
+     2 Ints, Bool, cast, several shapes, axis reductions (vector-add, host-data, axis-reduce, tiny-net, topk); 3 matmul tiled,
+     transpose, lookup, slices, rotate, reshape, table (the rest); 4 --device mojo in the tool and the Gpu extension, check-equiv over
+     both backends, the macro choosing Mojo; 5 results by GPU, M1 Max and RTX 5060 Ti, beside OpenCL. Then REWRITE around X_eTaL
+     source -> Mojo -> GPUs, and say which backend each result used (Mojo on NVIDIA goes through the CUDA driver; the "ML on GPU
+     without CUDA" claim rests on OpenCL alone). Date 10/16 is stale; #11-#13 links assume 10/17-10/19. -->
 
 <img src="{{ '/assets/images/posts/block-modular-max-mojo.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
@@ -160,7 +167,7 @@ The M3 Pro is the other Mac to try; Mojo lists M1 through M5.
 
 ## What it is not yet
 
-The five programs were written by hand in a small subset of the IR: f32 only, one vector length per program, elementwise steps and whole-array reductions, no matrix product, no axes, no gathers. X_eTaL's own front end is not connected, so no X_eTaL source has gone through this path yet, and X_eTaL-gpu's OpenCL runtime is not replaced. Every call sets up the device and uploads its inputs again, with none of the sessions and resident weights X_eTaL-gpu already has.
+The five programs were written by hand in a small subset of the IR: f32 only, one vector length per program, elementwise steps and whole-array reductions, no matrix product, no axes, no gathers. X_eTaL-gpu's lowering and this emitter are not yet joined: one of its demos, saxpy, has already gone from X_eTaL source to Mojo to the M1 Max, matching the evaluator, but only by piping one tool into the other, and the other demos need operations this emitter does not have yet. Every call sets up the device and uploads its inputs again, with none of the sessions and resident weights X_eTaL-gpu already has.
 
 ## What about MLX?
 
