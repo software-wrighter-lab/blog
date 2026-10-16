@@ -19,7 +19,7 @@ repo_urls:
      Modular's GPU compatibility table, docs/max/packages.mdx; Mojo's target table, Mojo/stdlib/std/_gpu/host/_builtin_targets.mojo.
      The generated saxpy kernel below is from the Mac's rust-demo/work/saxpy/saxpy.mojo. Mojo 1.2.0.dev2026101305 on both machines.
      The README of modular-fork is being reworked by its own agent; recheck links into it before publishing.
-     VISUALS: placeholders marked [VISUAL n] below; none exist yet.
+     VISUALS: 1 path, 2 terminals, 3 provenance are drafts (2026-10-16, from today's Mac run and the committed Linux log; redo 2 after gpu-mojo with X_eTaL source); 4 and 5 still [VISUAL n] placeholders.
      ON HOLD (Mike, 2026-10-16): do not publish until X_eTaL-gpu saga gpu-mojo lands (queued after models-from-source, ahead of
      gpu-pipeline): 1 components/mojo emitter + runtime, f32 elementwise and reductions (saxpy, threshold, reduce-sum, pipeline);
      2 Ints, Bool, cast, several shapes, axis reductions (vector-add, host-data, axis-reduce, tiny-net, topk); 3 matmul tiled,
@@ -69,10 +69,12 @@ Mojo is Modular's systems language, Python-like on the surface, built for high-p
 
 ## What was built
 
-<!-- [VISUAL 1] Left gutter, zoomable: the path as a diagram. One box column: "XIR text" → "Rust emitter" → "generated Mojo" →
-     "shared library (C ABI)" → "Mojo DeviceContext", then forking to two boxes: "Metal → Apple M1 Max" and "PTX → ptxas → libcuda →
-     RTX 5060 Ti", with a dotted "Rust reference" arrow back to a "compare" box. Why: the post's one claim is one generated source,
-     two vendors; the fork in the picture is that claim. Text beside it: the paragraph below. -->
+<figure class="zoomable" style="float: left; clear: both; margin: 0.2em 1.5em 0.6em 0; max-width: 44%;">
+<img src="{{ '/assets/images/posts/xetal-mojo-path.webp' | relative_url }}" class="no-invert" alt="The path from X_eTaL source to two GPUs: saxpy.xtl is lowered by xetal-gpu to XIR, which goes either to the OpenCL emitter and runtime of post #7 or to the Mojo emitter, mojo build, a library with a C ABI, and then Metal on the Apple M1 Max or the CUDA driver on the RTX 5060 Ti; every result is checked against the X_eTaL evaluator">
+<figcaption style="font-size: 0.85em;">One program, two backends, and through Mojo two vendors' GPUs. Click to enlarge.</figcaption>
+</figure>
+
+Read the diagram from the top. An X_eTaL program, here the SAXPY demo from post #7's Accel library, is lowered by X_eTaL-gpu into its accelerator IR, using X_eTaL's own crates, so the libraries it uses are inlined and every array operation becomes an IR operation. From there the IR can go two ways. On the left is the path post #7 measured, an OpenCL emitter and runtime. On the right is the new one: a Mojo emitter, a library built by Mojo's compiler, and Mojo choosing the GPU, Metal on the Mac and NVIDIA's driver on the Arch box. Whichever way it goes, the answer is checked against the X_eTaL evaluator.
 
 The tool, `rust-demo`, is a simpler cousin of X_eTaL-gpu's `gp:a_ccel<` macro and OpenCL emitter. It reads a program in the text form of X_eTaL-gpu's accelerator IR, checks it, and writes Mojo: elementwise steps fused into one kernel, split where a reduction needs the whole array, reductions as two-pass trees in shared memory. `mojo build --emit shared-lib` turns that into a library with C entry points; Rust loads it and calls it; Mojo's `DeviceContext` opens whatever GPU the machine has. Every output is checked against a reference evaluator written in Rust.
 
@@ -108,17 +110,29 @@ The other four programs cover comparisons and selection, sums and extremes of a 
 
 ## Proving the GPU ran it
 
-<!-- [VISUAL 2] Right gutter, zoomable: the two terminals side by side, `just run softmax` (or reduce) on the Mac and on the Arch box:
-     the "device: api=metal name=Apple M1 Max" and "device: api=cuda name=NVIDIA GeForce RTX 5060 Ti" lines, the launch and proof lines,
-     and "RESULT: ... agree". Real screenshots from each machine (Mike captures; the Linux log is in doc/evidence/). Why: the evidence
-     a skeptical reader wants, on screen, in the tool's own words. -->
+<figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 50%;">
+<img src="{{ '/assets/images/posts/xetal-mojo-terminals.webp' | relative_url }}" class="no-invert" alt="Two terminal runs of xir-mojo run programs/reduce.xir side by side: on the Apple M1 Max the device line reads api=metal, on the RTX 5060 Ti api=cuda; both launch 4 blocks of 256 threads, both report element 999 computed by block 3 thread 231, and both end with 3 of 3 outputs agreeing with the Rust reference">
+<figcaption style="font-size: 0.85em;">The same program on both GPUs, the tool's own output: the Mac's run from today, the Arch box's from its committed log. Click to enlarge.</figcaption>
+</figure>
 
-A result that matches could have come from the CPU. So each run prints the device the library opened, the grid it launched, and, from an extra kernel, which block and thread computed each element. On the thousand-element programs, both GPUs ran four blocks of 256 threads, the last one 232 wide, and element 999 came from block 3, thread 231. The assembly the device compiler received is printed too: Metal AIR for `air64-apple-macosx26.0.0` on the Mac, PTX for `sm_120a` on the NVIDIA card.
+A result that matches could have come from the CPU. So each run prints the device the library opened, the grid it launched, and, from an extra kernel, which block and thread computed each element. The two terminals show the same program, `reduce`, the sum, largest and smallest of a thousand values, run by the same command on each machine. Read the orange line first: `api=metal` and the M1 Max on the left, `api=cuda` and the RTX 5060 Ti on the right. Everything below it matches, line for line, down to the last green line: three of three outputs agree with the reference.
 
-<!-- [VISUAL 3] Left gutter, zoomable: a provenance strip. 1000 cells in a row (or a 40 by 25 grid), colored by the block that computed
-     each element (four colors, the last block visibly shorter), with element 0 and 999 labeled "block 0, thread 0" and "block 3,
-     thread 231". Generated from the log's numbers (an X_eTaL + Video.xtl still would keep it in the family). Why: the provenance
-     argument is about which thread did which element; a strip shows it at a glance where a sentence asks the reader to imagine it. -->
+The times differ, and they are not a race. The Mac's run reused a kernel it had already compiled; the Arch box's was its first. The assembly the device compiler received can be printed too: Metal AIR for `air64-apple-macosx26.0.0` on the Mac, PTX for `sm_120a` on the NVIDIA card.
+
+<div style="clear: both;"></div>
+
+### Which thread did which element
+
+<figure class="zoomable" style="float: left; clear: both; margin: 0.2em 1.5em 0.6em 0; max-width: 44%;">
+<img src="{{ '/assets/images/posts/xetal-mojo-provenance.webp' | relative_url }}" class="no-invert" alt="A grid of 1000 cells, one per element of the reduce program, colored by the GPU block that computed it: blocks 0, 1 and 2 have 256 elements each and block 3 has 232; element 0 is marked block 0, thread 0, and element 999 block 3, thread 231">
+<figcaption style="font-size: 0.85em;">Which thread computed each element, from the run's own report. Click to enlarge.</figcaption>
+</figure>
+
+A GPU runs a kernel as a grid of blocks, each a group of threads that work side by side. The grid on the left is the `reduce` program's thousand elements, one square each, colored by the block whose thread computed it. Three blocks took 256 elements each, and the fourth took the last 232; its other 24 threads found no element and did nothing. The two outlined squares are the ones the tool names: element 0, computed by block 0, thread 0, and element 999, by block 3, thread 231.
+
+That map comes from the GPU, not from the plan. An extra kernel has every thread write down its own block and thread number beside the element it handled, and the tool reads those numbers back. Both GPUs drew the same map, which is what one generated source for two vendors should give.
+
+<div style="clear: both;"></div>
 
 ## Results
 
