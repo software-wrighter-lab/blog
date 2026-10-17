@@ -56,9 +56,9 @@ Each notation keeps its own reading direction, and the macro expansion is where 
 
 ## A network, left to right
 
-<figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 52%;">
-<img src="{{ '/assets/images/posts/xetal-pipe-mlp.webp' | relative_url }}" class="no-invert" alt="A two-layer network as a row of stages, each with the shape it produces: X, 4 by 2; it nn:d_ense W1, 4 by 3; nn:r_elu, 4 by 3; it nn:d_ense W2, 4 by 2; nn:s_oftmax, 4 by 2. Below, the pipeline on one line and the same computation by hand, right to left: nn:s_oftmax (nn:r_elu X nn:d_ense W1) nn:d_ense W2">
-<figcaption style="font-size: 0.85em;">The library's demo network, stage by stage, and the same thing by hand. Click to enlarge.</figcaption>
+<figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 30%;">
+<img src="{{ '/assets/images/posts/xetal-pipe-mlp.webp' | relative_url }}" class="no-invert" alt="A two-layer network as a column of stages, top to bottom, each with the shape it produces: X, 4 by 2; it nn:d_ense W1, 4 by 3; nn:r_elu, 4 by 3; it nn:d_ense W2, 4 by 2; nn:s_oftmax, 4 by 2.">
+<figcaption style="font-size: 0.85em;">The demo network, stage by stage, with the shape each produces. Click to enlarge.</figcaption>
 </figure>
 
 The library is `Pipeline`, in X_eTaL-ML, beside the neural-network functions its stages call. Its demo is a small two-layer network over four points, written one stage per line:
@@ -94,7 +94,7 @@ Stages are separated by `|>`, which means nothing else in X_eTaL. The first stag
 - **An expression that names the previous value `it`:** `it nn:d_ense W1`, `it - m`, `m - it`. Where order matters, it is written, never guessed.
 - **An expression of names bound earlier in the pipeline,** which is how a model branches and joins.
 
-A name after a colon, ` : m`, keeps a stage's value for later stages; ` : (Q, K, V)` takes a tuple apart. A shape after the name, ` : h [4 3]`, is a promise the macro checks.
+A name after a colon, as in `x : m`, keeps a stage's value for later stages, and `x : (Q, K, V)` takes a tuple apart. A shape after the name, as in `x : h [4 3]`, is a promise the macro checks.
 
 ## Names: a stable softmax
 
