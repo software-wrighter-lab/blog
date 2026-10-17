@@ -17,6 +17,8 @@ repo_urls:
      pipelined expression macros, second."). Source: X_eTaL 3fad8892 "design: ML pipelines and raw strings decided" (step 099, D155,
      ST4 in docs/lang-choices.md), docs/spatial.md "Pipelines", docs/spatial-poc/pipes-oracle.xtl (hand-checked equivalents),
      docs/plan.md (steps 100 raw-strings IN PROGRESS on 10/16, 105 spatial-pipeline-macro, 106 shape-lint).
+     2026-10-16 evening: the equation library moved to X_eTaL-libraries as libs/Equations; whether e:p_ipe< goes there too is NOT
+     stated yet, so the post no longer says "the same library". Confirm before publishing.
      Nothing runs yet. Recheck every detail against the repo before publishing. Date provisional.
      Lead image FOR NOW (Mike): his screenshot of a CNN layer as five stages with shapes, not inverted. -->
 
@@ -113,6 +115,6 @@ The linear regression shows something the design keeps visible on purpose: addin
 
 ## Where it stands
 
-The pipeline design is decided and written down, beside the equation macro, in the same library. The order from here: raw strings, now in progress; the equation library; the pipeline macro; then the shape check that proves or refutes a pipeline's shape contracts before it runs. Planned after that: a trace of each stage's name, shape and a sample, and a drawing of the pipeline. Because a pipeline is ordinary X_eTaL once expanded, it can go where any X_eTaL program goes, including the GPUs of [post #7](/2026/10/13/array-languages-xetal-gpu/) and the step-by-step Blender videos of [post #9](/2026/10/15/array-languages-xetal-blender/).
+The pipeline design is decided and written down, beside the equation macro. The order from here: raw strings, now in progress; the equation library; the pipeline macro; then the shape check that proves or refutes a pipeline's shape contracts before it runs. Planned after that: a trace of each stage's name, shape and a sample, and a drawing of the pipeline. Because a pipeline is ordinary X_eTaL once expanded, it can go where any X_eTaL program goes, including the GPUs of [post #7](/2026/10/13/array-languages-xetal-gpu/) and the step-by-step Blender videos of [post #9](/2026/10/15/array-languages-xetal-blender/).
 
 </div>

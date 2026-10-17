@@ -20,7 +20,10 @@ repo_urls:
      Rechecked 10/16 evening: no X_eTaL commits since 71e074d3 (10/15 14:49); raw strings (step 100) in progress, uncommitted;
      demos/spatial/ still absent; steps 102 oracle, 103 capture, 104 lowering, 105 latex, 107 shape lint pending; 101 integrals plan pending.
      NOTE: docs/plan.md rows 4-5 still name the pre-D154 macros (e:s_um<, "e:q_< (the pair)"); docs/spatial.md (D154) is followed here.
-     The library itself (demos/spatial/) is NOT written yet: no claims that it runs; the numbers below are the proof of concept's.
+     2026-10-16 evening (Mike relayed the X_eTaL agent): the library moves to X_eTaL-libraries as libs/Equations (Equations.xtlm),
+     imported "e:" u_se< "Equations"; new saga there: XETAL_COMMIT bump (needs []G_ENSYM, raw strings), oracle, capture, lowering,
+     latex + README/docs/demo/catalog. X_eTaL keeps the integrals plan, a canary macro library, the shape lint, the docs.
+     The library itself is NOT written yet: no claims that it runs; the numbers below are the proof of concept's.
      Date provisional (after #10 on Friday 10/16). Lead image: Mike's chalkboard of the stable softmax, not inverted, not transparent. -->
 
 <img src="{{ '/assets/images/posts/block-chalk-softmax.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
@@ -38,6 +41,7 @@ repo_urls:
 | Resource | Link |
 |----------|------|
 | **The design** | [docs/spatial.md](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/spatial.md) --- the call, the lowering, the errors, the expected outputs |
+| **The library** | [X_eTaL-libraries](https://github.com/softwarewrighter/X_eTaL-libraries) --- where `Equations` is being built, beside the other shared libraries |
 | **Why this call** | [docs/eq-rationale.md](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/eq-rationale.md) --- seven ways to write it, compared |
 | **The thread** | [ML #9](/2026/09/10/ml-cnn-from-equations-mlpl/) · [Array Languages #5: X_eTaL-ML](/2026/10/11/array-languages-xetal-ml/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
@@ -59,13 +63,13 @@ Machine-learning papers are written in math, and programs are not. Translating o
 - **The macro call,** in the middle, which is what a programmer writes. It reads almost like the math: the same indices, the same bounds, the same summand.
 - **The expanded X_eTaL,** below it, which is what actually runs, plain array operations that `xetal expand` will show to anyone who wants to check the macro's work.
 
-Read up, and the code can be checked against the paper. Read down, and the paper becomes a program, with its answer at the bottom. The expansion and the answer here come from the proof of concept, which takes an earlier form of the call; the library that takes the form shown is next.
+Read up, and the code can be checked against the paper. Read down, and the paper becomes a program, with its answer at the bottom. The expansion and the answer here come from the proof of concept, which takes an earlier form of the call. The library that takes the form shown, Equations, is the next piece of work.
 
 <div style="clear: both;"></div>
 
 ## Macros first, syntax only when justified
 
-An ML-focused language could add notation for sums to its grammar. The approach here is the opposite. X_eTaL's macros are functions from source text to source text, and the bet is that they are a sufficient mechanism to express ML concisely and idiomatically, so the grammar changes only when a change is justified. This work is the test of that bet, and it is deliberately a library on the language as it is: nothing in the compiler changes for the equations.
+An ML-focused language could add notation for sums to its grammar. The approach here is the opposite. X_eTaL's macros are functions from source text to source text, and the bet is that they are a sufficient mechanism to express ML concisely and idiomatically, so the grammar changes only when a change is justified. This work is the test of that bet, and it is deliberately a library on the language as it is: nothing in the compiler changes for the equations. The library, `Equations`, lives beside the other shared libraries in [X_eTaL-libraries](https://github.com/softwarewrighter/X_eTaL-libraries), and a program uses it like any of them, with `"e:" u̲se< "Equations"`.
 
 ## An equation, as the paper prints it
 
@@ -139,7 +143,7 @@ error[index]: X axis 2: index 5 is outside 0..3 (from h+r)
 
 ## Checked before it is built
 
-The library itself is not written yet. A proof of concept, in an earlier form of the call, already runs, and its outputs were checked against an independent version written by hand; they become the library's tests. One fixture: `X` of 2 by 4 by 4 holding 0 to 31 and `W` of 1 by 2 by 2 by 2 holding 0 to 7 give a 1 by 3 by 3 result:
+The `Equations` library is not written yet; it is the next piece of work. A proof of concept, in an earlier form of the call, already runs, and its outputs were checked against an independent version written by hand; they become the library's tests. One fixture: `X` of 2 by 4 by 4 holding 0 to 31 and `W` of 1 by 2 by 2 by 2 holding 0 to 7 give a 1 by 3 by 3 result:
 
 ```text
 560 596 632
@@ -157,7 +161,7 @@ The call's form was not the first idea. The design compares seven ways of writin
 
 ## What comes next
 
-The library is built in a fixed order, each step with its tests first. First an oracle, an independent version of the convolution written with rotations, a transpose and one inner product, which must reproduce the three fixtures. Then reading the call: splitting its strings, pairing each sum's bounds with its index, and rejecting a malformed call when it expands. Then the lowering, the grids, gathers and reductions above, which must match the oracle. Then the LaTeX, from the same parse, checked by a typesetter. After that come the parts deliberately left out for now: padding, strides and dilation for convolutions, and a shape check that catches a wrong shape before a program runs rather than after. Anything a macro cannot cover is reviewed and decided, never assumed.
+The library is built in X_eTaL-libraries, in a fixed order, each step with its tests first. First the library's pinned copy of X_eTaL moves up to the current language, since the macros need two of its recent additions: fresh names for the code a macro emits, so it cannot clash with a user's, and raw strings. Then an oracle, an independent version of the convolution written with rotations, a transpose and one inner product, which must reproduce the three fixtures. Then reading the call: splitting its strings, pairing each sum's bounds with its index, and rejecting a malformed call when it expands, including one that would otherwise give a silent wrong answer. A macro there can use the other libraries for its own text processing, so the `Strings` library's splitting and trimming replace much of the proof of concept's hand-written code. Then the lowering, the grids, gathers with a bounds check per axis, and reductions above, which must match the oracle. Then the LaTeX, from the same parse, checked by a typesetter, with the library's documentation and a demo. After that come the parts deliberately left out for now: padding, strides and dilation for convolutions, and a shape check that catches a wrong shape before a program runs rather than after. Anything a macro cannot cover is reviewed and decided, never assumed.
 
 Sums are not the only operator an equation needs. A continuous convolution is an integral, and integrals are planned as well, with the numerical method stated in the program rather than assumed; they too are the subject of a planned post.
 
