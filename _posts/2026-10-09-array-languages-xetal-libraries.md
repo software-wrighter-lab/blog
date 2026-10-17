@@ -101,11 +101,11 @@ The repo has a rule for when a macro is warranted, and it is stricter than most 
 | Macro | Reason | What it does |
 |---|---|---|
 | `ᵈd̲ate<` | notation | a date literal checked at compile time, its day number written in |
-| `ᵖʸp̲oly<` | notation | math notation, `3x^2 - 2x + 1`, compiled to coefficients |
+| `ᵖˡp̲oly<` | notation | math notation, `3x^2 - 2x + 1`, compiled to coefficients |
 | `ᵍg̲raph<` | names | a graph written by its node names, one variable per node defined |
 | `ᵇf̲ields<` | names | named bit fields, a getter and setter each, offsets compiled in |
 | `ᶜˢc̲olumns<` | names | a table's columns as named, typed variables |
-| `ᵏc̲ases<` | source text | table-driven checks, each named by its own source |
+| `ᶜʰc̲ases<` | source text | table-driven checks, each named by its own source |
 
 The Graphs one is the clearest case for creating names. A subway map written as `"town" ᵍg̲raph< "airport-bridge-center-docks-exchange, fair-center-garden, docks-harbor"` expands into `airport ← 1`, `bridge ← 2` and so on for every station, plus `town` as the 8 by 8 adjacency matrix, so the rest of the program says `town ᵍl̲evels center` and speaks of stations rather than numbers. No function could do that: a function computes values, never definitions.
 
@@ -118,3 +118,7 @@ What is *not* here is as telling. A Control library of `if`, `unless` and `each`
 ## Next in the series
 
 A planned post covers the third meaning of *Extensible*: native extensions, Rust behind an X_eTaL facade, and the extension ABI.
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/17: two macros shown with the libraries' new recommended aliases, <code>ᵖˡp̲oly&lt;</code> for Polynomials (was <code>py:</code>, which read as Python) and <code>ᶜʰc̲ases&lt;</code> for Check (was <code>k:</code>), after the libraries chose plain names that read under any alias in <a href="https://github.com/softwarewrighter/X_eTaL-libraries/commit/7f9560d">7f9560d</a>. An alias is still the caller's choice. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-09-array-languages-xetal-libraries.md">This post's history</a>.]</em></p>
