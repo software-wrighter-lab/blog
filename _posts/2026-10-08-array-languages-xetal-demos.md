@@ -75,8 +75,8 @@ The sandpile and the epicycles arrived while this series was being written. The 
 An image kernel is a small picture of numbers: a sharpen is `0 -1 0 / -1 5 -1 / 0 -1 0`. The stencils demo writes kernels exactly like that, as text, and a macro library of its own, `Stencil.xtlm`, turns each into code before the program is type-checked:
 
 ```text
-ᵘs̲harpen ← { p → "0 -1 0  -1 5 -1  0 -1 0" ˢt̲encil< "p" }
-ᵘh̲eat ← { p → p + 0.2 × "0 1 0  1 -4 1  0 1 0" ˢt̲encil< "p" }
+ᵘs̲harpen ← { p → "0 -1 0  -1 5 -1  0 -1 0" ˢs̲tencil< "p" }
+ᵘh̲eat ← { p → p + 0.2 × "0 1 0  1 -4 1  0 1 0" ˢs̲tencil< "p" }
 ```
 
 `xetal expand` shows what the compiler sees for the sharpen: one rotation of the picture per nonzero number, times that number, summed.
@@ -166,3 +166,7 @@ Every demo's programs are tested at the command line and its page in headless Ch
 ## Next in the series
 
 The libraries: nineteen of them, and six that carry macros of their own.
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/17: the stencil macro's name corrected from <code>ˢt̲encil&lt;</code> to <code>ˢs̲tencil&lt;</code>, as the demo renamed it in <a href="https://github.com/softwarewrighter/X_eTaL-demos/commit/2809b69">2809b69</a>; without its s, the name read as "stencil" only beside the <code>s:</code> alias. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-08-array-languages-xetal-demos.md">This post's history</a>.]</em></p>
