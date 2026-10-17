@@ -59,3 +59,11 @@ rN      GRID → TOUR → END
 ## Never commit or push conflict markers
 
 - `scripts/check-conflict-markers` runs from `.githooks/pre-commit` and `.githooks/pre-push` (`git config core.hooksPath .githooks`, set once per clone) and from `scripts/validate`. Never bypass it with `--no-verify`; resolve the conflict.
+
+## Editing published posts
+
+- **Mark every correction or addition to a published post** with an editor's note at the end of the post: a `---` rule, then
+  `<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. YYYY/MM/DD: summary of corrections/additions]</em></p>`.
+  One note per edit date; a later edit adds its own line below the earlier ones, never rewrites them.
+- The summary says what changed and why in one sentence or two (e.g. a renamed name in an example, a result updated from the repo).
+- Ship the edit the usual way: commit on `drafts`, cherry-pick into a `mktemp` worktree of `origin/main`, validate, push, merge back.
