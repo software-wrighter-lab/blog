@@ -71,7 +71,7 @@ and the line of Python it writes, which the player turns into the bar:
 boxes('bar', nums('0.0 0.0 1.0 1.0 1.0 2.0 1.0 1.0 1.0 1.0', 10), 'solid')
 ```
 
-Other examples check the details a video needs: `vd:l_inear 255 128 0` converts an sRGB color to the linear values Blender's renderer works in, `1.0 0.2195197180748679 0.0`, and `vd:c_ontrast` measures how readable a caption will be against its plate, 21 for white on black, the most a color pair can have.
+Other examples check the details a video needs: `ᵛᵈl̲inear 255 128 0` converts an sRGB color to the linear values Blender's renderer works in, `1.0 0.2195197180748679 0.0`, and `ᵛᵈc̲ontrast` measures how readable a caption will be against its plate, 21 for white on black, the most a color pair can have.
 
 The whole path is written up as literate documents in Emacs Org mode, where the prose, the X_eTaL code, the Python it produces and the rendered result sit together, each block run to produce what follows it. Two cover the videos in this post, both built with no hand-written Python:
 
@@ -273,3 +273,7 @@ The longest-term aim reaches past Blender and past any one machine: X_eTaL as a 
 These previews become finished explainer videos, each from the real data of the repo it explains: HEX1000 running, from its circuit simulation, with a render that refuses to finish unless the display shows the evaluator's answer; HEX1000 being built, its lookup tables flown to their places on the Gowin die; the GPU kernel being built and then running; and a short trailer, one X_eTaL program driving three things, a GPU, an FPGA and Blender. They are made for this series first, and perhaps a narrated YouTube video later. The pattern stays the same throughout: X_eTaL works out the arrays, writes the Python, and Blender does what it is best at.
 
 </div>
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/17: X_eTaL code is now shown rendered throughout, as <code>xetal render</code> draws it, including code written inside strings, rather than partly as typed; names that are about how you type them stay typed. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-15-array-languages-xetal-blender.md">This post's history</a>.]</em></p>

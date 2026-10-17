@@ -113,7 +113,7 @@ The pipeline is complete: lexer, parser, formatter, a Core intermediate form, Hi
 - **Functions.** Lambdas with `_l` and `_r`, named parameters, guards one per line, recursion, and *selective laziness*: a `~` parameter is not evaluated until used, which is what lets the Y combinator run.
 - **Libraries.** `"c:" u̲se< "Combinators"` imports a library under a prefix you choose. Built-in: Stats, Combinators (Smullyan's birds), Maybe, TTTML and Turtle; user libraries go in a folder.
 - **Macros.** A `.xtlm` file holds functions from source text to source text, run before compilation and type-checked after; `xetal expand` shows what each call became. The system macros are themselves written in X_eTaL: `i̲f<`, `u̲nless<`, `e̲ach<`, and a set modeled on Rust's standard ones, `f̲ormat<`, `d̲bg<`, `a̲ssert<`, `p̲anic<`, `i̲nclude<`, `c̲fg<`, `l̲ine<`, `f̲ile<`. Expansion is hygienic.
-- **Errors of your own.** `"code" ⎕S̲IGNAL "message"` raises a typed error, and `default ⎕W̲ARN "code" "message"` raises one a handler may resume from. `t̲ry<`, `c̲atch<` and `f̲inally<` give the familiar syntax, as system macros over typed built-ins, and a handler answers with one of four outcomes: `r̲ecover<` with a value of the body's type, `r̲etry<` the body, `h̲alt<` and pass the error on, or `c̲ontinue<` from the point of failure with the warning's value. `"1 d_iv 0" t̲ry< "@ r_ecover< \"-1\""` is −1; `xetal expand` shows it becomes `'{ @ → 1 d̲iv 0 } ⎕T̲RAP '{ e → ⎕R̲ECOVER (−1) }`.
+- **Errors of your own.** `"code" ⎕S̲IGNAL "message"` raises a typed error, and `default ⎕W̲ARN "code" "message"` raises one a handler may resume from. `t̲ry<`, `c̲atch<` and `f̲inally<` give the familiar syntax, as system macros over typed built-ins, and a handler answers with one of four outcomes: `r̲ecover<` with a value of the body's type, `r̲etry<` the body, `h̲alt<` and pass the error on, or `c̲ontinue<` from the point of failure with the warning's value. `"1 d̲iv 0" t̲ry< "@ r̲ecover< \"-1\""` is −1; `xetal expand` shows it becomes `'{ @ → 1 d̲iv 0 } ⎕T̲RAP '{ e → ⎕R̲ECOVER (−1) }`.
 - **Docs and tests in the language.** `##` doc comments, examples under them run as doc tests, `@test` unit tests, and `xetal doc`, which builds a searchable reference site: search by name, or by type the way Hoogle does, so `Num a => a -> a -> a` finds `+`.
 - **Pictures.** `⎕G̲RID` and `⎕P̲ATH` produce SVG, animated by frames, shown with `⎕S̲HOW`. Big grids become PNG frames; there is a Mandelbrot zoom.
 - **Files, keyboard, numbers, trigonometry.** Enough I/O to write real programs.
@@ -191,8 +191,8 @@ The clearest way to see what these features buy is to write one function --- fac
 **6. Named self, by a macro: 3628800.** The macro writes the name in place of the self parameter. `xetal expand` shows that the compiler sees plain named recursion, version 1, with no laziness and no combinator left to run.
 
 ```text
-"u:f_act" ᶜY̲< "{ ~s_elf n -> n <= 1 ? 1; n * s_elf n - 1 }"
-⍝ xetal expand:  u:f_act := { n -> n <= 1 ? 1; n * u:f_act n - 1 }
+"ᵘf̲act" ᶜY̲< "{ ~s̲elf n → n ≤ 1 ? 1◆ n × s̲elf n − 1 }"
+⍝ xetal expand:  ᵘf̲act ← { n → n ≤ 1 ? 1◆ n × ᵘf̲act n − 1 }
 ```
 
 Read down the list and each language feature changes what the same idea does. Strict evaluation is why the naive Y overflows; one character, `~`, fixes it; quoting lambdas allows recursion with no name; static types refuse the self-application that Lisp or JavaScript would accept; and a macro erases the whole apparatus at compile time and leaves the cheapest version behind. The comparisons outside the family are instructive too: Dyalog APL's dfns have `∇`, built-in recursion with no name, where X_eTaL gets there through Y and a lazy parameter; Lisp would do the macro version on a syntax tree, where X_eTaL does it on text and type-checks the output; and Rust or Haskell need a wrapper type before the textbook Y will compile at all.
@@ -243,3 +243,7 @@ A `.xtl` file with a `#!/usr/bin/env xetal` line runs on its own. The recommende
 ## Next in the series
 
 The demos repo, programs worth watching; the libraries, where the E in the name gets its first two meanings; the native extensions, where it gets its third; the machine-learning work the whole thing is for; and the games, where state and input get their turn.
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/17: X_eTaL code is now shown rendered throughout, as <code>xetal render</code> draws it, including code written inside strings, rather than partly as typed; names that are about how you type them stay typed. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-07-array-languages-xetal.md">This post's history</a>.]</em></p>

@@ -200,7 +200,7 @@ The M3 Pro is the other Mac to try; Mojo lists M1 through M5.
 The Mojo backend covers elementwise work and whole-array reductions. Still ahead, in order:
 
 - **Axes and structure:** reductions along an axis, several shapes in one program, then tiled matrix products, transposes, lookups, slices, rotations and reshapes, which brings in the rest of the Accel demos and, after them, X_eTaL-ML's models, which run from their own source through OpenCL today.
-- **The macro and the extension:** `--device mojo` behind `gp:a_ccel<` and the GPU extension, so an X_eTaL program calls the GPU through Mojo itself, with both backends checked against the same answers.
+- **The macro and the extension:** `--device mojo` behind `ᵍᵖa̲ccel<` and the GPU extension, so an X_eTaL program calls the GPU through Mojo itself, with both backends checked against the same answers.
 - **Results by GPU,** beside the OpenCL numbers, including the cost of a call with everything already built.
 - **Wider Ints:** Ints cross the C boundary as 64-bit floats for now, so values beyond 2^53 are not yet tested.
 
@@ -211,3 +211,7 @@ Apple's own MLX is the other way onto Metal, and in some ways the closest thing 
 And FPGAs? Mojo compiles for CPUs and GPUs; it has no way to describe hardware, so the Tang boards stay with X_eTaL-fpga.
 
 </div>
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/17: X_eTaL code is now shown rendered throughout, as <code>xetal render</code> draws it, including code written inside strings, rather than partly as typed; names that are about how you type them stay typed. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-16-array-languages-xetal-mojo-metal.md">This post's history</a>.]</em></p>
