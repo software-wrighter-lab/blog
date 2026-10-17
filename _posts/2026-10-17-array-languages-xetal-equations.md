@@ -108,9 +108,9 @@ Three macros parse the same text the same way:
 
 | Macro | Gives |
 |---|---|
-| `e:e_q<` | the value, the array |
-| `e:t_ex<` | the LaTeX, a string |
-| `e:b_oth<` | both, as a pair |
+| `ᵉe̲q<` | the value, the array |
+| `ᵉt̲ex<` | the LaTeX, a string |
+| `ᵉb̲oth<` | both, as a pair |
 
 So the value and its typeset equation always describe the same thing. The library's demo is one CNN layer, two 4 by 4 pictures through one 2 by 2 by 2 filter, with one call giving both:
 
@@ -267,3 +267,7 @@ Sums are not the only operator an equation needs. A continuous convolution is an
 Equations are one half of the notation ML needs. The other is the data flow a model runs, layer after layer, which reads left to right where X_eTaL reads right to left; a pipeline macro for it is the subject of a planned post. Both lower to ordinary X_eTaL, so what they produce can run on the GPUs of [post #7](/2026/10/13/array-languages-xetal-gpu/), through OpenCL or, as of [post #10](/2026/10/16/array-languages-xetal-mojo-metal/), Mojo, and be drawn step by step in Blender, as the softmax and matrix-product videos in [post #9](/2026/10/15/array-languages-xetal-blender/) already are.
 
 </div>
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/17: the table of the three macros now shows them rendered, <code>ᵉe̲q&lt;</code>, <code>ᵉt̲ex&lt;</code> and <code>ᵉb̲oth&lt;</code>, as the rest of the post does, rather than as typed (<code>e:e_q&lt;</code>, ...). <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-17-array-languages-xetal-equations.md">This post's history</a>.]</em></p>
