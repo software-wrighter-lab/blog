@@ -2,38 +2,32 @@
 layout: post
 title: "Array Languages #12: ML Pipelines as X_eTaL Macros"
 categories: [languages, language-design, machine-learning, tools]
-tags: [array-languages, xetal, x-etal, apl, macros, machine-learning, pipelines, softmax, layer-norm, notation]
-keywords: "X_eTaL pipeline macro, ML data flow left to right, pipe operator in an array language, stable softmax, layer norm, MLP, residual connection, shape contracts, macros instead of syntax"
-abstract: "Twelfth in the Array Languages series, a design before the code: a macro that writes an ML model's data flow left to right, data first and then each transform in turn, in a language that reads right to left. Stages can be named for later use and given shapes that are checked, and the whole thing lowers to ordinary X_eTaL. One small language change comes with it, and only one: raw strings, so a pipeline can be written one stage per line."
+tags: [array-languages, xetal, x-etal, apl, macros, machine-learning, pipelines, softmax, layer-norm, mlp, notation]
+keywords: "X_eTaL pipeline macro, ML data flow left to right, pipe operator in an array language, stable softmax, layer norm, MLP, residual connection, shape contracts, raw strings, macros instead of syntax"
+abstract: "Twelfth in the Array Languages series: a macro that writes an ML model's data flow left to right, data first and then each layer in turn, in a language that reads right to left. Stages can be named for later use and given shapes that are checked, a pipeline can be written one stage per line, and the whole thing expands to ordinary X_eTaL that xetal expand shows. It is a library, Pipeline, in X_eTaL-ML, checked against hand-written code and against random pipelines."
 series: "Array Languages"
 series_part: 12
 date: 2026-10-18 00:15:00 -0700
 repo_urls:
-  - url: "https://github.com/softwarewrighter/X_eTaL"
-    title: "X_eTaL"
+  - url: "https://github.com/softwarewrighter/X_eTaL-ML"
+    title: "X_eTaL-ML (the Pipeline library)"
 ---
 
-<!-- DRAFT, A PLAN (2026-10-15, rechecked 10/16): split from #11 per Mike ("One for Math equation xetal macros, first. the 12 post for ML
-     pipelined expression macros, second."). Source: X_eTaL 3fad8892 "design: ML pipelines and raw strings decided" (step 099, D155,
-     ST4 in docs/lang-choices.md), docs/spatial.md "Pipelines", docs/spatial-poc/pipes-oracle.xtl (hand-checked equivalents),
-     docs/plan.md (steps 100 raw-strings IN PROGRESS on 10/16, 105 spatial-pipeline-macro, 106 shape-lint).
-     2026-10-16 evening: the equation library moved to X_eTaL-libraries as libs/Equations (saga 12 there); per its docs/plan.md
-     (uncommitted 10/16), the pipeline macro goes to X_eTaL-ML ("it needs nn: functions"). Raw strings landed in X_eTaL 282c5420
-     (D156) and 823adbd3, pushed. Confirm the pipeline macro's home and name before publishing.
-     PLAN (Mike, 2026-10-16): the pipeline macro work continues 10/17 for this post on 10/18.
-     2026-10-17 10:40: X_eTaL-ML queued steps 021 re-pin (IN PROGRESS, uncommitted), 022 f32-tolerance, 023 pipeline-macro
-     (libs/Pipeline, pipe:p_ipe<, tests first incl. round-trip and differential), 024 pipeline-bias (nn:a_ddAxis, nn:b_ias),
-     025 pipeline-demos (dense+bias, stable softmax, layer norm, attention with : (Q, K, V), a CNN layer as a Rosetta Stone:
-     math via Equations, pipeline, expansion, plain X_eTaL). Rewrite this post from what lands; the linear regression's
-     explicit bias becomes nn:b_ias.
-     Nothing runs yet. Recheck every detail against the repo before publishing. Date provisional.
+<!-- DRAFT (rewritten 2026-10-17 afternoon from X_eTaL-ML's step 022, pipeline-macro, UNCOMMITTED while its gate runs: libs/Pipeline
+     src/Pipeline.xtlm, docs/README.md, demos/mlp.xtl, tests/ oracle, differential, roundtrip, shape-fails, 14 reject-*).
+     Every output below was run here on 2026-10-17 ~14:00 with the ML repo's pinned xetal (b8a6ac3b): just demo-lib Pipeline mlp,
+     just run-lib Pipeline oracle / shape-fails / roundtrip, just expand-lib Pipeline mlp, and the reject-*.err goldens.
+     RECHECK against the commit when it lands (and again after 023 pipeline-bias and 024 pipeline-demos, the Rosetta Stone).
+     NOT CLAIMED: demos/mlp.xtl says "Which class each point gets: XOR", but its argmax is 2 1 1 1, which is not XOR: (0,0) and
+     (1,1) get different classes (worked by hand: W1/W2 as written); reported to Mike for the ML agent. The post does not call it XOR.
+     Also its comment says "(W1 nn:d_ense it)" where the code is "it nn:d_ense W1".
      Lead image FOR NOW (Mike): his screenshot of a CNN layer as five stages with shapes, not inverted. -->
 
 <img src="{{ '/assets/images/posts/block-cnn-pipeline-stages.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
 <div style="overflow: hidden;" markdown="1">
 
-[Post #11](/2026/10/17/array-languages-xetal-equations/) turned an equation, as a paper prints it, into array code with one macro call. An ML model is more than one equation, though: it is data flowing through layers, one after another. This is a second macro, designed but not yet built: a pipeline that writes that flow left to right, the way it is drawn and described, in a language that reads right to left.
+[Post #11](/2026/10/17/array-languages-xetal-equations/) turned an equation, as a paper prints it, into array code with one macro call. A model is more than one equation, though: it is data flowing through layers, one after another, and that is how papers draw it and how people describe it, left to right. X_eTaL, like APL, reads right to left. This post is the macro that lets a model be written the way it is drawn.
 
 </div>
 
@@ -43,8 +37,9 @@ repo_urls:
 
 | Resource | Link |
 |----------|------|
-| **The design** | [docs/spatial.md](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/spatial.md) --- equations and pipelines |
-| **The thread** | [Array Languages #11: equations](/2026/10/17/array-languages-xetal-equations/) · [Array Languages #5: X_eTaL-ML](/2026/10/11/array-languages-xetal-ml/) |
+| **The library** | [Pipeline](https://github.com/softwarewrighter/X_eTaL-ML/tree/main/libs/Pipeline) in X_eTaL-ML · [its reference](https://github.com/softwarewrighter/X_eTaL-ML/blob/main/libs/Pipeline/docs/README.md) |
+| **The design** | [docs/spatial.md](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/spatial.md), "Pipelines", in X_eTaL |
+| **The thread** | [#11: equations](/2026/10/17/array-languages-xetal-equations/) · [#5: X_eTaL-ML](/2026/10/11/array-languages-xetal-ml/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
 </div>
@@ -57,71 +52,121 @@ Each notation keeps its own reading direction, and the macro expansion is where 
 
 - **Equations read inside out,** as the paper prints them: sums outermost first, the summand inside.
 - **Pipelines read left to right:** the data first, then each transform in turn.
-- **X_eTaL reads right to left,** as APL does. Both macros lower to ordinary X_eTaL, which `xetal expand` shows.
+- **X_eTaL reads right to left,** as APL does. Both macros expand to ordinary X_eTaL, which `xetal expand` shows.
 
-## The call
+## A network, left to right
 
-Stages are separated by `|>`. The first is the data; each one after it transforms the value before it. A small network:
+<figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 52%;">
+<img src="{{ '/assets/images/posts/xetal-pipe-mlp.webp' | relative_url }}" class="no-invert" alt="A two-layer network as a row of stages, each with the shape it produces: X, 4 by 2; it nn:d_ense W1, 4 by 3; nn:r_elu, 4 by 3; it nn:d_ense W2, 4 by 2; nn:s_oftmax, 4 by 2. Below, the pipeline on one line and the same computation by hand, right to left: nn:s_oftmax (nn:r_elu X nn:d_ense W1) nn:d_ense W2">
+<figcaption style="font-size: 0.85em;">The library's demo network, stage by stage, and the same thing by hand. Click to enlarge.</figcaption>
+</figure>
 
-```text
-Y ← @ ᵖⁱᵖᵉp̲ipe< "X |> W1 nn:d_ense it |> nn:r_elu |> W2 nn:d_ense it |> nn:s_oftmax"
-```
-
-- **Stages are X_eTaL,** type-checked like any code and copied into the expansion as written. A stage is either a function, applied to the previous value, like `nn:r_elu`, or an expression that names the previous value `it`. Order is explicit where it matters: `it - m` or `m - it`.
-- **Names** keep a stage's value: ` : name` at the end of a stage, and later stages use the name directly, so a branch and a join need nothing more. Each stage is evaluated once, and a name bound twice is rejected.
-- **Shapes** are contracts. An optional shape after a name is proved or refuted by a shape check before the program runs where it can be, and checked after the stage at run time where it cannot: `error[shape]: stage 3 (conv): shape 2 8 6 6, expected 2 8 4 4`.
-- **The value** is the last stage's value.
-- **A stage may be an equation.** A call to the equation macro from post #11 is just a value, so a convolution written as its triple sum can sit in the middle of a pipeline.
-
-## One stage per line
-
-A long pipeline on one line is hard to read, and an ordinary string cannot span lines. So the design takes one change to the language, the only one in this work: raw strings, spelled as in Rust. `r"..."` holds its text exactly as written, with no escapes, across as many lines as it needs, and `r#"..."#` may hold a `"` too. A raw string is another way to write the same character vector as `"..."`, not a new string type, so types, built-ins and the evaluator are unchanged. With it, the small network above reads one stage per line:
+The library is `Pipeline`, in X_eTaL-ML, beside the neural-network functions its stages call. Its demo is a small two-layer network over four points, written one stage per line:
 
 ```text
+"nn:" u̲se< "NN"
+"pipe:" u̲se< "Pipeline"
 Y ← @ ᵖⁱᵖᵉp̲ipe< r"
-      X
-   |> W1 nn:d_ense it
-   |> nn:r_elu
-   |> W2 nn:d_ense it
-   |> nn:s_oftmax"
+   X
+|> it nn:d_ense W1
+|> nn:r_elu
+|> it nn:d_ense W2
+|> nn:s_oftmax"
 ```
 
-Raw strings are now in the language, written test-first: the lexer, the formatter and the macro expander all take them, and an error inside one is reported at its place in the text.
-
-## Stable softmax, step by step
-
-The stable softmax subtracts the maximum before exponentiating, so large scores do not overflow:
+Read it the way it is written: start from the data `X`, apply the first dense layer, then a ReLU, then the second dense layer, then a softmax. The figure shows each stage and the shape it produces. By hand, in X_eTaL, the same network reads right to left, with the last step first:
 
 ```text
-p ← @ ᵖⁱᵖᵉp̲ipe< "z |> 'm_ax r_/ it : m |> e_xp z - m : e |> e / '+ r_/ e"
+ⁿⁿs̲oftmax (ⁿⁿr̲elu X ⁿⁿd̲ense W1) ⁿⁿd̲ense W2
 ```
 
-Read left to right: start from the scores `z`; take their maximum and call it `m`; raise e to `z - m` and call it `e`; divide `e` by its sum. Four stages, in the order the math is explained.
+The demo computes both and prints them; they are identical, to the last digit.
+
+The `r"..."` is a raw string, new in the language this week: its text is kept exactly as written, across as many lines as it needs, so a pipeline can be laid out one stage per line. It is the one change to the language this work asked for, and it is only a new way to write a string, not a new kind of value.
+
+<div style="clear: both;"></div>
+
+## The rules
+
+Stages are separated by `|>`, which means nothing else in X_eTaL. The first stage is the data. Every later stage is one of three things:
+
+- **A function,** applied to the previous value: `nn:r_elu`, a train, `'+ r_/`, or a quoted lambda.
+- **An expression that names the previous value `it`:** `it nn:d_ense W1`, `it - m`, `m - it`. Where order matters, it is written, never guessed.
+- **An expression of names bound earlier in the pipeline,** which is how a model branches and joins.
+
+A name after a colon, ` : m`, keeps a stage's value for later stages; ` : (Q, K, V)` takes a tuple apart. A shape after the name, ` : h [4 3]`, is a promise the macro checks.
+
+## Names: a stable softmax
+
+The stable softmax subtracts the maximum before exponentiating, so large scores cannot overflow:
+
+```text
+@ ᵖⁱᵖᵉp̲ipe< "z |> 'm_ax r_/ it : m |> e_xp z - m : e |> e / '+ r_/ e"
+```
+
+Start from the scores `z`; take their maximum and call it `m`; raise e to `z - m` and call it `e`; divide `e` by its sum. Four stages, in the order the math is explained, and with `z := 1 2 3` the result is the library's own softmax, `0.0900 0.2447 0.6652`.
+
+## What it becomes
+
+The macro writes ordinary X_eTaL, laid out as a program, one line per stage. This is the network above, from `xetal expand`:
+
+```text
+Y ← ({ @ →
+  g1:stage ← X
+  g2:stage ← { @ →
+    it ← g1:stage
+    it ⁿⁿd̲ense W1
+  } @
+  g3:stage ← ⁿⁿr̲elu g2:stage
+  g4:stage ← { @ →
+    it ← g3:stage
+    it ⁿⁿd̲ense W2
+  } @
+  g5:stage ← ⁿⁿs̲oftmax g4:stage
+  g5:stage
+} @)
+```
+
+Each stage's value gets a name of its own, fresh from the language so it cannot clash with the program's. A function stage is applied to the stage before it; a stage that says `it` gets a small block where `it` is that value. Nothing is evaluated twice, and the last stage is the result.
 
 ## Why direction matters
 
 A residual connection is "double it, then add back the input". Written by hand in X_eTaL as `2 * x + x`, it reads right to left as `2 * (x + x)`, which is not a residual. As a pipeline it reads the way it is meant:
 
 ```text
-x : s |> 2 * it |> it + s
+@ ᵖⁱᵖᵉp̲ipe< "x : s |> 2 * it |> it + s"
 ```
 
-## Checked before it is built
+With `x := 1 2 3 4` it gives `3.0 6.0 9.0 12.0`.
 
-Each example in the design has a hand-written X_eTaL equivalent, and the pipeline must print exactly what that equivalent prints:
+## Shapes, checked
 
-| Example | Pipeline | Expected |
-|---|---|---|
-| Linear regression | `X \|> it '+ '* i_nner W : P \|> P + (s_hape P) r_eshape b` | `14 25` / `20 31` |
-| Stable softmax | `z \|> 'm_ax r_/ it : m \|> e_xp z - m : e \|> e / '+ r_/ e` | `0.0900 0.2447 0.6652` |
-| Layer norm | `x \|> ('+ r_/ it) / f_loat t_ally it : mu \|> x - mu : c \|> ('+ r_/ c * c) / f_loat t_ally c : v \|> c / v ^ 0.5` | `-1.3416 -0.4472 0.4472 1.3416` |
-| MLP | `X \|> it '+ '* i_nner W1 \|> 0 m_ax it \|> it '+ '* i_nner W2` | `2` / `2` |
-| Residual | `x : s \|> 2 * it \|> it + s` | `3.0 6.0 9.0 12.0` |
+A shape written after a name is a contract. Here the second stage promises a vector of length `n`, which is 3, and breaks it:
 
-The linear regression shows something the design keeps visible on purpose: adding the bias vector `b` to every row is written out, `(s_hape P) r_eshape b`, because X_eTaL has no implicit broadcasting.
+```text
+@ ᵖⁱᵖᵉp̲ipe< "x |> 2 * it : y [n] |> y + 1"
+error[shape]: stage 2 (y): shape 4, expected 3
+```
 
-## Where it stands
+For now the check runs when the program runs, which is better than a wrong answer but later than it could be. A shape check that proves or refutes these promises before the program runs is planned in X_eTaL; the run-time check stays as the backstop.
 
-The pipeline design is decided and written down. Raw strings are done. The pipeline macro itself will live in [X_eTaL-ML](https://github.com/softwarewrighter/X_eTaL-ML) as a library of its own, `Pipeline`, imported as `"pipe:" u̲se< "Pipeline"`, beside the `nn:` functions its stages call, while the equation macro of post #11 lives in the shared libraries. The order from here: the pipeline macro; then the shape check that proves or refutes a pipeline's shape contracts before it runs. Planned after that: a trace of each stage's name, shape and a sample, and a drawing of the pipeline. Because a pipeline is ordinary X_eTaL once expanded, it can go where any X_eTaL program goes, including the GPUs of [post #7](/2026/10/13/array-languages-xetal-gpu/) and the step-by-step Blender videos of [post #9](/2026/10/15/array-languages-xetal-blender/).
+## A reader that cannot drop text
+
+The pipeline macro is a reader, like the equation macro, and it was written after the equation macro's reader was caught dropping text and giving silent wrong answers. So every rule of this one uses all of its text or refuses the call when the program is compiled, naming what it could not use:
+
+```text
+error[bad-pipeline]: a shape is [extents] at the stage's end, nothing after it: [4] extra
+error[bad-pipeline]: the first stage is the data; nothing precedes it: it * 2
+error[bad-pipeline]: a name is bound once in a pipeline: m
+error[bad-pipeline]: a stage is a function (nn:r_elu, [f_ g_], '{ x -> ... }) or an expression naming the previous value it (or a name bound before it): 3
+```
+
+The library's tests go further than single cases. The five pipelines from the design, linear regression, the stable softmax, layer norm, a small MLP and the residual, must each equal their hand-written versions, written on one line and one stage per line. A differential test runs every kind of stage, in every order, against plain X_eTaL. And `pipe:t_ext<` writes back what the macro read, so a test can check that it read exactly what was written.
+
+<div style="clear: both;"></div>
+
+## What comes next
+
+Two steps follow in X_eTaL-ML. A bias helper, so a dense layer's bias is added along the right axis by name instead of reshaped by hand, as linear regression does today: `P + (s_hape P) r_eshape b`. Then the real models as pipelines, and one CNN layer shown four ways, side by side: as the equation of post #11, as a pipeline, as the expansion, and as plain X_eTaL. Because a pipeline is ordinary X_eTaL once expanded, it can go where any X_eTaL program goes, including the GPUs of [post #7](/2026/10/13/array-languages-xetal-gpu/) and [post #10](/2026/10/16/array-languages-xetal-mojo-metal/), and the step-by-step Blender videos of [post #9](/2026/10/15/array-languages-xetal-blender/).
 
 </div>
