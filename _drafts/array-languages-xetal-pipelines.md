@@ -68,10 +68,10 @@ The library is `Pipeline`, in X_eTaL-ML, beside the neural-network functions its
 "pipe:" u̲se< "Pipeline"
 Y ← @ ᵖⁱᵖᵉp̲ipe< r"
    X
-|> it nn:d_ense W1
-|> nn:r_elu
-|> it nn:d_ense W2
-|> nn:s_oftmax"
+|> it ⁿⁿd̲ense W1
+|> ⁿⁿr̲elu
+|> it ⁿⁿd̲ense W2
+|> ⁿⁿs̲oftmax"
 ```
 
 Read it the way it is written: start from the data `X`, apply the first dense layer, then a ReLU, then the second dense layer, then a softmax. The figure shows each stage and the shape it produces. By hand, in X_eTaL, the same network reads right to left, with the last step first:
@@ -90,8 +90,8 @@ The `r"..."` is a raw string, new in the language this week: its text is kept ex
 
 Stages are separated by `|>`, which means nothing else in X_eTaL. The first stage is the data. Every later stage is one of three things:
 
-- **A function,** applied to the previous value: `nn:r_elu`, a train, `'+ r_/`, or a quoted lambda.
-- **An expression that names the previous value `it`:** `it nn:d_ense W1`, `it - m`, `m - it`. Where order matters, it is written, never guessed.
+- **A function,** applied to the previous value: `ⁿⁿr̲elu`, a train, `'+ r̲/`, or a quoted lambda.
+- **An expression that names the previous value `it`:** `it ⁿⁿd̲ense W1`, `it − m`, `m − it`. Where order matters, it is written, never guessed.
 - **An expression of names bound earlier in the pipeline,** which is how a model branches and joins.
 
 A name after a colon, as in `x : m`, keeps a stage's value for later stages, and `x : (Q, K, V)` takes a tuple apart. A shape after the name, as in `x : h [4 3]`, is a promise the macro checks.
@@ -101,7 +101,7 @@ A name after a colon, as in `x : m`, keeps a stage's value for later stages, and
 The stable softmax subtracts the maximum before exponentiating, so large scores cannot overflow:
 
 ```text
-@ ᵖⁱᵖᵉp̲ipe< "z |> 'm_ax r_/ it : m |> e_xp z - m : e |> e / '+ r_/ e"
+@ ᵖⁱᵖᵉp̲ipe< "z |> 'm̲ax r̲/ it : m |> e̲xp z − m : e |> e ÷ '+ r̲/ e"
 ```
 
 Start from the scores `z`; take their maximum and call it `m`; raise e to `z - m` and call it `e`; divide `e` by its sum. Four stages, in the order the math is explained, and with `z := 1 2 3` the result is the library's own softmax, `0.0900 0.2447 0.6652`.
@@ -134,7 +134,7 @@ Each stage's value gets a name of its own, fresh from the language so it cannot 
 A residual connection is "double it, then add back the input". Written by hand in X_eTaL as `2 * x + x`, it reads right to left as `2 * (x + x)`, which is not a residual. As a pipeline it reads the way it is meant:
 
 ```text
-@ ᵖⁱᵖᵉp̲ipe< "x : s |> 2 * it |> it + s"
+@ ᵖⁱᵖᵉp̲ipe< "x : s |> 2 × it |> it + s"
 ```
 
 With `x := 1 2 3 4` it gives `3.0 6.0 9.0 12.0`.
@@ -144,7 +144,7 @@ With `x := 1 2 3 4` it gives `3.0 6.0 9.0 12.0`.
 A shape written after a name is a contract. Here the second stage promises a vector of length `n`, which is 3, and breaks it:
 
 ```text
-@ ᵖⁱᵖᵉp̲ipe< "x |> 2 * it : y [n] |> y + 1"
+@ ᵖⁱᵖᵉp̲ipe< "x |> 2 × it : y [n] |> y + 1"
 error[shape]: stage 2 (y): shape 4, expected 3
 ```
 
@@ -161,12 +161,12 @@ error[bad-pipeline]: a name is bound once in a pipeline: m
 error[bad-pipeline]: a stage is a function (nn:r_elu, [f_ g_], '{ x -> ... }) or an expression naming the previous value it (or a name bound before it): 3
 ```
 
-The library's tests go further than single cases. The five pipelines from the design, linear regression, the stable softmax, layer norm, a small MLP and the residual, must each equal their hand-written versions, written on one line and one stage per line. A differential test runs every kind of stage, in every order, against plain X_eTaL. And `pipe:t_ext<` writes back what the macro read, so a test can check that it read exactly what was written.
+The library's tests go further than single cases. The five pipelines from the design, linear regression, the stable softmax, layer norm, a small MLP and the residual, must each equal their hand-written versions, written on one line and one stage per line. A differential test runs every kind of stage, in every order, against plain X_eTaL. And `ᵖⁱᵖᵉt̲ext<` writes back what the macro read, so a test can check that it read exactly what was written.
 
 <div style="clear: both;"></div>
 
 ## What comes next
 
-Two steps follow in X_eTaL-ML. A bias helper, so a dense layer's bias is added along the right axis by name instead of reshaped by hand, as linear regression does today: `P + (s_hape P) r_eshape b`. Then the real models as pipelines, and one CNN layer shown four ways, side by side: as the equation of post #11, as a pipeline, as the expansion, and as plain X_eTaL. Because a pipeline is ordinary X_eTaL once expanded, it can go where any X_eTaL program goes, including the GPUs of [post #7](/2026/10/13/array-languages-xetal-gpu/) and [post #10](/2026/10/16/array-languages-xetal-mojo-metal/), and the step-by-step Blender videos of [post #9](/2026/10/15/array-languages-xetal-blender/).
+Two steps follow in X_eTaL-ML. A bias helper, so a dense layer's bias is added along the right axis by name instead of reshaped by hand, as linear regression does today: `P + (s̲hape P) r̲eshape b`. Then the real models as pipelines, and one CNN layer shown four ways, side by side: as the equation of post #11, as a pipeline, as the expansion, and as plain X_eTaL. Because a pipeline is ordinary X_eTaL once expanded, it can go where any X_eTaL program goes, including the GPUs of [post #7](/2026/10/13/array-languages-xetal-gpu/) and [post #10](/2026/10/16/array-languages-xetal-mojo-metal/), and the step-by-step Blender videos of [post #9](/2026/10/15/array-languages-xetal-blender/).
 
 </div>

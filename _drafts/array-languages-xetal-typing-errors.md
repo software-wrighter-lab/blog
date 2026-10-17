@@ -140,7 +140,7 @@ error[rank]: X[c,h+r] indexes 2 axes, but X has rank 3
 And a pipeline stage that promises a shape is checked against it:
 
 ```text
-@ ᵖⁱᵖᵉp̲ipe< "x |> 2 * it : y [n] |> y + 1"
+@ ᵖⁱᵖᵉp̲ipe< "x |> 2 × it : y [n] |> y + 1"
 error[shape]: stage 2 (y): shape 4, expected 3
 ```
 
@@ -166,7 +166,7 @@ It was fixed the same morning, in three layers. Every rule of the reader now use
 
 The fix covered one library. The class of bug, a reader that uses part of its text and drops the rest, can happen in any macro that reads a notation, and more of them are coming. Three changes go further, from narrow to broad:
 
-- **The pipeline macro was written to the rule from the start,** with a test for each kind of text it refuses, the equation library's three cases among them, and a macro, `pipe:t_ext<`, that writes back what it read.
+- **The pipeline macro was written to the rule from the start,** with a test for each kind of text it refuses, the equation library's three cases among them, and a macro, `ᵖⁱᵖᵉt̲ext<`, that writes back what it read.
 - **A parsing library for macro writers,** whose every piece uses all of its text or refuses, with the reprint check built in, so a new macro does not have to learn this lesson again. It has been written, and it is the subject of a planned post.
 - **A check in the language itself,** proposed and not yet decided: the macro runner would refuse any expansion that leaves part of an argument unused, in every macro, library or not. That would put this whole class of mistake on the top rung.
 
