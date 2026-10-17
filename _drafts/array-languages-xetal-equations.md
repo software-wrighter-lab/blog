@@ -26,6 +26,8 @@ repo_urls:
      2026-10-16 evening (Mike relayed the X_eTaL agent): the library moves to X_eTaL-libraries as libs/Equations (Equations.xtlm),
      imported "e:" u_se< "Equations"; new saga there: XETAL_COMMIT bump (needs []G_ENSYM, raw strings), oracle, capture, lowering,
      latex + README/docs/demo/catalog. X_eTaL keeps the integrals plan, a canary macro library, the shape lint, the docs.
+     2026-10-17: the four ML equations (dense, attention scores/output, MSE) ran with the pinned xetal; outputs checked by hand;
+     forms that are wrong today (^ in a summand: silent wrong answer) are NOT shown; gaps written up for the X_eTaL agents.
      2026-10-17: Equations DONE in X_eTaL-libraries (saga 12: be0f5b9 pin, 8197d52 oracle, 09143d8 capture, cb430d5 lowering,
      ba03d6a latex; 0643930 expansion layout, 7dffc91, 4b4193b just tex); in the live demo. Expansion, outputs and errors in this post
      are from runs with the repo's pinned xetal (823adbd3) on 2026-10-17 and match the tests/*.out goldens; error locations trimmed.
@@ -202,6 +204,31 @@ And an index outside its axis, here a sum that runs one past the two channels:
 "Y[o,h,w] | O Ho Wo" ᵉe̲q< "sum c:=0..C | X[c,h,w]"
 error[index]: X axis 1: index 2 is outside 0..1 (from c)
 ```
+
+## Beyond the CNN
+
+<figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 46%;">
+<img src="{{ '/assets/images/posts/xetal-eq-four.webp' | relative_url }}" class="no-invert" alt="Four equations typeset from the LaTeX the macro returned, each with its result: a dense layer without its bias, z sub i equals the sum over j of W sub i,j x sub j, giving -2 -2; attention scores, S sub i,j equals the sum over d of Q sub i,d K sub j,d over s, giving 1 2 0 and 1 0 3; attention output, O sub i,e equals the sum over j of A sub i,j V sub j,e, giving 2.5 3.5 and 3 4; mean squared error, L equals the sum over i of (y sub i minus p sub i) times (y sub i minus p sub i) over nf, giving 0.3125">
+<figcaption style="font-size: 0.85em;">Four more equations, typeset from the macro's own LaTeX, with what each computed. Click to enlarge.</figcaption>
+</figure>
+
+The convolution is the hardest case, three sums and arithmetic in the subscripts, but most of machine learning is simpler sums. Four that every model uses, each one call:
+
+```text
+(z, tz) ← "z[i] | N" ᵉb̲oth< "sum j:=0..M - 1 | W[i,j] * x[j]"
+(S, tS) ← "S[i,j] | T U" ᵉb̲oth< "sum d:=0..D - 1 | Q[i,d] * K[j,d] / s"
+(O, tO) ← "O[i,e] | T E" ᵉb̲oth< "sum j:=0..U - 1 | A[i,j] * V[j,e]"
+(L, tL) ← "L[] | " ᵉb̲oth< "sum i:=0..n - 1 | (y[i] - p[i]) * (y[i] - p[i]) / nf"
+```
+
+- **A dense layer,** the weights `W` times the input `x`, the core of every fully connected layer.
+- **Attention scores,** each query in `Q` against each key in `K`, scaled by `s`, which is √`D`, computed before the call.
+- **Attention output,** the attention weights `A` applied to the values `V`.
+- **Mean squared error,** the average squared difference between targets `y` and predictions `p`. Its result has no free indices, `L[]`, so it is a single number; `nf` is `n` as a float.
+
+The figure shows what each call returned: the LaTeX, typeset, and the value, each checked by hand. They also show where the notation stops today. A paper would write the attention scale as a fraction, `1/√d` in front of the sum, the error with a square and `1/n` in front, and the dense layer with its bias added after the sum. The macro takes only `sum`, and only one summand, so the scale and the average go inside the sum, the square is written as a product, the bias waits for a second step, and the LaTeX shows them exactly as written. The answers are right; the next round of the library is to make the notation match the paper too.
+
+<div style="clear: both;"></div>
 
 ## Checked against an oracle
 
