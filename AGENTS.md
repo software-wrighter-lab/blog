@@ -66,4 +66,8 @@ rN      GRID → TOUR → END
   `<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. YYYY/MM/DD: summary of corrections/additions]</em></p>`.
   One note per edit date; a later edit adds its own line below the earlier ones, never rewrites them.
 - The summary says what changed and why in one sentence or two (e.g. a renamed name in an example, a result updated from the repo).
+- Link commits by short SHA on GitHub: the source-repo commit(s) that prompted the change
+  (`<a href="https://github.com/softwarewrighter/REPO/commit/SHA">SHA</a>`), and the post's own history
+  (`https://github.com/software-wrighter-lab/blog/commits/main/_posts/FILE.md`), since a commit cannot name its own SHA.
+- `AGENTS.md` and other drafts-only files never go to main: commit the post edit on its own, so its cherry-pick is clean.
 - Ship the edit the usual way: commit on `drafts`, cherry-pick into a `mktemp` worktree of `origin/main`, validate, push, merge back.
