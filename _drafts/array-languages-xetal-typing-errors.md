@@ -80,6 +80,7 @@ A mistake in a program can surface at four times: when the program is checked, w
 
 ## What changes so it cannot happen again
 
-<!-- PLAN: only what is committed by publishing time; the rest as plans, clearly marked. -->
+<!-- PLAN: only what is committed by publishing time; the rest as plans, clearly marked. End by pointing to the macro writers'
+     parsing library as "a planned post" (#15, 10/21), with no link. -->
 
 </div>
