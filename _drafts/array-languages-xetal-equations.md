@@ -21,7 +21,8 @@ repo_urls:
      Pipelines (e:p_ipe<, D155, committed 3fad8892 on 10/15, with raw strings ST4) were split out to #12 (_drafts/array-languages-xetal-pipelines.md) per Mike.
      Rechecked 10/16 evening: no X_eTaL commits since 71e074d3 (10/15 14:49); raw strings (step 100) in progress, uncommitted;
      demos/spatial/ still absent; steps 102 oracle, 103 capture, 104 lowering, 105 latex, 107 shape lint pending; 101 integrals plan pending.
-     NOTE: docs/plan.md rows 4-5 still name the pre-D154 macros (e:s_um<, "e:q_< (the pair)"); docs/spatial.md (D154) is followed here.
+     2026-10-17 07:33/07:45: value macro renamed e:q_< -> e:e_q< (libraries b73ef1c; X_eTaL D160 e0f1d4c0); xetal expand lays out any
+     macro's text as a program (X_eTaL step 107, D159). Old note: docs/plan.md rows 4-5 named pre-D154 macros; docs/spatial.md (D154) is followed here.
      2026-10-16 evening (Mike relayed the X_eTaL agent): the library moves to X_eTaL-libraries as libs/Equations (Equations.xtlm),
      imported "e:" u_se< "Equations"; new saga there: XETAL_COMMIT bump (needs []G_ENSYM, raw strings), oracle, capture, lowering,
      latex + README/docs/demo/catalog. X_eTaL keeps the integrals plan, a canary macro library, the shape lint, the docs.
@@ -91,7 +92,7 @@ The running example is the 2D convolution a CNN computes, strictly a cross-corre
 As a macro call it reads almost the same:
 
 ```text
-Y ← "Y[o,h,w] | O Ho Wo" ᵉq̲< "sum c:=0..C - 1, sum r:=0..Kh - 1, sum s:=0..Kw - 1 | X[c,h+r,w+s] * W[o,c,r,s]"
+Y ← "Y[o,h,w] | O Ho Wo" ᵉe̲q< "sum c:=0..C - 1, sum r:=0..Kh - 1, sum s:=0..Kw - 1 | X[c,h+r,w+s] * W[o,c,r,s]"
 ```
 
 The left string names the result, its free indices, and one extent for each, so the result has shape `O Ho Wo`; extents are written, never guessed. The right string is the sums, outermost first, each an operator word, an index and an inclusive range, then the summand after the bar. Inside the strings the notation is the paper's: math precedence, brackets for indexing, and indices counted from 0 as the paper counts them.
@@ -100,7 +101,7 @@ Three macros parse the same text the same way:
 
 | Macro | Gives |
 |---|---|
-| `e:q_<` | the value, the array |
+| `e:e_q<` | the value, the array |
 | `e:t_ex<` | the LaTeX, a string |
 | `e:b_oth<` | both, as a pair |
 
@@ -185,7 +186,7 @@ There are no loops in the result, just array operations, which is the same shape
 Mistakes are caught where they can be. A malformed call is rejected when the macro expands, before the program runs; the library's tests cover ten of them, among them a sum written `c=0..C - 1` where `c:=0..C - 1` is meant, a sum with no operator word, a missing summand, and an index bound twice:
 
 ```text
-"Y[o,h,w] | O Ho Wo" ᵉq̲< "sum c:=0..C - 1, sum h:=0..1 | X[c,h,w]"
+"Y[o,h,w] | O Ho Wo" ᵉe̲q< "sum c:=0..C - 1, sum h:=0..1 | X[c,h,w]"
 error[bad-equation]: an index is bound once: c, h, o, h, w
 ```
 
@@ -198,7 +199,7 @@ error[rank]: X[c,h+r] indexes 2 axes, but X has rank 3
 And an index outside its axis, here a sum that runs one past the two channels:
 
 ```text
-"Y[o,h,w] | O Ho Wo" ᵉq̲< "sum c:=0..C | X[c,h,w]"
+"Y[o,h,w] | O Ho Wo" ᵉe̲q< "sum c:=0..C | X[c,h,w]"
 error[index]: X axis 1: index 2 is outside 0..1 (from c)
 ```
 
@@ -214,7 +215,7 @@ The call's form was not the first idea. The design compares seven ways of writin
 
 ## What comes next
 
-The library went from plan to finished in one evening, in five steps, each with its tests first: moving its copy of X_eTaL up to the current language, for fresh names and raw strings; the oracle; reading the call, with the rejections; the lowering, with the checks; and the LaTeX, with the demo and the documentation. Then I asked for readable expansions, and the macro now lays its expansion out as a program, as shown above; a general layout pass for every macro's expansion is queued in X_eTaL. Macros also had a bug, which I hit in X_eTaL's live demo: with its Boxed display on, every macro call in every program failed, because a macro's expansion went through the same printer as the program's output and came back drawn as a box instead of as source. That is fixed, with tests that were red before the fix.
+The library went from plan to finished in one evening, in five steps, each with its tests first: moving its copy of X_eTaL up to the current language, for fresh names and raw strings; the oracle; reading the call, with the rejections; the lowering, with the checks; and the LaTeX, with the demo and the documentation. Then I asked for readable expansions: the macro now lays its expansion out as a program, as shown above, and `xetal expand` now does the same for every macro. And one name changed before this post: the value macro was `q_<`, which read as "eq" only beside the alias `e:`. Since the alias is the caller's choice, it is now `e_q<`, which reads as "eq" under any alias, like its siblings `t_ex<` and `b_oth<`. Macros also had a bug, which I hit in X_eTaL's live demo: with its Boxed display on, every macro call in every program failed, because a macro's expansion went through the same printer as the program's output and came back drawn as a box instead of as source. That is fixed, with tests that were red before the fix.
 
 Still ahead for equations: the parts deliberately left out, padding, strides and dilation for convolutions, and a shape check that catches a wrong shape before a program runs rather than after, which is being built in X_eTaL now. Anything a macro cannot cover is reviewed and decided, never assumed.
 

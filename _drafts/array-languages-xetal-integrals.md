@@ -52,7 +52,7 @@ The aim is one computation shown four ways, all from the same numbers: the equat
 Convolution and cross-correlation are easy to confuse, because with a symmetric kernel they give the same answer. So the first example uses one that is not symmetric. With `x = 1 2 3 4` and `h = 1 2 3`, the two windows that fit are `1 2 3` and `2 3 4`. Convolution reverses the kernel to `3 2 1` and gives `10 16`; cross-correlation, which is what CNNs compute, uses it as it is and gives `14 20`. The correlation is already a sum the equation macro can write:
 
 ```text
-r ← "r[n] | 2" ᵉq̲< "sum k:=0..2 | x[n+k] * h[k]"
+r ← "r[n] | 2" ᵉe̲q< "sum k:=0..2 | x[n+k] * h[k]"
 ```
 
 Full convolution, where the kernel hangs off the ends, needs a rule for the values outside the input, zeros for one. The plan calls for that rule to be written down too, never assumed.
