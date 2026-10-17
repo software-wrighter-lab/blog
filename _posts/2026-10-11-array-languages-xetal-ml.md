@@ -111,10 +111,10 @@ The demos are made of six libraries in the repo. Three are new this week: Quant 
 
 ```text
 "net:" u̲se< "Net"
-"u:d_eep c" ⁿᵉᵗm̲odel< "2 16 relu 16 relu 3 softmax"
+"ᵘd̲eep c" ⁿᵉᵗm̲odel< "2 16 relu 16 relu 3 softmax"
 ```
 
-That call expands into the code that loads the weights, checked, and an ordinary forward function of NN calls, and `xetal expand` shows all of it. A second macro, `net:t_rain<`, writes the network's backpropagation and an Adam step. The [network macro](https://softwarewrighter.github.io/X_eTaL-ML/net-macro/) demo lets you type a spec of your own and train it in the page.
+That call expands into the code that loads the weights, checked, and an ordinary forward function of NN calls, and `xetal expand` shows all of it. A second macro, `ⁿᵉᵗt̲rain<`, writes the network's backpropagation and an Adam step. The [network macro](https://softwarewrighter.github.io/X_eTaL-ML/net-macro/) demo lets you type a spec of your own and train it in the page.
 
 Tuples, new in X_eTaL this week, came in exactly where this repo had asked for them. A training state is several arrays of different shapes: two weight matrices, Adam's two running averages for each, and a step count. Before tuples it had to be packed into one long vector. Now it is one tuple, taken apart by name, and `p̲ower` iterates it as one value:
 
@@ -158,3 +158,7 @@ A few things wait on the language, filed as asks rather than worked around: a gr
 A planned post covers the games, and what a game asks of a language that a demo never does.
 
 </div>
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/17: X_eTaL code is now shown rendered throughout, as <code>xetal render</code> draws it, including code written inside strings, rather than partly as typed; names that are about how you type them stay typed. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-11-array-languages-xetal-ml.md">This post's history</a>.]</em></p>

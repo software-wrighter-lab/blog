@@ -4,7 +4,7 @@ title: "Array Languages #7: X_eTaL-gpu, Array Programs on GPUs Old and New"
 categories: [languages, language-design, gpu, hardware]
 tags: [array-languages, xetal, x-etal, apl, gpu, opencl, kepler, maxwell, pascal, turing, ampere, ada-lovelace, blackwell, accelerator-ir, parallelism]
 keywords: "X_eTaL GPU, array language on GPU, OpenCL C 1.2 kernels, kernel fusion, tree reduction, accelerator IR, retired CUDA cards, Kepler, Maxwell, Pascal, Turing, Ampere, Ada Lovelace, Blackwell, Apple M1 Max, Apple M3 Pro, Tesla P100, Tesla M40, Quadro K4200, Tesla M10, Tesla P4, GTX 1660 Super, RTX 3060, RTX 3060 Laptop GPU, RTX 3090, RTX 4070 Laptop GPU, RTX 5060 Ti, A2, whole-array parallelism, GPU native extension"
-abstract: "Seventh in the Array Languages series: X_eTaL-gpu takes X_eTaL programs to GPUs through OpenCL, old and new. A function written in ordinary X_eTaL is now marked for the GPU with a macro, gp:a_ccel<, and runs there, lowered from its own source. Measured so far on an M1 Max and an RTX 5060 Ti, large, product-heavy work in big batches runs 25 to 220 times faster than X_eTaL's own evaluator. Against tuned CPU code a small model does not win yet, and the next examples are built to the rule the measurements give: upload little, keep the data on the GPU, and do a lot of arithmetic per byte."
+abstract: "Seventh in the Array Languages series: X_eTaL-gpu takes X_eTaL programs to GPUs through OpenCL, old and new. A function written in ordinary X_eTaL is now marked for the GPU with a macro, ᵍᵖa̲ccel<, and runs there, lowered from its own source. Measured so far on an M1 Max and an RTX 5060 Ti, large, product-heavy work in big batches runs 25 to 220 times faster than X_eTaL's own evaluator. Against tuned CPU code a small model does not win yet, and the next examples are built to the rule the measurements give: upload little, keep the data on the GPU, and do a lot of arithmetic per byte."
 series: "Array Languages"
 series_part: 7
 date: 2026-10-13 00:15:00 -0700
@@ -69,26 +69,26 @@ What a GPU can run is a subset of X_eTaL, and the repo keeps that subset as an o
 ˡd̲ense ← { x wb → (x '+ '× i̲nner -1 d̲rop wb) + (o̲ffsets t̲ally x) 'r̲ight t̲able r̲avel -1 t̲ake wb }
 ```
 
-### The macro, `gp:a_ccel<`
+### The macro, `ᵍᵖa̲ccel<`
 
 A program imports the GPU facade and Accel, and marks a function for the GPU. Here is a network layer, from the repo's [accelerate demo](https://github.com/softwarewrighter/X_eTaL-gpu/blob/main/extensions/gpu/demos/accelerate.xtl):
 
 ```text
 "gp:" u̲se< "Gpu"
 "ac:" u̲se< "Accel"
-ᵘl̲ayer ← "float float" ᵍᵖa̲ccel< "{ x wb -> ac:r_elu x ac:d_ense wb }"
+ᵘl̲ayer ← "float float" ᵍᵖa̲ccel< "{ x wb → ᵃᶜr̲elu x ᵃᶜd̲ense wb }"
 h ← x ᵘl̲ayer wb
 ```
 
-On the right is the function, written as X_eTaL text on one line. On the left is how each argument is taken, `float` or `int`; an array of integers that the function looks rows up by, such as token ids, is passed as `int`. After that, `u:l_ayer` is called like any other function.
+On the right is the function, written as X_eTaL text on one line. On the left is how each argument is taken, `float` or `int`; an array of integers that the function looks rows up by, such as token ids, is passed as `int`. After that, `ᵘl̲ayer` is called like any other function.
 
-`gp:a_ccel<` is a macro, and like every X_eTaL macro it is a function from source text to source text. `xetal expand` shows what it writes:
+`ᵍᵖa̲ccel<` is a macro, and like every X_eTaL macro it is a function from source text to source text. `xetal expand` shows what it writes:
 
 ```text
-ᵘl̲ayer ← ({ x wb → ᵍᵖo̲utput 1 ᵍᵖa̲fter ᵍᵖr̲un 0 ᵍᵖa̲fter 2 ᵍᵖb̲ind wb ᵍᵖa̲fter 1 ᵍᵖb̲ind x ᵍᵖa̲fter "{ x wb -> ac:r_elu x ac:d_ense wb }" ᵍᵖl̲ower "accelerate.xtl|float float" })
+ᵘl̲ayer ← ({ x wb → ᵍᵖo̲utput 1 ᵍᵖa̲fter ᵍᵖr̲un 0 ᵍᵖa̲fter 2 ᵍᵖb̲ind wb ᵍᵖa̲fter 1 ᵍᵖb̲ind x ᵍᵖa̲fter "{ x wb → ᵃᶜr̲elu x ᵃᶜd̲ense wb }" ᵍᵖl̲ower "accelerate.xtl|float float" })
 ```
 
-Read from the right, as X_eTaL evaluates: `gp:l_ower` hands the function's text to the GPU extension, with the calling file, so the runner reads the same imports, and the arguments' kinds. Then `x` is bound as the first input and `wb` as the second, `gp:r_un 0` runs the program on the first OpenCL device, and `gp:o_utput 1` reads the result back. `gp:a_fter` puts the calls in that order. Nothing in the expansion is GPU code; it is a few calls to the extension.
+Read from the right, as X_eTaL evaluates: `ᵍᵖl̲ower` hands the function's text to the GPU extension, with the calling file, so the runner reads the same imports, and the arguments' kinds. Then `x` is bound as the first input and `wb` as the second, `ᵍᵖr̲un 0` runs the program on the first OpenCL device, and `ᵍᵖo̲utput 1` reads the result back. `ᵍᵖa̲fter` puts the calls in that order. Nothing in the expansion is GPU code; it is a few calls to the extension.
 
 The extension does the rest. It lowers the function's text through X_eTaL's own compiler crates, for the shapes of the arrays actually bound, once per set of shapes, and keeps the session: a second call with the same shapes reuses the compiled program, and a call with new shapes is lowered again. The repo's tests run a dense layer at two shapes, an embedding lookup with integer ids, and the softmax of attention scores this way on the M1 Max, each giving the evaluator's own value, and they pin the macro's expansion. The [live site](https://softwarewrighter.github.io/X_eTaL-gpu/) shows each of the demo's definitions beside its expansion.
 
@@ -221,7 +221,7 @@ The machine-learning models from [post #5](/2026/10/11/array-languages-xetal-ml/
 Two of the fixes have landed:
 
 - **Binary arrays.** Inputs can be bound from binary files instead of text. For the world model on the 5060 Ti, binding its inputs fell from 460 ms to 13 ms, and the whole process from about 1.06 s to 0.39 s. Results still come back as text.
-- **Sessions.** A session compiles once, keeps the kernels and the device buffers, and uploads only the inputs that change: bind the weights once, then rebind each batch and run again with `gp:r_erun`. The first call still pays 150 ms or so; the calls after it cost their upload and kernels.
+- **Sessions.** A session compiles once, keeps the kernels and the device buffers, and uploads only the inputs that change: bind the weights once, then rebind each batch and run again with `ᵍᵖr̲erun`. The first call still pays 150 ms or so; the calls after it cost their upload and kernels.
 
 What remains is the upload of each new batch, which the comparison above shows is now the main cost. Two things answer it: work that does more arithmetic per number uploaded, which is what the next examples are built for, and hiding the upload behind the work, which is the next fix.
 
@@ -235,7 +235,7 @@ First the direction, then the examples built to beat the CPU:
 
 1. **The lowering, done.** X_eTaL source and the shapes of its inputs in, a program in the GPU's form out, through X_eTaL's own crates, with a reason given for anything outside the subset. Every example now runs this way.
 2. **Running from source, done.** `xetal-gpu run program.xtl --device opencl:0` runs a program straight from its source. A statement the GPU cannot take, a sort or a `where`, no longer stops the program: the evaluator computes it and hands the result to the GPU as an input, and everything after it runs on the device. `explain` shows the X_eTaL line each kernel came from. Thirteen examples now agree with the evaluator this way on the M1 Max, and on the RTX 5060 Ti under Linux, each lowered from its own source with no changes.
-3. **The macro, done.** `gp:a_ccel<`, as above: a function written in X_eTaL, marked for the GPU, lowered and run there, its compiled program reused across calls with the same shapes.
+3. **The macro, done.** `ᵍᵖa̲ccel<`, as above: a function written in X_eTaL, marked for the GPU, lowered and run there, its compiled program reused across calls with the same shapes.
 4. **The models from their own source, under way now.** The world model and the benchmarks run from X_eTaL-ML's own programs through the macro, and the results tables say they were run from source.
 5. **Pipelining.** Chunks of a batch overlapping their upload, compute and download, as above, measured as sustained items per second.
 6. **Retrieval against a resident index.** The first example built to beat the CPU's library, written in X_eTaL and run through the macro: an index of hundreds of thousands of documents, each embedded as 256 numbers, kept on the GPU through a session. A batch of queries is scored against all of it with one product, and the best few for each query are kept by a top-k, measured against NumPy's library with fresh queries on every call. Each number uploaded buys a great many comparisons, the shape the rule asks for. Its two operations are done: lookup, the gather every transformer's embedding uses, and top-k. On 256 queries against 100,000 documents on the M1 Max, the top-k kernel takes 122 ms, against 92 ms for the scoring product.
@@ -295,3 +295,7 @@ The asks between the repositories show where each layer of the stack still falls
 This post will be updated as the models land on the cards.
 
 </div>
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/17: X_eTaL code is now shown rendered throughout, as <code>xetal render</code> draws it, including code written inside strings, rather than partly as typed; names that are about how you type them stay typed. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-13-array-languages-xetal-gpu.md">This post's history</a>.]</em></p>
