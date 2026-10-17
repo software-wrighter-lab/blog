@@ -18,9 +18,11 @@ repo_urls:
      Every output below was run here on 2026-10-17 ~14:00 with the ML repo's pinned xetal (b8a6ac3b): just demo-lib Pipeline mlp,
      just run-lib Pipeline oracle / shape-fails / roundtrip, just expand-lib Pipeline mlp, and the reject-*.err goldens.
      RECHECK against the commit when it lands (and again after 023 pipeline-bias and 024 pipeline-demos, the Rosetta Stone).
-     NOT CLAIMED: demos/mlp.xtl says "Which class each point gets: XOR", but its argmax is 2 1 1 1, which is not XOR: (0,0) and
-     (1,1) get different classes (worked by hand: W1/W2 as written); reported to Mike for the ML agent. The post does not call it XOR.
-     Also its comment says "(W1 nn:d_ense it)" where the code is "it nn:d_ense W1".
+     2026-10-17 ~15:00: COMMITTED as 8c758a1 (14:31); re-run on the commit: outputs, expansion, errors unchanged. The demo's weights
+     were fixed (now XOR: argmax 1 2 2 1, checked by hand); the comment now says "it nn:d_ense W1". Steps next: gate-affected (begun),
+     then pipeline-bias, pipeline-demos.
+     RENDERING: stages are shown rendered one by one (xetal render on each stage) because the renderer draws a string as typed;
+     X_eTaL code strings c"..." (ST5, docs/code-strings.md, steps 111-112) will make the renderer do it; re-render from source then.
      Lead image FOR NOW (Mike): his screenshot of a CNN layer as five stages with shapes, not inverted. -->
 
 <img src="{{ '/assets/images/posts/block-cnn-pipeline-stages.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
@@ -80,7 +82,7 @@ Read it the way it is written: start from the data `X`, apply the first dense la
 ⁿⁿs̲oftmax (ⁿⁿr̲elu X ⁿⁿd̲ense W1) ⁿⁿd̲ense W2
 ```
 
-The demo computes both and prints them; they are identical, to the last digit.
+The network's weights are set by hand so that it separates the four points of XOR: the demo prints the class each point gets, `1 2 2 1`, the two points that differ in one input in one class and the other two in the other. It also computes the network by hand, and the two results are identical, to the last digit.
 
 The `r"..."` is a raw string, new in the language this week: its text is kept exactly as written, across as many lines as it needs, so a pipeline can be laid out one stage per line. It is the one change to the language this work asked for, and it is only a new way to write a string, not a new kind of value.
 
