@@ -21,7 +21,7 @@ repo_urls:
      tmp/equations-findings-2026-10-17.md. NO library exists yet (no commit, no plan step on 10/17): where it lives, its name,
      its API are all open. Do not describe any of it as built until its commit exists. Macros to move onto it, as examples:
      Equations (e:e_q<), Pipeline (pipe:p_ipe<, X_eTaL-ML), Stencil (X_eTaL-demos), Tags (X_eTaL-libraries).
-     Lead image: Mike's block-composer-stick.jpg (2026-10-17), third version (11:56), an accurate stick; monochrome, inverts in dark mode. -->
+     Lead image: Mike's block-composer-stick.jpg (2026-10-17), fourth version (11:58), type set upside down; monochrome, inverts in dark mode. -->
 
 <img src="{{ '/assets/images/posts/block-composer-stick.webp' | relative_url }}" class="post-marker" alt="" style="width: 205px;">
 
