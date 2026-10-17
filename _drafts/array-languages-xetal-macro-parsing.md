@@ -18,8 +18,11 @@ repo_urls:
      Sources so far: X_eTaL docs/type-check-macros.md approaches 9 (a total-parsing library for macro authors), 10 (an
      unused-argument check in the macro runner; to be decided with Mike), 11 (a lint for .xtlm readers), from b8a6ac3b; the
      Equations case (X_eTaL-libraries ed91e6d, 8a6e796: whole-input rule, closed alphabet, the reprint check) and the blog's
-     tmp/equations-findings-2026-10-17.md. NO library exists yet (no commit, no plan step on 10/17): where it lives, its name,
-     its API are all open. Do not describe any of it as built until its commit exists. Macros to move onto it, as examples:
+     tmp/equations-findings-2026-10-17.md. 2026-10-17 10:35: X_eTaL-libraries Saga 13 (parsing) planned (92050c8): libs/Parsing,
+     alias pa:, a plain .xtl library of total parsers (split outside brackets, balanced group, chain with leading minus, name,
+     number, binding i:=a..b, function applied, reference), each all-or-refuse via []R_EJECT, plus a write-back whole-text check;
+     steps parsing-library, equations-on-parsing, tags-on-parsing. Named Parsing, not Reading (a Lisp reader macro is different).
+     X_eTaL step 110 macro-contracts (uncommitted plan). NOT built yet. Do not describe any of it as built until its commit exists. Macros to move onto it, as examples:
      Equations (e:e_q<), Pipeline (pipe:p_ipe<, X_eTaL-ML), Stencil (X_eTaL-demos), Tags (X_eTaL-libraries).
      Lead image: Mike's block-composer-stick.jpg (2026-10-17), fourth version (11:58), type set upside down; monochrome, inverts in dark mode. -->
 
