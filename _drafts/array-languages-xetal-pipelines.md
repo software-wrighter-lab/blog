@@ -28,7 +28,7 @@ repo_urls:
 
 <div style="overflow: hidden;" markdown="1">
 
-[Post #11](/2026/10/17/array-languages-xetal-equations/) turned an equation, as a paper prints it, into array code with one macro call. An ML model is more than one equation, though: it is data flowing through layers, one after another. This is the second macro in the same library, designed but not yet built: a pipeline that writes that flow left to right, the way it is drawn and described, in a language that reads right to left.
+[Post #11](/2026/10/17/array-languages-xetal-equations/) turned an equation, as a paper prints it, into array code with one macro call. An ML model is more than one equation, though: it is data flowing through layers, one after another. This is a second macro, designed but not yet built: a pipeline that writes that flow left to right, the way it is drawn and described, in a language that reads right to left.
 
 </div>
 
