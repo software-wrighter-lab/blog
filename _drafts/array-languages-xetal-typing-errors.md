@@ -3,8 +3,8 @@ layout: post
 title: "Array Languages #14: Types, Lints and Errors in X_eTaL"
 categories: [languages, language-design, tools]
 tags: [array-languages, xetal, x-etal, apl, types, type-inference, lint, errors, macros, ergonomics]
-keywords: "X_eTaL type checking, array language type inference, xetal lint, compile-time errors versus run-time errors, silent wrong answers, macro errors, shape lint, error messages, ergonomics"
-abstract: "Fourteenth in the Array Languages series, a plan: how X_eTaL tries to turn mistakes into errors as early as possible. A type error before the program runs is good, a run-time error is worse, and a silent wrong answer is the worst, and writing the Equations post turned up three of those in a day-old macro library. This post follows the ladder: types, lints, macro checks, run-time checks, and what the language changes so a whole class of silent failure cannot happen."
+keywords: "X_eTaL type checking, array language type inference, xetal lint, compile-time errors versus run-time errors, silent wrong answers, macro errors, shape checks, error messages, ergonomics"
+abstract: "Fourteenth in the Array Languages series: how X_eTaL tries to turn mistakes into errors as early as possible. A type error before the program runs is good, a run-time error is worse, and a silent wrong answer is the worst, and writing the equations post turned up three of those in a day-old macro library. This post follows the ladder rung by rung, with a real example of each, and ends with what changed so that class of mistake cannot come back."
 series: "Array Languages"
 series_part: 14
 date: 2026-10-20 00:15:00 -0700
@@ -15,21 +15,24 @@ repo_urls:
     title: "X_eTaL-libraries"
 ---
 
-<!-- DRAFT, A PLAN (2026-10-17): Mike: "type errors good; runtime errors bad; blog posts should be correct (unless we are
-     blogging about error handling--a good idea; plan the next AL series draft to be on Typing, linting, errors/ergonomics,
-     for publishing after the planned posts so far". After #13 (integrals, 10/19); date provisional.
-     Sources to read before writing: X_eTaL docs/lang-choices.md (T1-T6 types, Haskell-style numeric typing, value restriction),
-     docs/design.md, Saga 40 (xetal lint: names and renames D148-D150, --fix and --format json D144, redundant-lambda D143),
-     docs/type-check-macros.md (approach 8, the shape lint, D155), MC23 and D158 (Boxed broke every macro expansion), X_eTaL-gpu's
-     ask G13 ("every run-time finding comes with the earlier check it could have been"), and the blog's
-     tmp/equations-findings-2026-10-17.md (three silent wrong answers in Equations' summand reader, its causes, the proposals).
-     Do not claim any fix exists until its commit does. Lead image: Mike's block-checking.jpg (2026-10-17), background as is, not inverted. -->
+<!-- DRAFT (written 2026-10-17 afternoon). Every output below was run that day: X_eTaL e436d6ce (target/release/xetal) for run,
+     type, lint, lint --fix, lint --list, lint --explain; X_eTaL-libraries' pinned xetal 823adbd3 for Equations (8a6e796/92050c8,
+     19 reject tests) and Parsing (239dc1b); X_eTaL-ML b8a6ac3b for Pipeline (step 022, 14 reject tests, UNCOMMITTED at the
+     time: RECHECK). Error locations trimmed where the run printed a scratch path.
+     Sources: X_eTaL docs/lint.md (11 lints, 5 groups), docs/type-check-macros.md (approaches 8-11), the blog's
+     tmp/equations-findings-2026-10-17.md (sections 1, 5, 7). Ergonomics finding (section 7): plain type errors print a byte range
+     ("at 47..52") with no file:line, unlike lint and macro output; reported for the X_eTaL agent. If fixed by publishing, show
+     the new message and say so; if not, keep the "What is still rough" section.
+     The parsing library is #15 (10/21): refer to it as "a planned post", no link, until #15 is published.
+     Mike's framing (2026-10-17): "type errors good; runtime errors bad; blog posts should be correct (unless we are blogging
+     about error handling".
+     Lead image: Mike's block-checking.jpg (2026-10-17), background as is, not inverted. -->
 
 <img src="{{ '/assets/images/posts/block-checking.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
 <div style="overflow: hidden;" markdown="1">
 
-A mistake in a program can surface at four times: when the program is checked, when a lint reads it, when it runs, or never, as an answer that is quietly wrong. X_eTaL is designed to push every mistake as early on that list as it can. This post is about that ladder, and about what happened when a new library slipped to the bottom rung.
+A mistake in a program can surface at four times: when the program is checked, before it runs; when a lint reads it; when it runs; or never, as an answer that is quietly wrong. X_eTaL is designed to push every mistake as early on that list as it can. This post climbs that ladder one rung at a time, with a real example of each, and then tells what happened when a new library slipped to the bottom rung.
 
 </div>
 
@@ -39,8 +42,9 @@ A mistake in a program can surface at four times: when the program is checked, w
 
 | Resource | Link |
 |----------|------|
-| **The language** | [X_eTaL](https://github.com/softwarewrighter/X_eTaL) |
+| **The language** | [X_eTaL](https://github.com/softwarewrighter/X_eTaL) · [its lints](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/lint.md) |
 | **The libraries** | [X_eTaL-libraries](https://github.com/softwarewrighter/X_eTaL-libraries) |
+| **The thread** | [#11: equations](/2026/10/17/array-languages-xetal-equations/) · [#12: pipelines](/2026/10/18/array-languages-xetal-pipelines/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
 </div>
@@ -49,38 +53,125 @@ A mistake in a program can surface at four times: when the program is checked, w
 
 ## The ladder
 
-<!-- PLAN: four rungs, with one real example each, every one run and quoted from its tool:
-     1. a type error before running (an Int divided by a Float variable: error[type-mismatch], and why the literal case works);
-     2. a lint (xetal lint: a redundant lambda, a name, --fix);
-     3. a run-time error that names everything (Equations' error[index] and error[rank]);
-     4. a silent wrong answer (below). -->
+| When | What catches it | Example below |
+|---|---|---|
+| before the program runs | the type checker | a whole number divided by a decimal |
+| before the program runs | a macro checking its own text | an equation or a pipeline written wrong |
+| when asked | the linter | a lambda that only passes its argument on |
+| while the program runs | a check written into the code | an index outside its array, a broken shape promise |
+| never | nothing | three equations that summed the wrong thing |
+
+The higher a mistake is caught, the cheaper it is: an error before the program runs costs a moment, an error while it runs may throw away work already done, and a wrong answer costs whatever was built on it.
 
 ## Types first
 
-<!-- PLAN: what X_eTaL checks before a program runs: inferred types, numeric classes, Int versus Float, the value restriction;
-     `xetal type`; a type error located at the code that caused it. Ergonomics: errors in macro output are located at the call,
-     not in the string; what would help. -->
+X_eTaL infers the type of every name before a program runs, and refuses a program whose types do not fit. Ask it what it inferred:
+
+```text
+$ xetal type mean.xtl
+u:m_ean : Float -> Float
+```
+
+Here is a program with a mistake in its last line: a 2 by 2 array of whole numbers divided by a decimal.
+
+```text
+a ← 2 2 r̲eshape 1 2 3 4
+s ← 2.0
+p̲rint! 100
+a ÷ s
+```
+
+```text
+$ xetal run type.xtl
+error[type-mismatch]: expected Int, found Float at 47..52
+```
+
+The `100` on the line before is never printed: the program is refused before it starts. That is the rung a mistake should land on. Writing `a ÷ 2.0` works, because a number written in the program takes whichever type it is needed as; a name already bound as a whole number does not change type, so `(f̲loat a) ÷ s` is how to say it.
+
+## Macros check their own text
+
+A macro that reads a notation checks it when the program is compiled, and refuses a call it cannot read, at the call:
+
+```text
+"Y[o,h,w] | O Ho Wo" ᵉe̲q< "sum c:=0..C - 1, sum h:=0..1 | X[c,h,w]"
+error[bad-equation]: an index is bound once: c, h, o, h, w
+```
+
+```text
+@ ᵖⁱᵖᵉp̲ipe< "x |> 3"
+error[bad-pipeline]: a stage is a function (nn:r_elu, [f_ g_], '{ x -> ... }) or an expression naming the previous value it (or a name bound before it): 3
+```
+
+The equation library has nineteen tests of such refusals, the pipeline library fourteen. They are the type checker's rung for the notations the type checker cannot see inside, because to the language a notation is just a string.
 
 ## Lints
 
-<!-- PLAN: xetal lint (Saga 40): what it flags, --fix, JSON output, how the libraries keep themselves lint clean; the shape lint
-     (D155) as the next rung: proving a shape contract before the program runs, so a run-time check becomes a compile-time one. -->
+`xetal lint` reads a program for things that are legal but probably not meant. It has eleven lints in five groups, from `suspicious` to `pedantic`, each with a default level, and each one explains itself with `xetal lint --explain`. Two of them:
 
-## Macros check their arguments
+```text
+u:n̲egAll ← { v → '{ x → n̲eg x } m̲ap v }
+warning[redundant-lambda]: this lambda only passes its arguments to `n_eg`: write `'n_eg` at lint.xtl:1:22
+```
 
-<!-- PLAN: []R_EJECT at the argument (Equations' ten rejection tests), hygiene and fresh names ([]G_ENSYM), raw strings with
-     errors located inside them, and D158: the Boxed setting that turned every macro expansion into a box drawing. -->
+```text
+u:c̲lip ← { v → (t̲ally v) ? v; 0 r̲eshape 0 }
+warning[int-condition]: this guard's condition is an Int, which fails at run time unless it is 1 or 0: write the comparison meant, as `0 < n` or `0 != n` at ic.xtl:1:20
+```
+
+The second is a lint about the next rung down: a guard on a count works while the count is 0 or 1, and stops the program the first time it is 2. Where a fix is certain, `xetal lint --fix` makes it, and it refuses to touch a file git could not restore:
+
+```text
+$ xetal lint --fix fixme.xtl
+fixed 1 finding(s) in fixme.xtl
+u:n̲egAll ← { v → 'n̲eg m̲ap v }
+```
+
+The libraries are kept lint clean, and findings can also be written as JSON, one per line, so an editor can show where they are.
+
+## Checked while running
+
+Some mistakes only the data can show. Then the check is written into the code, and it stops the program with everything needed to find the cause, never a silent wrong read. The equation macro checks every subscript it reads:
+
+```text
+error[index]: X axis 1: index 2 is outside 0..1 (from c)
+error[rank]: X[c,h+r] indexes 2 axes, but X has rank 3
+```
+
+And a pipeline stage that promises a shape is checked against it:
+
+```text
+@ ᵖⁱᵖᵉp̲ipe< "x |> 2 * it : y [n] |> y + 1"
+error[shape]: stage 2 (y): shape 4, expected 3
+```
+
+These are better than wrong answers and worse than errors before running. Where the extents are known before the program runs, as they are in every one of these examples, a shape check planned in X_eTaL could move them up a rung.
 
 ## A silent wrong answer
 
-<!-- PLAN: the story from writing #11 (tmp/equations-findings-2026-10-17.md): (y[i] - p[i])^2 summed y - p, y[i]2 and y[i] % 2
-     dropped their tails, the LaTeX said otherwise; how it was found (trying more ML equations for the post), the cause (a reader
-     that consumed part of its input), and the fix as it lands: the library's whole-input rule, a closed alphabet, coverage and
-     differential tests, and the language-level changes (total parsing for macros, an unconsumed-argument check), if decided. -->
+Writing the equations post meant trying equations the library had not been tested on. With `y` of `1 2 3 4` and `p` of `1.5 2 2 4`, three gave wrong answers with no error anywhere:
+
+| Summand | Gave | Should have |
+|---|---|---|
+| `(y[i] - p[i])^2` | 0.5, the sum of `y − p` | given 1.25 |
+| `y[i]2` | 10 | been refused |
+| `y[i] % 2` | 10, the `% 2` gone | been refused |
+
+Worse, the LaTeX the same call returned showed the square, so the printed math and the computed value disagreed, which is the one thing the library promised could not happen.
+
+The cause was in the macro's reader, the code that takes its string apart. A term starting with a parenthesis was read by dropping its first and last characters, without checking that the last one was the closing parenthesis, so `(y[i] - p[i])^2` lost its `2`. A reference like `y[i]` was read from the first `[` to the last `]`, without checking that the `]` ended the term, so whatever followed it vanished. Nothing checked that every character had been used.
+
+It was fixed the same morning, in three layers. Every rule of the reader now uses all of its text or refuses the call. Only the notation's own characters may appear, so `%` is refused by name. And every call is now read three ways from one grammar, as the value, as the LaTeX and as a plain reprint, and the reprint is compared with what was written: a rule that dropped a character, any rule, now makes the call fail when the program is compiled. A differential test now also generates random equations and checks each against the same computation written by hand.
 
 ## What changes so it cannot happen again
 
-<!-- PLAN: only what is committed by publishing time; the rest as plans, clearly marked. End by pointing to the macro writers'
-     parsing library as "a planned post" (#15, 10/21), with no link. -->
+The fix covered one library. The class of bug, a reader that uses part of its text and drops the rest, can happen in any macro that reads a notation, and more of them are coming. Three changes go further, from narrow to broad:
+
+- **The pipeline macro was written to the rule from the start,** with a test for each kind of text it refuses, the equation library's three cases among them, and a macro, `pipe:t_ext<`, that writes back what it read.
+- **A parsing library for macro writers,** whose every piece uses all of its text or refuses, with the reprint check built in, so a new macro does not have to learn this lesson again. It has been written, and it is the subject of a planned post.
+- **A check in the language itself,** proposed and not yet decided: the macro runner would refuse any expansion that leaves part of an argument unused, in every macro, library or not. That would put this whole class of mistake on the top rung.
+
+## What is still rough
+
+The ladder is right; some rungs are uncomfortable. The type error above names a byte range, `at 47..52`, where the linter names a file, a line and a column and says how to fix the finding; and it says a whole number was expected without saying which name was one. Both have been reported. A mistake caught early is only half the help. The other half is a message that says where and what to do.
 
 </div>
