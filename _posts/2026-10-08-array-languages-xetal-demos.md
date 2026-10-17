@@ -169,4 +169,4 @@ The libraries: nineteen of them, and six that carry macros of their own.
 
 ---
 
-<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/17: the stencil macro's name corrected from <code>ˢt̲encil&lt;</code> to <code>ˢs̲tencil&lt;</code>, as the demo renamed it on 2026/10/08; without its s, the name read as "stencil" only beside the <code>s:</code> alias.]</em></p>
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/17: the stencil macro's name corrected from <code>ˢt̲encil&lt;</code> to <code>ˢs̲tencil&lt;</code>, as the demo renamed it in <a href="https://github.com/softwarewrighter/X_eTaL-demos/commit/2809b69">2809b69</a>; without its s, the name read as "stencil" only beside the <code>s:</code> alias. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-08-array-languages-xetal-demos.md">This post's history</a>.]</em></p>
