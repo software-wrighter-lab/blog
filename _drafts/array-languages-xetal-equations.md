@@ -27,7 +27,7 @@ repo_urls:
 
 <div style="overflow: hidden;" markdown="1">
 
-[ML #9](/2026/09/10/ml-cnn-from-equations-mlpl/) ended with a CNN's triple sum and a question: what notation could say it in one line? [Post #5](/2026/10/11/array-languages-xetal-ml/) said experiments were under way with macros for ML equations. This is the design they produced: write the equation as the paper prints it, and get the array code, the LaTeX, or both, from one macro call, with no change to the language.
+[ML #9](/2026/09/10/ml-cnn-from-equations-mlpl/) ended with a CNN's triple sum and a question: what notation could say it in one line? [Post #5](/2026/10/11/array-languages-xetal-ml/) said experiments were under way with macros for ML equations. This is the design they produced. Its purpose is to let one equation be seen three ways and to move freely between them: as the math a paper prints, as an X_eTaL macro call that reads almost the same, and as the ordinary X_eTaL the macro expands to and runs. Because the typeset math and the running code come from the same call, they cannot drift apart.
 
 </div>
 
@@ -46,17 +46,37 @@ repo_urls:
 
 <div class="clearfix" markdown="1" style="clear: both;">
 
+## One equation, three views
+
+<figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 48%;">
+<img src="{{ '/assets/images/posts/xetal-eq-three.webp' | relative_url }}" class="no-invert" alt="Three views of one equation. At the top, the CNN's triple sum typeset as a paper prints it: Y sub o,h,w equals the sum over c from 0 to C minus 1, r from 0 to Kh minus 1 and s from 0 to Kw minus 1 of X sub c, h plus r, w plus s times W sub o,c,r,s. An arrow up: e:t_ex returns this as LaTeX, from the same call. In the middle, the macro call written in X_eTaL. An arrow down: xetal expand shows what the macro writes. Then an excerpt of the expanded X_eTaL: a grid of coordinates and three sum-reductions over gathers from X and W. Then the result it runs to, 560 596 632, 704 740 776, 848 884 920">
+<figcaption style="font-size: 0.85em;">One equation, three views: the math, the macro call, and the X_eTaL it expands to. Click to enlarge.</figcaption>
+</figure>
+
+Machine-learning papers are written in math, and programs are not. Translating one into the other by hand is where mistakes hide: an index off by one, a sum over the wrong axis, a bound that is right in the paper and wrong in the code. The equation macros keep the two together. The figure shows the three views of one equation, the convolution a CNN computes:
+
+- **The math,** at the top, typeset as a paper would print it. It is not drawn by hand: the macro returns it as LaTeX, from the same call that computes the value.
+- **The macro call,** in the middle, which is what a programmer writes. It reads almost like the math: the same indices, the same bounds, the same summand.
+- **The expanded X_eTaL,** below it, which is what actually runs, plain array operations that `xetal expand` will show to anyone who wants to check the macro's work.
+
+Read up, and the code can be checked against the paper. Read down, and the paper becomes a program, with its answer at the bottom. The expansion and the answer here come from the proof of concept, which takes an earlier form of the call; the library that takes the form shown is next.
+
+<div style="clear: both;"></div>
+
 ## Macros first, syntax only when justified
 
 An ML-focused language could add notation for sums to its grammar. The approach here is the opposite. X_eTaL's macros are functions from source text to source text, and the bet is that they are a sufficient mechanism to express ML concisely and idiomatically, so the grammar changes only when a change is justified. This work is the test of that bet, and it is deliberately a library on the language as it is: nothing in the compiler changes for the equations.
 
 ## An equation, as the paper prints it
 
-The running example is the 2D convolution a CNN computes, a cross-correlation, written as a triple sum over input channels and kernel rows and columns:
+<figure class="zoomable" style="float: left; clear: both; margin: 0.2em 1.5em 0.6em 0; max-width: 44%;">
+<img src="{{ '/assets/images/posts/xetal-eq-eq.webp' | relative_url }}" class="no-invert" alt="The CNN's triple sum typeset: Y sub o,h,w equals the sum over c from 0 to C minus 1, the sum over r from 0 to Kh minus 1 and the sum over s from 0 to Kw minus 1 of X sub c, h plus r, w plus s times W sub o,c,r,s">
+<figcaption style="font-size: 0.85em;">The convolution, typeset from the LaTeX the macro returns. Click to enlarge.</figcaption>
+</figure>
 
-```text
-Y[o,h,w] = sum_{c=0}^{C-1} sum_{r=0}^{Kh-1} sum_{s=0}^{Kw-1} X[c,h+r,w+s] W[o,c,r,s]
-```
+The running example is the 2D convolution a CNN computes, strictly a cross-correlation, written as a triple sum. Each output `Y[o,h,w]`, for output channel `o` at row `h` and column `w`, adds up products over every input channel `c` and every kernel row `r` and column `s`: the input `X` at the window's position times the weight `W` for that output channel. The typeset version on the left is how a paper prints it.
+
+<div style="clear: both;"></div>
 
 As a macro call it reads almost the same:
 
@@ -82,7 +102,34 @@ Y_{o,h,w} = \sum_{c=0}^{C - 1} \sum_{r=0}^{Kh - 1} \sum_{s=0}^{Kw - 1} X_{c,h+r,
 
 ## What it becomes
 
-The macro writes ordinary X_eTaL, and `xetal expand` shows it. A grid of coordinates is built over the free and summed indices; each array reference becomes a gather, its index expressions evaluated on that grid; and each sum becomes one reduction along its axis, innermost first. There are no loops in the result, just array operations, which is the same shape the GPU work in [post #7](/2026/10/13/array-languages-xetal-gpu/) lowers to kernels.
+The macro writes ordinary X_eTaL, and `xetal expand` shows it. The proof of concept already does this, from an earlier form of the call, which gave the sums' bounds in one list and their starting values in a third region, matched by position:
+
+```text
+Y ← "o h w | O Ho Wo" ᵉs̲um< "C - 1, Kh - 1, Kw - 1 | X[c,h+r,w+s] * W[o,c,r,s] | c:=0, r:=0, s:=0"
+```
+
+Its expansion, rendered, with line breaks added at the statement separators:
+
+```text
+Y ← ({ @ →
+  grid ← (1 + (C − 1) − (0)) c̲at (1 + (Kh − 1) − (0)) c̲at (1 + (Kw − 1) − (0)) c̲at (O) c̲at (Ho) c̲at (Wo)◆
+  g̲rid ← { k → grid r̲eshape (o̲ffsets k s̲elect grid) 'l̲eft t̲able ('× r̲/ k d̲rop grid) r̲eshape 0 }◆
+  a̲t ← { A i → (1 + i) s̲elect r̲avel A }◆
+  '+ r̲/₁ '+ r̲/₂ '+ r̲/₃
+    (X a̲t ((g̲rid 6)+((0) + g̲rid 3)) + (3 s̲elect s̲hape X) × ((g̲rid 5)+((0) + g̲rid 2)) + (2 s̲elect s̲hape X) × (((0) + g̲rid 1)))
+    × (W a̲t (((0) + g̲rid 3)) + (4 s̲elect s̲hape W) × (((0) + g̲rid 2)) + (3 s̲elect s̲hape W) × (((0) + g̲rid 1)) + (2 s̲elect s̲hape W) × ((g̲rid 4)))
+} @)
+```
+
+Each line maps back to the math:
+
+- **`grid`** is the shape of the whole computation: one axis per index, the summed ones first, `c`, `r` and `s`, then the free ones, `o`, `h` and `w`.
+- **`g̲rid k`** gives the value of the `k`th index at every point of that grid, so `g̲rid 3` is `s` everywhere and `g̲rid 6` is `w`.
+- **`a̲t`** reads elements out of an array by flat position, a gather.
+- **The `X` term** builds each flat position from the paper's subscripts, `w+s`, `h+r` and `c`, combined by the array's own dimensions, so `X[c,h+r,w+s]` becomes one gather over the whole grid. The `W` term does the same for `W[o,c,r,s]`.
+- **`'+ r̲/₁ '+ r̲/₂ '+ r̲/₃`** are the three sums: reductions along the axes of `c`, `r` and `s`, leaving an array of shape `O Ho Wo`, which is `Y`.
+
+There are no loops in the result, just array operations, which is the same shape the GPU work in [post #7](/2026/10/13/array-languages-xetal-gpu/) lowers to kernels. The decided form adds what the proof of concept lacks: each sum binds its own index and range, so a bound cannot be paired with the wrong index, and every gather gets a bounds check.
 
 Mistakes are caught where they can be. A malformed range, an index summed twice, or a summand index that is neither summed nor free is rejected when the macro expands. An index that runs outside its array is a run-time error that names the array, the axis, the index and the expression it came from, never a silent wrong read:
 
