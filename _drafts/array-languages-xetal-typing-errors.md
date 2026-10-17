@@ -23,9 +23,9 @@ repo_urls:
      docs/type-check-macros.md (approach 8, the shape lint, D155), MC23 and D158 (Boxed broke every macro expansion), X_eTaL-gpu's
      ask G13 ("every run-time finding comes with the earlier check it could have been"), and the blog's
      tmp/equations-findings-2026-10-17.md (three silent wrong answers in Equations' summand reader, its causes, the proposals).
-     Do not claim any fix exists until its commit does. Lead image: PLACEHOLDER (scripts/placeholder-marker); Mike will supply one. -->
+     Do not claim any fix exists until its commit does. Lead image: Mike's block-checking.jpg (2026-10-17), background as is, not inverted. -->
 
-<img src="{{ '/assets/images/posts/placeholder-xetal-typing-errors.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-checking.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
 <div style="overflow: hidden;" markdown="1">
 
