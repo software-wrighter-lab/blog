@@ -26,6 +26,9 @@ repo_urls:
      2026-10-16 evening (Mike relayed the X_eTaL agent): the library moves to X_eTaL-libraries as libs/Equations (Equations.xtlm),
      imported "e:" u_se< "Equations"; new saga there: XETAL_COMMIT bump (needs []G_ENSYM, raw strings), oracle, capture, lowering,
      latex + README/docs/demo/catalog. X_eTaL keeps the integrals plan, a canary macro library, the shape lint, the docs.
+     2026-10-17 10:00: MSE uses ^2 (fixed reader ed91e6d, run from a clean export of origin/main). NOT YET: libraries' uncommitted
+     'whole equations' (09:51: (sum ...) + b[i], / sqrt(d), prod max min, exp log sqrt abs, \frac \sqrt, reprint check): redo the
+     four-equation figure from it once committed (dense with bias, attention with 1/sqrt d, MSE as printed, softmax, max pooling).
      2026-10-17: the four ML equations (dense, attention scores/output, MSE) ran with the pinned xetal; outputs checked by hand;
      forms that are wrong today (^ in a summand: silent wrong answer) are NOT shown; gaps written up for the X_eTaL agents.
      2026-10-17: Equations DONE in X_eTaL-libraries (saga 12: be0f5b9 pin, 8197d52 oracle, 09143d8 capture, cb430d5 lowering,
@@ -208,7 +211,7 @@ error[index]: X axis 1: index 2 is outside 0..1 (from c)
 ## Beyond the CNN
 
 <figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 46%;">
-<img src="{{ '/assets/images/posts/xetal-eq-four.webp' | relative_url }}" class="no-invert" alt="Four equations typeset from the LaTeX the macro returned, each with its result: a dense layer without its bias, z sub i equals the sum over j of W sub i,j x sub j, giving -2 -2; attention scores, S sub i,j equals the sum over d of Q sub i,d K sub j,d over s, giving 1 2 0 and 1 0 3; attention output, O sub i,e equals the sum over j of A sub i,j V sub j,e, giving 2.5 3.5 and 3 4; mean squared error, L equals the sum over i of (y sub i minus p sub i) times (y sub i minus p sub i) over nf, giving 0.3125">
+<img src="{{ '/assets/images/posts/xetal-eq-four.webp' | relative_url }}" class="no-invert" alt="Four equations typeset from the LaTeX the macro returned, each with its result: a dense layer without its bias, z sub i equals the sum over j of W sub i,j x sub j, giving -2 -2; attention scores, S sub i,j equals the sum over d of Q sub i,d K sub j,d over s, giving 1 2 0 and 1 0 3; attention output, O sub i,e equals the sum over j of A sub i,j V sub j,e, giving 2.5 3.5 and 3 4; mean squared error, L equals the sum over i of (y sub i minus p sub i) squared over nf, giving 0.3125">
 <figcaption style="font-size: 0.85em;">Four more equations, typeset from the macro's own LaTeX, with what each computed. Click to enlarge.</figcaption>
 </figure>
 
@@ -218,7 +221,7 @@ The convolution is the hardest case, three sums and arithmetic in the subscripts
 (z, tz) ← "z[i] | N" ᵉb̲oth< "sum j:=0..M - 1 | W[i,j] * x[j]"
 (S, tS) ← "S[i,j] | T U" ᵉb̲oth< "sum d:=0..D - 1 | Q[i,d] * K[j,d] / s"
 (O, tO) ← "O[i,e] | T E" ᵉb̲oth< "sum j:=0..U - 1 | A[i,j] * V[j,e]"
-(L, tL) ← "L[] | " ᵉb̲oth< "sum i:=0..n - 1 | (y[i] - p[i]) * (y[i] - p[i]) / nf"
+(L, tL) ← "L[] | " ᵉb̲oth< "sum i:=0..n - 1 | (y[i] - p[i])^2 / nf"
 ```
 
 - **A dense layer,** the weights `W` times the input `x`, the core of every fully connected layer.
@@ -226,7 +229,7 @@ The convolution is the hardest case, three sums and arithmetic in the subscripts
 - **Attention output,** the attention weights `A` applied to the values `V`.
 - **Mean squared error,** the average squared difference between targets `y` and predictions `p`. Its result has no free indices, `L[]`, so it is a single number; `nf` is `n` as a float.
 
-The figure shows what each call returned: the LaTeX, typeset, and the value, each checked by hand. They also show where the notation stops today. A paper would write the attention scale as a fraction, `1/√d` in front of the sum, the error with a square and `1/n` in front, and the dense layer with its bias added after the sum. The macro takes only `sum`, and only one summand, so the scale and the average go inside the sum, the square is written as a product, the bias waits for a second step, and the LaTeX shows them exactly as written. The answers are right; the next round of the library is to make the notation match the paper too.
+The figure shows what each call returned: the LaTeX, typeset, and the value, each checked by hand. They also show where the notation stops today. A paper would write the attention scale as a fraction, `1/√d` in front of the sum, the error's `1/n` in front of its sum, and the dense layer with its bias added after the sum. The macro takes only `sum`, and only one summand, so the scale and the average go inside the sum, the bias waits for a second step, and the LaTeX shows them exactly as written. Powers are in: `^` binds tightest, a tower of powers is read from the top as math reads it, so `2^3^2` is 512, and the power comes before a minus sign, so `-2^2` is −4. The answers are right; the next round of the library is to make the notation match the paper too.
 
 <div style="clear: both;"></div>
 
@@ -242,7 +245,9 @@ The call's form was not the first idea. The design compares seven ways of writin
 
 ## What comes next
 
-The library went from plan to finished in one evening, in five steps, each with its tests first: moving its copy of X_eTaL up to the current language, for fresh names and raw strings; the oracle; reading the call, with the rejections; the lowering, with the checks; and the LaTeX, with the demo and the documentation. Then I asked for readable expansions: the macro now lays its expansion out as a program, as shown above, and `xetal expand` now does the same for every macro. And one name changed before this post: the value macro was `q_<`, which read as "eq" only beside the alias `e:`. Since the alias is the caller's choice, it is now `e_q<`, which reads as "eq" under any alias, like its siblings `t_ex<` and `b_oth<`. Macros also had a bug, which I hit in X_eTaL's live demo: with its Boxed display on, every macro call in every program failed, because a macro's expansion went through the same printer as the program's output and came back drawn as a box instead of as source. That is fixed, with tests that were red before the fix.
+The library went from plan to finished in one evening, in five steps, each with its tests first: moving its copy of X_eTaL up to the current language, for fresh names and raw strings; the oracle; reading the call, with the rejections; the lowering, with the checks; and the LaTeX, with the demo and the documentation. Writing this post found a real bug, the worst kind: three summands that gave wrong answers with no error. `(y[i] - p[i])^2` summed `y - p`, and `y[i]2` and `y[i] % 2` summed `y`, while the LaTeX printed what was written. The reader had used part of its text and dropped the rest. It was fixed the same morning: every rule of the grammar now uses all of its text or refuses the call, only the grammar's own characters may appear, and `^` joined the grammar. Each of the three is now a test, and a function call such as `exp(y[i])`, not in the grammar yet, is refused rather than guessed at.
+
+Then I asked for readable expansions: the macro now lays its expansion out as a program, as shown above, and `xetal expand` now does the same for every macro. And one name changed before this post: the value macro was `q_<`, which read as "eq" only beside the alias `e:`. Since the alias is the caller's choice, it is now `e_q<`, which reads as "eq" under any alias, like its siblings `t_ex<` and `b_oth<`. Macros also had a bug, which I hit in X_eTaL's live demo: with its Boxed display on, every macro call in every program failed, because a macro's expansion went through the same printer as the program's output and came back drawn as a box instead of as source. That is fixed, with tests that were red before the fix.
 
 Still ahead for equations: the parts deliberately left out, padding, strides and dilation for convolutions, and a shape check that catches a wrong shape before a program runs rather than after, which is being built in X_eTaL now. Anything a macro cannot cover is reviewed and decided, never assumed.
 
