@@ -224,6 +224,8 @@ error[index]: X axis 1: index 2 is outside 0..1 (from c)
 
 The convolution is the hardest case, three sums and arithmetic in the subscripts, but a sum is rarely the whole of an equation. A paper puts a bias after it, a scale or an average over it, and a function around its terms. So a sum in parentheses is a term like any other, `max`, `min` and `prod` join `sum`, and `exp`, `log`, `sqrt`, `abs`, `max` and `min` can be applied, spelled as a paper spells them. Five equations every model uses, each one call:
 
+<div style="clear: both;"></div>
+
 ```text
 (z, tz) ← "z[i] | 2" ᵉb̲oth< "(sum j:=0..2 | W[i,j] * x[j]) + b[i]"
 (S, tS) ← "S[i,j] | 2 3" ᵉb̲oth< "(sum d:=0..3 | Q[i,d] * K[j,d]) / sqrt(4)"
