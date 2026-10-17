@@ -23,6 +23,9 @@ repo_urls:
      2026-10-16 evening (Mike relayed the X_eTaL agent): the library moves to X_eTaL-libraries as libs/Equations (Equations.xtlm),
      imported "e:" u_se< "Equations"; new saga there: XETAL_COMMIT bump (needs []G_ENSYM, raw strings), oracle, capture, lowering,
      latex + README/docs/demo/catalog. X_eTaL keeps the integrals plan, a canary macro library, the shape lint, the docs.
+     PLAN (Mike, 2026-10-16): Equations lands BEFORE this post publishes 10/17; the lint work runs in parallel. On landing, regenerate
+     from the real library: xetal-eq-three.webp and the "What it becomes" expansion from the decided call (not the POC's e:s_um<),
+     the LaTeX from e:t_ex<, the fixtures from the oracle goldens, the bounds error from an actual run; drop "not written yet".
      The library itself is NOT written yet: no claims that it runs; the numbers below are the proof of concept's.
      Date provisional (after #10 on Friday 10/16). Lead image: Mike's chalkboard of the stable softmax, not inverted, not transparent. -->
 

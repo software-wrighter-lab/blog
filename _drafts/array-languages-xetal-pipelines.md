@@ -19,6 +19,7 @@ repo_urls:
      docs/plan.md (steps 100 raw-strings IN PROGRESS on 10/16, 105 spatial-pipeline-macro, 106 shape-lint).
      2026-10-16 evening: the equation library moved to X_eTaL-libraries as libs/Equations; whether e:p_ipe< goes there too is NOT
      stated yet, so the post no longer says "the same library". Confirm before publishing.
+     PLAN (Mike, 2026-10-16): the pipeline macro work continues 10/17 for this post on 10/18.
      Nothing runs yet. Recheck every detail against the repo before publishing. Date provisional.
      Lead image FOR NOW (Mike): his screenshot of a CNN layer as five stages with shapes, not inverted. -->
 
