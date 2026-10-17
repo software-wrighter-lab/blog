@@ -21,9 +21,9 @@ repo_urls:
      tmp/equations-findings-2026-10-17.md. NO library exists yet (no commit, no plan step on 10/17): where it lives, its name,
      its API are all open. Do not describe any of it as built until its commit exists. Macros to move onto it, as examples:
      Equations (e:e_q<), Pipeline (pipe:p_ipe<, X_eTaL-ML), Stencil (X_eTaL-demos), Tags (X_eTaL-libraries).
-     Lead image: PLACEHOLDER (scripts/placeholder-marker); Mike will supply one. -->
+     Lead image: Mike's block-composer-stick.jpg (2026-10-17), a stylized woodcut; monochrome, inverts in dark mode. -->
 
-<img src="{{ '/assets/images/posts/placeholder-xetal-macro-parsing.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-composer-stick.webp' | relative_url }}" class="post-marker" alt="" style="width: 205px;">
 
 <div style="overflow: hidden;" markdown="1">
 
@@ -43,6 +43,10 @@ A macro in X_eTaL is a function from the text written at its call to the code th
 </div>
 
 <div class="clearfix" markdown="1" style="clear: both;">
+
+<div class="aside-box" style="float: left; clear: none; margin: 0.3em 1.8em 1.2em 0; max-width: 280px;" markdown="1">
+**What is a composing stick?** The tool at the top of this post, drawn loosely. Before machines set type, a compositor built each line of a page by hand in a composing stick: a small metal tray held in one hand, its width set to the line's measure. Letters, one piece of metal each, were picked from the type case one at a time and set in the stick, then spaced out until the line filled the measure exactly and could be lifted out as one piece. Every character was placed on purpose, and nothing was left loose. That is the idea this post borrows for parsing.
+</div>
 
 ## Every macro is a parser
 
