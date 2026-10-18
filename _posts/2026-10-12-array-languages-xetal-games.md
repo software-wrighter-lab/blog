@@ -171,3 +171,6 @@ When an ask lands, the game drops its workaround. When it does not, the game sho
 
 That is the tour: [the language](/2026/10/07/array-languages-xetal/), [the demos](/2026/10/08/array-languages-xetal-demos/), [the libraries](/2026/10/09/array-languages-xetal-libraries/), [the extensions](/2026/10/10/array-languages-xetal-extensions/), [the machine learning](/2026/10/11/array-languages-xetal-ml/), and the games. Six repositories, each with one job, and one language under all of them. Two more, for GPUs and FPGAs, are planned and will join the series when they exist.
 
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/18: the sections are now staggered across the page, as on the rest of the site, with each image beside its section in the open margin. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-12-array-languages-xetal-games.md">This post's history</a>.]</em></p>

@@ -120,3 +120,5 @@ A planned post covers the third meaning of *Extensible*: native extensions, Rust
 ---
 
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/17: two macros shown with the libraries' new recommended aliases, <code>ᵖˡp̲oly&lt;</code> for Polynomials (was <code>py:</code>, which read as Python) and <code>ᶜʰc̲ases&lt;</code> for Check (was <code>k:</code>), after the libraries chose plain names that read under any alias in <a href="https://github.com/softwarewrighter/X_eTaL-libraries/commit/7f9560d">7f9560d</a>. An alias is still the caller's choice. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-09-array-languages-xetal-libraries.md">This post's history</a>.]</em></p>
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/18: the sections are now staggered across the page, as on the rest of the site, with each image beside its section in the open margin. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-09-array-languages-xetal-libraries.md">This post's history</a>.]</em></p>

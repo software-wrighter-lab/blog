@@ -84,3 +84,6 @@ After that come more advanced meshes and effects. That makes 3D scene generation
 
 Other things set up this week that will pay off later: the native hook X_eTaL still needs, so extensions can drop their bridge; worked examples under every library function that `xetal doc` can run and check; and the equation-macro proof of concept.
 
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/18: the sections are now staggered across the page, as on the rest of the site, with each image beside its section in the open margin. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-11-saw-guards-lints-macros-blender.md">This post's history</a>.]</em></p>

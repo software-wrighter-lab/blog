@@ -263,3 +263,5 @@ Equations are one half of the notation ML needs. The other is the data flow a mo
 ---
 
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/17: the table of the three macros now shows them rendered, <code>ᵉe̲q&lt;</code>, <code>ᵉt̲ex&lt;</code> and <code>ᵉb̲oth&lt;</code>, as the rest of the post does, rather than as typed (<code>e:e_q&lt;</code>, ...). <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-17-array-languages-xetal-equations.md">This post's history</a>.]</em></p>
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/18: the sections are now staggered across the page, as on the rest of the site, with each image beside its section in the open margin. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-17-array-languages-xetal-equations.md">This post's history</a>.]</em></p>
