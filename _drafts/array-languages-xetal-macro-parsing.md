@@ -24,8 +24,9 @@ repo_urls:
      steps parsing-library, equations-on-parsing, tags-on-parsing. Named Parsing, not Reading (a Lisp reader macro is different).
      X_eTaL step 110 macro-contracts (uncommitted plan).
      2026-10-17 14:30: Saga 13 step 1 COMMITTED (239dc1b, 14:08): libs/Parsing (src/Parsing.xtl, docs, demos/pieces.xtl, tests incl.
-     Probe.xtlm, reject-*). Error code is error[bad-text]. Outputs above run here with the pinned xetal. Steps 2 (equations-on-parsing)
-     and 3 (tags-on-parsing) PENDING: "Before and after" is still future tense; rewrite when they land. Step 1 status still in-progress. Do not describe any of it as built until its commit exists. Macros to move onto it, as examples:
+     Probe.xtlm, reject-*). Error code is error[bad-text]. Outputs above run here with the pinned xetal. Steps 2-3 DONE (8c5fd18, merged a3d6a38): refusals carry the caller's
+     tag; Equations' goldens unchanged; new reject-result-trailing; Tags write-back. MC31 contracts (X_eTaL 57cff932): unused-argument
+     shown with the scratchpad toy Sq.xtlm on a clean build of main. RECHECK before publishing. Do not describe any of it as built until its commit exists. Macros to move onto it, as examples:
      Equations (e:e_q<), Pipeline (pipe:p_ipe<, X_eTaL-ML), Stencil (X_eTaL-demos), Tags (X_eTaL-libraries).
      Lead image: Mike's block-composer-stick.jpg (2026-10-17), fourth version (11:58), type set upside down; monochrome, inverts in dark mode. -->
 
@@ -63,7 +64,7 @@ Until now each macro library wrote those pieces itself. That is where a silent w
 
 ## The library
 
-`Parsing`, in X_eTaL-libraries, imported with `"pa:" u̲se< "Parsing"`, is an ordinary library of functions that macro libraries call while they read their text. It was generalized from the equation macro's own helpers, and every piece of it either uses all of its text or refuses the call with `error[bad-text]`, at the place the macro names, with the text it could not use:
+`Parsing`, in X_eTaL-libraries, imported with `"pa:" u̲se< "Parsing"`, is an ordinary library of functions that macro libraries call while they read their text. It was generalized from the equation macro's own helpers, and every piece of it either uses all of its text or refuses the call, under the macro's own error code and at the place the macro names, with the text it could not use:
 
 - **Pieces of text:** cut at a separator, but only at the top level, outside parentheses, brackets and braces; find the top-level operators of a chain; tell whether a text is one parenthesized group, which means its opening parenthesis closes at the last character and nowhere sooner, the very check the equation reader lacked.
 - **Kinds of text:** a name, a number, a word with its namespace, a function applied, `f(...)`.
@@ -82,13 +83,14 @@ The split finds the one `+` at the top level, outside the parentheses and bracke
 
 ## What it refuses
 
-A reference must end at its bracket:
+A refusal carries the calling macro's own error code, so a notation built on the library keeps its voice. Through the equation macro, a reference must end at its bracket:
 
 ```text
-error[bad-text]: a reference is a name, then its indices in brackets that end the text: X[i]2
+"L[] | " ᵉe̲q< "sum i:=0..n - 1 | y[i]2"
+error[bad-equation]: an array reference ends with its closing bracket; nothing follows it: y[i]2
 ```
 
-And the whole-text check catches a parser that dropped anything at all, whatever the rule that dropped it. Its test gives it a parse with the last character missing:
+And the whole-text check catches a parser that dropped anything at all, whatever the rule that dropped it. The library's own test gives it a parse with the last character missing, through a small probe macro whose code is `bad-text`:
 
 ```text
 error[bad-text]: the parser did not use all of the text: it read a from ab
@@ -98,10 +100,19 @@ That check is the guard for the whole class of bug. A rule can be wrong in ways 
 
 ## The language's part
 
-A library only protects the macros that use it. The stronger fix is in the language: X_eTaL's macro runner could refuse any expansion that leaves part of an argument unused, in every macro, library or not. That check, an unused-argument check, is proposed in X_eTaL's design notes and is a decision still to be made.
+A library only protects the macros that use it, so the language now checks every macro too. A macro declares a contract in the documentation above its definition: how it is called, and whether it copies its text into its expansion or parses it. For a macro that copies, the default, the macro runner checks that every name and number of the call's text reaches the expansion. A toy macro that forgets the power of what it was given:
+
+```text
+@ q:s̲quare< "3 ^ 2"
+error[unused-argument]: q:s_quare< did not use 2 of the text on its right; a macro that copies its text writes every name and number of it (## uses: copied)
+```
+
+A macro that parses a notation cannot be checked that way, since its expansion is not a copy of its text, so it says `## uses: parsed`, and the parsing library's whole-text check is its guard. Every macro in the libraries now declares which kind it is.
 
 ## Before and after
 
-Next, the equation macro moves onto the library, with no change in what it does: every test, the differential test and the demos must come out the same. Then the `Tags` library's macros, which read their own small notations, follow, with a whole-text check of their own. The pipeline macro and the integral macros to come are its next users.
+The equation macro has moved onto the library. Its own group, chain, binding, function, reference and splitting helpers are gone, replaced by calls to `pa:`, and nothing it does changed: every test, the differential test that generates random equations, and the demos came out the same. Moving it found one more case its old reader had let through: a result with text after its brackets, `Y[o]2`, was read as `Y[o]`. It is now refused. The `Tags` library's macros moved too, and now write each declaration back and compare it with the text.
+
+The pipeline macro and the integral macros to come are its next users.
 
 </div>
