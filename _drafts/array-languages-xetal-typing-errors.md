@@ -20,9 +20,9 @@ repo_urls:
      19 reject tests) and Parsing (239dc1b); X_eTaL-ML b8a6ac3b for Pipeline (step 022, 14 reject tests, UNCOMMITTED at the
      time: RECHECK). Error locations trimmed where the run printed a scratch path.
      Sources: X_eTaL docs/lint.md (11 lints, 5 groups), docs/type-check-macros.md (approaches 8-11), the blog's
-     tmp/equations-findings-2026-10-17.md (sections 1, 5, 7). Ergonomics finding (section 7): plain type errors print a byte range
-     ("at 47..52") with no file:line, unlike lint and macro output; reported for the X_eTaL agent. If fixed by publishing, show
-     the new message and say so; if not, keep the "What is still rough" section.
+     tmp/equations-findings-2026-10-17.md. UPDATED 2026-10-17 evening on X_eTaL main (clean export at eb82c117, built): the type error
+     now has file:line, source, both operands and a help line (shown); 29 lints in 6 groups (docs/lint.md at 6c0bf1c9); macro contracts
+     MC31/D163 (57cff932): unused-argument shown with a toy Sq.xtlm in the scratchpad. RECHECK all outputs before publishing.
      The parsing library is #15 (10/21): refer to it as "a planned post", no link, until #15 is published.
      Mike's framing (2026-10-17): "type errors good; runtime errors bad; blog posts should be correct (unless we are blogging
      about error handling".
@@ -83,10 +83,24 @@ a ÷ s
 
 ```text
 $ xetal run type.xtl
-error[type-mismatch]: expected Int, found Float at 47..52
+error[type-mismatch]: expected Int, found Float
+ --> type.xtl:4:1
+  |
+4 | a / s
+  | ^^^^^
+  | - `a` is an Int
+  |     - `s` is a Float
+  |
+1 | a := 2 2 r_eshape 1 2 3 4
+  |      -------------------- `a` gets its type here
+  |
+2 | s := 2.0
+  |      --- `s` gets its type here
+  = note: `/` has type Num a => a -> a -> Float
+  = help: Int and Float do not mix: `f_loat n` makes a Float of an Int, `f_loor x` or `c_eiling x` an Int of a Float
 ```
 
-The `100` on the line before is never printed: the program is refused before it starts. That is the rung a mistake should land on. Writing `a ÷ 2.0` works, because a number written in the program takes whichever type it is needed as; a name already bound as a whole number does not change type, so `(f̲loat a) ÷ s` is how to say it.
+The `100` on the line before is never printed: the program is refused before it starts. That is the rung a mistake should land on. And the message does the rest of the work: where, which name is which type, where each got its type, and how to convert. That message is new this week. Until a few days ago the same mistake was reported as `expected Int, found Float at 47..52`, a range of bytes, with no line, no source and no hint; writing this post found it, and it was rewritten. Writing `a ÷ 2.0` works, because a number written in the program takes whichever type it is needed as; a name already bound as a whole number does not change type, so `(f̲loat a) ÷ s` is how to say it.
 
 ## Macros check their own text
 
@@ -106,7 +120,7 @@ The equation library has nineteen tests of such refusals, the pipeline library f
 
 ## Lints
 
-`xetal lint` reads a program for things that are legal but probably not meant. It has eleven lints in five groups, from `suspicious` to `pedantic`, each with a default level, and each one explains itself with `xetal lint --explain`. Two of them:
+`xetal lint` reads a program for things that are legal but probably not meant. It has twenty-nine lints in six groups, from `correctness` and `suspicious` to `pedantic`, each with a default level, and each one explains itself with `xetal lint --explain`. Two of them:
 
 ```text
 u:n̲egAll ← { v → '{ x → n̲eg x } m̲ap v }
@@ -168,10 +182,17 @@ The fix covered one library. The class of bug, a reader that uses part of its te
 
 - **The pipeline macro was written to the rule from the start,** with a test for each kind of text it refuses, the equation library's three cases among them, and a macro, `ᵖⁱᵖᵉt̲ext<`, that writes back what it read.
 - **A parsing library for macro writers,** whose every piece uses all of its text or refuses, with the reprint check built in, so a new macro does not have to learn this lesson again. It has been written, and it is the subject of a planned post.
-- **A check in the language itself,** proposed and not yet decided: the macro runner would refuse any expansion that leaves part of an argument unused, in every macro, library or not. That would put this whole class of mistake on the top rung.
+- **A check in the language itself,** now built. A macro declares a contract in its documentation, how it is called and whether it copies its text into its expansion or parses it. For a macro that copies, the default, the macro runner checks that every name and number of the call's text reaches the expansion, and refuses the call otherwise. A toy macro that forgets the power:
+
+```text
+@ q:s̲quare< "3 ^ 2"
+error[unused-argument]: q:s_quare< did not use 2 of the text on its right; a macro that copies its text writes every name and number of it (## uses: copied)
+```
+
+A macro that parses a notation, such as the equation and pipeline macros, says `## uses: parsed`, and for those the reprint check is the guard. Either way, the mistake that started this lands on the top rung.
 
 ## What is still rough
 
-The ladder is right; some rungs are uncomfortable. The type error above names a byte range, `at 47..52`, where the linter names a file, a line and a column and says how to fix the finding; and it says a whole number was expected without saying which name was one. Both have been reported. A mistake caught early is only half the help. The other half is a message that says where and what to do.
+The ladder is right; the rungs are being made comfortable one message at a time, as the type error above shows. Shape and rank are still checked mostly while the program runs; a shape lint that proves them before it runs, from the extents a program writes down, is the next rung up for them.
 
 </div>
