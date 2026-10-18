@@ -280,7 +280,7 @@ The record above is the summary. The whole conversation, every request, reply an
   Claude-Session: https://claude.ai/code/session_01Etyh3Gka9iV2U9SJkNnmhm
   ```
 
-  The link opens the session for whoever owns it.
+  That trailer is how a commit leads back to the conversation that made it.
 
 Transcripts are long, private and scattered; that is why the saga keeps the summary. The record in the repository says what was planned and done, the commits hold the code, and a transcript, wherever it lives, is there for the rare time the reasoning behind a step matters.
 
