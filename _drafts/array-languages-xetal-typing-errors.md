@@ -23,6 +23,22 @@ repo_urls:
      tmp/equations-findings-2026-10-17.md. UPDATED 2026-10-17 evening on X_eTaL main (clean export at eb82c117, built): the type error
      now has file:line, source, both operands and a help line (shown); 29 lints in 6 groups (docs/lint.md at 6c0bf1c9); macro contracts
      MC31/D163 (57cff932): unused-argument shown with a toy Sq.xtlm in the scratchpad. RECHECK all outputs before publishing.
+     PLANNED UPDATE (2026-10-18, Mike: describe how the linter will look into code strings; X_eTaL step 112 still landing, an hour
+     or two out; write from what is committed then, run every example on a clean build):
+     - New section after "Macros check their own text": "Looking inside a string". Today a macro's argument is one Char vector to
+       every tool, so a mistake in X_eTaL written inside a string surfaces only after expansion, placed back by the expander's byte map.
+       A code string, c"...", declares its inside is X_eTaL (ST5, step 111, landed: rendered as code; |> drawn ▷, $ labels drawn ▹).
+       Step 112: the inside lexed, parsed, linted and type-checked with the file, before any macro runs, errors at their place inside
+       the string. Show one real lint inside a c"..." (e.g. redundant-lambda or unused-binding in a stage) and one type error inside
+       a stage (an unknown name, a Char where a number is needed), each with its located message.
+     - The type check is partial, by design: a stage is checked as a lambda over the names the macro binds (## binds: it), so what
+       holds for every it; the join between stages is still checked on the expansion, or earlier by the shape lint. Say so.
+     - string-kind lint + ## takes: code (MC31 extended): code passed as a plain string, or a code string passed to a notation
+       (an equation), is flagged with its fix (add or drop the c). Show it.
+     - Equations stay plain strings: their strings are notation (## takes: text notation, ## draws: e:t_ex<, MC32, step 154), drawn
+       as math, guarded by the Parsing whole-text check: the ladder has a rung for each kind of string.
+     - Update the ladder table: a row "inside a code string, before the macro runs: the linter and type checker".
+     - Keep the "after expansion" behavior as the "before", like the type-error message.
      The parsing library is #15 (10/21): refer to it as "a planned post", no link, until #15 is published.
      Mike's framing (2026-10-17): "type errors good; runtime errors bad; blog posts should be correct (unless we are blogging
      about error handling".
