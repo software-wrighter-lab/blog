@@ -841,12 +841,14 @@ article.post .resource-box,
   // negative, so the section's text keeps its full width.
   .stagger-0 > figure.outdent-right {
     float: right;
+    clear: right;
     width: 60%;
     margin: 0.2em -66.667% 0.6em 1.5em;
   }
 
   .stagger-2 > figure.outdent-left {
     float: left;
+    clear: left;
     width: 60%;
     margin: 0.2em 1.5em 0.6em -66.667%;
   }

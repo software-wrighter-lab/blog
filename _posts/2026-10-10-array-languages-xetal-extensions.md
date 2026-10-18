@@ -39,7 +39,6 @@ Libraries extend the vocabulary and macros extend the language. This is the thir
 
 </div>
 
-<div class="clearfix" markdown="1">
 
 ## The boundary
 
@@ -81,9 +80,7 @@ X_eTaL can't call native code by itself yet. That hook is filed with the languag
 
 Crossing as text has a cost, and the clock extension measures it. On a laptop the bridge makes about 220,000 calls a second and carries about 2.6 million numbers a second out and back. A sum of 100,000 numbers takes about as long in X_eTaL as it does in Rust over the bridge, because most of the time goes to formatting the numbers as text. So the bridge pays off for work that is heavy per element, such as an SVD, an image codec or a database query, and not for a sum.
 
-</div>
 
-<div class="clearfix" markdown="1">
 
 ## Eleven extensions, by what they reach
 
@@ -105,9 +102,7 @@ Release 1 was Hello, Clock and SQLite. There are now eleven, and between them th
 
 Each one has its facade, its Rust tests and golden tests of every facade function, demo and error message. The 3D renderer is a CPU rasterizer written in Rust, drawing into a native window, with no GPU API. Regular expressions are the one extension still on the roadmap.
 
-</div>
 
-<div class="clearfix" markdown="1">
 
 ## The demos
 
@@ -120,6 +115,8 @@ The pattern in the demos is the same each time: the extension does what it is fo
 .ext-grid span { display: block; text-align: center; font-size: 0.85em; margin-top: 0.3em; }
 @media (max-width: 600px) { .ext-grid { grid-template-columns: repeat(2, 1fr); } }
 </style>
+
+<hr class="stagger-end">
 
 <div class="ext-grid">
 <a class="no-external-icon" href="https://softwarewrighter.github.io/X_eTaL-extensions/#sqlite-notebook"><img src="{{ '/assets/images/posts/xetal-ext-sqlite-notebook.webp' | relative_url }}" class="no-invert" alt="The data notebook: CO2 at Mauna Loa in SQLite, the yearly rise and a least-squares line computed in X_eTaL"><span>data notebook</span></a>
@@ -153,9 +150,7 @@ The pattern in the demos is the same each time: the extension does what it is fo
 - **Graphics: Life in a window.** The first window demo, arrays shown as pixels.
 - **3D: the voxel world and the cube.** A world of blocks you can walk, fly, dig, flood and light, and a game, Gem Hunt, on top. They have [a post of their own](/2026/10/09/voxels-3d-worlds-array-languages/). So does the voxel Rubik's cube, which the [Eigencube](/2026/10/08/eigencube-rubiks-cube-linear-algebra/) solver now drives.
 
-</div>
 
-<div class="clearfix" markdown="1">
 
 ## Why the types make this safe
 
@@ -165,4 +160,3 @@ The static types are not a safety feature bolted onto APL. Array-language tersen
 
 A planned post covers where the machine learning is: the ML demos and their own repo.
 
-</div>

@@ -54,7 +54,6 @@ repo_urls:
 
 </div>
 
-<div class="clearfix" markdown="1" style="clear: both;">
 
 ## Three directions
 
@@ -179,4 +178,3 @@ The library's tests go further than single cases. The five pipelines from the de
 
 Two steps follow in X_eTaL-ML. A bias helper, so a dense layer's bias is added along the right axis by name instead of reshaped by hand, as linear regression does today: `P + (s̲hape P) r̲eshape b`. Then the real models as pipelines, and one CNN layer shown four ways, side by side: as the equation of post #11, as a pipeline, as the expansion, and as plain X_eTaL. Because a pipeline is ordinary X_eTaL once expanded, it can go where any X_eTaL program goes, including the GPUs of [post #7](/2026/10/13/array-languages-xetal-gpu/) and [post #10](/2026/10/16/array-languages-xetal-mojo-metal/), and the step-by-step Blender videos of [post #9](/2026/10/15/array-languages-xetal-blender/).
 
-</div>

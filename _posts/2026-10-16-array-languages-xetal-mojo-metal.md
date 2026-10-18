@@ -48,7 +48,6 @@ repo_urls:
 
 </div>
 
-<div class="clearfix" markdown="1" style="clear: both;">
 
 ## Why another way onto the same GPU
 
@@ -67,7 +66,7 @@ Mojo is Modular's systems language, Python-like on the surface, built for high-p
 
 ## From X_eTaL source to Mojo
 
-<figure class="zoomable" style="float: left; clear: both; margin: 0.2em 1.5em 0.6em 0; max-width: 44%;">
+<figure class="zoomable outdent-right">
 <img src="{{ '/assets/images/posts/xetal-mojo-path.webp' | relative_url }}" class="no-invert" alt="The path from X_eTaL source to two GPUs: saxpy.xtl is lowered by xetal-gpu to XIR, which goes either to the OpenCL emitter and runtime of post #7 or to the Mojo emitter, mojo build, a library with a C ABI, and then Metal on the Apple M1 Max or the CUDA driver on the RTX 5060 Ti; every result is checked against the X_eTaL evaluator">
 <figcaption style="font-size: 0.85em;">One program, two backends, and through Mojo two vendors' GPUs. Click to enlarge.</figcaption>
 </figure>
@@ -83,7 +82,6 @@ y ← 1.0 ᵃᶜs̲cale 1.0 0.5 0.25 0.125 0.0 -0.125 -0.25 -0.5
 (2.0 ᵃᶜs̲cale x) ᵃᶜv̲add y
 ```
 
-<div style="clear: both;"></div>
 
 The only change is the device: `xetal-gpu run saxpy.xtl --device mojo` in place of `--device opencl:0`. The Mojo backend fuses the divide, the two scales and the add into one kernel, and writes it as ordinary Mojo a person could read:
 
@@ -108,11 +106,10 @@ def stage0(
 
 Then `mojo build --emit shared-lib` makes it a library with C entry points, cached by the source's hash, and the tool loads it and calls it. Mojo's `DeviceContext` opens whatever GPU the machine has. The GPU prints `1.5 1.5 1.75 2.125 2.5 2.875 3.25 3.5`, which is what the X_eTaL evaluator prints.
 
-<div style="clear: both;"></div>
 
 ## Five demos, two GPUs
 
-<figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 50%;">
+<figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 48%;">
 <img src="{{ '/assets/images/posts/xetal-mojo-source-terminals.webp' | relative_url }}" class="no-invert" alt="Three terminals. Top left, the Apple M1 Max: just run-mojo libs/Accel/demos/reduce-sum.xtl reports api=metal, name=Apple M1 Max, and prints 108, 24, 408, 4.5, 3.1875. Top right, the RTX 5060 Ti on Arch Linux: the same command reports api=cuda, name=NVIDIA GeForce RTX 5060 Ti, and prints the same five numbers. Below, the X_eTaL evaluator on the CPU prints 108 24 408 4.5 3.1875">
 <figcaption style="font-size: 0.85em;">One X_eTaL file, through Mojo on two GPUs, and the evaluator's answer. Click to enlarge.</figcaption>
 </figure>
@@ -139,7 +136,7 @@ The times say more about the machines than the GPUs. On the 5060 Ti, building a 
 
 Before the backend moved into X_eTaL-gpu, it was a small standalone tool, `rust-demo`, in a fork of Modular's repository: a Rust program that reads the IR's text form, writes Mojo, builds it and runs it. It began with five programs written by hand in the IR, and ended with the five Accel demos above, lowered from X_eTaL source, checked against both its own Rust reference and the X_eTaL evaluator, on both GPUs. That tool is also where the evidence that the GPU, and not the CPU, did the work comes from.
 
-<figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 50%;">
+<figure class="zoomable outdent-left">
 <img src="{{ '/assets/images/posts/xetal-mojo-terminals.webp' | relative_url }}" class="no-invert" alt="Two terminal runs of xir-mojo run programs/reduce.xir side by side: on the Apple M1 Max the device line reads api=metal, on the RTX 5060 Ti api=cuda; both launch 4 blocks of 256 threads, both report element 999 computed by block 3 thread 231, and both end with 3 of 3 outputs agreeing with the Rust reference">
 <figcaption style="font-size: 0.85em;">The first proof's same program on both GPUs, in the tool's own output. Click to enlarge.</figcaption>
 </figure>
@@ -148,11 +145,10 @@ A result that matches could have come from the CPU. So each `rust-demo` run prin
 
 The times differ, and they are not a race. The Mac's run reused a kernel it had already compiled; the Arch box's was its first. The assembly the device compiler received can be printed too: Metal AIR for `air64-apple-macosx26.0.0` on the Mac, PTX for `sm_120a` on the NVIDIA card.
 
-<div style="clear: both;"></div>
 
 ### Which thread did which element
 
-<figure class="zoomable" style="float: left; clear: both; margin: 0.2em 1.5em 0.6em 0; max-width: 44%;">
+<figure class="zoomable outdent-left">
 <img src="{{ '/assets/images/posts/xetal-mojo-provenance.webp' | relative_url }}" class="no-invert" alt="A grid of 1000 cells, one per element of the reduce program, colored by the GPU block that computed it: blocks 0, 1 and 2 have 256 elements each and block 3 has 232; element 0 is marked block 0, thread 0, and element 999 block 3, thread 231">
 <figcaption style="font-size: 0.85em;">Which thread computed each element, from the run's own report. Click to enlarge.</figcaption>
 </figure>
@@ -161,7 +157,6 @@ A GPU runs a kernel as a grid of blocks, each a group of threads that work side 
 
 That map comes from the GPU, not from the plan. An extra kernel has every thread write down its own block and thread number beside the element it handled, and the tool reads those numbers back. Both GPUs drew the same map, which is what one generated source for two vendors should give.
 
-<div style="clear: both;"></div>
 
 ## How Mojo reaches each GPU
 
@@ -173,7 +168,7 @@ So on NVIDIA, Mojo does go through CUDA's driver, even though no CUDA is written
 
 ## The cards: Mojo or OpenCL
 
-<figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 50%;">
+<figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 48%;">
 <img src="{{ '/assets/images/posts/xetal-mojo-cards.webp' | relative_url }}" class="no-invert" alt="My GPUs by NVIDIA generation, oldest to newest: Kepler, the Quadro K4200 and Tesla K80, OpenCL only, no Mojo target; Maxwell, the Tesla M10 and M40, and Pascal, the Tesla P100 and P4, Mojo compiler targets not listed by Modular, so try Mojo, else OpenCL; Turing, the GTX 1660 Super, generation listed; Ampere, the RTX 3090, RTX 3060, RTX 3060 Laptop and A2, Ada, the RTX 4070 Laptop, and Blackwell, the RTX 5060 Ti, listed, Mojo; the RTX 5060 Ti marked as having run X_eTaL demos through Mojo. Below, Apple silicon through Metal: Mojo listed for M1 to M5, the M1 Max marked as run, the M3 Pro still to try">
 <figcaption style="font-size: 0.85em;">My cards by generation: where Mojo reaches, and where OpenCL stays. Click to enlarge.</figcaption>
 </figure>
@@ -210,7 +205,6 @@ Apple's own MLX is the other way onto Metal, and in some ways the closest thing 
 
 And FPGAs? Mojo compiles for CPUs and GPUs; it has no way to describe hardware, so the Tang boards stay with X_eTaL-fpga.
 
-</div>
 
 ---
 

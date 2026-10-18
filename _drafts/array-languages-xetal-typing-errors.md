@@ -49,7 +49,6 @@ A mistake in a program can surface at four times: when the program is checked, b
 
 </div>
 
-<div class="clearfix" markdown="1" style="clear: both;">
 
 ## The ladder
 
@@ -195,4 +194,3 @@ A macro that parses a notation, such as the equation and pipeline macros, says `
 
 The ladder is right; the rungs are being made comfortable one message at a time, as the type error above shows. Shape and rank are still checked mostly while the program runs; a shape lint that proves them before it runs, from the extents a program writes down, is the next rung up for them.
 
-</div>

@@ -50,7 +50,6 @@ A macro in X_eTaL is a function from the text written at its call to the code th
 
 </div>
 
-<div class="clearfix" markdown="1" style="clear: both;">
 
 <div class="aside-box" style="float: left; clear: none; margin: 0.3em 1.8em 1.2em 0; max-width: 280px;" markdown="1">
 **What is a composing stick?** The tool at the top of this post. Before machines set type, a compositor built each line of a page by hand in a composing stick: a small metal tray held in one hand, its width set to the line's measure. Letters, one piece of metal each, were picked from the type case one at a time and set in the stick, then spaced out until the line filled the measure exactly and could be lifted out as one piece. Every character was placed on purpose, and nothing was left loose. That is the idea this post borrows for parsing.
@@ -115,4 +114,3 @@ The equation macro has moved onto the library. Its own group, chain, binding, fu
 
 The pipeline macro and the integral macros to come are its next users.
 
-</div>

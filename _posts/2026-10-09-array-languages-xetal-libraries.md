@@ -71,7 +71,6 @@ The reference is the newest piece. `xetal doc` builds a [cross-reference site](h
 
 The README makes a distinction worth repeating: the *Extensible* in the name has three sides. Libraries extend the vocabulary; macros extend the language; native extensions extend the machine. This post is the first two; a planned post covers the third.
 
-<div class="clearfix" markdown="1">
 
 ## Macros: extending what the language can say
 
@@ -113,7 +112,6 @@ What is *not* here is as telling. A Control library of `if`, `unless` and `each`
 
 **Where these sit among other languages' macros.** They are not C-preprocessor macros, which have no host language and no checking after expansion, and not Lisp, Julia or Template Haskell macros, which work on a syntax tree with quote and unquote. The nearest modern relative is Rust's function-like procedural macro, compiled ahead of its users and type-checked after expansion --- except that X_eTaL hands the macro text, not a token stream. The nearest old one is Forth's parsing words, which run at compile time and are defined in the language itself. Within the APL family, they are execute, `⍎`, moved to compile time and given a type checker. Expansion is hygienic: names a macro introduces are renamed to fresh `g1:` names unless the macro declares that it binds one on purpose.
 
-</div>
 
 ## Next in the series
 

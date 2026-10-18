@@ -51,7 +51,6 @@ The same whole-array program that runs on the X_eTaL evaluator, or as threads on
 
 </div>
 
-<div class="clearfix" markdown="1" style="clear: both;">
 
 ## One program, four ways to run it
 
@@ -107,9 +106,7 @@ module vector_add (
   ...
 ```
 
-</div>
 
-<div class="clearfix" markdown="1">
 
 ## Circuits with state
 
@@ -256,7 +253,6 @@ The repo now has its goals written down, in order:
 
 This post will be updated as the machine comes together.
 
-</div>
 
 ---
 

@@ -45,7 +45,6 @@ repo_urls:
 
 </div>
 
-<div class="clearfix" markdown="1">
 
 ## Why an array language for ML
 
@@ -94,9 +93,7 @@ w ← -1 0 1 o̲-₂ -1 0 1 o̲-₂ x
 GK ← DM '+ '× i̲nner o̲\ V
 ```
 
-</div>
 
-<div class="clearfix" markdown="1">
 
 ## Six libraries, and a network in one line
 
@@ -131,9 +128,7 @@ Tuples, new in X_eTaL this week, came in exactly where this repo had asked for t
 s2 ← 300 'ᵘa̲dam p̲ower s1
 ```
 
-</div>
 
-<div class="clearfix" markdown="1">
 
 ## TTTML: an older kind of learning
 
@@ -157,7 +152,6 @@ A few things wait on the language, filed as asks rather than worked around: a gr
 
 A planned post covers the games, and what a game asks of a language that a demo never does.
 
-</div>
 
 ---
 

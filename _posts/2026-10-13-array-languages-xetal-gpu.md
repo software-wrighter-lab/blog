@@ -52,7 +52,6 @@ X_eTaL states a computation as whole-array operations, `c ← a + b`, `'+ r̲/ c
 
 </div>
 
-<div class="clearfix" markdown="1" style="clear: both;">
 
 ## The direction: a macro, not a translation
 
@@ -138,9 +137,7 @@ __kernel void k0(__global const long* b_x, __global const long* b_w, __global lo
 
 The tool shows each step: `xetal-gpu kernel` prints the OpenCL C, and `xetal-gpu explain` says which X_eTaL values became which kernels. How a device runs a program, its widths, work-group and tiles, is a schedule kept as one TOML file per device.
 
-</div>
 
-<div class="clearfix" markdown="1">
 
 ## What runs today
 
@@ -294,7 +291,6 @@ The asks between the repositories show where each layer of the stack still falls
 
 This post will be updated as the models land on the cards.
 
-</div>
 
 ---
 

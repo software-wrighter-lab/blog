@@ -43,7 +43,6 @@ repo_urls:
 
 </div>
 
-<div class="clearfix" markdown="1" style="clear: both;">
 
 ## One computation, four views
 
@@ -113,4 +112,3 @@ The first deliverable is a 60 to 90 second Blender video comparing the asymmetri
 
 The plan and its decisions are written and taken. Nothing for integrals is built yet: the equation library has no `integral` word, and the convolution helpers do not exist. What does exist runs today: the correlation above, written with the equation macro, gives `14 20`, and the trapezoid sum gives `1.0`. Like the equations, all of this is planned as libraries on the language as it is.
 
-</div>

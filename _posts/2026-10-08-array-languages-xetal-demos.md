@@ -35,7 +35,6 @@ repo_urls:
 
 </div>
 
-<div class="clearfix" markdown="1">
 
 ## The arc
 
@@ -46,9 +45,7 @@ The [catalog](https://softwarewrighter.github.io/X_eTaL-demos/) opens on a card 
 <figcaption style="font-size: 0.85em;">The twelve live demos, in the catalog's order.</figcaption>
 </figure>
 
-</div>
 
-<div class="clearfix" markdown="1">
 
 ## One story in twelve demos
 
@@ -66,9 +63,7 @@ Read in order, the demos make one argument: whole-array transformations express 
 
 The sandpile and the epicycles arrived while this series was being written. The machine-learning demos that started here --- a ternary network, a mixture-of-experts router, a tiny CNN --- moved to a repository of their own, which a planned post in this series covers, so that this one means visual and scientific array programming and nothing else.
 
-</div>
 
-<div class="clearfix" markdown="1">
 
 ## A demo built on its own macros
 
@@ -92,9 +87,7 @@ A 0 writes nothing and a 1 writes no multiply, so each stencil costs exactly the
 <figcaption style="font-size: 0.85em;"><a href="https://softwarewrighter.github.io/X_eTaL-demos/stencil-macros/">Stencils by macro</a>: edit the kernel, see the expansion, see the result.</figcaption>
 </figure>
 
-</div>
 
-<div class="clearfix" markdown="1">
 
 ## Unix pipes, in an array language
 
@@ -111,9 +104,7 @@ Each stage gives the same bytes as the tool it imitates; the tests compare them 
 <figcaption style="font-size: 0.85em;">The pipe stages at work, recorded at the command line.</figcaption>
 </figure>
 
-</div>
 
-<div class="clearfix" markdown="1">
 
 ## The Tower of Hanoi, three ways
 
@@ -153,15 +144,12 @@ The literate document that walks through them puts the trade-off in one line: "T
 <figcaption style="font-size: 0.85em;">Four disks, fifteen moves, drawn by the program itself with <code>⎕S̲HOW ⎕G̲RID</code>.</figcaption>
 </figure>
 
-</div>
 
-<div class="clearfix" markdown="1">
 
 ## How the repo keeps itself honest
 
 Every demo's programs are tested at the command line and its page in headless Chrome, both as regression baselines. The timings of every page's program are kept and checked whenever the repo moves to a new X_eTaL commit, which it now pins by commit rather than copying. Anything the language lacks is filed as an ask, not worked around: the three asks that made Unix pipe stages possible are an example. And when the language changed how libraries name their private helpers, a `h:` namespace that arrived this week, the repo moved to it the same day, using the language's own `xetal migrate`.
 
-</div>
 
 ## Next in the series
 
