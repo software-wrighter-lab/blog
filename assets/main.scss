@@ -834,6 +834,23 @@ article.post .resource-box,
     }
   }
 
+  // A gutter figure in a staggered section: it steps out of the 60% column
+  // into the empty side of the page (the right 40% beside stagger-0, the
+  // left 40% beside stagger-2), so an image sits beside its text. The
+  // negative margin puts its edge at the page's; its margin box is
+  // negative, so the section's text keeps its full width.
+  .stagger-0 > figure.outdent-right {
+    float: right;
+    width: 60%;
+    margin: 0.2em -66.667% 0.6em 1.5em;
+  }
+
+  .stagger-2 > figure.outdent-left {
+    float: left;
+    width: 60%;
+    margin: 0.2em 1.5em 0.6em -66.667%;
+  }
+
   // Disable stagger on narrow viewports — 60% of a small screen is too tight
   @media (max-width: 900px) {
     .stagger {
@@ -844,6 +861,12 @@ article.post .resource-box,
     .stagger-2 {
       margin-left: 0;
       margin-right: 0;
+    }
+    .stagger-0 > figure.outdent-right,
+    .stagger-2 > figure.outdent-left {
+      float: none;
+      width: auto;
+      margin: 1em 0;
     }
   }
 }
