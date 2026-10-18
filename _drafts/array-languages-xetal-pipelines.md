@@ -29,6 +29,18 @@ repo_urls:
      stage before it inside a segment, pipe:s_ub< for sub-pipes; every edge declared, so diagram, trace and shape lint see all edges.
      Decision 6 SETTLED: stages naming earlier stages without it are allowed (X_eTaL's own spatial.md examples use them).
      Code strings are now c"..." (multi-line, escapes) and c#"..."# (verbatim), no cr"..." (X_eTaL 53130942, 0c525d74); not built yet.
+     2026-10-18 (Mike relayed the cloud agent): CODE STRINGS COMING (X_eTaL step 111) and a DECISION on the pipe symbol, option A:
+     |> is typed and drawn as ▷ by the renderer; |> is its own punctuation token (Pipe), not a symbol (symbols are dyadic functions);
+     in ordinary code |> is an error with a clear message for now (a real |> operator, option E, left for later). So the network
+     listing will be written @ pipe:p_ipe< c"..." and rendered as:
+         Y ← @ ᵖⁱᵖᵉp̲ipe< c"
+            X
+         ▷ it ⁿⁿd̲ense W1
+         ▷ ⁿⁿr̲elu
+         ▷ it ⁿⁿd̲ense W2
+         ▷ ⁿⁿs̲oftmax"
+     When it lands: rewrite every pipeline example from the committed demos, rendered by xetal render itself (no per-stage stand-in),
+     ▷ in rendered code, |> only where the post talks about what is typed; recheck the figure's stage boxes; check its decision ID.
      RENDERING: stages are shown rendered one by one (xetal render on each stage) because the renderer draws a string as typed;
      X_eTaL code strings c"..." (ST5, docs/code-strings.md, steps 111-112) will make the renderer do it; re-render from source then.
      Lead image FOR NOW (Mike): his screenshot of a CNN layer as five stages with shapes, not inverted. -->
