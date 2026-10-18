@@ -20,6 +20,8 @@ repo_urls:
      Decision 6 SETTLED late 10/17 (cloud agent's pipeline-topologies design): stages naming earlier stages without it are allowed.
      STILL TO RAISE: the plan lists code strings as available though step 111 is pending (c"..." is bad-string on main 6c0bf1c9).
      If the post keeps "Pipelines that join", recheck it against the topology design (segments and labels) once it is committed.
+     2026-10-18: labels become $name (drawn ▹name), the library Flow (flow:p_ipe<); "Pipelines that join" uses ": f_samples" today: rewrite it
+     as a fan-in with labels once that lands (a stage may name several labels, so it × f_samples may become a plain join).
      Links to #11 and #12 assume they publish 10/17 and 10/18. Date provisional.
      Lead image: Mike's screenshot (continuous convolution card), not inverted, not transparent. -->
 

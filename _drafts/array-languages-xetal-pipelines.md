@@ -39,6 +39,14 @@ repo_urls:
          ▷ ⁿⁿr̲elu
          ▷ it ⁿⁿd̲ense W2
          ▷ ⁿⁿs̲oftmax"
+     2026-10-18 later (Mike relayed the cloud agent): MORE PIPELINE CHANGES COMING. Library renamed to Flow, alias flow:
+     (flow:p_ipe<, drawn ᶠˡᵒʷp̲ipe<; the rename waits on the pinned X_eTaL build). Labels: typed $h, drawn ▹h (Mike chose
+     ▹ over ▸), its own token and lang-choices entry like |>, replacing " : name". Example as it will render:
+         P ← @ ᶠˡᵒʷp̲ipe< c"z ▷ 'm̲ax r̲/ it ▹m ▷ e̲xp z − m ▹e ▷ e ÷ '+ r̲/ e"
+     Patterns the post can show: fan-out (label once, use later), fan-in (a stage naming several labels: e_xp z - m, it + x,
+     W nn:m_ix V), tuples (a stage split into named parts), subpipes (functions defined by their own pipeline), dynamic pipes
+     (ordinary X_eTaL inside a stage, e.g. p_ower for repetition; the pipeline itself stays static, every stage visible in the
+     source and the expansion). $ touches only the name after it: no clash with namespaces.
      When it lands: rewrite every pipeline example from the committed demos, rendered by xetal render itself (no per-stage stand-in),
      ▷ in rendered code, |> only where the post talks about what is typed; recheck the figure's stage boxes; check its decision ID.
      RENDERING: stages are shown rendered one by one (xetal render on each stage) because the renderer draws a string as typed;
