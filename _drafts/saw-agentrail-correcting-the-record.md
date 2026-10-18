@@ -41,8 +41,6 @@ This week's sharpening was on a tool rather than a project. agentrail keeps AI c
 
 </div>
 
-<div class="clearfix" markdown="1" style="clear: both;">
-
 ## The saga, and its cursor
 
 An agent starts every session with `agentrail next`, marks the step `begin`, does the work, commits, and runs `agentrail complete`. That records the commit, a summary and a trajectory, then moves the cursor to the next step. The saga is a record of the git history, and the next session trusts it.
@@ -252,6 +250,11 @@ Reserved, done and closed, and each step of it written down in words someone els
 
 ## And the full transcripts
 
+<figure class="zoomable outdent-right">
+<img src="{{ '/assets/images/posts/saw-agentrail-cloud-session.webp' | relative_url }}" class="no-invert" alt="A Claude Code cloud session in the web interface, reporting on X_eTaL's step 111, part 2 (commit b33403be): the renderer now draws a code string's inside like the code around it; both editors color it; the glyph tables moved into a new crate to stay within sw-checklist's limits; all tests pass. Then a wrinkle with pipelines written as one code string, a notation decision recorded as MC32, step 154 queued at the end because agentrail would not renumber completed steps, and a question whether to open the X_eTaL pull request">
+<figcaption style="font-size: 0.85em;">A cloud session's report, in the web interface: nothing of it is on a local disk. Click to enlarge.</figcaption>
+</figure>
+
 The record above is the summary. The whole conversation, every request, reply and command, is kept by the coding agent itself, not by agentrail, and since the work runs in parallel it is spread across machines. With Claude Code:
 
 - **On a Mac or Linux machine,** each session is a file under `~/.claude/projects/`, in a folder named after the repository's path with its slashes turned into dashes. For X_eTaL on my Mac:
@@ -280,7 +283,7 @@ The record above is the summary. The whole conversation, every request, reply an
   Claude-Session: https://claude.ai/code/session_01Etyh3Gka9iV2U9SJkNnmhm
   ```
 
-  That trailer is how a commit leads back to the conversation that made it.
+  That trailer is how a commit leads back to the conversation that made it. The screenshot beside this section is one such session, reporting on X_eTaL's step 111 this morning: it lives only in the web interface, and no folder on my machines holds it.
 
 Transcripts are long, private and scattered; that is why the saga keeps the summary. The record in the repository says what was planned and done, the commits hold the code, and a transcript, wherever it lives, is there for the rare time the reasoning behind a step matters.
 
@@ -301,5 +304,3 @@ Transcripts are long, private and scattered; that is why the saga keeps the summ
 ## The lesson
 
 A workflow tool that keeps agents honest has to make it easy to be honest about work it did not see. Once several agents share a project, "done somewhere else" is a normal state, not an exception. The record needs a way to say so, and the tool should require the evidence.
-
-</div>
