@@ -15,7 +15,9 @@ repo_urls:
 
 <!-- DRAFT (2026-10-18). Sources: Mike's ~/Downloads/agentrail-correcting-the-record.md and sw-vibe-coding/agentrail-rs PR #3
      ("feat: correct the record: close, edit, reserve; the cursor skips finished work", merged 2026-10-18T14:43Z, +702 -6, 15 files).
-     Commands, numbers and examples are from those two; nothing here was run by the blog agent.
+     Commands, numbers and examples are from those two, except "Reading the record": real commits on X_eTaL main read 2026-10-18,
+     517f7142 (14:44 UTC, correct the record) and c5750cec (08:12 PDT = 15:12 UTC, close 119), their messages and step-file diffs
+     quoted exactly (diffs trimmed to the changed lines).
      Lead image: Mike's block-table-jigsaw.jpg (2026-10-18), not inverted (mostly black ink on warm off-white paper). -->
 
 <img src="{{ '/assets/images/posts/block-table-jigsaw.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
@@ -127,6 +129,82 @@ Stranded: 4 pending step(s) behind the cursor (111):
 ```
 
 A silent inconsistency becomes a visible to-do with the command attached.
+
+## Reading the record
+
+The saga is plain files in `.agentrail/`, committed with the code, so its history is git's history. Most of it is for the tool, but three parts are written for people: each commit's message, each step's `step.toml`, a few lines of fields, and its `summary.md`, one paragraph. To see what happened to the plan, ask git for just that folder:
+
+```bash
+git log --oneline -- .agentrail/
+git show 517f7142 -- .agentrail/steps/101-spatial-oracle/
+```
+
+Here is the first real use of the new commands, on X_eTaL's saga the same morning the change merged. One commit corrected the record, and its message says what it did and where each piece of work is:
+
+```text
+saga: correct the record (steps done elsewhere closed, 111's prompt, 119 reserved)
+
+Using agentrail's new close/edit/reserve (sw-vibe-coding/agentrail-rs
+PR #3), each with where the work is, no other step touched:
+
+- 101-104 (Saga 41 steps 2-5): done in X_eTaL-libraries as its Saga 12
+  (8197d52, 09143d8, cb430d5, ba03d6a); closed --elsewhere.
+- 114 integrals-plan: Saga 42 planned and decided (18c1501f, 6c0bf1c9).
+- 115 shape-lint: merged with PR #130 (dc359072).
+- 120 doc-comment-glyphs: c005fa16.
+- 123 errors-library-calls (ask E5) and 126-130 (Saga 27): done in the
+  readable lane, merged with PR #131 (80087dab).
+- 119 pages-gh-pages reserved for the local agent: the build moved to
+  gh-pages (b025b3d0); switching GitHub Pages' source remains.
+- 111 code-strings: prompt corrected to the decided design (c"..." and
+  c#"..."#; cr"..." was dropped) and docs/code-strings.md's order.
+
+agentrail status reports no stranded steps; the cursor stays at 111.
+```
+
+Each step's file shows the same story in a few changed lines. Step 101 was done in another repository, so it gains a completion time and a `done_elsewhere` naming that repository's commit, and its list of commits here stays empty, because none of them are here:
+
+```diff
+-status = "pending"
++status = "completed"
++completed_at = "2026-10-18T14:43:53"
+ commits = []
++done_elsewhere = "X_eTaL-libraries@8197d52 (Saga 12 step 2)"
+```
+
+and its new `summary.md` says, in a sentence, what was done:
+
+```text
+Done in X_eTaL-libraries as its Saga 12 step 2 (equations-oracle): Equations with the CNN cross-correlation as its oracle.
+```
+
+Step 115 was done in this repository, merged with a pull request, so it records that commit instead:
+
+```diff
+-status = "pending"
++status = "completed"
++completed_at = "2026-10-18T14:43:53"
+-commits = []
++commits = ["dc359072a9e2c1d9fe29c80d07ca9b29b26b99a6"]
+```
+
+Step 119 was not done yet, but it was someone else's: the local agent had moved the site's build and still had to switch where GitHub Pages reads it from. So it was reserved, with a note saying what remained:
+
+```diff
++reserved_for = "local agent: the site build moved to gh-pages (b025b3d0); switching GitHub Pages' source remains"
+```
+
+A few hours later the local agent did it, and closed the step. The work was a change to the repository's settings, with no commit at all, and the record says exactly that:
+
+```diff
+-status = "pending"
++status = "completed"
++completed_at = "2026-10-18T08:12:40"
+-reserved_for = "local agent: the site build moved to gh-pages (b025b3d0); switching GitHub Pages' source remains"
++done_elsewhere = "GitHub repository settings (Pages: branch gh-pages, path /), no commit"
+```
+
+That is the whole life of a handed-off step, reserved, done and closed, in three readable lines of history, with nothing claimed that did not happen.
 
 ## The rules behind it
 
