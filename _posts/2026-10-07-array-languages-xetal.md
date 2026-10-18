@@ -52,7 +52,6 @@ This is the first of a series, one post per repository. This one is the language
 **How to read a name.** No underline: a variable. First letter underlined: a function. A raised letter in front: the library it came from --- `u` for yours, `c` for a library you imported as `c`. A lowered number after a function: the axis it works along. A raised number on a value: a power. You type `r_ev` and see r̲ev; you type `r_/_2` and see r̲/₂. Expressions read right to left, as in APL.
 </div>
 
-<div class="clearfix" style="clear: both; padding-top: 0.5em;" markdown="1">
 
 ## The question it asks
 
@@ -65,7 +64,6 @@ The README puts it in one sentence: *what would APL look like if it were designe
 </div>
 \nThe audience it names is three people: the author and anyone else exploring notation design; learners, who get progressive disclosure from long names down to terse stems; and AI coding agents, which implement the language under a strict test-driven process. That last one is not a joke. The repository was built in its first week by coding agents working through [agentrail](https://github.com/sw-vibe-coding/agentrail-rs) sagas against a spec that is a directory of test cases, under two rules that are written down: never resolve an ambiguity heuristically, and never special-case Life.
 
-</div>
 
 ## Why static types, in an array language
 
@@ -129,7 +127,6 @@ d̲eviations ← { v → (f̲loat v) − ˡm̲ean v }
 ˡs̲d ← { (ˡv̲ariance ⍵) ^ 0.5 }     ⍝ the standard deviation
 ```
 
-<div class="clearfix" markdown="1">
 
 ## What sets it apart
 
@@ -148,9 +145,7 @@ Against **APL, J, K, BQN and Dyalog**:
 - **Ambiguity is an error,** and each meaning has one spelling. The parser never picks a reading from context.
 - **Lazy parameters on a strict default,** which the next section puts to work.
 
-</div>
 
-<div class="clearfix" markdown="1">
 
 ## Recursion, six ways
 
@@ -197,9 +192,7 @@ The clearest way to see what these features buy is to write one function --- fac
 
 Read down the list and each language feature changes what the same idea does. Strict evaluation is why the naive Y overflows; one character, `~`, fixes it; quoting lambdas allows recursion with no name; static types refuse the self-application that Lisp or JavaScript would accept; and a macro erases the whole apparatus at compile time and leaves the cheapest version behind. The comparisons outside the family are instructive too: Dyalog APL's dfns have `∇`, built-in recursion with no name, where X_eTaL gets there through Y and a lazy parameter; Lisp would do the macro version on a syntax tree, where X_eTaL does it on text and type-checks the output; and Rust or Haskell need a wrapper type before the textbook Y will compile at all.
 
-</div>
 
-<div class="clearfix" markdown="1">
 
 ## The programs inside the repo
 
@@ -218,7 +211,6 @@ Read down the list and each language feature changes what the same idea does. St
 ᵘs̲ieve 1 d̲rop r̲ange 100
 ```
 
-</div>
 
 ## Where the language is going
 
@@ -247,3 +239,5 @@ The demos repo, programs worth watching; the libraries, where the E in the name 
 ---
 
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/17: X_eTaL code is now shown rendered throughout, as <code>xetal render</code> draws it, including code written inside strings, rather than partly as typed; names that are about how you type them stay typed. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-07-array-languages-xetal.md">This post's history</a>.]</em></p>
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/18: the sections are now staggered across the page, as on the rest of the site, with each image beside its section in the open margin. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-07-array-languages-xetal.md">This post's history</a>.]</em></p>

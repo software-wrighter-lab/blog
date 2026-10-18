@@ -38,7 +38,6 @@ The demos show what array programming looks like. The games show what it can car
 
 </div>
 
-<div class="clearfix" markdown="1" style="clear: both;">
 
 ## Twenty games, live
 
@@ -51,6 +50,8 @@ Each game's rules are a small X_eTaL library, and its page shows only what X_eTa
 .games-grid span { display: block; text-align: center; font-size: 0.85em; margin-top: 0.3em; }
 @media (max-width: 600px) { .games-grid { grid-template-columns: repeat(2, 1fr); } }
 </style>
+
+<div style="clear: both;"></div>
 
 <div class="games-grid">
 <a class="no-external-icon" href="https://softwarewrighter.github.io/X_eTaL-games/horse-race/"><img src="{{ '/assets/images/posts/xetal-games-horse-race.webp' | relative_url }}" class="no-invert" alt="The horse race game's page in the X_eTaL games catalog"><span>horse race</span></a>
@@ -75,9 +76,7 @@ Each game's rules are a small X_eTaL library, and its page shows only what X_eTa
 <a class="no-external-icon" href="https://softwarewrighter.github.io/X_eTaL-games/tower-defense/"><img src="{{ '/assets/images/posts/xetal-games-tower-defense.webp' | relative_url }}" class="no-invert" alt="The tower defense game's isometric board, with its money, lives, wave and time across the top and the tower buttons below"><span>tower defense</span></a>
 </div>
 
-</div>
 
-<div class="clearfix" markdown="1">
 
 ## Each game, one idea
 
@@ -119,9 +118,7 @@ runs ← ('+ s̲\ ends) − ends             ⍝ maze: runs of a row, by one sca
 
 The same few shapes recur across games that look nothing alike: rotate and reduce for a neighborhood, a table of every pair, compress to keep what survives, a fixed point to finish a flood. That recurrence is what the shared libraries capture, Board, Play, Text, State, Svg and Ecs, each game using the ones it needs.
 
-</div>
 
-<div class="clearfix" markdown="1">
 
 ## An entity-component system as arrays
 
@@ -174,4 +171,6 @@ When an ask lands, the game drops its workaround. When it does not, the game sho
 
 That is the tour: [the language](/2026/10/07/array-languages-xetal/), [the demos](/2026/10/08/array-languages-xetal-demos/), [the libraries](/2026/10/09/array-languages-xetal-libraries/), [the extensions](/2026/10/10/array-languages-xetal-extensions/), [the machine learning](/2026/10/11/array-languages-xetal-ml/), and the games. Six repositories, each with one job, and one language under all of them. Two more, for GPUs and FPGAs, are planned and will join the series when they exist.
 
-</div>
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/18: the sections are now staggered across the page, as on the rest of the site, with each image beside its section in the open margin. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-12-array-languages-xetal-games.md">This post's history</a>.]</em></p>

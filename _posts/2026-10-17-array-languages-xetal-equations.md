@@ -62,7 +62,6 @@ repo_urls:
 
 </div>
 
-<div class="clearfix" markdown="1" style="clear: both;">
 
 ## One equation, three views
 
@@ -87,14 +86,13 @@ An ML-focused language could add notation for sums to its grammar. The approach 
 
 ## An equation, as the paper prints it
 
-<figure class="zoomable" style="float: left; clear: both; margin: 0.2em 1.5em 0.6em 0; max-width: 44%;">
+<figure class="zoomable outdent-right">
 <img src="{{ '/assets/images/posts/xetal-eq-eq.webp' | relative_url }}" class="no-invert" alt="The CNN's triple sum typeset: Y sub o,h,w equals the sum over c from 0 to C minus 1, the sum over r from 0 to Kh minus 1 and the sum over s from 0 to Kw minus 1 of X sub c, h plus r, w plus s times W sub o,c,r,s">
 <figcaption style="font-size: 0.85em;">The convolution, typeset from the LaTeX the macro returns. Click to enlarge.</figcaption>
 </figure>
 
 The running example is the 2D convolution a CNN computes, strictly a cross-correlation, written as a triple sum. Each output `Y[o,h,w]`, for output channel `o` at row `h` and column `w`, adds up products over every input channel `c` and every kernel row `r` and column `s`: the input `X` at the window's position times the weight `W` for that output channel. The typeset version on the left is how a paper prints it.
 
-<div style="clear: both;"></div>
 
 As a macro call it reads almost the same:
 
@@ -126,7 +124,7 @@ Y
 Y m̲atch X ᵉc̲orrelate W
 ```
 
-<figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 48%;">
+<figure class="zoomable outdent-right">
 <img src="{{ '/assets/images/posts/xetal-eq-texpage.webp' | relative_url }}" class="no-invert" alt="The Equations library's page for its CNN demo: the program, then its output, where the line printed between double dollar signs is drawn by KaTeX as the triple sum Y sub o,h,w equals the sum over c, r and s of X sub c, h plus r, w plus s times W sub o,c,r,s, followed by the result 560 596 632, 704 740 776, 848 884 920 and a 1">
 <figcaption style="font-size: 0.85em;">The demo as the library shows it: the program, and its output with the LaTeX line drawn as math. Click to enlarge.</figcaption>
 </figure>
@@ -143,7 +141,6 @@ $$Y_{o,h,w} = \sum_{c=0}^{C - 1} \sum_{r=0}^{Kh - 1} \sum_{s=0}^{Kw - 1} X_{c,h+
 
 The `$$` line is for whatever shows the output. In the library's live demo, and on the page `just tex Equations cnn` writes, shown here, that line is drawn as math by KaTeX; everywhere else it is plain text. The final `1` is the check: the result matches `ᵉc̲orrelate`, the library's own cross-correlation, written a different way.
 
-<div style="clear: both;"></div>
 
 ## What it becomes
 
@@ -217,14 +214,13 @@ error[index]: X axis 1: index 2 is outside 0..1 (from c)
 
 ## Beyond the CNN
 
-<figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 46%;">
+<figure class="zoomable outdent-left">
 <img src="{{ '/assets/images/posts/xetal-eq-five.webp' | relative_url }}" class="no-invert" alt="Five equations typeset from the LaTeX the macro returned, each with its result: a dense layer with its bias, z sub i equals the sum over j of W sub i,j x sub j, in parentheses, plus b sub i, giving -1.5 -2.5; attention scores with their scale, S sub i,j equals the sum over d of Q sub i,d K sub j,d over the square root of 4, giving 1 2 0 and 1 0 3; softmax, s sub i equals exp of v sub i over the sum over j of exp of v sub j, giving 0.09 0.245 0.665; mean squared error, L equals the sum over i of (y sub i minus p sub i) squared, over 4, giving 0.3125; and 2 by 2 max pooling with stride 2, P sub o,h,w equals the max over r and the max over s of X sub o, 2h plus r, 2w plus s, giving 4 8 and 12 16">
 <figcaption style="font-size: 0.85em;">Five more equations, typeset from the macro's own LaTeX, with what each computed. Click to enlarge.</figcaption>
 </figure>
 
 The convolution is the hardest case, three sums and arithmetic in the subscripts, but a sum is rarely the whole of an equation. A paper puts a bias after it, a scale or an average over it, and a function around its terms. So a sum in parentheses is a term like any other, `max`, `min` and `prod` join `sum`, and `exp`, `log`, `sqrt`, `abs`, `max` and `min` can be applied, spelled as a paper spells them. Five equations every model uses, each one call:
 
-<div style="clear: both;"></div>
 
 ```text
 (z, tz) ← "z[i] | 2" ᵉb̲oth< "(sum j:=0..2 | W[i,j] * x[j]) + b[i]"
@@ -242,7 +238,6 @@ The convolution is the hardest case, three sums and arithmetic in the subscripts
 
 The figure shows what each call returned, the LaTeX typeset and the value, and every value was checked by hand. The LaTeX follows the source: a quotient becomes a fraction, `sqrt` a radical, a parenthesized sum keeps its parentheses. Powers bind tightest, and a tower of powers is read from the top, as math reads it, so `2^3^2` is 512; the power comes before a minus sign, so `-2^2` is −4. A name the grammar does not know, applied like a function, is refused rather than guessed at.
 
-<div style="clear: both;"></div>
 
 ## Checked against an oracle
 
@@ -250,9 +245,7 @@ The library was built test-first, against an oracle: `ᵉc̲orrelate`, the same 
 
 The call's form was not the first idea. The design compares seven ways of writing it, judged on whether a reader can see which bound goes with which index, whether different operators can mix, what a plausible slip does, how close it stays to the paper, and whether it works with no compiler change. The worst outcome is a slip that gives a silent wrong answer, and the chosen form, a binding per sum, was picked largely to rule those out.
 
-</div>
 
-<div class="clearfix" markdown="1">
 
 ## What comes next
 
@@ -266,8 +259,9 @@ Sums are not the only operator an equation needs. A continuous convolution is an
 
 Equations are one half of the notation ML needs. The other is the data flow a model runs, layer after layer, which reads left to right where X_eTaL reads right to left; a pipeline macro for it is the subject of a planned post. Both lower to ordinary X_eTaL, so what they produce can run on the GPUs of [post #7](/2026/10/13/array-languages-xetal-gpu/), through OpenCL or, as of [post #10](/2026/10/16/array-languages-xetal-mojo-metal/), Mojo, and be drawn step by step in Blender, as the softmax and matrix-product videos in [post #9](/2026/10/15/array-languages-xetal-blender/) already are.
 
-</div>
 
 ---
 
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/17: the table of the three macros now shows them rendered, <code>ᵉe̲q&lt;</code>, <code>ᵉt̲ex&lt;</code> and <code>ᵉb̲oth&lt;</code>, as the rest of the post does, rather than as typed (<code>e:e_q&lt;</code>, ...). <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-17-array-languages-xetal-equations.md">This post's history</a>.]</em></p>
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/18: the sections are now staggered across the page, as on the rest of the site, with each image beside its section in the open margin. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-17-array-languages-xetal-equations.md">This post's history</a>.]</em></p>

@@ -52,7 +52,6 @@ The extensions in [post #4](/2026/10/10/array-languages-xetal-extensions/) gave 
 
 </div>
 
-<div class="clearfix" markdown="1" style="clear: both;">
 
 ## From arrays to a video
 
@@ -80,9 +79,7 @@ The whole path is written up as literate documents in Emacs Org mode, where the 
 
 They sit in the extensions repo's [collection of literate documents](https://softwarewrighter.github.io/X_eTaL-extensions/literate/), beside one on [water that drains](https://github.com/softwarewrighter/X_eTaL-extensions/blob/main/docs/literate/water.org) in the voxel world.
 
-</div>
 
-<div class="clearfix" markdown="1">
 
 <div style="clear: both;"></div>
 
@@ -122,9 +119,7 @@ The library on top, `Bpy.xtl`, returns pieces of a script as text: an empty scen
 
 The corners are an outer product: each center plus each of a unit cube's eight corners, scaled, one coordinate at a time. The faces are another: each cube's offset into the corner list plus the six sides' corner numbers. No loop over cubes, and a thousand cubes cost the same few lines as one. The numbers go into the script, and Blender builds one mesh from them.
 
-</div>
 
-<div class="clearfix" markdown="1">
 
 ## Blender draws the series
 
@@ -134,7 +129,7 @@ The extension's next job is to show the rest of this series rather than tell it.
 
 ### Arrays become a model
 
-<figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 46%;">
+<figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 48%;">
 <img src="{{ '/assets/images/posts/xetal-blender-blender-arrays.webp' | relative_url }}" class="no-invert" alt="Blender's own process in five stages: a profile of 6 points by 2, corners of 96 by 3, faces of 80 by 4, the finished cannon piece, and sixteen rendered frames">
 <figcaption style="font-size: 0.85em;">Arrays become a model: profile, corners, faces, the piece, the renders. Click to enlarge.</figcaption>
 </figure>
@@ -147,7 +142,7 @@ The caption along the bottom of the frame says it in one line: X_eTaL computes t
 
 ### HEX1000 as arrays
 
-<figure class="zoomable" style="float: left; clear: both; margin: 0.2em 1.5em 0.6em 0; max-width: 46%;">
+<figure class="zoomable" style="float: left; clear: both; margin: 0.2em 1.5em 0.6em 0; max-width: 48%;">
 <img src="{{ '/assets/images/posts/xetal-blender-fpga-arrays.webp' | relative_url }}" class="no-invert" alt="HEX1000's RAM as arrays: a snapshot after each key of C0DE+BEEF=, the RAM after the sum as bars, four files of sixteen nibbles, and a seven-segment display reading 17FCd, the same answer as the Tang Nano 9K">
 <figcaption style="font-size: 0.85em;">HEX1000 as arrays: its RAM after each key, and the answer. Click to enlarge.</figcaption>
 </figure>
@@ -160,7 +155,7 @@ Across the top is one small grid per key, from reset to the equals sign, so you 
 
 ### One kernel on two GPUs
 
-<figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 46%;">
+<figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 48%;">
 <img src="{{ '/assets/images/posts/xetal-blender-gpu-arrays.webp' | relative_url }}" class="no-invert" alt="Two vectors x and y as bars, one OpenCL kernel of eight work-items computing 2x + y, and the work spread to an Apple M1 Max in unified memory and an NVIDIA RTX 5060 Ti over PCIe">
 <figcaption style="font-size: 0.85em;">One kernel, eight work-items, on two GPUs. Click to enlarge.</figcaption>
 </figure>
@@ -173,7 +168,7 @@ On the left, two vectors of eight numbers, `x` and `y`, drawn as bars, become `2
 
 ### A tiny network, stage by stage
 
-<figure class="zoomable" style="float: left; clear: both; margin: 0.2em 1.5em 0.6em 0; max-width: 46%;">
+<figure class="zoomable" style="float: left; clear: both; margin: 0.2em 1.5em 0.6em 0; max-width: 48%;">
 <img src="{{ '/assets/images/posts/xetal-blender-gpu-tinynet.webp' | relative_url }}" class="no-invert" alt="A tiny neural network on the GPU, stage by stage: x 4 by 3, times W1 plus b gives z1 4 by 5, relu gives h, times W2 plus b gives z2 4 by 2, softmax gives p 4 by 2; colored cells mark positive, negative and zero values; a bar below shows the 17 GPU launches by kind">
 <figcaption style="font-size: 0.85em;">A tiny network on the GPU, stage by stage, and its 17 kernel launches. Click to enlarge.</figcaption>
 </figure>
@@ -188,7 +183,7 @@ The bar along the bottom is what the GPU actually did to compute it: 17 kernel l
 
 ## Video: a matrix product, item by item
 
-<figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 46%;">
+<figure class="zoomable outdent-left">
 <video autoplay muted loop playsinline preload="metadata" class="no-invert" poster="{{ '/assets/images/posts/xetal-blender-matmul-steps-poster.webp' | relative_url }}" aria-label="An animated 3D matrix product, A 3 by 4 times B 4 by 2: A on the left wall, B on the ceiling, C on the back wall, every product in the cube between; item by item, then all six at once">
 <source src="{{ '/assets/videos/xetal-blender-matmul-steps.webm' | relative_url }}" type="video/webm">
 <source src="{{ '/assets/videos/xetal-blender-matmul-steps.mp4' | relative_url }}" type="video/mp4">
@@ -205,11 +200,10 @@ A matrix product is the work a GPU does most, in a network's layers, in attentio
 
 The point is the shape of the work: each item of `C` needs one row and one column and nothing else, which is exactly what lets a GPU compute them all at the same time.
 
-<div style="clear: both;"></div>
 
 ## Video: the 512 by 512 product
 
-<figure class="zoomable" style="float: left; clear: both; margin: 0.2em 1.5em 0.6em 0; max-width: 46%;">
+<figure class="zoomable outdent-right">
 <video autoplay muted loop playsinline preload="metadata" class="no-invert" poster="{{ '/assets/images/posts/xetal-blender-matmul-fly-poster.webp' | relative_url }}" aria-label="A fly-through of a 512 by 512 matrix product: the whole scale, a 16 by 16 work-group tile and the rows and columns it reads, one work-item's 512 products along a beam summed from far to near, then C filling a work-group at a time">
 <source src="{{ '/assets/videos/xetal-blender-matmul-fly.webm' | relative_url }}" type="video/webm">
 <source src="{{ '/assets/videos/xetal-blender-matmul-fly.mp4' | relative_url }}" type="video/mp4">
@@ -226,11 +220,10 @@ The same construct at the size that matters: the 512 by 512 product from [post #
 
 At this size the arithmetic dwarfs the cost of moving the data, which is why products are the work worth sending to a GPU.
 
-<div style="clear: both;"></div>
 
 ## Video: ReLU and softmax
 
-<figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 46%;">
+<figure class="zoomable" style="float: right; clear: both; margin: 0.2em 0 0.6em 1.5em; max-width: 48%;">
 <video autoplay muted loop playsinline preload="metadata" class="no-invert" poster="{{ '/assets/images/posts/xetal-blender-relu-softmax-poster.webp' | relative_url }}" aria-label="ReLU and softmax animated: z1 as orange positive and blue negative bars on a glass floor, the negatives turning red and shrinking to zero; then softmax's four steps on z2, ending as four columns of two shares, each exactly 1 tall">
 <source src="{{ '/assets/videos/xetal-blender-relu-softmax.webm' | relative_url }}" type="video/webm">
 <source src="{{ '/assets/videos/xetal-blender-relu-softmax.mp4' | relative_url }}" type="video/mp4">
@@ -272,8 +265,9 @@ The longest-term aim reaches past Blender and past any one machine: X_eTaL as a 
 
 These previews become finished explainer videos, each from the real data of the repo it explains: HEX1000 running, from its circuit simulation, with a render that refuses to finish unless the display shows the evaluator's answer; HEX1000 being built, its lookup tables flown to their places on the Gowin die; the GPU kernel being built and then running; and a short trailer, one X_eTaL program driving three things, a GPU, an FPGA and Blender. They are made for this series first, and perhaps a narrated YouTube video later. The pattern stays the same throughout: X_eTaL works out the arrays, writes the Python, and Blender does what it is best at.
 
-</div>
 
 ---
 
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/17: X_eTaL code is now shown rendered throughout, as <code>xetal render</code> draws it, including code written inside strings, rather than partly as typed; names that are about how you type them stay typed. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-15-array-languages-xetal-blender.md">This post's history</a>.]</em></p>
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/18: the sections are now staggered across the page, as on the rest of the site, with each image beside its section in the open margin. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-15-array-languages-xetal-blender.md">This post's history</a>.]</em></p>

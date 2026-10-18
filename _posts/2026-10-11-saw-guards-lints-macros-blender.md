@@ -41,7 +41,6 @@ Most of this week went into the Array Languages series, so this Saw is short. It
 
 </div>
 
-<div class="clearfix" markdown="1">
 
 ## Guards on the blog
 
@@ -51,9 +50,7 @@ Publishing every day for a week showed where the blog needed checks rather than 
 - **Thumbnails and lead images checked.** Every post leads with its own image, and validation fails on a duplicate. A new check builds the site and confirms that each card on the abstracts page shows the same image as its post, light and dark versions included.
 - **One font for code.** Every code sample on the site, past and future, is drawn in JuliaMono, served from the blog itself. It covers every APL and X_eTaL symbol, and a small script rebuilds it when a post needs a character it lacks.
 
-</div>
 
-<div class="clearfix" markdown="1">
 
 ## Two tools in the language
 
@@ -68,9 +65,7 @@ The bigger change is a rule. X_eTaL should stay small, so a new language feature
 - **Math equations for ML.** Macros that take an equation, starting with the convolution's triple sum, and give back math notation, the array code it expands to, and a computation that runs. [Array Languages #5](/2026/10/11/array-languages-xetal-ml/) says more.
 - **Networks and native bindings.** Two macro libraries already in use show the pattern works: one writes a neural network and its training step from a line, and another writes every native extension's typed facade.
 
-</div>
 
-<div class="clearfix" markdown="1">
 
 ## Looking ahead: Blender
 
@@ -89,4 +84,6 @@ After that come more advanced meshes and effects. That makes 3D scene generation
 
 Other things set up this week that will pay off later: the native hook X_eTaL still needs, so extensions can drop their bridge; worked examples under every library function that `xetal doc` can run and check; and the equation-macro proof of concept.
 
-</div>
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/18: the sections are now staggered across the page, as on the rest of the site, with each image beside its section in the open margin. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-11-saw-guards-lints-macros-blender.md">This post's history</a>.]</em></p>
