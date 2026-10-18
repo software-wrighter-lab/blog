@@ -16,9 +16,9 @@ repo_urls:
 <!-- DRAFT (2026-10-18). Sources: Mike's ~/Downloads/agentrail-correcting-the-record.md and sw-vibe-coding/agentrail-rs PR #3
      ("feat: correct the record: close, edit, reserve; the cursor skips finished work", merged 2026-10-18T14:43Z, +702 -6, 15 files).
      Commands, numbers and examples are from those two; nothing here was run by the blog agent.
-     Lead image: PLACEHOLDER (scripts/placeholder-marker); Mike will supply one. -->
+     Lead image: Mike's block-table-jigsaw.jpg (2026-10-18), not inverted (mostly black ink on warm off-white paper). -->
 
-<img src="{{ '/assets/images/posts/placeholder-saw-agentrail-correcting-the-record.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-table-jigsaw.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
 <div style="overflow: hidden;" markdown="1">
 
