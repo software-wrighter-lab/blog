@@ -71,3 +71,12 @@ rN      GRID → TOUR → END
   (`https://github.com/software-wrighter-lab/blog/commits/main/_posts/FILE.md`), since a commit cannot name its own SHA.
 - `AGENTS.md` and other drafts-only files never go to main: commit the post edit on its own, so its cherry-pick is clean.
 - Ship the edit the usual way: commit on `drafts`, cherry-pick into a `mktemp` worktree of `origin/main`, validate, push, merge back.
+
+## Staggered sections by default
+
+- Top-level `##` sections stagger left, center, right (60% wide; the first two skip it when a links box floats). That is the
+  house layout: do not wrap a post's body in one `<div class="clearfix">`, which turns staggering off for every section.
+- A gutter image in a staggered section goes in the empty side of the page: `<figure class="zoomable outdent-right">` in a
+  `stagger-0` (left) section, `outdent-left` in a `stagger-2` (right) one (CSS in `assets/main.scss`; it falls back to full width
+  under 900px). A `stagger-1` (center) section has no open side; put the figure in a neighboring section or reorder.
+- Check the order with the preview (which section gets which `stagger-N`) before placing figures.
