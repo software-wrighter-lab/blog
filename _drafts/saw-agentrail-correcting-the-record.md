@@ -139,7 +139,7 @@ git log --oneline -- .agentrail/
 git show 517f7142 -- .agentrail/steps/101-spatial-oracle/
 ```
 
-Here is the first real use of the new commands, on X_eTaL's saga the same morning the change merged. One commit corrected the record, and its message says what it did and where each piece of work is:
+Here is the first real use of the new commands, on X_eTaL's saga, a minute after the change merged. One commit corrected the record, and its message says what it did and where each piece of work is:
 
 ```text
 saga: correct the record (steps done elsewhere closed, 111's prompt, 119 reserved)
@@ -194,7 +194,7 @@ Step 119 was not done yet, but it was someone else's: the local agent had moved 
 +reserved_for = "local agent: the site build moved to gh-pages (b025b3d0); switching GitHub Pages' source remains"
 ```
 
-A few hours later the local agent did it, and closed the step. The work was a change to the repository's settings, with no commit at all, and the record says exactly that:
+Half an hour later the local agent did it, and closed the step. The work was a change to the repository's settings, with no commit at all, and the record says exactly that:
 
 ```diff
 -status = "pending"
