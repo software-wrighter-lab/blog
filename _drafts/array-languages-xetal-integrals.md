@@ -17,9 +17,9 @@ repo_urls:
      its eight decisions taken with Mike 2026-10-17 "for now"; the design note docs/convolutions/integrals.md). Nothing built.
      Run here on 2026-10-17 with X_eTaL-libraries origin/main (0f82f93, clean export): the correlation e:b_oth< call gives
      r_{n} = \sum_{k=0}^{2} x_{n+k} \, h_{k} and 14 20; dx * '+ r_/ q gives 1.0.
-     CONFLICTS TO RAISE (not in the post): Saga 42's decision 6 says a stage naming earlier stages without it stays refused, but
-     X_eTaL-ML's committed Pipeline (8c758a1) accepts such stages (the stable softmax's "e / '+ r_/ e"); and the plan lists code
-     strings as available though step 111 is pending (c"..." is bad-string on main 6c0bf1c9).
+     Decision 6 SETTLED late 10/17 (cloud agent's pipeline-topologies design): stages naming earlier stages without it are allowed.
+     STILL TO RAISE: the plan lists code strings as available though step 111 is pending (c"..." is bad-string on main 6c0bf1c9).
+     If the post keeps "Pipelines that join", recheck it against the topology design (segments and labels) once it is committed.
      Links to #11 and #12 assume they publish 10/17 and 10/18. Date provisional.
      Lead image: Mike's screenshot (continuous convolution card), not inverted, not transparent. -->
 

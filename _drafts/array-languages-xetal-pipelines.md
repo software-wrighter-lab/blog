@@ -24,6 +24,10 @@ repo_urls:
      2026-10-17 evening (Mike): the pipeline DESIGN IS NOT FINAL; a cloud agent is still working on it. Publishing goal: 10/18
      AFTERNOON, when the design, implementation and demos should be ready. Rewrite from what is committed then (expect changes to the
      rules, e.g. whether a stage may name earlier stages without it: X_eTaL Saga 42 decision 6 says refused; Pipeline 8c758a1 accepts).
+     2026-10-17 late (Mike relayed the cloud agent): pipeline-topologies.md (NOT PUSHED anywhere yet) recommends CMS-style segments
+     separated by \, wiring only at a segment's start (a label or a tuple: fan-out, fan-in, several outputs), a stage sees only the
+     stage before it inside a segment, pipe:s_ub< for sub-pipes; every edge declared, so diagram, trace and shape lint see all edges.
+     Decision 6 SETTLED: stages naming earlier stages without it are allowed (X_eTaL's own spatial.md examples use them).
      Code strings are now c"..." (multi-line, escapes) and c#"..."# (verbatim), no cr"..." (X_eTaL 53130942, 0c525d74); not built yet.
      RENDERING: stages are shown rendered one by one (xetal render on each stage) because the renderer draws a string as typed;
      X_eTaL code strings c"..." (ST5, docs/code-strings.md, steps 111-112) will make the renderer do it; re-render from source then.
