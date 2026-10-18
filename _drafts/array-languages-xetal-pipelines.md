@@ -21,6 +21,10 @@ repo_urls:
      2026-10-17 ~15:00: COMMITTED as 8c758a1 (14:31); re-run on the commit: outputs, expansion, errors unchanged. The demo's weights
      were fixed (now XOR: argmax 1 2 2 1, checked by hand); the comment now says "it nn:d_ense W1". Steps next: gate-affected (begun),
      then pipeline-bias, pipeline-demos.
+     2026-10-17 evening (Mike): the pipeline DESIGN IS NOT FINAL; a cloud agent is still working on it. Publishing goal: 10/18
+     AFTERNOON, when the design, implementation and demos should be ready. Rewrite from what is committed then (expect changes to the
+     rules, e.g. whether a stage may name earlier stages without it: X_eTaL Saga 42 decision 6 says refused; Pipeline 8c758a1 accepts).
+     Code strings are now c"..." (multi-line, escapes) and c#"..."# (verbatim), no cr"..." (X_eTaL 53130942, 0c525d74); not built yet.
      RENDERING: stages are shown rendered one by one (xetal render on each stage) because the renderer draws a string as typed;
      X_eTaL code strings c"..." (ST5, docs/code-strings.md, steps 111-112) will make the renderer do it; re-render from source then.
      Lead image FOR NOW (Mike): his screenshot of a CNN layer as five stages with shapes, not inverted. -->
