@@ -132,14 +132,92 @@ A silent inconsistency becomes a visible to-do with the command attached.
 
 ## Reading the record
 
-The saga is plain files in `.agentrail/`, committed with the code, so its history is git's history. Most of it is for the tool, but three parts are written for people: each commit's message, each step's `step.toml`, a few lines of fields, and its `summary.md`, one paragraph. To see what happened to the plan, ask git for just that folder:
+An agent's full conversation stays on the machine it ran on. What agentrail commits with the code is the part worth keeping: what was planned and what was done, in a few sentences per step. Anyone can read it, on GitHub or in a clone, without agentrail installed.
 
-```bash
-git log --oneline -- .agentrail/
-git show 517f7142 -- .agentrail/steps/101-spatial-oracle/
+### Where the words are
+
+Everything is in the `.agentrail/` folder at the top of the repository. In X_eTaL's, for example, [`.agentrail/steps`](https://github.com/softwarewrighter/X_eTaL/tree/main/.agentrail/steps) holds one folder per step, named by number and slug, `110-macro-contracts`. Four files tell the story:
+
+| File | What it says |
+|---|---|
+| [`.agentrail/plan.md`](https://github.com/softwarewrighter/X_eTaL/tree/main/.agentrail/plan.md) | the saga's plan, in prose: its goal and what was decided |
+| `steps/NNN-slug/prompt.md` | what the step was asked to do, written before it started |
+| `steps/NNN-slug/summary.md` | what was done, a few lines written when it finished |
+| `steps/NNN-slug/step.toml` | when it finished, the commits it made, or where it was done instead |
+
+So the way to read a step is in that order: the prompt, then the summary, then a glance at the record for when and where. Step 110 of X_eTaL's saga, the macro contracts, reads like this. Its prompt, the plan, begins:
+
+```text
+The user (2026-10-17, decided): three contract lines in a macro's doc block, checked by
+the macro runner ... ## uses: copied (the default: every name and number token of each
+argument appears as a token in the expansion, else error[unused-argument] at the argument
+naming the text ignored ...) and ## uses: parsed (the macro parses a notation and takes
+responsibility ...). Test-first ...
 ```
 
-Here is the first real use of the new commands, on X_eTaL's saga, a minute after the change merged. One commit corrected the record, and its message says what it did and where each piece of work is:
+Its summary, what was done:
+
+```text
+Macro contracts (MC31, D163): xetal-contract crate (## takes:, ## uses: copied|parsed,
+## binds:) checked by the expander around each call; bad-macro-call before the macro runs,
+unused-argument after, bad-contract at load; every standard macro annotated; xetal doc
+shows takes/uses; spec + goldens; docs. ... Commit 57cff932 pushed.
+```
+
+And its record says when, and which commit holds the work:
+
+```text
+completed_at = "2026-10-17T16:51:51"
+commits = ["57cff93220e03f551567200f8812d78a9f9b1b8a"]
+```
+
+On GitHub, the History button on the `.agentrail` folder lists the saga's own commits, one per finished step, `chore: complete step 110 (macro contracts)`, and each commit in `commits` links to the code itself.
+
+### All of it at once
+
+In a clone, `agentrail history` prints every step in order, its status, the first line of its prompt and its summary:
+
+```text
+108-plain-names [production] (completed)
+  The user (2026-10-17), after a survey of names: rename what reads oddly or de...
+  Summary: Plain names (D161): s:r_ange -> s_pread, demos/sub.xtl -> dyadic.xtl, Macros t_h...
+
+109-spatial-pipeline-macro [production] (completed)
+  Saga 41 step 5b (docs/plan.md, docs/spatial.md Pipelines, D155): e:p_ipe< in ...
+  Summary: Handed to X_eTaL-ML (the user's choice: the pipeline macro lives beside the nn: ...
+
+110-macro-contracts [production] (completed)
+  The user (2026-10-17, decided): three contract lines in a macro's doc block, ...
+  Summary: Macro contracts (MC31, D163): xetal-contract crate (## takes:, ## uses: copied|p...
+```
+
+It does not print dates. For a diary of what was done when, a few lines of shell put each finished step's date beside its summary:
+
+```bash
+for d in .agentrail/steps/*/; do
+  t=$(sed -n 's/^completed_at = "\(.*\)"/\1/p' "$d/step.toml")
+  [ -n "$t" ] && [ -f "$d/summary.md" ] &&
+    printf '%s  %s  %s\n' "${t%T*}" "$(basename "$d")" "$(head -c 70 "$d/summary.md")"
+done | sort
+```
+
+The last three days of X_eTaL, from that:
+
+```text
+2026-10-16  100-raw-strings       Raw strings (ST4, D156): lexer r"..." and r#"..."# (verbatim, mult
+2026-10-16  106-boxed-macro-text  Boxed broke every macro (expansions captured through the boxed pr
+2026-10-17  107-expand-layout     xetal expand and Expand lay a macro's text out as a program past 8
+2026-10-17  110-macro-contracts   Macro contracts (MC31, D163): xetal-contract crate (## takes:, ##
+2026-10-18  101-spatial-oracle    Done in X_eTaL-libraries as its Saga 12 step 2 (equations-oracle):
+2026-10-18  115-shape-lint        The shape lint (shape-mismatch, shape-check-proven, r_equireShape)
+2026-10-18  126-errors-located    Saga 27 step 1 done in the readable lane (lanes/readable/.agentrai
+```
+
+One thing to read carefully. A step closed out of order carries the date it was recorded, not the date the work was done: step 101 shows the 18th because that is when the record was corrected. Its summary says where the work is, and its record names the commit, `done_elsewhere = "X_eTaL-libraries@8197d52 (Saga 12 step 2)"`, whose own date is when the work happened.
+
+### The correction, told in words
+
+The correction itself reads the same way. It was the first use of the new commands, a minute after the change merged, and its commit message is a plain account of what was set right and where each piece of work really is:
 
 ```text
 saga: correct the record (steps done elsewhere closed, 111's prompt, 119 reserved)
@@ -162,49 +240,49 @@ PR #3), each with where the work is, no other step touched:
 agentrail status reports no stranded steps; the cursor stays at 111.
 ```
 
-Each step's file shows the same story in a few changed lines. Step 101 was done in another repository, so it gains a completion time and a `done_elsewhere` naming that repository's commit, and its list of commits here stays empty, because none of them are here:
-
-```diff
--status = "pending"
-+status = "completed"
-+completed_at = "2026-10-18T14:43:53"
- commits = []
-+done_elsewhere = "X_eTaL-libraries@8197d52 (Saga 12 step 2)"
-```
-
-and its new `summary.md` says, in a sentence, what was done:
+Half an hour later the local agent switched the Pages setting and closed step 119, and its summary says what it did, in a sentence:
 
 ```text
-Done in X_eTaL-libraries as its Saga 12 step 2 (equations-oracle): Equations with the CNN cross-correlation as its oracle.
+GitHub Pages' source switched from the main workflow to the gh-pages branch (gh api,
+2026-10-18 07:40) after the first just publish from main 723cd4eb; the site build moved
+there in b025b3d0 (#128, D164).
 ```
 
-Step 115 was done in this repository, merged with a pull request, so it records that commit instead:
+Reserved, done and closed, and each step of it written down in words someone else can read.
 
-```diff
--status = "pending"
-+status = "completed"
-+completed_at = "2026-10-18T14:43:53"
--commits = []
-+commits = ["dc359072a9e2c1d9fe29c80d07ca9b29b26b99a6"]
-```
+## And the full transcripts
 
-Step 119 was not done yet, but it was someone else's: the local agent had moved the site's build and still had to switch where GitHub Pages reads it from. So it was reserved, with a note saying what remained:
+The record above is the summary. The whole conversation, every request, reply and command, is kept by the coding agent itself, not by agentrail, and since the work runs in parallel it is spread across machines. With Claude Code:
 
-```diff
-+reserved_for = "local agent: the site build moved to gh-pages (b025b3d0); switching GitHub Pages' source remains"
-```
+- **On a Mac or Linux machine,** each session is a file under `~/.claude/projects/`, in a folder named after the repository's path with its slashes turned into dashes. For X_eTaL on my Mac:
 
-Half an hour later the local agent did it, and closed the step. The work was a change to the repository's settings, with no commit at all, and the record says exactly that:
+  ```text
+  ~/.claude/projects/-Users-mike-github-softwarewrighter-X-eTaL/d545dc14-38c5-4323-80b6-15b75c666593.jsonl
+  ```
 
-```diff
--status = "pending"
-+status = "completed"
-+completed_at = "2026-10-18T08:12:40"
--reserved_for = "local agent: the site build moved to gh-pages (b025b3d0); switching GitHub Pages' source remains"
-+done_elsewhere = "GitHub repository settings (Pages: branch gh-pages, path /), no commit"
-```
+  The Arch Linux machine keeps its own sessions the same way, in its own home folder. Each file holds one JSON object per line, and `jq` pulls out the readable part, the agent's replies with their times:
 
-That is the whole life of a handed-off step, reserved, done and closed, in three readable lines of history, with nothing claimed that did not happen.
+  ```bash
+  jq -r 'select(.type=="assistant") | .timestamp as $t
+         | .message.content[]? | select(.type=="text") | "\($t)  \(.text)"' SESSION.jsonl
+  ```
+
+  From the X_eTaL session above, on the evening step 110 was being built:
+
+  ```text
+  2026-10-17T21:13:22.930Z  Libraries step 1 is done and published. Next in the chain: X_eTaL step 110 (macro contracts).
+  **Step 110, macro contracts (in progress):** the `xetal-contract` crate is written and green (10 tests),
+  ```
+
+- **In Claude's cloud,** a session runs on a virtual machine that is gone when it ends, so its transcript is not on any disk of mine; it is in the web interface, at claude.ai/code. A commit made there carries a trailer that links back to it, as the correction above does:
+
+  ```text
+  Claude-Session: https://claude.ai/code/session_01Etyh3Gka9iV2U9SJkNnmhm
+  ```
+
+  The link opens the session for whoever owns it.
+
+Transcripts are long, private and scattered; that is why the saga keeps the summary. The record in the repository says what was planned and done, the commits hold the code, and a transcript, wherever it lives, is there for the rare time the reasoning behind a step matters.
 
 ## The rules behind it
 
