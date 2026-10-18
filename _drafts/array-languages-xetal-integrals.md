@@ -22,6 +22,13 @@ repo_urls:
      If the post keeps "Pipelines that join", recheck it against the topology design (segments and labels) once it is committed.
      2026-10-18: labels become $name (drawn ▹name), the library Flow (flow:p_ipe<); "Pipelines that join" uses ": f_samples" today: rewrite it
      as a fan-in with labels once that lands (a stage may name several labels, so it × f_samples may become a plain join).
+     2026-10-18 11:40: X_eTaL-ML step 026 "integrals" IN PROGRESS (uncommitted; Mike: "blog tomorrow"): libs/Integrals, alias integ:,
+     Integrals.xtlm, '@ integ:i_ntegral< "integral tau:=a..b by trapezoid 64 | body"' (Saga 42 call shape, liftable into Equations
+     later), integ:t_ex< (\int_{a}^{b} ... d\tau); improper integrals refused; tests first (exact on constants/lines for trapezoid,
+     quadratics/cubics for simpson; convergence order on e_xp; the box convolution converging to the triangle; 13 refusals); demos:
+     convolution.xtl (two boxes as a function of t) and gelu.xtl (GELU as x Phi(x) by the integral vs the tanh approximation; the KL
+     divergence of two Gaussians over a truncation vs its closed form). REWRITE #13 from it once committed: it becomes a "built" post.
+     NAMING to raise: integ:i_ntegral< says "integral" twice, the same smell as pipe:p_ipe< (renamed Flow).
      Links to #11 and #12 assume they publish 10/17 and 10/18. Date provisional.
      Lead image: Mike's screenshot (continuous convolution card), not inverted, not transparent. -->
 
