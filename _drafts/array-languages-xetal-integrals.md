@@ -13,12 +13,13 @@ repo_urls:
     title: "X_eTaL"
 ---
 
-<!-- DRAFT (rewritten 2026-10-19 from X_eTaL-ML's committed Integrals: 9825334 "Integrals, a definite integral as a macro call",
-     35c4840 goldens, origin f734718). Every output was run on a clean export of X_eTaL-ML's libs with a clean build of X_eTaL main
-     (f027bb74): demos/convolution, demos/gelu, tests/exact (8 checks), tests/convergence (4 4 16 16), tests/latex, tests/reject-infinite.
-     Rendered lines by xetal render; the integral calls are shown AS TYPED on purpose: a plain string renders its X_eTaL body as typed,
-     and a c"..." string mis-draws the notation (:= as ←, | as ∨). Fix belongs to X_eTaL step 154 (MC32 notation drawing) or the lift
-     of integral into X_eTaL-libraries' Equations (Saga 42 decision 1). Naming integ:i_ntegral< to be raised.
+<!-- DRAFT (rewritten 2026-10-19 afternoon): integrals now IN X_eTaL-libraries' Equations (3a61a22, PR #5, Saga 14 step 3, X_eTaL
+     Saga 42 decision 1; every macro declares ## takes:, a3f7f75). Runs: clean export of X_eTaL-libraries origin 982495a with its pinned
+     xetal f7848d00 (scripts/xt, XETAL_LIBS_ROOT): demos/integrals.xtl (GELU table, 0.000473, KL 0.443147 x2, LaTeX), my calls (1/3,
+     6.0; the inf refusal), tests integral-nested (0.25 xy square, 3.0 sum inside) and integral-latex (the four typeset). Expansion by
+     scripts/xt expand, checks trimmed. Box convolution and convergence numbers from X_eTaL-ML's Integrals (9825334), clean export with
+     X_eTaL main f027bb74; Equations' goldens repeat 4 4 16 16 from it. Note for the agents: the result name Phi is not made \Phi
+     (Greek is converted in bodies and bounds only).
      Saga 42 decisions (X_eTaL 6c0bf1c9) for the convolution family; boundary modes, FFT. Animation planned, not built.
      Lead image: Mike's screenshot (continuous convolution card), not inverted, not transparent. -->
 
@@ -36,7 +37,7 @@ repo_urls:
 
 | Resource | Link |
 |----------|------|
-| **The library** | [Integrals](https://github.com/softwarewrighter/X_eTaL-ML/tree/main/libs/Integrals) in X_eTaL-ML · [its reference](https://github.com/softwarewrighter/X_eTaL-ML/blob/main/libs/Integrals/docs/README.md) |
+| **The library** | [Equations](https://github.com/softwarewrighter/X_eTaL-libraries/tree/main/libs/Equations), now with integrals · [Integrals](https://github.com/softwarewrighter/X_eTaL-ML/tree/main/libs/Integrals) in X_eTaL-ML, its check |
 | **The design** | [docs/plan.md](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/plan.md), Saga 42, in X_eTaL |
 | **The thread** | [#11: equations](/2026/10/17/array-languages-xetal-equations/) · [#12: pipelines](/2026/10/18/array-languages-xetal-pipelines/) · [#9: Blender](/2026/10/15/array-languages-xetal-blender/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
@@ -56,48 +57,62 @@ Convolution and cross-correlation are easy to confuse, because with a symmetric 
 r ← "r[n] | 2" ᵉe̲q< "sum k:=0..2 | x[n+k] * h[k]"
 ```
 
-## The integral, as a macro
+## The integral, in the equation's own words
 
-A convolution in a textbook is often continuous, an integral rather than a sum, and the step from one to the other is where a computer has to approximate. `Integrals`, a new library in X_eTaL-ML, writes a definite integral the way a paper does and computes it by a rule you can name. The call's text is the integral's own notation, so it is shown here as written:
-
-```text
-@ integ:i_ntegral< "integral x:=0..1 by simpson 2 | x ^ 2"
-@ integ:i_ntegral< "integral x:=0..2 by trapezoid 4 | 1.0 + 2.0 * x"
-@ integ:i_ntegral< "integral tau:=0..2 by trapezoid 128 | (u:b_ox tau) * u:b_ox t - tau"
-```
-
-`integral` reads like `sum`: a variable, its bounds, then the body after the bar. `by simpson 2` names the rule and the grid, how many steps; left out, the rule is the trapezoid on 64 steps, a documented default, so the plain form works. The body is X_eTaL, evaluated once over the whole grid: the macro binds the variable to the grid's points as one array, so the body may call any function. The first two lines give `1/3` and `6.0` exactly, because Simpson's rule is exact on a square and the trapezoid on a straight line.
-
-Like every reader in the series now, this one uses all of its text or refuses the call when the program is compiled, naming what it could not use, and some integrals it refuses on principle. A paper's convolution runs from minus infinity to infinity, and a computer cannot. Rather than quietly replace infinity with a finite bound, the macro refuses, and says how to go on:
+A convolution in a textbook is often continuous, an integral rather than a sum, and the step from one to the other is where a computer has to approximate. So `integral` is now an operator word in the equation library, beside `sum`, `prod`, `max` and `min`, and it reads the same way: a variable, its bounds, then the body after the bar. The string is the integral's notation, like the sums of post #11:
 
 ```text
-error[bad-integral]: an improper integral (a bound of inf): write a truncation, 0..20 say, and show the tail is small, or change variables so the bounds are finite: 0..inf
+v ← "v[] | " ᵉe̲q< "integral x:=0..1 by simpson 2 | x^2"
+w ← "w[] | " ᵉe̲q< "integral x:=0..2 by trapezoid 4 | 1 + 2 * x"
 ```
+
+`by simpson 2` names the rule and the grid, how many steps; left out, the rule is the trapezoid on 64 steps, a documented default, so the plain form works. These two give `1/3` and `6.0` exactly, because Simpson's rule is exact on a square and the trapezoid rule on a straight line.
+
+Because an integral is a term like any other, it nests. An integral sits inside a sum, a sum inside an integral, and two integrals make a double integral:
+
+```text
+q ← "L[] | " ᵉe̲q< "integral x:=0..1 by trapezoid 4, integral y:=0..1 by trapezoid 4 | x * y"
+r ← "L[] | " ᵉe̲q< "integral x:=0..1 by simpson 2 | (sum j:=0..M-1 | A[j] * x)"
+```
+
+The first is `xy` over the unit square, `0.25`; the second, with `A` of `1 2 3`, is `3.0`.
+
+Some integrals are refused on principle. A paper's convolution runs from minus infinity to infinity, and a computer cannot. Rather than quietly replace infinity with a finite bound, the macro refuses, and says how to go on:
+
+```text
+error[bad-equation]: an improper integral (a bound of inf): write a truncation, 0..20 say, and show the tail is small, or change variables so the bounds are finite: integral x:=0..inf
+```
+
+### The math it typesets
+
+<figure class="zoomable outdent-right">
+<img src="{{ '/assets/images/posts/xetal-int-four.webp' | relative_url }}" class="no-invert" alt="Four integrals typeset from the LaTeX the equation library returned: Phi equals one half plus the integral from 0 to x of exp of minus u squared over 2, over the square root of 2 pi, du, used for GELU; the KL divergence, the integral from -10 to 10 of P sub x times log of P sub x over Q sub x, dx, 0.443147 as the closed form; a double integral, the integral from 0 to 1 of the integral from 0 to x of x y dy dx; and a continuous convolution, F sub t equals the integral from 0 to 2 of exp of minus tau times exp of t minus tau, d tau">
+<figcaption style="font-size: 0.85em;">Four integrals, typeset from the LaTeX the macro returned. Click to enlarge.</figcaption>
+</figure>
+
+The same call gives its LaTeX, `ᵉt̲ex<`, and an integral comes out as a paper would print it: `\int` with its bounds, the body as math, `\, d\tau` at the end, nested integrals with the inner `d` first, and Greek names as Greek letters in the body and bounds. The figure shows four, each typeset from what the library returned, among them GELU's normal-distribution integral and the KL divergence below.
 
 ### What it becomes
 
-The macro writes ordinary X_eTaL: the bounds, the step, the variable bound to the grid, the rule's weights, and the step times the weighted sum of the body. Simpson on two steps over `0..1`, from `xetal expand`:
+The macro writes ordinary X_eTaL: the bounds as floats, the step, the rule's weights, a grid for the variable, and one weighted sum along it. Simpson on two steps over `0..1`, from `xetal expand`, its checks left out:
 
 ```text
-v ← ({ @ →
-  g1:a ← f̲loat 0
-  g2:b ← f̲loat 1
-  g3:h ← (g2:b − g1:a) ÷ 2.0
-  x ← g1:a + g3:h × f̲loat o̲ffsets 3
-  g4:w ← (1.0 c̲at (1 r̲eshape 4.0 2.0) c̲at 1.0) ÷ 3.0
-  g3:h × '+ r̲/ g4:w × x ^ 2
-} @)
+g9:a ← f̲loat (0)
+g8:b ← f̲loat (1)
+g7:h ← (g8:b − g9:a) ÷ 2.0
+g6:w ← g7:h × (1.0 c̲at (1 r̲eshape 4.0 2.0) c̲at 1.0) ÷ 3.0
+g10:grid ← (3)
+g11:g̲rid ← { k →
+  g10:grid r̲eshape (o̲ffsets k s̲elect g10:grid) 'l̲eft t̲able ('× r̲/ k d̲rop g10:grid) r̲eshape 0
+}
+'+ r̲/₁ g10:grid r̲eshape ((1 + g11:g̲rid 1) s̲elect g6:w) × (((g9:a + g7:h × f̲loat g11:g̲rid 1) ^ 2))
 ```
 
-The weights are Simpson's, 1, 4 and 1 over 3, and the variable `x` is the grid, three points. The macro's own names are fresh, `g1:a` and the rest, so they cannot collide with the program's; `x` is the caller's.
+The weights are Simpson's, 1, 4 and 1, times the step over 3; the grid has three points; and the integral is one reduction, `'+ r̲/₁`, of the weights times the body on the grid, the same shape as a sum's.
 
 ### Checked by its orders
 
-The tests check the rules the way numerical analysts do: by how fast the error falls. Doubling the grid should divide the trapezoid rule's error by about 4 and Simpson's by about 16, and on `eˣ` over `0..1` they do:
-
-```text
-4 4 16 16
-```
+The tests check the rules the way numerical analysts do: by how fast the error falls. Doubling the grid should divide the trapezoid rule's error by about 4 and Simpson's by about 16, and on `eˣ` over `0..1` they do: `4 4 16 16`. Those numbers, and every value above, came first from a standalone library in X_eTaL-ML, `Integrals`, which now serves as the equation library's independent check.
 
 ## Two boxes make a triangle
 
@@ -107,36 +122,29 @@ The card at the top of this post is the classic example: two box functions, each
 ᵘb̲ox ← { x → f̲loat (x ≥ 0.0) ∧ x ≤ 1.0 }
 ```
 
-The convolution is the third integral above, as a function of `t`. At `t` from 0 to 2 in eighths, on 128 steps, it gives the first line below; the exact triangle is the second:
+A body that calls an X_eTaL function like this one is not in the equation notation, which has `exp`, `log`, `sqrt`, `abs`, `max`, `min`, `sin` and `cos`; X_eTaL-ML's `Integrals` library takes it, with the same call and an X_eTaL body. At `t` from 0 to 2 in eighths, on 128 steps, it gives the first line below; the exact triangle is the second:
 
 ```text
 0.008 0.133 0.258 0.383 0.508 0.633 0.758 0.883 1.008 0.891 0.766 0.641 0.516 0.391 0.266 0.141 0.016
 0.0   0.125 0.25  0.375 0.5   0.625 0.75  0.875 1.0   0.875 0.75  0.625 0.5   0.375 0.25  0.125 0.0
 ```
 
-Close, and honestly close: the box jumps at its edges, and a rule sampling a jump is off by about half a step at each one, so this integral's error falls only as fast as the step does. The library documents that, and its tests check it.
+Close, and honestly close: the box jumps at its edges, and a rule sampling a jump is off by about half a step at each one, so this integral's error falls only as fast as the step does. Both libraries document that.
 
 ## GELU, from its definition
 
-The same macro computes something every transformer uses. GELU, the activation in BERT and GPT, is `x` times the standard normal's cumulative distribution, `Φ(x)`, which is an integral of the normal density from 0 to `x`, plus one half. The density is one line:
+The same notation computes something every transformer uses. GELU, the activation in BERT and GPT, is `x` times the standard normal's cumulative distribution, `Φ(x)`, which is one half plus an integral of the normal density from 0 to `x`:
 
 ```text
-ᵘp̲hi ← { u → (e̲xp n̲eg (u × u) ÷ 2.0) ÷ (2.0 × p̲i @) ^ 0.5 }
+ᵘg̲elu ← { x → x × 0.5 + "L[] | " ᵉe̲q< "integral u:=0..x by simpson 32 | exp(-(u^2) / 2) / sqrt(2 * pi)" }
 ```
 
-and GELU is that integral, by Simpson on 32 steps, times `x`. Most frameworks compute GELU with a tanh approximation instead:
-
-```text
-ᵘa̲pprox ← { x → 0.5 × x × 1.0 + ⁿⁿt̲anh ((2.0 ÷ p̲i @) ^ 0.5) × x + 0.044715 × x ^ 3 }
-```
-
-The integral says by how much the approximation is off. At `x` from −3 to 3, GELU is `−0.004 −0.0455 −0.1587 −0.1543 0 0.3457 0.8413 1.9545 2.996`, and the largest difference from the approximation over −4 to 4 is `0.000473`. The demo also computes the KL divergence of two Gaussians as an integral over a truncation, `0.443147`, and its closed form, also `0.443147`.
+Most frameworks compute GELU with a tanh approximation instead, and the integral says by how much it is off. At `x` from −3 to 3, GELU is `−0.004 −0.0455 −0.1587 −0.1543 0 0.3457 0.8413 1.9545 2.996`, and the largest difference from the approximation over −4 to 4 is `0.000473`. The demo also computes the KL divergence of two Gaussians as an integral over a truncation, `0.443147`, and by its closed form, also `0.443147`.
 
 ## What is not right yet
 
-- **The LaTeX.** The library's `integ:t_ex<` gives the integral's LaTeX, but the body is X_eTaL, so the typeset formula reads `\int_{0}^{2} (u:b_ox tau) * u:b_ox t - tau \, d\tau`, code inside the math. The plan is to move `integral` into the equation library's grammar, where the body is math notation and typesets as math.
-- **The drawing.** For the same reason, the call above is shown as typed: the renderer cannot yet draw a string that mixes the integral's notation with X_eTaL. Drawing a notation string properly is a planned step in X_eTaL.
-- **The name.** `integ:i_ntegral<` says "integral" twice, the same problem the pipeline macro's first name had; a better name is to be decided.
+- **A function in the body.** The equation notation has a fixed set of functions, so an integrand that calls an X_eTaL function, like the box, needs the standalone library for now.
+- **The drawing.** An equation's string is drawn as typed, as in post #11; drawing a notation string as math in the code itself is a planned step in X_eTaL.
 
 ## A family of convolutions
 
