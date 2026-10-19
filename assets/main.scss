@@ -853,6 +853,16 @@ article.post .resource-box,
     margin: 0.2em 1.5em 0.6em -66.667%;
   }
 
+  // An aside in a right-hand section: the same open left side, as wide
+  // as a gutter figure rather than the narrow house aside.
+  .stagger-2 > .aside-box.outdent-left {
+    float: left;
+    clear: left;
+    width: 60%;
+    max-width: none;
+    margin: 0.3em 1.5em 1.2em -66.667%;
+  }
+
   // Disable stagger on narrow viewports — 60% of a small screen is too tight
   @media (max-width: 900px) {
     .stagger {
@@ -865,7 +875,8 @@ article.post .resource-box,
       margin-right: 0;
     }
     .stagger-0 > figure.outdent-right,
-    .stagger-2 > figure.outdent-left {
+    .stagger-2 > figure.outdent-left,
+    .stagger-2 > .aside-box.outdent-left {
       float: none;
       width: auto;
       margin: 1em 0;
