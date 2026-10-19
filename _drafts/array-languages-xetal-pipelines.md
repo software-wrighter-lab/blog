@@ -90,6 +90,12 @@ The `c"..."` is a code string, new in the language this week. Its value is an or
 
 ## The rules
 
+<div class="aside-box outdent-right" markdown="1">
+**What is `it`?** An anaphor is a word that points back to something already said: in "take the scores and normalize it", *it* means the scores. Programming borrowed the word for macros that bind a name for the code written at their call; the best known is the anaphoric `aif` in Paul Graham's *On Lisp*, which binds `it` to the value its test produced. In a pipeline, `it` is the previous stage's value, and writing it says where that value goes, which matters wherever order does: `it − m` is not `m − it`. It is `it` because it reads as English and is short, and Kotlin and Groovy use the same word for the same job.
+
+**Why it is safe.** Hygiene is the question of whether names a macro writes can collide with names in the code around its call. In X_eTaL hygiene is a choice, as in Common Lisp rather than Scheme. The pipeline macro's own names come fresh from the language, `g1:stage`, `g2:stage` and so on, so they cannot collide with anything. `it` is the deliberate exception, declared in the macro's contract with `## binds: it`: a stage may read it, but may not bind an `it` of its own, and a label named `it` is refused.
+</div>
+
 Stages are separated by `▷`. The first stage is the data. Every later stage is one of three things:
 
 - **A function,** applied to the previous value: `ⁿⁿr̲elu`, a train, `'+ r̲/`, or a quoted lambda.
