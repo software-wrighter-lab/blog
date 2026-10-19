@@ -33,6 +33,9 @@ repo_urls:
        a stage (an unknown name, a Char where a number is needed), each with its located message.
      - The type check is partial, by design: a stage is checked as a lambda over the names the macro binds (## binds: it), so what
        holds for every it; the join between stages is still checked on the expansion, or earlier by the shape lint. Say so.
+     - 2026-10-18 evening: step 112 MERGED (X_eTaL #146, D176). As built: every code string LEXED with the file; parsed, linted and
+       code-checked (partial type check) only where the macro takes code (## takes: code); a code string on a text/notation side
+       (a pipeline) is lexed only. Write the section from docs/code-strings.md "As built (D176)" and runs on a clean build.
      - string-kind lint + ## takes: code (MC31 extended): code passed as a plain string, or a code string passed to a notation
        (an equation), is flagged with its fix (add or drop the c). Show it.
      - Equations stay plain strings: their strings are notation (## takes: text notation, ## draws: e:t_ex<, MC32, step 154), drawn

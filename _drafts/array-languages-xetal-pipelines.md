@@ -19,7 +19,11 @@ repo_urls:
      demos/mlp (XOR 1 2 2 1, softmax 0.0900 0.2447 0.6652, s_hape H 4 3), tests/oracle (7 checks), tests/shape-fails (located error),
      tests/reject-* (.err goldens), xetal expand demos/mlp (unchanged). |> typed, drawn ▷ (S13); $name typed, drawn ▹name (S14);
      code strings c"..." (ST5, step 111). Error output is shown as the tools print it (typed source in the error's snippet).
-     NOT YET: X_eTaL step 112 (checks inside code strings, in progress); X_eTaL-ML step 027 (four-way demos) pending.
+     X_eTaL step 112 MERGED (#146, D176): code strings lexed with the file; parsed/linted/type-checked only where a macro says
+     ## takes: code. Flow's p_ipe< and t_ext< keep no takes: line (notation): their strings are LEXED ONLY. Flow pins 4453400b (pre-112).
+     NOT YET: X_eTaL-ML step 028 pipeline-demos (four ways: math, pipeline, expansion, plain X_eTaL; the CNN layer) pending;
+     static shape proof of ▹h [..] annotations (run-time check only); CMS-style segments (\) and a named sub-pipe macro are design only
+     (fan-out/fan-in by labels, subpipes as function stages and p_ower inside a stage work); no pipeline diagram/trace yet.
      Lead image FOR NOW (Mike): his screenshot of a CNN layer as five stages with shapes, not inverted. -->
 
 <img src="{{ '/assets/images/posts/block-cnn-pipeline-stages.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
@@ -175,5 +179,5 @@ The library's tests go further than single cases. The five pipelines from the de
 
 ## What comes next
 
-A dense layer's bias no longer has to be reshaped by hand: the stage `b ⁿⁿb̲ias it` adds it along the right axis, and refuses a bias of the wrong length. Next in X_eTaL-ML are the real models as pipelines, each shown four ways, side by side: as the equation of post #11, as a pipeline, as the expansion, and as plain X_eTaL. And next in X_eTaL, the inside of a code string gets checked with the rest of the file, linted and type-checked before the macro ever runs. Because a pipeline is ordinary X_eTaL once expanded, it can go where any X_eTaL program goes, including the GPUs of [post #7](/2026/10/13/array-languages-xetal-gpu/) and [post #10](/2026/10/16/array-languages-xetal-mojo-metal/), and the step-by-step Blender videos of [post #9](/2026/10/15/array-languages-xetal-blender/).
+A dense layer's bias no longer has to be reshaped by hand: the stage `b ⁿⁿb̲ias it` adds it along the right axis, and refuses a bias of the wrong length. Next in X_eTaL-ML are the real models as pipelines, each shown four ways, side by side: as the equation of post #11, as a pipeline, as the expansion, and as plain X_eTaL. And in X_eTaL, every code string is now read with the rest of the file: a pipeline's string is lexed when the program is, so a stray character in a stage is an error before the macro runs. Full checking inside, linting and type-checking each stage on its own, applies where a macro takes plain X_eTaL; a pipeline's string mixes X_eTaL with its own notation, `▷` and labels, so its stages are still checked as the macro expands them. Because a pipeline is ordinary X_eTaL once expanded, it can go where any X_eTaL program goes, including the GPUs of [post #7](/2026/10/13/array-languages-xetal-gpu/) and [post #10](/2026/10/16/array-languages-xetal-mojo-metal/), and the step-by-step Blender videos of [post #9](/2026/10/15/array-languages-xetal-blender/).
 
