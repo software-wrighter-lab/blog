@@ -27,7 +27,7 @@ repo_urls:
      c"..." on a notation side), X_eTaL-libraries a0b37fb (n vs 2n error estimate, jump warning; planned notations, ## draws:).
      2026-10-19 evening: X_eTaL step 154 (d5d54ae8, MC32, D178) and Equations draws (5d3c808, ## takes: notation notation, ## draws: t_ex<):
      figure = xetal render --html of scratch show.xtl (libraries' xetal d5d54ae8, clean export 357849b), typeset with KaTeX; the use< line
-     is left out (drawn ᵉ⁼u̲se<, a quirk reported). 
+     is left out (drawn ᵉ⁼u̲se<; Mike 10-19: fixed in X_eTaL, being pushed; once the libraries pin it, the line may be shown).
      Saga 42 decisions (X_eTaL 6c0bf1c9) for the convolution family; boundary modes, FFT. Animation planned, not built.
      Lead image: Mike's screenshot (continuous convolution card), not inverted, not transparent. -->
 
