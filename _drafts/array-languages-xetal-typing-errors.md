@@ -42,6 +42,8 @@ repo_urls:
        to Equations (a text side) fails in the LEXER ("bad-number: a . must be followed by digits", from 0..1) before string-kind can
        suggest dropping the c: raise with the X_eTaL agent; show the fixed message if it lands. Type errors from notation macros
        underline the whole call, not the term inside the string (Int array x Float integral): also for "What is still rough".
+       Both RECORDED as planned work (X_eTaL 2e750334: B1, approach 3, located errors for transformed text; B2, string-kind refinement);
+       say "planned" unless built by publishing.
      - string-kind lint + ## takes: code (MC31 extended): code passed as a plain string, or a code string passed to a notation
        (an equation), is flagged with its fix (add or drop the c). Show it.
      - Equations stay plain strings: their strings are notation (## takes: text notation, ## draws: e:t_ex<, MC32, step 154), drawn

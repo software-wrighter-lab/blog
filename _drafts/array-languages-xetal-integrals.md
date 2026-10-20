@@ -23,6 +23,8 @@ repo_urls:
      2026-10-19 evening: e:c_onvolve< / e:c_orrelate< (e491dab, decision 5) run here: full 1 4 10 16 17 12, same 4 10 16 17,
      valid 10 16, correlate valid 14 20; bad mode refused (bad-convolution). Catalog of 13 (291023d); Greek result names fixed.
      Probed: Int array x Float integral is a type-mismatch before running, underlined across the whole call; no integral lints.
+     Asks recorded 2026-10-19: X_eTaL 2e750334 (B1 errors inside a notation string = type-check-macros approach 3; B2 string-kind for
+     c"..." on a notation side), X_eTaL-libraries a0b37fb (n vs 2n error estimate, jump warning; planned notations, ## draws:).
      Saga 42 decisions (X_eTaL 6c0bf1c9) for the convolution family; boundary modes, FFT. Animation planned, not built.
      Lead image: Mike's screenshot (continuous convolution card), not inverted, not transparent. -->
 
@@ -152,7 +154,7 @@ Most frameworks compute GELU with a tanh approximation instead, and the integral
 ## What is not right yet
 
 - **What the notation cannot write yet.** Its functions are a fixed set, grown on purpose, so an integrand that calls an X_eTaL function, like the box, needs the standalone library for now. The library's plan names the rest: a step function, which would let the box be written as math; `float(e)`, to scale a float integral by a whole-number array; `tanh`; and Greek names with subscripts.
-- **Diagnostics.** A wrong call is refused before the program runs, and a type mistake, such as a whole-number array times a float integral, is a type error before it runs too. But the error underlines the whole call rather than the term inside the string, and nothing warns that a grid is too coarse or that an integrand jumps.
+- **Diagnostics.** A wrong call is refused before the program runs, and a type mistake, such as a whole-number array times a float integral, is a type error before it runs too. But the error underlines the whole call rather than the term inside the string, and nothing warns that a grid is too coarse or that an integrand jumps. Both are now planned work: errors placed inside a notation's string in X_eTaL, and an error estimate and a warning on a jump in the equation library.
 - **The drawing.** An equation's string is drawn as typed, as in post #11; drawing a notation string as math in the code itself is a planned step in X_eTaL.
 
 ## A family of convolutions
