@@ -4,7 +4,7 @@ title: "Rabbit-hole #7: The Phoenix --- One Small Problem, Five Languages, and W
 categories: [rabbit-hole, programming-languages, deep-dive]
 tags: [rabbit-hole, phoenix, birds, aviary, xetal, x-etal, apl, j, haskell, lisp, racket, clojure, bqn, tacit, point-free, trains, fork, combinators, leetcode, gcd]
 keywords: "LeetCode 1979, find greatest common divisor of array, gcd min max, APL train, J fork, J hook, Haskell liftM2 point-free, Racket gcd, Clojure gcd, X_eTaL train, fork combinator, S' combinator, phoenix, tacit programming"
-abstract: "LeetCode 1979 asks for the greatest common divisor of an array's smallest and largest numbers. Conor Hoekstra solved it in sixteen languages; here it is in five, APL, J, Haskell, Lisp and X_eTaL, all asking for the same shape: one argument handed to two functions, their results to a third. APL and J write that fork as three functions side by side; X_eTaL needs brackets around them. This post is about why."
+abstract: "LeetCode 1979 asks for the greatest common divisor of an array's smallest and largest numbers. Conor Hoekstra solved it in sixteen languages; here it is in five, APL, J, Haskell, Lisp and X_eTaL, all asking for the same shape: one argument handed to two functions, their results to a third. APL and J write that fork as three functions side by side; X_eTaL needs brackets around them. This post is about why. Along the way the fork becomes a bird: Curry's Phoenix, just added to X_eTaL's Combinators library."
 series: "Down the Rabbit-Hole"
 series_part: 7
 date: 2026-10-19 12:00:00 -0700
