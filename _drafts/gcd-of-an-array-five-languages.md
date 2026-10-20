@@ -20,9 +20,9 @@ repo_urls:
      Combinators: B and S from X_eTaL main's lib/Combinators.xtl, run and linted. Step 156 (Phoenix and Psi, c:P_hi) was
      uncommitted when this was written (previewed from a copy: 'u:m_ost 'u:l_east 'n:g_cd c:P_hi gives 2 1 3); once it lands an
      Ed. note can show the one-bird form.
-     Lead image: Mike's screenshot of the five solutions (Screenshot 2026-10-19 at 9.53.33 PM), dark, not inverted. -->
+     Lead image: Mike's block-phoenix.jpg (2026-10-19; replaced the screenshot of the five solutions), dark, not inverted. -->
 
-<img src="{{ '/assets/images/posts/block-gcd-five-languages.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-phoenix.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
 [LeetCode 1979](https://leetcode.com/problems/find-greatest-common-divisor-of-array/) is a small problem: given an array of numbers, return the greatest common divisor of its smallest and its largest. For `2 5 6 9 10` that is the GCD of 2 and 10, which is 2. (Not the GCD of the whole array, which is 1: the title says "of array", but the problem means its two extremes.)
 
