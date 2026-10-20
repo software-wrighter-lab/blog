@@ -141,6 +141,13 @@ $$Y_{o,h,w} = \sum_{c=0}^{C - 1} \sum_{r=0}^{Kh - 1} \sum_{s=0}^{Kw - 1} X_{c,h+
 
 The `$$` line is for whatever shows the output. In the library's live demo, and on the page `just tex Equations cnn` writes, shown here, that line is drawn as math by KaTeX; everywhere else it is plain text. The final `1` is the check: the result matches `ᵉc̲orrelate`, the library's own cross-correlation, written a different way.
 
+<figure class="zoomable outdent-right">
+<img src="{{ '/assets/images/posts/xetal-eq-drawn.webp' | relative_url }}" class="no-invert" alt="The CNN demo as xetal render --html draws it, typeset: the lines in decorated code, and the equation call drawn as (Y, tex) gets e:both followed by a box of typeset math, Y sub o,h,w equals the sum over c, r and s of X sub c, h plus r, w plus s times W sub o,c,r,s">
+<figcaption style="font-size: 0.85em;">The same demo, drawn for reading: the call's strings become its math. Click to enlarge.</figcaption>
+</figure>
+
+Since this post was published, the library also draws itself. Where a program is shown for reading, in the live demos, the documentation and `xetal render --html`, an equation call keeps its macro's name as code, so a reader sees which macro ran, and its two strings become one box of typeset math from the same LaTeX. The figure is the demo above, drawn that way. Nothing about the value or the text changes, only the drawing, and a terminal, with no math renderer, still shows the typed text.
+
 
 ## What it becomes
 
@@ -265,3 +272,5 @@ Equations are one half of the notation ML needs. The other is the data flow a mo
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/17: the table of the three macros now shows them rendered, <code>ᵉe̲q&lt;</code>, <code>ᵉt̲ex&lt;</code> and <code>ᵉb̲oth&lt;</code>, as the rest of the post does, rather than as typed (<code>e:e_q&lt;</code>, ...). <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-17-array-languages-xetal-equations.md">This post's history</a>.]</em></p>
 
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/18: the sections are now staggered across the page, as on the rest of the site, with each image beside its section in the open margin. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-17-array-languages-xetal-equations.md">This post's history</a>.]</em></p>
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/19: added the demo as the equation library now draws it, each call's strings shown as typeset math where a program is drawn for reading (X_eTaL's <a href="https://github.com/softwarewrighter/X_eTaL/commit/d5d54ae8">d5d54ae8</a>, the library's <a href="https://github.com/softwarewrighter/X_eTaL-libraries/commit/5d3c808">5d3c808</a>). <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-17-array-languages-xetal-equations.md">This post's history</a>.]</em></p>
