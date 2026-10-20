@@ -155,7 +155,7 @@ Most frameworks compute GELU with a tanh approximation instead, and the integral
 
 - **What the notation cannot write yet.** Its functions are a fixed set, grown on purpose, so an integrand that calls an X_eTaL function, like the box, needs the standalone library for now. The library's plan names the rest: a step function, which would let the box be written as math; `float(e)`, to scale a float integral by a whole-number array; `tanh`; and Greek names with subscripts.
 - **Diagnostics.** A wrong call is refused before the program runs, and a type mistake, such as a whole-number array times a float integral, is a type error before it runs too. But the error underlines the whole call rather than the term inside the string, and nothing warns that a grid is too coarse or that an integrand jumps. Both are now planned work: errors placed inside a notation's string in X_eTaL, and an error estimate and a warning on a jump in the equation library.
-- **The drawing.** An equation's string is drawn as typed, as in post #11; drawing a notation string as math in the code itself is a planned step in X_eTaL.
+- **The drawing.** An equation's string is drawn as typed, as in post #11. The plan is for the equation macro to declare in its contract how its text is drawn, so the editors and the renderer can show the string itself as math; it stays an ordinary string either way, with no new kind of literal.
 
 ## A family of convolutions
 
