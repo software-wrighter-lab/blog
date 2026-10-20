@@ -27,7 +27,10 @@ repo_urls:
      Probe.xtlm, reject-*). Error code is error[bad-text]. Outputs above run here with the pinned xetal. Steps 2-3 DONE (8c5fd18, merged a3d6a38): refusals carry the caller's
      tag; Equations' goldens unchanged; new reject-result-trailing; Tags write-back. MC31 contracts (X_eTaL 57cff932): unused-argument
      shown with the scratchpad toy Sq.xtlm on a clean build of main. RECHECK before publishing. Do not describe any of it as built until its commit exists. Macros to move onto it, as examples:
-     Equations (e:e_q<), Pipeline (pipe:p_ipe<, X_eTaL-ML), Stencil (X_eTaL-demos), Tags (X_eTaL-libraries).
+     Equations (e:e_q<), Flow (flow:p_ipe<, X_eTaL-ML, its own reader), Stencil (X_eTaL-demos), Tags (X_eTaL-libraries).
+     RECHECKED 2026-10-20 on X_eTaL 0b427a30, X_eTaL-libraries 33c2d13 (Parsing unchanged since 8c5fd18), X_eTaL-ML 25901a4: demo
+     output shown as run; bad-text matches tests/reject-whole.err; y[i]2 refusal; unused-argument toy; all 16 library macros
+     declare ## uses:; Flow does not use pa: (own reader, ## uses: parsed, 16 reject tests, roundtrip test); integrals use pa:.
      Lead image: Mike's block-composer-stick.jpg (2026-10-17), fourth version (11:58), type set upside down; monochrome, inverts in dark mode. -->
 
 <img src="{{ '/assets/images/posts/block-composer-stick.webp' | relative_url }}" class="post-marker" alt="" style="width: 205px;">
@@ -78,6 +81,15 @@ call ← "(sum j:=0..M-1 | W[i,j] * x[j]) + b[i]"
 ᵖᵃg̲roup? d̲isclose f̲irst "+" ᵖᵃs̲plit call
 ```
 
+```text
+┌→─────────────────────────────────────────┐
+│ ┌→──────────────────────────────┐ ┌→───┐ │
+│ │(sum j:=0..M-1 | W[i,j] * x[j])│ │b[i]│ │
+│ └───────────────────────────────┘ └────┘ │
+└∊─────────────────────────────────────────┘
+1
+```
+
 The split finds the one `+` at the top level, outside the parentheses and brackets, and gives the two terms, `(sum j:=0..M-1 | W[i,j] * x[j])` and `b[i]`; the first term is one group, so its inside can be read as a sum.
 
 ## What it refuses
@@ -112,5 +124,5 @@ A macro that parses a notation cannot be checked that way, since its expansion i
 
 The equation macro has moved onto the library. Its own group, chain, binding, function, reference and splitting helpers are gone, replaced by calls to `pa:`, and nothing it does changed: every test, the differential test that generates random equations, and the demos came out the same. Moving it found one more case its old reader had let through: a result with text after its brackets, `Y[o]2`, was read as `Y[o]`. It is now refused. The `Tags` library's macros moved too, and now write each declaration back and compare it with the text.
 
-The pipeline macro and the integral macros to come are its next users.
+The integrals added to the equation macro since ([post #13](/2026/10/19/array-languages-xetal-integrals/)) read their bounds and bodies through it as well. The pipeline macro, Flow in X_eTaL-ML, has a reader of its own, written to the same rule from the start: it declares `## uses: parsed`, its tests refuse sixteen kinds of wrong text, and a round-trip test checks that what it writes back is what was written.
 
