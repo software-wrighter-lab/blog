@@ -36,6 +36,12 @@ repo_urls:
      - 2026-10-18 evening: step 112 MERGED (X_eTaL #146, D176). As built: every code string LEXED with the file; parsed, linted and
        code-checked (partial type check) only where the macro takes code (## takes: code); a code string on a text/notation side
        (a pipeline) is lexed only. Write the section from docs/code-strings.md "As built (D176)" and runs on a clean build.
+     - 2026-10-19: 31 lints in 6 groups on main (docs/lint.md). Two for code strings: string-kind (style, warn: a plain or raw string on a
+       ## takes: @ code side, or c"..." on a text side; fix: add or drop the c) and code-check (correctness, DENY: the inside of a code
+       string on a code side, checked before expansion as the body of a lambda over its names). Found probing integrals: a c"..." given
+       to Equations (a text side) fails in the LEXER ("bad-number: a . must be followed by digits", from 0..1) before string-kind can
+       suggest dropping the c: raise with the X_eTaL agent; show the fixed message if it lands. Type errors from notation macros
+       underline the whole call, not the term inside the string (Int array x Float integral): also for "What is still rough".
      - string-kind lint + ## takes: code (MC31 extended): code passed as a plain string, or a code string passed to a notation
        (an equation), is flagged with its fix (add or drop the c). Show it.
      - Equations stay plain strings: their strings are notation (## takes: text notation, ## draws: e:t_ex<, MC32, step 154), drawn
@@ -138,7 +144,7 @@ The equation library has nineteen tests of such refusals, the pipeline library f
 
 ## Lints
 
-`xetal lint` reads a program for things that are legal but probably not meant. It has twenty-nine lints in six groups, from `correctness` and `suspicious` to `pedantic`, each with a default level, and each one explains itself with `xetal lint --explain`. Two of them:
+`xetal lint` reads a program for things that are legal but probably not meant. It has thirty-one lints in six groups, from `correctness` and `suspicious` to `pedantic`, each with a default level, and each one explains itself with `xetal lint --explain`. Two of them:
 
 ```text
 u:n̲egAll ← { v → '{ x → n̲eg x } m̲ap v }

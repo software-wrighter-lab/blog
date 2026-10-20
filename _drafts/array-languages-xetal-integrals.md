@@ -20,6 +20,9 @@ repo_urls:
      scripts/xt expand, checks trimmed. Box convolution and convergence numbers from X_eTaL-ML's Integrals (9825334), clean export with
      X_eTaL main f027bb74; Equations' goldens repeat 4 4 16 16 from it. Note for the agents: the result name Phi is not made \Phi
      (Greek is converted in bodies and bounds only).
+     2026-10-19 evening: e:c_onvolve< / e:c_orrelate< (e491dab, decision 5) run here: full 1 4 10 16 17 12, same 4 10 16 17,
+     valid 10 16, correlate valid 14 20; bad mode refused (bad-convolution). Catalog of 13 (291023d); Greek result names fixed.
+     Probed: Int array x Float integral is a type-mismatch before running, underlined across the whole call; no integral lints.
      Saga 42 decisions (X_eTaL 6c0bf1c9) for the convolution family; boundary modes, FFT. Animation planned, not built.
      Lead image: Mike's screenshot (continuous convolution card), not inverted, not transparent. -->
 
@@ -51,11 +54,16 @@ The aim is one computation shown four ways, all from the same numbers: the equat
 
 ## First, the discrete case
 
-Convolution and cross-correlation are easy to confuse, because with a symmetric kernel they give the same answer, so the first example uses one that is not symmetric. With `x` of `1 2 3 4` and `h` of `1 2 3`, the two windows that fit are `1 2 3` and `2 3 4`. Convolution reverses the kernel to `3 2 1` and gives `10 16`; cross-correlation, which is what CNNs compute, uses it as it is and gives `14 20`. The correlation is a sum the equation macro of post #11 already writes, and it gives `14 20`:
+Convolution and cross-correlation are easy to confuse, because with a symmetric kernel they give the same answer, so the first example uses one that is not symmetric: `x` of `1 2 3 4` and a kernel `h` of `1 2 3`. The equation library has a macro for each, and each names its mode, how it treats the edges, because libraries and traditions disagree about which is natural and none is assumed:
 
 ```text
-r ← "r[n] | 2" ᵉe̲q< "sum k:=0..2 | x[n+k] * h[k]"
+"y[n] | full" ᵉc̲onvolve< "x h"
+"y[n] | same" ᵉc̲onvolve< "x h"
+"y[n] | valid" ᵉc̲onvolve< "x h"
+"r[n] | valid" ᵉc̲orrelate< "x h"
 ```
+
+`full` gives every overlap, `1 4 10 16 17 12`; `same` keeps the signal's length, `4 10 16 17`; `valid` keeps only the windows that fit entirely, `10 16`. Convolution reverses the kernel; cross-correlation, which is what CNNs compute, uses it as it is, and over the same valid windows gives `14 20`. A missing or misspelled mode is refused when the program is compiled. Neither macro is new grammar: each expands to the sum it is, and its LaTeX is that sum, `y_n = \sum_{k=0}^{2} h_k \, x_{n-k}` for the convolution.
 
 ## The integral, in the equation's own words
 
@@ -143,12 +151,13 @@ Most frameworks compute GELU with a tanh approximation instead, and the integral
 
 ## What is not right yet
 
-- **A function in the body.** The equation notation has a fixed set of functions, so an integrand that calls an X_eTaL function, like the box, needs the standalone library for now.
+- **What the notation cannot write yet.** Its functions are a fixed set, grown on purpose, so an integrand that calls an X_eTaL function, like the box, needs the standalone library for now. The library's plan names the rest: a step function, which would let the box be written as math; `float(e)`, to scale a float integral by a whole-number array; `tanh`; and Greek names with subscripts.
+- **Diagnostics.** A wrong call is refused before the program runs, and a type mistake, such as a whole-number array times a float integral, is a type error before it runs too. But the error underlines the whole call rather than the term inside the string, and nothing warns that a grid is too coarse or that an integrand jumps.
 - **The drawing.** An equation's string is drawn as typed, as in post #11; drawing a notation string as math in the code itself is a planned step in X_eTaL.
 
 ## A family of convolutions
 
-The plan lists the variants that follow, each with its own check, a fixture that is not symmetric, and its own animation: 2D image convolution and a CNN layer with its bias, separable Gaussian blur as two 1D passes, dilated, transposed, circular, by FFT, and 3D over voxels. Each has a trap the tests are meant to catch: a transposed convolution is not an inverse, a circular one is not a linear one without padding, and an FFT convolution without enough padding wraps around. A convolution names how it treats the edges, `full`, `same`, `valid` or `circular`, with no default, because libraries and traditions disagree about which one is natural. The FFT waits for complex numbers in the language.
+The plan lists the variants that follow, each with its own check, a fixture that is not symmetric, and its own animation: 2D image convolution and a CNN layer with its bias, separable Gaussian blur as two 1D passes, dilated, transposed, circular, by FFT, and 3D over voxels. Each has a trap the tests are meant to catch: a transposed convolution is not an inverse, a circular one is not a linear one without padding, and an FFT convolution without enough padding wraps around. The 1D modes are built, as above; `circular` is planned with the rest. The FFT waits for complex numbers in the language.
 
 ## Animated from the same numbers
 
