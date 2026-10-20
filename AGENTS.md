@@ -80,3 +80,6 @@ rN      GRID → TOUR → END
   `stagger-0` (left) section, `outdent-left` in a `stagger-2` (right) one (CSS in `assets/main.scss`; it falls back to full width
   under 900px). A `stagger-1` (center) section has no open side; put the figure in a neighboring section or reorder.
 - Check the order with the preview (which section gets which `stagger-N`) before placing figures.
+- A section can be pinned to a side so its figure has an open margin: put `{: .pos-left}`, `{: .pos-center}` or `{: .pos-right}`
+  on the line after its `##` heading; the sections after it keep alternating from there. Keep neighbors alternating, and give a
+  section with no gutter image the center.
