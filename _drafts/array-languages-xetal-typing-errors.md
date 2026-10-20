@@ -4,7 +4,7 @@ title: "Array Languages #14: Types, Lints and Errors in X_eTaL"
 categories: [languages, language-design, tools]
 tags: [array-languages, xetal, x-etal, apl, types, type-inference, lint, errors, macros, ergonomics]
 keywords: "X_eTaL type checking, array language type inference, xetal lint, compile-time errors versus run-time errors, silent wrong answers, macro errors, shape checks, error messages, ergonomics"
-abstract: "Fourteenth in the Array Languages series: how X_eTaL tries to turn mistakes into errors as early as possible. A type error before the program runs is good, a run-time error is worse, and a silent wrong answer is the worst, and writing the equations post turned up three of those in a day-old macro library. This post follows the ladder rung by rung, with a real example of each, and ends with what changed so that class of mistake cannot come back."
+abstract: "Fourteenth in the Array Languages series: how X_eTaL tries to turn mistakes into errors as early as possible. A type error before the program runs is good, a run-time error is worse, and a silent wrong answer is the worst, and writing the equations post turned up three of those in a day-old macro library. This post follows the ladder rung by rung, cheapest to fix first, from the editor through macro expansion, types, lints and tests to run time, with a real example of each, and ends with what changed so that class of mistake cannot come back."
 series: "Array Languages"
 series_part: 14
 date: 2026-10-20 00:15:00 -0700
@@ -61,7 +61,7 @@ repo_urls:
 
 <div style="overflow: hidden;" markdown="1">
 
-A mistake in a program can surface at four times: when the program is checked, before it runs; when a lint reads it; when it runs; or never, as an answer that is quietly wrong. X_eTaL is designed to push every mistake as early on that list as it can. This post climbs that ladder one rung at a time, with a real example of each, and then tells what happened when a new library slipped to the bottom rung.
+The earlier a mistake is caught, the less it costs to fix. In X_eTaL it can be caught as you type it; when the compiler expands the macros, first inside a code string and then by a macro reading its own text; when the types are checked; when a lint reads the program; when a test finds that its output has changed; while it runs; or never, as an answer that is quietly wrong. X_eTaL is designed to push every mistake as early on that list as it can. This post goes down that ladder one rung at a time, with a real example of each, and then tells what happened when a new library slipped to the bottom rung.
 
 </div>
 
@@ -83,71 +83,32 @@ A mistake in a program can surface at four times: when the program is checked, b
 
 | When | What catches it | Example below |
 |---|---|---|
+| as you type | the editor | a brace left open |
+| when the macros expand | the compiler, inside a code string | a misspelled name or a wrong type in X_eTaL handed to a macro |
+| when the macros expand | a macro checking its own text | an equation or a pipeline written wrong |
 | before the program runs | the type checker | a whole number divided by a decimal |
-| before the program runs | a macro checking its own text | an equation or a pipeline written wrong |
-| before the program runs | the checker, inside a code string | a misspelled name or a wrong type in X_eTaL handed to a macro |
 | when asked | the linter | a lambda that only passes its argument on |
+| when the tests run | a regression test | a fixed bug coming back |
 | while the program runs | a check written into the code | an index outside its array, a broken shape promise |
 | never | nothing | three equations that summed the wrong thing |
 
 The higher a mistake is caught, the cheaper it is: an error before the program runs costs a moment, an error while it runs may throw away work already done, and a wrong answer costs whatever was built on it.
 
-## Types first
+## As you type
 
-X_eTaL infers the type of every name before a program runs, and refuses a program whose types do not fit. Ask it what it inferred:
-
-```text
-$ xetal type mean.xtl
-u:m_ean : Float -> Float
-```
-
-Here is a program with a mistake in its last line: a 2 by 2 array of whole numbers divided by a decimal.
+The earliest check is in the editor. `xetal edit` shows a file as typed on the left and drawn on the right, and below them the types of its definitions or, when there is one, the first error, marked in both panes, updated on every keystroke. A brace left open is found before the line is finished, with the message `xetal run` would print:
 
 ```text
-a ← 2 2 r̲eshape 1 2 3 4
-s ← 2.0
-p̲rint! 100
-a ÷ s
-```
-
-```text
-$ xetal run type.xtl
-error[type-mismatch]: expected Int, found Float
- --> type.xtl:4:1
+error[unclosed]: this `{` is never closed
+ --> syn.xtl:1:12
   |
-4 | a / s
-  | ^^^^^
-  | - `a` is an Int
-  |     - `s` is a Float
-  |
-1 | a := 2 2 r_eshape 1 2 3 4
-  |      -------------------- `a` gets its type here
-  |
-2 | s := 2.0
-  |      --- `s` gets its type here
-  = note: `/` has type Num a => a -> a -> Float
-  = help: Int and Float do not mix: `f_loat n` makes a Float of an Int, `f_loor x` or `c_eiling x` an Int of a Float
+1 | u:m_ean := { v -> ('+ r_/ v) / f_loat t_ally v
+  |            ^
 ```
 
-The `100` on the line before is never printed: the program is refused before it starts. That is the rung a mistake should land on. And the message does the rest of the work: where, which name is which type, where each got its type, and how to convert. That message is new this week. Until a few days ago the same mistake was reported as `expected Int, found Float at 47..52`, a range of bytes, with no line, no source and no hint; writing this post found it, and it was rewritten. Writing `a ÷ 2.0` works, because a number written in the program takes whichever type it is needed as; a name already bound as a whole number does not change type, so `(f̲loat a) ÷ s` is how to say it.
+The grammar helps here: it never guesses between two readings, so text it cannot read one way is an error where it was typed, not a different program. A language server, so that any editor could do the same, is on X_eTaL's wish list.
 
-## Macros check their own text
-
-A macro that reads a notation checks it when the program is compiled, and refuses a call it cannot read, at the call:
-
-```text
-"Y[o,h,w] | O Ho Wo" ᵉe̲q< "sum c:=0..C - 1, sum h:=0..1 | X[c,h,w]"
-error[bad-equation]: an index is bound once: o, h, w, c, h
-```
-
-```text
-@ ᶠˡᵒʷp̲ipe< c"x ▷ 3"
-error[bad-pipeline]: a stage is a function (nn:r_elu, [f_ g_], '{ x -> ... }) or an expression naming the previous value it (or a name bound before it): 3
-```
-
-The equation library has twenty-eight tests of such refusals, the pipeline library (Flow, in X_eTaL-ML) sixteen. They are the type checker's rung for the notations the type checker cannot see inside, because to the language a notation is just a string.
-
-## Looking inside a string
+## Looking inside a string, before any macro runs
 
 A macro's arguments are strings, and to every tool a string is opaque: whatever X_eTaL is written inside one, the type checker and the linter see only quoted text. A mistake in it surfaces only when the macro has run and its expansion is checked. That is still before the program runs, but it needs a run of the macros, and the linter alone never sees it.
 
@@ -186,6 +147,61 @@ warning[string-kind]: i_f< takes code on its right: write it as a code string, c
 
 The check inside a string is partial by design. It knows what holds for any value the macro might give the names it binds, an unknown name, a wrong number of arguments, a type that cannot fit, but not what the macro will actually pass; that is still checked on the expansion. And it applies only where a macro takes code. A pipeline's string mixes X_eTaL with the pipeline's own notation, and an equation's string is a notation altogether; those are only read with the file, and their macros check them as they expand.
 
+## Macros check their own text
+
+A macro that reads a notation checks it when the program is compiled, and refuses a call it cannot read, at the call:
+
+```text
+"Y[o,h,w] | O Ho Wo" ᵉe̲q< "sum c:=0..C - 1, sum h:=0..1 | X[c,h,w]"
+error[bad-equation]: an index is bound once: o, h, w, c, h
+```
+
+```text
+@ ᶠˡᵒʷp̲ipe< c"x ▷ 3"
+error[bad-pipeline]: a stage is a function (nn:r_elu, [f_ g_], '{ x -> ... }) or an expression naming the previous value it (or a name bound before it): 3
+```
+
+The equation library has twenty-eight tests of such refusals, the pipeline library (Flow, in X_eTaL-ML) sixteen. They do the type checker's job for the notations it cannot see inside, because to the language a notation is just a string, and they do it earlier, while the macros expand.
+
+## Types
+
+After the macros have expanded, X_eTaL infers the type of every name before the program runs, and refuses a program whose types do not fit. Ask it what it inferred:
+
+```text
+$ xetal type mean.xtl
+u:m_ean : Float -> Float
+```
+
+Here is a program with a mistake in its last line: a 2 by 2 array of whole numbers divided by a decimal.
+
+```text
+a ← 2 2 r̲eshape 1 2 3 4
+s ← 2.0
+p̲rint! 100
+a ÷ s
+```
+
+```text
+$ xetal run type.xtl
+error[type-mismatch]: expected Int, found Float
+ --> type.xtl:4:1
+  |
+4 | a / s
+  | ^^^^^
+  | - `a` is an Int
+  |     - `s` is a Float
+  |
+1 | a := 2 2 r_eshape 1 2 3 4
+  |      -------------------- `a` gets its type here
+  |
+2 | s := 2.0
+  |      --- `s` gets its type here
+  = note: `/` has type Num a => a -> a -> Float
+  = help: Int and Float do not mix: `f_loat n` makes a Float of an Int, `f_loor x` or `c_eiling x` an Int of a Float
+```
+
+The `100` on the line before is never printed: the program is refused before it starts. That is the latest rung a mistake should land on. And the message does the rest of the work: where, which name is which type, where each got its type, and how to convert. That message is new this week. Until a few days ago the same mistake was reported as `expected Int, found Float at 47..52`, a range of bytes, with no line, no source and no hint; writing this post found it, and it was rewritten. Writing `a ÷ 2.0` works, because a number written in the program takes whichever type it is needed as; a name already bound as a whole number does not change type, so `(f̲loat a) ÷ s` is how to say it.
+
 ## Lints
 
 `xetal lint` reads a program for things that are legal but probably not meant. It has thirty-one lints in six groups, from `correctness` and `suspicious` to `pedantic`, each with a default level, and each one explains itself with `xetal lint --explain`. Two of them:
@@ -200,7 +216,7 @@ warning[redundant-lambda]: this lambda only passes its arguments to `n_eg`: writ
 warning[int-condition]: this guard's condition is an Int, which fails at run time unless it is 1 or 0: write the comparison meant, as `0 < n` or `0 != n` at ic.xtl:1:20
 ```
 
-The second is a lint about the next rung down: a guard on a count works while the count is 0 or 1, and stops the program the first time it is 2. Where a fix is certain, `xetal lint --fix` makes it, and it refuses to touch a file git could not restore:
+The second is a lint about a later rung: a guard on a count works while the count is 0 or 1, and stops the program the first time it is 2. Where a fix is certain, `xetal lint --fix` makes it, and it refuses to touch a file git could not restore:
 
 ```text
 $ xetal lint --fix fixme.xtl
@@ -209,6 +225,27 @@ fixed 1 finding(s) in fixme.xtl
 ```
 
 The libraries are kept lint clean, and findings can also be written as JSON, one per line, so an editor can show where they are.
+
+## Tests
+
+Some mistakes are not in new code but in a change to code that worked. The libraries' tests are regression baselines: each test is a program with its expected output pinned beside it, and a test whose output changes fails. The equation library's refusals are tested this way. This one pins the bug told below, so that it cannot come back:
+
+```text
+⍝ Text after a reference is refused, never dropped (y[i]2 once gave the plain sum).
+"e:" u̲se< "Equations"
+y ← f̲loat 1 2 3 4
+"L[] | " ᵉe̲q< "sum i:=0..3 | y[i]2"
+```
+
+```text
+error[bad-equation]: an array reference ends with its closing bracket; nothing follows it: y[i]2
+ --> reject-trailing.xtl:5:17
+  |
+5 | "L[] | " e:e_q< "sum i:=0..3 | y[i]2"
+  |                 ^^^^^^^^^^^^^^^^^^^^^
+```
+
+A test catches a mistake only after it is made and only where someone thought to look, which is why it sits below the checks that need no test written.
 
 ## Checked while running
 
@@ -257,7 +294,7 @@ The fix covered one library. The class of bug, a reader that uses part of its te
 error[unused-argument]: q:s_quare< did not use 2 of the text on its right; a macro that copies its text writes every name and number of it (## uses: copied)
 ```
 
-A macro that parses a notation, such as the equation and pipeline macros, says `## uses: parsed`, and for those the reprint check is the guard. Either way, the mistake that started this lands on the top rung.
+A macro that parses a notation, such as the equation and pipeline macros, says `## uses: parsed`, and for those the reprint check is the guard. Either way, the mistake that started this is now caught while the macros expand, near the top of the ladder.
 
 ## What is still rough
 
