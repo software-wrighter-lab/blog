@@ -195,6 +195,26 @@ PY
   if [[ -n "$lint_hits" ]]; then
     err "css: hardcoded background without pinned text colour in: $lint_hits (light-on-light in dark mode)"
   fi
+  # The allowlist above trusts code blocks to follow the theme, which they do
+  # except inside a fixed warm panel: there a block kept the dark --code-bg
+  # under the panel's pinned navy text (dark on dark), and shipped. Each warm
+  # panel must give its code blocks a background and a text colour of its own.
+  panel_hits=$(python3 - "$css" <<'PY'
+import re, sys
+css = open(sys.argv[1]).read()
+rules = [(' '.join(sel.split()), body) for sel, body in re.findall(r'([^{}]+)\{([^{}]*)\}', css)]
+bad = []
+for panel in ('.aside-box', '.resource-box'):
+    ok = any(re.search(re.escape(panel) + r' pre(?![-\w])', sel) and re.search(r'background', body)
+             and re.search(r'(?<![-a-z])color\s*:', body) for sel, body in rules)
+    if not ok:
+        bad.append(panel + ' pre')
+print('; '.join(bad))
+PY
+)
+  if [[ -n "$panel_hits" ]]; then
+    err "css: no code-block colours inside the warm panel: $panel_hits (dark-on-dark in dark mode)"
+  fi
 fi
 
 # No merge-conflict markers or unmerged paths anywhere in the tracked tree.

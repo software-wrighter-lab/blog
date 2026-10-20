@@ -70,6 +70,22 @@ body {
     border-color: transparent;
   }
 
+  // A code block keeps the theme's --code-bg everywhere else, which is dark
+  // in dark mode; under the panel's pinned navy text that is unreadable. In
+  // the panel a block takes a light wash of the navy in both themes.
+  pre,
+  .highlight,
+  .highlighter-rouge .highlight {
+    background-color: rgba(30, 58, 95, 0.07);
+    border-color: rgba(30, 58, 95, 0.2);
+    color: #1e3a5f;
+  }
+
+  pre code {
+    background-color: transparent;
+    color: #1e3a5f;
+  }
+
   table {
     th, td {
       color: #1e3a5f;
