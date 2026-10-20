@@ -21,9 +21,9 @@ repo_urls:
      drawn form (xetal render), never typed and drawn mixed. The repo_urls link is for a repository that does not exist yet: confirm
      it before publishing.
      After this post is published: add an Ed. note to Made Visible #4 linking here (not before).
-     Lead image: PLACEHOLDER (scripts/placeholder-marker); Mike will supply one. -->
+     Lead image: Mike's block-cracked-stone.jpg (2026-10-19), dark background as is, not inverted. -->
 
-<img src="{{ '/assets/images/posts/placeholder-made-visible-xetal-rosetta.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-cracked-stone.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
 [Part 4](/2026/09/25/made-visible-rosetta-m/) drew a notation that did not exist yet: ten stones whose M face was placeholder glyphs, with no parser and no evaluator behind them. This one draws the notation that does.
 
