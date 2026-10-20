@@ -4,7 +4,7 @@ title: "Array Languages #17: Small Comforts, X_eTaL's Ergonomics"
 categories: [languages, language-design]
 tags: [array-languages, xetal, x-etal, apl, ergonomics, lambda, dfn, effects, tolerant-equality, formatter, notebook, doc-tests, alpha, omega, lazy-evaluation, call-by-need, unit, tuples, pattern-matching, lint, language-design]
 keywords: "X_eTaL ergonomics, X_eTaL lambda, effect marker, missing-bang lint, tolerant equality, canonical form, xetal fmt, notebook mode, APL2 DISPLAY boxed arrays, doc tests, rustdoc examples, APL dfn alpha omega, shorthand lambda arguments, named parameters, unused parameter, lazy parameter, call by need, niladic function, unit, tuple pattern, wildcard, unused-binding lint"
-abstract: "Seventeenth in the Array Languages series: the small things that make X_eTaL comfortable to write, read and trust. Every way a lambda can take its arguments, from ⍺ and ⍵ to the newest, ▁, for an argument a function takes and never uses; effects marked with ! and a lint that renames for you; exact equality with a tolerant one beside it; the canonical form, notebook runs and boxed arrays for seeing what a line means; and documentation examples that run as tests.""
+abstract: "Seventeenth in the Array Languages series: the small things that make X_eTaL comfortable to write, read and trust. Every way a lambda can take its arguments, from ⍺ and ⍵ to the newest, ▁, for an argument a function takes and never uses; effects marked with ! and a lint that renames for you; exact equality with a tolerant one beside it; the canonical form, notebook runs and boxed arrays for seeing what a line means; and documentation examples that run as tests."
 series: "Array Languages"
 series_part: 17
 date: 2026-10-23 00:15:00 -0700
