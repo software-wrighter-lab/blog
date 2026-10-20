@@ -96,6 +96,11 @@ The higher a mistake is caught, the cheaper it is: an error before the program r
 
 ## As you type
 
+<figure class="zoomable" style="float: right; clear: right; width: 42%; margin: 0.3em 0 1em 1.5em;">
+<img src="{{ '/assets/images/posts/xetal-live-demo-non-ascii.webp' | relative_url }}" class="no-invert" alt="The X_eTaL live demo: the drawn form of a line pasted into the ASCII pane, and below it error[non-ascii] at main.xtl:1:11 with the column marked">
+<figcaption style="font-size: 0.8em;">The live demo, as you type: the drawn form pasted in as source is refused at its first character that is not ASCII, line 1, column 11. Click to enlarge.</figcaption>
+</figure>
+
 The earliest check is in the editor. `xetal edit` shows a file as typed on the left and drawn on the right, and below them the types of its definitions or, when there is one, the first error, marked in both panes, updated on every keystroke. A brace left open is found before the line is finished, with the message `xetal run` would print:
 
 ```text
@@ -106,7 +111,7 @@ error[unclosed]: this `{` is never closed
   |            ^
 ```
 
-The grammar helps here: it never guesses between two readings, so text it cannot read one way is an error where it was typed, not a different program. A language server, so that any editor could do the same, is on X_eTaL's wish list.
+The [live demo](https://softwarewrighter.github.io/X_eTaL/)'s editor does the same in the browser. It also refuses text that is not source at all: the drawn form, pasted in, is an error at its first character that is not ASCII, because the drawing is only ever output. The grammar helps here too: it never guesses between two readings, so text it cannot read one way is an error where it was typed, not a different program. A language server, so that any editor could do the same, is on X_eTaL's wish list.
 
 ## Looking inside a string, before any macro runs
 
