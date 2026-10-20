@@ -33,7 +33,10 @@ repo_urls:
      declare ## uses:; Flow does not use pa: (own reader, ## uses: parsed, 16 reject tests, roundtrip test); integrals use pa:.
      Lead image: Mike's block-composer-stick.jpg (2026-10-17), fourth version (11:58), type set upside down; monochrome, inverts in dark mode. -->
 
-<img src="{{ '/assets/images/posts/block-composer-stick.webp' | relative_url }}" class="post-marker" alt="" style="width: 205px;">
+<figure style="float: left; width: 205px; margin: 0.8em 2em 1em 0.5em;">
+<img src="{{ '/assets/images/posts/block-composer-stick.webp' | relative_url }}" class="post-marker" alt="A compositor's hand setting metal type in a composing stick" style="width: 205px; float: none; margin: 0 !important; padding: 0;">
+<figcaption style="font-size: 0.8em; text-align: center; margin-top: 0.3em;">A composing stick.</figcaption>
+</figure>
 
 <div style="overflow: hidden;" markdown="1">
 
@@ -56,6 +59,10 @@ A macro in X_eTaL is a function from the text written at its call to the code th
 ## Every macro is a parser
 
 An X_eTaL macro takes the text written at its call and returns code. A macro that only rearranges code, such as `i̲f<`, needs no parser. But a macro that embeds a notation does: the equation macro of [post #11](/2026/10/17/array-languages-xetal-equations/) reads a sum as a paper prints it, and the pipeline macro of [post #12](/2026/10/18/array-languages-xetal-pipelines/) reads stages joined by `|>`. Each one cuts its text at operators outside brackets, recognizes names, numbers and references like `W[i,j]`, and has to say clearly when the text is wrong.
+
+<div class="aside-box" style="float: left; width: 36%; margin: 0.3em 1.8em 1.2em 0;" markdown="1">
+**What is a composing stick?** The tool in the picture at the top of this post. Before machines set type, a compositor built each line of a page by hand in a composing stick: a small metal tray held in one hand, its width set to the line's measure. Letters, one piece of metal each, were picked from the type case one at a time and set in the stick, then spaced out until the line filled the measure exactly and could be lifted out as one piece. Every character was placed on purpose, and nothing was left loose. That is the idea this post borrows for parsing.
+</div>
 
 Until now each macro library wrote those pieces itself. That is where a silent wrong answer came from: the equation reader took a group in parentheses by dropping its first and last characters without checking that the last one closed it, so `(y[i] - p[i])^2` lost its `2` and summed `y - p`, while its LaTeX printed what was written. The fix was a rule, every reading rule uses all of its text or refuses the call, and the rule is now a library.
 
@@ -88,11 +95,6 @@ call ← "(sum j:=0..M-1 | W[i,j] * x[j]) + b[i]"
 The split finds the one `+` at the top level, outside the parentheses and brackets, and gives the two terms, `(sum j:=0..M-1 | W[i,j] * x[j])` and `b[i]`; the first term is one group, so its inside can be read as a sum.
 
 ## What it refuses
-{: .pos-right}
-
-<div class="aside-box outdent-left" markdown="1">
-**What is a composing stick?** The tool at the top of this post. Before machines set type, a compositor built each line of a page by hand in a composing stick: a small metal tray held in one hand, its width set to the line's measure. Letters, one piece of metal each, were picked from the type case one at a time and set in the stick, then spaced out until the line filled the measure exactly and could be lifted out as one piece. Every character was placed on purpose, and nothing was left loose. That is the idea this post borrows for parsing.
-</div>
 
 
 A refusal carries the calling macro's own error code, so a notation built on the library keeps its voice. Through the equation macro, a reference must end at its bracket:
