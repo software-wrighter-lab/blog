@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Array Languages #17: ⍺, ⍵ and ▁, How an X_eTaL Lambda Takes Its Arguments"
+title: "Array Languages #17: Small Comforts, X_eTaL's Ergonomics"
 categories: [languages, language-design]
-tags: [array-languages, xetal, x-etal, apl, lambda, dfn, alpha, omega, lazy-evaluation, call-by-need, unit, tuples, pattern-matching, lint, language-design]
-keywords: "X_eTaL lambda, APL dfn alpha omega, shorthand lambda arguments, named parameters, unused parameter, lazy parameter, call by need, niladic function, unit, tuple pattern, wildcard, unused-binding lint"
-abstract: "Seventeenth in the Array Languages series: every way an X_eTaL lambda can take its arguments. ⍺ and ⍵ for the left and right, as in an APL dfn; named parameters; @ for none at all; ~ for an argument evaluated only if it is used; tuple patterns; and the newest, ▁, for an argument the function takes but never uses, which came out of a side question about an unused parameter and a lint that would not stop warning about it."
+tags: [array-languages, xetal, x-etal, apl, ergonomics, lambda, dfn, effects, tolerant-equality, formatter, notebook, doc-tests, alpha, omega, lazy-evaluation, call-by-need, unit, tuples, pattern-matching, lint, language-design]
+keywords: "X_eTaL ergonomics, X_eTaL lambda, effect marker, missing-bang lint, tolerant equality, canonical form, xetal fmt, notebook mode, APL2 DISPLAY boxed arrays, doc tests, rustdoc examples, APL dfn alpha omega, shorthand lambda arguments, named parameters, unused parameter, lazy parameter, call by need, niladic function, unit, tuple pattern, wildcard, unused-binding lint"
+abstract: "Seventeenth in the Array Languages series: the small things that make X_eTaL comfortable to write, read and trust. Every way a lambda can take its arguments, from ⍺ and ⍵ to the newest, ▁, for an argument a function takes and never uses; effects marked with ! and a lint that renames for you; exact equality with a tolerant one beside it; the canonical form, notebook runs and boxed arrays for seeing what a line means; and documentation examples that run as tests.""
 series: "Array Languages"
 series_part: 17
 date: 2026-10-23 00:15:00 -0700
@@ -13,7 +13,8 @@ repo_urls:
     title: "X_eTaL"
 ---
 
-<!-- DRAFT (2026-10-20). Every row except the _u ones run on a clean build of X_eTaL main 0b427a30 and drawn with xetal render.
+<!-- DRAFT (2026-10-20), refocused on ergonomics (Mike): lambda arguments, ! effects, = and e_q~, fmt/--echo/--box, doc tests.
+     Every example except the _u ones run on a clean build of X_eTaL main 0b427a30 and drawn with xetal render.
      PENDING: _u (step 157, decision L8, drawn U+2581 ▁) is being built in X_eTaL and was UNCOMMITTED when this was written.
      Every line with ▁ is PROVISIONAL: when step 157 lands, run each _u row (results in the table come from the X_eTaL agent's
      table, not from a run here), re-render, check the error messages' exact text, and link the commit. Until then, do not publish.
@@ -23,7 +24,7 @@ repo_urls:
 
 <img src="{{ '/assets/images/posts/placeholder-array-languages-xetal-lambda-arguments.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
-An X_eTaL lambda is written in braces, and how it takes its arguments is written inside them too. Most of the time that is one letter. ⍺ and ⍵, the left and right argument, came from APL's direct functions, and the rest came one question at a time: what if there is no argument, what if the argument is expensive, what if it is a pair, and, this week, what if the function is handed an argument it has no use for.
+A language is learned through its big ideas and lived in through its small ones. This post is about the small ones in X_eTaL: how a lambda takes its arguments, including a new way to say that it ignores one; how a function that prints says so in its name; how two numbers are compared; how to see what a line of right-to-left code really means; and how an example in a comment becomes a test. The newest came from a side question this week.
 
 <!--more-->
 
@@ -31,14 +32,17 @@ An X_eTaL lambda is written in braces, and how it takes its arguments is written
 
 | Resource | Link |
 |----------|------|
-| **The decisions** | [lang-choices.md](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/lang-choices.md): L1 to L8 (lambdas), E1 and E2 (laziness), TU3 and TU4 (patterns) |
-| **The lint** | [docs/lint.md](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/lint.md): `unused-binding` |
+| **The decisions** | [lang-choices.md](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/lang-choices.md): L1 to L8 (lambdas), E1 and E2 (laziness), TU3 and TU4 (patterns), T3 (equality) |
+| **The lints** | [docs/lint.md](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/lint.md): `unused-binding`, `missing-bang`, `needless-bang` |
+| **The tools** | the [README](https://github.com/softwarewrighter/X_eTaL#readme): `xetal fmt`, `xetal run --echo` and `--box`, `xetal doc --test` |
 | **The series** | [#1: X_eTaL](/2026/10/07/array-languages-xetal/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
 </div>
 
-## Two ways to write a lambda
+## A lambda's arguments
+
+### Two ways to write a lambda
 
 A lambda either uses the shorthand arguments or names its parameters, never both in one lambda (L5). The shorthand is typed `_l` and `_r` and drawn ⍺ and ⍵; how many of them the body uses decides how many arguments the lambda takes:
 
@@ -62,7 +66,7 @@ A lambda either uses the shorthand arguments or names its parameters, never both
 
 Named parameters are listed before an arrow, and are drawn as written: `{ x → x × 2 }` and `{ x y → x − y }` are the same two functions. They desugar to nested one-argument lambdas (L4), so a two-argument function is curried.
 
-## ⍺ and ⍵
+### ⍺ and ⍵
 
 The shorthand arguments were first drawn as small subscript l and r. They lasted a day: in my terminal's font a subscript l was unreadable, and on the second day they became APL's alpha and omega, which every APL reader already knows as a dfn's left and right argument.
 
@@ -76,7 +80,7 @@ One rule keeps the shorthand honest (L1): `_r` alone makes a one-argument lambda
 error[bad-lambda]: a lambda using _l must also use _r; otherwise name the parameters
 ```
 
-## Nothing: @
+### Nothing: @
 
 A function of no arguments takes `@`, the unit value, and is called with it (L6):
 
@@ -91,7 +95,7 @@ A function of no arguments takes `@`, the unit value, and is called with it (L6)
 
 It takes only `@`. Called with a number, it is a type error before the program runs, `expected Unit, found a number`. A lambda with no arguments at all, `{ 42 }`, is refused: a lambda needs ⍵, ⍺ and ⍵, named parameters, or `@ →`.
 
-## Ignored: ▁
+### Ignored: ▁
 
 <!-- PROVISIONAL until step 157 lands: every ▁ line, its results and error text. -->
 
@@ -127,7 +131,7 @@ Why not `_`, which already means "discard"? Because it already has its job: `_ :
 6
 ```
 
-## Lazy: ~
+### Lazy: ~
 
 Arguments are evaluated before the function runs, right to left (E4), unless a parameter is marked lazy with `~`: then its argument is evaluated where the body first reads it, and never if the body does not (E1). The [Sage bird](/2026/09/21/rabbit-hole-sage-y-combinator/) needs it, since a strict fixed point would recurse forever; here it makes the factorial out of a lambda that receives itself:
 
@@ -163,7 +167,7 @@ error[division-by-zero]: division by zero
 
 With `_u` the two ideas combine. `{ a ~▁ → a }` says three things at once: the right argument is taken, it is dropped, and it is never even computed. No directive, and no division.
 
-## Patterns
+### Patterns
 
 A parameter can also be a tuple pattern, which takes a pair apart as it arrives (TU3), and `_` skips a part:
 
@@ -178,7 +182,7 @@ A parameter can also be a tuple pattern, which takes a pair apart as it arrives 
 
 `{ (a, _) → a }` gives 3 for the same call.
 
-## Every shape
+### Every shape
 
 | Shape | Definition | Call | Result |
 |---|---|---|---|
@@ -206,3 +210,117 @@ And the spellings that are refused, each with the way out:
 | `ᵘf̲n ← { x → x + ⍵ }` | `bad-lambda`: do not mix named parameters with _l / _r |
 | `ᵘf̲n ← { ▁ + ⍵ }` | `bad-lambda-arg`: `_u` marks a parameter the lambda never uses; name it |
 | `ᵘf̲n ← { x ▁ → ▁ }` | `bad-lambda-arg`: the same |
+
+## Effects are marked: !
+
+A function that prints, reads, draws or changes something has a `!` at the end of its name, `p̲rint!` and `r̲oll!` among the built-ins, so a reader can tell from a call alone whether it does anything besides return a value. The linter holds programs to it. A function that calls an effect without saying so:
+
+```text
+ᵘs̲ay ← { x → p̲rint! x }
+_ ← ᵘs̲ay "hello"
+```
+
+```text
+warning[missing-bang]: function `u:s_ay` calls `p_rint!`, an effect, but its name has no `!`: write `u:s_ay!` at bang.xtl:1:1
+```
+
+`xetal lint --fix` renames it, at its definition and at every use in the file, in one edit:
+
+```text
+ᵘs̲ay! ← { x → p̲rint! x }
+_ ← ᵘs̲ay! "hello"
+```
+
+The opposite slip, a `!` on a function that does nothing but compute, is `needless-bang`. It is in the pedantic group, allowed by default, and reported with `-W pedantic`.
+
+## Exact, and tolerant beside it
+
+`=` is exact (T3). It is IEEE equality and nothing else, so it is transitive, and it says what floating point does:
+
+```text
+(0.1 + 0.2) = 0.3
+(0.1 + 0.2) e̲q~ 0.3
+0.1 + 0.2
+```
+
+```text
+0
+1
+0.30000000000000004
+```
+
+APL compares within a tolerance set by a system variable, and every comparison in a program depends on its current value. X_eTaL keeps the exact comparison as the default and puts the tolerant one beside it as a function of its own, `e̲q~`, with a fixed relative tolerance of about 1e-14. Which comparison is meant is written at the comparison, and nothing elsewhere can change it.
+
+## Seeing what a line means
+
+Right-to-left reading with no precedence is simple to state and easy to misread at first. Three tools show what a line means. `xetal fmt` prints its canonical form, every application in parentheses:
+
+```text
+'+ r̲/ 1 + 2 3 × 4
+m ← 2 3 r̲eshape r̲ange 6
+'+ r̲/₁ m
+```
+
+```text
+('+ r_/ (1 + (2 3 * 4)))
+m := (2 3 r_eshape (r_ange 6))
+('+ r_/_1 m)
+```
+
+The first line is 22: `2 3 × 4` is `8 12`, plus 1 is `9 13`, and the sum of those is 22. `xetal run --echo` runs a file as a notebook, each statement drawn and followed by what it printed, the way an APL session shows input indented above its output:
+
+```text
+      m ← 2 3 r̲eshape r̲ange 6
+      m
+1 2 3
+4 5 6
+      '+ r̲/₁ m
+5 7 9
+```
+
+And `--box` draws every array the way APL2's `DISPLAY` does, with its shape on the frame: `→` along a row, `↓` down the rows, `~` for numbers:
+
+```text
+┌→────┐
+↓1 2 3│
+│4 5 6│
+└~────┘
+┌→────┐
+│5 7 9│
+└~────┘
+```
+
+## Examples that are tests
+
+A `##` comment above a definition documents it, and `xetal doc` builds a cross-referenced site from those comments, as rustdoc does for a crate. Inside one, `>>` marks an example and the lines after it are what it prints:
+
+```text
+⍝│ m_ean v: the arithmetic mean of v.
+⍝│ >> "a:" u_se< "Avg"
+⍝│ >> a:m_ean 1 2 3 4
+⍝│ 2.5
+ˡm̲ean ← { v → ('+ r̲/ v) ÷ f̲loat t̲ally v }
+```
+
+`xetal doc --test` runs every example and compares:
+
+```text
+doc tests in Avg.xtl: 2 examples
+l:m_ean >> "a:" u_se< "Avg" ... ok
+l:m_ean >> a:m_ean 1 2 3 4 ... ok
+doc test result: ok. 2 passed; 0 failed
+```
+
+An example whose output no longer matches fails, with both versions shown, so documentation cannot drift from the code it describes:
+
+```text
+---- l:m_ean >> a:m_ean 1 2 3 4
+--- expected
+2.4
+--- actual
+2.5
+doc test result: FAILED. 1 passed; 1 failed
+error[doc-test-failed]: 1 doc example(s) failed in bad/Avg.xtl
+```
+
+The standard libraries are documented this way: fifteen of the Combinators library's birds carry an example, and each one is a doc test.
