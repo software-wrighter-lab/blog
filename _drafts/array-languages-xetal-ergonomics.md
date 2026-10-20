@@ -20,9 +20,9 @@ repo_urls:
      table, not from a run here), re-render, check the error messages' exact text, and link the commit. Until then, do not publish.
      Sources: lang-choices L1-L8, E1, E2, E4, TU3, TU4; design D140 (unused-binding, now superseded by L8); history.md (alpha/omega).
      The _u idea came from Mike's side question on 2026-10-20 (u:n_ope's unused parameter). Follows #16 (10/22); links only to
-     published posts. Lead image: PLACEHOLDER (scripts/placeholder-marker); Mike will supply one. -->
+     published posts. Lead image: Mike's block-ergo-chair.jpg (2026-10-20), dark, not inverted. -->
 
-<img src="{{ '/assets/images/posts/placeholder-array-languages-xetal-lambda-arguments.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-ergo-chair.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
 A language is learned through its big ideas and lived in through its small ones. This post is about the small ones in X_eTaL: how a lambda takes its arguments, including a new way to say that it ignores one; how a function that prints says so in its name; how two numbers are compared; how to see what a line of right-to-left code really means; and how an example in a comment becomes a test. The newest came from a side question this week.
 
