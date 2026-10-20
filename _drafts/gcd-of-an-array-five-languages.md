@@ -184,7 +184,7 @@ Longer trains group from the right into forks (TR3), and a train turns into ordi
 <tr><td>J</td><td style="white-space: nowrap;"><code>&lt;./+.&gt;./</code></td><td>three functions in a row (two would be a hook)</td></tr>
 <tr><td>Haskell</td><td style="white-space: nowrap;"><code>liftM2 gcd minimum maximum</code></td><td>a library function, <code>liftM2</code></td></tr>
 <tr><td>Lisp (Racket)</td><td style="white-space: nowrap;"><code>(gcd (apply min nums) (apply max nums))</code></td><td>the argument's name, written twice</td></tr>
-<tr><td>X_eTaL</td><td style="white-space: nowrap;"><code>['m̲in r̲/ ⁿg̲cd 'm̲ax r̲/]</code></td><td>brackets</td></tr>
+<tr><td>X_eTaL</td><td style="white-space: nowrap;"><code>['m̲in r̲/ ⁿg̲cd 'm̲ax r̲/]</code></td><td>a train of three in brackets</td></tr>
 <tr><td>X_eTaL</td><td style="white-space: nowrap;"><code>'['m̲ax r̲/ i̲d] '['m̲in r̲/ i̲d] 'ⁿg̲cd ᶜP̲hi</code></td><td>the Phoenix, given trains</td></tr>
 <tr><td>X_eTaL</td><td style="white-space: nowrap;"><code>'{ 'm̲ax r̲/ ⍵ } '{ 'm̲in r̲/ ⍵ } 'ⁿg̲cd ᶜP̲hi</code></td><td>the Phoenix, given lambdas</td></tr>
 </tbody>
