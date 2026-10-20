@@ -17,8 +17,9 @@ repo_urls:
      APL: GNU APL 2.0 ran the lambda; it rejects the train (SYNTAX ERROR: APL2 has no trains). The train is code_report's (Dyalog),
      not run here. J: J 9.7.1 ran code_report's fork and the two-verb hook. Haskell, Racket, Clojure, BQN: code_report's files,
      quoted, not run here.
-     Phoenix: u:P_hi as committed in X_eTaL docs/literate/trains.org (main), run and linted; step 156 (Phoenix and Psi in the
-     Combinators library, c:P_hi) was uncommitted when this was written: an Ed. note can show c:P_hi once it lands.
+     Combinators: B and S from X_eTaL main's lib/Combinators.xtl, run and linted. Step 156 (Phoenix and Psi, c:P_hi) was
+     uncommitted when this was written (previewed from a copy: 'u:m_ost 'u:l_east 'n:g_cd c:P_hi gives 2 1 3); once it lands an
+     Ed. note can show the one-bird form.
      Lead image: Mike's screenshot of the five solutions (Screenshot 2026-10-19 at 9.53.33 PM), dark, not inverted. -->
 
 <img src="{{ '/assets/images/posts/block-gcd-five-languages.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
@@ -139,21 +140,26 @@ error[type-mismatch]: expected a number, found Int -> Int
   = help: this is a function still waiting for an argument: give it one, or quote it ('f_) to pass the function itself
 ```
 
-The fork is also a combinator you can write yourself. X_eTaL's [trains document](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/literate/trains.org) checks each kind of train against its bird, and the fork's is Curry's Phoenix, one line long. With it, and the two reductions given names, the same answer comes out of plain application:
+The fork is also a combinator, and X_eTaL has a library of them: Combinators, Smullyan's birds from *To Mock a Mockingbird*, built into `xetal`. The fork's bird, Curry's Phoenix, is not one of Smullyan's, so the library does not have it yet. Two of his birds make one, though: Φ c f g = S (B c f) g. The Bluebird `B` joins the GCD to the least number, which leaves a function still waiting for its other argument. The Starling `S` hands the same array to that function and to the largest:
 
 ```text
 "n:" u̲se< "Numbers"
-ᵘP̲hi ← { c̲ f̲ g̲ x → (f̲ x) c̲ g̲ x }
+"c:" u̲se< "Combinators"
 ᵘm̲ost ← 'm̲ax r̲/
 ᵘl̲east ← 'm̲in r̲/
-'ᵘm̲ost 'ᵘl̲east 'ⁿg̲cd ᵘP̲hi 2 5 6 9 10
+ᵘg̲cdLeast ← 'ᵘl̲east 'ⁿg̲cd ᶜB̲
+'ᵘm̲ost 'ᵘg̲cdLeast ᶜS̲ 2 5 6 9 10
+'ᵘm̲ost 'ᵘg̲cdLeast ᶜS̲ 7 5 6 8 3
+'ᵘm̲ost 'ᵘg̲cdLeast ᶜS̲ 3 3
 ```
 
 ```text
 2
+1
+3
 ```
 
-This is Haskell's `liftM2 gcd minimum maximum` in X_eTaL: the combinator is an ordinary function, and its three arguments are quoted functions. The reductions have names because a quote takes a name, a lambda or a train ([F4](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/lang-choices.md)), and `'m̲ax r̲/` on its own is none of them. The brackets write the same thing with no helper and no names.
+This is Haskell's `liftM2 gcd minimum maximum` built from birds: two libraries, two imports, no lambda and no brackets. It is longer for two reasons. The birds take quoted functions, and a quote takes a name, a lambda or a train ([F4](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/lang-choices.md)), so the reductions need names; and without a Phoenix the fork takes two birds. The bracketed fork writes the same thing with neither.
 
 ## Why the brackets
 
