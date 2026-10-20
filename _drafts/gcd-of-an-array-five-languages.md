@@ -17,9 +17,9 @@ repo_urls:
      APL: GNU APL 2.0 ran the lambda; it rejects the train (SYNTAX ERROR: APL2 has no trains). The train is code_report's (Dyalog),
      not run here. J: J 9.7.1 ran code_report's fork and the two-verb hook. Haskell, Racket, Clojure, BQN: code_report's files,
      quoted, not run here.
-     Lead image: PLACEHOLDER (scripts/placeholder-marker); Mike will supply one. -->
+     Lead image: Mike's screenshot of the five solutions (Screenshot 2026-10-19 at 9.53.33 PM), dark, not inverted. -->
 
-<img src="{{ '/assets/images/posts/placeholder-gcd-of-an-array.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-gcd-five-languages.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
 [LeetCode 1979](https://leetcode.com/problems/find-greatest-common-divisor-of-array/) is a small problem: given an array of numbers, return the greatest common divisor of its smallest and its largest. For `2 5 6 9 10` that is the GCD of 2 and 10, which is 2. (Not the GCD of the whole array, which is 1: the title says "of array", but the problem means its two extremes.)
 
