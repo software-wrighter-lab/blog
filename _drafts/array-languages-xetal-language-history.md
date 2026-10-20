@@ -19,9 +19,9 @@ repo_urls:
      (X_eTaL main f027bb74); the research-era Life rule is quoted as it was typed in docs/research.txt (historical, never runnable).
      Follows #15 (10/21); links only to posts already published (#1-#11); later posts are "planned". RECHECK history.md before
      publishing: the user said more work is coming.
-     Lead image: PLACEHOLDER (scripts/placeholder-marker); Mike will supply one. -->
+     Lead image: Mike's block-changed-mind.jpg (2026-10-19), dark background as is, not inverted. -->
 
-<img src="{{ '/assets/images/posts/placeholder-xetal-language-history.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-changed-mind.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
 <div style="overflow: hidden;" markdown="1">
 
