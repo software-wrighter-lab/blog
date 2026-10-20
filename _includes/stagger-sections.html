@@ -17,8 +17,17 @@
     post.dataset.staggered = 'true';
     const toStagger = h2s.slice(skip);
 
-    toStagger.forEach(function(h2, i) {
-      const pos = i % 3;
+    // A heading may pin its section's position with a class (kramdown:
+    // {: .pos-left} / .pos-center / .pos-right on the line after it);
+    // the sections after it go on alternating from there. Without any,
+    // this is i % 3, as before.
+    let prev = -1;
+    toStagger.forEach(function(h2) {
+      const pinned = h2.classList.contains('pos-left') ? 0
+                   : h2.classList.contains('pos-center') ? 1
+                   : h2.classList.contains('pos-right') ? 2 : null;
+      const pos = pinned !== null ? pinned : (prev + 1) % 3;
+      prev = pos;
       const section = document.createElement('section');
       section.className = 'stagger stagger-' + pos;
 
