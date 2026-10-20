@@ -83,6 +83,7 @@ A mistake in a program can surface at four times: when the program is checked, b
 |---|---|---|
 | before the program runs | the type checker | a whole number divided by a decimal |
 | before the program runs | a macro checking its own text | an equation or a pipeline written wrong |
+| before the program runs | the checker, inside a code string | a misspelled name or a wrong type in X_eTaL handed to a macro |
 | when asked | the linter | a lambda that only passes its argument on |
 | while the program runs | a check written into the code | an index outside its array, a broken shape promise |
 | never | nothing | three equations that summed the wrong thing |
@@ -143,6 +144,44 @@ error[bad-pipeline]: a stage is a function (nn:r_elu, [f_ g_], '{ x -> ... }) or
 ```
 
 The equation library has nineteen tests of such refusals, the pipeline library fourteen. They are the type checker's rung for the notations the type checker cannot see inside, because to the language a notation is just a string.
+
+## Looking inside a string
+
+A macro's arguments are strings, and to every tool a string is opaque: whatever X_eTaL is written inside one, the type checker and the linter see only quoted text. A mistake in it surfaces only when the macro has run and its expansion is checked. That is still before the program runs, but it needs a run of the macros, and the linter alone never sees it.
+
+A code string, `c"..."`, changes that. Its value is the same string, but the `c` tells every tool its inside is X_eTaL, and a macro says in its contract which of its sides take code. The system macro `i̲f<` takes code on both. So the inside is now read with the rest of the file, and where a macro takes code it is also checked on its own, before any macro runs: as the body of a function over the names it uses, with the program's functions in scope. A misspelled function is found where it was written:
+
+```text
+c"n = 0" i̲f< c"ᵘn̲ope 1◆ 2"
+```
+
+```text
+error[undefined-name]: this name is never defined
+ --> p.xtl:2:17
+  |
+2 | c"n = 0" i_f< c"u:n_ope 1; 2"
+  |                 ^^^^^^^
+```
+
+So is a value of the wrong type, with its hint:
+
+```text
+error[type-mismatch]: expected a number, found Char
+ --> p.xtl:2:17
+  |
+2 | c"n = 0" i_f< c"1 + \"a\"; 2"
+  |                 ^^^^^^^^
+  |                     ---- a string: a vector of Char
+  = help: a string is text, not a number: write a number without quotes
+```
+
+The linter does the same check without running anything, as a lint of its own, `code-check`, which is an error by default, and it runs the ordinary lints on the inside too: a lambda that only passes its argument on, written inside a code string, is reported at its column inside the string, the same `redundant-lambda` as in code outside one. Writing the same call with plain strings still works, and running it still finds the misspelled name; but the linter alone finds only a suggestion, the `string-kind` lint:
+
+```text
+warning[string-kind]: i_f< takes code on its right: write it as a code string, c"...", so it is drawn and checked as X_eTaL
+```
+
+The check inside a string is partial by design. It knows what holds for any value the macro might give the names it binds, an unknown name, a wrong number of arguments, a type that cannot fit, but not what the macro will actually pass; that is still checked on the expansion. And it applies only where a macro takes code. A pipeline's string mixes X_eTaL with the pipeline's own notation, and an equation's string is a notation altogether; those are only read with the file, and their macros check them as they expand.
 
 ## Lints
 
@@ -219,5 +258,9 @@ A macro that parses a notation, such as the equation and pipeline macros, says `
 
 ## What is still rough
 
-The ladder is right; the rungs are being made comfortable one message at a time, as the type error above shows. Shape and rank are still checked mostly while the program runs; a shape lint that proves them before it runs, from the extents a program writes down, is the next rung up for them.
+The ladder is right; the rungs are being made comfortable one message at a time, as the type error above shows. Three places are still rough, and each is now planned work:
+
+- **Errors inside a notation.** A type mistake in an equation, such as a whole-number array times a float integral, is a type error before the program runs, but it underlines the whole call rather than the term inside the string that is wrong.
+- **A code string given to a notation.** Writing `c"..."` for an equation, which takes notation rather than code, fails in the lexer with a message about a number, before the `string-kind` lint can say what to do: drop the `c`.
+- **Shape and rank.** They are still checked mostly while the program runs. A shape lint already proves some mismatches before it runs, where the extents are written down; equations and pipelines check theirs as they run.
 
