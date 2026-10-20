@@ -53,9 +53,9 @@ repo_urls:
      The parsing library is #15 (10/21): refer to it as "a planned post", no link, until #15 is published.
      Mike's framing (2026-10-17): "type errors good; runtime errors bad; blog posts should be correct (unless we are blogging
      about error handling".
-     Lead image: Mike's block-checking.jpg (2026-10-17), background as is, not inverted. -->
+     Lead image: Mike's block-lint-type-check.jpg (2026-10-19; replaced block-checking.jpg), dark background as is, not inverted. -->
 
-<img src="{{ '/assets/images/posts/block-checking.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-lint-type-check.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
 <div style="overflow: hidden;" markdown="1">
 
