@@ -25,6 +25,9 @@ repo_urls:
      Probed: Int array x Float integral is a type-mismatch before running, underlined across the whole call; no integral lints.
      Asks recorded 2026-10-19: X_eTaL 2e750334 (B1 errors inside a notation string = type-check-macros approach 3; B2 string-kind for
      c"..." on a notation side), X_eTaL-libraries a0b37fb (n vs 2n error estimate, jump warning; planned notations, ## draws:).
+     2026-10-19 evening: X_eTaL step 154 (d5d54ae8, MC32, D178) and Equations draws (5d3c808, ## takes: notation notation, ## draws: t_ex<):
+     figure = xetal render --html of scratch show.xtl (libraries' xetal d5d54ae8, clean export 357849b), typeset with KaTeX; the use< line
+     is left out (drawn ᵉ⁼u̲se<, a quirk reported). 
      Saga 42 decisions (X_eTaL 6c0bf1c9) for the convolution family; boundary modes, FFT. Animation planned, not built.
      Lead image: Mike's screenshot (continuous convolution card), not inverted, not transparent. -->
 
@@ -102,6 +105,15 @@ error[bad-equation]: an improper integral (a bound of inf): write a truncation, 
 
 The same call gives its LaTeX, `ᵉt̲ex<`, and an integral comes out as a paper would print it: `\int` with its bounds, the body as math, `\, d\tau` at the end, nested integrals with the inner `d` first, and Greek names as Greek letters in the body and bounds. The figure shows four, each typeset from what the library returned, among them GELU's normal-distribution integral and the KL divergence below.
 
+### Drawn as math
+
+<figure class="zoomable outdent-right">
+<img src="{{ '/assets/images/posts/xetal-int-drawn.webp' | relative_url }}" class="no-invert" alt="A short X_eTaL program as xetal render --html draws it, typeset: ordinary lines in decorated code, and each equation call drawn as the macro's name and a box of typeset math: y gets e:convolve of y sub n equals the sum over m of x sub n minus m times h sub m, full; v gets e:eq of the integral from 0 to 1 of x squared dx; GELU's body adds e:eq of Phi equals the integral from 0 to x of exp of minus u squared over 2, over the square root of 2 pi, du; and Y gets e:eq of the CNN layer's triple sum">
+<figcaption style="font-size: 0.85em;">A program as the equation library now draws it: the code as code, each equation as math. Click to enlarge.</figcaption>
+</figure>
+
+The strings in the calls above are the notation as typed. Where a program is drawn for reading, in the live demos, the documentation and `xetal render --html`, the equation library now draws each call itself: the macro's name stays as code, so a reader sees which macro ran, and its strings become one box of typeset math, from the same LaTeX `ᵉt̲ex<` gives. The value and the text are unchanged; only the drawing is. The figure is a short program, the convolution, an integral, GELU's `Φ` and the CNN layer, as `xetal render --html` writes it, typeset the way a page does. In a terminal, which has no math renderer, the typed text is shown, styled as notation.
+
 ### What it becomes
 
 The macro writes ordinary X_eTaL: the bounds as floats, the step, the rule's weights, a grid for the variable, and one weighted sum along it. Simpson on two steps over `0..1`, from `xetal expand`, its checks left out:
@@ -155,7 +167,6 @@ Most frameworks compute GELU with a tanh approximation instead, and the integral
 
 - **What the notation cannot write yet.** Its functions are a fixed set, grown on purpose, so an integrand that calls an X_eTaL function, like the box, needs the standalone library for now. The library's plan names the rest: a step function, which would let the box be written as math; `float(e)`, to scale a float integral by a whole-number array; `tanh`; and Greek names with subscripts.
 - **Diagnostics.** A wrong call is refused before the program runs, and a type mistake, such as a whole-number array times a float integral, is a type error before it runs too. But the error underlines the whole call rather than the term inside the string, and nothing warns that a grid is too coarse or that an integrand jumps. Both are now planned work: errors placed inside a notation's string in X_eTaL, and an error estimate and a warning on a jump in the equation library.
-- **The drawing.** An equation's string is drawn as typed, as in post #11. The plan is for the equation macro to declare in its contract how its text is drawn, so the editors and the renderer can show the string itself as math; it stays an ordinary string either way, with no new kind of literal.
 
 ## A family of convolutions
 
