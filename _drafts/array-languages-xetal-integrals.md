@@ -28,6 +28,9 @@ repo_urls:
      2026-10-19 evening: X_eTaL step 154 (d5d54ae8, MC32, D178) and Equations draws (5d3c808, ## takes: notation notation, ## draws: t_ex<):
      figure = xetal render --html of scratch show.xtl (libraries' xetal d5d54ae8, clean export 357849b), typeset with KaTeX; the use< line
      is left out (drawn ᵉ⁼u̲se<; Mike 10-19: fixed in X_eTaL, being pushed; once the libraries pin it, the line may be shown).
+     Figures boxes/gelu: math typeset with KaTeX (Phi from the library's LaTeX; f, f*f, GELU and the tanh form written from their
+     definitions), plots from computed numbers (box: Integrals, 128 steps; GELU error: Equations at 161 points, max 0.000473 at x=-2.7).
+     Sections pinned: Two boxes {: .pos-right}, GELU {: .pos-left} (stagger script reads pos-* classes).
      Saga 42 decisions (X_eTaL 6c0bf1c9) for the convolution family; boundary modes, FFT. Animation planned, not built.
      Lead image: Mike's screenshot (continuous convolution card), not inverted, not transparent. -->
 
@@ -137,6 +140,12 @@ The weights are Simpson's, 1, 4 and 1, times the step over 3; the grid has three
 The tests check the rules the way numerical analysts do: by how fast the error falls. Doubling the grid should divide the trapezoid rule's error by about 4 and Simpson's by about 16, and on `eˣ` over `0..1` they do: `4 4 16 16`. Those numbers, and every value above, came first from a standalone library in X_eTaL-ML, `Integrals`, which now serves as the equation library's independent check.
 
 ## Two boxes make a triangle
+{: .pos-right}
+
+<figure class="zoomable outdent-left">
+<img src="{{ '/assets/images/posts/xetal-int-boxes.webp' | relative_url }}" class="no-invert" alt="The box function f of tau, 1 from 0 to 1 and 0 otherwise, and the convolution of two boxes, f star f of t equals the integral from 0 to 2 of f of tau times f of t minus tau, d tau. Below, a plot over t from 0 to 2: the exact triangle as a line rising to 1 at t equals 1 and falling to 0 at 2, and the 17 values computed by the trapezoid rule on 128 steps as dots, each a little above the line">
+<figcaption style="font-size: 0.85em;">The box, its convolution with itself, and the computed values against the exact triangle. Click to enlarge.</figcaption>
+</figure>
 
 The card at the top of this post is the classic example: two box functions, each 1 between 0 and 1 and 0 elsewhere. Slide one across the other and their overlap grows to 1 and shrinks back, so their convolution is a triangle. The box is one line of X_eTaL:
 
@@ -154,6 +163,12 @@ A body that calls an X_eTaL function like this one is not in the equation notati
 Close, and honestly close: the box jumps at its edges, and a rule sampling a jump is off by about half a step at each one, so this integral's error falls only as fast as the step does. Both libraries document that.
 
 ## GELU, from its definition
+{: .pos-left}
+
+<figure class="zoomable outdent-right">
+<img src="{{ '/assets/images/posts/xetal-int-gelu.webp' | relative_url }}" class="no-invert" alt="GELU by its integral: Phi equals the integral from 0 to x of exp of minus u squared over 2, over the square root of 2 pi, du, and GELU of x equals x times one half plus Phi; the tanh approximation most frameworks use, one half x times 1 plus tanh of the square root of 2 over pi times x plus 0.044715 x cubed; and a plot of the integral minus the approximation for x from -4 to 4, a wave between about -0.0005 and 0.0002, with its largest gap, 0.000473, near x equals -2.7">
+<figcaption style="font-size: 0.85em;">GELU by its integral, the tanh approximation, and how far apart they are. Click to enlarge.</figcaption>
+</figure>
 
 The same notation computes something every transformer uses. GELU, the activation in BERT and GPT, is `x` times the standard normal's cumulative distribution, `Φ(x)`, which is one half plus an integral of the normal density from 0 to `x`:
 
