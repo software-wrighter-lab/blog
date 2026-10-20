@@ -17,7 +17,8 @@ repo_urls:
      APL: GNU APL 2.0 ran the lambda; it rejects the train (SYNTAX ERROR: APL2 has no trains). The train is code_report's (Dyalog),
      not run here. J: J 9.7.1 ran code_report's fork and the two-verb hook. Haskell, Racket, Clojure, BQN: code_report's files,
      quoted, not run here.
-     Phoenix: c:P_hi from X_eTaL 9e667493 (step 156), run (2 1 3) and linted with a clean build of 0b427a30.
+     Phoenix: c:P_hi from X_eTaL 9e667493 (step 156), with atop trains as its arguments, run (2 1 3) and linted with a clean
+     build of 0b427a30.
      Lead image: Mike's block-phoenix.jpg (2026-10-19; replaced the screenshot of the five solutions), dark, not inverted. -->
 
 <img src="{{ '/assets/images/posts/block-phoenix.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
@@ -39,28 +40,6 @@ In 2021 Conor Hoekstra solved it in [sixteen languages](https://www.youtube.com/
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
 </div>
-
-## Naming the argument: Lisp
-
-The direct solution names the array and says what to do with it. Hoekstra's Racket:
-
-```racket
-(define (find-gcd nums)
-  (gcd (apply min nums)
-       (apply max nums)))
-```
-
-His Clojure is the same, with `gcd` from `clojure.math.numeric-tower`. Nothing here is hard to read, and `nums` appears twice: once for the smallest, once for the largest. Every other solution below is a way of not writing that name.
-
-## Haskell: liftM2
-
-```haskell
-import Control.Monad (liftM2)
-
-findGCD = liftM2 gcd minimum maximum
-```
-
-There is no argument at all. For functions, `liftM2 f g h` is the function `\x -> f (g x) (h x)`: give the same `x` to `g` and to `h`, then combine their results with `f`. Here that is `gcd (minimum xs) (maximum xs)`. The pattern has names in combinatory logic, the S' combinator, or the Phoenix in Smullyan's birds, and in the array languages it is called a fork.
 
 ## APL and J: three functions side by side
 
@@ -94,7 +73,41 @@ The fork is not marked anywhere. What makes the three functions a fork is that t
 
 BQN, Hoekstra's third array language, has the same fork, `⌈´GCD⌊´`, with a GCD it defines first, since BQN has no GCD primitive.
 
+## Haskell: liftM2
+
+```haskell
+import Control.Monad (liftM2)
+
+findGCD = liftM2 gcd minimum maximum
+```
+
+There is no argument at all. For functions, `liftM2 f g h` is the function `\x -> f (g x) (h x)`: give the same `x` to `g` and to `h`, then combine their results with `f`. Here that is `gcd (minimum xs) (maximum xs)`. It is the same fork as APL's and J's, and combinatory logic has names for it too: the S' combinator, or Curry's Phoenix.
+
+## Lisp: naming the argument
+
+The direct solution names the array and says what to do with it. Hoekstra's Racket:
+
+```racket
+(define (find-gcd nums)
+  (gcd (apply min nums)
+       (apply max nums)))
+```
+
+His Clojure is the same, with `gcd` from `clojure.math.numeric-tower`. Nothing here is hard to read, and `nums` appears twice: once for the smallest, once for the largest. The forks above are ways of not writing that name.
+
 ## X_eTaL: the same fork, in brackets
+{: .pos-right}
+
+<div class="aside-box outdent-left" markdown="1">
+**New: the Phoenix.** The fork is also a bird, Curry's Phoenix, just added to X_eTaL's Combinators library as `ᶜP̲hi` ([9e66749](https://github.com/softwarewrighter/X_eTaL/commit/9e667493)). With it the solution reads like Haskell's `liftM2 gcd minimum maximum`:
+
+<pre style="white-space: pre-wrap; font-size: 0.85em;"><code>"n:" u̲se&lt; "Numbers"
+"c:" u̲se&lt; "Combinators"
+'['m̲ax r̲/ i̲d] '['m̲in r̲/ i̲d] 'ⁿg̲cd ᶜP̲hi 2 5 6 9 10</code></pre>
+
+A bird takes quoted functions, and a quote touches one name, a lambda or a train, so each reduction is wrapped in a train: `['m̲ax r̲/ i̲d]` is an atop, the largest of the array itself (`i̲d` is the identity).
+</div>
+
 
 X_eTaL's GCD is in the Numbers library, Euclid's algorithm applied item by item:
 
@@ -138,25 +151,11 @@ error[type-mismatch]: expected a number, found Int -> Int
   = help: this is a function still waiting for an argument: give it one, or quote it ('f_) to pass the function itself
 ```
 
-The fork is also a bird: Curry's Phoenix, just added to X_eTaL's Combinators library as `ᶜP̲hi` ([9e66749](https://github.com/softwarewrighter/X_eTaL/commit/9e667493)). With it the solution is Haskell's `liftM2 gcd minimum maximum`, two imports and one bird:
-
-```text
-"n:" u̲se< "Numbers"
-"c:" u̲se< "Combinators"
-'{ 'm̲ax r̲/ ⍵ } '{ 'm̲in r̲/ ⍵ } 'ⁿg̲cd ᶜP̲hi 2 5 6 9 10
-```
-
-```text
-2
-```
-
-The braces are there because a bird takes quoted functions, and a quote touches one name, a lambda or a train. `'m̲ax r̲/` is two tokens, reduce given a function, so a lambda wraps it. Parentheses would not do: they group, but a function in parentheses is still applied, not passed.
-
 ## Why the brackets
 
 Without brackets X_eTaL reads that line the only way it reads any line: right to left, each function applied to what is on its right. `'m̲ax r̲/` takes the array and gives 10. `ⁿg̲cd` takes 10 as its right argument and is still waiting for its left one, and nothing gives it one. There is no second reading to fall back on.
 
-That is a choice. A fork needs one thing that plain application cannot do: hand the *same* argument to two functions. Composition does not need it. In X_eTaL `n̲eg a̲bs -5` is already "negate the absolute value", with no brackets, because each function takes the result of the one on its right. Duplicating the argument is the new part, and every language above marks it somehow. The Lisp names the argument and writes the name twice. Haskell calls `liftM2`. APL and J mark it by position: three functions in a row, with no argument between them, are given a meaning they do not have anywhere else, and two in a row are given yet another.
+That is a choice. A fork needs one thing that plain application cannot do: hand the *same* argument to two functions. Composition does not need it. In X_eTaL `n̲eg a̲bs -5` is already "negate the absolute value", with no brackets, because each function takes the result of the one on its right. Duplicating the argument is the new part, and every language above marks it somehow. APL and J mark it by position: three functions in a row, with no argument between them, are given a meaning they do not have anywhere else, and two in a row are given yet another. Haskell calls `liftM2`, and X_eTaL can call the Phoenix. The Lisp names the argument and writes the name twice.
 
 X_eTaL marks the fork with brackets ([TR1](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/lang-choices.md)): `[F G H] x` is `(F x) G (H x)`. The brackets also settle what two functions mean. In X_eTaL `[F G] x` is `F (G x)`, as in BQN and Dyalog, not J's hook (TR2), and the same two functions in brackets give the smaller of the largest:
 
@@ -171,14 +170,26 @@ X_eTaL marks the fork with brackets ([TR1](https://github.com/softwarewrighter/X
 
 Longer trains group from the right into forks (TR3), and a train turns into ordinary application before it runs, so the evaluator never sees one. One rule decides this: the language never chooses between two readings of the same text. A run of names means application, always, and the one construction that means something else is written so that it looks different.
 
+<hr>
+
+<div class="clearfix" markdown="1">
+
 ## Five ways to say it
 
-| Language | Solution | The fork is |
-|---|---|---|
-| Racket | `(gcd (apply min nums) (apply max nums))` | the argument's name, written twice |
-| Haskell | `liftM2 gcd minimum maximum` | a library function, `liftM2` |
-| APL (Dyalog) | `⌈/∨⌊/` | three functions in a row |
-| J | `<./+.>./` | three functions in a row (two would be a hook) |
-| X_eTaL | `['m̲in r̲/ ⁿg̲cd 'm̲ax r̲/]` | brackets |
+<table style="table-layout: fixed; width: 100%;">
+<colgroup><col style="width: 14%;"><col style="width: 50%;"><col style="width: 36%;"></colgroup>
+<thead><tr><th>Language</th><th>Solution</th><th>The fork is</th></tr></thead>
+<tbody>
+<tr><td>APL (Dyalog)</td><td style="white-space: nowrap;"><code>⌈/∨⌊/</code></td><td>three functions in a row</td></tr>
+<tr><td>J</td><td style="white-space: nowrap;"><code>&lt;./+.&gt;./</code></td><td>three functions in a row (two would be a hook)</td></tr>
+<tr><td>Haskell</td><td style="white-space: nowrap;"><code>liftM2 gcd minimum maximum</code></td><td>a library function, <code>liftM2</code></td></tr>
+<tr><td>Lisp (Racket)</td><td style="white-space: nowrap;"><code>(gcd (apply min nums) (apply max nums))</code></td><td>the argument's name, written twice</td></tr>
+<tr><td>X_eTaL</td><td style="white-space: nowrap;"><code>['m̲in r̲/ ⁿg̲cd 'm̲ax r̲/]</code></td><td>brackets</td></tr>
+<tr><td>X_eTaL</td><td style="white-space: nowrap;"><code>'['m̲ax r̲/ i̲d] '['m̲in r̲/ i̲d] 'ⁿg̲cd ᶜP̲hi</code></td><td>the Phoenix, given trains</td></tr>
+<tr><td>X_eTaL</td><td style="white-space: nowrap;"><code>'{ 'm̲ax r̲/ ⍵ } '{ 'm̲in r̲/ ⍵ } 'ⁿg̲cd ᶜP̲hi</code></td><td>the Phoenix, given lambdas</td></tr>
+</tbody>
+</table>
 
 The array languages are the shortest, and X_eTaL pays two characters for its brackets. In return, a row of names in X_eTaL always means the same thing, and counting the functions never changes it.
+
+</div>
