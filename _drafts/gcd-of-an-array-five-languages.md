@@ -5,7 +5,7 @@ categories: [languages, language-design]
 tags: [xetal, x-etal, apl, j, haskell, lisp, racket, clojure, bqn, tacit, point-free, trains, fork, combinators, leetcode, gcd]
 keywords: "LeetCode 1979, find greatest common divisor of array, gcd min max, APL train, J fork, J hook, Haskell liftM2 point-free, Racket gcd, Clojure gcd, X_eTaL train, fork combinator, S' combinator, phoenix, tacit programming"
 abstract: "LeetCode 1979 asks for the greatest common divisor of an array's smallest and largest numbers. Conor Hoekstra solved it in sixteen languages; here it is in five, APL, J, Haskell, Lisp and X_eTaL, all asking for the same shape: one argument handed to two functions, their results to a third. APL and J write that fork as three functions side by side; X_eTaL needs brackets around them. This post is about why."
-date: 2026-10-23 00:15:00 -0700
+date: 2026-10-19 12:00:00 -0700
 repo_urls:
   - url: "https://github.com/softwarewrighter/X_eTaL"
     title: "X_eTaL"
@@ -17,6 +17,8 @@ repo_urls:
      APL: GNU APL 2.0 ran the lambda; it rejects the train (SYNTAX ERROR: APL2 has no trains). The train is code_report's (Dyalog),
      not run here. J: J 9.7.1 ran code_report's fork and the two-verb hook. Haskell, Racket, Clojure, BQN: code_report's files,
      quoted, not run here.
+     Phoenix: u:P_hi as committed in X_eTaL docs/literate/trains.org (main), run and linted; step 156 (Phoenix and Psi in the
+     Combinators library, c:P_hi) was uncommitted when this was written: an Ed. note can show c:P_hi once it lands.
      Lead image: Mike's screenshot of the five solutions (Screenshot 2026-10-19 at 9.53.33 PM), dark, not inverted. -->
 
 <img src="{{ '/assets/images/posts/block-gcd-five-languages.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
@@ -136,6 +138,22 @@ error[type-mismatch]: expected a number, found Int -> Int
   |           --------------------------- this is an Int -> Int
   = help: this is a function still waiting for an argument: give it one, or quote it ('f_) to pass the function itself
 ```
+
+The fork is also a combinator you can write yourself. X_eTaL's [trains document](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/literate/trains.org) checks each kind of train against its bird, and the fork's is Curry's Phoenix, one line long. With it, and the two reductions given names, the same answer comes out of plain application:
+
+```text
+"n:" u̲se< "Numbers"
+ᵘP̲hi ← { c̲ f̲ g̲ x → (f̲ x) c̲ g̲ x }
+ᵘm̲ost ← 'm̲ax r̲/
+ᵘl̲east ← 'm̲in r̲/
+'ᵘm̲ost 'ᵘl̲east 'ⁿg̲cd ᵘP̲hi 2 5 6 9 10
+```
+
+```text
+2
+```
+
+This is Haskell's `liftM2 gcd minimum maximum` in X_eTaL: the combinator is an ordinary function, and its three arguments are quoted functions. The reductions have names because a quote takes a name, a lambda or a train ([F4](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/lang-choices.md)), and `'m̲ax r̲/` on its own is none of them. The brackets write the same thing with no helper and no names.
 
 ## Why the brackets
 
