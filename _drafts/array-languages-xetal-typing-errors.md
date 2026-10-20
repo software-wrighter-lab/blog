@@ -22,7 +22,9 @@ repo_urls:
      Sources: X_eTaL docs/lint.md (11 lints, 5 groups), docs/type-check-macros.md (approaches 8-11), the blog's
      tmp/equations-findings-2026-10-17.md. UPDATED 2026-10-17 evening on X_eTaL main (clean export at eb82c117, built): the type error
      now has file:line, source, both operands and a help line (shown); 29 lints in 6 groups (docs/lint.md at 6c0bf1c9); macro contracts
-     MC31/D163 (57cff932): unused-argument shown with a toy Sq.xtlm in the scratchpad. RECHECK all outputs before publishing.
+     MC31/D163 (57cff932): unused-argument shown with a toy Sq.xtlm in the scratchpad.
+     RECHECKED 2026-10-20 on a clean build of X_eTaL 0b427a30, X_eTaL-libraries 357849b, X_eTaL-ML 25901a4: every example re-run;
+     pipelines now Flow (flow:p_ipe<, $y drawn ▹y); B2 landed (3df84439); B1 still open; refusal tests 28 (Equations), 16 (Flow).
      PLANNED UPDATE (2026-10-18, Mike: describe how the linter will look into code strings; X_eTaL step 112 still landing, an hour
      or two out; write from what is committed then, run every example on a clean build):
      - New section after "Macros check their own text": "Looking inside a string". Today a macro's argument is one Char vector to
@@ -135,15 +137,15 @@ A macro that reads a notation checks it when the program is compiled, and refuse
 
 ```text
 "Y[o,h,w] | O Ho Wo" ᵉe̲q< "sum c:=0..C - 1, sum h:=0..1 | X[c,h,w]"
-error[bad-equation]: an index is bound once: c, h, o, h, w
+error[bad-equation]: an index is bound once: (sum c:=0..C - 1, sum h:=0..1 | X[c,h,w])
 ```
 
 ```text
-@ ᵖⁱᵖᵉp̲ipe< "x |> 3"
+@ ᶠˡᵒʷp̲ipe< c"x ▷ 3"
 error[bad-pipeline]: a stage is a function (nn:r_elu, [f_ g_], '{ x -> ... }) or an expression naming the previous value it (or a name bound before it): 3
 ```
 
-The equation library has nineteen tests of such refusals, the pipeline library fourteen. They are the type checker's rung for the notations the type checker cannot see inside, because to the language a notation is just a string.
+The equation library has twenty-eight tests of such refusals, the pipeline library (Flow, in X_eTaL-ML) sixteen. They are the type checker's rung for the notations the type checker cannot see inside, because to the language a notation is just a string.
 
 ## Looking inside a string
 
@@ -172,6 +174,7 @@ error[type-mismatch]: expected a number, found Char
 2 | c"n = 0" i_f< c"1 + \"a\"; 2"
   |                 ^^^^^^^^
   |                     ---- a string: a vector of Char
+  = note: `+` has type Num a => a -> a -> a
   = help: a string is text, not a number: write a number without quotes
 ```
 
@@ -188,12 +191,12 @@ The check inside a string is partial by design. It knows what holds for any valu
 `xetal lint` reads a program for things that are legal but probably not meant. It has thirty-one lints in six groups, from `correctness` and `suspicious` to `pedantic`, each with a default level, and each one explains itself with `xetal lint --explain`. Two of them:
 
 ```text
-u:n̲egAll ← { v → '{ x → n̲eg x } m̲ap v }
+ᵘn̲egAll ← { v → '{ x → n̲eg x } m̲ap v }
 warning[redundant-lambda]: this lambda only passes its arguments to `n_eg`: write `'n_eg` at lint.xtl:1:22
 ```
 
 ```text
-u:c̲lip ← { v → (t̲ally v) ? v; 0 r̲eshape 0 }
+ᵘc̲lip ← { v → (t̲ally v) ? v◆ 0 r̲eshape 0 }
 warning[int-condition]: this guard's condition is an Int, which fails at run time unless it is 1 or 0: write the comparison meant, as `0 < n` or `0 != n` at ic.xtl:1:20
 ```
 
@@ -202,7 +205,7 @@ The second is a lint about the next rung down: a guard on a count works while th
 ```text
 $ xetal lint --fix fixme.xtl
 fixed 1 finding(s) in fixme.xtl
-u:n̲egAll ← { v → 'n̲eg m̲ap v }
+ᵘn̲egAll ← { v → 'n̲eg m̲ap v }
 ```
 
 The libraries are kept lint clean, and findings can also be written as JSON, one per line, so an editor can show where they are.
@@ -219,11 +222,11 @@ error[rank]: X[c,h+r] indexes 2 axes, but X has rank 3
 And a pipeline stage that promises a shape is checked against it:
 
 ```text
-@ ᵖⁱᵖᵉp̲ipe< "x |> 2 × it : y [n] |> y + 1"
+@ ᶠˡᵒʷp̲ipe< c"x ▷ 2 × it ▹y [n] ▷ y + 1"
 error[shape]: stage 2 (y): shape 4, expected 3
 ```
 
-These are better than wrong answers and worse than errors before running. Where the extents are known before the program runs, as they are in every one of these examples, a shape check planned in X_eTaL could move them up a rung.
+These are better than wrong answers and worse than errors before running. X_eTaL's shape lint can move such a mistake up a rung: it proves a mismatch before the program runs where a shape is written as a check, `r̲equireShape`. The equation and pipeline macros check their shapes in code of their own, which the lint does not read, so for now theirs are caught while the program runs.
 
 ## A silent wrong answer
 
@@ -245,7 +248,7 @@ It was fixed the same morning, in three layers. Every rule of the reader now use
 
 The fix covered one library. The class of bug, a reader that uses part of its text and drops the rest, can happen in any macro that reads a notation, and more of them are coming. Three changes go further, from narrow to broad:
 
-- **The pipeline macro was written to the rule from the start,** with a test for each kind of text it refuses, the equation library's three cases among them, and a macro, `ᵖⁱᵖᵉt̲ext<`, that writes back what it read.
+- **The pipeline macro was written to the rule from the start,** with a test for each kind of text it refuses, the equation library's three cases among them, and a macro, `ᶠˡᵒʷt̲ext<`, that writes back what it read.
 - **A parsing library for macro writers,** whose every piece uses all of its text or refuses, with the reprint check built in, so a new macro does not have to learn this lesson again. It has been written, and it is the subject of a planned post.
 - **A check in the language itself,** now built. A macro declares a contract in its documentation, how it is called and whether it copies its text into its expansion or parses it. For a macro that copies, the default, the macro runner checks that every name and number of the call's text reaches the expansion, and refuses the call otherwise. A toy macro that forgets the power:
 
@@ -258,9 +261,7 @@ A macro that parses a notation, such as the equation and pipeline macros, says `
 
 ## What is still rough
 
-The ladder is right; the rungs are being made comfortable one message at a time, as the type error above shows. Three places are still rough, and each is now planned work:
+The ladder is right; the rungs are being made comfortable one message at a time, as the type error above shows. One rough place was fixed while this post was being written: a code string given to an equation, which takes notation rather than code, used to fail in the lexer with a message about a number. Now it is the `string-kind` error, at the string, with the fix: drop the `c`, the value is the same ([3df8443](https://github.com/softwarewrighter/X_eTaL/commit/3df84439)). Two places are still rough, and both are planned work:
 
 - **Errors inside a notation.** A type mistake in an equation, such as a whole-number array times a float integral, is a type error before the program runs, but it underlines the whole call rather than the term inside the string that is wrong.
-- **A code string given to a notation.** Writing `c"..."` for an equation, which takes notation rather than code, fails in the lexer with a message about a number, before the `string-kind` lint can say what to do: drop the `c`.
 - **Shape and rank.** They are still checked mostly while the program runs. A shape lint already proves some mismatches before it runs, where the extents are written down; equations and pipelines check theirs as they run.
-
