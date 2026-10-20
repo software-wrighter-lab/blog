@@ -24,12 +24,27 @@ if [[ ${#posts[@]} -eq 0 ]]; then
   exit 0
 fi
 
+# Front matter must parse as YAML. Jekyll drops a file's fields without an
+# error when it does not (a stray quote once left a draft with no abstract),
+# so check it with the same parser Jekyll uses.
+fm_yaml() {
+  local fm_err
+  if ! fm_err=$(ruby -ryaml -e '
+      s = File.read(ARGV[0]); m = s.match(/\A---\n(.*?)\n---\n/m)
+      abort "no closing ---" unless m
+      begin; YAML.safe_load(m[1], permitted_classes: [Date, Time]); rescue => e; abort e.message.lines.first; end
+    ' "$1" 2>&1); then
+    err "$(basename "$1"): front matter is not valid YAML: $fm_err"
+  fi
+}
+
 echo "validating ${#posts[@]} post(s)"
 
 for f in "${posts[@]}"; do
   base=$(basename "$f")
 
   head -1 "$f" | grep -q '^---' || { err "$base: no front matter"; continue; }
+  fm_yaml "$f"
 
   for field in title date abstract; do
     [[ -n "$(fm "$field" "$f")" ]] || err "$base: missing $field"
@@ -113,6 +128,12 @@ done
 # image is an error too --- generate a placeholder with
 # scripts/placeholder-marker rather than borrowing an image --- and a
 # placeholder that reaches _posts/ is an error, so it cannot ship by accident.
+# Drafts get the front-matter parse too (the rest of the per-post checks are for _posts/).
+for f in _drafts/*.md; do
+  [[ -f "$f" && "$(basename "$f")" != README.md ]] || continue
+  head -1 "$f" | grep -q '^---' && fm_yaml "$f"
+done
+
 # _drafts/ exists only on the drafts branch; on main this checks posts alone.
 img_hits=$(python3 - <<'PY'
 import re, glob
