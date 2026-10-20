@@ -23,7 +23,7 @@ repo_urls:
      tmp/equations-findings-2026-10-17.md. UPDATED 2026-10-17 evening on X_eTaL main (clean export at eb82c117, built): the type error
      now has file:line, source, both operands and a help line (shown); 29 lints in 6 groups (docs/lint.md at 6c0bf1c9); macro contracts
      MC31/D163 (57cff932): unused-argument shown with a toy Sq.xtlm in the scratchpad.
-     RECHECKED 2026-10-20 on a clean build of X_eTaL 0b427a30, X_eTaL-libraries 357849b, X_eTaL-ML 25901a4: every example re-run;
+     RECHECKED 2026-10-20 on a clean build of X_eTaL 0b427a30, X_eTaL-libraries 357849b (33c2d13 for the bound-once message), X_eTaL-ML 25901a4: every example re-run;
      pipelines now Flow (flow:p_ipe<, $y drawn ▹y); B2 landed (3df84439); B1 still open; refusal tests 28 (Equations), 16 (Flow).
      PLANNED UPDATE (2026-10-18, Mike: describe how the linter will look into code strings; X_eTaL step 112 still landing, an hour
      or two out; write from what is committed then, run every example on a clean build):
@@ -137,7 +137,7 @@ A macro that reads a notation checks it when the program is compiled, and refuse
 
 ```text
 "Y[o,h,w] | O Ho Wo" ᵉe̲q< "sum c:=0..C - 1, sum h:=0..1 | X[c,h,w]"
-error[bad-equation]: an index is bound once: (sum c:=0..C - 1, sum h:=0..1 | X[c,h,w])
+error[bad-equation]: an index is bound once: o, h, w, c, h
 ```
 
 ```text
