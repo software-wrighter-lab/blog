@@ -1,17 +1,19 @@
 ---
 layout: post
-title: "One Small Problem, Five Languages: Why X_eTaL Brackets Its Forks"
-categories: [languages, language-design]
-tags: [xetal, x-etal, apl, j, haskell, lisp, racket, clojure, bqn, tacit, point-free, trains, fork, combinators, leetcode, gcd]
+title: "Rabbit-hole #7: The Phoenix --- One Small Problem, Five Languages, and Why X_eTaL Brackets Its Forks"
+categories: [rabbit-hole, programming-languages, deep-dive]
+tags: [rabbit-hole, phoenix, birds, aviary, xetal, x-etal, apl, j, haskell, lisp, racket, clojure, bqn, tacit, point-free, trains, fork, combinators, leetcode, gcd]
 keywords: "LeetCode 1979, find greatest common divisor of array, gcd min max, APL train, J fork, J hook, Haskell liftM2 point-free, Racket gcd, Clojure gcd, X_eTaL train, fork combinator, S' combinator, phoenix, tacit programming"
 abstract: "LeetCode 1979 asks for the greatest common divisor of an array's smallest and largest numbers. Conor Hoekstra solved it in sixteen languages; here it is in five, APL, J, Haskell, Lisp and X_eTaL, all asking for the same shape: one argument handed to two functions, their results to a third. APL and J write that fork as three functions side by side; X_eTaL needs brackets around them. This post is about why."
+series: "Down the Rabbit-Hole"
+series_part: 7
 date: 2026-10-19 12:00:00 -0700
 repo_urls:
   - url: "https://github.com/softwarewrighter/X_eTaL"
     title: "X_eTaL"
 ---
 
-<!-- DRAFT (2026-10-19), from a conversation with an agent about GCD in X_eTaL. No series (Mike: "maybe deep dive or general").
+<!-- DRAFT (2026-10-19), from a conversation with an agent about GCD in X_eTaL. Series: Down the Rabbit-Hole #7 (after #6, the Sage Bird: the same aviary).
      X_eTaL: run with xetal at X_eTaL 87cc1031 (clean build) and X_eTaL-libraries 357849b (Numbers), shown as xetal render draws it.
      Note: xetal run prints each statement's value; the conversation's p_rint! lines printed twice for that reason, not a quirk.
      APL: GNU APL 2.0 ran the lambda; it rejects the train (SYNTAX ERROR: APL2 has no trains). The train is code_report's (Dyalog),
