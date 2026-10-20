@@ -17,9 +17,7 @@ repo_urls:
      APL: GNU APL 2.0 ran the lambda; it rejects the train (SYNTAX ERROR: APL2 has no trains). The train is code_report's (Dyalog),
      not run here. J: J 9.7.1 ran code_report's fork and the two-verb hook. Haskell, Racket, Clojure, BQN: code_report's files,
      quoted, not run here.
-     Combinators: B and S from X_eTaL main's lib/Combinators.xtl, run and linted. Step 156 (Phoenix and Psi, c:P_hi) was
-     uncommitted when this was written (previewed from a copy: 'u:m_ost 'u:l_east 'n:g_cd c:P_hi gives 2 1 3); once it lands an
-     Ed. note can show the one-bird form.
+     Phoenix: c:P_hi from X_eTaL 9e667493 (step 156), run (2 1 3) and linted with a clean build of 0b427a30.
      Lead image: Mike's block-phoenix.jpg (2026-10-19; replaced the screenshot of the five solutions), dark, not inverted. -->
 
 <img src="{{ '/assets/images/posts/block-phoenix.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
@@ -140,26 +138,19 @@ error[type-mismatch]: expected a number, found Int -> Int
   = help: this is a function still waiting for an argument: give it one, or quote it ('f_) to pass the function itself
 ```
 
-The fork is also a combinator, and X_eTaL has a library of them: Combinators, Smullyan's birds from *To Mock a Mockingbird*, built into `xetal`. The fork's bird, Curry's Phoenix, is not one of Smullyan's, so the library does not have it yet. Two of his birds make one, though: Φ c f g = S (B c f) g. The Bluebird `B` joins the GCD to the least number, which leaves a function still waiting for its other argument. The Starling `S` hands the same array to that function and to the largest:
+The fork is also a bird: Curry's Phoenix, just added to X_eTaL's Combinators library as `ᶜP̲hi` ([9e66749](https://github.com/softwarewrighter/X_eTaL/commit/9e667493)). With it the solution is Haskell's `liftM2 gcd minimum maximum`, two imports and one bird:
 
 ```text
 "n:" u̲se< "Numbers"
 "c:" u̲se< "Combinators"
-ᵘm̲ost ← 'm̲ax r̲/
-ᵘl̲east ← 'm̲in r̲/
-ᵘg̲cdLeast ← 'ᵘl̲east 'ⁿg̲cd ᶜB̲
-'ᵘm̲ost 'ᵘg̲cdLeast ᶜS̲ 2 5 6 9 10
-'ᵘm̲ost 'ᵘg̲cdLeast ᶜS̲ 7 5 6 8 3
-'ᵘm̲ost 'ᵘg̲cdLeast ᶜS̲ 3 3
+'{ 'm̲ax r̲/ ⍵ } '{ 'm̲in r̲/ ⍵ } 'ⁿg̲cd ᶜP̲hi 2 5 6 9 10
 ```
 
 ```text
 2
-1
-3
 ```
 
-This is Haskell's `liftM2 gcd minimum maximum` built from birds: two libraries, two imports, no lambda and no brackets. It is longer for two reasons. The birds take quoted functions, and a quote takes a name, a lambda or a train ([F4](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/lang-choices.md)), so the reductions need names; and without a Phoenix the fork takes two birds. The bracketed fork writes the same thing with neither.
+The braces are there because a bird takes quoted functions, and a quote touches one name, a lambda or a train. `'m̲ax r̲/` is two tokens, reduce given a function, so a lambda wraps it. Parentheses would not do: they group, but a function in parentheses is still applied, not passed.
 
 ## Why the brackets
 
