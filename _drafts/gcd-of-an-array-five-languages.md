@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Rabbit-hole #7: The Phoenix --- One Small Problem, Five Languages, and Why X_eTaL Brackets Its Forks"
+title: "Rabbit-hole #7: The Phoenix Combinator, and Why X_eTaL Brackets Its Forks"
 categories: [rabbit-hole, programming-languages, deep-dive]
 tags: [rabbit-hole, phoenix, birds, aviary, xetal, x-etal, apl, j, haskell, lisp, racket, clojure, bqn, tacit, point-free, trains, fork, combinators, leetcode, gcd]
 keywords: "LeetCode 1979, find greatest common divisor of array, gcd min max, APL train, J fork, J hook, Haskell liftM2 point-free, Racket gcd, Clojure gcd, X_eTaL train, fork combinator, S' combinator, phoenix, tacit programming"
