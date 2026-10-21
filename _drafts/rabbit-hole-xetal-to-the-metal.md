@@ -31,6 +31,9 @@ repo_urls:
      2026-10-21 later: X_eTaL-gpu main unchanged (8d5b943); step 024-opencl-binary IN PROGRESS, uncommitted (xetal-gpu binary
      FILE: CL_PROGRAM_BINARIES on the M1 Max (X1) and NVIDIA (A7); evidence docs/evidence/m1max-opencl-20261021/, handoff
      docs/m1max-opencl-handoff.md). Fill the OpenCL TODOs when pushed.
+     2026-10-21 evening: modular-fork d8aff0f1 (Metal AIR + M1 Max run), ae9d69f6 (gfx1100 AMDGCN, no AMD GPU), 8e40a980 (CPU,
+     -D XIR_CPU=true, arm64), da278226 (doc/top-down.md): Apple, AMD (Mojo half) and CPU (arm64) sections filled; walkthrough linked;
+     all links 200. AIR triple: side file says macosx15.0.0, the run's dump macosx26.0.0 (not quoted).
      TODO sections wait on: tmp/asks-2026-10-21-gpu-deep-dive-remaining.md (A1-A8 Arch, M1-M4 Mac, X1, B1); earlier list: tmp/asks-2026-10-20-rust-demo-top-down.md (items 1-10; 6 and 10 may belong in X_eTaL-gpu).
      OpenCL section: runtime calls verified in X_eTaL-gpu components/runtime/src/lib.rs; schedules/ listing; RTX 5060 Ti OpenCL results
      from docs/linux-nvidia-results.md (2026-10-14, rev 6ccdbc1, driver 615.78.08, OpenCL 3.0 CUDA, 13/13 Accel demos). Do not describe any of it as
@@ -48,6 +51,7 @@ Between a line of array code and a GPU doing it there are five or six programs, 
 | Resource | Link |
 |----------|------|
 | **The Mojo road** | [modular-fork: rust-demo](https://github.com/softwarewrighter/modular-fork/tree/experimental/rust-demo) |
+| **The whole walk** | [Top down: one X_eTaL program to five instruction sets](https://github.com/softwarewrighter/modular-fork/blob/experimental/rust-demo/doc/top-down.md), with every listing |
 | **The OpenCL road** | [X_eTaL-gpu](https://github.com/softwarewrighter/X_eTaL-gpu) |
 | **Earlier** | [AL #7: X_eTaL on GPUs](/2026/10/13/array-languages-xetal-gpu/) · [AL #10: through Mojo](/2026/10/16/array-languages-xetal-mojo-metal/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
@@ -400,15 +404,82 @@ Building it needs the CUDA Toolkit; running it needs the card and its driver, si
 
 ## ROCm: HIP and AMDGCN
 
-TODO (asks 4, 5): listings only, no AMD card installed: the generated `.hip`, `hipcc`'s AMDGCN for a named `gfx` target, and Mojo's AMDGCN for the same target if it can compile offline.
+No AMD GPU is installed here, so this section is listings only: nothing below ran. It does not need one to be written. Mojo's `--target-accelerator=gfx1100` (RDNA3, the Radeon RX 7900 family) compiled the same `.mojo` file on the Mac and wrote AMDGCN assembly ([the whole listing](https://github.com/softwarewrighter/modular-fork/blob/experimental/rust-demo/doc/evidence/amd-gfx1100-listings-20261021/accel-threshold-stage0.gfx1100.amdgcn); an excerpt, in the compiler's order):
+
+```text
+	global_load_b32 v4, v[2:3], off
+	global_load_b32 v8, v[2:3], off
+	v_add_f32_e32 v10, -4.0, v4
+	v_trunc_f32_e32 v2, v10
+	v_mul_f32_e32 v8, 0x3e800000, v8
+	v_add_f32_e32 v12, -1.0, v8
+	v_cmp_lt_f32_e32 vcc_lo, 0.5, v12
+	v_cndmask_b32_e64 v14, 0, 1.0, vcc_lo
+	v_max_f32_e32 v15, 0, v10
+	v_max_f32_e32 v14, 0, v12
+	global_store_b32 v[4:5], v12, off
+```
+
+The element-by-element arithmetic is as short as on NVIDIA: a multiply by 0.25 (`0x3e800000`), an add of -1.0, a compare and a select, two maxima, five stores. The difference is the remainder. RDNA3 has no instruction that converts a float to a 64-bit integer or back, so the one `cvt.rzi.s64.f32` of the PTX becomes a truncate, a multiply by 2^-32, a floor, a fused multiply-add and two conversions, and the way back several more: one line of X_eTaL, about thirty instructions. The listing's descriptor also records 32-wide waves, the same width as NVIDIA's warps.
+
+TODO (Arch, A1-A3): the same kernel as HIP C++, from a HIP emitter, with `hipcc --offload-arch=gfx1100 -S` beside Mojo's listing (ROCm installed on the Arch machine; no AMD card needed to compile).
 
 ## Apple Silicon: Metal and AIR
 
-TODO (ask 2): the same program through Mojo on the M1 Max: Mojo writes Apple's AIR instead of PTX, from the same `.mojo` file; the listing and the run.
+The same `.mojo` file, built on the M1 Max, does not become PTX. Mojo's compiler lowers `stage0` to AIR, Apple's intermediate representation for Metal: LLVM's own IR, with Apple's intrinsics, which `mojo build --target-accelerator=metal:4 --emit asm` writes beside the host assembly. The body still reads as the program ([the whole listing](https://github.com/softwarewrighter/modular-fork/blob/experimental/rust-demo/doc/evidence/m1max-metal-20261021/accel-threshold-stage0.air.ll); an excerpt):
+
+```llvm
+  %60 = fdiv float %57, 4.000000e+00
+  %61 = fsub contract float %60, 1.000000e+00
+  %62 = fcmp ogt float %61, 5.000000e-01
+  %63 = select i1 %62, float 1.000000e+00, float 0.000000e+00
+  %64 = fmul contract float %61, %63
+  %65 = call float @air.fmax.f32(float %61, float 0.000000e+00)
+  %66 = fsub contract float %59, 4.000000e+00
+  %67 = call float @air.fmax.f32(float %66, float 0.000000e+00)
+  %68 = call i64 @air.convert.s.i64.f.f32(float %66)
+  %69 = sdiv i64 %68, 2
+```
+
+The divide is still a divide here, and the subtract carries a `contract` flag, which lets Apple's back end fuse the two later; the AIR itself keeps them apart. The thread's position arrives as arguments to the function rather than from special registers, the maxima are calls to `@air.fmax.f32`, and the integer conversions for the remainder are `@air.convert` calls. Run on the M1 Max, the five rows match X_eTaL's exactly ([run log](https://github.com/softwarewrighter/modular-fork/blob/experimental/rust-demo/doc/evidence/m1max-metal-20261021/metal.log)). What happens to the AIR next is Apple's: the Metal driver compiles it to the GPU's own instructions when the function is first loaded, and there is no public listing of that step.
 
 ## On the CPU
 
-TODO (ask 3): the same kernel run by Mojo on the CPU, its host assembly, and the run. (The CUDA capture's CPU log is the same C++ expressions compiled for the host, a check of the emitter, not a Mojo CPU run.)
+The same file has a CPU build as well. Built with `-D XIR_CPU=true`, its host code opens a CPU device instead of the GPU, makes the same buffers and copies, and hands each stage to the CPU as a parallel range over the elements instead of a grid of threads. The body is the same function either way. On the M1 Max's CPU it gave X_eTaL's five rows exactly ([run log](https://github.com/softwarewrighter/modular-fork/blob/experimental/rust-demo/doc/evidence/m1max-cpu-20261021/cpu.log)), and its body in arm64 is a fourth spelling of the program ([the whole listing](https://github.com/softwarewrighter/modular-fork/blob/experimental/rust-demo/doc/evidence/m1max-cpu-20261021/accel-threshold-xir_run-closures.s); an excerpt):
+
+```text
+	fmov	s2, #0.25000000
+	fmov	s3, #-1.00000000
+	fmadd	s0, s0, s2, s3
+	fmov	s2, #0.50000000
+	fcmp	s0, s2
+	fmov	s3, #1.00000000
+	fcsel	s3, s3, s2, gt
+	fmul	s3, s0, s3
+	fmaxnm	s4, s0, s2
+	fmov	s5, #-4.00000000
+	fadd	s1, s1, s5
+	fmaxnm	s2, s1, s2
+	fcvtzs	x9, s1
+```
+
+Like nvcc's default PTX, LLVM's Arm back end fused the divide and the subtract into one `fmadd`. And the remainder is cheap here: Arm has 64-bit conversions (`fcvtzs`, `scvtf`) and conditional instructions in hardware, so the whole floored `m̲od` is about nine instructions.
+
+TODO (Arch, A6): the same build on the x86-64 CPU.
+
+## One line, five spellings
+
+The first line of the program, `x ← ((r̲ange 8) ÷ 4) − 1.0`, as each road wrote it:
+
+| Road | Instructions | |
+|---|---|---|
+| Mojo → PTX (NVIDIA) | `mul.rn.f32` by 0.25, `add.f32` of -1.0 | two |
+| nvcc → PTX (NVIDIA) | `fma.rn.f32 … 0.25, -1.0` | fused |
+| Mojo → AIR (Apple) | `fdiv` by 4.0, `fsub contract` 1.0 | two, fusing left to Apple's driver |
+| Mojo → AMDGCN (AMD) | `v_mul_f32` by 0.25, `v_add_f32` of -1.0 | two |
+| Mojo → arm64 (CPU) | `fmadd` with 0.25 and -1.0 | fused |
+
+Every road that ran, all but AMD's, gave the same eight numbers, because 0.25 is exact and the fused and unfused results agree; on other numbers a fused multiply-add rounds once instead of twice, and that is a choice each compiler makes for you.
 
 ## The toolchains side by side
 
@@ -417,13 +488,13 @@ TODO (ask 3): the same kernel run by Mojo on the CPU, its host assembly, and the
 | kernel language | CUDA C++ | HIP C++ | Metal Shading Language | OpenCL C | Mojo |
 | compiled by | `nvcc`, ahead of time | `hipcc` or `amdclang++`, ahead of time, for a named target (`--offload-arch=gfx942`) | `xcrun metal`, ahead of time | the driver, at run time (`clBuildProgram`) | `mojo build`, ahead of time (LLVM) |
 | what it produces | PTX and/or machine code (cubin), in a fat binary | an AMDGPU code object, in a fat binary or a `.hsaco` | AIR (LLVM bitcode), packed by `metallib` into a `.metallib` | nothing shipped but the source | PTX, AMD GPU code or AIR, embedded in the library |
-| last step to machine code | `ptxas` at build time, or the driver compiles the PTX at load | done ahead of time for the named target | Apple's driver | inside the driver | NVIDIA: a bundled PTX compiler, or the driver |
+| last step to machine code | `ptxas` at build time, or the driver compiles the PTX at load | done ahead of time for the named target | Apple's driver, when the function is first loaded (no public listing) | inside the driver | NVIDIA: a bundled PTX compiler, or the driver |
 | needed to build | CUDA Toolkit | ROCm | Xcode's Metal toolchain | nothing | Mojo |
 | needed to run | NVIDIA driver (the CUDA runtime is linked statically by default) | ROCm runtime | macOS | a driver with OpenCL | the GPU's driver (NVIDIA: 580 or later) |
 
 Sources: NVIDIA's [nvcc documentation](https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html) (the compilation trajectory; PTX "dynamically compiled by the CUDA runtime system if no binary load image is found for the current GPU"); AMD's [HIP compilers page](https://rocm.docs.amd.com/projects/HIP/en/latest/understand/compilers.html); Apple's [Metal tools](https://developer.apple.com/library/ios/documentation/Miscellaneous/Conceptual/MetalProgrammingGuide/Dev-Technique/Dev-Technique.html); Mojo's requirements in the fork (driver 580, `MODULAR_NVPTX_COMPILER_PATH`).
 
-TODO: confirm the Metal row's last step and the "needed to run" row against each vendor's current documentation; confirm Mojo's AMD output and what it needs (ask 4).
+TODO: confirm the "needed to run" row against each vendor's current documentation.
 
 ## Next: Qualcomm
 
