@@ -23,6 +23,8 @@ repo_urls:
      int-assembly.log; mangled kernel name shortened to stage0 for width), X_eTaL-gpu's threshold.cl. Mojo's driver 580 and
      MODULAR_NVPTX_COMPILER_PATH: Mojo/docs/site/requirements.mdx in the fork; kgen.compile_offload, AsyncRT_DeviceContext_*
      calls: in the fork's Mojo sources.
+     2026-10-21: rust-demo 4d6801bc (CUDA evidence, doc/cuda-blog-handoff.md): generated .mojo and .cu, nvcc PTX (default and
+     --fmad=false), SASS, RTX 5060 Ti run (0 mismatches); environment nvcc 13.4.92, driver 615.78.08. Links checked (200).
      TODO sections wait on rust-demo work: tmp/asks-2026-10-20-rust-demo-top-down.md (items 1-10; 6 and 10 may belong in X_eTaL-gpu).
      OpenCL section: runtime calls verified in X_eTaL-gpu components/runtime/src/lib.rs; schedules/ listing; RTX 5060 Ti OpenCL results
      from docs/linux-nvidia-results.md (2026-10-14, rev 6ccdbc1, driver 615.78.08, OpenCL 3.0 CUDA, 13/13 Accel demos). Do not describe any of it as
@@ -106,7 +108,50 @@ Five outputs for the five lines the program prints, and no loops: every `map` is
 
 ## XIR to Mojo
 
-TODO (ask 1): the generated `.mojo` for this program, committed in rust-demo. The emitter is a table from each XIR operation to one line of Mojo; it fuses the element-by-element operations into one kernel, `stage0`, and writes a host function, `xir_run`, exported with a C interface, that creates the buffers, copies, launches and copies back.
+rust-demo's emitter turns each XIR operation into one line of Mojo, and fuses the element-by-element operations into one GPU function, `stage0`, one thread per element. The names carry over from the XIR, `%div` becoming `v_div` ([the whole file](https://github.com/softwarewrighter/modular-fork/blob/experimental/rust-demo/doc/evidence/rtx5060-cuda-20261021/accel-threshold.mojo)):
+
+```mojo
+def stage0(
+    b_l: Pointer[Float32, ImmutAnyOrigin],
+    b_l_2: Pointer[Float32, ImmutAnyOrigin],
+    b_sub: Pointer[Float32, MutAnyOrigin],
+    b_mul: Pointer[Float32, MutAnyOrigin],
+    b_max: Pointer[Float32, MutAnyOrigin],
+    b_max_2: Pointer[Float32, MutAnyOrigin],
+    b_mul_2: Pointer[Float32, MutAnyOrigin],
+    n: Int32,
+):
+    var i = Int(block_idx.x * block_dim.x + thread_idx.x)
+    if i < Int(n):
+        var v_l = b_l[unsafe_offset=i]
+        var v_l_2 = b_l_2[unsafe_offset=i]
+        var v_div = v_l / Float32(4.0)
+        var v_sub = v_div - Float32(1.0)
+        var v_gt = Bool(v_sub > Float32(0.5))
+        var v_f = Float32(1.0) if v_gt else Float32(0.0)
+        var v_mul = v_sub * v_f
+        var v_max = max(v_sub, Float32(0.0))
+        var v_sub_2 = v_l_2 - Float32(4.0)
+        var v_max_2 = max(v_sub_2, Float32(0.0))
+        var v_mod = Float32(Int(v_sub_2) % Int(Float32(2.0)))
+        var v_mul_2 = v_sub_2 * v_mod
+        b_sub[unsafe_offset=i] = v_sub
+        b_mul[unsafe_offset=i] = v_mul
+        b_max[unsafe_offset=i] = v_max
+        b_max_2[unsafe_offset=i] = v_max_2
+        b_mul_2[unsafe_offset=i] = v_mul_2
+```
+
+Beside it the emitter writes a host function, `xir_run`, exported with a C interface so that Rust can call it from the built library. It opens the device, creates a buffer for each array, copies the inputs up, launches `stage0`, and copies the five results down. Its central calls, from the same file:
+
+```mojo
+var ctx = DeviceContext()
+var b_l = ctx.enqueue_create_buffer[DType.float32](8)
+ctx.enqueue_copy(dst_buf=b_l, src_buf=h_l)
+ctx.enqueue_function[stage0](b_l, b_l_2, b_sub, b_mul, b_max, b_max_2, b_mul_2, Int32(N), grid_dim=BLOCKS, block_dim=TPB)
+```
+
+Nothing in the file says which GPU it is for. The same text built on the Mac goes to Metal, and on the Arch machine to CUDA.
 
 ## Mojo to PTX
 
@@ -275,7 +320,77 @@ TODO (ask 10): the same demo through OpenCL on the M1 Max, committed with its ou
 
 ## CUDA C and nvcc
 
-TODO (ask 5): the generated `.cu` for the same XIR, `nvcc -ptx`'s output, a run on the RTX 5060 Ti against the expected output, and the differences from Mojo's PTX.
+The same XIR also goes to CUDA C++, through a second emitter in rust-demo with the same table, one line per operation. The work for one element is a device function, and the kernel calls it for its thread's index ([the whole file](https://github.com/softwarewrighter/modular-fork/blob/experimental/rust-demo/doc/evidence/rtx5060-cuda-20261021/accel-threshold.cu), host code included):
+
+```cpp
+HD inline void element(int i, const float* b_0, const float* b_11, float* out_0, float* out_1, float* out_2, float* out_3, float* out_4) {
+    float v_0 = b_0[i]; // %l
+    float v_1 = 4.0f; // %r
+    float v_2 = v_0 / v_1; // %div
+    float v_3 = 1.0f; // %r_2
+    float v_4 = v_2 - v_3; // %sub
+    float v_5 = 0.5f; // %r_3
+    bool v_6 = v_4 > v_5; // %gt
+    float v_7 = float(v_6); // %f
+    float v_8 = v_4 * v_7; // %mul
+    float v_9 = 0.0f; // %r_4
+    float v_10 = fmaxf(v_4, v_9); // %max
+    float v_11 = b_11[i]; // %l_2
+    float v_12 = 4.0f; // %r_5
+    float v_13 = v_11 - v_12; // %sub_2
+    float v_14 = 0.0f; // %r_6
+    float v_15 = fmaxf(v_13, v_14); // %max_2
+    float v_16 = 2.0f; // %r_7
+    float v_17 = float((static_cast<long long>(v_13) % static_cast<long long>(v_16)) + (((static_cast<long long>(v_13) % static_cast<long long>(v_16)) != 0 && ((v_13 < 0) != (v_16 < 0))) ? static_cast<long long>(v_16) : 0)); // %mod
+    float v_18 = v_13 * v_17; // %mul_2
+    out_0[i] = float(v_4);
+    out_1[i] = float(v_8);
+    out_2[i] = float(v_10);
+    out_3[i] = float(v_15);
+    out_4[i] = float(v_18);
+}
+
+extern "C" __global__ void stage0(const float* b_0, const float* b_11, float* out_0, float* out_1, float* out_2, float* out_3, float* out_4) {
+    int i = blockIdx.x * blockDim.x + threadIdx.x;
+    if (i < 8) element(i, b_0, b_11, out_0, out_1, out_2, out_3, out_4);
+}
+```
+
+The long `%mod` line is the one place C++ needs help: its `%` truncates toward zero, so the emitter adds the divisor back when the signs differ, which makes `-3 mod 2` equal 1, as X_eTaL has it. The host side is plain CUDA runtime calls: `cudaMalloc`, `cudaMemcpy`, the launch `stage0<<<1, 256>>>(...)`, `cudaDeviceSynchronize`, and `cudaMemcpy` back.
+
+`nvcc -O3 -arch=compute_120a -ptx` turns it into PTX (CUDA 13.4, "Generated by NVIDIA NVVM Compiler"). It is the same work as Mojo's PTX with one visible difference: nvcc fused the divide and the subtract into one fused multiply-add,
+
+```text
+fma.rn.f32 	%r6, %r5, 0f3E800000, 0fBF800000;
+```
+
+that is, `l × 0.25 − 1.0` in one instruction and one rounding, where Mojo's PTX has a `mul.rn.f32` and an `add.f32`. With `--fmad=false` nvcc writes them separately too, `mul.rn.f32` then `add.rn.f32` ([default](https://github.com/softwarewrighter/modular-fork/blob/experimental/rust-demo/doc/evidence/rtx5060-cuda-20261021/accel-threshold.ptx), [without FMA](https://github.com/softwarewrighter/modular-fork/blob/experimental/rust-demo/doc/evidence/rtx5060-cuda-20261021/accel-threshold-no-fma.ptx)). Counting the operations in the source and counting the instructions are different answers, and the compiler decides which.
+
+One level further down, `nvcc -arch=sm_120a -cubin` and `nvdisasm` show the card's own machine code, SASS. The same multiply-add is there as `FFMA`, the ReLUs as `FMNMX` against the zero register, and the five results as `STG` stores (an excerpt; [the whole listing](https://github.com/softwarewrighter/modular-fork/blob/experimental/rust-demo/doc/evidence/rtx5060-cuda-20261021/accel-threshold.sass)):
+
+```text
+LDG.E R6, desc[UR4][R6.64] ;
+LDG.E R3, desc[UR4][R4.64] ;
+FFMA R3, R3, R14, -1 ;
+FMNMX R21, RZ, R3, !PT ;
+STG.E desc[UR4][R14.64], R3 ;
+FMUL R17, R3, R16 ;
+STG.E desc[UR4][R10.64], R17 ;
+```
+
+Built as a native `sm_120a` program and run on the RTX 5060 Ti, it prints X_eTaL's five lines ([run log](https://github.com/softwarewrighter/modular-fork/blob/experimental/rust-demo/doc/evidence/rtx5060-cuda-20261021/cuda.log)):
+
+```text
+output %sub: -0.75 -0.5 -0.25 0 0.25 0.5 0.75 1
+output %mul: -0 -0 -0 0 0 0 0.75 1
+output %max: 0 0 0 0 0.25 0.5 0.75 1
+output %max_2: 0 0 0 0 1 2 3 4
+output %mul_2: -3 -0 -1 0 1 0 3 0
+backend: CUDA
+RESULT: 0 mismatched elements
+```
+
+Building it needs the CUDA Toolkit; running it needs the card and its driver, since nvcc links the CUDA runtime statically by default. That is the trade against Mojo's road: the toolkit on the build machine in place of Mojo, and `nvcc`'s PTX in place of LLVM's.
 
 ## ROCm: HIP and AMDGCN
 
@@ -287,7 +402,7 @@ TODO (ask 2): the same program through Mojo on the M1 Max: Mojo writes Apple's A
 
 ## On the CPU
 
-TODO (ask 3): the same kernel on the CPU, its host assembly, and the run.
+TODO (ask 3): the same kernel run by Mojo on the CPU, its host assembly, and the run. (The CUDA capture's CPU log is the same C++ expressions compiled for the host, a check of the emitter, not a Mojo CPU run.)
 
 ## The toolchains side by side
 
@@ -298,7 +413,7 @@ TODO (ask 3): the same kernel on the CPU, its host assembly, and the run.
 | what it produces | PTX and/or machine code (cubin), in a fat binary | an AMDGPU code object, in a fat binary or a `.hsaco` | AIR (LLVM bitcode), packed by `metallib` into a `.metallib` | nothing shipped but the source | PTX, AMD GPU code or AIR, embedded in the library |
 | last step to machine code | `ptxas` at build time, or the driver compiles the PTX at load | done ahead of time for the named target | Apple's driver | inside the driver | NVIDIA: a bundled PTX compiler, or the driver |
 | needed to build | CUDA Toolkit | ROCm | Xcode's Metal toolchain | nothing | Mojo |
-| needed to run | NVIDIA driver | ROCm runtime | macOS | a driver with OpenCL | the GPU's driver (NVIDIA: 580 or later) |
+| needed to run | NVIDIA driver (the CUDA runtime is linked statically by default) | ROCm runtime | macOS | a driver with OpenCL | the GPU's driver (NVIDIA: 580 or later) |
 
 Sources: NVIDIA's [nvcc documentation](https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html) (the compilation trajectory; PTX "dynamically compiled by the CUDA runtime system if no binary load image is found for the current GPU"); AMD's [HIP compilers page](https://rocm.docs.amd.com/projects/HIP/en/latest/understand/compilers.html); Apple's [Metal tools](https://developer.apple.com/library/ios/documentation/Miscellaneous/Conceptual/MetalProgrammingGuide/Dev-Technique/Dev-Technique.html); Mojo's requirements in the fork (driver 580, `MODULAR_NVPTX_COMPILER_PATH`).
 
