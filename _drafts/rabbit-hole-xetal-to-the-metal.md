@@ -28,6 +28,9 @@ repo_urls:
      2026-10-21: Mike: note a follow-on post on the Arduino UNO Q (QRB2210 MPU + STM32U585 MCU); added as "Next: Qualcomm" (a
      planned post, no link). Specs from Arduino's docs and Qualcomm's product brief; no OpenCL-on-Adreno claim (to be checked on
      the board).
+     2026-10-21 later: X_eTaL-gpu main unchanged (8d5b943); step 024-opencl-binary IN PROGRESS, uncommitted (xetal-gpu binary
+     FILE: CL_PROGRAM_BINARIES on the M1 Max (X1) and NVIDIA (A7); evidence docs/evidence/m1max-opencl-20261021/, handoff
+     docs/m1max-opencl-handoff.md). Fill the OpenCL TODOs when pushed.
      TODO sections wait on: tmp/asks-2026-10-21-gpu-deep-dive-remaining.md (A1-A8 Arch, M1-M4 Mac, X1, B1); earlier list: tmp/asks-2026-10-20-rust-demo-top-down.md (items 1-10; 6 and 10 may belong in X_eTaL-gpu).
      OpenCL section: runtime calls verified in X_eTaL-gpu components/runtime/src/lib.rs; schedules/ listing; RTX 5060 Ti OpenCL results
      from docs/linux-nvidia-results.md (2026-10-14, rev 6ccdbc1, driver 615.78.08, OpenCL 3.0 CUDA, 13/13 Accel demos). Do not describe any of it as
