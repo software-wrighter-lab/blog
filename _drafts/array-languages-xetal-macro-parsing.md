@@ -155,3 +155,10 @@ The equation macro has moved onto the library. Its own group, chain, binding, fu
 
 The integrals added to the equation macro since ([post #13](/2026/10/19/array-languages-xetal-integrals/)) read their bounds and bodies through it as well. The pipeline macro, Flow in X_eTaL-ML, has a reader of its own, written to the same rule from the start: it declares `## uses: parsed`, its tests refuse sixteen kinds of wrong text, and a round-trip test checks that what it writes back is what was written.
 
+<!-- PLANNED (Mike, 2026-10-21): HOLD publishing until this is pushed. The libraries agent is moving the other macro libraries
+     onto Parsing, one step each (X_eTaL-libraries Saga 16, steps 2-7, in its working tree when noted): Bits, Check, Csv, Dates,
+     Graphs, Polynomials; then Ranges (r:f_or<, the guide's macro), a before-and-after demo of (y[i] - p[i])^2, and a doc-site check.
+     Step 2's own words: "no behavior change ... consistency and defense-in-depth ... not a bug fix" (Bits' checks are already
+     exhaustive). When pushed: add a paragraph here naming the libraries that read through Parsing (count them on main with
+     git grep 'pa:' libs/*/src), say every golden stayed the same if the commits say so, and link Ranges and the before-and-after
+     demo once they exist. Then recheck the post's examples and publish. -->
