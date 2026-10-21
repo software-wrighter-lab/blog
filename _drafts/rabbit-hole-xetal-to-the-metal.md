@@ -197,7 +197,23 @@ $L__BB0_2:
 }
 ```
 
-TODO: annotate the body, instruction by instruction, against the XIR: the thread index and bounds check; `0f3E800000` is 0.25 (the `÷ 4` became a multiply); `0fBF800000` is -1.0; the compare and select are `ᵃᶜt̲hreshold`; the two `max.f32` are the ReLUs; the block from `cvt.rzi.s64.f32` is the floored `m̲od 2`, with the sign fix that makes -3 mod 2 equal 1; five stores for five outputs.
+Read against the XIR, the body is short. The hexadecimal constants are 32-bit floats:
+
+| PTX | What it does | From |
+|---|---|---|
+| `%ctaid.x`, `%ntid.x`, `%tid.x`, `setp.ge`, `bra` | which element this thread handles, and stop if it is past the end | one thread per element |
+| `ld.global.b32` (two) | read element *i* of the two `r̲ange 8` inputs | `%l`, `%l_2` |
+| `mul.rn.f32 … 0f3E800000` | multiply by 0.25: the `÷ 4`, turned into a multiply by its exact reciprocal | `%div` |
+| `add.f32 … 0fBF800000` | add -1.0 | `%sub`, which is `x` |
+| `setp.gt.f32 … 0f3F000000`, `selp.f32 0f3F800000, 0f00000000` | compare with 0.5, then 1.0 or 0.0 | `%gt`, `%f` |
+| `mul.f32 %r9` | `x` times that | `%mul`, `ᵃᶜt̲hreshold` |
+| `max.f32 … 0f00000000` (two) | the larger of the value and 0 | `%max`, `%max_2`, the two `ᵃᶜr̲elu` |
+| `add.f32 … 0fC0800000` | add -4.0 | `%sub_2`, which is `n` |
+| `cvt.rzi.s64.f32` through `cvt.rn.f32.s64` | `n` as a 64-bit integer, the remainder by 2 without a divide, a sign fix that makes it floored (so -3 mod 2 is 1), and back | `%mod` |
+| `mul.f32 %r14` | `n` times that | `%mul_2`, `ᵃᶜk̲eep` |
+| `st.global.b32` (five) | write the five results | the five `output` lines |
+
+Seven lines of X_eTaL became one pass in which each thread reads two numbers and writes five. The scalars of the program became constants in the instructions, and this route carries X_eTaL's integers as 32-bit floats, converting to a true integer only for the remainder.
 
 ## How Mojo uses CUDA, and goes around it
 
@@ -275,4 +291,15 @@ TODO (ask 3): the same kernel on the CPU, its host assembly, and the run.
 
 ## The toolchains side by side
 
-TODO (ask 9): for CUDA, ROCm, Metal, OpenCL and Mojo: source language, compiler, intermediate (PTX, AMDGCN code object, AIR, OpenCL C at run time), assembler, runtime, and what has to be installed, each verified against its vendor's documentation.
+| | CUDA | ROCm (HIP) | Metal | OpenCL | Mojo |
+|---|---|---|---|---|---|
+| kernel language | CUDA C++ | HIP C++ | Metal Shading Language | OpenCL C | Mojo |
+| compiled by | `nvcc`, ahead of time | `hipcc` or `amdclang++`, ahead of time, for a named target (`--offload-arch=gfx942`) | `xcrun metal`, ahead of time | the driver, at run time (`clBuildProgram`) | `mojo build`, ahead of time (LLVM) |
+| what it produces | PTX and/or machine code (cubin), in a fat binary | an AMDGPU code object, in a fat binary or a `.hsaco` | AIR (LLVM bitcode), packed by `metallib` into a `.metallib` | nothing shipped but the source | PTX, AMD GPU code or AIR, embedded in the library |
+| last step to machine code | `ptxas` at build time, or the driver compiles the PTX at load | done ahead of time for the named target | Apple's driver | inside the driver | NVIDIA: a bundled PTX compiler, or the driver |
+| needed to build | CUDA Toolkit | ROCm | Xcode's Metal toolchain | nothing | Mojo |
+| needed to run | NVIDIA driver | ROCm runtime | macOS | a driver with OpenCL | the GPU's driver (NVIDIA: 580 or later) |
+
+Sources: NVIDIA's [nvcc documentation](https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html) (the compilation trajectory; PTX "dynamically compiled by the CUDA runtime system if no binary load image is found for the current GPU"); AMD's [HIP compilers page](https://rocm.docs.amd.com/projects/HIP/en/latest/understand/compilers.html); Apple's [Metal tools](https://developer.apple.com/library/ios/documentation/Miscellaneous/Conceptual/MetalProgrammingGuide/Dev-Technique/Dev-Technique.html); Mojo's requirements in the fork (driver 580, `MODULAR_NVPTX_COMPILER_PATH`).
+
+TODO: confirm the Metal row's last step and the "needed to run" row against each vendor's current documentation; confirm Mojo's AMD output and what it needs (ask 4).
