@@ -31,6 +31,9 @@ repo_urls:
      RECHECKED 2026-10-20 on X_eTaL 0b427a30, X_eTaL-libraries 33c2d13 (Parsing unchanged since 8c5fd18), X_eTaL-ML 25901a4: demo
      output shown as run; bad-text matches tests/reject-whole.err; y[i]2 refusal; unused-argument toy; all 16 library macros
      declare ## uses:; Flow does not use pa: (own reader, ## uses: parsed, 16 reject tests, roundtrip test); integrals use pa:.
+     2026-10-21: The library section rewritten (Mike: deeper, simpler, good and bad inputs): every example run on X_eTaL 2bdc6a57 and
+     X_eTaL-libraries dcb6917 through tests/Probe.xtlm. PENDING: Saga 16 (parsing-guide): libs/Parsing/docs/guide.md (step 1,
+     uncommitted at the time), libs/Ranges (step 2), a before-and-after demo (step 3). Link each only once it is pushed.
      Lead image: Mike's block-composer-stick.jpg (2026-10-17), fourth version (11:58), type set upside down; monochrome, inverts in dark mode. -->
 
 <figure style="float: left; width: 205px; margin: 0.8em 2em 1em 0.5em;">
@@ -68,31 +71,50 @@ Until now each macro library wrote those pieces itself. That is where a silent w
 
 ## The library
 
-`Parsing`, in X_eTaL-libraries, imported with `"pa:" u̲se< "Parsing"`, is an ordinary library of functions that macro libraries call while they read their text. It was generalized from the equation macro's own helpers, and every piece of it either uses all of its text or refuses the call, under the macro's own error code and at the place the macro names, with the text it could not use:
+`Parsing`, in X_eTaL-libraries, imported with `"pa:" u̲se< "Parsing"`, is an ordinary library of functions that a macro calls while it reads its text. It was generalized from the equation macro's own helpers, and it has one rule: every piece either uses all of the text it is given, or stops the compile with an error that names the text. It has four kinds of tools.
 
-- **Pieces of text:** cut at a separator, but only at the top level, outside parentheses, brackets and braces; find the top-level operators of a chain; tell whether a text is one parenthesized group, which means its opening parenthesis closes at the last character and nowhere sooner, the very check the equation reader lacked.
-- **Kinds of text:** a name, a number, a word with its namespace, a function applied, `f(...)`.
-- **Parsers:** a chain and its operators, with a leading minus; a binding such as `sum i:=0..n - 1`; a function applied and its arguments; a reference, `A[i,j]`, as a name and its indices.
-- **Refusals:** a closed alphabet, so a character the notation does not use is refused by name; and a whole-text check, which writes a parse back and compares it with the text.
-
-The library's demo takes the right side of a dense layer with its bias apart, piece by piece, as a macro does before it writes any code:
+**Cutting text, bracket-aware.** These never fail. `ch ᵖᵃs̲plit t` cuts at a separator, but only outside parentheses, brackets and braces, so a `+` inside `(a+b)` or `c[i+1]` is left alone:
 
 ```text
-call ← "(sum j:=0..M-1 | W[i,j] * x[j]) + b[i]"
-"+" ᵖᵃs̲plit call
-ᵖᵃg̲roup? d̲isclose f̲irst "+" ᵖᵃs̲plit call
+"+" ᵖᵃs̲plit "(a+b) + c[i+1]"
 ```
 
 ```text
-┌→─────────────────────────────────────────┐
-│ ┌→──────────────────────────────┐ ┌→───┐ │
-│ │(sum j:=0..M-1 | W[i,j] * x[j])│ │b[i]│ │
-│ └───────────────────────────────┘ └────┘ │
-└∊─────────────────────────────────────────┘
-1
+┌→─────────────────┐
+│ ┌→────┐ ┌→─────┐ │
+│ │(a+b)│ │c[i+1]│ │
+│ └─────┘ └──────┘ │
+└∊─────────────────┘
 ```
 
-The split finds the one `+` at the top level, outside the parentheses and brackets, and gives the two terms, `(sum j:=0..M-1 | W[i,j] * x[j])` and `b[i]`; the first term is one group, so its inside can be read as a sum.
+`ᵖᵃg̲roup?` asks whether a text is exactly one parenthesized group, opening with `(` and closing at its last character and nowhere sooner: `"(a (b) c)"` is one group, and `"(a)(b)"` is not, which is the very check the equation reader lacked.
+
+**Recognizing kinds of text.** Questions answered 1 or 0: a name, a number (`"0.5"` is one, `"2."` is not), a word with its namespace, a function applied.
+
+**Parsers that take a piece apart or refuse.** Each takes a tag, `where`, that says which error code to refuse with and where to point. The library's tests wrap each one in a small macro, so its result and its refusals can be seen:
+
+| Parser | Good input | Gives | Bad input | Refusal |
+|---|---|---|---|---|
+| a chain, `ᵖᵃp̲arts` | `-a + b - c` | `a`, `b`, `c`; operators `+-`; opens with a minus | `a + - b` | an operator needs a value on each side |
+| a binding, `ᵖᵃb̲inding` | `sum i:=0..n` | `sum`, `i`, `0`, `n` | `sum i=0..n` | a binding is a word, an index, `:=` and a range low..high |
+| a function applied, `ᵖᵃa̲pplied` | `exp(z[i], 2)` | `exp`; `z[i]`, `2` | `exp(z[i]) + 1` | a function applied is a name, then its arguments in parentheses that end the text |
+| a reference, `ᵖᵃr̲eference` | `W[i,j]` | `W`; `i`, `j` | `W[i,j]2` | an array reference ends with its closing bracket; nothing follows it |
+
+Every refusal names the text it could not use, so the user sees what was wrong, not only that something was.
+
+**Guards.** `ᵖᵃc̲haracters` refuses any character outside the notation's alphabet and names it (`not a character of this notation: 2`); `ᵖᵃr̲equire` refuses unless a condition holds; and `ᵖᵃw̲hole` is the safety net, below.
+
+This is how a macro uses it, the reference parser's test macro in full:
+
+```text
+⍝│ uses: parsed
+ᵐr̲eference< ← { @ t →
+  (name, ix) ← "bad-text right" ᵖᵃr̲eference t
+  "\"" c̲at name c̲at ": " c̲at ("|" ᵗj̲oin ix) c̲at "\""
+}
+```
+
+The tag `"bad-text right"` says: refuse with `error[bad-text]`, pointing at the call's right side. A real notation passes its own code, `"bad-equation right"` in the equation library, so its users see the notation's own errors.
 
 ## What it refuses
 
