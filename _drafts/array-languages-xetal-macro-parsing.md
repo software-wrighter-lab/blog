@@ -32,7 +32,9 @@ repo_urls:
      output shown as run; bad-text matches tests/reject-whole.err; y[i]2 refusal; unused-argument toy; all 16 library macros
      declare ## uses:; Flow does not use pa: (own reader, ## uses: parsed, 16 reject tests, roundtrip test); integrals use pa:.
      2026-10-21: The library section rewritten (Mike: deeper, simpler, good and bad inputs): every example run on X_eTaL 2bdc6a57 and
-     X_eTaL-libraries dcb6917 through tests/Probe.xtlm. Saga 16 step 1 PUBLISHED: guide.md (7c6f0f9), linked
+     X_eTaL-libraries dcb6917 through tests/Probe.xtlm. Saga 16 steps 2-7 PUBLISHED (1587686 Bits, c916a49 Check, 404066f Csv,
+     3d79475 Graphs migrated, tests unchanged per each commit; 0b02e8d Dates, 4d62eec Polynomials surveyed, left; reasons from the
+     commit messages); pa: users on main counted: Bits Check Csv Equations Graphs Tags. Saga 16 step 1 PUBLISHED: guide.md (7c6f0f9), linked
      (GitHub page verified 200, title checked). PENDING: libs/Ranges (step 2; the guide names r:f_or<), the before-and-after demo
      (step 3). Link each only once it is pushed.
      Lead image: Mike's block-composer-stick.jpg (2026-10-17), fourth version (11:58), type set upside down; monochrome, inverts in dark mode. -->
@@ -155,10 +157,6 @@ The equation macro has moved onto the library. Its own group, chain, binding, fu
 
 The integrals added to the equation macro since ([post #13](/2026/10/19/array-languages-xetal-integrals/)) read their bounds and bodies through it as well. The pipeline macro, Flow in X_eTaL-ML, has a reader of its own, written to the same rule from the start: it declares `## uses: parsed`, its tests refuse sixteen kinds of wrong text, and a round-trip test checks that what it writes back is what was written.
 
-<!-- PLANNED (Mike, 2026-10-21): HOLD publishing until this is pushed. The libraries agent is moving the other macro libraries
-     onto Parsing, one step each (X_eTaL-libraries Saga 16, steps 2-7, in its working tree when noted): Bits, Check, Csv, Dates,
-     Graphs, Polynomials; then Ranges (r:f_or<, the guide's macro), a before-and-after demo of (y[i] - p[i])^2, and a doc-site check.
-     Step 2's own words: "no behavior change ... consistency and defense-in-depth ... not a bug fix" (Bits' checks are already
-     exhaustive). When pushed: add a paragraph here naming the libraries that read through Parsing (count them on main with
-     git grep 'pa:' libs/*/src), say every golden stayed the same if the commits say so, and link Ranges and the before-and-after
-     demo once they exist. Then recheck the post's examples and publish. -->
+Since then the library's own authors have used it on the rest of their macro libraries, as dogfooding rather than repair. Four more now read their text through Parsing: Bits, Check, Csv and Graphs, each taking the library's name check or its position search in place of its own copy, and each library's tests came out unchanged. Two of them, Check and Graphs, had been splitting with the Strings library's split, which does not know about brackets; their inputs never hold one, so it fixed nothing today, but now every list-splitting macro uses the same tool.
+
+Two were looked at and left alone, and the reasons are the useful part. Dates checks its characters with an error of its own, `... is not a date: write it yyyy-mm-dd`, and Parsing's character check would have replaced it with a generic one; better wording beats sharing a function. Polynomials reads numbers such as `2.` and `.5`, which Parsing's number check refuses, so moving it would have changed what the notation accepts. A shared tool is worth using where it fits, and not worth forcing where it does not.
