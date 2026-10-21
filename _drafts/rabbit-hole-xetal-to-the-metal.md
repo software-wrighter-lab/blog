@@ -23,7 +23,9 @@ repo_urls:
      int-assembly.log; mangled kernel name shortened to stage0 for width), X_eTaL-gpu's threshold.cl. Mojo's driver 580 and
      MODULAR_NVPTX_COMPILER_PATH: Mojo/docs/site/requirements.mdx in the fork; kgen.compile_offload, AsyncRT_DeviceContext_*
      calls: in the fork's Mojo sources.
-     TODO sections wait on rust-demo work: tmp/asks-2026-10-20-rust-demo-top-down.md (items 1-9). Do not describe any of it as
+     TODO sections wait on rust-demo work: tmp/asks-2026-10-20-rust-demo-top-down.md (items 1-10; 6 and 10 may belong in X_eTaL-gpu).
+     OpenCL section: runtime calls verified in X_eTaL-gpu components/runtime/src/lib.rs; schedules/ listing; RTX 5060 Ti OpenCL results
+     from docs/linux-nvidia-results.md (2026-10-14, rev 6ccdbc1, driver 615.78.08, OpenCL 3.0 CUDA, 13/13 Accel demos). Do not describe any of it as
      built until its commit exists. Listings may be long: summarize here, link the full listings and doc/top-down.md.
      Same date as AL #16 (different series); date tentative. Lead image: PLACEHOLDER; Mike will supply one. -->
 
@@ -233,9 +235,27 @@ __kernel void k0(__global const float* b_l, __global const long* b_l_2, __global
 }
 ```
 
-The program ships this text, and the driver compiles it at run time (`clBuildProgram`): Apple's OpenCL on the Mac, NVIDIA's `libnvidia-opencl` on Linux, which comes with the display driver, not the toolkit.
+It is OpenCL C, a dialect of C99, not C++. The emitter takes a per-device schedule from X_eTaL-gpu's `schedules/` directory (`apple-m1-max`, `nvidia-rtx5060-ti`, `nvidia-modern`, `nvidia-legacy`, and f64 variants), which sets the work-group size, the tile size, and whether floats are 32 or 64 bits.
 
-TODO (ask 6): the PTX NVIDIA's OpenCL compiler made from this, beside Mojo's.
+Nothing compiles this file ahead of time. The program ships the text, and X_eTaL-gpu's runtime, through the `opencl3` crate, hands it to whatever driver owns the GPU:
+
+| Step | `opencl3` call | OpenCL API |
+|---|---|---|
+| find the GPU | `get_platforms`, `Context::from_device` | `clGetPlatformIDs`, `clCreateContext` |
+| a queue | `CommandQueue::create_default` | `clCreateCommandQueue` |
+| compile | `Program::create_and_build_from_source` | `clCreateProgramWithSource`, `clBuildProgram` |
+| a kernel | `Kernel::create` | `clCreateKernel` |
+| data in | `enqueue_write_buffer` | `clEnqueueWriteBuffer` |
+| run | set the arguments, enqueue | `clSetKernelArg`, `clEnqueueNDRangeKernel` |
+| data out | `enqueue_read_buffer` | `clEnqueueReadBuffer` |
+
+`clBuildProgram` is where the compiling happens, inside the vendor's driver, at run time. On Linux that is NVIDIA's OpenCL, which ships with the display driver, not the CUDA Toolkit: it compiles OpenCL C to PTX and the PTX to the card's machine code, with no `nvcc` anywhere. On the Mac it is Apple's OpenCL 1.2, deprecated since 2018 and still present, whose intermediate steps Apple does not document. On October 14 all thirteen Accel demos, this one among them, passed through OpenCL on the RTX 5060 Ti (the device reports itself as "OpenCL 3.0 CUDA", driver 615.78.08), each lowered from its source and checked against the evaluator's output on the XIR interpreter and on the GPU at two tile sizes ([results](https://github.com/softwarewrighter/X_eTaL-gpu/blob/main/docs/linux-nvidia-results.md)).
+
+That is the difference between the two roads. Mojo compiles to PTX or AIR when the library is built, so its PTX can be printed on any machine and shipped inside the library; the driver only finishes and launches it. OpenCL compiles when the program runs, so its PTX exists only inside NVIDIA's driver, unless the program asks for it back.
+
+TODO (ask 6): the PTX NVIDIA's OpenCL compiler made from this, read back with `clGetProgramInfo(CL_PROGRAM_BINARIES)`, beside Mojo's.
+
+TODO (ask 10): the same demo through OpenCL on the M1 Max, committed with its output (no committed threshold run on the Mac yet), and what Apple's `CL_PROGRAM_BINARIES` returns, if anything readable.
 
 ## CUDA C and nvcc
 
