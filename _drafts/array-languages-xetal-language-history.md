@@ -19,6 +19,10 @@ repo_urls:
      (X_eTaL main f027bb74); the research-era Life rule is quoted as it was typed in docs/research.txt (historical, never runnable).
      Follows #15 (10/21); links only to posts already published (#1-#11); later posts are "planned". RECHECK history.md before
      publishing: the user said more work is coming.
+     RECHECKED 2026-10-21 on X_eTaL 72637325: history.md unchanged since 51b9de49 (10-18). Register now D1-D183 (body updated);
+     reversal row added for D182 (_u supersedes D140's no opt-out spelling); notations drawn (D178) added to the arc; integrals
+     dropped from the open questions (built, AL #13); a_ssert< (plan.md) and Saga 29 (under review) and Saga 31 (planned) still open.
+     Commit and PR counts not used in the body (gh shows 137 merged PRs now vs history.md's 143: counted differently).
      Lead image: Mike's block-changed-mind.jpg (2026-10-19), dark background as is, not inverted. -->
 
 <img src="{{ '/assets/images/posts/block-changed-mind.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
@@ -46,7 +50,7 @@ X_eTaL is three weeks old, and it has already changed its mind about its own syn
 
 The way the language is decided explains the way it changed.
 
-- **One question at a time.** On the first day the language was settled as fifty numbered questions and six review items, each put to me and recorded. Every later change has gone the same way: a proposal, often with alternatives, my choice, an entry in `lang-choices.md`, and a row in the decisions register. The register grew from about 20 entries on the first day to 174 three weeks later.
+- **One question at a time.** On the first day the language was settled as fifty numbered questions and six review items, each put to me and recorded. Every later change has gone the same way: a proposal, often with alternatives, my choice, an entry in `lang-choices.md`, and a row in the decisions register. The register grew from about 20 entries on the first day to 183 by October 21.
 - **Tests define the language.** A syntax change starts with a failing test, and the decision is written into the design in the same commit.
 - **Ambiguity is an error.** The parser never chooses between two readings, and what a token is comes from the token alone, never from types or context. This rule has decided more syntax questions than any other.
 - **Dogfooding files the requests.** From the first week, the sibling repositories, demos, games, libraries, extensions and ML, have filed asks against the core, each with a code, and many decisions cite one.
@@ -93,6 +97,7 @@ The language changes its mind in the open: each reversal is recorded with its ea
 | 10-12 | automatic macro hygiene | hygiene by choice, with fresh names on request | the renaming guessed at bytes and broke macros that bind a name on purpose |
 | 10-17 | `e:q_<` and other short names | plain names, `ᵉe̲q<` | a name must read under any alias |
 | 10-17 | a raw code string, `cr"..."`, proposed | `c"..."` and `c#"..."#` only | one level of code is enough |
+| 10-20 | an unused parameter named, with a lint directive to silence its warning | `_u`, drawn ▁, a parameter nothing can read | a required but ignored argument had no spelling; the directive said the warning was wrong, not that nothing was there |
 
 ## The newest arc: notation inside strings
 
@@ -109,7 +114,8 @@ The last week has been about one problem: mathematical and pipeline notation tha
   ```
 
 - **Two pipeline tokens,** `|>` drawn `▷` between stages and `$` drawn `▹` for a stage's label, each a token of its own that is an error in ordinary code.
+- **Notations drawn by their library.** A macro side can be declared a notation, and its library can say how to draw it, so an equation written as a string is shown as typeset math wherever the program is drawn.
 
 ## What it does not settle
 
-The open questions are written down too: records, enums and matching; complex numbers, which the FFT is waiting for; a data notation for X_eTaL values; integrals, now being built as a library; and whether `a̲ssert<` should stop the program, as Rust's `assert!` does. Each will be decided the same way: one question, with the reason recorded and a test to hold it.
+The open questions are written down too: records, enums and matching; complex numbers, which the FFT is waiting for; a data notation for X_eTaL values; and whether `a̲ssert<` should stop the program, as Rust's `assert!` does. Each will be decided the same way: one question, with the reason recorded and a test to hold it.
