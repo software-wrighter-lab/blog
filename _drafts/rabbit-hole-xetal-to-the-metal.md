@@ -25,6 +25,9 @@ repo_urls:
      calls: in the fork's Mojo sources.
      2026-10-21: rust-demo 4d6801bc (CUDA evidence, doc/cuda-blog-handoff.md): generated .mojo and .cu, nvcc PTX (default and
      --fmad=false), SASS, RTX 5060 Ti run (0 mismatches); environment nvcc 13.4.92, driver 615.78.08. Links checked (200).
+     2026-10-21: Mike: note a follow-on post on the Arduino UNO Q (QRB2210 MPU + STM32U585 MCU); added as "Next: Qualcomm" (a
+     planned post, no link). Specs from Arduino's docs and Qualcomm's product brief; no OpenCL-on-Adreno claim (to be checked on
+     the board).
      TODO sections wait on rust-demo work: tmp/asks-2026-10-20-rust-demo-top-down.md (items 1-10; 6 and 10 may belong in X_eTaL-gpu).
      OpenCL section: runtime calls verified in X_eTaL-gpu components/runtime/src/lib.rs; schedules/ listing; RTX 5060 Ti OpenCL results
      from docs/linux-nvidia-results.md (2026-10-14, rev 6ccdbc1, driver 615.78.08, OpenCL 3.0 CUDA, 13/13 Accel demos). Do not describe any of it as
@@ -418,3 +421,7 @@ TODO (ask 3): the same kernel run by Mojo on the CPU, its host assembly, and the
 Sources: NVIDIA's [nvcc documentation](https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html) (the compilation trajectory; PTX "dynamically compiled by the CUDA runtime system if no binary load image is found for the current GPU"); AMD's [HIP compilers page](https://rocm.docs.amd.com/projects/HIP/en/latest/understand/compilers.html); Apple's [Metal tools](https://developer.apple.com/library/ios/documentation/Miscellaneous/Conceptual/MetalProgrammingGuide/Dev-Technique/Dev-Technique.html); Mojo's requirements in the fork (driver 580, `MODULAR_NVPTX_COMPILER_PATH`).
 
 TODO: confirm the Metal row's last step and the "needed to run" row against each vendor's current documentation; confirm Mojo's AMD output and what it needs (ask 4).
+
+## Next: Qualcomm
+
+Apple Silicon and NVIDIA are two families. A planned post adds a third, Qualcomm, on a small board, the Arduino UNO Q (2 GB, ABX00162). It is a hybrid of two chips: a Qualcomm Dragonwing QRB2210, with four Arm Cortex-A53 cores running Debian Linux, an Adreno 702 GPU and a Hexagon DSP; and an ST STM32U585 microcontroller, an Arm Cortex-M33 running Zephyr, for the board's real-time pins. That is two instruction sets, 64-bit Armv8-A and 32-bit Armv8-M, and one more GPU. The plan is to try the same program on the Cortex-A53 through X_eTaL and Mojo, then look for a road onto the Adreno GPU, which Mojo does not target, through OpenCL if the board's Linux has a driver for it ([Arduino's UNO Q documentation](https://docs.arduino.cc/hardware/uno-q), [Qualcomm's QRB2210 product brief](https://docs.qualcomm.com/doc/87-61720-1/87-61720-1_REV_D_Qualcomm_Dragonwing_QRB2210_Processor_Product_Brief.pdf)).
