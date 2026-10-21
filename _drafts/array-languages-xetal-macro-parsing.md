@@ -35,7 +35,7 @@ repo_urls:
      X_eTaL-libraries dcb6917 through tests/Probe.xtlm. Saga 16 steps 2-7 PUBLISHED (1587686 Bits, c916a49 Check, 404066f Csv,
      3d79475 Graphs migrated, tests unchanged per each commit; 0b02e8d Dates, 4d62eec Polynomials surveyed, left; reasons from the
      commit messages); pa: users on main counted: Bits Check Csv Equations Graphs Tags. Saga 16 step 1 PUBLISHED: guide.md (7c6f0f9), linked
-     (GitHub page verified 200, title checked). PENDING: libs/Ranges (step 2; the guide names r:f_or<), the before-and-after demo
+     (GitHub page verified 200, title checked). PUBLISHED: libs/Ranges (fe54d30, rg:f_or<), linked; PENDING:, the before-and-after demo
      (step 3). Link each only once it is pushed.
      Lead image: Mike's block-composer-stick.jpg (2026-10-17), fourth version (11:58), type set upside down; monochrome, inverts in dark mode. -->
 
@@ -120,7 +120,7 @@ This is how a macro uses it, the reference parser's test macro in full:
 
 The tag `"bad-text right"` says: refuse with `error[bad-text]`, pointing at the call's right side. A real notation passes its own code, `"bad-equation right"` in the equation library, so its users see the notation's own errors.
 
-To see all of it used together, the library's [guide](https://github.com/softwarewrighter/X_eTaL-libraries/blob/main/libs/Parsing/docs/guide.md) builds one small notation macro from nothing, `for<`, which reads stepped ranges written the way a paper writes them, `for i:=0..10 by 2`. It reaches for each kind of tool in the order a real macro needs them, cutting the list, reading each binding, checking the optional step, and finally writing the whole parse back to prove nothing was dropped, and it explains the `where` tag in a section of its own.
+To see all of it used together, the library's [guide](https://github.com/softwarewrighter/X_eTaL-libraries/blob/main/libs/Parsing/docs/guide.md) builds one small notation macro from nothing, `for<`, which reads stepped ranges written the way a paper writes them, `for i:=0..10 by 2`. It reaches for each kind of tool in the order a real macro needs them, cutting the list, reading each binding, checking the optional step, and finally writing the whole parse back to prove nothing was dropped, and it explains the `where` tag in a section of its own. The finished macro is now a small library of its own, [Ranges](https://github.com/softwarewrighter/X_eTaL-libraries/tree/main/libs/Ranges), whose one macro is `rg:f_or<`.
 
 ## What it refuses
 
