@@ -160,3 +160,30 @@ The integrals added to the equation macro since ([post #13](/2026/10/19/array-la
 Since then the library's own authors have used it on the rest of their macro libraries, as dogfooding rather than repair. Four more now read their text through Parsing: Bits, Check, Csv and Graphs, each taking the library's name check or its position search in place of its own copy, and each library's tests came out unchanged. Two of them, Check and Graphs, had been splitting with the Strings library's split, which does not know about brackets; their inputs never hold one, so it fixed nothing today, but now every list-splitting macro uses the same tool.
 
 Two were looked at and left alone, and the reasons are the useful part. Dates checks its characters with an error of its own, `... is not a date: write it yyyy-mm-dd`, and Parsing's character check would have replaced it with a generic one; better wording beats sharing a function. Polynomials reads numbers such as `2.` and `.5`, which Parsing's number check refuses, so moving it would have changed what the notation accepts. A shared tool is worth using where it fits, and not worth forcing where it does not.
+
+The library also carries the bug that started all of this as a [demo](https://github.com/softwarewrighter/X_eTaL-libraries/blob/main/libs/Parsing/demos/before-after.xtl), the check any reader might write first beside the library's:
+
+```text
+term ← "(y - p)^2"
+ᵘn̲aiveGroup? ← { t → ("(" m̲atch 1 t̲ake t) ∧ 0 < '+ r̲/ 0 + t m̲ember? ")" }
+ᵘn̲aiveGroup? term
+ᵖᵃg̲roup? term
+y ← 5.0
+p ← 3.0
+y − p
+(y − p) ^ 2
+```
+
+```text
+1
+0
+2.0
+4.0
+```
+
+The naive check sees an opening parenthesis and a closing one somewhere and says the text is a group; `ᵖᵃg̲roup?` says it is not, because the closing parenthesis is not the last character. Read the first way, the term is `y - p`, 2.0; it is `(y - p)^2`, 4.0. The demo also runs in the libraries' [cross-reference site](https://softwarewrighter.github.io/X_eTaL-libraries/doc/), with the Ranges library and its demo.
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/21: Added the Parsing library's before-and-after demo of the bug that started this post, with its output, and a link to the libraries' cross-reference site, both published after this post (X_eTaL-libraries <a href="https://github.com/softwarewrighter/X_eTaL-libraries/commit/d9d157e">d9d157e</a>, <a href="https://github.com/softwarewrighter/X_eTaL-libraries/commit/5e6ba9c">5e6ba9c</a>); this post's <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-21-array-languages-xetal-macro-parsing.md">history</a>.]</em></p>
+
