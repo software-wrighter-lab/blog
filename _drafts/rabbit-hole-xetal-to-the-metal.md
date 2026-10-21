@@ -27,9 +27,9 @@ repo_urls:
      OpenCL section: runtime calls verified in X_eTaL-gpu components/runtime/src/lib.rs; schedules/ listing; RTX 5060 Ti OpenCL results
      from docs/linux-nvidia-results.md (2026-10-14, rev 6ccdbc1, driver 615.78.08, OpenCL 3.0 CUDA, 13/13 Accel demos). Do not describe any of it as
      built until its commit exists. Listings may be long: summarize here, link the full listings and doc/top-down.md.
-     Same date as AL #16 (different series); date tentative. Lead image: PLACEHOLDER; Mike will supply one. -->
+     Same date as AL #16 (different series); date tentative. Lead image: Mike's block-down-gpu-hole.jpg (2026-10-21), dark, not inverted. -->
 
-<img src="{{ '/assets/images/posts/placeholder-rabbit-hole-xetal-to-the-metal.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-down-gpu-hole.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
 Between a line of array code and a GPU doing it there are five or six programs, each turning one language into a lower one, and most of them are invisible. This post makes them visible for one small program. It follows a threshold and two ReLUs, written in X_eTaL, down through every level to the instructions a GPU runs, by Mojo, and then down the other roads: OpenCL, CUDA C, HIP for AMD, and Metal.
 
