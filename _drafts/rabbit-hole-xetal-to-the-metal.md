@@ -4,7 +4,7 @@ title: "Rabbit-hole #8: From X_eTaL to the Metal, One Kernel Down Every GPU Tool
 categories: [rabbit-hole, programming-languages, deep-dive]
 tags: [rabbit-hole, xetal, x-etal, mojo, gpu, cuda, ptx, sass, nvcc, rocm, hip, amdgcn, metal, air, opencl, llvm, compilers, array-languages]
 keywords: "X_eTaL to PTX, Mojo GPU compilation, kgen.compile_offload, LLVM NVPTX, CUDA without nvcc, PTX walkthrough, ROCm HIP AMDGCN, Metal AIR, OpenCL C driver compile, CUDA vs ROCm vs Metal vs OpenCL, GPU toolchain comparison, array language GPU"
-abstract: "One small ML array program, a threshold and two ReLUs written in X_eTaL, followed all the way down: X_eTaL source to its Core, to an accelerator IR, to Mojo, to the PTX NVIDIA's driver finishes into machine code, and on to the other roads, OpenCL C compiled by the driver at run time, CUDA C through nvcc, HIP through hipcc for AMD, and Metal's AIR on Apple Silicon. What each toolchain needs installed, what it hands to the next, and where Mojo uses CUDA and where it goes around it."
+abstract: "One small ML array program, a threshold and two ReLUs written in X_eTaL, followed all the way down: X_eTaL source to its Core, to an accelerator IR, to Mojo, to the PTX NVIDIA's driver finishes into machine code, to Apple's AIR and AMD's GPU code from the same Mojo file, and on to the other roads, CUDA C++ through nvcc and OpenCL C compiled by the driver at run time. What each toolchain needs installed, what it hands to the next, and where Mojo uses CUDA and where it goes around it."
 series: "Down the Rabbit-Hole"
 series_part: 8
 date: 2026-10-22 00:15:00 -0700
@@ -42,7 +42,7 @@ repo_urls:
 
 <img src="{{ '/assets/images/posts/block-down-gpu-hole.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
-Between a line of array code and a GPU doing it there are five or six programs, each turning one language into a lower one, and most of them are invisible. This post makes them visible for one small program. It follows a threshold and two ReLUs, written in X_eTaL, down through every level to the instructions a GPU runs, by Mojo, and then down the other roads: OpenCL, CUDA C, HIP for AMD, and Metal.
+Between a line of array code and a GPU doing it there are five or six programs, each turning one language into a lower one, and most of them are invisible. This post makes them visible for one small program. It follows a threshold and two ReLUs, written in X_eTaL, down through every level to the instructions a GPU runs, by Mojo, onto NVIDIA, Apple and AMD, and then down the other roads: CUDA C++ and OpenCL.
 
 <!--more-->
 
@@ -402,7 +402,7 @@ RESULT: 0 mismatched elements
 
 Building it needs the CUDA Toolkit; running it needs the card and its driver, since nvcc links the CUDA runtime statically by default. That is the trade against Mojo's road: the toolkit on the build machine in place of Mojo, and `nvcc`'s PTX in place of LLVM's.
 
-## ROCm: HIP and AMDGCN
+## AMD: AMDGCN, through Mojo
 
 No AMD GPU is installed here, so this section is listings only: nothing below ran. It does not need one to be written. Mojo's `--target-accelerator=gfx1100` (RDNA3, the Radeon RX 7900 family) compiled the same `.mojo` file on the Mac and wrote AMDGCN assembly ([the whole listing](https://github.com/softwarewrighter/modular-fork/blob/experimental/rust-demo/doc/evidence/amd-gfx1100-listings-20261021/accel-threshold-stage0.gfx1100.amdgcn); an excerpt, in the compiler's order):
 
@@ -422,7 +422,7 @@ No AMD GPU is installed here, so this section is listings only: nothing below ra
 
 The element-by-element arithmetic is as short as on NVIDIA: a multiply by 0.25 (`0x3e800000`), an add of -1.0, a compare and a select, two maxima, five stores. The difference is the remainder. RDNA3 has no instruction that converts a float to a 64-bit integer or back, so the one `cvt.rzi.s64.f32` of the PTX becomes a truncate, a multiply by 2^-32, a floor, a fused multiply-add and two conversions, and the way back several more: one line of X_eTaL, about thirty instructions. The listing's descriptor also records 32-wide waves, the same width as NVIDIA's warps.
 
-TODO (Arch, A1-A3): the same kernel as HIP C++, from a HIP emitter, with `hipcc --offload-arch=gfx1100 -S` beside Mojo's listing (ROCm installed on the Arch machine; no AMD card needed to compile).
+This is the one AMD example in the post. The C++ road onto AMD, HIP compiled with `hipcc`, would be the counterpart of the CUDA C++ section above; it is not shown here.
 
 ## Apple Silicon: Metal and AIR
 
