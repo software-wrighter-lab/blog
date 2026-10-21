@@ -32,8 +32,9 @@ repo_urls:
      output shown as run; bad-text matches tests/reject-whole.err; y[i]2 refusal; unused-argument toy; all 16 library macros
      declare ## uses:; Flow does not use pa: (own reader, ## uses: parsed, 16 reject tests, roundtrip test); integrals use pa:.
      2026-10-21: The library section rewritten (Mike: deeper, simpler, good and bad inputs): every example run on X_eTaL 2bdc6a57 and
-     X_eTaL-libraries dcb6917 through tests/Probe.xtlm. PENDING: Saga 16 (parsing-guide): libs/Parsing/docs/guide.md (step 1,
-     uncommitted at the time), libs/Ranges (step 2), a before-and-after demo (step 3). Link each only once it is pushed.
+     X_eTaL-libraries dcb6917 through tests/Probe.xtlm. Saga 16 step 1 PUBLISHED: guide.md (7c6f0f9), linked
+     (GitHub page verified 200, title checked). PENDING: libs/Ranges (step 2; the guide names r:f_or<), the before-and-after demo
+     (step 3). Link each only once it is pushed.
      Lead image: Mike's block-composer-stick.jpg (2026-10-17), fourth version (11:58), type set upside down; monochrome, inverts in dark mode. -->
 
 <figure style="float: left; width: 205px; margin: 0.8em 2em 1em 0.5em;">
@@ -54,6 +55,7 @@ A macro in X_eTaL is a function from the text written at its call to the code th
 | Resource | Link |
 |----------|------|
 | **The library** | [Parsing](https://github.com/softwarewrighter/X_eTaL-libraries/tree/main/libs/Parsing) in X_eTaL-libraries · [its reference](https://github.com/softwarewrighter/X_eTaL-libraries/blob/main/libs/Parsing/docs/README.md) |
+| **The guide** | [Writing a notation macro with Parsing](https://github.com/softwarewrighter/X_eTaL-libraries/blob/main/libs/Parsing/docs/guide.md) --- one macro built step by step, each tool in turn |
 | **The language** | [X_eTaL](https://github.com/softwarewrighter/X_eTaL) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
@@ -115,6 +117,8 @@ This is how a macro uses it, the reference parser's test macro in full:
 ```
 
 The tag `"bad-text right"` says: refuse with `error[bad-text]`, pointing at the call's right side. A real notation passes its own code, `"bad-equation right"` in the equation library, so its users see the notation's own errors.
+
+To see all of it used together, the library's [guide](https://github.com/softwarewrighter/X_eTaL-libraries/blob/main/libs/Parsing/docs/guide.md) builds one small notation macro from nothing, `for<`, which reads stepped ranges written the way a paper writes them, `for i:=0..10 by 2`. It reaches for each kind of tool in the order a real macro needs them, cutting the list, reading each binding, checking the optional step, and finally writing the whole parse back to prove nothing was dropped, and it explains the `where` tag in a section of its own.
 
 ## What it refuses
 
