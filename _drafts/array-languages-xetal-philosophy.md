@@ -19,9 +19,9 @@ repo_urls:
      Mike's own words come from the design conversations (not in source control) and are attributed so. "Functional over
      object-oriented" is NOT a recorded statement of Mike's: written as what the language leaves out. Link #16 only once it is
      published (both may go out together). Ergonomics renumbered #18. Julia (Mike, 2026-10-22): the M5 decision, one body checked once vs Julia's per-call specialization;
-     Mike's words from the design conversations (2026-10-12). Lead image: PLACEHOLDER; Mike will supply one. -->
+     Mike's words from the design conversations (2026-10-12). Lead image: Mike's block-philosopher.jpg (2026-10-22, from Dropbox), monochrome, inverts in dark mode. -->
 
-<img src="{{ '/assets/images/posts/placeholder-array-languages-xetal-philosophy.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-philosopher.webp' | relative_url }}" class="post-marker" alt="" style="width: 205px;">
 
 The previous post told how X_eTaL's decisions were made, one at a time. Read together, they say what I think a practical programming language should be. None of it was written down as a manifesto first; it is the pattern the choices make, checked against the record of why each was made.
 
