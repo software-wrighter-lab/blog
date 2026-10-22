@@ -202,3 +202,8 @@ Longer trains group from the right into forks (TR3), and a train turns into ordi
 The array languages are the shortest, and X_eTaL pays two characters for its brackets. In return, a row of names in X_eTaL always means the same thing, and counting the functions never changes it.
 
 </div>
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/21: Listed Conor Hoekstra's two code_report videos in this post's metadata, so the post appears with them in the blog's Videos index; the post's text is unchanged. This post's <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-19-rabbit-hole-phoenix-combinator.md">history</a>.]</em></p>
+
