@@ -54,7 +54,7 @@ repo_urls:
 
 <img src="{{ '/assets/images/posts/block-down-gpu-hole.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
-Between a line of array code and a GPU doing it there are five or six programs, each turning one language into a lower one, and most of them are invisible. This post makes them visible for one small program. It follows a threshold and two ReLUs, written in X_eTaL, down to the instructions a GPU runs, by Mojo onto NVIDIA, Apple and AMD and onto the CPU, and down two other roads, CUDA C++ and OpenCL. The listings themselves are long, so they live in the repositories; this post is the guided tour, with a link at every stop.
+Between a line of array code and a GPU doing it there may be many programs, each turning one language into a lower one, and most of them are invisible. This post makes them visible for one small program. It follows a threshold and two ReLUs, written in X_eTaL, down to the instructions a GPU runs, by Mojo onto NVIDIA, Apple and AMD and onto the CPU, and down two other roads, CUDA C++ and OpenCL. The listings themselves are long, so they live in the repositories; this post is the guided tour, with a link at every stop.
 
 <!--more-->
 
