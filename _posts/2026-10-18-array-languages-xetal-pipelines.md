@@ -187,3 +187,33 @@ The library's tests go further than single cases. The five pipelines from the de
 
 A dense layer's bias no longer has to be reshaped by hand: the stage `b ⁿⁿb̲ias it` adds it along the right axis, and refuses a bias of the wrong length. Next in X_eTaL-ML are the real models as pipelines, each shown four ways, side by side: as the equation of post #11, as a pipeline, as the expansion, and as plain X_eTaL. And in X_eTaL, every code string is now read with the rest of the file: a pipeline's string is lexed when the program is, so a stray character in a stage is an error before the macro runs. Full checking inside, linting and type-checking each stage on its own, applies where a macro takes plain X_eTaL; a pipeline's string mixes X_eTaL with its own notation, `▷` and labels, so its stages are still checked as the macro expands them. Because a pipeline is ordinary X_eTaL once expanded, it can go where any X_eTaL program goes, including the GPUs of [post #7](/2026/10/13/array-languages-xetal-gpu/) and [post #10](/2026/10/16/array-languages-xetal-mojo-metal/), and the step-by-step Blender videos of [post #9](/2026/10/15/array-languages-xetal-blender/).
 
+The first of those is now in X_eTaL-ML: one CNN layer written [four ways](https://github.com/softwarewrighter/X_eTaL-ML/blob/main/demos/pipelines/rosetta.xtl), all giving the same feature maps. As a paper prints it, through the equation macro:
+
+```text
+eq ← "Y[o,h,w] | O Ho Wo" ᵉe̲q< "max((sum r:=0..2, sum s:=0..2 | P[h+r,w+s] * F[o,r,s]) + B[o], 0)"
+```
+
+As a pipeline, the picture's windows, one matrix product with the filters, the bias along the filters' axis, the maps shaped and checked, then the activation:
+
+```text
+pipe ← @ ᶠˡᵒʷp̲ipe< c"
+   1 5 5 r̲eshape P
+▷ ᶜᵛw̲indows
+▷ ((O c̲at 9) r̲eshape F) '+ '× i̲nner it
+▷ (1, B) ⁿⁿa̲ddAxis it
+▷ (O c̲at Ho c̲at Wo) r̲eshape it ▹Y [O Ho Wo]
+▷ ⁿⁿr̲elu Y"
+```
+
+And as plain X_eTaL, the Conv library's layer:
+
+```text
+plain ← ⁿⁿr̲elu (O c̲at Ho c̲at Wo) r̲eshape ((O c̲at 9) r̲eshape F, B) ᶜᵛc̲onv 1 5 5 r̲eshape P
+```
+
+The fourth way is the pipeline's expansion, which `xetal expand` shows. The demo checks that the equation agrees with the pipeline and the pipeline with plain X_eTaL, on a picture chosen so the maps are not all zero, and both checks pass. It also runs in X_eTaL-ML's [live demo](https://softwarewrighter.github.io/X_eTaL-ML/pipelines/).
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/21: Added the CNN layer written four ways, the first of the side-by-side models this post said were next, now in X_eTaL-ML (<a href="https://github.com/softwarewrighter/X_eTaL-ML/commit/f51180e">f51180e</a>); this post's <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-18-array-languages-xetal-pipelines.md">history</a>.]</em></p>
+
