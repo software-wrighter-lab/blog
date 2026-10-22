@@ -61,9 +61,9 @@ For reading a run back, `xetal run --echo` prints a file as a notebook, each sta
 
 ## Testing, speed and coverage
 
-What exists is the testing X_eTaL's own development needs. Its examples in documentation comments run as tests, `xetal doc --test`, the way rustdoc runs Rust's, and the X_eTaL repositories pin their behavior with regression baselines: a program and its expected output, side by side, failing when the output changes. The libraries' Check library supplies assertions.
+What exists is the testing X_eTaL's own development needs. Its examples in documentation comments run as tests, `xetal doc --test`, the way rustdoc runs Rust's. And every X_eTaL repository pins its behavior with golden tests run by [reg-rs](https://github.com/sw-cli-tools/reg-rs), a regression tool for command-line programs, written in Rust and not specific to X_eTaL: each test is a command and its expected output, saved side by side, and a test fails when the output changes. The libraries' Check library supplies assertions for programs that test themselves.
 
-What is missing is the user's side of it: there is no `xetal test` yet. It is designed, with the user's decisions recorded: tests are definitions tagged `## @test` in a `tests/` folder, each run in its own session, with `@expect error[...]` for a test that should fail, reported as `cargo test` reports them and as JUnit XML for continuous integration, and the assertions become a standard library. None of it is built.
+What is missing is a test framework for X_eTaL code itself, the way JUnit or TestNG is for Java: there is no `xetal test`, and no xetalunit. Both are designed, with the decisions recorded: tests are definitions tagged `## @test` in a `tests/` folder, each run in its own session, with `@expect error[...]` for a test that should fail, reported as `cargo test` reports them and as JUnit XML for continuous integration; the assertions become a standard library; and xetalunit, a library of its own, adds fixtures, parameterized cases and reports, in the manner of JUnit 4 and TestNG. None of it is built yet, and it is the testing tool X_eTaL most needs.
 
 TODO (inventory): benchmarks, profiling and coverage: what exists in bench/ and the GPU repository, and what is planned.
 
