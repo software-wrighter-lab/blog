@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "Array Languages #17: Small Comforts, X_eTaL's Ergonomics"
+title: "Array Languages #18: Small Comforts, X_eTaL's Ergonomics"
 categories: [languages, language-design]
 tags: [array-languages, xetal, x-etal, apl, ergonomics, lambda, dfn, effects, tolerant-equality, formatter, notebook, doc-tests, alpha, omega, lazy-evaluation, call-by-need, unit, tuples, pattern-matching, lint, language-design]
 keywords: "X_eTaL ergonomics, X_eTaL lambda, effect marker, missing-bang lint, tolerant equality, canonical form, xetal fmt, notebook mode, APL2 DISPLAY boxed arrays, doc tests, rustdoc examples, APL dfn alpha omega, shorthand lambda arguments, named parameters, unused parameter, lazy parameter, call by need, niladic function, unit, tuple pattern, wildcard, unused-binding lint"
-abstract: "Seventeenth in the Array Languages series: the small things that make X_eTaL comfortable to write, read and trust. Every way a lambda can take its arguments, from ⍺ and ⍵ to the newest, ▁, for an argument a function takes and never uses; effects marked with ! and a lint that renames for you; exact equality with a tolerant one beside it; the canonical form, notebook runs and boxed arrays for seeing what a line means; and documentation examples that run as tests."
+abstract: "Eighteenth in the Array Languages series: the small things that make X_eTaL comfortable to write, read and trust. Every way a lambda can take its arguments, from ⍺ and ⍵ to the newest, ▁, for an argument a function takes and never uses; effects marked with ! and a lint that renames for you; exact equality with a tolerant one beside it; the canonical form, notebook runs and boxed arrays for seeing what a line means; and documentation examples that run as tests."
 series: "Array Languages"
-series_part: 17
-date: 2026-10-23 00:15:00 -0700
+series_part: 18
+date: 2026-10-24 00:15:00 -0700
 repo_urls:
   - url: "https://github.com/softwarewrighter/X_eTaL"
     title: "X_eTaL"
@@ -21,7 +21,7 @@ repo_urls:
      (Earlier: _u was being built and was UNCOMMITTED when this was first written.)
      Publishing: HOLD until Mike decides (2026-10-21); planned 10/23, after #16.
      Sources: lang-choices L1-L8, E1, E2, E4, TU3, TU4; design D140 (unused-binding, now superseded by L8); history.md (alpha/omega).
-     The _u idea came from Mike's side question on 2026-10-20 (u:n_ope's unused parameter). Follows #16 (10/22); links only to
+     The _u idea came from Mike's side question on 2026-10-20 (u:n_ope's unused parameter). Follows #17, the philosophy companion to #16 (renumbered 2026-10-22); links only to
      published posts. Lead image: Mike's block-ergo-chair.jpg (2026-10-20), dark, not inverted. -->
 
 <img src="{{ '/assets/images/posts/block-ergo-chair.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
