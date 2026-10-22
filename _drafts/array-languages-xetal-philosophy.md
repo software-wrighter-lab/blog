@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Array Languages #17: What Makes a Practical Language"
+title: "Array Languages #17: What Makes a Practical Language, IMHO"
 categories: [languages, language-design]
 tags: [array-languages, xetal, x-etal, apl, haskell, rust, language-design, philosophy, static-typing, functional-programming, macros, ergonomics]
 keywords: "programming language design philosophy, practical language, static typing, functional programming, small language core, macros and extensions, readability, no ambiguity, X_eTaL"
-abstract: "Seventeenth in the Array Languages series, a companion to the sixteenth: the philosophy behind X_eTaL's decisions, read back out of them. Read code at the point of use; one meaning per thing and no guessing; errors before the program runs; functional by default and practical where it must be; borrow on purpose and do not copy; keep the core small and grow it only on evidence; and treat the tools as part of the language. Macros and extensions keep the core concise, and the price of that is guarding the macros well."
+abstract: "Seventeenth in the Array Languages series, a companion to the sixteenth: my opinions, from experience, about what makes a programming language practical, read back out of X_eTaL's decisions. Read code at the point of use; one meaning per thing and no guessing; errors before the program runs; functional by default and practical where it must be; borrow on purpose and do not copy; keep the core small and grow it only on evidence; and treat the tools as part of the language. Macros and extensions keep the core concise, and the price of that is guarding the macros well."
 series: "Array Languages"
 series_part: 17
 date: 2026-10-23 00:15:00 -0700
@@ -23,7 +23,7 @@ repo_urls:
 
 <img src="{{ '/assets/images/posts/block-philosopher.webp' | relative_url }}" class="post-marker" alt="" style="width: 205px;">
 
-The previous post told how X_eTaL's decisions were made, one at a time. Read together, they say what I think a practical programming language should be. None of it was written down as a manifesto first; it is the pattern the choices make, checked against the record of why each was made.
+The previous post told how X_eTaL's decisions were made, one at a time. Read together, they say what I think a practical programming language should be. This is opinion, not a rule: it comes from my own experience of the languages I have used and the programs I have had to keep working, and other people's experience has led them, reasonably, to other languages. None of it was written down as a manifesto first; it is the pattern the choices make, checked against the record of why each was made.
 
 <!--more-->
 
