@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Array Languages #16: How X_eTaL Changed Its Mind"
+title: "Array Languages #16: How X_eTaL Evolved, Decision by Decision"
 categories: [languages, language-design, process]
-tags: [array-languages, xetal, x-etal, apl, language-design, history, decisions, macros, dogfooding, ai-agents]
-keywords: "X_eTaL history, language design decisions, why a language changes, dogfooding, reversed decisions, no-ambiguity rule, macros instead of syntax, code strings, plain names, macro contracts, decisions register, lang-choices"
-abstract: "Sixteenth in the Array Languages series: three weeks of an array language's history, told as reasons. Almost every change to X_eTaL's syntax and meaning came from one of five pressures, a program it had to run, a sibling repository that needed something, my own hands on the tools, a rule that the grammar may never guess, or a review that said stop. This post follows the record of what changed and why, including the decisions it reversed."
+tags: [array-languages, xetal, x-etal, apl, haskell, rust, bqn, j, language-design, history, decisions, macros, trains, lazy-evaluation, tuples, dogfooding]
+keywords: "X_eTaL language design, design decisions, APL without an APL keyboard, ASCII source rendered notation, Haskell types, Rust macros lints diagnostics, trains fork atop, lazy parameters, macro hygiene, macro contracts, tuples, features not adopted, language evolution"
+abstract: "Sixteenth in the Array Languages series: how X_eTaL became the language it is, decision by decision. APL's arrays and right-to-left reading, typed in ASCII and drawn as notation; Haskell's types but not its evaluation; Rust's macros, lints and error messages; tuples for state that arrays packed badly. Most changes came the way a page fault is resolved: a library, a macro library or an extension tried to do something, failed or found it clumsy, and the language answered with a feature, a choice among alternatives, or a refusal. Here are the choices in order, the few that deserve a story, and the features left out because they would have cluttered the language."
 series: "Array Languages"
 series_part: 16
 date: 2026-10-22 00:15:00 -0700
@@ -13,27 +13,23 @@ repo_urls:
     title: "X_eTaL"
 ---
 
-<!-- DRAFT (2026-10-18). Source: X_eTaL docs/history.md, merged in PR #144 (2026-10-18T19:57Z), covering 2026-09-27 to 10-18;
-     its numbers (1,057 commits, 143 merged pull requests, decisions D1 to D174) are as of that document; the normative record is
-     docs/design.md section 9 and docs/lang-choices.md. Code: today's Life rule and the code-string call rendered with xetal render
-     (X_eTaL main f027bb74); the research-era Life rule is quoted as it was typed in docs/research.txt (historical, never runnable).
-     Follows #15 (10/21); links only to posts already published (#1-#11); later posts are "planned". RECHECK history.md before
-     publishing: the user said more work is coming.
-     RECHECKED 2026-10-21 on X_eTaL 72637325: history.md unchanged since 51b9de49 (10-18). Register now D1-D183 (body updated);
-     reversal row added for D182 (_u supersedes D140's no opt-out spelling); notations drawn (D178) added to the arc; integrals
-     dropped from the open questions (built, AL #13); a_ssert< (plan.md) and Saga 29 (under review) and Saga 31 (planned) still open.
-     RECHECKED 2026-10-22 on X_eTaL 3fffbd4a: history.md unchanged; register D185 (D184 completion, D185 terminal editor in the
-     browser: features, not reversals); docs/user-macro-design.md (deferred, no saga step) added to the open questions.
-     Commit and PR counts not used in the body (gh shows 137 merged PRs now vs history.md's 143: counted differently).
-     Lead image: Mike's block-changed-mind.jpg (2026-10-19), dark background as is, not inverted. -->
+<!-- DRAFT, REWRITTEN 2026-10-22 (Mike): language evolution, not "changed its mind": the distinctive choices and influences, a
+     numbered table of choices, a few in depth, what was refused to stay small, how library/macro-library/extension needs changed
+     the language. Target ~15 minutes. Publishing: when Mike decides.
+     Sources: X_eTaL origin/main 3fffbd4a: docs/lang-choices.md (decision codes), docs/design.md section 9 (register D1-D185;
+     D111 and D113 duplicate text, so 184 distinct), docs/history.md, docs/asks.md (ledger: 38 landed, 12 partly, 20 planned,
+     11 declined, 20 new; E5/X15 lag the register), docs/adt.md, docs/code-strings.md, docs/eq-rationale.md, docs/user-macro-design.md,
+     PRD. Research report: blog scratchpad xetal-decisions.md; X_eTaL/work/summarized-decisions.md (gitignored). Mike's own words
+     come from the design conversations (work/condensed-chat.txt, not in source control): attributed as such, never as recorded
+     decisions. Corrections from the research: the Q1-Q50/R1-R6 answers fell on 09-27 Pacific (09-28 UTC) with sub-questions, and
+     the questions themselves are in the conversations, not the repo; the register had 20 entries at the end of 09-27 (4d2b8dfa).
+     NOT claimed: A+ (never mentioned); K and Uiua as influences (comparison columns only); a crate-like ecosystem (a non-goal for
+     now in the PRD; "Packages" on the wish list). Code: the train, the lazy factorial and k_eep run and rendered on X_eTaL 2bdc6a57.
+     Links only to published posts. Lead image: Mike's block-changed-mind.jpg, dark, not inverted. -->
 
 <img src="{{ '/assets/images/posts/block-changed-mind.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
-<div style="overflow: hidden;" markdown="1">
-
-X_eTaL is three weeks old, and it has already changed its mind about its own syntax more than once. That is not a flaw in the process; it is the process. Every change is decided one question at a time, recorded with its reason, and pinned by tests, so the history can be read back. This post reads it back: not what was built, which the earlier posts covered, but why the language moved.
-
-</div>
+X_eTaL is an array language in the APL tradition that you can type on an ordinary keyboard. Its source is plain ASCII, `r_ev` with an underscore after a letter, and the tools draw it as notation, `r̲ev` with the letter underlined, `←` for `:=`, `⍺` and `⍵` for a lambda's arguments, as you type. From APL it takes arrays as the only data, right-to-left reading with no precedence, and quads for the system. From BQN and J, the leading axis and the atop. From Haskell it takes the types, inference and numeric classes, but not the evaluation: X_eTaL is strict, with laziness only where a parameter asks for it. From Rust it takes the macros, raw strings, doc tests, a clippy-style linter and error messages that point at the line. Functions are curried, every function takes its function arguments first, and Smullyan's birds are a library. And where state did not fit in arrays, it took tuples. K and Uiua appear on X_eTaL's comparison stone, not as sources of its design.
 
 <!--more-->
 
@@ -41,83 +37,132 @@ X_eTaL is three weeks old, and it has already changed its mind about its own syn
 
 | Resource | Link |
 |----------|------|
-| **The history** | [docs/history.md](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/history.md) --- what changed in the syntax, when, and why |
-| **The record** | [docs/lang-choices.md](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/lang-choices.md) and the decisions register in [docs/design.md](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/design.md) |
-| **The series** | [#1: X_eTaL](/2026/10/07/array-languages-xetal/) · [#11: equations](/2026/10/17/array-languages-xetal-equations/) |
+| **The decisions** | [lang-choices.md](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/lang-choices.md) and the register in [design.md](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/design.md) (section 9, D1 to D185) |
+| **The history** | [history.md](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/history.md) and the [asks ledger](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/asks.md) |
+| **The series** | [#1: X_eTaL](/2026/10/07/array-languages-xetal/) · [#14: types, lints and errors](/2026/10/20/array-languages-xetal-typing-errors/) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
 </div>
 
-## How a change is decided
+## How it changed: page faults
 
-The way the language is decided explains the way it changed.
+The first evening settled the core, one question at a time: fifty numbered questions, a few sub-questions and six review items, each answered by me and recorded as a decision. The register of decisions had 20 entries at the end of that first day and has 185 three and a half weeks later. Almost none of the later ones came from a plan. They came the way a page fault is resolved: a program tried to do something, and the language either could not or made it clumsy. A library needed an error of its own; a macro dropped part of its text and nobody noticed; a training loop packed three arrays into one vector to get them through a loop. Each time the language answered in one of three ways: a feature, a choice among alternatives written down with the reasons, or a refusal.
 
-- **One question at a time.** On the first day the language was settled as fifty numbered questions and six review items, each put to me and recorded. Every later change has gone the same way: a proposal, often with alternatives, my choice, an entry in `lang-choices.md`, and a row in the decisions register. The register grew from about 20 entries on the first day to 185 by October 22.
-- **Tests define the language.** A syntax change starts with a failing test, and the decision is written into the design in the same commit.
-- **Ambiguity is an error.** The parser never chooses between two readings, and what a token is comes from the token alone, never from types or context. This rule has decided more syntax questions than any other.
-- **Dogfooding files the requests.** From the first week, the sibling repositories, demos, games, libraries, extensions and ML, have filed asks against the core, each with a code, and many decisions cite one.
+The mechanism is a ledger. Every sibling repository, the libraries, the machine learning, the extensions, the games, files its needs as asks with a code, and X_eTaL answers each one: landed, planned, or declined with a reason. Today the ledger holds 38 landed, 12 partly landed, 20 planned, 11 declined and 20 not yet decided. The rule the history states is short: "a workaround copied in more than one place is evidence, and a general mechanism moves down into the core."
 
-## The first reversal, on the first day
+## The choices, in order
 
-The idea came first, in a long research conversation: an array language as terse as APL, typed in plain ASCII, where typographic decoration, an underline, a subscript, a raised letter, turns an ordinary letter into a function or a derived one. Its Life rule, as the research wrote it, was:
+| # | Choice | Why, or instead of what |
+|---|---|---|
+| 1 | Source is ASCII; decoration is display only | APL needs a special keyboard; J and K's digraphs are hard to read |
+| 2 | An underlined letter makes a name a function: `r_ev` | letters mainly; no overstrike; one underline per name |
+| 3 | Built-ins are words, `r_eshape`, one name each | a single letter cannot stand for every word that starts with it; no aliases |
+| 4 | Right to left, no precedence; `:=` drawn as `←` | APL's reading, typed in ASCII |
+| 5 | Namespaces are typed prefixes, `u:`, `l:`, drawn raised; the importer picks the alias | prefixes are typeable and unambiguous |
+| 6 | One arity per function; dyadic use is currying | instead of APL's ambivalent functions |
+| 7 | A quoted function is an operand: `'+ r_/ v`; function arguments first | instead of a separate class of operators |
+| 8 | Leading axis by default | as in J and BQN, instead of APL's last axis |
+| 9 | Index origin 1, not configurable | APL's origin, without `⎕IO` |
+| 10 | `=` is exact; `e̲q~` compares with a fixed tolerance | instead of APL's `⎕CT` setting |
+| 11 | Hindley-Milner inference, Haskell-style numeric classes, checked before running | Haskell's types, with no annotations required |
+| 12 | Strict evaluation, with `~` for a lazy parameter | so the Y combinator works without making everything lazy |
+| 13 | Trains in brackets: `[F G H]` a fork, `[F G]` an atop | instead of implicit trains, and instead of J's hook |
+| 14 | Values are immutable; a name with `!` is mutable | instead of a `mut` keyword |
+| 15 | Macros are names ending in `<`; imports are `"k:" u̲se< "Lib"` | instead of a `use` keyword; the alias is always required |
+| 16 | Lambda arguments drawn `⍺` and `⍵` | the first drawing, subscript l and r, was unreadable in a terminal font |
+| 17 | Nested arrays with a static `Box` type, shown like APL2's `DISPLAY` | static depth, so the type checker still sees the structure |
+| 18 | Strings and comments may hold any Unicode; code stays ASCII | so a library could greet with its drawn logo |
+| 19 | Smullyan's birds as a library | combinators as ordinary functions |
+| 20 | A steppable evaluator, so a program can wait for input in the browser | chosen over re-running per line and over a sleeping worker; no WASI build |
+| 21 | Macro libraries, `.xtlm`, exporting under `m:` | asked for by the libraries, ML and extensions alike |
+| 22 | System macros written in X_eTaL, modeled on Rust's: `f̲ormat<`, `d̲bg<`, `a̲ssert<` | which ones: "the test Rust's std uses" |
+| 23 | Errors of one's own: signal, trap, retry, recover | a library asked for assert, raise and catch; typed, not an untyped exception |
+| 24 | Doc comments with examples that run as tests | as rustdoc runs them |
+| 25 | `h:` for a library's private names | a private helper could silently hide a future built-in |
+| 26 | Tuples, `(w, m, v, k)`, taken apart by patterns only | a training state of several arrays had been packed into one vector |
+| 27 | Names bound once per scope | instead of shadowing, which hid mistakes |
+| 28 | A linter, levels in ordinary comments, fixes git can undo | clippy's model |
+| 29 | Macro hygiene by choice, with fresh names on request | instead of automatic renaming, which guessed wrong |
+| 30 | One body per function, checked once | instead of a copy per argument type, as Julia makes |
+| 31 | Raw strings, `r"..."`, by Rust's rules | multi-line macro arguments without escapes |
+| 32 | Equations and pipelines as libraries of macros | no compiler change; kept out of the grammar |
+| 33 | Plain names: `ᵉe̲q<`, not a pun | a name must read under any alias |
+| 34 | Macro contracts: `## takes:`, `## uses:`, `## binds:` | after a macro dropped part of its text in silence |
+| 35 | Errors at file, line and column, with the spot underlined | as rustc does |
+| 36 | Code strings, `c"..."`, checked as X_eTaL | a macro's X_eTaL argument was opaque to every tool |
+| 37 | A macro's notation drawn by its own library | an equation shown as typeset math |
+| 38 | `_u`, drawn `▁`, for a parameter nothing reads | instead of a lint directive on every such line |
+
+Rows 1 to 19 were settled in the first days; the rest arrived as the libraries and other repositories found something missing. A few deserve more than a row.
+
+## Laziness, only where asked for
+
+I wanted the Y combinator to work in its textbook shape, `Y f = f (Y f)`. In a strict language that recurses forever before it does anything, and the usual fix is a different combinator, Z, which hides the recursion behind an extra lambda. The other fix is to make the whole language lazy, as Haskell is, and pay for it everywhere. Neither was what I wanted. The answer was a mark on one parameter: `~` makes that argument lazy, evaluated where the body first reads it and never if it does not. Everything else stays strict. The factorial, from a lambda that receives itself:
 
 ```text
-life = { (+ r_ -1 0 1 t_12 _r) = 3 + _r }
+ᵘf̲n ← { ~s̲elf n → n ≤ 1 ? 1◆ n × s̲elf n − 1 }
+'ᵘf̲n ᶜY̲ 5
 ```
 
-The first code departed from the research, and re-reading the research the same day showed where. The decisions that came out of that first day still hold, and two principles from it explain much of what followed: *one key, one job*, and *a single letter cannot stand for every word that starts with it*. So there is no separate class of operators; a reduction is an ordinary function given a quoted function. Namespaces are a leading prefix, chosen by whoever imports a library. A raised `²` is an exponent. Built-ins are words with one underlined letter. Binding is `←` and `=` is always equality. The same rule today, rendered as it is drawn:
+That gives 120. The same mark later turned out to be useful for an argument a function does not need at all, below.
+
+## Trains, marked
+
+Trains came early: a fork, three functions where the outer two see the argument and the middle one joins their results, and an atop. APL and J write a train as functions side by side, and what it means depends on how many there are. In J, two functions in a row are a hook, a different combinator from three. X_eTaL marks a train with brackets instead, and takes BQN's and Dyalog's atop for two:
 
 ```text
-ᵘl̲ife ← { ('+ r̲/₁₂ -1 0 1 o̲-₁₂ ⍵) { (⍺ = 3) + ⍵ × ⍺ = 4 } ⍵ }
+ᵘa̲vg ← ['+ r̲/ ÷ t̲ally]
 ```
 
-It is also *correct* today, which the research's was not: checked against an APL implementation the next day, a blinker's center died, and the rule became Conway's.
+That is the mean, the sum divided by the count. The brackets cost two characters, and buy one rule: a row of names without them always means application, right to left. A train becomes ordinary application before it runs, so the evaluator never sees one. Named dyadic trains were asked for and declined: a named two-argument function is a lambda.
 
-## Five pressures
+## Names bound once
 
-Looking across three weeks, almost every change came from one of five pressures.
+At first, binding a name again made a new binding that hid the old one, as in most functional languages. Two weeks in, a survey of X_eTaL and its sibling repositories found 235 bindings that a stricter rule would break, and 106 of them were throwaway names. Shadowing had been hiding mistakes. The rule became: a name without `!` is bound once per scope, `_ := expr` keeps a value only for its effect, and in an interactive session `[]E_X` removes a name so it can be bound again. Each sibling repository got a notice listing its sites to change.
 
-1. **A program the language had to run.** Life forced axes, rotations along them and truth values that count, before most of the language existed.
-2. **Dogfooding.** The classic APL programs forced nested arrays; the games forced a machine that can pause for input; the ML work and the demos forced tuples; the equation library forced macro contracts and plain names. The rule is that a workaround copied into more than one place is evidence, and the general mechanism moves into the core.
-3. **My own hands on the tools.** Glyph choices, Unicode in strings, the controls of a live page, and the pipeline's two tokens were decided while I was using the tools, not reading about them.
-4. **The no-ambiguity rule.** It rejected the research's raised reduce, kept equations out of the grammar, made `'^` an error, and made `|>` and `$` tokens rather than ligatures drawn over other characters.
-5. **Release reviews.** A review on the eighth day turned the project from breadth to quality: speed, macros, documentation and, in time, readable errors.
+## Macros: from hooks to hygiene to contracts
 
-## Decisions it reversed
+Macros started as one hard-coded import macro. The libraries, the machine learning and the extensions all asked for macro libraries of their own, and that is where most of the language's later growth came from. Three changes in particular came straight out of library work.
 
-The language changes its mind in the open: each reversal is recorded with its earlier form.
+**Hygiene.** At first a macro's names were renamed automatically, Scheme's way, so they could not collide with the caller's. Building the Tags library broke it: when a macro took its argument apart, the renaming changed a name it wrote but not the reference to it, because it had to guess from bytes which text the macro had copied. Hygiene became a choice, as in Common Lisp: a macro asks for a fresh name when it needs one, and lints catch the captures the renaming used to prevent.
 
-| When | Was | Became | Why |
-|---|---|---|---|
-| 09-27 | a raised letter as a namespace | a prefix, `ᵘ` for yours, chosen by the importer | read right to left, the raised forms needed a class of operators; prefixes are typeable and unambiguous |
-| 09-27 | one-letter built-ins | words, `o̲-`, `t̲able` | one letter cannot stand for every word that starts with it |
-| 09-28 | the research's Life rule | Conway's rule | checked against an APL implementation; a blinker's center died |
-| 09-28 | lambda arguments drawn as small l and r | `⍺` and `⍵` | unreadable in my terminal's font |
-| 09-30 | source wholly ASCII | strings and comments may hold any Unicode | a library could not greet with its drawn logo; code stays ASCII |
-| 10-02 | a WASI target for the terminal | a steppable evaluator | pausing for input fits a machine whose state is data |
-| 10-08 | binding a name again shadows it | names bound once | silent shadowing hid mistakes, and a survey found most rebindings were throwaway names |
-| 10-12 | automatic macro hygiene | hygiene by choice, with fresh names on request | the renaming guessed at bytes and broke macros that bind a name on purpose |
-| 10-17 | `e:q_<` and other short names | plain names, `ᵉe̲q<` | a name must read under any alias |
-| 10-17 | a raw code string, `cr"..."`, proposed | `c"..."` and `c#"..."#` only | one level of code is enough |
-| 10-20 | an unused parameter named, with a lint directive to silence its warning | `_u`, drawn ▁, a parameter nothing can read | a required but ignored argument had no spelling; the directive said the warning was wrong, not that nothing was there |
+**Contracts.** The Equations library summed `(y[i] - p[i])^2` as `y[i] - p[i]`: its reader dropped the `^2`, and the answer was wrong in silence. The response had a limit set on purpose: I did not want "a whole other meta language", only to "prevent preventable errors". A macro now declares how it is called, `## takes:`, and whether it copies its text or parses it, `## uses:`. For a copying macro the runner checks that every name and number of the call reaches the expansion; for a parsing one, a new Parsing library makes every reader use all of its text or refuse.
 
-## The newest arc: notation inside strings
+**Code strings and notations.** A macro's argument that is itself X_eTaL was one string to every tool: not drawn, not formatted, not linted. A `c` in front, `c"..."`, now says its inside is code, so it is drawn and checked like the rest of the file. And a macro side can be declared a notation, drawn by its own library, which is how an equation written as a string appears as typeset math.
 
-The last week has been about one problem: mathematical and pipeline notation that is not X_eTaL, and how to admit it without making the grammar ambiguous. The answer each time was a string handed to a macro, and each step made that string safer:
+## Tuples, and no more
 
-- **Equations as a library, not syntax.** A sum as a paper prints it is a string given to a macro, which checks it and writes array code. The compiler did not change.
-- **Raw strings,** so a notation full of quotes and backslashes is readable; another spelling of the same string, not a new type.
-- **Plain names,** after the equation macro's first name read as nothing under another alias.
-- **Macro contracts,** after an equation reader dropped `^2` and summed the wrong thing in silence: a macro declares what it takes and uses, and the language checks.
-- **Code strings,** because a macro's argument is often X_eTaL, but to every tool a plain string is opaque. A `c` in front says the inside is code, so it is drawn as code and read with the rest of the file:
+The machine learning repository packed a training state, 99 weights and Adam's two running averages, into one vector of 298 numbers to get it through a loop, and a demo packed a game's state the same way. Tuples arrived for that: `(w, m, v, k)`, taken apart by patterns and never confused with arrays. The rule I gave them was narrow: use a tuple only when it adds value over an array. Records, sum types and pattern matching in the ML style were planned next and then not wanted: the language stays array-first and small.
 
-  ```text
-  _ ← c"n = 0" i̲f< c"p̲rint! 1◆ 2"
-  ```
+## `_u`, for an argument nothing reads
 
-- **Two pipeline tokens,** `|>` drawn `▷` between stages and `$` drawn `▹` for a stage's label, each a token of its own that is an error in ordinary code.
-- **Notations drawn by their library.** A macro side can be declared a notation, and its library can say how to draw it, so an equation written as a string is shown as typeset math wherever the program is drawn.
+A function that must accept an argument and ignore it, a combinator such as the Kestrel, or a lazy guard that is never forced, used to need a name and a lint directive to silence the unused-name warning: the warning was wrong, and the source had to say so. Now `_u`, drawn `▁`, is a parameter nothing can read, so there is nothing to warn about. With `~` it is also never computed:
 
-## What it does not settle
+```text
+ᵘk̲eep ← { a ~▁ → a }
+```
 
-The open questions are written down too: records, enums and matching; complex numbers, which the FFT is waiting for; a data notation for X_eTaL values; macros defined in the program itself, rather than only in a macro library it imports, a design written down and deferred; and whether `a̲ssert<` should stop the program, as Rust's `assert!` does. Each will be decided the same way: one question, with the reason recorded and a test to hold it.
+`7 ᵘk̲eep 1 ÷ 0` gives 7, and the division never happens.
+
+## What it refused, to stay small
+
+Most of what X_eTaL left out was left out to keep it from growing without a reason. Some of the refusals, with the reason recorded at the time:
+
+- **A notation string, `n"..."`**, beside the code string: "declined as a creeping feature". It would have cost a lexer kind, a formatter case and a lint to carry one fact the macro's contract already states.
+- **A raw code string, `cr"..."`, and nested code strings:** one kind of code string, one level deep, was enough.
+- **Keywords.** No `mut` and no `use`: mutation is a `!` on a name, and an import is a macro. "Avoid introducing keywords" was the rule from the first evening.
+- **Aliases for built-ins:** one name per built-in, so there is one thing to learn and to read.
+- **Equations in the grammar:** a library of macros instead, with no change to the compiler.
+- **Records, sums and matching in the ML style:** not wanted; the language stays array-first.
+- **Lisp's reader macros, and macros in the style of Rust's syn and quote:** the first lets a program redefine the language by accident, the second is more machinery than the problem needs; contracts sit in between.
+- **Macros used because they can be:** a macro in a demo, or an extension, has to earn its place.
+- **A copy of each function per argument type, as Julia makes:** one body, checked once.
+- **Shapes in types:** asked for three times, declined three times; array types do not carry their rank, and shapes are checked when the program runs.
+- **Regular expressions in the core:** a library can bring them, from a Rust crate.
+- **APL's del editor, and a build that needs Node:** a terminal editor in Rust, and nothing else in the build.
+- **Implicit trains and J's hook:** a second reading for a row of names; the brackets keep one. **Named dyadic trains:** a lambda says it. **Haskell's sections:** a function given one argument is an error with the fixes named.
+- **Settings for the index origin and the comparison tolerance,** which APL has: X_eTaL fixes the origin at 1 and puts the tolerance in a function of its own, `e̲q~`, so no setting changes what a program means.
+
+## Still open
+
+Some questions are written down and left open, each to be decided the same way: whether `a̲ssert<` should stop the program, as Rust's `assert!` does; algebraic data in an array-first form; complex numbers, which the FFT is waiting for; macros defined in a program itself rather than only in a macro library it imports; and how libraries are shared. For now there is no package manager: libraries come in through `u̲se<`, with an alias chosen by the program, and the sibling repositories are the ecosystem.
