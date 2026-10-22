@@ -11,6 +11,12 @@ date: 2026-10-19 00:15:00 -0700
 repo_urls:
   - url: "https://github.com/softwarewrighter/X_eTaL"
     title: "X_eTaL"
+video_urls:
+  - "https://www.youtube.com/watch?v=UVUjnzpQKUo"
+  - "https://www.youtube.com/watch?v=LWgcukcpo9A"
+video_titles:
+  - "code_report: 1 Problem, 16 Programming Languages"
+  - "code_report: 1 Problem, 5 Programming Languages"
 ---
 
 <!-- DRAFT (2026-10-19), from a conversation with an agent about GCD in X_eTaL. Series: Down the Rabbit-Hole #7 (after #6, the Sage Bird: the same aviary).
