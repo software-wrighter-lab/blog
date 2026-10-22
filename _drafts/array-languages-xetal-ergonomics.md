@@ -15,9 +15,11 @@ repo_urls:
 
 <!-- DRAFT (2026-10-20), refocused on ergonomics (Mike): lambda arguments, ! effects, = and e_q~, fmt/--echo/--box, doc tests.
      Every example except the _u ones run on a clean build of X_eTaL main 0b427a30 and drawn with xetal render.
-     PENDING: _u (step 157, decision L8, drawn U+2581 ▁) is being built in X_eTaL and was UNCOMMITTED when this was written.
-     Every line with ▁ is PROVISIONAL: when step 157 lands, run each _u row (results in the table come from the X_eTaL agent's
-     table, not from a run here), re-render, check the error messages' exact text, and link the commit. Until then, do not publish.
+     _u: X_eTaL 7d811a01 (step 157, L8, D182), CONFIRMED 2026-10-21 on a clean build of 2bdc6a57: every _u row run (42, 6, 10,
+     0, 7 with no division; both refusals with the text in the table), linted clean, drawn ▁; the unused-binding warning now
+     suggests _u; the tour's k_eep is { a ~_u -> a } and Combinators' K is { x _u -> x } (both from step 157's audit).
+     (Earlier: _u was being built and was UNCOMMITTED when this was first written.)
+     Publishing: HOLD until Mike decides (2026-10-21); planned 10/23, after #16.
      Sources: lang-choices L1-L8, E1, E2, E4, TU3, TU4; design D140 (unused-binding, now superseded by L8); history.md (alpha/omega).
      The _u idea came from Mike's side question on 2026-10-20 (u:n_ope's unused parameter). Follows #16 (10/22); links only to
      published posts. Lead image: Mike's block-ergo-chair.jpg (2026-10-20), dark, not inverted. -->
@@ -97,17 +99,21 @@ It takes only `@`. Called with a number, it is a type error before the program r
 
 ### Ignored: ▁
 
-<!-- PROVISIONAL until step 157 lands: every ▁ line, its results and error text. -->
-
 The newest case came from a side question. A function had to accept an argument and had no use for it:
 
 ```text
 ᵘn̲ope ← { na → 42 }
 ```
 
-It runs, and `xetal lint` warns, correctly as far as it can tell: `parameter na is never used`. Until now the only way to say "unused on purpose" was a directive, `# lint: allow unused-binding`, at the end of the line or on the line before. That was a deliberate choice, made when the lint was (D140): no spelling of a name would opt out. It was wordy for a common case, and it said "the warning is wrong here" rather than "there is nothing here to use".
+It runs, and `xetal lint` warns, correctly as far as it could tell, that the parameter is never used. Until this week the only way to say "unused on purpose" was a directive, `# lint: allow unused-binding`, at the end of the line or on the line before. That was a deliberate choice, made when the lint was (D140): no spelling of a name would opt out. It was wordy for a common case, and it said "the warning is wrong here" rather than "there is nothing here to use".
 
-So X_eTaL gets a third shorthand name, `_u`, for a parameter that is taken and dropped (L8). It stands only in a parameter list, may repeat, and is never read: using it in the body is an error that says to name it. The linter never flags it, so no directive is needed. It is drawn as a heavy low line, ▁, a thicker underscore, so that it reads as an empty slot:
+So X_eTaL now has a third shorthand name, `_u`, for a parameter that is taken and dropped (L8, [7d811a0](https://github.com/softwarewrighter/X_eTaL/commit/7d811a01)). It stands only in a parameter list, may repeat, and is never read: using it in the body is an error that says to name it. The linter never flags it, so no directive is needed, and the warning for an ordinary unused name now says what to write instead:
+
+```text
+warning[unused-binding]: parameter `na` is never used; write `_u` for a parameter nothing reads at nope.xtl:1:14
+```
+
+ It is drawn as a heavy low line, ▁, a thicker underscore, so that it reads as an empty slot:
 
 ```text
 ᵘf̲n ← { ▁ → 42 }
@@ -131,6 +137,12 @@ Why not `_`, which already means "discard"? Because it already has its job: `_ :
 6
 ```
 
+That is the Kestrel, the bird that keeps its first argument, and X_eTaL's own Combinators library now writes it this way:
+
+```text
+ˡK̲ ← { x ▁ → x }
+```
+
 ### Lazy: ~
 
 Arguments are evaluated before the function runs, right to left (E4), unless a parameter is marked lazy with `~`: then its argument is evaluated where the body first reads it, and never if the body does not (E1). The [Sage bird](/2026/09/21/rabbit-hole-sage-y-combinator/) needs it, since a strict fixed point would recurse forever; here it makes the factorial out of a lambda that receives itself:
@@ -145,10 +157,10 @@ Arguments are evaluated before the function runs, right to left (E4), unless a p
 120
 ```
 
-Laziness also protects a function from an argument it does not need. The tour's `ᵘk̲eep` returns its left argument; with an ordinary right parameter the caller's `1 ÷ 0` is computed first and stops the program, and with a lazy one it is never computed:
+Laziness also protects a function from an argument it does not need, and with `▁` the two combine. The tour's `ᵘk̲eep` returns its left argument and drops its right. Dropped but not lazy, the caller's `1 ÷ 0` is still computed first, and stops the program:
 
 ```text
-ᵘk̲eep ← { a b → a }  ⍝ lint: allow unused-binding
+ᵘk̲eep ← { a ▁ → a }
 7 ᵘk̲eep 1 ÷ 0
 ```
 
@@ -156,8 +168,10 @@ Laziness also protects a function from an argument it does not need. The tour's 
 error[division-by-zero]: division by zero
 ```
 
+Dropped and lazy, as the tour writes it, the argument is never computed at all:
+
 ```text
-ᵘk̲eep ← { a ~b → a }  ⍝ lint: allow unused-binding
+ᵘk̲eep ← { a ~▁ → a }
 7 ᵘk̲eep 1 ÷ 0
 ```
 
@@ -165,7 +179,7 @@ error[division-by-zero]: division by zero
 7
 ```
 
-With `_u` the two ideas combine. `{ a ~▁ → a }` says three things at once: the right argument is taken, it is dropped, and it is never even computed. No directive, and no division.
+`{ a ~▁ → a }` says three things at once: the right argument is taken, it is dropped, and it is never even computed. Before `_u`, the tour wrote `{ a ~b → a }` with a lint directive above it.
 
 ### Patterns
 
@@ -208,7 +222,7 @@ And the spellings that are refused, each with the way out:
 | `ᵘf̲n ← { ⍺ × 2 }` | `bad-lambda`: a lambda using _l must also use _r; otherwise name the parameters |
 | `ᵘf̲n ← { 42 }` | `bad-lambda`: a lambda needs _r, _l and _r, named parameters, or `@ ->` |
 | `ᵘf̲n ← { x → x + ⍵ }` | `bad-lambda`: do not mix named parameters with _l / _r |
-| `ᵘf̲n ← { ▁ + ⍵ }` | `bad-lambda-arg`: `_u` marks a parameter the lambda never uses; name it |
+| `ᵘf̲n ← { ▁ + ⍵ }` | `bad-lambda-arg`: `_u` marks a parameter the lambda never uses (`{ x _u -> x }`); name it to use it, and write `_r` or `_l` in a shorthand lambda |
 | `ᵘf̲n ← { x ▁ → ▁ }` | `bad-lambda-arg`: the same |
 
 ## Effects are marked: !
