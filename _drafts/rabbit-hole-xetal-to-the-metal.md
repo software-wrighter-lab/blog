@@ -25,7 +25,8 @@ repo_urls:
      calls: in the fork's Mojo sources.
      2026-10-21: rust-demo 4d6801bc (CUDA evidence, doc/cuda-blog-handoff.md): generated .mojo and .cu, nvcc PTX (default and
      --fmad=false), SASS, RTX 5060 Ti run (0 mismatches); environment nvcc 13.4.92, driver 615.78.08. Links checked (200).
-     2026-10-21: Mike: note a follow-on post on the Arduino UNO Q (QRB2210 MPU + STM32U585 MCU); added as "Next: Qualcomm" (a
+     2026-10-21: (later softened by Mike to one sentence: "A future post may investigate Qualcomm GPUs on a developer board, and
+     other NPUs"; the UNO Q details were removed as over-promising.) Earlier: a follow-on post on the Arduino UNO Q (QRB2210 MPU + STM32U585 MCU); added as "Next: Qualcomm" (a
      planned post, no link). Specs from Arduino's docs and Qualcomm's product brief; no OpenCL-on-Adreno claim (to be checked on
      the board).
      2026-10-21 later: X_eTaL-gpu main unchanged (8d5b943); step 024-opencl-binary IN PROGRESS, uncommitted (xetal-gpu binary
@@ -46,8 +47,9 @@ repo_urls:
      built until its commit exists. Listings may be long: summarize here, link the full listings and doc/top-down.md.
      Same date as AL #16 (different series); date tentative. Lead image: Mike's block-down-gpu-hole.jpg (2026-10-21), dark, not inverted.      2026-10-21: SHORTENED for a ~10-minute read (Mike): every listing now lives in modular-fork rust-demo/doc (top-down.md, the
      handoffs, evidence/) and X_eTaL-gpu docs/ (OpenCL captures); the post summarizes and links. The long version is in this
-     file's history (commit ad7a58a). x86-64 CPU (A6) dropped like HIP: one CPU example (arm64). TODO: confirm the toolchain
-     table's "needed to run" row.
+     file's history (commit ad7a58a). x86-64 CPU (A6) dropped like HIP: one CPU example (arm64). "needed to run" row CONFIRMED 2026-10-21:
+     nvcc docs 4.2.1.16 (--cudart static by default except Windows); the fork's Mojo/docs/site/requirements.mdx (NVIDIA 580+,
+     AMD driver 6.3.3+ via libamdhip64.so, Apple: Metal framework built into macOS, macOS 15+).
 -->
 
 <img src="{{ '/assets/images/posts/block-down-gpu-hole.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
@@ -179,12 +181,12 @@ The OpenCL road, which keeps X_eTaL's integers as 64-bit integers from end to en
 | what it produces | PTX and/or machine code, in a fat binary | an AMD GPU code object | AIR, packed into a `.metallib` | nothing shipped but the source | PTX, AMD GPU code or AIR, in the library |
 | last step to machine code | `ptxas` at build time, or the driver at load | done ahead of time | Apple's driver, at first load (no public listing) | inside the driver | NVIDIA: a bundled PTX compiler, or the driver |
 | needed to build | CUDA Toolkit | ROCm | Xcode's Metal toolchain | nothing | Mojo |
-| needed to run | NVIDIA driver (the CUDA runtime is linked statically by default) | ROCm runtime | macOS | a driver with OpenCL | the GPU's driver (NVIDIA: 580 or later) |
+| needed to run | NVIDIA driver (the CUDA runtime is linked statically by default, except on Windows) | ROCm's HIP runtime (`libamdhip64`) | macOS (Metal is built in) | a driver with OpenCL | the GPU's driver: NVIDIA 580 or later, AMD 6.3.3 or later; macOS 15 or later |
 
 Sources: NVIDIA's [nvcc documentation](https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html), AMD's [HIP compilers page](https://rocm.docs.amd.com/projects/HIP/en/latest/understand/compilers.html), Apple's [Metal tools](https://developer.apple.com/library/ios/documentation/Miscellaneous/Conceptual/MetalProgrammingGuide/Dev-Technique/Dev-Technique.html), and Mojo's requirements in the fork.
 
 </div>
 
-## Next: Qualcomm
+## Next
 
-A planned post adds a third family of hardware, Qualcomm, on the Arduino UNO Q (2 GB, ABX00162). It is a hybrid of two chips: a Qualcomm Dragonwing QRB2210, with four Arm Cortex-A53 cores running Debian Linux, an Adreno 702 GPU and a Hexagon DSP; and an ST STM32U585 microcontroller, an Arm Cortex-M33, for the board's real-time pins. The plan is the same program on the Cortex-A53 through X_eTaL and Mojo, then a road onto the Adreno GPU, which Mojo does not target, through OpenCL if the board's Linux has a driver for it ([Arduino's documentation](https://docs.arduino.cc/hardware/uno-q), [Qualcomm's product brief](https://docs.qualcomm.com/doc/87-61720-1/87-61720-1_REV_D_Qualcomm_Dragonwing_QRB2210_Processor_Product_Brief.pdf)).
+A future post may investigate Qualcomm GPUs on a developer board, and other NPUs.
