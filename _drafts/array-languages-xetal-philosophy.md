@@ -17,13 +17,12 @@ repo_urls:
      ~15 minutes. Read back out of the decisions (blog scratchpad xetal-decisions.md; X_eTaL/work/summarized-decisions.md).
      Quotes: DOC ones are in X_eTaL's committed docs (lang-choices P1/P2, history section 17, adt.md, plan.md Saga 29, D161, wish-list);
      Mike's own words come from the design conversations (not in source control) and are attributed so. "Functional over
-     object-oriented" is NOT a recorded statement of Mike's: written as what the language leaves out. Link #16 only once it is
-     published (both may go out together). Ergonomics renumbered #18. Julia (Mike, 2026-10-22): the M5 decision, one body checked once vs Julia's per-call specialization;
+     object-oriented" is NOT a recorded statement of Mike's: written as what the language leaves out. #16 published 2026-10-22; linked. Ergonomics renumbered #18. Julia (Mike, 2026-10-22): the M5 decision, one body checked once vs Julia's per-call specialization;
      Mike's words from the design conversations (2026-10-12). Lead image: Mike's block-philosopher.jpg (2026-10-22, from Dropbox), monochrome, inverts in dark mode. -->
 
 <img src="{{ '/assets/images/posts/block-philosopher.webp' | relative_url }}" class="post-marker" alt="" style="width: 205px;">
 
-The previous post told how X_eTaL's decisions were made, one at a time. Read together, they say what I think a practical programming language should be. This is opinion, not a rule, drawn from my experience: the languages I have used and the programs I have had to keep working. Other people's experience has led them, reasonably, to other languages. YMMV. None of it was written down as a manifesto first; it is the pattern the choices make, checked against the record of why each was made.
+[The previous post](/2026/10/22/array-languages-xetal-language-history/) told how X_eTaL's decisions were made, one at a time. Read together, they say what I think a practical programming language should be. This is opinion, not a rule, drawn from my experience: the languages I have used and the programs I have had to keep working. Other people's experience has led them, reasonably, to other languages. YMMV. None of it was written down as a manifesto first; it is the pattern the choices make, checked against the record of why each was made.
 
 <!--more-->
 
