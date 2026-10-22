@@ -22,6 +22,8 @@ repo_urls:
      RECHECKED 2026-10-21 on X_eTaL 72637325: history.md unchanged since 51b9de49 (10-18). Register now D1-D183 (body updated);
      reversal row added for D182 (_u supersedes D140's no opt-out spelling); notations drawn (D178) added to the arc; integrals
      dropped from the open questions (built, AL #13); a_ssert< (plan.md) and Saga 29 (under review) and Saga 31 (planned) still open.
+     RECHECKED 2026-10-22 on X_eTaL 3fffbd4a: history.md unchanged; register D185 (D184 completion, D185 terminal editor in the
+     browser: features, not reversals); docs/user-macro-design.md (deferred, no saga step) added to the open questions.
      Commit and PR counts not used in the body (gh shows 137 merged PRs now vs history.md's 143: counted differently).
      Lead image: Mike's block-changed-mind.jpg (2026-10-19), dark background as is, not inverted. -->
 
@@ -50,7 +52,7 @@ X_eTaL is three weeks old, and it has already changed its mind about its own syn
 
 The way the language is decided explains the way it changed.
 
-- **One question at a time.** On the first day the language was settled as fifty numbered questions and six review items, each put to me and recorded. Every later change has gone the same way: a proposal, often with alternatives, my choice, an entry in `lang-choices.md`, and a row in the decisions register. The register grew from about 20 entries on the first day to 183 by October 21.
+- **One question at a time.** On the first day the language was settled as fifty numbered questions and six review items, each put to me and recorded. Every later change has gone the same way: a proposal, often with alternatives, my choice, an entry in `lang-choices.md`, and a row in the decisions register. The register grew from about 20 entries on the first day to 185 by October 22.
 - **Tests define the language.** A syntax change starts with a failing test, and the decision is written into the design in the same commit.
 - **Ambiguity is an error.** The parser never chooses between two readings, and what a token is comes from the token alone, never from types or context. This rule has decided more syntax questions than any other.
 - **Dogfooding files the requests.** From the first week, the sibling repositories, demos, games, libraries, extensions and ML, have filed asks against the core, each with a code, and many decisions cite one.
@@ -118,4 +120,4 @@ The last week has been about one problem: mathematical and pipeline notation tha
 
 ## What it does not settle
 
-The open questions are written down too: records, enums and matching; complex numbers, which the FFT is waiting for; a data notation for X_eTaL values; and whether `a̲ssert<` should stop the program, as Rust's `assert!` does. Each will be decided the same way: one question, with the reason recorded and a test to hold it.
+The open questions are written down too: records, enums and matching; complex numbers, which the FFT is waiting for; a data notation for X_eTaL values; macros defined in the program itself, rather than only in a macro library it imports, a design written down and deferred; and whether `a̲ssert<` should stop the program, as Rust's `assert!` does. Each will be decided the same way: one question, with the reason recorded and a test to hold it.
