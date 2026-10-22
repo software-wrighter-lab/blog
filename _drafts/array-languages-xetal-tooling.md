@@ -18,9 +18,9 @@ repo_urls:
      planned, is missing; Rust as the inspiration; wanted: a time-travelling debugger, visual debugging, LSP, DAP, an equation editor,
      a tensor pipeline editor, flying around and manipulating variables in 3D. Inventory pending: scratchpad xetal-tooling.md.
      xetal 2bdc6a57 subcommands: lex, render, diagram, expand, doc, parse, fmt, migrate, lint, core, type, eval, run, repl, edit.
-     Links only to published posts. Lead image: PLACEHOLDER; Mike will supply one. -->
+     Links only to published posts. Lead image: Mike's block-bench-tools.jpg (2026-10-22, from Dropbox), monochrome, inverts in dark mode. -->
 
-<img src="{{ '/assets/images/posts/placeholder-array-languages-xetal-tooling.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-bench-tools.webp' | relative_url }}" class="post-marker" alt="" style="width: 205px;">
 
 TODO: intro: a language is used through its tools; Rust's cargo, rustfmt, clippy, rustdoc and rust-analyzer as the yardstick.
 
