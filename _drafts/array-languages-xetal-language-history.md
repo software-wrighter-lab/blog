@@ -39,7 +39,7 @@ X_eTaL is an array language in the APL tradition that you can type on an ordinar
 |----------|------|
 | **The decisions** | [lang-choices.md](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/lang-choices.md) and the register in [design.md](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/design.md) (section 9, D1 to D185) |
 | **The history** | [history.md](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/history.md) and the [asks ledger](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/asks.md) |
-| **The series** | [#1: X_eTaL](/2026/10/07/array-languages-xetal/) · [#14: types, lints and errors](/2026/10/20/array-languages-xetal-typing-errors/) |
+| **The series** | [Array Languages: every post](/series/#array-languages) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
 </div>
@@ -62,7 +62,7 @@ The mechanism is a ledger. Every sibling repository, the libraries, the machine 
 | 6 | One arity per function; dyadic use is currying | instead of APL's ambivalent functions |
 | 7 | A quoted function is an operand: `'+ r_/ v`; function arguments first | instead of a separate class of operators |
 | 8 | Leading axis by default | as in J and BQN, instead of APL's last axis |
-| 9 | Index origin 1, not configurable | APL's origin, without `⎕IO` |
+| 9 | Index origin 1, not configurable | APL's origin, and Julia's, without APL's `⎕IO` setting |
 | 10 | `=` is exact; `e̲q~` compares with a fixed tolerance | instead of APL's `⎕CT` setting |
 | 11 | Hindley-Milner inference, Haskell-style numeric classes, checked before running | Haskell's types, with no annotations required |
 | 12 | Strict evaluation, with `~` for a lazy parameter | so the Y combinator works without making everything lazy |

@@ -33,7 +33,7 @@ The previous post told how X_eTaL's decisions were made, one at a time. Read tog
 |----------|------|
 | **The principles** | [lang-choices.md, section 1](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/lang-choices.md) |
 | **The decisions** | the register in [design.md](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/design.md), section 9 |
-| **The series** | [#1: X_eTaL](/2026/10/07/array-languages-xetal/) · [#14: types, lints and errors](/2026/10/20/array-languages-xetal-typing-errors/) |
+| **The series** | [Array Languages: every post](/series/#array-languages) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
 </div>

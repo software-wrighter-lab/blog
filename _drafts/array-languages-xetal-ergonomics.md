@@ -37,7 +37,7 @@ A language is learned through its big ideas and lived in through its small ones.
 | **The decisions** | [lang-choices.md](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/lang-choices.md): L1 to L8 (lambdas), E1 and E2 (laziness), TU3 and TU4 (patterns), T3 (equality) |
 | **The lints** | [docs/lint.md](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/lint.md): `unused-binding`, `missing-bang`, `needless-bang` |
 | **The tools** | the [README](https://github.com/softwarewrighter/X_eTaL#readme): `xetal fmt`, `xetal run --echo` and `--box`, `xetal doc --test` |
-| **The series** | [#1: X_eTaL](/2026/10/07/array-languages-xetal/) |
+| **The series** | [Array Languages: every post](/series/#array-languages) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
 </div>
