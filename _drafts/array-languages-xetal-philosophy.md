@@ -23,7 +23,7 @@ repo_urls:
 
 <img src="{{ '/assets/images/posts/block-philosopher.webp' | relative_url }}" class="post-marker" alt="" style="width: 205px;">
 
-The previous post told how X_eTaL's decisions were made, one at a time. Read together, they say what I think a practical programming language should be. This is opinion, not a rule: it comes from my own experience of the languages I have used and the programs I have had to keep working, and other people's experience has led them, reasonably, to other languages. None of it was written down as a manifesto first; it is the pattern the choices make, checked against the record of why each was made.
+The previous post told how X_eTaL's decisions were made, one at a time. Read together, they say what I think a practical programming language should be. This is opinion, not a rule, drawn from my experience: the languages I have used and the programs I have had to keep working. Other people's experience has led them, reasonably, to other languages. YMMV. None of it was written down as a manifesto first; it is the pattern the choices make, checked against the record of why each was made.
 
 <!--more-->
 
