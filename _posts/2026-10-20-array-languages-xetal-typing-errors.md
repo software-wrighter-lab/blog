@@ -4,7 +4,7 @@ title: "Array Languages #14: Types, Lints and Errors in X_eTaL"
 categories: [languages, language-design, tools]
 tags: [array-languages, xetal, x-etal, apl, types, type-inference, lint, errors, macros, ergonomics]
 keywords: "X_eTaL type checking, array language type inference, xetal lint, compile-time errors versus run-time errors, silent wrong answers, macro errors, shape checks, error messages, ergonomics"
-abstract: "Fourteenth in the Array Languages series: how X_eTaL tries to turn mistakes into errors as early as possible. A type error before the program runs is good, a run-time error is worse, and a silent wrong answer is the worst, and writing the equations post turned up three of those in a day-old macro library. This post follows the ladder rung by rung, cheapest to fix first, from the editor through macro expansion, types, lints and tests to run time, with a real example of each, and ends with what changed so that class of mistake cannot come back."
+abstract: "Fourteenth in the Array Languages series: how X_eTaL tries to turn mistakes into errors as early as possible. A type error before the program runs is good, a run-time error is worse, and a silent wrong answer is the worst, and writing the equations post turned up three of those in a day-old macro library. This post follows the ladder rung by rung, cheapest to fix first, from the editor through macro expansion, types, lints and tests to run time, with a real example of each, and ends with what changed so that class of mistake is caught."
 series: "Array Languages"
 series_part: 14
 date: 2026-10-20 00:15:00 -0700
@@ -233,7 +233,7 @@ The libraries are kept lint clean, and findings can also be written as JSON, one
 
 ## Tests
 
-Some mistakes are not in new code but in a change to code that worked. The libraries' tests are regression baselines: each test is a program with its expected output pinned beside it, and a test whose output changes fails. The equation library's refusals are tested this way. This one pins the bug told below, so that it cannot come back:
+Some mistakes are not in new code but in a change to code that worked. The libraries' tests are regression baselines: each test is a program with its expected output pinned beside it, and a test whose output changes fails. The equation library's refusals are tested this way. This one pins the bug told below, so that it cannot come back unnoticed:
 
 ```text
 ⍝ Text after a reference is refused, never dropped (y[i]2 once gave the plain sum).
@@ -286,7 +286,7 @@ The cause was in the macro's reader, the code that takes its string apart. A ter
 
 It was fixed the same morning, in three layers. Every rule of the reader now uses all of its text or refuses the call. Only the notation's own characters may appear, so `%` is refused by name. And every call is now read three ways from one grammar, as the value, as the LaTeX and as a plain reprint, and the reprint is compared with what was written: a rule that dropped a character, any rule, now makes the call fail when the program is compiled. A differential test now also generates random equations and checks each against the same computation written by hand.
 
-## What changes so it cannot happen again
+## What changes so it is caught next time
 
 The fix covered one library. The class of bug, a reader that uses part of its text and drops the rest, can happen in any macro that reads a notation, and more of them are coming. Three changes go further, from narrow to broad:
 
@@ -307,3 +307,8 @@ The ladder is right; the rungs are being made comfortable one message at a time,
 
 - **Errors inside a notation.** A type mistake in an equation, such as a whole-number array times a float integral, is a type error before the program runs, but it underlines the whole call rather than the term inside the string that is wrong.
 - **Shape and rank.** They are still checked mostly while the program runs. A shape lint already proves some mismatches before it runs, where the extents are written down; equations and pipelines check theirs as they run.
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/22: Reworded three claims that promised too much ("cannot come back", "cannot happen again"): checks close off classes of mistake and a test catches a bug's return, but a program can still be well typed and wrong. This post's <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-20-array-languages-xetal-typing-errors.md">history</a>.]</em></p>
+
