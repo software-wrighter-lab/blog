@@ -16,7 +16,8 @@ repo_urls:
 <!-- DRAFT SKELETON (2026-10-22), Mike: tooling post: REPL (TUI, WASM), type system, linter, and tools that may or may not exist
      (formatter, benchmarker, coverage, docstrings, cross-reference, crate-like dependencies); what exists, needs work, is designed or
      planned, is missing; Rust as the inspiration; wanted: a time-travelling debugger, visual debugging, LSP, DAP, an equation editor,
-     a tensor pipeline editor, flying around and manipulating variables in 3D. Inventory pending: scratchpad xetal-tooling.md. FILLED 2026-10-22/23 from facts checked in this session and the tooling inventory (scratchpad xetal-tooling.md) (xetal 2bdc6a57 --help,
+     a tensor pipeline editor, flying around and manipulating variables in 3D. Inventory pending: scratchpad xetal-tooling.md. xetalunit plan (2026-10-23): Saga 33 (committed) plus Mike's 10-22 additions (doubles, spies, fast tests, property tests:
+     blog tmp/asks-2026-10-22-tooling.md, not in any repo plan as of X_eTaL 9f7d43fc / libraries ede0da9). FILLED 2026-10-22/23 from facts checked in this session and the tooling inventory (scratchpad xetal-tooling.md) (xetal 2bdc6a57 --help,
      lint --list = 31, D183-D185, plan.md Saga 33 (designed, not built), the libraries doc site, XETAL_COMMIT pins, PRD non-goal,
      wish list): intro, writing and running, checking, testing (part), documentation, libraries. The rest waits on the inventory.
      xetal 2bdc6a57 subcommands: lex, render, diagram, expand, doc, parse, fmt, migrate, lint, core, type, eval, run, repl, edit.
@@ -86,6 +87,18 @@ For reading a run back, `xetal run --echo` prints a file as a notebook, each sta
 What exists is the testing X_eTaL's own development needs: X_eTaL alone has 267 golden tests and 499 test cases for its implementation. Its examples in documentation comments run as tests, `xetal doc --test`, the way rustdoc runs Rust's. And every X_eTaL repository pins its behavior with golden tests run by [reg-rs](https://github.com/sw-cli-tools/reg-rs), a regression tool for command-line programs, written in Rust and not specific to X_eTaL: each test is a command and its expected output, saved side by side, and a test fails when the output changes. The libraries' Check library supplies assertions for programs that test themselves.
 
 What is missing is a test framework for X_eTaL code itself, the way JUnit or TestNG is for Java: there is no `xetal test`, and no xetalunit. Both are designed, with the decisions recorded: tests are definitions tagged `## @test` in a `tests/` folder, each run in its own session, with `@expect error[...]` for a test that should fail, reported as `cargo test` reports them and as JUnit XML for continuous integration; the assertions become a standard library; and xetalunit, a library of its own, adds fixtures, parameterized cases and reports, in the manner of JUnit 4 and TestNG. None of it is built yet, and it is the testing tool X_eTaL most needs.
+
+JUnit was built for objects: test classes, setup and teardown to rebuild mutable state, mocks to stand in for collaborating objects. X_eTaL's values do not change and most of its functions are pure, so most of that has nothing to manage, and copying it feature for feature would add machinery without a use. What I want xetalunit to be is a framework shaped for a functional array language:
+
+- **Assertions that help when they fail:** where two arrays differ, by index and value; a shape or rank mismatch named; floats compared with a tolerance; both sides drawn.
+- **Tables of cases as arrays.** A table of inputs and expected outputs is an array, and one test applies the function to every row, each row reported on its own: TestNG's data providers, the array way.
+- **Fixtures only where there are effects:** a temporary directory, recorded input events, configuration facts. Pure tests need no setup at all.
+- **Library doubles instead of dependency injection.** A function that needs a collaborator already takes it as an argument, so most injection is just passing a function. For a whole library, a test puts a double with the same exports first on the search path, the importer's alias resolves to it, and the code under test is unchanged; the runner checks the double's exports and types match the real library's.
+- **Spies**, to record what the code asked of a double: which functions, with what arguments, how often.
+- **Fast unit tests:** one process, the libraries loaded and checked once, tests in parallel, slow tests tagged and kept out of the default run, and a watch mode that reruns only what a change affects.
+- **Property tests**, from Haskell's QuickCheck rather than from JUnit: a law, such as reverse twice is the identity, checked on generated arrays, with a fixed seed and the smallest failing input reported.
+
+Saga 33 records the runner, the tags, expected errors, the reports and the fixtures and table-driven cases; the doubles, spies, fast-test design and property tests are mine from this week, written up as asks and not yet in any plan.
 
 
 Speed is measured, but only roughly. Sixteen benchmark programs run with `just bench`, and `just bench-check` fails the build when one is more than 15 percent slower than its recorded baseline, so a large slowdown is caught before it lands. But it reports the best of a few wall-clock runs, with none of criterion's warm-up and statistics, and it is a tool for the implementation, not a `xetal bench` anyone can point at their own library. Profiling exists only one level down: `perf` on the Rust interpreter shows which Rust functions are slow, not which X_eTaL functions. And there is no coverage tool at all, for X_eTaL programs or for the interpreter.
