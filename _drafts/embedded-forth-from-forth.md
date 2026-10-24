@@ -125,8 +125,11 @@ So the build was run again with the compiler on forth-from-forth's own kernel. I
 Since then the build runs that way by default ([6c8ec30](https://github.com/sw-embed/sw-cor24-forth/commit/6c8ec30)): the committed kernel already holds the core, so only the compiler is streamed in, and it regenerates the kernel it is running on. The hand-written kernel is now only the root of the chain. Two golden tests keep both ends honest, `tf24a_fff_image_current` (the self-hosted build reproduces `kernel.s`) and `tf24a_fff_bootstrap_root` (starting again from the hand-written kernel gives the same `kernel.s`):
 
 ```sh
-forth-from-forth/scripts/build-image.sh --check                                   # self-hosted
-XC_HOST=forth-on-forthish/kernel.s forth-from-forth/scripts/build-image.sh --check  # from the root
+# self-hosted: the kernel rebuilds itself
+forth-from-forth/scripts/build-image.sh --check
+# from the root: start again on the hand-written kernel
+XC_HOST=forth-on-forthish/kernel.s \
+  forth-from-forth/scripts/build-image.sh --check
 ```
 
 A full build, primitives and dictionary, is about 1.26 billion instructions of real work and about 30 seconds of wall time, since the compiler runs inside the emulator.
