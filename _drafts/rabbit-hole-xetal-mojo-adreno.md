@@ -25,7 +25,7 @@ repo_urls:
 
 <img src="{{ '/assets/images/posts/relu-curve.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
-[Rabbit-hole #8](/2026/10/21/rabbit-hole-xetal-to-the-metal/) followed one small X_eTaL program down every GPU toolchain it could reach, and ended on a hedge: a future post may investigate Qualcomm GPUs on a developer board. This is that post. The board is an Arduino UNO Q, and its GPU is a Qualcomm Adreno 702, which Mojo does not target. The program is the same one: a threshold and a ReLU, two activation functions from machine learning. By the end of one day, both X_eTaL and Mojo had run it on that GPU, and every answer was checked against a reference.
+[Rabbit-hole #8](/2026/10/21/rabbit-hole-xetal-to-the-metal/) followed one small X_eTaL program down every GPU toolchain it could reach, and ended on a hedge: a future post may investigate Qualcomm GPUs on a developer board. This is that post. The board is an Arduino UNO Q, and its GPU is a Qualcomm Adreno 702, which Mojo does not target. The program is the same one: a threshold and a ReLU, two [activation functions](/2026/02/07/five-ml-concepts-4/) from machine learning. By the end of one day, both X_eTaL and Mojo had run it on that GPU, and every answer was checked against a reference.
 
 <!--more-->
 
