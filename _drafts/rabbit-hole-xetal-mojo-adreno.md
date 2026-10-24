@@ -4,7 +4,7 @@ title: "Rabbit-hole #9: X_eTaL and Mojo on a Qualcomm Adreno 702"
 categories: [rabbit-hole, programming-languages, deep-dive]
 tags: [rabbit-hole, xetal, x-etal, mojo, gpu, qualcomm, adreno, arduino, uno-q, opencl, spir-v, mesa, rusticl, freedreno, llvm, metal, cuda]
 keywords: "Mojo on Qualcomm Adreno, X_eTaL OpenCL Adreno 702, Arduino UNO Q GPU, rusticl OpenCL, SPIR-V retarget NVPTX, Freedreno IR3, one Mojo kernel three GPUs, Mojo Metal CUDA Adreno"
-abstract: "A threshold and a ReLU, written once in X_eTaL and once in Mojo, run on the Adreno 702 GPU in an Arduino UNO Q, a GPU Mojo does not target. X_eTaL gets there through its own OpenCL backend; Mojo gets there first as the host program, then with its own kernel, retargeted from NVIDIA's IR to SPIR-V. Both reach the same Freedreno instructions. The same Mojo kernel also runs on Apple and NVIDIA GPUs, and X_eTaL's Mojo backend now runs eleven demos. What one day of work established, and what it did not."
+abstract: "A threshold and a ReLU activation function, written once in X_eTaL and once in Mojo, run on the Adreno 702 GPU in an Arduino UNO Q, a GPU Mojo does not target. X_eTaL gets there through its own OpenCL backend; Mojo gets there first as the host program, then with its own kernel, retargeted from NVIDIA's IR to SPIR-V. Both reach the same Freedreno instructions. The same Mojo kernel also runs on Apple and NVIDIA GPUs, and X_eTaL's Mojo backend now runs eleven demos. What one day of work established, and what it did not."
 series: "Down the Rabbit-Hole"
 series_part: 9
 date: 2026-10-24 00:15:00 -0700
