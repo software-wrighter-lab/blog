@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Array Languages #18: X_eTaL and Mojo on a Qualcomm Adreno 702"
-categories: [languages, gpu]
-tags: [array-languages, xetal, x-etal, mojo, gpu, qualcomm, adreno, arduino, uno-q, opencl, spir-v, mesa, rusticl, freedreno, llvm, metal, cuda]
+title: "Rabbit-hole #9: X_eTaL and Mojo on a Qualcomm Adreno 702"
+categories: [rabbit-hole, programming-languages, deep-dive]
+tags: [rabbit-hole, xetal, x-etal, mojo, gpu, qualcomm, adreno, arduino, uno-q, opencl, spir-v, mesa, rusticl, freedreno, llvm, metal, cuda]
 keywords: "Mojo on Qualcomm Adreno, X_eTaL OpenCL Adreno 702, Arduino UNO Q GPU, rusticl OpenCL, SPIR-V retarget NVPTX, Freedreno IR3, one Mojo kernel three GPUs, Mojo Metal CUDA Adreno"
-abstract: "Eighteenth in the Array Languages series: a threshold and a ReLU, written once in X_eTaL and once in Mojo, run on the Adreno 702 GPU in an Arduino UNO Q, a GPU Mojo does not target. X_eTaL gets there through its own OpenCL backend; Mojo gets there first as the host program, then with its own kernel, retargeted from NVIDIA's IR to SPIR-V. Both reach the same Freedreno instructions. The same Mojo kernel also runs on Apple and NVIDIA GPUs, and X_eTaL's Mojo backend now runs eleven demos. What one day of work established, and what it did not."
-series: "Array Languages"
-series_part: 18
+abstract: "A threshold and a ReLU, written once in X_eTaL and once in Mojo, run on the Adreno 702 GPU in an Arduino UNO Q, a GPU Mojo does not target. X_eTaL gets there through its own OpenCL backend; Mojo gets there first as the host program, then with its own kernel, retargeted from NVIDIA's IR to SPIR-V. Both reach the same Freedreno instructions. The same Mojo kernel also runs on Apple and NVIDIA GPUs, and X_eTaL's Mojo backend now runs eleven demos. What one day of work established, and what it did not."
+series: "Down the Rabbit-Hole"
+series_part: 9
 date: 2026-10-24 00:15:00 -0700
 repo_urls:
   - url: "https://github.com/softwarewrighter/modular-fork/tree/research-qualcomm-adreno-702-gpu/adreno-poc"
@@ -15,7 +15,7 @@ repo_urls:
     title: "X_eTaL-gpu"
 ---
 
-<!-- DRAFT (2026-10-23), Mike: a new #18 inserted for 10/24 (Ergonomics moved to #19 on 10/25, Tooling to #20 on 10/26).
+<!-- DRAFT (2026-10-23), Mike: Rabbit-hole #9 for 10/24, the sequel to Rabbit-hole #8 (first drafted as AL #18; moved because Mojo is not an array language). AL Ergonomics #18 moved to 10/25, Tooling #19 to 10/26.
      Sources: modular-fork branch research-qualcomm-adreno-702-gpu at d76ece32ce, adreno-poc/docs/adreno-deep-dive.md,
      mojo-on-3-gpus.md, slides-2026-10-23 (figures rendered from the deck's HTML slides: board, path-xetal, metal, steps-all,
      three-gpus, adreno-both, boundary; threshold-rendered from docs/images); X_eTaL-gpu 53633e4 (eleven demos through Mojo,
@@ -38,7 +38,7 @@ repo_urls:
 | **Three GPUs** | [mojo-on-3-gpus.md](https://github.com/softwarewrighter/modular-fork/blob/research-qualcomm-adreno-702-gpu/adreno-poc/docs/mojo-on-3-gpus.md) |
 | **The talk** | [slides, PDF](https://github.com/softwarewrighter/modular-fork/blob/research-qualcomm-adreno-702-gpu/adreno-poc/docs/slides-2026-10-23/xetal-and-mojo-on-the-adreno-702.pdf) |
 | **X_eTaL on GPUs** | [X_eTaL-gpu](https://github.com/softwarewrighter/X_eTaL-gpu), its [Mojo backend](https://github.com/softwarewrighter/X_eTaL-gpu/blob/main/components/mojo/README.md) |
-| **The series** | [Array Languages: every post](/series/#array-languages) |
+| **The series** | [Down the Rabbit-Hole: every post](/series/#down-the-rabbit-hole) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
 </div>
