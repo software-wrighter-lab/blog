@@ -20,10 +20,10 @@ repo_urls:
      mojo-on-3-gpus.md, slides-2026-10-23 (figures rendered from the deck's HTML slides: board, path-xetal, metal, steps-all,
      three-gpus, adreno-both, boundary; threshold-rendered from docs/images); X_eTaL-gpu 53633e4 (eleven demos through Mojo,
      docs/rtx5060-mojo-results.md). Where the deep dive's section 9 says the RTX run of activation_gpu.mojo had not been done,
-     the later mojo-on-3-gpus.md records it with a log; the later document is followed. Lead image: Mike's
-     block-activation-curves.jpg (2026-10-23, ~/Downloads), dark color, no-invert. -->
+     the later mojo-on-3-gpus.md records it with a log; the later document is followed. Lead image: a ReLU graph drawn for this post (2026-10-23; the eight dots are the post's inputs), replacing Mike's
+     block-activation-curves.jpg, kept in assets for a future post on several activation functions; dark, no-invert. -->
 
-<img src="{{ '/assets/images/posts/block-activation-curves.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/relu-curve.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
 [Rabbit-hole #8](/2026/10/21/rabbit-hole-xetal-to-the-metal/) followed one small X_eTaL program down every GPU toolchain it could reach, and ended on a hedge: a future post may investigate Qualcomm GPUs on a developer board. This is that post. The board is an Arduino UNO Q, and its GPU is a Qualcomm Adreno 702, which Mojo does not target. The program is the same one: a threshold and a ReLU, two activation functions from machine learning. By the end of one day, both X_eTaL and Mojo had run it on that GPU, and every answer was checked against a reference.
 
