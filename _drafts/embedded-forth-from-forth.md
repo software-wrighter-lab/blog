@@ -5,7 +5,7 @@ date: 2026-10-24 00:15:00 -0700
 categories: [embedded, programming-languages, deep-dive]
 tags: [embedded, forth, self-hosting, cor24, cross-compiler, kernel, bootstrapping, threaded-code, forth-from-forth]
 keywords: "Forth from Forth, Forth cross-compiler, self-hosting Forth kernel, COR24, sw-cor24-forth, forth-from-forth, kernel.s as a build artifact, Forth primitives, bootstrapping, threaded code"
-abstract: "Phase 4 of the COR24 Forth kernel, finished: a cross-compiler written in Forth turns the core's Forth source into the kernel's dictionary and writes the primitives in a small Forth assembler vocabulary, so the whole kernel.s is generated from Forth and boots straight into the Forth QUIT. Run on the kernel it just built, the compiler reproduces that kernel exactly: the hand-written kernel was needed only to start the chain. First output after 710 thousand instructions instead of 150 million. Why it sat for six months (a minus sign), what the April posts predicted, the new fourth tab in the web demo, and what still is not Forth: the assembler that turns the text into bytes."
+abstract: "Phase 4 of the COR24 Forth kernel, finished: a cross-compiler written in Forth turns the core's Forth source into the kernel's dictionary and writes the primitives in a small Forth assembler vocabulary, so the whole kernel.s is generated from Forth and boots straight into the Forth QUIT. Run on the kernel it just built, the compiler reproduces that kernel exactly, and the build now runs that way by default: the hand-written kernel was needed only to start the chain. Boot to the prompt now takes about a hundred instructions instead of ten million. Why it sat for six months (a minus sign), what the April posts predicted, the new fourth tab in the web demo, and what still is not Forth: the assembler that turns the text into bytes."
 series: "Embedded"
 series_part: 4
 repo_url: "https://github.com/sw-embed/sw-cor24-forth"
@@ -22,8 +22,11 @@ repo_url: "https://github.com/sw-embed/sw-cor24-forth"
      delete-bootstrap-and-rebaseline, 6 web-tab-4 (web-sw-cor24-forth), 7 blog-brief, 8 deck-update. kernel.s is still a copy of
      phase 3's. The saga's blog-brief step will hand over the facts; fill from it, the docs and the commits, not from this plan.
      2026-10-23 evening: filled from the repo's blog brief (docs/blog/2026-phase-4-forth-from-forth-brief.md, 4afec14, revised 2c461b6
-     with the Forth primitives 5b874f5 and the fixed point 0208844; all pushed). Numbers spot-checked against origin/main kernel-sizes.md, prims.fth
-     (32 PRIM: lines), xcomp.fth (621 lines after the revision). Figures: boot chart drawn from kernel-sizes.md; tab 4 captured from the live demo
+     with the Forth primitives 5b874f5 and the fixed point 0208844; revised again 6c8ec30 (self-hosted by default) and
+     0f89bc3 (hash deleted, boot numbers corrected: the April-style first-output counts were mostly emulator input pacing); all pushed.
+     NOT live at drafting: tab 4's Rebuild kernel button and tests/boot_cost.rs (uncommitted in web-sw-cor24-forth); the boot numbers
+     are cited from kernel-sizes.md instead. Add the button to "In the browser" when it ships.) Numbers spot-checked against origin/main kernel-sizes.md, prims.fth
+     (32 PRIM: lines), xcomp.fth (625 lines at 0f89bc3). Figures: boot chart drawn from kernel-sizes.md; tab 4 captured from the live demo
      (build a2caefd). Mike's point: a Forth compiler compiling itself; the revised brief has it (tf24a_fff_fixed_point), with the
      caveat that cor24-asm, not Forth, turns the text into bytes. status.md still has stale rows (6a template, web tab 4).
      Lead image: Mike's block-rabbit-watch.jpg (2026-10-23, ~/Downloads), monochrome; no-invert (Mike, 2026-10-23: inverted prints look poor in dark mode). -->
@@ -60,7 +63,7 @@ The bug was not in the compiler. Phase 3's Forth `NUMBER` read the minus sign fr
 ## The cross-compiler
 {: .pos-left}
 
-[`compiler/xcomp.fth`](https://github.com/sw-embed/sw-cor24-forth/blob/main/forth-from-forth/compiler/xcomp.fth) is 621 lines of Forth: the compiler and a small COR24 assembler vocabulary. It reads the five core tiers as ordinary Forth source and writes their dictionary as COR24 assembly text. The 32 primitives underneath are registered, one line each, in [`core/prims.fth`](https://github.com/sw-embed/sw-cor24-forth/blob/main/forth-from-forth/core/prims.fth), which ties each Forth name to the label of its code:
+[`compiler/xcomp.fth`](https://github.com/sw-embed/sw-cor24-forth/blob/main/forth-from-forth/compiler/xcomp.fth) is 625 lines of Forth: the compiler and a small COR24 assembler vocabulary. It reads the five core tiers as ordinary Forth source and writes their dictionary as COR24 assembly text. The 32 primitives underneath are registered, one line each, in [`core/prims.fth`](https://github.com/sw-embed/sw-cor24-forth/blob/main/forth-from-forth/core/prims.fth), which ties each Forth name to the label of its code:
 
 ```forth
 PRIM: LIT     do_lit
@@ -110,19 +113,37 @@ l: do_plus
   r0 jmp,
 ```
 
-Run, these words print COR24 assembler text, and the result is byte-identical to the hand-written primitives they replaced. The generated `kernel.s` now has no hand-written template behind it: 3,917 lines, all from Forth. The vocabulary prints text, though; it does not encode instructions. The COR24 assembler, `cor24-asm`, still turns that text into bytes.
+Run, these words print COR24 assembler text, and the result is byte-identical to the hand-written primitives they replaced. The generated `kernel.s` now has no hand-written template behind it, and with the primitives in Forth, deleting the unused `FIND` hash table became a Forth edit too: 3,508 lines, all from Forth. The vocabulary prints text, though; it does not encode instructions. The COR24 assembler, `cor24-asm`, still turns that text into bytes.
 
-## Booting already compiled
+## The kernel rebuilds itself
 {: .pos-right}
 
-<figure class="zoomable outdent-left">
-<img src="{{ '/assets/images/posts/fff-boot-instructions.webp' | relative_url }}" class="no-invert" alt="A bar chart on a log scale of instructions until the first output for the input 7777 dot on the COR24 emulator: forth.s, all assembly, 80,000; forth-from-forth, core compiled into the image, 710,000; forth-in-forth, four tiers over the UART, 87,440,000; forth-on-forthish, five tiers over the UART, 149,560,000">
-<figcaption style="font-size: 0.85em;">Instructions until the first output, per kernel, on a log scale. Click to enlarge.</figcaption>
+The first build of forth-from-forth was a bootstrap. The cross-compiler ran on the phase-3 kernel, forth-on-forthish, which was built from hand-written assembly, and emitted the new kernel. The question that matters is what happens when the new kernel does the job itself.
+
+So the build was run again with the compiler on forth-from-forth's own kernel. It reproduced forth-from-forth's `kernel.s` exactly, every byte of the text ([0208844](https://github.com/sw-embed/sw-cor24-forth/commit/0208844)). That is the fixed point a self-hosting compiler is judged by: built by itself, it builds itself, unchanged.
+
+Since then the build runs that way by default ([6c8ec30](https://github.com/sw-embed/sw-cor24-forth/commit/6c8ec30)): the committed kernel already holds the core, so only the compiler is streamed in, and it regenerates the kernel it is running on. The hand-written kernel is now only the root of the chain. Two golden tests keep both ends honest, `tf24a_fff_image_current` (the self-hosted build reproduces `kernel.s`) and `tf24a_fff_bootstrap_root` (starting again from the hand-written kernel gives the same `kernel.s`):
+
+```sh
+forth-from-forth/scripts/build-image.sh --check                                   # self-hosted
+XC_HOST=forth-on-forthish/kernel.s forth-from-forth/scripts/build-image.sh --check  # from the root
+```
+
+A full build, primitives and dictionary, is about 1.26 billion instructions of real work and about 30 seconds of wall time, since the compiler runs inside the emulator.
+
+## Booting already compiled
+{: .pos-left}
+
+<figure class="zoomable outdent-right">
+<img src="{{ '/assets/images/posts/fff-boot-instructions.webp' | relative_url }}" class="no-invert" alt="Two bar charts on log scales of instructions of real work, with input waits not counted. Boot to the prompt: forth.s about 100, forth-in-forth 1,743,700, forth-on-forthish 10,177,150, forth-from-forth about 100. Then the line 7777 dot: forth.s 13,750, forth-in-forth 13,150, forth-on-forthish 638,100, forth-from-forth 634,200">
+<figcaption style="font-size: 0.85em;">Boot to the prompt, then one line, per kernel, on log scales. Click to enlarge.</figcaption>
 </figure>
 
-`scripts/build-image.sh` splices the compiled dictionary into the kernel. At reset, `_start` points `LATEST` at the newest compiled entry, and the start thread runs the Forth `QUIT`. Nothing is read over the UART until the user types.
+At reset, `_start` points `LATEST` at the newest compiled entry, and the start thread runs the Forth `QUIT`. Nothing is compiled at boot, and nothing is read over the UART until the user types.
 
-Measured on the COR24 emulator, with the input `7777 .`, the first output now comes after 710 thousand instructions. Phase 3 needed about 150 million, phase 2 about 87 million, and the all-assembly kernel 80 thousand. In the web app, through the same UART pump the browser uses, tab 4 is ready after one tick of the pump and tab 3 after 74.
+Counting only real work, with each input byte handed over the moment the kernel asks for it, boot to the prompt now takes about a hundred instructions, as the all-assembly kernel does. Phase 3 needed about ten million, compiling its five tiers from text at every start, and phase 2 about 1.7 million. (The repo's earlier figures, instructions to the first output, were mostly the emulator waiting: it hands over at most one input byte per 10,000-instruction batch.) In the web app, through the same UART pump the browser uses, tab 4 is ready after one tick of the pump and tab 3 after 74.
+
+Each line typed still costs what it did in phase 3. Tabs 3 and 4 run the same Forth: `FIND` walks the whole dictionary, about 127 entries, comparing strings in Forth, and `/MOD` is a Forth loop of repeated subtraction, since COR24 has no divide. So `7777 .` costs about 634 thousand instructions, most of them (about 475 thousand) in the roughly 860 trips round `/MOD` that printing it takes; phase 2, with its hashed assembly `FIND` and assembly `/MOD`, does the same line in about 13 thousand.
 
 Getting the assembly bootstrap out of the image took one more Forth definition. The last assembly code that called the assembly `WORD` and `FIND` was `[']`, and a Forth one replaced it ([8ab0170](https://github.com/sw-embed/sw-cor24-forth/commit/8ab0170)):
 
@@ -138,15 +159,16 @@ A reachability pass then removed everything nothing referred to: 85 blocks and 1
 | phase 4, image with the bootstrap still in | 5,087 | 9,450 |
 | phase 4, bootstrap removed | 4,060 | 8,168 |
 | phase 4, primitives from Forth | 3,917 | 8,168 |
+| phase 4, `FIND` hash table removed | 3,508 | 7,098 |
 
-The phase-4 kernel is bigger than phase 3's because it carries the compiled core: 83 definitions, 2,427 lines of emitted assembly, about 5.4 KB on their own. Phase 3 carried the same core as source and compiled it at every boot. A full build, primitives and dictionary, takes about 80 seconds, since the compiler runs inside the emulator. All 92 golden-output tests pass.
+The phase-4 kernel is bigger than phase 3's because it carries the compiled core: 83 definitions, 2,427 lines of emitted assembly, about 5.4 KB on their own. Phase 3 carried the same core as source and compiled it at every boot. All 92 golden-output tests pass.
 
 ## What the April posts predicted
 {: .pos-center}
 
 The [rabbit-hole posts](/2026/04/23/rabbit-hole-deep-dive-forth-find-cost-of-a-name/) from April worked through what phase 4 would need. Checked against what was built:
 
-- **"Phase 4 deletes the hashing subsystem."** Mostly. The assembly `FIND` that used the hash is gone from the image. The hash table itself is still there, unused: the assembly `CREATE` maintains it and `_start` fills it. Now that the primitives are Forth, removing it is a Forth edit.
+- **"Phase 4 deletes the hashing subsystem."** True, in two steps. The assembly `FIND` that used the hash left when a Forth `[']` replaced its last caller. The table, the loop in `_start` that filled it and its upkeep in `CREATE` stayed until the primitives were Forth; then deleting them was a Forth edit: 259 lines of `prims-asm.fth`, 1,070 bytes of kernel, and boot down from about 22,000 instructions to about 100.
 - **Caches to replace the hash** (a numeric fast path, recent hits, hot tokens): none were built. Boot no longer runs `FIND` over the core at all, which was the cost they targeted. Interactive `FIND` speed was not measured.
 - **Dictionary compaction and specialized images:** not done. The image keeps every core word, development words such as `SEE` and `DUMP-ALL` included. The relocation problem that post described did not arise, because the image is assembled from text with labels rather than relocated.
 - **Forward references as linker-style fixups:** not needed for the core. Every definition is registered before its body is read, so later definitions and self-reference resolve by name, and the core has no mutual recursion. The retargetable second backend that post proposed was not built.
@@ -173,18 +195,8 @@ Finishing phase 4 turned up bugs in the older kernels and in the tests:
 - **Fixed in the tests:** six golden tests kept only the first 100 to 250 lines of output, so the Fibonacci tests never compared the Fibonacci result; and the emulator's default 10-second limit cut runs short under load.
 - **Not fixed:** `2SWAP` and `2OVER` in the layered kernels are wrong (`1 2 3 4 2SWAP` leaves `2 1 4 3`); `.` prints -8388608 as `-0`; and tab 3 starts each session with a stray value on its stack, left by errors its assembly bootstrap prints while loading the core.
 
-## The kernel rebuilds itself
+## What is still not Forth
 {: .pos-right}
 
-Building forth-from-forth is a bootstrap. The cross-compiler normally runs on the phase-3 kernel, forth-on-forthish, which was built from hand-written assembly, and emits the new kernel. The question that matters is what happens when the new kernel does the job itself.
-
-So the build was run again with the compiler on forth-from-forth's own kernel. It reproduced forth-from-forth's `kernel.s` exactly, every byte of the text ([0208844](https://github.com/sw-embed/sw-cor24-forth/commit/0208844)). That is the fixed point a self-hosting compiler is judged by: built by itself, it builds itself, unchanged. From here, the hand-written kernel is only the root of the chain, needed once to start it. A golden test, `tf24a_fff_fixed_point`, now runs that build on every change, and anyone can repeat it:
-
-```sh
-XC_HOST=forth-from-forth/kernel.s forth-from-forth/scripts/build-image.sh --check
-```
-
-## What is still not Forth
-
-- **The assembler.** The kernel's assembly is generated by Forth, but `cor24-asm` turns it into bytes. A Forth instruction encoder, the piece Embedded #3 expected retargeting to hinge on, is the next step, after which the image would need no external assembler.
-- **Leftovers:** the unused `FIND` hash table; `DO`, `?DO`, `LOOP`, `CONSTANT` and `VARIABLE` in the cross-compiler, left out because no core tier uses them; and the second, retargetable backend and the Forth-builder kit from the spring, which are still plans.
+- **The assembler.** The kernel is generated from Forth down to assembly text, and `cor24-asm` turns the text into bytes. That is where the work stops for now. A Forth instruction encoder, the piece Embedded #3 expected retargeting to hinge on, could replace it later; it is not planned.
+- **Leftovers:** `DO`, `?DO`, `LOOP`, `CONSTANT` and `VARIABLE` in the cross-compiler, left out because no core tier uses them; and the second, retargetable backend and the Forth-builder kit from the spring, which are still plans.
