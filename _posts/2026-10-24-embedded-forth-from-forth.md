@@ -207,4 +207,4 @@ Finishing phase 4 turned up bugs in the older kernels and in the tests:
 
 ---
 
-<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/24: the lead image is now a block print of an Arduino board, in place of a rabbit print meant for the Rabbit-hole series. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-24-embedded-forth-from-forth.md">Post history</a>.]</em></p>
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/24: the lead image is now a block print of an Arduino board, in place of a rabbit print meant for the Rabbit-hole series. Next steps: porting <a href="https://github.com/sw-vibe-coding/sw-fth-wasm">sw-fth-wasm</a>, the Rust/WASM proto-Forth, to a command-line Forth REPL on the Arduino UNO Q pictured at the top. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-24-embedded-forth-from-forth.md">Post history</a>.]</em></p>
