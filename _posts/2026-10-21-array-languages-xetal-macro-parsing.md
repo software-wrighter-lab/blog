@@ -40,7 +40,7 @@ repo_urls:
      Lead image: Mike's block-composer-stick.jpg (2026-10-17), fourth version (11:58), type set upside down; monochrome, inverts in dark mode. -->
 
 <figure style="float: left; width: 205px; margin: 0.8em 2em 1em 0.5em;">
-<img src="{{ '/assets/images/posts/block-composer-stick.webp' | relative_url }}" class="post-marker" alt="A compositor's hand setting metal type in a composing stick" style="width: 205px; float: none; margin: 0 !important; padding: 0;">
+<img src="{{ '/assets/images/posts/block-composer-stick.webp' | relative_url }}" class="post-marker no-invert" alt="A compositor's hand setting metal type in a composing stick" style="width: 205px; float: none; margin: 0 !important; padding: 0;">
 <figcaption style="font-size: 0.8em; text-align: center; margin-top: 0.3em;">A composing stick.</figcaption>
 </figure>
 

@@ -13,7 +13,7 @@ series_part: 12
 date: 2026-09-24 00:15:00 -0700
 ---
 
-<img src="{{ '/assets/images/posts/ibm-5100-marker.webp' | relative_url }}" class="post-marker" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/ibm-5100-marker.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
 Last week's [TBT #11](/2026/09/17/tbt-apl-360-revisited/) covered APL\360 itself --- the typeball, the six-space prompt, the clean-room interpreter --- so this week stays on the new work: sw-apl's second mode, modelled on the APL of the IBM 5100 family, finished over the past week, and the two workspaces it made possible.
 
