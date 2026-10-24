@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Saw #8: Tuplet, Smalltalk-on-BASIC, Forth-from-Forth, sw-MLPL Split, and I2C on COR24"
+title: "Saw #8: Tuplet, Smalltalk-on-BASIC, proto-forth-wasm, sw-MLPL Split, and I2C on COR24"
 date: 2026-04-26 09:30:00 -0700
 categories: [languages, compilers, forth, smalltalk, emacs, machine-learning]
-tags: [sharpen-the-saw, tuplet, smalltalk, cor24, basic, forth, forth-from-forth, espanso, gnu-apl, emacs, glyphs, wasm, dogfooding, ocaml, i2c, mlpl, mlx, cuda]
-keywords: "Tuplet language, significant whitespace, glyph input, Espanso, GNU APL, Emacs glyph entry, integer Smalltalk, COR24 BASIC, dogfooding languages, forcing function, Forth-from-Forth, WebAssembly Forth, OCaml features, language playground, I2C COR24 emulator, sw-MLPL, MLX backend, CUDA backend, project compartmentalization, parallel development, demo site status tab, org-mode babel"
-abstract: "Tuplet is a new experimental PoC language with significant whitespace and glyphs, set up as a playground for future language experiments---and the reason for installing Espanso and configuring Emacs as a shared glyph-input layer (also useful for GNU APL). An integer/toy Smalltalk written in COR24 BASIC works as a forcing function for BASIC; Tuplet plays the same role for OCaml and Forth. A new Forth-from-Forth runs in the browser via WASM. sw-MLPL splits into Linux/CUDA, Mac/MLX, and Web UI repos after its build dir crossed 35 GB. The COR24 emulator gains I2C support with examples, and the demo site's Status tab tracks the new languages with commits and issues."
+tags: [sharpen-the-saw, tuplet, smalltalk, cor24, basic, forth, forth-wasm, espanso, gnu-apl, emacs, glyphs, wasm, dogfooding, ocaml, i2c, mlpl, mlx, cuda]
+keywords: "Tuplet language, significant whitespace, glyph input, Espanso, GNU APL, Emacs glyph entry, integer Smalltalk, COR24 BASIC, dogfooding languages, forcing function, proto-forth-wasm, WebAssembly Forth, OCaml features, language playground, I2C COR24 emulator, sw-MLPL, MLX backend, CUDA backend, project compartmentalization, parallel development, demo site status tab, org-mode babel"
+abstract: "Tuplet is a new experimental PoC language with significant whitespace and glyphs, set up as a playground for future language experiments---and the reason for installing Espanso and configuring Emacs as a shared glyph-input layer (also useful for GNU APL). An integer/toy Smalltalk written in COR24 BASIC works as a forcing function for BASIC; Tuplet plays the same role for OCaml and Forth. A new browser-native Forth, proto-forth-wasm, runs via WASM. sw-MLPL splits into Linux/CUDA, Mac/MLX, and Web UI repos after its build dir crossed 35 GB. The COR24 emulator gains I2C support with examples, and the demo site's Status tab tracks the new languages with commits and issues."
 series: "Sharpen the Saw Sundays"
 series_part: 8
 repo_url: "https://github.com/sw-vibe-coding/tuplet"
@@ -28,7 +28,7 @@ Six threads, one idea: dogfood the stack and let the gaps---missing features, mi
 | **Tuplet** | [github.com/sw-vibe-coding/tuplet](https://github.com/sw-vibe-coding/tuplet) |
 | **Smalltalk on COR24 BASIC** | [github.com/sw-embed/sw-cor24-smalltalk](https://github.com/sw-embed/sw-cor24-smalltalk) |
 | **Smalltalk video (YouTube Short)** | [youtube.com/shorts/fL5NLSKkLoU](https://www.youtube.com/shorts/fL5NLSKkLoU) |
-| **Forth-from-Forth (proto-forth-wasm)** | [github.com/sw-vibe-coding/sw-fth-wasm](https://github.com/sw-vibe-coding/sw-fth-wasm) — [live demo](https://sw-vibe-coding.github.io/sw-fth-wasm/) |
+| **proto-forth-wasm** | [github.com/sw-vibe-coding/sw-fth-wasm](https://github.com/sw-vibe-coding/sw-fth-wasm) — [live demo](https://sw-vibe-coding.github.io/sw-fth-wasm/) |
 | **COR24 Demo Hub (Status tab)** | [sw-embed.github.io/web-sw-cor24-demos](https://sw-embed.github.io/web-sw-cor24-demos/#/) |
 | **Repos & Live Demos** | [Table below](#repos-and-live-demos) |
 | **Prior Post** | [Saw #7: Prolog, Many-Agent Isolation, Self-Hosting Assembler, and MLPL](/2026/04/19/saw-prolog-many-agents-self-hosting-mlpl/) |
@@ -61,7 +61,7 @@ The glyphs in that fragment are: ▪ (BLACK SMALL SQUARE, U+25AA, mint), ℤ (DO
 Two things make Tuplet immediately practical:
 
 - **Implementation language**: Tuplet's host implementation is an OCaml subset that runs on [sw-cor24-ocaml](https://github.com/sw-embed/sw-cor24-ocaml). Using OCaml as a load-bearing part of the toolchain forced a round of new features in the OCaml interpreter---details in the Smalltalk-and-Tuplet section below.
-- **Compilation target**: Tuplet lowers to Forth, so it inherits whatever the COR24 Forth and Forth-from-Forth efforts deliver. New Forth features cascade into Tuplet for free.
+- **Compilation target**: Tuplet lowers to Forth, so it inherits whatever the COR24 Forth and proto-forth-wasm efforts deliver. New Forth features cascade into Tuplet for free.
 
 ## Glyph Input Infrastructure: Espanso and Emacs
 
@@ -121,13 +121,13 @@ The same forcing-function pattern played out for Tuplet on the OCaml side. Eleve
 
 A lexer, AST, and IR lowering pipeline needs records, variants, top-level lets, multi-line match, mutable refs, and exceptions just to be writable. The [OCaml live demo](https://sw-embed.github.io/web-sw-cor24-ocaml/) now ships every one of those. The Forth side picked up the matching upgrades---`:NONAME` for anonymous colon definitions and a `SEE-CFA` truncation fix---in [sw-cor24-forth](https://github.com/sw-embed/sw-cor24-forth) over the same window.
 
-## Forth-from-Forth: A Browser-Native Forth via WASM
+## proto-forth-wasm: A Browser-Native Forth via WASM
 
-[Forth-from-Forth](https://github.com/sw-vibe-coding/sw-fth-wasm) (`proto-forth-wasm`) is a browser-native Forth running on Rust/WASM. The Rust `Machine` owns the data stack, return stack, memory, dictionary, tokenizer, compiler, and VM loop; colon definitions compile to an opcode IR; user-word execution runs on an iterative VM loop with no host-stack recursion for nested calls. The vocabulary already covers arithmetic, stack shuffling, comparisons, structured control flow (`IF/ELSE/THEN`, `BEGIN/UNTIL`, `BEGIN/WHILE/REPEAT`, `DO/LOOP` with `I`), memory (`VARIABLE`, `CONSTANT`, `@`, `!`, `+!`, `ALLOT`), the return stack, I/O, and introspection (`SEE`, `WORDS`).
+[proto-forth-wasm](https://github.com/sw-vibe-coding/sw-fth-wasm) (repo `sw-fth-wasm`) is a browser-native Forth running on Rust/WASM. The Rust `Machine` owns the data stack, return stack, memory, dictionary, tokenizer, compiler, and VM loop; colon definitions compile to an opcode IR; user-word execution runs on an iterative VM loop with no host-stack recursion for nested calls. The vocabulary already covers arithmetic, stack shuffling, comparisons, structured control flow (`IF/ELSE/THEN`, `BEGIN/UNTIL`, `BEGIN/WHILE/REPEAT`, `DO/LOOP` with `I`), memory (`VARIABLE`, `CONSTANT`, `@`, `!`, `+!`, `ALLOT`), the return stack, I/O, and introspection (`SEE`, `WORDS`).
 
 The [live demo](https://sw-vibe-coding.github.io/sw-fth-wasm/) puts the REPL, source pane, stack, dictionary, output, history, and trace all on one page. WASM matters here for the same reason a self-hosting toolchain matters elsewhere: zero-install distribution. A reader can land on the page and have a working Forth in seconds.
 
-Two Forth-in-Forth issues closed this week pulled the project closer to self-hosting at the language level: [#1](https://github.com/sw-embed/sw-cor24-forth/issues/1) added a hashed dictionary to speed up `FIND`, and [#2](https://github.com/sw-embed/sw-cor24-forth/issues/2) added `DO/LOOP`, `?DO`, `WHILE/REPEAT`, `AGAIN`, `CONSTANT`, and `VARIABLE` to the Forth-in-Forth implementation. Open issue [#3](https://github.com/sw-embed/sw-cor24-forth/issues/3) tracks the remaining standard words: `+LOOP/J/LEAVE`, `DOES>`, `RECURSE`, `PICK/ROLL/?DUP/MIN/MAX/<=/>=/<>`.
+Separately, in the COR24 Forth ([sw-cor24-forth](https://github.com/sw-embed/sw-cor24-forth)), two Forth-in-Forth issues closed this week pulled that kernel closer to self-hosting at the language level: [#1](https://github.com/sw-embed/sw-cor24-forth/issues/1) added a hashed dictionary to speed up `FIND`, and [#2](https://github.com/sw-embed/sw-cor24-forth/issues/2) added `DO/LOOP`, `?DO`, `WHILE/REPEAT`, `AGAIN`, `CONSTANT`, and `VARIABLE` to the Forth-in-Forth implementation. Open issue [#3](https://github.com/sw-embed/sw-cor24-forth/issues/3) tracks the remaining standard words: `+LOOP/J/LEAVE`, `DOES>`, `RECURSE`, `PICK/ROLL/?DUP/MIN/MAX/<=/>=/<>`.
 
 A **Forth-builder** is in planning---a small kit (inner interpreter, dictionary, I/O backend, target word set) that composes Forth systems by configuration instead of by fork. Once the builder exists, spinning up a new Forth flavor for an experiment becomes a build-time decision.
 
@@ -176,7 +176,7 @@ The Status tab is the same kind of investment as the glyph-input layer and the I
 |---------|--------|-----------|
 | **Tuplet** | [sw-vibe-coding/tuplet](https://github.com/sw-vibe-coding/tuplet) | *in development* |
 | **Smalltalk on COR24 BASIC** | [sw-embed/sw-cor24-smalltalk](https://github.com/sw-embed/sw-cor24-smalltalk) | [sw-embed.github.io/web-sw-cor24-smalltalk](https://sw-embed.github.io/web-sw-cor24-smalltalk/) |
-| **Forth-from-Forth (WASM)** | [sw-vibe-coding/sw-fth-wasm](https://github.com/sw-vibe-coding/sw-fth-wasm) | [sw-vibe-coding.github.io/sw-fth-wasm](https://sw-vibe-coding.github.io/sw-fth-wasm/) |
+| **proto-forth-wasm (WASM)** | [sw-vibe-coding/sw-fth-wasm](https://github.com/sw-vibe-coding/sw-fth-wasm) | [sw-vibe-coding.github.io/sw-fth-wasm](https://sw-vibe-coding.github.io/sw-fth-wasm/) |
 | **COR24 BASIC** | [sw-embed/sw-cor24-basic](https://github.com/sw-embed/sw-cor24-basic) | [sw-embed.github.io/web-sw-cor24-basic](https://sw-embed.github.io/web-sw-cor24-basic/) |
 | **COR24 Forth** | [sw-embed/sw-cor24-forth](https://github.com/sw-embed/sw-cor24-forth) | [sw-embed.github.io/web-sw-cor24-forth](https://sw-embed.github.io/web-sw-cor24-forth/) |
 | **COR24 OCaml** | [sw-embed/sw-cor24-ocaml](https://github.com/sw-embed/sw-cor24-ocaml) | [sw-embed.github.io/web-sw-cor24-ocaml](https://sw-embed.github.io/web-sw-cor24-ocaml/) |
@@ -192,7 +192,7 @@ The Status tab is the same kind of investment as the glyph-input layer and the I
 
 **Glyph Input + Emacs**: Publish concrete Emacs configuration examples (init snippets, Quail rules, TeX-style mappings) drawn from `docs/emacs-inputs.md`, and add **org-mode support**---which means babel blocks for Tuplet *and* every other COR24 language (BASIC, Forth, OCaml, PL/SW, SNOBOL4, etc.). Babel-blocks across the language set turns org-mode into a real notebook for the COR24 stack.
 
-**Forth-from-Forth**: Close the remaining standard Forth words ([sw-cor24-forth #3](https://github.com/sw-embed/sw-cor24-forth/issues/3)) and start the Forth-builder kit so new Forth flavors compose by configuration.
+**COR24 Forth**: Close the remaining standard Forth words ([sw-cor24-forth #3](https://github.com/sw-embed/sw-cor24-forth/issues/3)) and start the Forth-builder kit so new Forth flavors compose by configuration.
 
 **sw-MLPL Split**: Land the four-way split (Linux/CUDA, Mac/MLX, Web UI, separated Compiler vs. REPL) and confirm each piece builds cleanly on a host that doesn't have the others' dependencies. Republish the live demo from the new Web UI repo.
 
@@ -201,3 +201,7 @@ The Status tab is the same kind of investment as the glyph-input layer and the I
 ---
 
 *Forcing functions sharpen languages faster than feature lists do. Follow for more Sharpen the Saw updates.*
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/23: proto-forth-wasm (repo sw-fth-wasm), a separate Rust/WASM Forth, was mislabeled "Forth-from-Forth" in the title, abstract, a section heading and two table rows; it is relabeled, and the sw-cor24-forth issues and next steps are now attributed to the COR24 Forth. "forth-from-forth" names phase 4 of sw-cor24-forth, a different project. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-04-26-saw-tuplet-smalltalk-forth-from-forth.md">Post history</a>.]</em></p>
