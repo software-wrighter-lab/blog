@@ -15,7 +15,7 @@ series_part: 6
 date: 2026-09-21 00:15:00 -0700
 ---
 
-<img src="{{ '/assets/images/posts/sage-bird-marker.webp' | relative_url }}" class="post-marker" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/sage-bird-marker.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
 Prior to this post, searching this site for "Y combinator" turned up nothing. The search engine was innocent: no post had ever covered it, despite the fact that the repos have carried working fixed-point combinators since August. This short post closes the gap.
 
