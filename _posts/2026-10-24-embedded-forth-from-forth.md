@@ -29,9 +29,9 @@ repo_url: "https://github.com/sw-embed/sw-cor24-forth"
      (32 PRIM: lines), xcomp.fth (625 lines at 0f89bc3). Figures: boot chart drawn from kernel-sizes.md; tab 4 captured from the live demo
      (build a2caefd). Mike's point: a Forth compiler compiling itself; the revised brief has it (tf24a_fff_fixed_point), with the
      caveat that cor24-asm, not Forth, turns the text into bytes. status.md still has stale rows (6a template, web tab 4).
-     Lead image: Mike's block-rabbit-watch.jpg (2026-10-23, ~/Downloads), monochrome; no-invert (Mike, 2026-10-23: inverted prints look poor in dark mode). -->
+     Lead image: Mike's block-uno-q.jpg (2026-10-24, from Dropbox; replaced block-rabbit-watch, a Rabbit-hole image kept for that series); was block-rabbit-watch.jpg (2026-10-23, ~/Downloads), monochrome; no-invert (Mike, 2026-10-23: inverted prints look poor in dark mode). -->
 
-<img src="{{ '/assets/images/posts/block-rabbit-watch.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-uno-q.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
 [Embedded #3](/2026/04/20/embedded-forth-self-hosting-spectrum/) asked how much of a Forth kernel can be written in Forth, and laid out four phases for the COR24 kernel, from all assembly to a cross-compiler written in Forth that emits the kernel's own assembly. Two phases had shipped, the third was under way, and the fourth was "on the horizon". The fourth has now landed, six months late. The kernel no longer reads its core Forth source at boot: a compiler written in Forth has already turned that source into the kernel's dictionary, and writes the primitives too, so every line of the kernel's assembly is generated from Forth. And the compiler, run on the kernel it just built, rebuilds that same kernel exactly. The hand-written kernel was needed only to start the chain.
 
@@ -204,3 +204,7 @@ Finishing phase 4 turned up bugs in the older kernels and in the tests:
 
 - **The assembler.** The kernel is generated from Forth down to assembly text, and `cor24-asm` turns the text into bytes. That is where the work stops for now. A Forth instruction encoder, the piece Embedded #3 expected retargeting to hinge on, could replace it later; it is not planned.
 - **Leftovers:** `DO`, `?DO`, `LOOP`, `CONSTANT` and `VARIABLE` in the cross-compiler, left out because no core tier uses them; and the second, retargetable backend and the Forth-builder kit from the spring, which are still plans.
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/24: the lead image is now a block print of an Arduino board, in place of a rabbit print meant for the Rabbit-hole series. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-24-embedded-forth-from-forth.md">Post history</a>.]</em></p>
