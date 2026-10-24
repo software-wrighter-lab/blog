@@ -44,6 +44,7 @@ repo_url: "https://github.com/sw-embed/sw-cor24-forth"
 | **The code** | [sw-cor24-forth](https://github.com/sw-embed/sw-cor24-forth), `forth-from-forth/` |
 | **Status and numbers** | [status.md](https://github.com/sw-embed/sw-cor24-forth/blob/main/forth-from-forth/docs/status.md), [kernel-sizes.md](https://github.com/sw-embed/sw-cor24-forth/blob/main/forth-from-forth/docs/kernel-sizes.md) |
 | **Live demo** | [Tiny Forth, tab 4](https://sw-embed.github.io/web-sw-cor24-forth/) |
+| **Presentation** | [Forth on COR24, PDF](https://github.com/sw-embed/web-sw-cor24-forth/blob/main/docs/forth-on-cor24.pdf) |
 | **Earlier** | [Embedded #3](/2026/04/20/embedded-forth-self-hosting-spectrum/); Rabbit-hole [#2](/2026/04/23/rabbit-hole-deep-dive-forth-find-cost-of-a-name/), [#3](/2026/04/24/rabbit-hole-forth-life-after-hashing/), [#4](/2026/04/25/rabbit-hole-forth-dictionary-compaction-specialized-images/), [#5](/2026/04/26/rabbit-hole-forth-retargetable-codegen-forward-references/) |
 | **The series** | [Embedded: every post](/series/#embedded) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
