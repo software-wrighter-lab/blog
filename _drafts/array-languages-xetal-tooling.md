@@ -21,9 +21,9 @@ repo_urls:
      lint --list = 31, D183-D185, plan.md Saga 33 (designed, not built), the libraries doc site, XETAL_COMMIT pins, PRD non-goal,
      wish list): intro, writing and running, checking, testing (part), documentation, libraries. The rest waits on the inventory.
      xetal 2bdc6a57 subcommands: lex, render, diagram, expand, doc, parse, fmt, migrate, lint, core, type, eval, run, repl, edit.
-     Links only to published posts. Lead image: Mike's block-bench-tools.jpg (2026-10-22, from Dropbox), monochrome, inverts in dark mode. -->
+     Links only to published posts. Lead image: Mike's block-bench-tools.jpg (2026-10-22, from Dropbox), monochrome; no-invert (Mike, 2026-10-23). -->
 
-<img src="{{ '/assets/images/posts/block-bench-tools.webp' | relative_url }}" class="post-marker" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-bench-tools.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
 A language is used through its tools, and Rust shows how far that can go: one command, `cargo`, builds, tests, benchmarks, documents, formats and lints, and a language server puts the compiler's knowledge in every editor. This post takes stock of X_eTaL's tools against that yardstick: what exists today, what needs work, what is designed or planned, and what is missing.
 
