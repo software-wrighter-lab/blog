@@ -14,7 +14,8 @@ repo_url: "https://github.com/sw-embed/sw-cor24-forth"
 <!-- DRAFT PLAN (2026-10-23), Mike: a post for 10/24 on finishing forth-from-forth, phase 4 of sw-cor24-forth ("hopefully
      finished tonight/tomorrow"). The sequel to Embedded #3 (2026-04-20), whose last phase was "On the Horizon"; Rabbit-hole #2-#5
      (2026-04-23 to 04-26) followed the phase-4 design (FIND, hashing, compaction, codegen).
-     NOT Saw #8's "Forth-from-Forth": that row links sw-vibe-coding/sw-fth-wasm, a separate WebAssembly Forth (last commit 2026-04-26).
+     Mike (2026-10-23): the work is in sw-cor24-forth and a fourth tab on web-sw-cor24-forth. Saw #8 labeled sw-vibe-coding/sw-fth-wasm
+     (proto-forth-wasm, a separate Rust/WASM Forth) "Forth-from-Forth"; that was a different project, not this one.
      Source state at drafting: sw-cor24-forth local main is 14 commits AHEAD of origin (latest a1a7b07, 2026-10-23): link only
      pushed commits. forth-from-forth/docs/status.md (2026-10-23): saga phase-4-tab-4, steps 1 parser-integration-fix (done,
      the negative-literal NUMBER bug), 2 compile-runtime-from-source, 3 compile-full-core, 4 prims-and-image-boot, 5
@@ -34,7 +35,7 @@ repo_url: "https://github.com/sw-embed/sw-cor24-forth"
 |----------|------|
 | **The code** | [sw-cor24-forth](https://github.com/sw-embed/sw-cor24-forth), `forth-from-forth/` |
 | **Status** | TODO: forth-from-forth/docs/status.md, once pushed |
-| **Live demo** | TODO: the web demo's tab 4 (web-sw-cor24-forth), if it ships |
+| **Live demo** | [web-sw-cor24-forth](https://sw-embed.github.io/web-sw-cor24-forth/) (TODO: tab 4 when it ships) |
 | **Earlier** | [Embedded #3](/2026/04/20/embedded-forth-self-hosting-spectrum/); Rabbit-hole [#2](/2026/04/23/rabbit-hole-deep-dive-forth-find-cost-of-a-name/), [#3](/2026/04/24/rabbit-hole-forth-life-after-hashing/), [#4](/2026/04/25/rabbit-hole-forth-dictionary-compaction-specialized-images/), [#5](/2026/04/26/rabbit-hole-forth-retargetable-codegen-forward-references/) |
 | **The series** | [Embedded: every post](/series/#embedded) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
@@ -67,7 +68,7 @@ TODO: step 5: the bootstrap deleted and the tests re-baselined (reg-rs); the bef
 
 ## In the browser
 
-TODO: step 6, tab 4 of the web demo, if it ships; a screenshot.
+TODO: step 6: the fourth tab on [web-sw-cor24-forth](https://sw-embed.github.io/web-sw-cor24-forth/), beside the three earlier phases' tabs; what it shows, and a screenshot.
 
 ## What it took, and what is next
 
