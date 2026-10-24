@@ -21,9 +21,9 @@ repo_url: "https://github.com/sw-embed/sw-cor24-forth"
      the negative-literal NUMBER bug), 2 compile-runtime-from-source, 3 compile-full-core, 4 prims-and-image-boot, 5
      delete-bootstrap-and-rebaseline, 6 web-tab-4 (web-sw-cor24-forth), 7 blog-brief, 8 deck-update. kernel.s is still a copy of
      phase 3's. The saga's blog-brief step will hand over the facts; fill from it, the docs and the commits, not from this plan.
-     Lead image: placeholder until Mike supplies one. -->
+     Lead image: Mike's block-rabbit-watch.jpg (2026-10-23, ~/Downloads), monochrome, inverts in dark mode. -->
 
-<img src="{{ '/assets/images/posts/placeholder-embedded-forth-from-forth.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-rabbit-watch.webp' | relative_url }}" class="post-marker" alt="" style="width: 205px;">
 
 [Embedded #3](/2026/04/20/embedded-forth-self-hosting-spectrum/) asked how much of a Forth kernel can be written in Forth, and laid out four phases for the COR24 kernel, from all assembly to a Forth-hosted cross-compiler that emits the kernel's own `.s` file. Two had shipped, the third was under way, and the fourth was "on the horizon". TODO: one or two sentences on what this post shows: phase 4 done (or how far), and what that means.
 
