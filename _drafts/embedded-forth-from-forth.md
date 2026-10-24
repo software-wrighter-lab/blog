@@ -122,6 +122,7 @@ A reachability pass then removed everything nothing referred to: 85 blocks and 1
 The phase-4 kernel is bigger than phase 3's because it carries the compiled core: 83 definitions, 2,427 lines of emitted assembly, about 5.4 KB on their own. Phase 3 carried the same core as source and compiled it at every boot. Building the image takes about 38 seconds, since the compiler runs inside the emulator. All 91 golden-output tests pass.
 
 ## What the April posts predicted
+{: .pos-center}
 
 The [rabbit-hole posts](/2026/04/23/rabbit-hole-deep-dive-forth-find-cost-of-a-name/) from April worked through what phase 4 would need. Checked against what was built:
 
