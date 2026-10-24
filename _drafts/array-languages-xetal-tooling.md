@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "Array Languages #19: X_eTaL's Tools, Built, Planned and Wanted"
+title: "Array Languages #20: X_eTaL's Tools, Built, Planned and Wanted"
 categories: [languages, language-design, tools]
 tags: [array-languages, xetal, x-etal, tooling, repl, editor, linter, formatter, debugger, lsp, dap, profiler, benchmarks, documentation, packages, rust, cargo]
 keywords: "X_eTaL tooling, array language REPL, WASM live demo, terminal editor, type checker, linter, formatter, doc tests, benchmarks, code coverage, cross-reference docs, package manager, time-travel debugger, visual debugger, LSP, DAP, equation editor, tensor pipeline editor, 3D variable explorer, Rust cargo tooling"
-abstract: "Nineteenth in the Array Languages series: the tools around X_eTaL, measured against Rust's. What exists today, from the REPL and the editors to the type checker, the linter and the documentation site; what needs work; what is designed or planned; and what is still missing: a test runner, benchmarks and coverage, a package system, a language server, a debugger that can step backward, and visual editors for equations, tensor pipelines and arrays in 3D."
+abstract: "Twentieth in the Array Languages series: the tools around X_eTaL, measured against Rust's. What exists today, from the REPL and the editors to the type checker, the linter and the documentation site; what needs work; what is designed or planned; and what is still missing: a test runner, benchmarks and coverage, a package system, a language server, a debugger that can step backward, and visual editors for equations, tensor pipelines and arrays in 3D."
 series: "Array Languages"
-series_part: 19
-date: 2026-10-25 00:15:00 -0700
+series_part: 20
+date: 2026-10-26 00:15:00 -0700
 repo_urls:
   - url: "https://github.com/softwarewrighter/X_eTaL"
     title: "X_eTaL"
