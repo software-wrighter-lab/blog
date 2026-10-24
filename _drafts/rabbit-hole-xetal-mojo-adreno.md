@@ -7,7 +7,7 @@ keywords: "Mojo on Qualcomm Adreno, X_eTaL OpenCL Adreno 702, Arduino UNO Q GPU,
 abstract: "A threshold and a ReLU activation function, written once in X_eTaL and once in Mojo, run on the Adreno 702 GPU in an Arduino UNO Q, a GPU Mojo does not target. X_eTaL gets there through its own OpenCL backend; Mojo gets there first as the host program, then with its own kernel, retargeted from NVIDIA's IR to SPIR-V. Both reach the same Freedreno instructions. The same Mojo kernel also runs on Apple and NVIDIA GPUs, and X_eTaL's Mojo backend now runs eleven demos. What one day of work established, and what it did not."
 series: "Down the Rabbit-Hole"
 series_part: 9
-date: 2026-10-24 00:15:00 -0700
+date: 2026-10-23 00:30:00 -0700
 repo_urls:
   - url: "https://github.com/softwarewrighter/modular-fork/tree/research-qualcomm-adreno-702-gpu/adreno-poc"
     title: "modular-fork: adreno-poc"
@@ -15,7 +15,7 @@ repo_urls:
     title: "X_eTaL-gpu"
 ---
 
-<!-- DRAFT (2026-10-23), Mike: Rabbit-hole #9 for 10/24, the sequel to Rabbit-hole #8 (first drafted as AL #18; moved because Mojo is not an array language). AL Ergonomics #18 moved to 10/25, Tooling #19 to 10/26.
+<!-- DRAFT (2026-10-23), Mike: Rabbit-hole #9, rescheduled to 10/23 (from 10/24), the sequel to Rabbit-hole #8 (first drafted as AL #18; moved because Mojo is not an array language). AL Ergonomics #18 moved to 10/25, Tooling #19 to 10/26.
      Sources: modular-fork branch research-qualcomm-adreno-702-gpu at d76ece32ce, adreno-poc/docs/adreno-deep-dive.md,
      mojo-on-3-gpus.md, slides-2026-10-23 (figures rendered from the deck's HTML slides: board, path-xetal, metal, steps-all,
      three-gpus, adreno-both, boundary; threshold-rendered from docs/images); X_eTaL-gpu 53633e4 (eleven demos through Mojo,
