@@ -22,6 +22,8 @@ repo_urls:
      support is being added to reva-fork; on dev today it is a roadmap item, not code). Windows: desktop installers are on a branch
      (506e165, claude/project-thread-vyqkk8), not on dev. Facts from reva-fork README, LICENSING.md, docs/licenses.md,
      docs/desktop.md, rust/DESIGN.md, git log; ba-cosy-zip-fork reva-fork-subset/README.md and docs/research.txt.
+     Live demos: Mike's staging sites (wrighter.space/staging/...-2026.1025.0); the asides' commands are the ones Mike ran there.
+     Re-check the URLs before publishing, as staging builds get new version numbers.
      STATUS (Mike, 2026-10-25): cloud agents are still updating both forks; update this draft and publish later today once
      3D graphics, the database and the web stack land. Re-check every fact against both repos then.
      Also in progress (Mike, 2026-10-25): a Logo-inspired turtle-graphics fractals demo (use its output as gutter images), and an
@@ -40,6 +42,7 @@ This week's saw is an old Forth and the language built on it. [Reva](https://git
 | Resource | Link |
 |----------|------|
 | **reva-fork** | [softwarewrighter/reva-fork](https://github.com/softwarewrighter/reva-fork) (branch `dev`) |
+| **Live demos** | [Reva in the browser](https://wrighter.space/staging/reva-fork/reva-web-2026.1025.0/), [CoSy in the browser](https://wrighter.space/staging/cosy-fork/cosy-web-2026.1025.0/) (staging) |
 | **Its design** | [rust/DESIGN.md](https://github.com/softwarewrighter/reva-fork/blob/dev/rust/DESIGN.md) |
 | **Reva, upstream** | [ronaaron/reva](https://github.com/ronaaron/reva) |
 | **CoSy** | [cosy.com](https://cosy.com/), its [Forth code](https://cosy.com/4thCoSy/); the older [CoSyBob/CoSy](https://github.com/CoSyBob/CoSy) repository |
@@ -94,6 +97,20 @@ The fractal demos are written the Logo way, drawing while they recurse. A Koch c
 
 Each segment is one call to the turtle. The library has six such demos: the Koch snowflake, the Sierpinski triangle, the dragon curve, the Hilbert curve, a fractal tree, and a plant grown by a small L-system interpreter.
 
+<div class="aside-box" style="float: none; width: auto; max-width: none; margin: 1em 0;" markdown="1">
+
+**Try it** in the [Reva web demo](https://wrighter.space/staging/reva-fork/reva-web-2026.1025.0/):
+
+```text
+needs turtle/fractals 5 koch-demo           | load and run
+fractals                                    | list the demos
+" /reva/lib/turtle/fractals" slurp type     | list the source
+```
+
+Other demos: `6 hilbert-demo`, `6 sierpinski-demo`, `12 dragon-demo`, `10 tree-demo`, `5 plant-demo`.
+
+</div>
+
 ## Cleaning up as it goes
 {: .pos-center}
 
@@ -146,6 +163,20 @@ The dragon curve needs no L-system at all. Folding a strip of paper is a list op
 | Shared tables and pipeline | none | 18 |
 
 Lines of code, comments left out. Each CoSy curve is a few lines on top of the shared pipeline; the dragon is about the same either way. The two files differ in what they cover, too: reva-fork's also has the tree and the L-system plant, in 87 lines of code to CoSy's 50.
+
+<div class="aside-box" style="float: none; width: auto; max-width: none; margin: 1em 0;" markdown="1">
+
+**Try it** in the [CoSy web demo](https://wrighter.space/staging/cosy-fork/cosy-web-2026.1025.0/):
+
+```text
+include cosy-fractals.f 5 ckoch             | load and run
+cfractals                                   | list the demos
+" cosy-fractals.f" slurp type               | list the source
+```
+
+Other demos: `6 chilbert`, `7 csierpinski`, `12 cdragon`. The Reva commands above work there too, since CoSy runs on Reva, so the two versions of each fractal can be drawn side by side. In the Reva demo the CoSy commands do not: `cosy-fractals.f` is not on that site, and listing it prints nothing.
+
+</div>
 
 ## Next
 {: .pos-center}
