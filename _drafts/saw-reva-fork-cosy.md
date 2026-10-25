@@ -150,4 +150,4 @@ Lines of code, comments left out. Each CoSy curve is a few lines on top of the s
 ## Next
 {: .pos-center}
 
-For reva-fork: x87 floats, then the virtual libraries and the UI service. For CoSy: its saved workspaces, a browser build, and, as the first practical goal on reva-fork's roadmap, a static WebAssembly demo of CoSy: a directory of HTML, JavaScript and a `.wasm` file that any web server can serve, with nothing to install.
+For reva-fork: the virtual libraries (the database first) and the UI service, with 3D after 2D. For CoSy: a browser build and, as the first practical goal on reva-fork's roadmap, a static WebAssembly demo of CoSy: a directory of HTML, JavaScript and a `.wasm` file that any web server can serve, with nothing to install.
