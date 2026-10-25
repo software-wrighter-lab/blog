@@ -4,7 +4,7 @@ title: "Saw #16: Reva Forth, Ported to Rust and WebAssembly, and CoSy on Top"
 categories: [languages, forth]
 tags: [sharpen-the-saw, forth, reva, cosy, apl, k, rust, wasm, webassembly, tauri, desktop, portability, licensing, emulation]
 keywords: "Reva Forth, reva-fork, Forth in Rust, Forth in WebAssembly, x86 emulation, vx86, Tauri desktop app, CoSy, Bob Armstrong, APL K vocabulary on Forth, porting legacy x86 code, removing bundled binaries, license gate, no copyleft"
-abstract: "Reva is a compact Forth that compiles straight to 32-bit x86 machine code. reva-fork carries it to 64-bit Linux and macOS (with Windows builds, untested so far), to the browser through WebAssembly, and to a desktop app, by running Reva's own Forth system unchanged on a small x86 virtual machine written in Rust. On top of it, I am porting Bob Armstrong's CoSy, an APL- and K-like vocabulary built on Reva, off its bundled Windows binaries, x86-only code and code not licensed for commercial use. Both now draw turtle-graphics fractals, and the two versions of each fractal show the difference between recursing in Forth and treating a curve as a list. Where both stand after one weekend, with live demos of each."
+abstract: "Reva is a compact Forth that compiles straight to 32-bit x86 machine code. reva-fork carries it to 64-bit Linux, macOS and Windows (checked so far under Wine), to the browser through WebAssembly, and to a desktop app, by running Reva's own Forth system unchanged on a small x86 virtual machine written in Rust. On top of it, I am porting Bob Armstrong's CoSy, an APL- and K-like vocabulary built on Reva, off its bundled Windows binaries, x86-only code and code not licensed for commercial use. Both now draw turtle-graphics fractals, and the two versions of each fractal show the difference between recursing in Forth and treating a curve as a list. Where both stand after one weekend, with live demos of each."
 series: "Sharpen the Saw Sundays"
 series_part: 16
 date: 2026-10-25 00:15:00 -0700
@@ -17,6 +17,8 @@ repo_urls:
 
 <!-- DRAFT (2026-10-25), Mike: Saw #16 on porting Reva to a portable Rust core (softwarewrighter/reva-fork, public, dev at
      bfdad6d) and CoSy onto it (softwarewrighter/ba-cosy-zip-fork, PRIVATE: no link until Mike makes it public).
+     Coverage pass (Mike asked, 2026-10-25): added pp/hl-type (reva 7e835a4, CoSy 441d871), CoSy.app (b9ae2d5), Windows path
+     mapping under Wine (6181fd7) and installers (506e165, 3108f0a), clear stops (b7ab725), demo scripts, docs/tests note.
      Mike (2026-10-25): the fork stays private until he has vetted it; publish without the link, and add it later with an
      [Ed. ...] note (links box row and the cosy-fractals.f mention). Final pass
      2026-10-25 evening: Mike postponed 3D graphics and the database to a future post (mentioned as planned, no link). Facts
@@ -29,7 +31,7 @@ repo_urls:
 
 <img src="{{ '/assets/images/posts/logo-cosy-coffee.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
-This week's saw is an old Forth and the language built on it. [Reva](https://github.com/ronaaron/reva) is a compact Forth by Ron Aaron that compiles straight to 32-bit x86 machine code; its last release was 2011.2. [CoSy](https://cosy.com/), by Bob Armstrong, is an APL- and K-like vocabulary written on top of Reva. Both run only where 32-bit x86 runs, and CoSy's distribution is built for Windows. I am carrying both forward: Reva to a portable Rust core that runs as a command-line tool on Linux and macOS (Windows builds, untested so far), in the browser and in a desktop app, and CoSy onto that core.
+This week's saw is an old Forth and the language built on it. [Reva](https://github.com/ronaaron/reva) is a compact Forth by Ron Aaron that compiles straight to 32-bit x86 machine code; its last release was 2011.2. [CoSy](https://cosy.com/), by Bob Armstrong, is an APL- and K-like vocabulary written on top of Reva. Both run only where 32-bit x86 runs, and CoSy's distribution is built for Windows. I am carrying both forward: Reva to a portable Rust core that runs as a command-line tool on Linux, macOS and Windows (checked so far under Wine), in the browser and in a desktop app, and CoSy onto that core.
 
 <!--more-->
 
@@ -39,6 +41,7 @@ This week's saw is an old Forth and the language built on it. [Reva](https://git
 |----------|------|
 | **reva-fork** | [softwarewrighter/reva-fork](https://github.com/softwarewrighter/reva-fork) (branch `dev`) |
 | **Live demos** | [Reva in the browser](https://wrighter.space/staging/reva-fork/reva-web-2026.1025.0/), [CoSy in the browser](https://wrighter.space/staging/cosy-fork/cosy-web-2026.1025.0/) (staging) |
+| **Demo script** | [docs/demo.md](https://github.com/softwarewrighter/reva-fork/blob/dev/docs/demo.md): what to type, step by step, from the terminal to the desktop app |
 | **Highlighter** | [forth-highlight.py](https://github.com/softwarewrighter/reva-fork/blob/dev/rust/scripts/forth-highlight.py), which made the code figures |
 | **Its design** | [rust/DESIGN.md](https://github.com/softwarewrighter/reva-fork/blob/dev/rust/DESIGN.md) |
 | **Reva, upstream** | [ronaaron/reva](https://github.com/ronaaron/reva) |
@@ -53,7 +56,7 @@ This week's saw is an old Forth and the language built on it. [Reva](https://git
 
 Reva compiles Forth to x86 machine code, and about 60 words in its Forth system, `src/reva.f`, and about 100 in its libraries are written as instruction bytes. Rewriting all of that for a new processor would make a new Forth, not a port. So [reva-fork](https://github.com/softwarewrighter/reva-fork) does something else: its portable core, written in Rust, executes the small subset of 32-bit x86 that Reva actually uses (called vx86) in a virtual machine over one flat 32-bit address space. That address space maps directly onto WebAssembly's linear memory, and onto a single buffer on a 64-bit host. The routines Reva's assembly core provided are re-implemented in Rust, at the addresses Reva expects, so the Forth side sees the same core it always did.
 
-The result is that Reva's own `reva.f`, release 2011.2, boots in full and unchanged: its embedded assembler, contexts, `needs` and libraries, `does>`, `catch` and `throw`, the FFI layer and the REPL. The design notes weigh the alternatives (a token-threaded VM, hand-written 64-bit assembly cores) against this one.
+The result is that Reva's own `reva.f`, release 2011.2, boots in full and unchanged: its embedded assembler, contexts, `needs` and libraries, `does>`, `catch` and `throw`, the FFI layer and the REPL. The design notes weigh the alternatives (a token-threaded VM, hand-written 64-bit assembly cores) against this one. The old wiki, which described the x86 distribution, is deprecated, and the new documentation is written from the portable core: every Forth sample in it is run as a test, beside unit tests and a golden-output regression suite ([reg-rs](https://github.com/sw-cli-tools/reg-rs)).
 
 ## Where reva-fork stands
 
@@ -61,9 +64,11 @@ The first commit of the portable core is from Saturday afternoon; this is where 
 
 - **The `reva` command** runs on any 64-bit platform Rust supports. 69 of the 132 programs in Reva's `examples/` run unchanged, and a generated report tracks the rest. The REPL keeps a history and has Emacs-style line editing.
 - **The browser:** a WebAssembly module with no imports runs the VM in a Web Worker, in time slices, so the page never freezes and Stop interrupts a running word. Files live in browser storage. The site is a static zip that any web server can host, and `reva-serve` packs the same site and a tiny web server into one local binary.
-- **A desktop app:** the same REPL in a [Tauri](https://tauri.app/) window on Linux and macOS, with files in a folder on disk and *packages*, folders with their own start files. CoSy is one. It also builds on Windows, untested so far.
+- **A desktop app:** the same REPL in a [Tauri](https://tauri.app/) window on Linux and macOS, with files in a folder on disk and *packages*, folders with their own start files. CoSy is one.
 - **Saved images** (also in the browser), `restart`, file words, `time&date`, and a version banner.
+- **Windows:** the command-line tool maps Windows paths (`C:\dir`) onto the VM's `/`-rooted ones, checked with a cross-built `reva.exe` under Wine, and the desktop app builds Windows installers, with a packaging guide. Neither has run on a Windows machine yet.
 - **x87 floating point**, the instructions Reva's float library compiles to, now runs in the VM.
+- **Clear stops** where the port ends: a native library the core does not serve prints a note naming it, and an unsupported instruction names its family (x87, MMX, SSE, privileged, I/O port) and points to the portability notes, instead of failing generically.
 - **Not yet:** native C libraries, and translating hot code back to native instructions.
 
 The next item on the roadmap is *virtual libraries*: Rust code inside the VM that serves the old library names, instead of loading native libraries: SQLite first, then a UI service and, later, 3D through WebGL, for the browser and the desktop app alike. The database and 3D graphics are for a planned post; this one stops at 2D.
@@ -93,6 +98,8 @@ The fractal demos are written the Logo way, drawing while they recurse. A Koch c
 ```
 
 Each segment is one call to the turtle. The code figures in this post were made with `forth-highlight.py`, a small script now in both forks that turns Reva and CoSy source into color-highlighted HTML or PNG. The library has six such demos: the Koch snowflake, the Sierpinski triangle, the dragon curve, the Hilbert curve, a fractal tree, and a plant grown by a small L-system interpreter.
+
+The highlighter did not stay a blog tool. Its rules moved into the VM as two REPL words, `pp FILE` and `hl-type`, which list Forth source in color in the terminal, the browser and the desktop app (`pp turtle/fractals` lists this library), while `slurp type` stays plain ([docs/highlight.md](https://github.com/softwarewrighter/reva-fork/blob/dev/docs/highlight.md)). One token table, `lib/highlight/forth.tbl`, now drives both the REPL words and `forth-highlight.py`, so the figures here and the REPL color code the same way.
 
 <div class="aside-box" style="float: none; clear: none; width: auto; max-width: none; margin: 1em 0;" markdown="1">
 
@@ -126,6 +133,8 @@ The first milestone landed on Sunday morning. A subset of CoSy loads to the end 
 - **Leaving things out for now:** the one piece of inline assembly that shelled out to an external assembler (now two bytes), the help system (it needs SQLite), and the GUI built on the IUP library, which also pulls in iconv through the FFI.
 
 Since then, with x87 in the VM, CoSy runs with real floats, and it restores and saves its `.csy` workspaces again. It opens in reva-fork's desktop app as a package with its own icon, runs in the browser from a static site (the demo linked above), and builds as one local binary, `cosy-serve`. Its About box credits Bob Armstrong and links CoSy.com.
+
+For the desktop goal, `make-cosy-app.sh` builds a self-contained `CoSy.app` for macOS that can be given away: the app carries CoSy inside it, copies it on first launch to a folder the user can write to (keeping any files they added there), and runs it in reva-fork's desktop app. CoSy also has its own token table, so `pp` colors CoSy's verbs on top of Forth's, and its own step-by-step demo script beside reva-fork's.
 
 The port also turned up two latent bugs in CoSy itself, broken on the original Reva too: two words spelled in the wrong case, and an undefined word that silently aborted the rest of one file.
 
