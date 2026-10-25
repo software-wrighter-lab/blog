@@ -16,7 +16,9 @@ repo_urls:
 ---
 
 <!-- DRAFT (2026-10-25), Mike: Saw #16 on porting Reva to a portable Rust core (softwarewrighter/reva-fork, public, dev at
-     bfdad6d) and CoSy onto it (softwarewrighter/ba-cosy-zip-fork, PRIVATE: no link until Mike makes it public). Final pass
+     bfdad6d) and CoSy onto it (softwarewrighter/ba-cosy-zip-fork, PRIVATE: no link until Mike makes it public).
+     Mike (2026-10-25): the fork stays private until he has vetted it; publish without the link, and add it later with an
+     [Ed. ...] note (links box row and the cosy-fractals.f mention). Final pass
      2026-10-25 evening: Mike postponed 3D graphics and the database to a future post (mentioned as planned, no link). Facts
      re-checked against both dev branches: README (69 of 132 examples), docs/desktop.md (Windows builds, untested),
      docs/serve.md, docs/turtle.md, LICENSING.md, docs/licenses.md; CoSy fork reva-fork-subset/README.md and git log.
