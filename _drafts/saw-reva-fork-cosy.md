@@ -97,7 +97,7 @@ The fractal demos are written the Logo way, drawing while they recurse. A Koch c
 
 Each segment is one call to the turtle. The library has six such demos: the Koch snowflake, the Sierpinski triangle, the dragon curve, the Hilbert curve, a fractal tree, and a plant grown by a small L-system interpreter.
 
-<div class="aside-box" style="float: none; width: auto; max-width: none; margin: 1em 0;" markdown="1">
+<div class="aside-box" style="float: none; clear: none; width: auto; max-width: none; margin: 1em 0;" markdown="1">
 
 **Try it** in the [Reva web demo](https://wrighter.space/staging/reva-fork/reva-web-2026.1025.0/):
 
@@ -164,7 +164,7 @@ The dragon curve needs no L-system at all. Folding a strip of paper is a list op
 
 Lines of code, comments left out. Each CoSy curve is a few lines on top of the shared pipeline; the dragon is about the same either way. The two files differ in what they cover, too: reva-fork's also has the tree and the L-system plant, in 87 lines of code to CoSy's 50.
 
-<div class="aside-box" style="float: none; width: auto; max-width: none; margin: 1em 0;" markdown="1">
+<div class="aside-box" style="float: none; clear: none; width: auto; max-width: none; margin: 1em 0;" markdown="1">
 
 **Try it** in the [CoSy web demo](https://wrighter.space/staging/cosy-fork/cosy-web-2026.1025.0/):
 
