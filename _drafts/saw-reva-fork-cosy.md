@@ -22,6 +22,9 @@ repo_urls:
      docs/desktop.md, rust/DESIGN.md, git log; ba-cosy-zip-fork reva-fork-subset/README.md and docs/research.txt.
      STATUS (Mike, 2026-10-25): cloud agents are still updating both forks; update this draft and publish later today once
      3D graphics, the database and the web stack land. Re-check every fact against both repos then.
+     Also in progress (Mike, 2026-10-25): a Logo-inspired turtle-graphics fractals demo (use its output as gutter images), and an
+     agent emulating/replacing the x86 floating-point (x87) dependencies. Neither committed as of 11:40 (checked all branches).
+     CoSy fork dev (4361f3c) has cosy-desktop: CoSy opens in reva-fork's desktop app with its own icon; added to the text.
      Lead image: Mike's logo-cosy-coffee.jpg (2026-10-25, ~/Downloads), color, no-invert. -->
 
 <img src="{{ '/assets/images/posts/logo-cosy-coffee.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
@@ -76,7 +79,9 @@ The first milestone landed this morning. A subset of CoSy loads to the end on re
 - **One VM fix in reva-fork:** an x86 instruction form (`mov` with a memory offset, opcodes `a0` to `a3`) that Reva's locals library emits and CoSy relies on.
 - **Leaving things out for now:** floats (stubbed until the VM has x87), the one piece of inline assembly that shelled out to an external assembler (now two bytes), the help system (it needs SQLite), and the GUI built on the IUP library, which also pulls in iconv through the FFI.
 
-It also turned up two latent bugs in CoSy itself, broken on the original Reva too: two words spelled in the wrong case, and an undefined word that silently aborted the rest of one file.
+CoSy also opens in reva-fork's desktop app as a package, with its own icon.
+
+The port also turned up two latent bugs in CoSy itself, broken on the original Reva too: two words spelled in the wrong case, and an undefined word that silently aborted the rest of one file.
 
 ## Next
 
