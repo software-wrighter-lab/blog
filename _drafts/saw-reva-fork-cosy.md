@@ -8,6 +8,8 @@ abstract: "Reva is a compact Forth that compiles straight to 32-bit x86 machine 
 series: "Sharpen the Saw Sundays"
 series_part: 16
 date: 2026-10-25 00:15:00 -0700
+video_url: "https://www.youtube.com/watch?v=DJCiwjD-qqU"
+video_title: "CoSy fractals"
 repo_urls:
   - url: "https://github.com/softwarewrighter/reva-fork"
     title: "reva-fork"
@@ -42,6 +44,7 @@ This week's saw is an old Forth and the language built on it. [Reva](https://git
 | **Reva, upstream** | [ronaaron/reva](https://github.com/ronaaron/reva) |
 | **CoSy** | [cosy.com](https://cosy.com/), its [Forth code](https://cosy.com/4thCoSy/); the older [CoSyBob/CoSy](https://github.com/CoSyBob/CoSy) repository |
 | **The CoSy port** | private for now; a link when it is public |
+| **Video** | [CoSy fractals](https://www.youtube.com/watch?v=DJCiwjD-qqU)<br>[![Video](https://img.youtube.com/vi/DJCiwjD-qqU/mqdefault.jpg){: .video-thumb}](https://www.youtube.com/watch?v=DJCiwjD-qqU) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
 </div>
