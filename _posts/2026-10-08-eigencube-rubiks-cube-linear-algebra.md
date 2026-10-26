@@ -105,20 +105,20 @@ Side by side, the two workspaces are the contrast this post is about: the sticke
 
 The X_eTaL port goes further than the original in one direction: it never handles one cube at a time. A batch of n cubes is one array of shape n × 26 × 3 × 3, a rotation matrix for every cubelet of every cube. The cubelets come out the same way as in APL:
 
-```text
+```xetal
 C ← (0 < '+ r̲/₂ a̲bs pts) r̲eplicate pts
 ```
 
 The twelve quarter-turn matrices are built rather than typed in, from Rodrigues' formula: a quarter turn about axis v is v vᵀ minus the cross-product matrix of v, with the sign flipped for the other direction. All twelve are computed in one expression and stacked into a single 36 × 3 matrix:
 
-```text
+```xetal
 Mf ← (((3 r̲eplicate 1 2 3) s̲elect₂ V) × (9 r̲eshape 1 2 3) s̲elect₂ V) − (12 9 r̲eshape 9 r̲eplicate dir) × V '+ '× i̲nner E
 M ← 36 3 r̲eshape Mf
 ```
 
 and then every turn of every cube in the batch is one inner product with that stack, between two transposes that line the axes up:
 
-```text
+```xetal
 ᵘt̲urns ← { R →
   n ← t̲ally R
   1 3 2 4 t̲ranspose (12 3 c̲at n c̲at 3) r̲eshape M '+ '× i̲nner 2 1 3 t̲ranspose R
@@ -144,7 +144,7 @@ The solver also uses tuples, a feature that just landed in X_eTaL. Each stage ca
 
 <div style="clear: both;"></div>
 
-```text
+```xetal
 ᵘs̲olve ← { hybrid S →
   (S1, ms, lens) ← 29 '{ st → hybrid ᵘs̲tage st } p̲ower (S, o̲ffsets 0, o̲ffsets 0)
   (_, all) ← ᵘf̲inish 4 'ᵘc̲orner p̲ower (S1, ms)
@@ -163,3 +163,7 @@ The solver is now connected to it. The eigencube solver above has become a libra
 ## Three languages, one idea
 
 The idea survives every translation because it is mathematics, not code: vectors for places, matrices for turns, a dot product to pick a face. What changes is how much of the bookkeeping each language makes you write. Python spells the loops. APLSV in 1975 already had the inner product and the encode that the geometry needs, though the playable workspace still turns stickers. And X_eTaL lets the batch, not the cube, be the unit, so the search expands every candidate in one product --- and, in a separate demo, computes the sticker permutations from the same geometry so the cube can be drawn and turned.
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/26: added color syntax highlighting for the X_eTaL source. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-08-eigencube-rubiks-cube-linear-algebra.md">Post history</a>.]</em></p>

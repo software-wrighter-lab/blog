@@ -93,7 +93,7 @@ Three rules do most of the work. An underlined first letter makes a name a funct
 
 The capstone is Conway's Life, which in APL is a famous one-liner, and here is checked against sw-apl's APL\360 as the reference:
 
-```text
+```xetal
 ᵘl̲ife ← { ('+ r̲/₁₂ -1 0 1 o̲-₁₂ ⍵) { (⍺ = 3) + ⍵ × ⍺ = 4 } ⍵ }
 ```
 
@@ -119,7 +119,7 @@ The pipeline is complete: lexer, parser, formatter, a Core intermediate form, Hi
 
 And a library, which is where the namespace decoration earns its keep --- the raised ˡ marks what the library exports, and a bare name stays private:
 
-```text
+```xetal
 ˡm̲ean ← { (f̲loat '+ r̲/ ⍵) ÷ f̲loat t̲ally ⍵ }  ⍝ Int or Float numbers
 s̲quare ← { ⍵ × ⍵ }                  ⍝ private: not visible outside
 d̲eviations ← { v → (f̲loat v) − ˡm̲ean v }
@@ -153,39 +153,39 @@ The clearest way to see what these features buy is to write one function --- fac
 
 **1. Named recursion: 3628800.** A definition can call its own name. Simplest and cheapest.
 
-```text
+```xetal
 ᵘf̲act ← { n → n ≤ 1 ? 1◆ n × ᵘf̲act n − 1 }
 ```
 
 **2. The Y combinator, self strict: `error[stack-overflow]`.** The library's Y is `Y f = f (Y f)`. A strict language evaluates `Y f` before calling `f`, so it unfolds forever. It type-checks, and fails when it runs.
 
-```text
+```xetal
 ᵘf̲act ← { s̲elf n → n ≤ 1 ? 1◆ n × s̲elf n − 1 }
 'ᵘf̲act ᶜY̲ 10
 ```
 
 **3. Y, self lazy: 3628800.** One character, `~`, makes the self parameter lazy, so `Y f` unfolds only when it is used. Each recursive call forces a deferred value.
 
-```text
+```xetal
 ᵘf̲act ← { ~s̲elf n → n ≤ 1 ? 1◆ n × s̲elf n − 1 }
 'ᵘf̲act ᶜY̲ 10
 ```
 
 **4. Y, with no name at all: 3628800.** An anonymous lambda recurses without ever being named: the quote passes the lambda as a value, and Y supplies the recursion.
 
-```text
+```xetal
 '{ ~s̲elf n → n ≤ 1 ? 1◆ n × s̲elf n − 1 } ᶜY̲ 10
 ```
 
 **5. The textbook Y: `error[infinite-type]`, or 3628800 with `--untyped`.** The type checker refuses self-application, `x x`, as Haskell's and OCaml's do. `--untyped` is the escape hatch that lets the classic version run.
 
-```text
+```xetal
 ᵘY̲ ← { f̲ → { x̲ → f̲ x̲ 'x̲ } '{ x̲ → f̲ x̲ 'x̲ } }
 ```
 
 **6. Named self, by a macro: 3628800.** The macro writes the name in place of the self parameter. `xetal expand` shows that the compiler sees plain named recursion, version 1, with no laziness and no combinator left to run.
 
-```text
+```xetal
 "ᵘf̲act" ᶜY̲< "{ ~s̲elf n → n ≤ 1 ? 1◆ n × s̲elf n − 1 }"
 ⍝ xetal expand:  ᵘf̲act ← { n → n ≤ 1 ? 1◆ n × ᵘf̲act n − 1 }
 ```
@@ -200,7 +200,7 @@ Read down the list and each language feature changes what the same idea does. St
 
 **The classics**, `demos/classics/`: twenty programs an APL programmer may have seen, each as a literate document --- the sieve, GCD, Fibonacci, Collatz, Hanoi, quicksort and the sorting family, Pascal's triangle, run-length encoding, histogram, shortest path, matrix multiply, a cellular automaton, Mandelbrot, turtle graphics, and Life drawn as pictures. They are the proof that the surface is enough. The sieve, verbatim:
 
-```text
+```xetal
 ᵘs̲ieve ← { v →
   0 = t̲ally v ? v
   p ← f̲irst v
@@ -241,3 +241,4 @@ The demos repo, programs worth watching; the libraries, where the E in the name 
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/17: X_eTaL code is now shown rendered throughout, as <code>xetal render</code> draws it, including code written inside strings, rather than partly as typed; names that are about how you type them stay typed. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-07-array-languages-xetal.md">This post's history</a>.]</em></p>
 
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/18: the sections are now staggered across the page, as on the rest of the site, with each image beside its section in the open margin; and the <code>t̲ry&lt;</code> example passes its code as code strings, <code>c"..."</code>, as macros that take X_eTaL now ask (X_eTaL step 112). <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-07-array-languages-xetal.md">This post's history</a>.]</em></p>
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/26: added color syntax highlighting for the X_eTaL source. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-07-array-languages-xetal.md">Post history</a>.]</em></p>

@@ -62,7 +62,7 @@ xetal_ext_sdk::xetal_extension! {
 
 The facade is where the three meanings of *Extensible* meet. Every facade function is one line, a call to a binding macro, `Ffi.xtlm`, that writes the function from its signature. The macros of [the previous post](/2026/10/09/array-languages-xetal-libraries/) write the plumbing for the native code of this one:
 
-```text
+```xetal
 "ffi:" u̲se< "Ffi"
 "s_hout : text -> text"        ᶠᶠⁱb̲ind< "hello/shout"
 "s_um : float -> float"        ᶠᶠⁱb̲ind< "hello/sum"
@@ -70,7 +70,7 @@ The facade is where the three meanings of *Extensible* meet. Every facade functi
 
 and a program imports the facade like any library:
 
-```text
+```xetal
 "hx:" u̲se< "Hello"
 ʰˣs̲hout "x_etal"                       ⍝ X_ETAL, upper-cased in Rust
 ʰˣs̲um (r̲ange 10) '× t̲able r̲ange 10    ⍝ 3025.0: a 10 by 10 array, summed in Rust
@@ -135,7 +135,7 @@ The pattern in the demos is the same each time: the extension does what it is fo
 
 - **Database: the data notebook.** The Mauna Loa CO2 record goes into SQLite as a CSV. SQL selects and groups, and X_eTaL computes the yearly rise, a least-squares line and its residuals, and a histogram:
 
-  ```text
+  ```xetal
   "sq:" u̲se< "Sqlite"
   db sq:i̲mport "co2=demos/data/co2-mlo-annual.csv"
   m ← db sq:n̲ums "select year, mean from co2 order by year"
@@ -163,3 +163,4 @@ A planned post covers where the machine learning is: the ML demos and their own 
 ---
 
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/18: the sections are now staggered across the page, as on the rest of the site. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-10-array-languages-xetal-extensions.md">This post's history</a>.]</em></p>
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/26: added color syntax highlighting for the X_eTaL source. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-10-array-languages-xetal-extensions.md">Post history</a>.]</em></p>

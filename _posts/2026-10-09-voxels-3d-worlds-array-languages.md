@@ -91,7 +91,7 @@ The [fork](https://github.com/softwarewrighter/avoxelgame-fork) changes no code.
 
 Here is the exposed-face test in X_eTaL, as it renders. `o̲-₁` is rotation along the first axis, the counterpart of APL's `⌽[⍺]`, and multiplying by a comparison with the coordinate turns the plane that wrapped around into air:
 
-```text
+```xetal
 ˡs̲olid ← { b → (b > 0) × b ≠ 5 }
 ˡe̲xposed ← { b →
   s ← ˡs̲olid b
@@ -176,3 +176,7 @@ The voxel drawing turned out general enough to point at something that isn't a w
 The last of the four connects the solver from the [Eigencube post](/2026/10/08/eigencube-rubiks-cube-linear-algebra/), first written for a 2D web page and now a library in X_eTaL-libraries. Scramble makes 20 random turns, Solve finds a solution in two to three seconds, about 150 turns long, and Step and Play animate it on the voxel cube until it is solved. A test checks that the two models, stickers and rotation matrices, agree on 40 random move lists.
 
 </div>
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/26: added color syntax highlighting for the X_eTaL source. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-09-voxels-3d-worlds-array-languages.md">Post history</a>.]</em></p>

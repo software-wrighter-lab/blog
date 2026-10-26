@@ -61,7 +61,7 @@ A GPU program should be just X_eTaL. That is now how it works: a function writte
 
 What a GPU can run is a subset of X_eTaL, and the repo keeps that subset as an ordinary, typed and tested library, Accel. Its 22 exports cover what the models need: elementwise arithmetic and masks, reductions, matrix products, attention scores and a weight gradient, the embedding lookup, the convolution's windows, argmax and top-k, a dense layer and a softmax. Each is one array expression:
 
-```text
+```xetal
 ˡr̲elu ← { x → x m̲ax 0 }
 ˡs̲cores ← { q k → q '+ '× i̲nner o̲\ k }
 ˡe̲mbed ← { t ids → ids s̲elect t }
@@ -72,7 +72,7 @@ What a GPU can run is a subset of X_eTaL, and the repo keeps that subset as an o
 
 A program imports the GPU facade and Accel, and marks a function for the GPU. Here is a network layer, from the repo's [accelerate demo](https://github.com/softwarewrighter/X_eTaL-gpu/blob/main/extensions/gpu/demos/accelerate.xtl):
 
-```text
+```xetal
 "gp:" u̲se< "Gpu"
 "ac:" u̲se< "Accel"
 ᵘl̲ayer ← "float float" ᵍᵖa̲ccel< "{ x wb → ᵃᶜr̲elu x ᵃᶜd̲ense wb }"
@@ -83,7 +83,7 @@ On the right is the function, written as X_eTaL text on one line. On the left is
 
 `ᵍᵖa̲ccel<` is a macro, and like every X_eTaL macro it is a function from source text to source text. `xetal expand` shows what it writes:
 
-```text
+```xetal
 ᵘl̲ayer ← ({ x wb → ᵍᵖo̲utput 1 ᵍᵖa̲fter ᵍᵖr̲un 0 ᵍᵖa̲fter 2 ᵍᵖb̲ind wb ᵍᵖa̲fter 1 ᵍᵖb̲ind x ᵍᵖa̲fter "{ x wb → ᵃᶜr̲elu x ᵃᶜd̲ense wb }" ᵍᵖl̲ower "accelerate.xtl|float float" })
 ```
 
@@ -117,7 +117,7 @@ Now the IR is produced from the X_eTaL source itself. The lowering takes a progr
 
 Here is where a line of X_eTaL ends up, for one of the examples from the Accel library, the subset of X_eTaL a device can run. This is the path every program now takes:
 
-```text
+```xetal
 ˡp̲ipeline ← { x w → ˡs̲um ˡr̲elu x + x × w }
 ```
 
@@ -297,3 +297,4 @@ This post will be updated as the models land on the cards.
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/17: X_eTaL code is now shown rendered throughout, as <code>xetal render</code> draws it, including code written inside strings, rather than partly as typed; names that are about how you type them stay typed. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-13-array-languages-xetal-gpu.md">This post's history</a>.]</em></p>
 
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/18: the sections are now staggered across the page, as on the rest of the site. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-13-array-languages-xetal-gpu.md">This post's history</a>.]</em></p>
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/26: added color syntax highlighting for the X_eTaL source. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-13-array-languages-xetal-gpu.md">Post history</a>.]</em></p>

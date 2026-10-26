@@ -65,7 +65,7 @@ Each notation keeps its own reading direction, and the macro expansion is where 
 
 The library is `Flow`, in X_eTaL-ML, beside the neural-network functions its stages call. Its demo is a small two-layer network over four points, written one stage per line:
 
-```text
+```xetal
 "nn:" u̲se< "NN"
 "flow:" u̲se< "Flow"
 Y ← @ ᶠˡᵒʷp̲ipe< c"
@@ -78,7 +78,7 @@ Y ← @ ᶠˡᵒʷp̲ipe< c"
 
 Read it the way it is written: start from the data `X`, apply the first dense layer, then a ReLU, then the second dense layer, then a softmax. The figure shows each stage and the shape it produces. By hand, in X_eTaL, the same network reads right to left, with the last step first:
 
-```text
+```xetal
 ⁿⁿs̲oftmax (ⁿⁿr̲elu X ⁿⁿd̲ense W1) ⁿⁿd̲ense W2
 ```
 
@@ -102,7 +102,7 @@ A label keeps a stage's value for later stages: `$m`, typed with a dollar sign a
 
 The stable softmax subtracts the maximum before exponentiating, so large scores cannot overflow:
 
-```text
+```xetal
 @ ᶠˡᵒʷp̲ipe< c"z ▷ 'm̲ax r̲/ it ▹m ▷ e̲xp z − m ▹e ▷ e ÷ '+ r̲/ e"
 ```
 
@@ -118,7 +118,7 @@ Start from the scores `z`; take their maximum and label it `m`; raise e to `z �
 
 The macro writes ordinary X_eTaL, laid out as a program, one line per stage. This is the network above, from `xetal expand`:
 
-```text
+```xetal
 Y ← ({ @ →
   g1:stage ← X
   g2:stage ← { @ →
@@ -141,7 +141,7 @@ Each stage's value gets a name of its own, fresh from the language so it cannot 
 
 A residual connection is "double it, then add back the input". Written by hand in X_eTaL as `2 × x + x`, it reads right to left as `2 × (x + x)`, which is not a residual. As a pipeline it reads the way it is meant:
 
-```text
+```xetal
 @ ᶠˡᵒʷp̲ipe< c"x ▹s ▷ 2 × it ▷ it + s"
 ```
 
@@ -151,11 +151,11 @@ With `x := 1 2 3 4` it gives `3.0 6.0 9.0 12.0`.
 
 A shape written after a name is a contract. Here the second stage promises a vector of length `n`, which is 3, and breaks it:
 
-```text
+```xetal
 @ ᶠˡᵒʷp̲ipe< c"x ▷ 2 × it ▹y [n] ▷ y + 1"
 ```
 
-```text
+```xetal
 error[shape]: stage 2 (y): shape 4, expected 3
  --> tests/shape-fails.xtl:6:1
   |
@@ -171,7 +171,7 @@ For now the check runs when the program runs, which is better than a wrong answe
 
 The pipeline macro is a reader, like the equation macro, and it was written after the equation macro's reader was caught dropping text and giving silent wrong answers. So every rule of this one uses all of its text or refuses the call when the program is compiled, naming what it could not use:
 
-```text
+```xetal
 error[bad-pipeline]: a shape is [extents] at the stage's end, nothing after it: [4] extra
 error[bad-pipeline]: the first stage is the data; nothing precedes it: it * 2
 error[bad-pipeline]: a name is bound once in a pipeline: m
@@ -189,13 +189,13 @@ A dense layer's bias no longer has to be reshaped by hand: the stage `b ⁿⁿb�
 
 The first of those is now in X_eTaL-ML: one CNN layer written [four ways](https://github.com/softwarewrighter/X_eTaL-ML/blob/main/demos/pipelines/rosetta.xtl), all giving the same feature maps. As a paper prints it, through the equation macro:
 
-```text
+```xetal
 eq ← "Y[o,h,w] | O Ho Wo" ᵉe̲q< "max((sum r:=0..2, sum s:=0..2 | P[h+r,w+s] * F[o,r,s]) + B[o], 0)"
 ```
 
 As a pipeline, the picture's windows, one matrix product with the filters, the bias along the filters' axis, the maps shaped and checked, then the activation:
 
-```text
+```xetal
 pipe ← @ ᶠˡᵒʷp̲ipe< c"
    1 5 5 r̲eshape P
 ▷ ᶜᵛw̲indows
@@ -207,7 +207,7 @@ pipe ← @ ᶠˡᵒʷp̲ipe< c"
 
 And as plain X_eTaL, the Conv library's layer:
 
-```text
+```xetal
 plain ← ⁿⁿr̲elu (O c̲at Ho c̲at Wo) r̲eshape ((O c̲at 9) r̲eshape F, B) ᶜᵛc̲onv 1 5 5 r̲eshape P
 ```
 
@@ -216,4 +216,4 @@ The fourth way is the pipeline's expansion, which `xetal expand` shows. The demo
 ---
 
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/21: Added the CNN layer written four ways, the first of the side-by-side models this post said were next, now in X_eTaL-ML (<a href="https://github.com/softwarewrighter/X_eTaL-ML/commit/f51180e">f51180e</a>); this post's <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-18-array-languages-xetal-pipelines.md">history</a>.]</em></p>
-
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/26: added color syntax highlighting for the X_eTaL source. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-18-array-languages-xetal-pipelines.md">Post history</a>.]</em></p>

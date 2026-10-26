@@ -96,7 +96,7 @@ The running example is the 2D convolution a CNN computes, strictly a cross-corre
 
 As a macro call it reads almost the same:
 
-```text
+```xetal
 Y ← "Y[o,h,w] | O Ho Wo" ᵉe̲q< "sum c:=0..C - 1, sum r:=0..Kh - 1, sum s:=0..Kw - 1 | X[c,h+r,w+s] * W[o,c,r,s]"
 ```
 
@@ -112,7 +112,7 @@ Three macros parse the same text the same way:
 
 So the value and its typeset equation always describe the same thing. The library's demo is one CNN layer, two 4 by 4 pictures through one 2 by 2 by 2 filter, with one call giving both:
 
-```text
+```xetal
 "e:" u̲se< "Equations"
 X ← 2 4 4 r̲eshape r̲ange 32
 W ← 1 2 2 2 r̲eshape r̲ange 8
@@ -153,7 +153,7 @@ Since this post was published, the library also draws itself. Where a program is
 
 The macro writes ordinary X_eTaL, and `xetal expand` shows it. This is the demo's call, expanded and rendered. The layout is the macro's own: it writes its expansion as a program, one definition per line and each gather on its own line, so it can be read.
 
-```text
+```xetal
 (Y, tex) ← ((({ @ →
   g3:a̲t ← { A i → (1 + i) s̲elect r̲avel A }
   g2:c̲heck ← { (A, name, k, from) e →
@@ -201,20 +201,20 @@ There are no loops in the result, just array operations, which is the same shape
 
 Mistakes are caught where they can be. A malformed call is rejected when the macro expands, before the program runs; the library's tests cover ten of them, among them a sum written `c=0..C - 1` where `c:=0..C - 1` is meant, a sum with no operator word, a missing summand, and an index bound twice:
 
-```text
+```xetal
 "Y[o,h,w] | O Ho Wo" ᵉe̲q< "sum c:=0..C - 1, sum h:=0..1 | X[c,h,w]"
 error[bad-equation]: an index is bound once: c, h, o, h, w
 ```
 
 The rest is checked when the program runs, never left as a silent wrong read. Too few subscripts for an array:
 
-```text
+```xetal
 error[rank]: X[c,h+r] indexes 2 axes, but X has rank 3
 ```
 
 And an index outside its axis, here a sum that runs one past the two channels:
 
-```text
+```xetal
 "Y[o,h,w] | O Ho Wo" ᵉe̲q< "sum c:=0..C | X[c,h,w]"
 error[index]: X axis 1: index 2 is outside 0..1 (from c)
 ```
@@ -229,7 +229,7 @@ error[index]: X axis 1: index 2 is outside 0..1 (from c)
 The convolution is the hardest case, three sums and arithmetic in the subscripts, but a sum is rarely the whole of an equation. A paper puts a bias after it, a scale or an average over it, and a function around its terms. So a sum in parentheses is a term like any other, `max`, `min` and `prod` join `sum`, and `exp`, `log`, `sqrt`, `abs`, `max` and `min` can be applied, spelled as a paper spells them. Five equations every model uses, each one call:
 
 
-```text
+```xetal
 (z, tz) ← "z[i] | 2" ᵉb̲oth< "(sum j:=0..2 | W[i,j] * x[j]) + b[i]"
 (S, tS) ← "S[i,j] | 2 3" ᵉb̲oth< "(sum d:=0..3 | Q[i,d] * K[j,d]) / sqrt(4)"
 (s, ts) ← "s[i] | 3" ᵉb̲oth< "exp(v[i]) / (sum j:=0..2 | exp(v[j]))"
@@ -274,3 +274,4 @@ Equations are one half of the notation ML needs. The other is the data flow a mo
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/18: the sections are now staggered across the page, as on the rest of the site, with each image beside its section in the open margin. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-17-array-languages-xetal-equations.md">This post's history</a>.]</em></p>
 
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/19: added the demo as the equation library now draws it, each call's strings shown as typeset math where a program is drawn for reading (X_eTaL's <a href="https://github.com/softwarewrighter/X_eTaL/commit/d5d54ae8">d5d54ae8</a>, the library's <a href="https://github.com/softwarewrighter/X_eTaL-libraries/commit/5d3c808">5d3c808</a>). <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-17-array-languages-xetal-equations.md">This post's history</a>.]</em></p>
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/26: added color syntax highlighting for the X_eTaL source. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-17-array-languages-xetal-equations.md">Post history</a>.]</em></p>

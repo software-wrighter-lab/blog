@@ -82,13 +82,13 @@ They fall into four kinds:
 - **Classic machine learning.** [k-means](https://softwarewrighter.github.io/X_eTaL-ML/k-means/) clusters five blobs step by step, and shows a poor start settling wrong where a farthest-first start finds all five.
 - **Embeddings.** The [embedding explorer](https://softwarewrighter.github.io/X_eTaL-ML/embedding-explorer/) makes word embeddings from counts, in X_eTaL: 4,000 short sentences over 75 words, each word described by 64 numbers from the words that occur near it. PCA turns the 64 dimensions into 3, and in the cloud you can turn, animals, foods, colors, numbers and places gather. The whole embedding table is one line:
 
-  ```text
+  ```xetal
   E ← ᵉᵐu̲nit 64 ᵉᵐp̲roject ᵉᵐp̲pmi (v, 2) ᵉᵐc̲ooccur ids
   ```
 
 The lines that do the work stay short. Every 3 by 3 window of a picture, and a convolution layer's gradient over a whole batch:
 
-```text
+```xetal
 w ← -1 0 1 o̲-₂ -1 0 1 o̲-₂ x
 GK ← DM '+ '× i̲nner o̲\ V
 ```
@@ -106,7 +106,7 @@ The demos are made of six libraries in the repo. Three are new this week: Quant 
 - **Learn** is classic machine learning, each method a fit and a predict: k-means, k nearest neighbors, PCA and logistic regression.
 - **Net** is a macro library, the second meaning of *Extensible* from [post #3](/2026/10/09/array-languages-xetal-libraries/) put to work. One line writes a network:
 
-```text
+```xetal
 "net:" u̲se< "Net"
 "ᵘd̲eep c" ⁿᵉᵗm̲odel< "2 16 relu 16 relu 3 softmax"
 ```
@@ -115,7 +115,7 @@ That call expands into the code that loads the weights, checked, and an ordinary
 
 Tuples, new in X_eTaL this week, came in exactly where this repo had asked for them. A training state is several arrays of different shapes: two weight matrices, Adam's two running averages for each, and a step count. Before tuples it had to be packed into one long vector. Now it is one tuple, taken apart by name, and `p̲ower` iterates it as one value:
 
-```text
+```xetal
 ᵘa̲dam ← { (W1, W2, M1, M2, V1, V2, k) →
   t ← 1.0 + k
   (G1, G2) ← W1 ᵘg̲rad W2
@@ -158,3 +158,4 @@ A planned post covers the games, and what a game asks of a language that a demo 
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/17: X_eTaL code is now shown rendered throughout, as <code>xetal render</code> draws it, including code written inside strings, rather than partly as typed; names that are about how you type them stay typed. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-11-array-languages-xetal-ml.md">This post's history</a>.]</em></p>
 
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/18: the sections are now staggered across the page, as on the rest of the site. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-11-array-languages-xetal-ml.md">This post's history</a>.]</em></p>
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/26: added color syntax highlighting for the X_eTaL source. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-11-array-languages-xetal-ml.md">Post history</a>.]</em></p>

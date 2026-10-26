@@ -63,7 +63,7 @@ The work was a plan of steps under agentrail: one coding agent on a Mac wrote th
 
 The X_eTaL program imports the Accel library and prints five results. As typed:
 
-```text
+```xetal
 "ac:" u_se< "Accel"
 x := ((r_ange 8) / 4) - 1.0
 x
@@ -207,3 +207,7 @@ Native support would need a SPIR-V target in Mojo's compiler and a runtime behin
 {: .pos-center}
 
 The plan's next steps keep the order the day kept, correctness on every road first, then size, then speed. For Mojo, widen the retargeter one construct at a time (barriers, shared memory, math functions), each checked against the evaluator, with reductions and softmax as the test set. For Vulkan, a host for Turnip and X_eTaL's programs as Vulkan compute. For measurement, the same activations from a thousand elements to a million, on the Cortex-A53 and on the Adreno, to find where, if anywhere, the GPU starts to pay on a board this small.
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/26: added color syntax highlighting for the X_eTaL source. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-23-rabbit-hole-xetal-mojo-adreno.md">Post history</a>.]</em></p>

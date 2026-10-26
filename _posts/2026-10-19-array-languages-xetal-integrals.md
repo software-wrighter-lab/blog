@@ -64,7 +64,7 @@ The aim is one computation shown four ways, all from the same numbers: the equat
 
 Convolution and cross-correlation are easy to confuse, because with a symmetric kernel they give the same answer, so the first example uses one that is not symmetric: `x` of `1 2 3 4` and a kernel `h` of `1 2 3`. The equation library has a macro for each, and each names its mode, how it treats the edges, because libraries and traditions disagree about which is natural and none is assumed:
 
-```text
+```xetal
 "y[n] | full" ᵉc̲onvolve< "x h"
 "y[n] | same" ᵉc̲onvolve< "x h"
 "y[n] | valid" ᵉc̲onvolve< "x h"
@@ -77,7 +77,7 @@ Convolution and cross-correlation are easy to confuse, because with a symmetric 
 
 A convolution in a textbook is often continuous, an integral rather than a sum, and the step from one to the other is where a computer has to approximate. So `integral` is now an operator word in the equation library, beside `sum`, `prod`, `max` and `min`, and it reads the same way: a variable, its bounds, then the body after the bar. The string is the integral's notation, like the sums of post #11:
 
-```text
+```xetal
 v ← "v[] | " ᵉe̲q< "integral x:=0..1 by simpson 2 | x^2"
 w ← "w[] | " ᵉe̲q< "integral x:=0..2 by trapezoid 4 | 1 + 2 * x"
 ```
@@ -86,7 +86,7 @@ w ← "w[] | " ᵉe̲q< "integral x:=0..2 by trapezoid 4 | 1 + 2 * x"
 
 Because an integral is a term like any other, it nests. An integral sits inside a sum, a sum inside an integral, and two integrals make a double integral:
 
-```text
+```xetal
 q ← "L[] | " ᵉe̲q< "integral x:=0..1 by trapezoid 4, integral y:=0..1 by trapezoid 4 | x * y"
 r ← "L[] | " ᵉe̲q< "integral x:=0..1 by simpson 2 | (sum j:=0..M-1 | A[j] * x)"
 ```
@@ -95,7 +95,7 @@ The first is `xy` over the unit square, `0.25`; the second, with `A` of `1 2 3`,
 
 Some integrals are refused on principle. A paper's convolution runs from minus infinity to infinity, and a computer cannot. Rather than quietly replace infinity with a finite bound, the macro refuses, and says how to go on:
 
-```text
+```xetal
 error[bad-equation]: an improper integral (a bound of inf): write a truncation, 0..20 say, and show the tail is small, or change variables so the bounds are finite: integral x:=0..inf
 ```
 
@@ -121,7 +121,7 @@ The strings in the calls above are the notation as typed. Where a program is dra
 
 The macro writes ordinary X_eTaL: the bounds as floats, the step, the rule's weights, a grid for the variable, and one weighted sum along it. Simpson on two steps over `0..1`, from `xetal expand`, its checks left out:
 
-```text
+```xetal
 g9:a ← f̲loat (0)
 g8:b ← f̲loat (1)
 g7:h ← (g8:b − g9:a) ÷ 2.0
@@ -149,7 +149,7 @@ The tests check the rules the way numerical analysts do: by how fast the error f
 
 The card at the top of this post is the classic example: two box functions, each 1 between 0 and 1 and 0 elsewhere. Slide one across the other and their overlap grows to 1 and shrinks back, so their convolution is a triangle. The box is one line of X_eTaL:
 
-```text
+```xetal
 ᵘb̲ox ← { x → f̲loat (x ≥ 0.0) ∧ x ≤ 1.0 }
 ```
 
@@ -172,7 +172,7 @@ Close, and honestly close: the box jumps at its edges, and a rule sampling a jum
 
 The same notation computes something every transformer uses. GELU, the activation in BERT and GPT, is `x` times the standard normal's cumulative distribution, `Φ(x)`, which is one half plus an integral of the normal density from 0 to `x`:
 
-```text
+```xetal
 ᵘg̲elu ← { x → x × 0.5 + "L[] | " ᵉe̲q< "integral u:=0..x by simpson 32 | exp(-(u^2) / 2) / sqrt(2 * pi)" }
 ```
 
@@ -191,3 +191,6 @@ The plan lists the variants that follow, each with its own check, a fixture that
 
 The first video planned compares the asymmetric 1D convolution, the correlation, and the continuous box-function integral: the equation, the current stage, the products, the running total, and the triangle drawn as `t` advances. Every number in it comes from the X_eTaL computation, through the same `Video.xtl` library and fixed Blender player as the videos in [post #9](/2026/10/15/array-languages-xetal-blender/). Blender draws; it does not compute the convolution again.
 
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/26: added color syntax highlighting for the X_eTaL source. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-19-array-languages-xetal-integrals.md">Post history</a>.]</em></p>

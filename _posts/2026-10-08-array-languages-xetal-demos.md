@@ -69,14 +69,14 @@ The sandpile and the epicycles arrived while this series was being written. The 
 
 An image kernel is a small picture of numbers: a sharpen is `0 -1 0 / -1 5 -1 / 0 -1 0`. The stencils demo writes kernels exactly like that, as text, and a macro library of its own, `Stencil.xtlm`, turns each into code before the program is type-checked:
 
-```text
+```xetal
 ᵘs̲harpen ← { p → "0 -1 0  -1 5 -1  0 -1 0" ˢs̲tencil< "p" }
 ᵘh̲eat ← { p → p + 0.2 × "0 1 0  1 -4 1  0 1 0" ˢs̲tencil< "p" }
 ```
 
 `xetal expand` shows what the compiler sees for the sharpen: one rotation of the picture per nonzero number, times that number, summed.
 
-```text
+```xetal
 ᵘs̲harpen ← { p → ((n̲eg (-1 o̲-₁ p)) + (n̲eg (-1 o̲-₂ p)) + (5 × p) + (n̲eg (1 o̲-₂ p)) + (n̲eg (1 o̲-₁ p))) }
 ```
 
@@ -112,7 +112,7 @@ One more, from the language's own classics rather than this repository, because 
 
 **1. Recursion, with the pegs as one vector.** Move n − 1 disks aside, move the largest, move the n − 1 back. The two halves reorder the pegs with `s̲elect`, so the reorderings are data rather than extra arguments.
 
-```text
+```xetal
 ᵘh̲anoi ← { n pegs →
   n = 0 ? 0 2 r̲eshape 0
   first ← (n − 1) ᵘh̲anoi 1 3 2 s̲elect pegs
@@ -125,7 +125,7 @@ One more, from the language's own classics rather than this repository, because 
 
 **3. Every move at once, with no recursion.** Move k moves disk 1 plus the number of trailing zero bits of k, worked out as a table of remainders. Each disk cycles round the pegs in a direction set by whether n − d is even, so the from and to pegs come out of arithmetic on whole vectors:
 
-```text
+```xetal
 ᵘm̲oves ← { n →
   k ← r̲ange (2 ^ n) − 1
   d ← 1 + '+ r̲/₂ 0 = k 'm̲od t̲able 2 ^ r̲ange n
@@ -160,3 +160,4 @@ The libraries: nineteen of them, and six that carry macros of their own.
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/17: the stencil macro's name corrected from <code>ˢt̲encil&lt;</code> to <code>ˢs̲tencil&lt;</code>, as the demo renamed it in <a href="https://github.com/softwarewrighter/X_eTaL-demos/commit/2809b69">2809b69</a>; without its s, the name read as "stencil" only beside the <code>s:</code> alias. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-08-array-languages-xetal-demos.md">This post's history</a>.]</em></p>
 
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/18: the sections are now staggered across the page, as on the rest of the site, with each image beside its section in the open margin. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-08-array-languages-xetal-demos.md">This post's history</a>.]</em></p>
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/26: added color syntax highlighting for the X_eTaL source. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-08-array-languages-xetal-demos.md">Post history</a>.]</em></p>
