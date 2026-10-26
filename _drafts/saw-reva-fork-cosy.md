@@ -184,7 +184,12 @@ Other demos: `6 chilbert`, `7 csierpinski`, `12 cdragon`. The Reva commands abov
 
 </div>
 
-## Next
+## Sharpening the saw
 {: .pos-center}
+
+The usual small upkeep around the main work this week. I organized my Chrome tabs into groups, one each for AI tools, blogging, demos and presentations, among others. [sed-rs](https://github.com/sw-cli-tools/sed-rs), my portable `sed` subset in Rust, picked up the features the new reva-fork and CoSy build scripts needed: addresses, blocks, labels and branches. And I set up Claude in the cloud to work on several repositories at once, which is how both forks moved this fast over one weekend.
+
+## Next
+{: .pos-left}
 
 For CoSy, the main gap is its GUI: the IUP widgets it used are what is still missing, and a terminal, browser and desktop front end on reva-fork has to replace them. Then a public link for the CoSy fork. For reva-fork, the virtual libraries, starting with the database, and 3D graphics; those, and what CoSy does with them, are for a planned post.
