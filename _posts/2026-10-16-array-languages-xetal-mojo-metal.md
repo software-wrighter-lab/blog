@@ -75,7 +75,7 @@ Read the diagram from the top. An X_eTaL program, here the SAXPY demo from post 
 
 The program is the one post #7 ran, unchanged:
 
-```text
+```xetal
 "ac:" u̲se< "Accel"
 x ← (r̲ange 8) ÷ 4
 y ← 1.0 ᵃᶜs̲cale 1.0 0.5 0.25 0.125 0.0 -0.125 -0.25 -0.5
@@ -211,3 +211,4 @@ And FPGAs? Mojo compiles for CPUs and GPUs; it has no way to describe hardware, 
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/17: X_eTaL code is now shown rendered throughout, as <code>xetal render</code> draws it, including code written inside strings, rather than partly as typed; names that are about how you type them stay typed. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-16-array-languages-xetal-mojo-metal.md">This post's history</a>.]</em></p>
 
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/18: the sections are now staggered across the page, as on the rest of the site, with each image beside its section in the open margin. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-16-array-languages-xetal-mojo-metal.md">This post's history</a>.]</em></p>
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/26: added color syntax highlighting for the X_eTaL source. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-16-array-languages-xetal-mojo-metal.md">Post history</a>.]</em></p>

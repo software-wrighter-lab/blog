@@ -99,7 +99,7 @@ Rows 1 to 19 were settled in the first days; the rest arrived as the libraries a
 
 I wanted the Y combinator to work in its textbook shape, `Y f = f (Y f)`. In a strict language that recurses forever before it does anything, and the usual fix is a different combinator, Z, which hides the recursion behind an extra lambda. The other fix is to make the whole language lazy, as Haskell is, and pay for it everywhere. Neither was what I wanted. The answer was a mark on one parameter: `~` makes that argument lazy, evaluated where the body first reads it and never if it does not. Everything else stays strict. The factorial, from a lambda that receives itself:
 
-```text
+```xetal
 ᵘf̲n ← { ~s̲elf n → n ≤ 1 ? 1◆ n × s̲elf n − 1 }
 'ᵘf̲n ᶜY̲ 5
 ```
@@ -110,7 +110,7 @@ That gives 120. The same mark later turned out to be useful for an argument a fu
 
 Trains came early: a fork, three functions where the outer two see the argument and the middle one joins their results, and an atop. APL and J write a train as functions side by side, and what it means depends on how many there are. In J, two functions in a row are a hook, a different combinator from three. X_eTaL marks a train with brackets instead, and takes BQN's and Dyalog's atop for two:
 
-```text
+```xetal
 ᵘa̲vg ← ['+ r̲/ ÷ t̲ally]
 ```
 
@@ -138,7 +138,7 @@ The machine learning repository packed a training state, 99 weights and Adam's t
 
 A function that must accept an argument and ignore it, a combinator such as the Kestrel, or a lazy guard that is never forced, used to need a name and a lint directive to silence the unused-name warning: the warning was wrong, and the source had to say so. Now `_u`, drawn `▁`, is a parameter nothing can read, so there is nothing to warn about. With `~` it is also never computed:
 
-```text
+```xetal
 ᵘk̲eep ← { a ~▁ → a }
 ```
 
@@ -166,3 +166,7 @@ Most of what X_eTaL left out was left out to keep it from growing without a reas
 ## Still open
 
 Some questions are written down and left open, each to be decided the same way: whether `a̲ssert<` should stop the program, as Rust's `assert!` does; algebraic data in an array-first form; complex numbers, which the FFT is waiting for; macros defined in a program itself rather than only in a macro library it imports; and how libraries are shared. For now there is no package manager: libraries come in through `u̲se<`, with an alias chosen by the program, and the sibling repositories are the ecosystem.
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/26: added color syntax highlighting for the X_eTaL source. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-22-array-languages-xetal-language-history.md">Post history</a>.]</em></p>

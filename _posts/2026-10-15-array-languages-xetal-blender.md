@@ -59,7 +59,7 @@ Every picture and video in this post comes out of the same pipeline, and it is s
 
 The library documents itself with examples that run, so each function shows exactly what it writes. Here is one, a group of boxes, each a row of a table: where its middle is, its width, depth and height, its color from 0 to 255, and how brightly it glows. One white bar, two units tall, standing on the floor:
 
-```text
+```xetal
 "vd:" u̲se< "Video"
 ("bar", 1 10 r̲eshape 0 0 1 1 1 2 255 255 255 1) ᵛᵈb̲oxes 0
 ```
@@ -107,7 +107,7 @@ Two choices shape it. The program generates the `bpy` code itself, rather than h
 
 The library on top, `Bpy.xtl`, returns pieces of a script as text: an empty scene, cubes, 3D labels, a sun and a sky, a camera, EEVEE settings, a still, a video, exports. The geometry is X_eTaL's. Here is every corner and face of *n* cubes at once, as one mesh:
 
-```text
+```xetal
 ˡc̲ubeMesh ← { (cs, size) z →
   n ← 1 s̲elect s̲hape cs
   c̲ol ← { k → r̲avel (k s̲elect₂ cs) '+ t̲able size × k s̲elect₂ corners }
@@ -271,3 +271,4 @@ These previews become finished explainer videos, each from the real data of the 
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/17: X_eTaL code is now shown rendered throughout, as <code>xetal render</code> draws it, including code written inside strings, rather than partly as typed; names that are about how you type them stay typed. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-15-array-languages-xetal-blender.md">This post's history</a>.]</em></p>
 
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/18: the sections are now staggered across the page, as on the rest of the site, with each image beside its section in the open margin. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-15-array-languages-xetal-blender.md">This post's history</a>.]</em></p>
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/26: added color syntax highlighting for the X_eTaL source. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-15-array-languages-xetal-blender.md">Post history</a>.]</em></p>

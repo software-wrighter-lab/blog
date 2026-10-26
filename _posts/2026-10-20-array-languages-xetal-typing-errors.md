@@ -103,7 +103,7 @@ The higher a mistake is caught, the cheaper it is: an error before the program r
 
 The earliest check is in the editor. `xetal edit` shows a file as typed on the left and drawn on the right, and below them the types of its definitions or, when there is one, the first error, marked in both panes, updated on every keystroke. A brace left open is found before the line is finished, with the message `xetal run` would print:
 
-```text
+```xetal
 error[unclosed]: this `{` is never closed
  --> syn.xtl:1:12
   |
@@ -119,11 +119,11 @@ A macro's arguments are strings, and to every tool a string is opaque: whatever 
 
 A code string, `c"..."`, changes that. Its value is the same string, but the `c` tells every tool its inside is X_eTaL, and a macro says in its contract which of its sides take code. The system macro `i̲f<` takes code on both. So the inside is now read with the rest of the file, and where a macro takes code it is also checked on its own, before any macro runs: as the body of a function over the names it uses, with the program's functions in scope. A misspelled function is found where it was written:
 
-```text
+```xetal
 c"n = 0" i̲f< c"ᵘn̲ope 1◆ 2"
 ```
 
-```text
+```xetal
 error[undefined-name]: this name is never defined
  --> p.xtl:2:17
   |
@@ -133,7 +133,7 @@ error[undefined-name]: this name is never defined
 
 So is a value of the wrong type, with its hint:
 
-```text
+```xetal
 error[type-mismatch]: expected a number, found Char
  --> p.xtl:2:17
   |
@@ -146,7 +146,7 @@ error[type-mismatch]: expected a number, found Char
 
 The linter does the same check without running anything, as a lint of its own, `code-check`, which is an error by default, and it runs the ordinary lints on the inside too: a lambda that only passes its argument on, written inside a code string, is reported at its column inside the string, the same `redundant-lambda` as in code outside one. Writing the same call with plain strings still works, and running it still finds the misspelled name; but the linter alone finds only a suggestion, the `string-kind` lint:
 
-```text
+```xetal
 warning[string-kind]: i_f< takes code on its right: write it as a code string, c"...", so it is drawn and checked as X_eTaL
 ```
 
@@ -156,12 +156,12 @@ The check inside a string is partial by design. It knows what holds for any valu
 
 A macro that reads a notation checks it when the program is compiled, and refuses a call it cannot read, at the call:
 
-```text
+```xetal
 "Y[o,h,w] | O Ho Wo" ᵉe̲q< "sum c:=0..C - 1, sum h:=0..1 | X[c,h,w]"
 error[bad-equation]: an index is bound once: o, h, w, c, h
 ```
 
-```text
+```xetal
 @ ᶠˡᵒʷp̲ipe< c"x ▷ 3"
 error[bad-pipeline]: a stage is a function (nn:r_elu, [f_ g_], '{ x -> ... }) or an expression naming the previous value it (or a name bound before it): 3
 ```
@@ -172,21 +172,21 @@ The equation library has twenty-eight tests of such refusals, the pipeline libra
 
 After the macros have expanded, X_eTaL infers the type of every name before the program runs, and refuses a program whose types do not fit. Ask it what it inferred:
 
-```text
+```xetal
 $ xetal type mean.xtl
 u:m_ean : Float -> Float
 ```
 
 Here is a program with a mistake in its last line: a 2 by 2 array of whole numbers divided by a decimal.
 
-```text
+```xetal
 a ← 2 2 r̲eshape 1 2 3 4
 s ← 2.0
 p̲rint! 100
 a ÷ s
 ```
 
-```text
+```xetal
 $ xetal run type.xtl
 error[type-mismatch]: expected Int, found Float
  --> type.xtl:4:1
@@ -211,19 +211,19 @@ The `100` on the line before is never printed: the program is refused before it 
 
 `xetal lint` reads a program for things that are legal but probably not meant. It has thirty-one lints in six groups, from `correctness` and `suspicious` to `pedantic`, each with a default level, and each one explains itself with `xetal lint --explain`. Two of them:
 
-```text
+```xetal
 ᵘn̲egAll ← { v → '{ x → n̲eg x } m̲ap v }
 warning[redundant-lambda]: this lambda only passes its arguments to `n_eg`: write `'n_eg` at lint.xtl:1:22
 ```
 
-```text
+```xetal
 ᵘc̲lip ← { v → (t̲ally v) ? v◆ 0 r̲eshape 0 }
 warning[int-condition]: this guard's condition is an Int, which fails at run time unless it is 1 or 0: write the comparison meant, as `0 < n` or `0 != n` at ic.xtl:1:20
 ```
 
 The second is a lint about a later rung: a guard on a count works while the count is 0 or 1, and stops the program the first time it is 2. Where a fix is certain, `xetal lint --fix` makes it, and it refuses to touch a file git could not restore:
 
-```text
+```xetal
 $ xetal lint --fix fixme.xtl
 fixed 1 finding(s) in fixme.xtl
 ᵘn̲egAll ← { v → 'n̲eg m̲ap v }
@@ -235,14 +235,14 @@ The libraries are kept lint clean, and findings can also be written as JSON, one
 
 Some mistakes are not in new code but in a change to code that worked. The libraries' tests are regression baselines: each test is a program with its expected output pinned beside it, and a test whose output changes fails. The equation library's refusals are tested this way. This one pins the bug told below, so that it cannot come back unnoticed:
 
-```text
+```xetal
 ⍝ Text after a reference is refused, never dropped (y[i]2 once gave the plain sum).
 "e:" u̲se< "Equations"
 y ← f̲loat 1 2 3 4
 "L[] | " ᵉe̲q< "sum i:=0..3 | y[i]2"
 ```
 
-```text
+```xetal
 error[bad-equation]: an array reference ends with its closing bracket; nothing follows it: y[i]2
  --> reject-trailing.xtl:5:17
   |
@@ -256,14 +256,14 @@ A test catches a mistake only after it is made and only where someone thought to
 
 Some mistakes only the data can show. Then the check is written into the code, and it stops the program with everything needed to find the cause, never a silent wrong read. The equation macro checks every subscript it reads:
 
-```text
+```xetal
 error[index]: X axis 1: index 2 is outside 0..1 (from c)
 error[rank]: X[c,h+r] indexes 2 axes, but X has rank 3
 ```
 
 And a pipeline stage that promises a shape is checked against it:
 
-```text
+```xetal
 @ ᶠˡᵒʷp̲ipe< c"x ▷ 2 × it ▹y [n] ▷ y + 1"
 error[shape]: stage 2 (y): shape 4, expected 3
 ```
@@ -294,7 +294,7 @@ The fix covered one library. The class of bug, a reader that uses part of its te
 - **A parsing library for macro writers,** whose every piece uses all of its text or refuses, with the reprint check built in, so a new macro does not have to learn this lesson again. It has been written, and it is the subject of a planned post.
 - **A check in the language itself,** now built. A macro declares a contract in its documentation, how it is called and whether it copies its text into its expansion or parses it. For a macro that copies, the default, the macro runner checks that every name and number of the call's text reaches the expansion, and refuses the call otherwise. A toy macro that forgets the power:
 
-```text
+```xetal
 @ q:s̲quare< "3 ^ 2"
 error[unused-argument]: q:s_quare< did not use 2 of the text on its right; a macro that copies its text writes every name and number of it (## uses: copied)
 ```
@@ -311,4 +311,4 @@ The ladder is right; the rungs are being made comfortable one message at a time,
 ---
 
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/22: Reworded three claims that promised too much ("cannot come back", "cannot happen again"): checks close off classes of mistake and a test catches a bug's return, but a program can still be well typed and wrong. This post's <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-20-array-languages-xetal-typing-errors.md">history</a>.]</em></p>
-
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/26: added color syntax highlighting for the X_eTaL source. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-20-array-languages-xetal-typing-errors.md">Post history</a>.]</em></p>

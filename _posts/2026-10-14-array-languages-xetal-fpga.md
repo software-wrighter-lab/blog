@@ -74,7 +74,7 @@ As with the GPU, every example is an X_eTaL program first, and the evaluator is 
 
 The hardware models are ordinary X_eTaL libraries. Fixed gives two's complement numbers of a stated width, so the evaluator computes exactly what a 16-bit adder would. Datapath holds the example programs at that width. Here is its sum, a tree computed level by level: `h̲alve` adds the first half of a vector to the second, wrapping to the width at every adder, and `p̲ower` applies it once per level of the tree:
 
-```text
+```xetal
 ʰh̲alve ← { w v →
   e ← v c̲at ((t̲ally v) m̲od 2) r̲eshape 0
   h ← (t̲ally e) d̲iv 2
@@ -259,3 +259,4 @@ This post will be updated as the machine comes together.
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/17: since this post, HEX1000's ROM and RAM moved from logic into block RAM, and synthesis now fits it on a Tang Nano 1K: 438 LUTs, 81 flip-flops and 2 block RAMs, where the 1K has 1,152, 864 and 4 (<a href="https://github.com/hardwarewrighter/X_eTaL-fpga/commit/6b248aa">6b248aa</a>). That is a synthesis result only, not yet run on a 1K board; a test on the board is queued (<a href="https://github.com/hardwarewrighter/X_eTaL-fpga/commit/656f0cc">656f0cc</a>), and the goal of HEX1000 on the 1K stays open until it passes. Also, X_eTaL code is now shown rendered throughout, as <code>xetal render</code> draws it, rather than partly as typed. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-14-array-languages-xetal-fpga.md">This post's history</a>.]</em></p>
 
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/18: the sections are now staggered across the page, as on the rest of the site, with each image beside its section in the open margin. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-14-array-languages-xetal-fpga.md">This post's history</a>.]</em></p>
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/26: added color syntax highlighting for the X_eTaL source. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-14-array-languages-xetal-fpga.md">Post history</a>.]</em></p>

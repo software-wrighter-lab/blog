@@ -107,7 +107,7 @@ This is the point of the repo: a game is chosen because its rules are array-shap
 
 A few of those ideas, in the games' own code:
 
-```text
+```xetal
 places ← 1 + '+ r̲/₂ 0 + p '< t̲able p   ⍝ racer: each car's place, every pair compared
 piece ← o̲\ r̲ev piece                   ⍝ falling blocks: a quarter turn
 full ← '∧ r̲/₂ W                        ⍝ falling blocks: which rows are full
@@ -124,7 +124,7 @@ The same few shapes recur across games that look nothing alike: rotate and reduc
 
 The newest games, the dungeon, side-scroller, racer, asteroids and tower defense, share one idea from game engines, written array first. A world is one matrix: a row per entity, a column for each component's fields, and a column saying whether the slot is alive. A system is a whole-column expression over every entity with the components it needs, at once. Spawning is writing into the free slots a mask finds. A macro library writes a world's layout, its getters, setters and masks, from one line:
 
-```text
+```xetal
 "h" ᵉᶜc̲omponents< "pos:2 hp atk kind chase heal gold player goal"
 ```
 
@@ -174,3 +174,4 @@ That is the tour: [the language](/2026/10/07/array-languages-xetal/), [the demos
 ---
 
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/18: the sections are now staggered across the page, as on the rest of the site, with each image beside its section in the open margin. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-12-array-languages-xetal-games.md">This post's history</a>.]</em></p>
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/26: added color syntax highlighting for the X_eTaL source. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-12-array-languages-xetal-games.md">Post history</a>.]</em></p>

@@ -51,7 +51,7 @@ Every library has a [live demo](https://softwarewrighter.github.io/X_eTaL-librar
 
 **Tuples, where they earn it.** X_eTaL got tuples this week, and the repo has already written down when to use them, in a rule decided with me: this is a typed *array* language, so the array is the default. A tuple is worth it only where it adds something an array cannot: type safety, convenience, or notation, and most of all parts of different types, which one array cannot hold. A point in Geometry stays an array, because it gets added to, scaled and rotated with other points, and a tuple can't take arithmetic. An audit of the types of all 168 exported functions found no case yet of different-typed parts, since the domain is mostly numbers and text, but it found two where a tuple's fixed arity pays. Strings' replace takes its pair of texts as a boxed list today, so the wrong count slips through:
 
-```text
+```xetal
 "a" "b" "c" ᵗr̲eplace "abc"        ⍝ bbc: the third text is silently ignored
 ```
 
@@ -78,7 +78,7 @@ Macros are built, on the language's main branch, and this repository was one of 
 
 Here is the Dates library's macro, rendered, in a program:
 
-```text
+```xetal
 "d:" u̲se< "Dates"
 landing ← @ ᵈd̲ate< "1969-07-20"
 ᵈw̲eekday landing                        ⍝ 7: a Sunday
@@ -87,7 +87,7 @@ landing ← @ ᵈd̲ate< "1969-07-20"
 
 and here is what `xetal expand` shows the compiler actually sees:
 
-```text
+```xetal
 landing ← (-165)
 ᵈw̲eekday landing
 ((20812)) − (20729)
@@ -122,3 +122,4 @@ A planned post covers the third meaning of *Extensible*: native extensions, Rust
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/17: two macros shown with the libraries' new recommended aliases, <code>ᵖˡp̲oly&lt;</code> for Polynomials (was <code>py:</code>, which read as Python) and <code>ᶜʰc̲ases&lt;</code> for Check (was <code>k:</code>), after the libraries chose plain names that read under any alias in <a href="https://github.com/softwarewrighter/X_eTaL-libraries/commit/7f9560d">7f9560d</a>. An alias is still the caller's choice. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-09-array-languages-xetal-libraries.md">This post's history</a>.]</em></p>
 
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/18: the sections are now staggered across the page, as on the rest of the site, with each image beside its section in the open margin. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-09-array-languages-xetal-libraries.md">This post's history</a>.]</em></p>
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/26: added color syntax highlighting for the X_eTaL source. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-09-array-languages-xetal-libraries.md">Post history</a>.]</em></p>

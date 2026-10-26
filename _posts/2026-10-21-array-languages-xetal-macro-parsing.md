@@ -79,7 +79,7 @@ Until now each macro library wrote those pieces itself. That is where a silent w
 
 **Cutting text, bracket-aware.** These never fail. `ch ᵖᵃs̲plit t` cuts at a separator, but only outside parentheses, brackets and braces, so a `+` inside `(a+b)` or `c[i+1]` is left alone:
 
-```text
+```xetal
 "+" ᵖᵃs̲plit "(a+b) + c[i+1]"
 ```
 
@@ -110,7 +110,7 @@ Every refusal names the text it could not use, so the user sees what was wrong, 
 
 This is how a macro uses it, the reference parser's test macro in full:
 
-```text
+```xetal
 ⍝│ uses: parsed
 ᵐr̲eference< ← { @ t →
   (name, ix) ← "bad-text right" ᵖᵃr̲eference t
@@ -127,14 +127,14 @@ To see all of it used together, the library's [guide](https://github.com/softwar
 
 A refusal carries the calling macro's own error code, so a notation built on the library keeps its voice. Through the equation macro, a reference must end at its bracket:
 
-```text
+```xetal
 "L[] | " ᵉe̲q< "sum i:=0..n - 1 | y[i]2"
 error[bad-equation]: an array reference ends with its closing bracket; nothing follows it: y[i]2
 ```
 
 And the whole-text check catches a parser that dropped anything at all, whatever the rule that dropped it. The library's own test gives it a parse with the last character missing, through a small probe macro whose code is `bad-text`:
 
-```text
+```xetal
 error[bad-text]: the parser did not use all of the text: it read a from ab
 ```
 
@@ -144,7 +144,7 @@ That check is the guard for the whole class of bug. A rule can be wrong in ways 
 
 A library only protects the macros that use it, so the language now checks every macro too. A macro declares a contract in the documentation above its definition: how it is called, and whether it copies its text into its expansion or parses it. For a macro that copies, the default, the macro runner checks that every name and number of the call's text reaches the expansion. A toy macro that forgets the power of what it was given:
 
-```text
+```xetal
 @ q:s̲quare< "3 ^ 2"
 error[unused-argument]: q:s_quare< did not use 2 of the text on its right; a macro that copies its text writes every name and number of it (## uses: copied)
 ```
@@ -163,7 +163,7 @@ Two were looked at and left alone, and the reasons are the useful part. Dates ch
 
 The library also carries the bug that started all of this as a [demo](https://github.com/softwarewrighter/X_eTaL-libraries/blob/main/libs/Parsing/demos/before-after.xtl), the check any reader might write first beside the library's:
 
-```text
+```xetal
 term ← "(y - p)^2"
 ᵘn̲aiveGroup? ← { t → ("(" m̲atch 1 t̲ake t) ∧ 0 < '+ r̲/ 0 + t m̲ember? ")" }
 ᵘn̲aiveGroup? term
@@ -186,4 +186,4 @@ The naive check sees an opening parenthesis and a closing one somewhere and says
 ---
 
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/21: Added the Parsing library's before-and-after demo of the bug that started this post, with its output, and a link to the libraries' cross-reference site, both published after this post (X_eTaL-libraries <a href="https://github.com/softwarewrighter/X_eTaL-libraries/commit/d9d157e">d9d157e</a>, <a href="https://github.com/softwarewrighter/X_eTaL-libraries/commit/5e6ba9c">5e6ba9c</a>); this post's <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-21-array-languages-xetal-macro-parsing.md">history</a>.]</em></p>
-
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/26: added color syntax highlighting for the X_eTaL source. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-21-array-languages-xetal-macro-parsing.md">Post history</a>.]</em></p>

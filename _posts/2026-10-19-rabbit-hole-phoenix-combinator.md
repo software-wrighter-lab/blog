@@ -119,21 +119,21 @@ A bird takes quoted functions, and a quote touches one name, a lambda or a train
 
 X_eTaL's GCD is in the Numbers library, Euclid's algorithm applied item by item:
 
-```text
+```xetal
 ʰe̲uclid ← { a b → b = 0 ? a̲bs a◆ b ʰe̲uclid a m̲od b }
 ˡg̲cd ← { a b → a 'ʰe̲uclid e̲ach b }
 ```
 
 Imported under the alias `n:` (the importer chooses it; `n:` for Numbers), `12 ⁿg̲cd 8 9 10 0` gives `4 3 2 12`. The LeetCode function, naming its argument as the Lisp does:
 
-```text
+```xetal
 "n:" u̲se< "Numbers"
 ᵘf̲indGcd ← { nums → ('m̲in r̲/ nums) ⁿg̲cd 'm̲ax r̲/ nums }
 ```
 
 and as a fork, with no name for the argument:
 
-```text
+```xetal
 "n:" u̲se< "Numbers"
 ᵘf̲indGcd ← ['m̲in r̲/ ⁿg̲cd 'm̲ax r̲/]
 ᵘf̲indGcd 2 5 6 9 10
@@ -149,7 +149,7 @@ and as a fork, with no name for the argument:
 
 `'m̲in r̲/` is the minimum reduction (a quoted function given to reduce), `'m̲ax r̲/` the maximum, and `ⁿg̲cd` combines them. Both versions pass the linter without a finding. Take the brackets away and the line is an error:
 
-```text
+```xetal
 error[type-mismatch]: expected a number, found Int -> Int
  --> c.xtl:2:1
   |
@@ -167,7 +167,7 @@ That is a choice. A fork needs one thing that plain application cannot do: hand 
 
 X_eTaL marks the fork with brackets ([TR1](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/lang-choices.md)): `[F G H] x` is `(F x) G (H x)`. The brackets also settle what two functions mean. In X_eTaL `[F G] x` is `F (G x)`, as in BQN and Dyalog, not J's hook (TR2), and the same two functions in brackets give the smaller of the largest:
 
-```text
+```xetal
 ᵘf̲indGcd ← ['m̲in r̲/ 'm̲ax r̲/]
 ᵘf̲indGcd 2 5 6 9 10
 ```
@@ -206,4 +206,4 @@ The array languages are the shortest, and X_eTaL pays two characters for its bra
 ---
 
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/21: Listed Conor Hoekstra's two code_report videos in this post's metadata, so the post appears with them in the blog's Videos index; the post's text is unchanged. This post's <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-19-rabbit-hole-phoenix-combinator.md">history</a>.]</em></p>
-
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/26: added color syntax highlighting for the X_eTaL source. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-19-rabbit-hole-phoenix-combinator.md">Post history</a>.]</em></p>

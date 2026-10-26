@@ -74,7 +74,7 @@ Between a line of array code and a GPU doing it there may be many programs, each
 
 The Accel library's threshold demo: an array, the array where it is above 0.5 and zero elsewhere, two ReLUs, and a select by an integer mask.
 
-```text
+```xetal
 "ac:" u̲se< "Accel"
 x ← ((r̲ange 8) ÷ 4) − 1.0
 x
@@ -190,3 +190,7 @@ Sources: NVIDIA's [nvcc documentation](https://docs.nvidia.com/cuda/cuda-compile
 ## Next
 
 A future post may investigate Qualcomm GPUs on a developer board, and other NPUs.
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/26: added color syntax highlighting for the X_eTaL source. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-21-rabbit-hole-xetal-to-the-metal.md">Post history</a>.]</em></p>
