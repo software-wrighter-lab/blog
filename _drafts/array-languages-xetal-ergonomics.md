@@ -7,7 +7,7 @@ keywords: "X_eTaL ergonomics, X_eTaL lambda, effect marker, missing-bang lint, t
 abstract: "Eighteenth in the Array Languages series: the small things that make X_eTaL comfortable to write, read and trust. Every way a lambda can take its arguments, from ⍺ and ⍵ to the newest, ▁, for an argument a function takes and never uses; effects marked with ! and a lint that renames for you; exact equality with a tolerant one beside it; the canonical form, notebook runs and boxed arrays for seeing what a line means; and documentation examples that run as tests."
 series: "Array Languages"
 series_part: 18
-date: 2026-10-25 00:15:00 -0700
+date: 2026-10-26 00:15:00 -0700
 repo_urls:
   - url: "https://github.com/softwarewrighter/X_eTaL"
     title: "X_eTaL"
@@ -19,7 +19,7 @@ repo_urls:
      0, 7 with no division; both refusals with the text in the table), linted clean, drawn ▁; the unused-binding warning now
      suggests _u; the tour's k_eep is { a ~_u -> a } and Combinators' K is { x _u -> x } (both from step 157's audit).
      (Earlier: _u was being built and was UNCOMMITTED when this was first written.)
-     Publishing: HOLD until Mike decides (2026-10-21); planned 10/25 (moved from 10/24 on 2026-10-23 for Rabbit-hole #9, the Adreno post).
+     Publishing: Mike, 2026-10-26: publish today.
      Sources: lang-choices L1-L8, E1, E2, E4, TU3, TU4; design D140 (unused-binding, now superseded by L8); history.md (alpha/omega).
      The _u idea came from Mike's side question on 2026-10-20 (u:n_ope's unused parameter). Follows #17, the philosophy companion to #16 (renumbered 2026-10-22); links only to
      published posts. Lead image: Mike's block-ergo-chair.jpg (2026-10-20), dark, not inverted. -->

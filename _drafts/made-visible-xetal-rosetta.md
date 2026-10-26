@@ -7,7 +7,7 @@ keywords: "X_eTaL Rosetta, Rosetta Stone, array language, ML equations, KaTeX, d
 abstract: "PLACEHOLDER: Part 4 drew a notation that did not exist yet. This one draws the notation that does: X_eTaL Rosetta, where each computation is a stone whose faces are the mathematics as a paper prints it, the same thing as a pipeline, as plain X_eTaL, and as a Blender video made from its arrays, and every face that runs is checked against the others."
 series: "Made Visible"
 series_part: 5
-date: 2026-11-02 00:15:00 -0700
+date: 2026-11-03 00:15:00 -0700
 repo_urls:
   - url: "https://github.com/softwarewrighter/X_eTaL-rosetta"
     title: "X_eTaL-rosetta"
