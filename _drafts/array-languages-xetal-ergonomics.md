@@ -48,7 +48,7 @@ A language is learned through its big ideas and lived in through its small ones.
 
 A lambda either uses the shorthand arguments or names its parameters, never both in one lambda (L5). The shorthand is typed `_l` and `_r` and drawn ⍺ and ⍵; how many of them the body uses decides how many arguments the lambda takes:
 
-```text
+```xetal
 ᵘf̲n ← { ⍵ × 2 }
 ᵘf̲n 5
 ```
@@ -57,7 +57,7 @@ A lambda either uses the shorthand arguments or names its parameters, never both
 10
 ```
 
-```text
+```xetal
 ᵘf̲n ← { ⍺ − ⍵ }
 3 ᵘf̲n 5
 ```
@@ -74,11 +74,11 @@ The shorthand arguments were first drawn as small subscript l and r. They lasted
 
 One rule keeps the shorthand honest (L1): `_r` alone makes a one-argument lambda, and `_l` exists only beside `_r`. A left argument with no right one is not a function X_eTaL can call, so the lambda is refused, with the fix:
 
-```text
+```xetal
 ᵘf̲n ← { ⍺ × 2 }
 ```
 
-```text
+```xetal
 error[bad-lambda]: a lambda using _l must also use _r; otherwise name the parameters
 ```
 
@@ -86,7 +86,7 @@ error[bad-lambda]: a lambda using _l must also use _r; otherwise name the parame
 
 A function of no arguments takes `@`, the unit value, and is called with it (L6):
 
-```text
+```xetal
 ᵘf̲n ← { @ → 42 }
 ᵘf̲n @
 ```
@@ -101,7 +101,7 @@ It takes only `@`. Called with a number, it is a type error before the program r
 
 The newest case came from a side question. A function had to accept an argument and had no use for it:
 
-```text
+```xetal
 ᵘn̲ope ← { na → 42 }
 ```
 
@@ -109,13 +109,13 @@ It runs, and `xetal lint` warns, correctly as far as it could tell, that the par
 
 So X_eTaL now has a third shorthand name, `_u`, for a parameter that is taken and dropped (L8, [7d811a0](https://github.com/softwarewrighter/X_eTaL/commit/7d811a01)). It stands only in a parameter list, may repeat, and is never read: using it in the body is an error that says to name it. The linter never flags it, so no directive is needed, and the warning for an ordinary unused name now says what to write instead:
 
-```text
+```xetal
 warning[unused-binding]: parameter `na` is never used; write `_u` for a parameter nothing reads at nope.xtl:1:14
 ```
 
  It is drawn as a heavy low line, ▁, a thicker underscore, so that it reads as an empty slot:
 
-```text
+```xetal
 ᵘf̲n ← { ▁ → 42 }
 ᵘf̲n 5
 ```
@@ -128,7 +128,7 @@ Why not `_`, which already means "discard"? Because it already has its job: `_ :
 
 `_u` also fills the gap that L1 leaves. A two-argument function that ignores its right argument has no shorthand, since `{ ⍺ × 2 }` is refused, but it has a short named form that says what it drops:
 
-```text
+```xetal
 ᵘf̲n ← { x ▁ → x × 2 }
 3 ᵘf̲n 5
 ```
@@ -139,7 +139,7 @@ Why not `_`, which already means "discard"? Because it already has its job: `_ :
 
 That is the Kestrel, the bird that keeps its first argument, and X_eTaL's own Combinators library now writes it this way:
 
-```text
+```xetal
 ˡK̲ ← { x ▁ → x }
 ```
 
@@ -147,7 +147,7 @@ That is the Kestrel, the bird that keeps its first argument, and X_eTaL's own Co
 
 Arguments are evaluated before the function runs, right to left (E4), unless a parameter is marked lazy with `~`: then its argument is evaluated where the body first reads it, and never if the body does not (E1). The [Sage bird](/2026/09/21/rabbit-hole-sage-y-combinator/) needs it, since a strict fixed point would recurse forever; here it makes the factorial out of a lambda that receives itself:
 
-```text
+```xetal
 "c:" u̲se< "Combinators"
 ᵘf̲n ← { ~s̲elf n → n ≤ 1 ? 1◆ n × s̲elf n − 1 }
 'ᵘf̲n ᶜY̲ 5
@@ -159,18 +159,18 @@ Arguments are evaluated before the function runs, right to left (E4), unless a p
 
 Laziness also protects a function from an argument it does not need, and with `▁` the two combine. The tour's `ᵘk̲eep` returns its left argument and drops its right. Dropped but not lazy, the caller's `1 ÷ 0` is still computed first, and stops the program:
 
-```text
+```xetal
 ᵘk̲eep ← { a ▁ → a }
 7 ᵘk̲eep 1 ÷ 0
 ```
 
-```text
+```xetal
 error[division-by-zero]: division by zero
 ```
 
 Dropped and lazy, as the tour writes it, the argument is never computed at all:
 
-```text
+```xetal
 ᵘk̲eep ← { a ~▁ → a }
 7 ᵘk̲eep 1 ÷ 0
 ```
@@ -185,7 +185,7 @@ Dropped and lazy, as the tour writes it, the argument is never computed at all:
 
 A parameter can also be a tuple pattern, which takes a pair apart as it arrives (TU3), and `_` skips a part:
 
-```text
+```xetal
 ᵘf̲n ← { (a, b) → a + b }
 ᵘf̲n (3, 4)
 ```
@@ -229,18 +229,18 @@ And the spellings that are refused, each with the way out:
 
 A function that prints, reads, draws or changes something has a `!` at the end of its name, `p̲rint!` and `r̲oll!` among the built-ins, so a reader can tell from a call alone whether it does anything besides return a value. The linter holds programs to it. A function that calls an effect without saying so:
 
-```text
+```xetal
 ᵘs̲ay ← { x → p̲rint! x }
 _ ← ᵘs̲ay "hello"
 ```
 
-```text
+```xetal
 warning[missing-bang]: function `u:s_ay` calls `p_rint!`, an effect, but its name has no `!`: write `u:s_ay!` at bang.xtl:1:1
 ```
 
 `xetal lint --fix` renames it, at its definition and at every use in the file, in one edit:
 
-```text
+```xetal
 ᵘs̲ay! ← { x → p̲rint! x }
 _ ← ᵘs̲ay! "hello"
 ```
@@ -251,7 +251,7 @@ The opposite slip, a `!` on a function that does nothing but compute, is `needle
 
 `=` is exact (T3). It is IEEE equality and nothing else, so it is transitive, and it says what floating point does:
 
-```text
+```xetal
 (0.1 + 0.2) = 0.3
 (0.1 + 0.2) e̲q~ 0.3
 0.1 + 0.2
@@ -269,13 +269,13 @@ APL compares within a tolerance set by a system variable, and every comparison i
 
 Right-to-left reading with no precedence is simple to state and easy to misread at first. Three tools show what a line means. `xetal fmt` prints its canonical form, every application in parentheses:
 
-```text
+```xetal
 '+ r̲/ 1 + 2 3 × 4
 m ← 2 3 r̲eshape r̲ange 6
 '+ r̲/₁ m
 ```
 
-```text
+```xetal
 ('+ r_/ (1 + (2 3 * 4)))
 m := (2 3 r_eshape (r_ange 6))
 ('+ r_/_1 m)
@@ -283,7 +283,7 @@ m := (2 3 r_eshape (r_ange 6))
 
 The first line is 22: `2 3 × 4` is `8 12`, plus 1 is `9 13`, and the sum of those is 22. `xetal run --echo` runs a file as a notebook, each statement drawn and followed by what it printed, the way an APL session shows input indented above its output:
 
-```text
+```xetal
       m ← 2 3 r̲eshape r̲ange 6
       m
 1 2 3
@@ -308,7 +308,7 @@ And `--box` draws every array the way APL2's `DISPLAY` does, with its shape on t
 
 A `##` comment above a definition documents it, and `xetal doc` builds a cross-referenced site from those comments, as rustdoc does for a crate. Inside one, `>>` marks an example and the lines after it are what it prints:
 
-```text
+```xetal
 ⍝│ m_ean v: the arithmetic mean of v.
 ⍝│ >> "a:" u_se< "Avg"
 ⍝│ >> a:m_ean 1 2 3 4
@@ -318,7 +318,7 @@ A `##` comment above a definition documents it, and `xetal doc` builds a cross-r
 
 `xetal doc --test` runs every example and compares:
 
-```text
+```xetal
 doc tests in Avg.xtl: 2 examples
 l:m_ean >> "a:" u_se< "Avg" ... ok
 l:m_ean >> a:m_ean 1 2 3 4 ... ok
@@ -327,7 +327,7 @@ doc test result: ok. 2 passed; 0 failed
 
 An example whose output no longer matches fails, with both versions shown, so documentation cannot drift from the code it describes:
 
-```text
+```xetal
 ---- l:m_ean >> a:m_ean 1 2 3 4
 --- expected
 2.4
