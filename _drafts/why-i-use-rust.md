@@ -74,6 +74,6 @@ Yes, people complain that Rust compiles slowly, and that is fair enough. For my 
 
 ## For pleasure, and for demos
 
-Rust is not the only language I enjoy. From a coding-pleasure point of view, Ruby was fun. And I enjoy building and playing with APL, Forth and Lisp, which I build in assembler, C or Rust, or, in Forth's case, in Forth itself ([Embedded #4](/2026/10/24/embedded-forth-from-forth/) is the latest of those).
+Rust is not the only language I enjoy. From a coding-pleasure point of view, Ruby, Clojure and JavaScript were fun. And I enjoy building and playing with APL, Forth and Lisp, which I build in assembler, C or Rust, or, in Forth's case, in Forth itself ([Embedded #4](/2026/10/24/embedded-forth-from-forth/) is the latest of those).
 
 So the split is simple. When I want to build an operating system, a programming language or a tool, I reach for Rust. When I want to demo a concept, I reach for APL, Forth or Lisp.
