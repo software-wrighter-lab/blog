@@ -13,7 +13,8 @@ date: 2026-10-28 00:15:00 -0700
 <!-- DRAFT (2026-10-28), Mike: a new series, "Why I Use" (Mike: not TBT, it's Wednesday and Rust isn't that old). Reasons are
      Mike's, from his message of 2026-10-28; nothing about the languages' pros and cons beyond what he said was added. Years
      (PL/S 1981-1999, Rust since 2018) come from TBT #13's published timeline. Lead image: Mike's logo-rust-rusty-gear.jpg
-     (Dropbox), outside of the circle made transparent; color, no-invert. -->
+     (Dropbox), outside of the circle made transparent; color, no-invert. Gutter: Mike's block-stopwatch.jpg (Dropbox), gray
+     background made transparent, beside the compile-times section. -->
 
 <img src="{{ '/assets/images/posts/logo-rust-rusty-gear.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
@@ -70,6 +71,11 @@ Rust supports Linux, macOS, Windows and more. Below the operating systems it run
 Rust prevents entire classes of errors at compile time: memory errors such as use after free, and data races between threads. It does that without a garbage collector, so there are no collection pauses, and without the overhead of a p-code interpreter. It compiles to native code, so there is no need for a JIT.
 
 ## The compile times
+{: .pos-left}
+
+<figure class="zoomable outdent-right">
+<img src="{{ '/assets/images/posts/block-stopwatch.webp' | relative_url }}" class="no-invert" alt="A block print of a pocket stopwatch, its face cut away to show the gears inside">
+</figure>
 
 Yes, people complain that Rust compiles slowly, and that is fair enough. For my situation it rarely bites. I combine Rust projects so that I generally compile only a subset at a time, and I build on beefy systems with many cores and lots of RAM.
 
