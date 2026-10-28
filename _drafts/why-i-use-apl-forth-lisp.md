@@ -19,7 +19,7 @@ date: 2026-10-29 00:15:00 -0700
 
 <img src="{{ '/assets/images/posts/placeholder-why-i-use-apl-forth-lisp.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
-[The first post in this series](/2026/10/28/why-i-use-rust/) ended on a split: when I want to build an operating system, a programming language or a tool, I reach for Rust; when I want to demo a concept, I reach for APL, Forth or Lisp. This one is about the second half. They are the languages I most enjoy building and playing with, and each lets a demo show something in a way the others cannot.
+[The first post in this series](/2026/10/28/why-i-use-rust/) ended on a split: when I want to build an operating system, a programming language or a tool, I reach for Rust; when I want to demo a concept, I reach for APL, Forth, Lisp, or one of my array languages. This one is about the second half. They are the languages I most enjoy building and playing with, and each lets a demo show something in a way the others cannot.
 
 <!--more-->
 
@@ -31,6 +31,7 @@ date: 2026-10-29 00:15:00 -0700
 | **APL, lately** | [Array Languages #1: X_eTaL](/2026/10/07/array-languages-xetal/), [Voxels](/2026/10/09/voxels-3d-worlds-array-languages/), [Eigencube](/2026/10/08/eigencube-rubiks-cube-linear-algebra/) |
 | **Forth** | [Embedded #3](/2026/04/20/embedded-forth-self-hosting-spectrum/), [Embedded #4](/2026/10/24/embedded-forth-from-forth/), [Saw #16: Reva and CoSy](/2026/10/25/saw-reva-fork-cosy/) |
 | **Lisp, compared** | [Rabbit-hole #7: the Phoenix combinator](/2026/10/19/rabbit-hole-phoenix-combinator/) |
+| **Array Languages** | [sw-mlpl](https://github.com/sw-ml-study/sw-mlpl), [X_eTaL](https://github.com/softwarewrighter/X_eTaL) |
 | **The series** | [Why I Use: every post](/series/#why-i-use) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
