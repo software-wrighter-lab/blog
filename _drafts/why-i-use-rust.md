@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Why I Use #1: Rust"
-categories: [languages, rust]
-tags: [why-i-use, rust, systems-programming, macros, pl-s, borrow-checker, cargo, wasm, embedded, gpu, career, programming-languages]
+categories: [languages, systems-programming]
+tags: [why-i-use, rust, macros, pl-s, borrow-checker, cargo, wasm, embedded, gpu, career, programming-languages]
 keywords: "why I use Rust, Rust for systems programming, Rust macros, PL/S executable macros, C preprocessor, borrow checker, Cargo, Rust WebAssembly, embedded Rust, bare metal, RTOS, no garbage collector, Rust compile times, language choice"
 abstract: "First in a series on the tools I reach for, and why. One of my first systems languages, IBM's PL/S, had macros that ran during compilation to generate the code to be compiled, far better than the C preprocessor. A career of moving from each language to its improvement went from assembler to PL/S, C and C++, Java and the languages around it, then tries of F#, Go, Julia and Python. Rust, once past the borrow checker, is where it settled: macros I like to use, a good build system, ecosystem and tooling, every target I build for, whole classes of errors prevented without a garbage collector, an interpreter or a JIT. Slow compiles are a fair complaint; here is why they rarely bite me. And why I still reach for APL, Forth and Lisp to demo an idea."
 series: "Why I Use"
