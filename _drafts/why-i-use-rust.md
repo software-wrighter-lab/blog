@@ -73,7 +73,7 @@ Rust prevents entire classes of errors at compile time: memory errors such as us
 ## The compile times
 {: .pos-left}
 
-<figure class="zoomable outdent-right">
+<figure class="zoomable outdent-right" style="width: 36%;">
 <img src="{{ '/assets/images/posts/block-stopwatch.webp' | relative_url }}" class="no-invert" alt="A block print of a pocket stopwatch, its face cut away to show the gears inside">
 </figure>
 
