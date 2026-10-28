@@ -28,6 +28,7 @@ When I want to build an operating system, a programming language or a tool, I re
 | **Rust** | [rust-lang.org](https://www.rust-lang.org/) |
 | **The longer timeline** | [TBT #13: Many Decades of Learning the Next Thing](/2026/10/01/tbt-timelines-of-tools/) |
 | **Built in Rust, lately** | [X_eTaL](/2026/10/07/array-languages-xetal/), [reva-fork](/2026/10/25/saw-reva-fork-cosy/) |
+| **The series** | [Why I Use: every post](/series/#why-i-use) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
 </div>
