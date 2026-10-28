@@ -38,7 +38,7 @@ date: 2026-10-29 00:15:00 -0700
 
 ## APL: the whole idea on one line
 
-APL was my first language: [my first program](/2026/01/29/tbt-apl-horse-race/) was a horse race on an IBM mainframe in 1972. It is still the one I reach for when an idea is about a whole collection of things at once, because the notation operates on entire arrays and the result reads close to the mathematics.
+APL was my first language: [my first program](/2026/01/29/tbt-apl-horse-race/) was a horse race on an IBM mainframe in 1972. In the demos on this blog it is there when an idea is about a whole collection of things at once: the notation operates on entire arrays, and the result reads close to the mathematics.
 
 The [voxel game post](/2026/10/09/voxels-3d-worlds-array-languages/) shows what that buys a demo. Which faces of a 3D chunk of blocks are exposed to the air is one line: shift the whole chunk one step along each of three axes in each of two directions, and compare. It is the same outer product of rotations as the one-line Game of Life:
 
@@ -46,13 +46,13 @@ The [voxel game post](/2026/10/09/voxels-3d-worlds-array-languages/) shows what 
 life ← {⊃1 ⍵ ∨.∧ 3 4 = +/ +⌿ ¯1 0 1 ∘.⊖ ¯1 0 1 ⌽¨ ⊂⍵}
 ```
 
-A reader can see the entire algorithm at once, with no loops or index bookkeeping in the way. [Eigencube](/2026/10/08/eigencube-rubiks-cube-linear-algebra/) does the same for a Rubik's cube: the cube as matrices, its moves as linear algebra. And [X_eTaL](/2026/10/07/array-languages-xetal/), the array language I am building in Rust, exists because I wanted that density with words you can read.
+A reader can see the entire algorithm at once, with no loops or index bookkeeping in the way. [Eigencube](/2026/10/08/eigencube-rubiks-cube-linear-algebra/) does the same for a Rubik's cube: the cube as matrices, its moves as linear algebra. And [X_eTaL](/2026/10/07/array-languages-xetal/), the array language I am building in Rust, aims at that density in an array language you can read.
 
 ## Forth: small enough to build, and to watch build itself
 
 Forth is the opposite kind of demo. Where APL hides the machine, Forth puts it on the table: a stack, a dictionary of words, and an interpreter small enough to read in one sitting. That makes it the language for showing how a language works from the inside.
 
-The COR24 Forth posts are built on that. [Embedded #3](/2026/04/20/embedded-forth-self-hosting-spectrum/) moved a kernel from all assembly to mostly Forth, one word at a time; the rabbit-hole posts that followed took apart dictionary lookup, hashing and code generation; and [Embedded #4](/2026/10/24/embedded-forth-from-forth/) ended with a Forth compiler, written in Forth, that rebuilds its own kernel byte for byte. Few languages let a demo go all the way down and back up like that in a few thousand lines.
+The COR24 Forth posts are built on that. [Embedded #3](/2026/04/20/embedded-forth-self-hosting-spectrum/) moved a kernel from all assembly to mostly Forth, one word at a time; the rabbit-hole posts that followed took apart dictionary lookup, hashing and code generation; and [Embedded #4](/2026/10/24/embedded-forth-from-forth/) ended with a Forth compiler, written in Forth, that rebuilds its own kernel byte for byte.
 
 Forth is also a good host. [CoSy](/2026/10/25/saw-reva-fork-cosy/), Bob Armstrong's APL- and K-like vocabulary, is built on Reva Forth, so a single REPL can show the same fractal drawn the Forth way, recursing, and the array way, as a list.
 
@@ -60,10 +60,12 @@ Forth is also a good host. [CoSy](/2026/10/25/saw-reva-fork-cosy/), Bob Armstron
 
 Lisp's demo is that a program is data. Its code is written as the lists it manipulates, so a program can build, inspect and rewrite code with the same functions it uses for anything else, and macros fall out of that naturally. I have used Lisps since 1989: Scheme, Common Lisp, Racket and Emacs Lisp.
 
-In this blog Lisp has mostly appeared as the point of comparison. In [the Phoenix combinator post](/2026/10/19/rabbit-hole-phoenix-combinator/) the Racket solution names its argument where APL and J compose functions without one, and when X_eTaL's macros were designed, Lisp's reader macros were the power to have without letting a program redefine the language by accident.
+In this blog Lisp has mostly appeared as the point of comparison. In [the Phoenix combinator post](/2026/10/19/rabbit-hole-phoenix-combinator/) the Racket solution names its argument where APL and J compose functions without one, and when X_eTaL's macros were designed, Lisp's reader macros were the thing not to copy: power enough to let a program redefine the language "by accident".
 
 Mike: TODO, a Lisp demo of your own (MacroLisp on COR24, a Lisp in Rust?) and what you reach for Lisp to show.
 
 ## Building them is part of the demo
 
-I do not only use these languages; I build them, in assembler, C or Rust, or, in Forth's case, in Forth itself. Building one is the deepest demo of all: an APL interpreter shows what an array is, a Forth kernel what a word and a stack are, a Lisp what evaluation is. Each is small enough to build in days rather than years, and each one I build teaches me something I then use in the tools I build in Rust.
+I do not only use these languages; I build them, in assembler, C or Rust, or, in Forth's case, in Forth itself. On this blog that has meant X_eTaL's interpreter in Rust, the COR24 Forth kernel in assembler and then in Forth, and Reva, an x86 Forth, carried to new machines on a virtual machine written in Rust.
+
+Mike: TODO, what building them gives you that using them does not, in your words.
