@@ -2,9 +2,9 @@
 layout: post
 title: "Why I Use #3: Assembler, C and PL/SW, for a Machine Rust Can't Target"
 categories: [languages, embedded]
-tags: [why-i-use, assembler, c, pl-sw, pl-i, cor24, fpga, soft-cpu, compilers, macros, operating-systems, embedded, rust]
-keywords: "why I use assembler, C compiler for COR24, PL/SW, PL/I-inspired systems language, compile-time macros, COR24 FPGA soft CPU, MakerLisp, tc24r, cor24-asm, SWTOS microkernel, cross compiler written in Rust, targets Rust does not support"
-abstract: "Third in the series on the tools I reach for. To write operating-system and programming-language code for small embedded processors, I use three low-level languages: assembler, C and PL/SW, my PL/I-inspired systems language. They exist because the processor I target, the COR24 FPGA soft CPU, is one Rust does not support. So the tools are written in Rust and generate COR24 assembler: an assembler, a C compiler, and PL/SW, whose compile-time macros carry on what IBM's PL/S taught me. The SWTOS microkernel is written in them."
+tags: [why-i-use, assembler, c, pl-sw, pl-s, cor24, fpga, soft-cpu, compilers, macros, operating-systems, embedded, rust]
+keywords: "why I use assembler, C compiler for COR24, PL/SW, PL/S-inspired systems language, compile-time macros, COR24 FPGA soft CPU, MakerLisp, tc24r, cor24-asm, SWTOS microkernel, cross compiler written in Rust, targets Rust does not support"
+abstract: "Third in the series on the tools I reach for. To write operating-system and programming-language code for small embedded processors, I use three low-level languages: assembler, C and PL/SW, my PL/S-inspired systems language. They exist because the processor I target, the COR24 FPGA soft CPU, is one Rust does not support. So the tools are written in Rust and generate COR24 assembler: an assembler, a C compiler, and PL/SW, whose compile-time macros carry on what IBM's PL/S taught me. The SWTOS microkernel is written in them."
 series: "Why I Use"
 series_part: 3
 date: 2026-10-30 00:15:00 -0700
@@ -78,7 +78,7 @@ void led_on() {
 
 ## PL/SW
 
-PL/SW is the one I designed. [The first post in this series](/2026/10/28/why-i-use-rust/) started with IBM's PL/S and its macros that ran during compilation to write the code to be compiled. PL/SW, the Programming Language for Software Wrighter, is a freestanding, PL/I-inspired systems language for COR24 that carries that idea on. A macro declares what it takes and generates code, here three instructions of COR24 assembler:
+PL/SW is the one I designed. [The first post in this series](/2026/10/28/why-i-use-rust/) started with IBM's PL/S and its macros that ran during compilation to write the code to be compiled. PL/SW, the Programming Language for Software Wrighter, is a freestanding systems language for COR24, inspired by PL/S, that carries that idea on. A macro declares what it takes and generates code, here three instructions of COR24 assembler:
 
 ```text
 /* ?LED_SET(VAL(n)) -- write a byte to LED MMIO register */
