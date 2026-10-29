@@ -879,8 +879,9 @@ article.post .resource-box,
     margin: 0.3em 1.5em 1.2em -66.667%;
   }
 
-  // The same for an aside in a left-hand section, out in its open right side.
-  .stagger-0 > .aside-box.outdent-right {
+  // The same, opt-in (class wide), for an aside in a left-hand section, out in
+  // its open right side; plain outdent-right asides keep the narrow house width.
+  .stagger-0 > .aside-box.outdent-right.wide {
     float: right;
     clear: right;
     width: 60%;
@@ -901,7 +902,7 @@ article.post .resource-box,
     }
     .stagger-0 > figure.outdent-right,
     .stagger-2 > figure.outdent-left,
-    .stagger-0 > .aside-box.outdent-right,
+    .stagger-0 > .aside-box.outdent-right.wide,
     .stagger-2 > .aside-box.outdent-left {
       float: none;
       width: auto;

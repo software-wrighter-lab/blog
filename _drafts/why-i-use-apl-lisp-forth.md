@@ -113,7 +113,7 @@ Forth is also a good host. [CoSy](/2026/10/25/saw-reva-fork-cosy/), Bob Armstron
 ## One idea, three languages: the birds
 {: .pos-left}
 
-<div class="aside-box outdent-right" markdown="1">
+<div class="aside-box outdent-right wide" markdown="1">
 
 **The Phoenix in X_eTaL.** The fork is built into the language as a bracketed train, `[F G H] x` is `(F x) G (H x)`, and the same Combinators library, in X_eTaL's standard [`lib/Combinators.xtl`](https://github.com/softwarewrighter/X_eTaL/blob/main/lib/Combinators.xtl), has it as a bird, `ᶜP̲hi`, Curry's S′:
 
