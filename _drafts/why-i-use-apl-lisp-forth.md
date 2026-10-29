@@ -27,7 +27,7 @@ date: 2026-10-29 00:15:00 -0700
 
 <img src="{{ '/assets/images/posts/block-apl-lisp-forth.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
-[The first post in this series](/2026/10/28/why-i-use-rust/) ended on a split: when I want to build an operating system, a programming language or a tool, I reach for Rust; when I want to demo a concept, I reach for APL, Forth, Lisp, or one of my array languages. This one is about the second half, taking the three in the order I learned them: APL, Lisp, then Forth. They are the languages I most enjoy building and playing with, and each lets a demo show something in a way the others cannot.
+[The first post in this series](/2026/10/28/why-i-use-rust/) ended on a split: when I want to build an operating system, a programming language or a tool, I reach for Rust; when I want to demo a concept, I choose an interactive language with a REPL and reach for APL, Forth, Lisp, or one of my array languages. This one is about the second half, taking the three in the order I learned them: APL, Lisp, then Forth. They are the languages I most enjoy building and playing with, and each lets a demo show something in a way the others cannot.
 
 <!--more-->
 
