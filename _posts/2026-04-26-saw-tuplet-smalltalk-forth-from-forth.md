@@ -9,6 +9,19 @@ abstract: "Tuplet is a new experimental PoC language with significant whitespace
 series: "Sharpen the Saw Sundays"
 series_part: 8
 repo_url: "https://github.com/sw-vibe-coding/tuplet"
+repo_urls:
+  - url: "https://github.com/sw-vibe-coding/tuplet"
+    title: "Tuplet"
+  - url: "https://github.com/sw-embed/sw-cor24-smalltalk"
+    title: "Smalltalk on COR24 BASIC"
+  - url: "https://github.com/sw-vibe-coding/sw-fth-wasm"
+    title: "proto-forth-wasm"
+  - url: "https://github.com/sw-ml-study/sw-mlpl"
+    title: "sw-MLPL"
+  - url: "https://github.com/sw-embed/sw-cor24-ocaml"
+    title: "COR24 OCaml"
+video_url: "https://www.youtube.com/shorts/fL5NLSKkLoU"
+video_title: "Embedded Smalltalk via Dogfooding"
 ---
 
 <img src="{{ '/assets/images/posts/block-gray-beard-sharpen-saw.webp' | relative_url }}" class="post-marker no-invert" alt="">
@@ -205,3 +218,4 @@ The Status tab is the same kind of investment as the glyph-input layer and the I
 ---
 
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/23: proto-forth-wasm (repo sw-fth-wasm), a separate Rust/WASM Forth, was mislabeled "Forth-from-Forth" in the title, abstract, a section heading and two table rows; it is relabeled, and the sw-cor24-forth issues and next steps are now attributed to the COR24 Forth. "forth-from-forth" names phase 4 of sw-cor24-forth, a different project. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-04-26-saw-tuplet-smalltalk-forth-from-forth.md">Post history</a>.]</em></p>
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/29: listed this post's repositories and its video in its metadata, so it appears in the blog's Code and Videos index. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-04-26-saw-tuplet-smalltalk-forth-from-forth.md">Post history</a>.]</em></p>

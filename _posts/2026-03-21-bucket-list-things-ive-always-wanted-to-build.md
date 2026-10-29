@@ -8,6 +8,9 @@ keywords: "bucket list, retirement projects, lifelong learning, FPGA, microcontr
 abstract: "A lifelong list of technical things I always wanted to learn and build---too busy during my career, too hard before AI. Now retired, I'm working through them for fun, no deadlines. This is the introduction to the list."
 series: "Bucket List"
 series_part: 1
+repo_urls:
+  - url: "https://github.com/softwarewrighter/bucketlist"
+    title: "bucketlist"
 ---
 
 <img src="{{ '/assets/images/posts/block-two-buckets.webp' | relative_url }}" class="post-marker" alt="" style="width: 200px;">
@@ -107,3 +110,7 @@ Future Bucket List posts will cover a few items at a time, mixing categories. I'
 ---
 
 *Everyone's list is different. This is mine. What's on yours?*
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/29: listed this post's repositories in its metadata, so it appears in the blog's Code index. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-03-21-bucket-list-things-ive-always-wanted-to-build.md">Post history</a>.]</em></p>

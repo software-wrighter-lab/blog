@@ -8,6 +8,11 @@ keywords: "Espanso text expander, Kate editor syntax highlighting, KSyntaxHighli
 abstract: "Three tools that turn out to be the same problem in disguise---Espanso for shared glyph input, Kate for one-XML-file syntax highlighting, and `gh gist create` standing in for ShareX---all earning their slot because they make collaborating on a new in-development language (PAL) cheap. Plus a deeper cut on the COR24 emulator: a three-layer I2C design (guest C apps / bit-banged bus state machine / pluggable device trait) that lets every COR24 language share the same I/O example library, with SPI sketched as a parallel phase 2."
 series: "Sharpen the Saw Sundays"
 series_part: 9
+repo_urls:
+  - url: "https://github.com/sw-embed/sw-cor24-emulator"
+    title: "COR24 emulator"
+  - url: "https://github.com/sw-vibe-coding/tuplet"
+    title: "Tuplet"
 ---
 
 <img src="{{ '/assets/images/posts/block-eight-saws.webp' | relative_url }}" class="post-marker no-invert" alt="Eight different saws---rip, crosscut, coping, keyhole, two-handed, pruning---rendered as a woodcut" style="width: 220px;">
@@ -250,3 +255,7 @@ Not commitments---just directions any of these threads could grow if the slot op
 ---
 
 *Glyph input, syntax highlighting, snippet sharing---three tools and one job: making a new language cheap to collaborate on. Plus a peripheral bus that does the same favor for the COR24 language stack. Follow for more Sharpen the Saw updates.*
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/29: listed this post's repositories in its metadata, so it appears in the blog's Code index. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-05-03-saw-espanso-kate-sharex-cor24-i2c-pluggable.md">Post history</a>.]</em></p>

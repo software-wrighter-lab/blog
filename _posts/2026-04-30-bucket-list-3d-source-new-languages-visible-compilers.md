@@ -8,6 +8,15 @@ keywords: "bucket list, 3D source code, programming languages, language implemen
 abstract: "Three threads winding through the next chunk of the bucket list. First, source code in three dimensions: punch cards were 1D, screens are 2D, DiscoveryOne projects glyphs at (x, y, z) onto seven semantic facets. Second, five programming languages of my own currently in flight --- PL/SW, SWS, sw-MLPL, Tuplet, and DiscoveryOne --- each picking a different point on the build-axis / run-axis space. Third, the missing tool category that would tie all the language work together: educational visualizers that let you *watch* a compiler run --- step through a lexer, animate a parser, observe register allocation, see a heap fill and a garbage collector reclaim it, watch a JIT tier up. Most CS students never see any of this. They read about it. I want to build the surface that lets them watch."
 series: "Bucket List"
 series_part: 3
+repo_urls:
+  - url: "https://github.com/sw-vibe-coding/tuplet"
+    title: "Tuplet"
+  - url: "https://github.com/sw-embed/sw-cor24-script"
+    title: "sw-cor24-script"
+  - url: "https://github.com/sw-embed/sw-cor24-plsw"
+    title: "PL/SW"
+  - url: "https://github.com/sw-ml-study/sw-mlpl"
+    title: "sw-MLPL"
 ---
 
 <img src="{{ '/assets/images/posts/block-mag-glyphs.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 220px;">
@@ -23,7 +32,7 @@ The first two posts in this series listed the things I always wanted to build ([
 | Resource | Link |
 |----------|------|
 | **DiscoveryOne** (3D source) | [softwarewrighter/DiscoveryOne](https://github.com/softwarewrighter/DiscoveryOne) |
-| **Tuplet** (2D, DiscoveryOne's predecessor) | [softwarewrighter/tuplet](https://github.com/softwarewrighter/tuplet) |
+| **Tuplet** (2D, DiscoveryOne's predecessor) | [softwarewrighter/tuplet](https://github.com/sw-vibe-coding/tuplet) |
 | **sw-MLPL** (array language) | [sw-ml-study/sw-mlpl](https://github.com/sw-ml-study/sw-mlpl) · [live REPL](https://sw-ml-study.github.io/sw-mlpl/) |
 | **PL/SW** (PL/I-inspired systems lang) | [sw-embed/sw-cor24-plsw](https://github.com/sw-embed/sw-cor24-plsw) · [live demo](https://sw-embed.github.io/web-sw-cor24-plsw/) |
 | **SWS** (Tcl-like resident shell) | [sw-embed/sw-cor24-script](https://github.com/sw-embed/sw-cor24-script) |
@@ -91,7 +100,7 @@ MLPL is the only one of the five that is mostly *built* --- the live REPL works 
 
 ### Tuplet --- 2D Layout-Sensitive Language with Mintable Verbs
 
-[**tuplet**](https://github.com/softwarewrighter/tuplet) is the language I am driving as my main daily-language experiment. It is 2D-layout-sensitive (where a glyph sits on a grid matters), has first-class named tuples and multi-output verbs, and lets the user *mint* new verbs and new syntax via the `*` operator. The kernel is small; everything else --- including control flow --- is library code expressed in the kernel. The host is an OCaml-subset interpreter; the runtime target is Forth running on the COR24 emulator.
+[**tuplet**](https://github.com/sw-vibe-coding/tuplet) is the language I am driving as my main daily-language experiment. It is 2D-layout-sensitive (where a glyph sits on a grid matters), has first-class named tuples and multi-output verbs, and lets the user *mint* new verbs and new syntax via the `*` operator. The kernel is small; everything else --- including control flow --- is library code expressed in the kernel. The host is an OCaml-subset interpreter; the runtime target is Forth running on the COR24 emulator.
 
 Tuplet is currently in the "wakes the dragons" phase of language development --- the language compiles, demos run, but the OCaml interpreter underneath has been [thrashing its heap](/2026/04/28/personal-software-sw-launcher-one-ring/) until the GC work in flight (`sw-cor24-ocaml#28`) lands. Once that lands, Tuplet's `heap_limit` should *shrink*, not stay where it is, and the language will start to feel less fragile.
 
@@ -162,3 +171,7 @@ All three categories above became viable in the same window for the same two rea
 The next post in the series will probably be about whichever of these turns out to land first. My money is on the lexer / parser visualizer for sw-MLPL, since the language is already runnable and the visualizer is mostly "yew web app" away. We'll see.
 
 The list keeps growing. The bucket keeps filling. That's the point.
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/29: listed this post's repositories in its metadata, so it appears in the blog's Code index; updated the link to tuplet, which moved to sw-vibe-coding. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-04-30-bucket-list-3d-source-new-languages-visible-compilers.md">Post history</a>.]</em></p>

@@ -8,6 +8,11 @@ abstract: "First in a series on the tools I reach for, and why. One of my first 
 series: "Why I Use"
 series_part: 1
 date: 2026-10-28 00:15:00 -0700
+repo_urls:
+  - url: "https://github.com/softwarewrighter/X_eTaL"
+    title: "X_eTaL"
+  - url: "https://github.com/sw-ml-study/sw-mlpl"
+    title: "sw-MLPL"
 ---
 
 <!-- DRAFT (2026-10-28), Mike: a new series, "Why I Use" (Mike: not TBT, it's Wednesday and Rust isn't that old). Reasons are
@@ -88,3 +93,4 @@ So the split is simple. When I want to build an operating system, a programming 
 ---
 
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/28: the closing paragraph now says that for a demo I choose an interactive language with a REPL. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-28-why-i-use-rust.md">Post history</a>.]</em></p>
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/29: listed this post's repositories in its metadata, so it appears in the blog's Code index. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-28-why-i-use-rust.md">Post history</a>.]</em></p>
