@@ -62,7 +62,32 @@ R←(N=3)∨W∧N=2
 ∇
 ```
 
-A cell lives next time if it has three live neighbors, or if it is alive and has two. Given a vertical line of three cells, `LIFE` turns it horizontal, and `LIFE LIFE` turns it back.
+A cell lives next time if it has three live neighbors, or if it is alive and has two. Given a vertical line of three cells, a "blinker", `LIFE` turns it horizontal, and `LIFE LIFE` turns it back. In sw-apl:
+
+```text
+      G←5 5⍴0
+      G[2;3]←1
+      G[3;3]←1
+      G[4;3]←1
+      G
+0 0 0 0 0
+0 0 1 0 0
+0 0 1 0 0
+0 0 1 0 0
+0 0 0 0 0
+      LIFE G
+0 0 0 0 0
+0 0 0 0 0
+0 1 1 1 0
+0 0 0 0 0
+0 0 0 0 0
+      LIFE LIFE G
+0 0 0 0 0
+0 0 1 0 0
+0 0 1 0 0
+0 0 1 0 0
+0 0 0 0 0
+```
 
 A reader can see the entire algorithm at once, with no loops or index bookkeeping in the way. [Eigencube](/2026/10/08/eigencube-rubiks-cube-linear-algebra/) does the same for a Rubik's cube: the cube as matrices, its moves as linear algebra. And [X_eTaL](/2026/10/07/array-languages-xetal/), the array language I am building in Rust, aims at that density in an array language you can read.
 
