@@ -83,4 +83,8 @@ Yes, people complain that Rust compiles slowly, and that is fair enough. For my 
 
 Rust is not the only language I enjoy. From a coding-pleasure point of view, Ruby, Clojure and JavaScript were fun. And I enjoy building and playing with APL, Forth and Lisp, which I build in assembler, C or Rust, or, in Forth's case, in Forth itself ([Embedded #4](/2026/10/24/embedded-forth-from-forth/) is the latest of those).
 
-So the split is simple. When I want to build an operating system, a programming language or a tool, I reach for Rust. When I want to demo a concept, I reach for APL, Forth, Lisp, or one of my array languages. By a demo I mean showing one idea, an algorithm, a data structure or a piece of how a language works, in as little code as lets someone see all of it at once, usually live at a REPL. A Rust program is built to last and to be maintained; a demo is built to be understood, and those languages get the idea onto the screen with the least in the way.
+So the split is simple. When I want to build an operating system, a programming language or a tool, I reach for Rust. When I want to demo a concept, I choose an interactive language with a REPL; I reach for APL, Forth, Lisp, or one of my array languages. By a demo I mean showing one idea, an algorithm, a data structure or a piece of how a language works, in as little code as lets someone see all of it at once, usually live at a REPL. A Rust program is built to last and to be maintained; a demo is built to be understood, and those languages get the idea onto the screen with the least in the way.
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/28: the closing paragraph now says that for a demo I choose an interactive language with a REPL. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-28-why-i-use-rust.md">Post history</a>.]</em></p>
