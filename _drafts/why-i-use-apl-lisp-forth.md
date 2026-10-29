@@ -85,7 +85,7 @@ Combinators make a good test of what a language lets a demo show. In Raymond Smu
 
 (The Starling's arguments differ between the columns, so its results do too: `6 6 6 6 6` in APL, 11 in the other two.)
 
-Each language shows the birds in its own way. APL\360 cannot hand one function to another at all, so BIRDS names a function by its glyph and dispatches on it, and passes the function the last step by dynamic scope; the later APL with execute calls a function by its name. In MacroLisp the birds are closures, curried one argument at a time, exactly as the λ-terms read:
+Each language shows the birds in its own way. APL\360 cannot hand one function to another at all, so BIRDS names a function by its glyph and dispatches on it, and hands a dyadic bird its function by dynamic scope; the later APL with execute calls a function by its name. In MacroLisp the birds are closures, curried one argument at a time, exactly as the λ-terms read:
 
 ```scheme
 (define K (lambda (x) (lambda (y) x)))
