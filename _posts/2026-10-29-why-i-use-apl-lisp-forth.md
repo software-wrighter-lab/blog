@@ -8,6 +8,21 @@ abstract: "Second in the series on the tools I reach for. When I want to build s
 series: "Why I Use"
 series_part: 2
 date: 2026-10-29 00:15:00 -0700
+repo_urls:
+  - url: "https://github.com/sw-vibe-coding/sw-apl"
+    title: "sw-apl"
+  - url: "https://github.com/sw-embed/sw-cor24-macrolisp"
+    title: "MacroLisp"
+  - url: "https://github.com/softwarewrighter/reva-fork"
+    title: "reva-fork"
+  - url: "https://github.com/sw-embed/sw-cor24-forth"
+    title: "COR24 Forth"
+  - url: "https://github.com/sw-embed/sw-cor24-apl"
+    title: "COR24 APL"
+  - url: "https://github.com/softwarewrighter/X_eTaL"
+    title: "X_eTaL"
+  - url: "https://github.com/sw-ml-study/sw-mlpl"
+    title: "sw-MLPL"
 ---
 
 <!-- DRAFT (2026-10-28), Mike: Why I Use #2, planned 10/29, while he reviews #1 (10/28). Mike's own words so far are #1's:
@@ -203,3 +218,7 @@ The Sage as a macro, `ᶜY̲<`, ties the knot when the program is expanded, so w
 I do not only use these languages; I build them, in assembler, C or Rust, or, in Forth's case, in Forth itself. On this blog that has meant X_eTaL's interpreter in Rust, the COR24 Forth kernel in assembler and then in Forth, and Reva, an x86 Forth, carried to new machines on a virtual machine written in Rust.
 
 Building them is also how I dogfood my own tools. Each language I build is a real program for the tools beneath it to compile, so it tests my Rust tooling and my process whenever they produce assembler, C, PL/SW, APL or reva-fork Forth. My [APL for COR24](https://github.com/sw-embed/sw-cor24-apl) is written in C, so it dogfoods my [C compiler](https://github.com/sw-embed/sw-cor24-x-tinyc). [MacroLisp](https://github.com/sw-embed/sw-cor24-macrolisp) dogfoods the C compiler too, and its own prelude dogfoods MacroLisp itself. And the [COR24 Forth](https://github.com/sw-embed/sw-cor24-forth) dogfoods my assembler, and then Forth itself, as more of the kernel moves into Forth. When one of them breaks, the fault is often in a tool beneath it, and the language is what found it: [Saw #5](/2026/04/05/saw-saga-archiving-mlpl-plsw-cor24-compilers/) fixed the C compiler to unblock the APL.
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/29: listed this post's repositories in its metadata, so it appears in the blog's Code index. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-29-why-i-use-apl-lisp-forth.md">Post history</a>.]</em></p>

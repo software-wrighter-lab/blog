@@ -8,6 +8,11 @@ keywords: "bucket list, COR24, software tools, Lisp, garbage collector, p-code V
 abstract: "Two weeks of vibe-coding with agentrail-rs produced a landing page for the COR24 Software Tools ecosystem---a portfolio of bucket list items that are actually getting done: a Lisp with garbage collection, a p-code VM, two programming languages, a monitor, an editor, and more."
 series: "Bucket List"
 series_part: 2
+repo_urls:
+  - url: "https://github.com/softwarewrighter/bucketlist"
+    title: "bucketlist"
+  - url: "https://github.com/sw-vibe-coding/agentrail-rs"
+    title: "agentrail-rs"
 ---
 
 <img src="{{ '/assets/images/posts/block-buckets-in-space.webp' | relative_url }}" class="post-marker" alt="" style="width: 200px;">
@@ -16,7 +21,7 @@ series_part: 2
 
 In the [first Bucket List post](/2026/03/21/bucket-list-things-ive-always-wanted-to-build/), I listed the things I've always wanted to build. A lot of them were software tools: compilers, interpreters, languages, debuggers---the infrastructure that software is made of. In the past two weeks, a surprising number of those items moved from "someday" to "done" or "in progress."
 
-The catalyst was [agentrail-rs](https://github.com/softwarewrighter/agentrail-rs), my AI agent workflow tool. I pointed it at the COR24 ecosystem and let it rip.
+The catalyst was [agentrail-rs](https://github.com/sw-vibe-coding/agentrail-rs), my AI agent workflow tool. I pointed it at the COR24 ecosystem and let it rip.
 
 </div>
 
@@ -114,3 +119,7 @@ This is what retirement plus AI looks like. The bucket list is getting shorter.
 ---
 
 *Previous: [Bucket List #1: Things I've Always Wanted to Build](/2026/03/21/bucket-list-things-ive-always-wanted-to-build/) --- the full list.*
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/29: listed this post's repositories in its metadata, so it appears in the blog's Code index; updated the link to agentrail-rs, which moved to sw-vibe-coding. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-04-03-bucket-list-software-tools-landing-page.md">Post history</a>.]</em></p>

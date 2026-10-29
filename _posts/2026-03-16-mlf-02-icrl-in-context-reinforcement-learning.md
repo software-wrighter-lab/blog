@@ -21,6 +21,9 @@ papers:
     url: "https://arxiv.org/abs/2303.11366"
   - title: "Voyager: An Open-Ended Embodied Agent with Large Language Models"
     url: "https://arxiv.org/abs/2305.16291"
+repo_urls:
+  - url: "https://github.com/sw-vibe-coding/agentrail-rs"
+    title: "agentrail-rs"
 ---
 
 <img src="{{ '/assets/images/posts/block-graph.webp' | relative_url }}" class="post-marker" alt="" style="width: 120px;">
@@ -123,3 +126,7 @@ See [Saw #2: agentrail-rs](/2026/03/15/saw-reg-rs-avoid-compaction-agentrail/) f
 ---
 
 *In-Context RL turns agents from amnesiacs into learners. Follow for more ML Frontier episodes exploring research at the edge.*
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/29: listed this post's repositories in its metadata, so it appears in the blog's Code index. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-03-16-mlf-02-icrl-in-context-reinforcement-learning.md">Post history</a>.]</em></p>
