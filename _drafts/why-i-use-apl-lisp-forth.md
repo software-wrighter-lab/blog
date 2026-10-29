@@ -16,7 +16,8 @@ date: 2026-10-29 00:15:00 -0700
      The rest is drawn from published posts, written as what each language let those demos show, NOT as Mike's stated
      motivations; Mike to add or correct his reasons (marked "Mike:" below).
      Birds section (Mike, 2026-10-28): sw-apl docs/birds.md (27fc0e1); MacroLisp run on the live web REPL (build 21a8477): birds
-     (42 7 9 6 -6 -7 25 11), Z fact 6 = 720, textbook Y = stack overflow, Y with a delay macro = 720; Forth run on reva-fork dev
+     (42 7 9 6 -6 -7 25 11), Z fact 6 = 720, textbook Y = stack overflow, Y with a delay macro = 720; APL\360 LIFE run in sw-apl --mode 70 (blinker
+     flips and back); the dfn Life line is Dyalog (Mike: sw-apl gives CHARACTER ERROR on it); Forth run on reva-fork dev
      (03fd93f+): 42 7 9 6 -6 -7 25 11, Y via self-application = 720. Links to #1 assume #1 publishes first (10/28).
      Years from TBT #1 (APL, 1972) and TBT #13's timeline (Lisps since 1989). Lead image: Mike's block-apl-lisp-forth.jpg (Dropbox), a color photo-style render (an APL apple, a
      lambda labeled Lisp, the word Forth), no-invert. -->
@@ -46,11 +47,22 @@ date: 2026-10-29 00:15:00 -0700
 
 APL was my first language: [my first program](/2026/01/29/tbt-apl-horse-race/) was a horse race on an IBM mainframe in 1972. In the demos on this blog it is there when an idea is about a whole collection of things at once: the notation operates on entire arrays, and the result reads close to the mathematics.
 
-The [voxel game post](/2026/10/09/voxels-3d-worlds-array-languages/) shows what that buys a demo. Which faces of a 3D chunk of blocks are exposed to the air is one line: shift the whole chunk one step along each of three axes in each of two directions, and compare. It is the same outer product of rotations as the one-line Game of Life:
+The [voxel game post](/2026/10/09/voxels-3d-worlds-array-languages/) shows what that buys a demo. Which faces of a 3D chunk of blocks are exposed to the air is one line: shift the whole chunk one step along each of three axes in each of two directions, and compare. It is the same outer product of rotations as the one-line Game of Life, in Dyalog APL:
 
 ```text
 life ← {⊃1 ⍵ ∨.∧ 3 4 = +/ +⌿ ¯1 0 1 ∘.⊖ ¯1 0 1 ⌽¨ ⊂⍵}
 ```
+
+That line needs a modern APL: the braces make a direct function, and `⊂` and `¨` work on nested arrays, none of which APL\360 had. My own APL, sw-apl, runs APL\360 as it was in 1970, where the same idea is a defined function that adds up the eight rotations by hand:
+
+```text
+∇R←LIFE W;N
+N←(1⌽W)+(¯1⌽W)+(1⊖W)+(¯1⊖W)+(1⊖1⌽W)+(1⊖¯1⌽W)+(¯1⊖1⌽W)+(¯1⊖¯1⌽W)
+R←(N=3)∨W∧N=2
+∇
+```
+
+A cell lives next time if it has three live neighbors, or if it is alive and has two. Given a vertical line of three cells, `LIFE` turns it horizontal, and `LIFE LIFE` turns it back.
 
 A reader can see the entire algorithm at once, with no loops or index bookkeeping in the way. [Eigencube](/2026/10/08/eigencube-rubiks-cube-linear-algebra/) does the same for a Rubik's cube: the cube as matrices, its moves as linear algebra. And [X_eTaL](/2026/10/07/array-languages-xetal/), the array language I am building in Rust, aims at that density in an array language you can read.
 
