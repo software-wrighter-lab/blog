@@ -16,7 +16,8 @@ date: 2026-10-29 00:15:00 -0700
      The rest is drawn from published posts, written as what each language let those demos show, NOT as Mike's stated
      motivations; Mike to add or correct his reasons (marked "Mike:" below).
      Birds section (Mike, 2026-10-28): sw-apl docs/birds.md (27fc0e1); MacroLisp run on the live web REPL (build 21a8477): birds
-     (42 7 9 6 -6 -7 25 11), Z fact 6 = 720, textbook Y = stack overflow, Y with a delay macro = 720; APL\360 LIFE run in sw-apl --mode 70 (blinker
+     (42 7 9 6 -6 -7 25 11), Z fact 6 = 720, textbook Y = stack overflow, Y with a delay macro = 720; X_eTaL aside: both Sage forms run in xetal 2bdc6a57 (720), rendered by xetal render (the macro's lambda as a
+     c"..." code string so it is drawn); the Phoenix fork is Rabbit-hole #7's, published with its run (2). APL\360 LIFE run in sw-apl --mode 70 (blinker
      flips and back); the dfn Life line is Dyalog (Mike: sw-apl gives CHARACTER ERROR on it); Forth run on reva-fork dev
      (03fd93f+): 42 7 9 6 -6 -7 25 11, Y via self-application = 720. Links to #1 assume #1 publishes first (10/28).
      Years from TBT #1 (APL, 1972) and TBT #13's timeline (Lisps since 1989). Lead image: Mike's block-apl-lisp-forth.jpg (Dropbox), a color photo-style render (an APL apple, a
@@ -158,6 +159,33 @@ Forth has no closures, so it cannot build a function that returns a function. It
 sw-apl's Sage, in the APL with execute, does the same: the step is given its own name as characters. Three languages, one idea, and each version shows something the others hide: APL how little the idea needs, Lisp the idea exactly as the λ-calculus writes it, Forth what it costs on a machine with only a stack.
 
 ## Building them is part of the demo
+{: .pos-right}
+
+<div class="aside-box outdent-left" markdown="1">
+
+**The Sage in X_eTaL.** X_eTaL is strict too, but a lambda's parameter can be made lazy with `~`, so its Combinators library's Sage, `ᶜY̲`, works without the Z detour, and a lambda recurses with no name at all ([Array Languages #1](/2026/10/07/array-languages-xetal/) has six ways to write it):
+
+```xetal
+"c:" u̲se< "Combinators"
+'{ ~s̲elf n → n ≤ 1 ? 1◆ n × s̲elf n − 1 } ᶜY̲ 6     ⍝ 720
+```
+
+The Sage as a macro, `ᶜY̲<`, ties the knot when the program is expanded, so what runs is plain named recursion:
+
+```xetal
+"u:f_act" ᶜY̲< c"{ ~s̲elf n → n ≤ 1 ? 1◆ n × s̲elf n − 1 }"
+ᵘf̲act 6     ⍝ 720
+```
+
+**Sage or Phoenix?** Different birds. The Sage, Y, is the fixed point, `Y f = f (Y f)`: recursion without a name. The Phoenix, Φ, is the fork, `Φ f g h x = f (g x) (h x)`: one argument handed to two functions and the results combined. X_eTaL writes the Phoenix as a bracketed train, here the GCD of the smallest and largest of an array ([Rabbit-hole #7](/2026/10/19/rabbit-hole-phoenix-combinator/)):
+
+```xetal
+ᵘf̲indGcd ← ['m̲in r̲/ ⁿg̲cd 'm̲ax r̲/]
+ᵘf̲indGcd 2 5 6 9 10     ⍝ 2
+```
+
+</div>
+
 
 I do not only use these languages; I build them, in assembler, C or Rust, or, in Forth's case, in Forth itself. On this blog that has meant X_eTaL's interpreter in Rust, the COR24 Forth kernel in assembler and then in Forth, and Reva, an x86 Forth, carried to new machines on a virtual machine written in Rust.
 
