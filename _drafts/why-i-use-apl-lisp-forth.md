@@ -186,7 +186,8 @@ sw-apl's Sage, in the APL with execute, does the same: the step is given its own
 
 ```xetal
 "c:" u̲se< "Combinators"
-'{ ~s̲elf n → n ≤ 1 ? 1◆ n × s̲elf n − 1 } ᶜY̲ 6   ⍝ 720
+'{ ~s̲elf n → n ≤ 1 ? 1◆ n × s̲elf n − 1 } ᶜY̲ 6
+⍝ 720
 ```
 
 The Sage as a macro, `ᶜY̲<`, ties the knot when the program is expanded, so what runs is plain named recursion:
