@@ -9,6 +9,8 @@ abstract: "Three threads winding through the next chunk of the bucket list. Firs
 series: "Bucket List"
 series_part: 3
 repo_urls:
+  - url: "https://github.com/sw-vibe-coding/DiscoveryOne"
+    title: "DiscoveryOne"
   - url: "https://github.com/sw-vibe-coding/tuplet"
     title: "Tuplet"
   - url: "https://github.com/sw-embed/sw-cor24-script"
@@ -31,8 +33,8 @@ The first two posts in this series listed the things I always wanted to build ([
 
 | Resource | Link |
 |----------|------|
-| **DiscoveryOne** (3D source) | [softwarewrighter/DiscoveryOne](https://github.com/softwarewrighter/DiscoveryOne) |
-| **Tuplet** (2D, DiscoveryOne's predecessor) | [softwarewrighter/tuplet](https://github.com/sw-vibe-coding/tuplet) |
+| **DiscoveryOne** (3D source) | [sw-vibe-coding/DiscoveryOne](https://github.com/sw-vibe-coding/DiscoveryOne) |
+| **Tuplet** (2D, DiscoveryOne's predecessor) | [sw-vibe-coding/tuplet](https://github.com/sw-vibe-coding/tuplet) |
 | **sw-MLPL** (array language) | [sw-ml-study/sw-mlpl](https://github.com/sw-ml-study/sw-mlpl) · [live REPL](https://sw-ml-study.github.io/sw-mlpl/) |
 | **PL/SW** (PL/I-inspired systems lang) | [sw-embed/sw-cor24-plsw](https://github.com/sw-embed/sw-cor24-plsw) · [live demo](https://sw-embed.github.io/web-sw-cor24-plsw/) |
 | **SWS** (Tcl-like resident shell) | [sw-embed/sw-cor24-script](https://github.com/sw-embed/sw-cor24-script) |
@@ -56,7 +58,7 @@ Every editor we use today is still a 2D-rectangle authoring surface. We have lea
 
 Punch cards are 1D. Screens are 2D. **What if source were 3D?**
 
-[**DiscoveryOne**](https://github.com/softwarewrighter/DiscoveryOne) is the project I am sketching to make that question concrete. Every glyph in a DiscoveryOne program has an `(x, y, z)` coordinate and an aspect label drawn from a fixed set: `@front`, `@left`, `@right`, `@top`, `@bottom`, `@rear`, `@internal`. A definition is *not* a block of text; it is a small cube of meaning, and the user views one facet at a time:
+[**DiscoveryOne**](https://github.com/sw-vibe-coding/DiscoveryOne) is the project I am sketching to make that question concrete. Every glyph in a DiscoveryOne program has an `(x, y, z)` coordinate and an aspect label drawn from a fixed set: `@front`, `@left`, `@right`, `@top`, `@bottom`, `@rear`, `@internal`. A definition is *not* a block of text; it is a small cube of meaning, and the user views one facet at a time:
 
 | Facet | Role |
 |-------|------|
@@ -174,4 +176,4 @@ The list keeps growing. The bucket keeps filling. That's the point.
 
 ---
 
-<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/29: listed this post's repositories in its metadata, so it appears in the blog's Code index; updated the link to tuplet, which moved to sw-vibe-coding. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-04-30-bucket-list-3d-source-new-languages-visible-compilers.md">Post history</a>.]</em></p>
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/29: listed this post's repositories in its metadata, so it appears in the blog's Code index; updated the links to tuplet and DiscoveryOne, which moved to sw-vibe-coding. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-04-30-bucket-list-3d-source-new-languages-visible-compilers.md">Post history</a>.]</em></p>
