@@ -18,7 +18,7 @@ date: 2026-10-30 00:15:00 -0700
      Facts from the READMEs: sw-cor24-x-assembler 362000b, sw-cor24-x-tinyc 96090c8, sw-cor24-plsw 05748d0, sw-tos; code samples
      verbatim from tests/programs/count_down.s, demos/led.c, examples/system.msw and examples/macro.plsw.
      Lead image: Mike's block-asm-c-plsw.png (Dropbox, third version 17:27; real COR24 count_down loop, C, and loop.plsw's MAIN),
-     no-invert. Links #1 (published) and #2 (planned 10/29; publish #2 first). -->
+     no-invert. Gutter: sw-cor24-plsw images/sw-pl-badge2.png (93b488d), no-invert. Links #1 (published) and #2 (planned 10/29; publish #2 first). -->
 
 <img src="{{ '/assets/images/posts/block-asm-c-plsw.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 300px;">
 
@@ -66,6 +66,7 @@ _loop:  mov     r1,r0
 [`cor24-asm`](https://github.com/sw-embed/sw-cor24-x-assembler), written in Rust, assembles `.s` files into loadable images, raw bytes and listings. It began as the byte-for-byte reference for a self-hosted COR24 assembler, as24, that runs on COR24 itself.
 
 ## C
+{: .pos-center}
 
 C is the portable layer above it. [`tc24r`](https://github.com/sw-embed/sw-cor24-x-tinyc) is a C compiler for COR24 written in Rust, after the design of chibicc: a recursive-descent parser that emits assembly directly. It handles 24-bit `int`, `char`, pointers, arrays, structs, unions, function pointers and the usual control flow, and its 61 demos all pass. A C program reaches the hardware the way C always has, through a pointer to a memory-mapped register:
 
@@ -77,6 +78,11 @@ void led_on() {
 ```
 
 ## PL/SW
+{: .pos-right}
+
+<figure class="zoomable outdent-left" style="width: 140px;">
+<img src="{{ '/assets/images/posts/plsw-badge.webp' | relative_url }}" class="no-invert" alt="The PL/SW badge: the letters PL in orange and SW in light blue on a dark shield with green and gold stripes">
+</figure>
 
 PL/SW is the one I designed. [The first post in this series](/2026/10/28/why-i-use-rust/) started with IBM's PL/S and its macros that ran during compilation to write the code to be compiled. PL/SW, the Programming Language for Software Wrighter, is a freestanding systems language for COR24, inspired by PL/S, that carries that idea on. A macro declares what it takes and generates code, here three instructions of COR24 assembler:
 
@@ -104,6 +110,7 @@ END;
 PL/SW also has BASED record templates for laying records over memory, controlled inline assembly, and conditional compilation, and it writes human-readable assembler with each source line as a comment. Its compiler is itself written in C, compiled by `tc24r`, and runs on COR24, fed its source over the UART; its linker tools are Rust.
 
 ## What they are for
+{: .pos-center}
 
 The [SWTOS](https://github.com/sw-embed/sw-tos) microkernel is the test of all three. It is a clean-room microkernel inspired by MINIX's message passing, written in PL/SW and assembler, and it runs on the COR24-TB board and in an emulator in [your browser](https://swtos.softwarewrighter.com/). [Made Visible #1](/2026/09/11/made-visible-swtos/) drew its storage. And the COR24 Forth kernel began as hand-written assembler before most of it moved into Forth ([Embedded #3](/2026/04/20/embedded-forth-self-hosting-spectrum/)).
 
