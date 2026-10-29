@@ -102,6 +102,7 @@ In this blog Lisp has mostly appeared as the point of comparison. In [the Phoeni
 My own Lisp, MacroLisp, does the demonstrating in the birds below.
 
 ## Forth: small enough to build, and to watch build itself
+{: .pos-center}
 
 Forth is the opposite kind of demo. Where APL hides the machine, Forth puts it on the table: a stack, a dictionary of words, and an interpreter small enough to read in one sitting. That makes it the language for showing how a language works from the inside.
 
@@ -110,6 +111,22 @@ The COR24 Forth posts are built on that. [Embedded #3](/2026/04/20/embedded-fort
 Forth is also a good host. [CoSy](/2026/10/25/saw-reva-fork-cosy/), Bob Armstrong's APL- and K-like vocabulary, is built on Reva Forth, so a single REPL can show the same fractal drawn the Forth way, recursing, and the array way, as a list.
 
 ## One idea, three languages: the birds
+{: .pos-left}
+
+<div class="aside-box outdent-right" markdown="1">
+
+**The Phoenix in X_eTaL.** The fork is built into the language as a bracketed train, `[F G H] x` is `(F x) G (H x)`, and the same Combinators library, in X_eTaL's standard [`lib/Combinators.xtl`](https://github.com/softwarewrighter/X_eTaL/blob/main/lib/Combinators.xtl), has it as a bird, `ᶜP̲hi`, Curry's S′:
+
+```xetal
+ᵘd̲ouble ← { x → 2 × x }
+ᵘi̲nc ← { x → x + 1 }
+[ᵘd̲ouble + ᵘi̲nc] 3
+'ᵘd̲ouble 'ᵘi̲nc '+ ᶜP̲hi 3
+```
+
+Both give 10, double 3 plus 3 plus one ([Rabbit-hole #7](/2026/10/19/rabbit-hole-phoenix-combinator/) used the Phoenix for a GCD).
+
+</div>
 
 Combinators make a good test of what a language lets a demo show. In Raymond Smullyan's *To Mock a Mockingbird* each combinator is a bird: the Kestrel keeps its first argument, the Bluebird composes two functions, the Starling feeds one argument to two functions, and the Sage, Y, gives a function its own fixed point, which is recursion without a name. [Rabbit-hole #6](/2026/09/21/rabbit-hole-sage-y-combinator/) chased the Sage through an eager array language. My APL, sw-apl, has the aviary as a workspace, [BIRDS](https://github.com/sw-vibe-coding/sw-apl/blob/main/docs/birds.md), and the same birds fly in my Lisp and in Forth:
 
@@ -177,17 +194,6 @@ gives 720. The Sage as a macro, `ᶜY̲<`, ties the knot when the program is exp
 "u:f_act" ᶜY̲< c"{ ~s̲elf n → n ≤ 1 ? 1◆ n × s̲elf n − 1 }"
 ᵘf̲act 6
 ```
-
-**The Phoenix in X_eTaL.** The fork is built into the language as a bracketed train, `[F G H] x` is `(F x) G (H x)`, and the same Combinators library, in X_eTaL's standard [`lib/Combinators.xtl`](https://github.com/softwarewrighter/X_eTaL/blob/main/lib/Combinators.xtl), has it as a bird, `ᶜP̲hi`, Curry's S′:
-
-```xetal
-ᵘd̲ouble ← { x → 2 × x }
-ᵘi̲nc ← { x → x + 1 }
-[ᵘd̲ouble + ᵘi̲nc] 3
-'ᵘd̲ouble 'ᵘi̲nc '+ ᶜP̲hi 3
-```
-
-Both give 10, double 3 plus 3 plus one ([Rabbit-hole #7](/2026/10/19/rabbit-hole-phoenix-combinator/) used the Phoenix for a GCD).
 
 </div>
 
