@@ -17,7 +17,8 @@ date: 2026-10-29 00:15:00 -0700
      motivations; Mike to add or correct his reasons (marked "Mike:" below).
      Birds section (Mike, 2026-10-28): sw-apl docs/birds.md (27fc0e1); MacroLisp run on the live web REPL (build 21a8477): birds
      (42 7 9 6 -6 -7 25 11), Z fact 6 = 720, textbook Y = stack overflow, Y with a delay macro = 720; X_eTaL aside: both Sage forms run in xetal 2bdc6a57 (720), rendered by xetal render (the macro's lambda as a
-     c"..." code string so it is drawn); the Phoenix fork is Rabbit-hole #7's, published with its run (2). APL\360 LIFE run in sw-apl --mode 70 (blinker
+     c"..." code string so it is drawn); Phoenix: lib/Combinators.xtl l:P_hi (X_eTaL base repo, not X_eTaL-libraries); [u:d_ouble + u:i_nc] 3 and
+     'u:d_ouble 'u:i_nc '+ c:P_hi 3 both run (10) in xetal 2bdc6a57. APL\360 LIFE run in sw-apl --mode 70 (blinker
      flips and back); the dfn Life line is Dyalog (Mike: sw-apl gives CHARACTER ERROR on it); Forth run on reva-fork dev
      (03fd93f+): 42 7 9 6 -6 -7 25 11, Y via self-application = 720. Links to #1 assume #1 publishes first (10/28).
      Years from TBT #1 (APL, 1972) and TBT #13's timeline (Lisps since 1989). Lead image: Mike's block-apl-lisp-forth.jpg (Dropbox), a color photo-style render (an APL apple, a
@@ -167,22 +168,26 @@ sw-apl's Sage, in the APL with execute, does the same: the step is given its own
 
 ```xetal
 "c:" u̲se< "Combinators"
-'{ ~s̲elf n → n ≤ 1 ? 1◆ n × s̲elf n − 1 } ᶜY̲ 6     ⍝ 720
+'{ ~s̲elf n → n ≤ 1 ? 1◆ n × s̲elf n − 1 } ᶜY̲ 6
 ```
 
-The Sage as a macro, `ᶜY̲<`, ties the knot when the program is expanded, so what runs is plain named recursion:
+gives 720. The Sage as a macro, `ᶜY̲<`, ties the knot when the program is expanded, so what runs is plain named recursion:
 
 ```xetal
 "u:f_act" ᶜY̲< c"{ ~s̲elf n → n ≤ 1 ? 1◆ n × s̲elf n − 1 }"
-ᵘf̲act 6     ⍝ 720
+ᵘf̲act 6
 ```
 
-**Sage or Phoenix?** Different birds. The Sage, Y, is the fixed point, `Y f = f (Y f)`: recursion without a name. The Phoenix, Φ, is the fork, `Φ f g h x = f (g x) (h x)`: one argument handed to two functions and the results combined. X_eTaL writes the Phoenix as a bracketed train, here the GCD of the smallest and largest of an array ([Rabbit-hole #7](/2026/10/19/rabbit-hole-phoenix-combinator/)):
+**The Phoenix in X_eTaL.** The fork is built into the language as a bracketed train, `[F G H] x` is `(F x) G (H x)`, and the same Combinators library, in X_eTaL's standard [`lib/Combinators.xtl`](https://github.com/softwarewrighter/X_eTaL/blob/main/lib/Combinators.xtl), has it as a bird, `ᶜP̲hi`, Curry's S′:
 
 ```xetal
-ᵘf̲indGcd ← ['m̲in r̲/ ⁿg̲cd 'm̲ax r̲/]
-ᵘf̲indGcd 2 5 6 9 10     ⍝ 2
+ᵘd̲ouble ← { x → 2 × x }
+ᵘi̲nc ← { x → x + 1 }
+[ᵘd̲ouble + ᵘi̲nc] 3
+'ᵘd̲ouble 'ᵘi̲nc '+ ᶜP̲hi 3
 ```
+
+Both give 10, double 3 plus 3 plus one ([Rabbit-hole #7](/2026/10/19/rabbit-hole-phoenix-combinator/) used the Phoenix for a GCD).
 
 </div>
 

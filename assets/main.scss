@@ -2042,3 +2042,23 @@ dialog.lightbox .lightbox-close {
     @include xetal-dark;
   }
 }
+
+// X_eTaL code inside an aside: the aside's panel is light in both themes,
+// so its code keeps the light palette, and long lines wrap instead of
+// being cut off at the aside's edge.
+.aside-box .language-xetal .highlight {
+  pre, code { white-space: pre-wrap; word-break: break-word; }
+}
+[data-theme="dark"] .aside-box .language-xetal .highlight,
+:root:not([data-theme="light"]) .aside-box .language-xetal .highlight {
+  .nb { color: #1f5fbf; }
+  .nf { color: #1e7a34; }
+  .nc { color: #0b7d8a; }
+  .vm { color: #9b2f9b; }
+  .m, .mi, .mf { color: #9a6a00; }
+  .s, .s2 { color: #8a6d00; }
+  .o { color: #2c6fb8; }
+  .nd { color: #9a6a00; }
+  .c1 { color: #626874; }
+  .cs, .cp { color: #2f7a40; }
+}
