@@ -120,8 +120,8 @@ Forth is also a good host. [CoSy](/2026/10/25/saw-reva-fork-cosy/), Bob Armstron
 ```xetal
 ᵘd̲ouble ← { x → 2 × x }
 ᵘi̲nc ← { x → x + 1 }
-[ᵘd̲ouble + ᵘi̲nc] 3
-'ᵘd̲ouble 'ᵘi̲nc '+ ᶜP̲hi 3
+[ᵘd̲ouble + ᵘi̲nc] 3            ⍝ 10
+'ᵘd̲ouble 'ᵘi̲nc '+ ᶜP̲hi 3     ⍝ 10
 ```
 
 Both give 10, double 3 plus 3 plus one ([Rabbit-hole #7](/2026/10/19/rabbit-hole-phoenix-combinator/) used the Phoenix for a GCD).
@@ -185,14 +185,14 @@ sw-apl's Sage, in the APL with execute, does the same: the step is given its own
 
 ```xetal
 "c:" u̲se< "Combinators"
-'{ ~s̲elf n → n ≤ 1 ? 1◆ n × s̲elf n − 1 } ᶜY̲ 6
+'{ ~s̲elf n → n ≤ 1 ? 1◆ n × s̲elf n − 1 } ᶜY̲ 6   ⍝ 720
 ```
 
-gives 720. The Sage as a macro, `ᶜY̲<`, ties the knot when the program is expanded, so what runs is plain named recursion:
+The Sage as a macro, `ᶜY̲<`, ties the knot when the program is expanded, so what runs is plain named recursion:
 
 ```xetal
 "u:f_act" ᶜY̲< c"{ ~s̲elf n → n ≤ 1 ? 1◆ n × s̲elf n − 1 }"
-ᵘf̲act 6
+ᵘf̲act 6   ⍝ 720
 ```
 
 </div>
