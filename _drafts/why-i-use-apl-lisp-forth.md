@@ -14,7 +14,8 @@ date: 2026-10-29 00:15:00 -0700
      "From a coding pleasure point of view ... I enjoy building and playing with APL, Forth, and Lisp (which I build in
      assembler, C, or Rust, or in Forth's case, in Forth itself). When I want to demo a concept I reach for APL, Forth, or Lisp."
      The rest is drawn from published posts, written as what each language let those demos show, NOT as Mike's stated
-     motivations; Mike to add or correct his reasons (marked "Mike:" below).
+     motivations; Mike to add or correct his reasons. Dogfooding paragraph: Mike, 2026-10-28 (his "sw-cor24-tiny-c" is the repo
+     sw-cor24-x-tinyc).
      Birds section (Mike, 2026-10-28): sw-apl docs/birds.md (27fc0e1); MacroLisp run on the live web REPL (build 21a8477): birds
      (42 7 9 6 -6 -7 25 11), Z fact 6 = 720, textbook Y = stack overflow, Y with a delay macro = 720; X_eTaL aside: both Sage forms run in xetal 2bdc6a57 (720), rendered by xetal render (the macro's lambda as a
      c"..." code string so it is drawn); Phoenix: lib/Combinators.xtl l:P_hi (X_eTaL base repo, not X_eTaL-libraries); [u:d_ouble + u:i_nc] 3 and
@@ -200,4 +201,4 @@ The Sage as a macro, `ᶜY̲<`, ties the knot when the program is expanded, so w
 
 I do not only use these languages; I build them, in assembler, C or Rust, or, in Forth's case, in Forth itself. On this blog that has meant X_eTaL's interpreter in Rust, the COR24 Forth kernel in assembler and then in Forth, and Reva, an x86 Forth, carried to new machines on a virtual machine written in Rust.
 
-Mike: TODO, what building them gives you that using them does not, in your words.
+Building them is also how I dogfood my own tools. Each language I build is a real program for the tools beneath it to compile, so it tests my Rust tooling and my process whenever they produce assembler, C, PL/SW, APL or reva-fork Forth. My [APL for COR24](https://github.com/sw-embed/sw-cor24-apl) is written in C, so it dogfoods my [C compiler](https://github.com/sw-embed/sw-cor24-x-tinyc). [MacroLisp](https://github.com/sw-embed/sw-cor24-macrolisp) dogfoods the C compiler too, and its own prelude dogfoods MacroLisp itself. And the [COR24 Forth](https://github.com/sw-embed/sw-cor24-forth) dogfoods my assembler, and then Forth itself, as more of the kernel moves into Forth. When one of them breaks, the fault is often in a tool beneath it, and the language is what found it: [Saw #5](/2026/04/05/saw-saga-archiving-mlpl-plsw-cor24-compilers/) fixed the C compiler to unblock the APL.
