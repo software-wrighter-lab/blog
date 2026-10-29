@@ -15,9 +15,10 @@ date: 2026-10-29 00:15:00 -0700
      assembler, C, or Rust, or in Forth's case, in Forth itself). When I want to demo a concept I reach for APL, Forth, or Lisp."
      The rest is drawn from published posts, written as what each language let those demos show, NOT as Mike's stated
      motivations; Mike to add or correct his reasons (marked "Mike:" below). Links to #1 assume #1 publishes first (10/28).
-     Years from TBT #1 (APL, 1972) and TBT #13's timeline (Lisps since 1989). Lead image: placeholder until Mike supplies one. -->
+     Years from TBT #1 (APL, 1972) and TBT #13's timeline (Lisps since 1989). Lead image: Mike's block-apl-lisp-forth.jpg (Dropbox), a color photo-style render (an APL apple, a
+     lambda labeled Lisp, the word Forth), no-invert. -->
 
-<img src="{{ '/assets/images/posts/placeholder-why-i-use-apl-forth-lisp.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-apl-lisp-forth.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
 [The first post in this series](/2026/10/28/why-i-use-rust/) ended on a split: when I want to build an operating system, a programming language or a tool, I reach for Rust; when I want to demo a concept, I reach for APL, Forth, Lisp, or one of my array languages. This one is about the second half. They are the languages I most enjoy building and playing with, and each lets a demo show something in a way the others cannot.
 
