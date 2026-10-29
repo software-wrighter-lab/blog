@@ -18,7 +18,7 @@ date: 2026-10-30 00:15:00 -0700
      Facts from the READMEs: sw-cor24-x-assembler 362000b, sw-cor24-x-tinyc 96090c8, sw-cor24-plsw 05748d0, sw-tos; code samples
      verbatim from tests/programs/count_down.s, demos/led.c, examples/system.msw and examples/macro.plsw.
      Lead image: Mike's block-asm-c-plsw.png (Dropbox, third version 17:27; real COR24 count_down loop, C, and loop.plsw's MAIN),
-     no-invert. -->
+     no-invert. Links #1 (published) and #2 (planned 10/29; publish #2 first). -->
 
 <img src="{{ '/assets/images/posts/block-asm-c-plsw.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 300px;">
 
@@ -44,9 +44,9 @@ date: 2026-10-30 00:15:00 -0700
 
 ## A machine Rust does not support
 
-COR24 is a 24-bit RISC soft CPU designed by [MakerLisp](https://makerlisp.com): a processor defined in an FPGA, here on the COR24-TB board with 1 MB of SRAM. Rust's compiler has no COR24 target, and adding one means a new LLVM back end. [Rabbit-hole #1](/2026/03/13/rabbit-hole-rust-to-unsupported-isa/) got Rust code onto COR24 anyway, by compiling for a 16-bit target Rust does support and translating the result, but that is an experiment, not a way to write an operating system.
+COR24 is a 24-bit RISC soft CPU designed by [MakerLisp](https://makerlisp.com): a processor defined in an FPGA, here on the COR24-TB board with 1 MB of SRAM. Rust's compiler has no COR24 target. [Rabbit-hole #1](/2026/03/13/rabbit-hole-rust-to-unsupported-isa/) got Rust code onto COR24 anyway, by compiling for a 16-bit target Rust does support and translating the result, but that is an experiment, not a way to write an operating system.
 
-So for COR24 I use the languages a new processor has always started with, and write their tools in Rust. Each of them ends in the same place: COR24 assembler text, which the assembler turns into the bytes the CPU runs.
+So for COR24 I write in assembler, C and PL/SW, and write their tools in Rust. Each of them ends in the same place: COR24 assembler text, which the assembler turns into the bytes the CPU runs.
 
 ## Assembler
 
@@ -105,6 +105,6 @@ PL/SW also has BASED record templates for laying records over memory, controlled
 
 ## What they are for
 
-The [SWTOS](https://github.com/sw-embed/sw-tos) microkernel is the test of all three. It is a clean-room microkernel inspired by MINIX's message passing, written in PL/SW and assembler, and it runs on the COR24-TB board and in an emulator in [your browser](https://swtos.softwarewrighter.com/). [Made Visible #1](/2026/09/11/made-visible-swtos/) drew its storage. The same tools carry the languages I build for COR24, from Forth to BASIC.
+The [SWTOS](https://github.com/sw-embed/sw-tos) microkernel is the test of all three. It is a clean-room microkernel inspired by MINIX's message passing, written in PL/SW and assembler, and it runs on the COR24-TB board and in an emulator in [your browser](https://swtos.softwarewrighter.com/). [Made Visible #1](/2026/09/11/made-visible-swtos/) drew its storage. And the COR24 Forth kernel began as hand-written assembler before most of it moved into Forth ([Embedded #3](/2026/04/20/embedded-forth-self-hosting-spectrum/)).
 
 Rust writes the tools. Assembler, C and PL/SW are what the tools turn into a running machine.
