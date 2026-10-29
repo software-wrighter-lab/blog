@@ -33,7 +33,7 @@ date: 2026-10-30 00:15:00 -0700
 | **The processor** | [COR24, by MakerLisp](https://makerlisp.com); [Embedded #2: COR24-RS](/2026/03/22/cor24-rs-assembly-emulator/) |
 | **Assembler** | [sw-cor24-x-assembler](https://github.com/sw-embed/sw-cor24-x-assembler) (`cor24-asm`, Rust) |
 | **C** | [sw-cor24-x-tinyc](https://github.com/sw-embed/sw-cor24-x-tinyc) (`tc24r`, Rust) |
-| **PL/SW** | [sw-cor24-plsw](https://github.com/sw-embed/sw-cor24-plsw) |
+| **PL/SW** | [sw-cor24-plsw](https://github.com/sw-embed/sw-cor24-plsw); [PL/S, its history](https://github.com/sw-embed/sw-cor24-plsw/blob/dev/docs/pl-s-history.md) |
 | **Written in PL/SW** | [SWTOS](https://github.com/sw-embed/sw-tos), [live](https://swtos.softwarewrighter.com/); [Made Visible #1](/2026/09/11/made-visible-swtos/) |
 | **Rust on COR24, the hard way** | [Rabbit-hole #1](/2026/03/13/rabbit-hole-rust-to-unsupported-isa/) |
 | **Try them** | [COR24 demo hub](https://sw-embed.github.io/web-sw-cor24-demos/) |
@@ -84,7 +84,7 @@ void led_on() {
 <img src="{{ '/assets/images/posts/plsw-badge.webp' | relative_url }}" class="no-invert" alt="The PL/SW badge: the letters PL in orange and SW in light blue on a dark shield with green and gold stripes">
 </figure>
 
-PL/SW is the one I designed. [The first post in this series](/2026/10/28/why-i-use-rust/) started with IBM's PL/S and its macros that ran during compilation to write the code to be compiled. PL/SW, the Programming Language for Software Wrighter, is a freestanding systems language for COR24, inspired by PL/S, that carries that idea on. A macro declares what it takes and generates code, here three instructions of COR24 assembler:
+PL/SW is the one I designed. [The first post in this series](/2026/10/28/why-i-use-rust/) started with IBM's PL/S ([its history](https://github.com/sw-embed/sw-cor24-plsw/blob/dev/docs/pl-s-history.md)) and its macros that ran during compilation to write the code to be compiled. PL/SW, the Programming Language for Software Wrighter, is a freestanding systems language for COR24, inspired by PL/S, that carries that idea on. A macro declares what it takes and generates code, here three instructions of COR24 assembler:
 
 ```text
 /* ?LED_SET(VAL(n)) -- write a byte to LED MMIO register */
