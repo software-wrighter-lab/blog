@@ -879,6 +879,16 @@ article.post .resource-box,
     margin: 0.3em 1.5em 1.2em -66.667%;
   }
 
+  // The same, opt-in (class wide), for an aside in a left-hand section, out in
+  // its open right side; plain outdent-right asides keep the narrow house width.
+  .stagger-0 > .aside-box.outdent-right.wide {
+    float: right;
+    clear: right;
+    width: 60%;
+    max-width: none;
+    margin: 0.3em -66.667% 1.2em 1.5em;
+  }
+
   // Disable stagger on narrow viewports — 60% of a small screen is too tight
   @media (max-width: 900px) {
     .stagger {
@@ -892,6 +902,7 @@ article.post .resource-box,
     }
     .stagger-0 > figure.outdent-right,
     .stagger-2 > figure.outdent-left,
+    .stagger-0 > .aside-box.outdent-right.wide,
     .stagger-2 > .aside-box.outdent-left {
       float: none;
       width: auto;
@@ -2041,4 +2052,24 @@ dialog.lightbox .lightbox-close {
   :root:not([data-theme="light"]) {
     @include xetal-dark;
   }
+}
+
+// X_eTaL code inside an aside: the aside's panel is light in both themes,
+// so its code keeps the light palette, and long lines wrap instead of
+// being cut off at the aside's edge.
+.aside-box .language-xetal .highlight {
+  pre, code { white-space: pre-wrap; word-break: break-word; }
+}
+[data-theme="dark"] .aside-box .language-xetal .highlight,
+:root:not([data-theme="light"]) .aside-box .language-xetal .highlight {
+  .nb { color: #1f5fbf; }
+  .nf { color: #1e7a34; }
+  .nc { color: #0b7d8a; }
+  .vm { color: #9b2f9b; }
+  .m, .mi, .mf { color: #9a6a00; }
+  .s, .s2 { color: #8a6d00; }
+  .o { color: #2c6fb8; }
+  .nd { color: #9a6a00; }
+  .c1 { color: #626874; }
+  .cs, .cp { color: #2f7a40; }
 }
