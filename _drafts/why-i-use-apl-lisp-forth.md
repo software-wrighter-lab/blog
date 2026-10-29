@@ -130,7 +130,7 @@ Both give 10, double 3 plus 3 plus one ([Rabbit-hole #7](/2026/10/19/rabbit-hole
 
 Combinators make a good test of what a language lets a demo show. In Raymond Smullyan's *To Mock a Mockingbird* each combinator is a bird: the Kestrel keeps its first argument, the Bluebird composes two functions, the Starling feeds one argument to two functions, and the Sage, Y, gives a function its own fixed point, which is recursion without a name. [Rabbit-hole #6](/2026/09/21/rabbit-hole-sage-y-combinator/) chased the Sage through an eager array language. My APL, sw-apl, has the aviary as a workspace, [BIRDS](https://github.com/sw-vibe-coding/sw-apl/blob/main/docs/birds.md), and the same birds fly in my Lisp and in Forth:
 
-| Bird | λ-term | APL (sw-apl) | MacroLisp | Forth (reva-fork) | Result |
+| Bird | λ-term | APL (sw-apl) | Lisp (sw-cor24-macrolisp) | Forth (reva-fork) | Result |
 |---|---|---|---|---|---|
 | I, Idiot | `λx.x` | `I 42` | `(I 42)` | `42 I` | 42 |
 | K, Kestrel | `λx y.x` | `7 K 9` | `((K 7) 9)` | `7 9 K` | 7 |
