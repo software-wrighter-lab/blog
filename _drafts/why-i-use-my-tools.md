@@ -30,7 +30,7 @@ repo_urls:
      through them, not embedded (no reused media). Lead image: Mike's block-project-checking.jpg (Dropbox), monochrome block print (signal, track switch,
      magnifying glass, meter, checklist), no-invert. Gutter: Mike's block-magnifier.jpg, blue background made
      transparent; the lens was the same blue, so it is a light/dark pair (black lines / white lines). Gutter beside reg-rs: Mike's
-     block-jack-o-lantern.jpg (Dropbox), color, no-invert, caption "Regressions are scary" (Mike). -->
+     block-halloween.jpg (Dropbox; replaced block-jack-o-lantern), color, no-invert, caption "Regressions are scary" (Mike). -->
 
 <img src="{{ '/assets/images/posts/block-project-checking.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
@@ -76,7 +76,7 @@ Plans change, so it has to handle more than a straight line: inserting and reord
 {: .pos-left .pumpkin}
 
 <figure class="zoomable outdent-right" style="width: 200px;">
-<img src="{{ '/assets/images/posts/block-jack-o-lantern.webp' | relative_url }}" class="no-invert" alt="A block print of a grinning jack-o'-lantern in a witch's hat, a spider hanging from a web above it">
+<img src="{{ '/assets/images/posts/block-halloween.webp' | relative_url }}" class="no-invert" alt="A block print of a black cat, fur on end and eyes wide, startled by a grinning jack-o'-lantern in a witch's hat, a spider hanging from a web above them">
 <figcaption style="font-size: 0.85em;">Regressions are scary.</figcaption>
 </figure>
 
