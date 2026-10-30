@@ -62,6 +62,18 @@ The briefing (490 lines, [docs/domain-expertise.md](https://github.com/softwarew
 
 Its pitfalls section then named what the February generator did wrong, by name. It treated a squeak as "noise bursts plus a sine", when the pitch comes from the slips themselves, not from a tone added on top. And it slipped 3 to 12 times a second, which is the rate of a creak or ratchet, not a squeak. The research also wrote down where it stopped: its parameter values were "reasoned starting points", not measured from recordings, and its claims were checked with a toy simulation, not against real hinges.
 
+## The document it left behind
+
+After applying the skill, I had Claude write the research up, and [the briefing](https://github.com/softwarewrighter/text-to-sfx-gen/blob/main/docs/domain-expertise.md) is worth reading on its own. It follows the skill's template, vocabulary, canon, pitfalls, frontier and open gaps, and then goes past it into what the work needed:
+
+- **The model, precisely:** the elasto-plastic friction equations from the DAFx-02 paper, how they couple to the resonant modes of the metal, and Farnell's cheaper phenomenological recipe as an alternative for creaks.
+- **A sanity simulation, run during the research:** a toy friction model driving one 600 Hz mode, swept over load and sliding speed. It squeals only inside a narrow window of speed, which is the physics saying why a hinge squeaks some of the time, not all of it.
+- **A plan an agent can act on:** how a user's or an LLM's settings map onto the physical ones, a pipeline of exciter, interaction and resonator stages an LLM could author, experiments with pass criteria, and a file-by-file plan for this repo.
+- **The frontier:** recent work on LLM-driven procedural audio, among it CTAG (ICML 2024), SonicRAG (2025) and the Faust project's guide for LLMs, each summarized with what it found and where it fell short.
+- **Its own limits, named:** the papers it could not read (one behind IEEE, one returning a 403), the measurements no paper provided, and an "expert-enough" gate that cites, section by section, the evidence for each of the skill's four tests.
+
+That last part is what I value most in it. A briefing that says what it does not know told me, before any code, where the next problem would be.
+
 ## Hinge Lab: physically right, perceptually wrong
 {: .pos-left}
 
