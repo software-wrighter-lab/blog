@@ -46,7 +46,7 @@ The first two posts in this series listed the things I always wanted to build ([
 
 <div class="aside-box" markdown="1">
 
-**Why this matters** --- A bucket list is only useful if it grows as fast as it shrinks. Crossing things off without adding things back is how a list gets shorter than the curiosities of the person carrying it. The three categories below are what's been quietly moving from "interesting" to "I'm actually doing this" since the last post --- and they share a thread: each one is something a working engineer rarely gets to do (build a new programming language, sculpt a new authoring surface, or instrument a compiler so you can *watch* it think) because the day job never gives that kind of room. Retirement and AI agents jointly do.
+**Why this matters** --- A bucket list is only useful if it grows as fast as it shrinks. Crossing things off without adding things back is how a list gets shorter than the curiosities of the person carrying it. The three categories below are what's been quietly moving from "interesting" to "I'm actually doing this" since the prior post --- and they share a thread: each one is something a working engineer rarely gets to do (build a new programming language, sculpt a new authoring surface, or instrument a compiler so you can *watch* it think) because the day job never gives that kind of room. Retirement and AI agents jointly do.
 
 </div>
 
@@ -177,3 +177,4 @@ The list keeps growing. The bucket keeps filling. That's the point.
 ---
 
 <p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/29: listed this post's repositories in its metadata, so it appears in the blog's Code index; updated the links to tuplet and DiscoveryOne, which moved to sw-vibe-coding. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-04-30-bucket-list-3d-source-new-languages-visible-compilers.md">Post history</a>.]</em></p>
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/30: "since the last post" now reads "since the prior post", so it cannot be read as the series' latest. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-04-30-bucket-list-3d-source-new-languages-visible-compilers.md">Post history</a>.]</em></p>
