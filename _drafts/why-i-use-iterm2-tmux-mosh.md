@@ -2,9 +2,9 @@
 layout: post
 title: "Why I Use #7: iTerm2, tmux and mosh --- Sessions That Survive"
 categories: [tools, terminals]
-tags: [why-i-use, iterm2, tmux, mosh, ssh, terminals, macos, arch-linux, ai-agents, remote-development]
-keywords: "why I use iTerm2, tmux, mosh, mobile shell, persistent terminal sessions, ssh alternative, roaming, laptop sleep, remote development, coding agents on a remote server, Arch Linux"
-abstract: "Seventh in the series on the tools I reach for: the terminal stack between my MacBook and the machines where my agents work. iTerm2 on the Mac, mosh for a connection that survives sleep and changing networks, and tmux for sessions that outlive any connection at all."
+tags: [why-i-use, iterm2, tmux, mosh, ssh, zsh, bash, shell-history, terminals, macos, arch-linux, ai-agents, remote-development]
+keywords: "why I use iTerm2, tmux, mosh, zsh on macOS, bash, shell history, HISTSIZE SAVEHIST, histappend, SHARE_HISTORY, mobile shell, persistent terminal sessions, ssh alternative, roaming, laptop sleep, remote development, coding agents on a remote server, Arch Linux"
+abstract: "Seventh in the series on the tools I reach for: the terminal stack between my MacBook and the machines where my agents work. iTerm2 on the Mac, mosh for a connection that survives sleep and changing networks, tmux for sessions that outlive any connection at all, and the shell underneath, zsh on the Mac and bash, with a history worth keeping."
 series: "Why I Use"
 series_part: 7
 date: 2026-11-03 00:15:00 -0800
@@ -18,6 +18,10 @@ date: 2026-11-03 00:15:00 -0800
      network hiccups better than plain ssh"); AI Tools #5 (Lucy, the local AI cluster); Saw #7 (mosh for roaming, sleep/wake and
      dropped Wi-Fi; tmux so agent sessions survive disconnects and re-attach from any client; multi-day runs).
      Checked on this Mac (2026-10-30): iTerm2 3.7.4, tmux 3.6b and mosh 1.4.0 (both Homebrew). No ~/.tmux.conf.
+     Shell and history added at Mike's request (2026-10-30: "a discussion of bash and history goes somewhere, but note that I
+     use zsh on Mac"). Checked on this Mac (2026-10-30): login shell /bin/zsh, zsh 5.9; /bin/bash is 3.2.57; no Homebrew bash;
+     ~/.zshrc sets no HIST* options, so /etc/zshrc's HISTSIZE=2000 / SAVEHIST=1000 apply (~/.zsh_history: 1054 lines, at the
+     cap). bash on Arch is inferred from "note that I use zsh on Mac": Mike: TODO confirm. Mike's own history habits: TODO.
      iTerm2 is NOT on the TBT #13 timeline: its start year is Mike: TODO. Tool behavior described is each project's documented
      behavior, not a measurement. Lead image: placeholder, due 2026-11-03. "Mike: TODO" marks his own reasons. -->
 
@@ -71,6 +75,27 @@ mosh keeps the connection alive; tmux keeps the work alive when the connection i
 
 Mike: TODO, how you lay out sessions and windows (one session per agent user? per project?), and whether you have any tmux configuration worth showing. There is no `~/.tmux.conf` on the Mac, so it may live on the Arch side or not exist.
 
+## The shell, and its history
+
+At the bottom of the stack is the shell. [My timeline](/2026/10/01/tbt-timelines-of-tools/) has sh, ksh and bash since 1991, and bash is still the shell on the Arch machines. On the Mac I use zsh, which has been the macOS default since Catalina in 2019. The bash Apple still ships is version 3.2 from 2007, the last release under GPLv2; later versions moved to GPLv3, the kind of license detail [#5](/2026/11/01/why-i-use-gnu-tools/) is about.
+
+Mike: TODO, confirm bash on Arch, and whether you keep the two shells' configuration alike.
+
+History is the part of a session I most dislike losing: the long command that worked last week, recalled with Ctrl-R instead of rebuilt. tmux makes it trickier. Every pane runs its own shell, each keeping its own history in memory until it exits, so a command typed in one window is not in another's Ctrl-R, and in bash the last shell to exit can overwrite what the others saved. Both shells can fix that:
+
+```text
+# bash: append rather than overwrite, and save after every command
+shopt -s histappend
+PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+
+# zsh: write each command as it runs, and read the others' as they go
+setopt INC_APPEND_HISTORY SHARE_HISTORY
+```
+
+The defaults are also smaller than they look. On macOS, `/etc/zshrc` sets `HISTSIZE=2000` and `SAVEHIST=1000`, so zsh saves only the last thousand commands unless you raise them.
+
+Mike: TODO, your settings: sizes, shared or per-pane history, and how you search it (Ctrl-R with [skim](/2026/11/04/why-i-use-rust-cli-tools/)?).
+
 ## Before tmux
 
 Mike: TODO, optional: GNU screen, if you used it before tmux ([#5](/2026/11/01/why-i-use-gnu-tools/) lists it as a candidate).
@@ -78,6 +103,6 @@ Mike: TODO, optional: GNU screen, if you used it before tmux ([#5](/2026/11/01/w
 ## Three ways to lose a session
 {: .pos-center}
 
-Each tool closes off one failure: iTerm2 the Mac end, mosh the network in between, tmux the connection itself.
+Each tool closes off one failure: iTerm2 the Mac end, mosh the network in between, tmux the connection itself. And the shell's history, set up to be kept, means even a closed session leaves its commands behind.
 
 Mike: TODO, a closing in your words. The [next post](/2026/11/04/why-i-use-rust-cli-tools/) is about what runs at the prompt once you are there: fd, ripgrep, skim, dua and bat.
