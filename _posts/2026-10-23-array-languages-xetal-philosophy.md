@@ -22,7 +22,7 @@ repo_urls:
 
 <img src="{{ '/assets/images/posts/block-philosopher.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
-[The previous post](/2026/10/22/array-languages-xetal-language-history/) told how X_eTaL's decisions were made, one at a time. Read together, they say what I think a practical programming language should be. This is opinion, not a rule, drawn from my experience: the languages I have used and the programs I have had to keep working. Other people's experience has led them, reasonably, to other languages. YMMV. None of it was written down as a manifesto first; it is the pattern the choices make, checked against the record of why each was made.
+[The prior post](/2026/10/22/array-languages-xetal-language-history/) told how X_eTaL's decisions were made, one at a time. Read together, they say what I think a practical programming language should be. This is opinion, not a rule, drawn from my experience: the languages I have used and the programs I have had to keep working. Other people's experience has led them, reasonably, to other languages. YMMV. None of it was written down as a manifesto first; it is the pattern the choices make, checked against the record of why each was made.
 
 <!--more-->
 
@@ -93,7 +93,7 @@ X_eTaL takes arrays and right-to-left reading from APL, the leading axis and the
 <figcaption style="font-size: 0.85em;">The asks ledger: changes requested by real programs, each with a repro, and some declined. Click to enlarge.</figcaption>
 </figure>
 
-The language changes when a real program needs it to, and not before. The history states the rule: "a workaround copied in more than one place is evidence, and a general mechanism moves down into the core." The design notes on data types put it the other way round: "a new language feature is added only where neither [a macro nor a convention] can do the job." And the rule for everyone else's code is the same: macros and extensions "need justification", and a demo should not use a macro just because it can. The last post's list of refusals is this principle at work.
+The language changes when a real program needs it to, and not before. The history states the rule: "a workaround copied in more than one place is evidence, and a general mechanism moves down into the core." The design notes on data types put it the other way round: "a new language feature is added only where neither [a macro nor a convention] can do the job." And the rule for everyone else's code is the same: macros and extensions "need justification", and a demo should not use a macro just because it can. The prior post's list of refusals is this principle at work.
 
 ## Macros and extensions keep the core concise
 {: .pos-left}
@@ -121,3 +121,7 @@ A notation drawn as you type, a REPL, an editor that shows the drawn form beside
 {: .pos-center}
 
 Put together, the philosophy is a trade: a small, readable, statically checked core, and growth pushed out into libraries, macro libraries and extensions, paid for by keeping the extension mechanism disciplined. Whether that trade holds up as the libraries grow is the open question every later post in this series will test.
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/10/30: "the previous post" and "the last post" now read "the prior post", so they cannot be read as the series' latest. <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-23-array-languages-xetal-philosophy.md">Post history</a>.]</em></p>
