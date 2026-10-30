@@ -4,7 +4,7 @@ title: "AI Tools #8: A Domain-Expert Skill Restarts a Stuck Project"
 categories: [ai-tools, audio]
 tags: [ai-tools, claude-code, skills, agent-skills, research, procedural-audio, sound-effects, friction, stick-slip, rust, egui, reproducibility]
 keywords: "Claude Code skill, domain-expert skill, agent research before coding, fluent shallow competence, procedural audio, squeaky hinge synthesis, stick-slip friction, Hinge Lab, sound effect analysis, MIT-licensed sound effects"
-abstract: "In February an AI agent wrote ten procedural sound-effect generators for me, and the door creak sounded like wind. The project stalled. This month I tried a Claude Code skill someone suggested to me, domain-expert, which makes the agent research a field from its primary sources and write a dated, sourced briefing before it writes any code. The briefing found what the old generator got wrong, a Rust model built on it was physically right, and measuring real squeaks found what the model still lacked. What the skill demands, what it produced, and where it stopped."
+abstract: "In February an AI agent wrote ten procedural sound-effect generators for me, and the door creak sounded like wind. The project stalled. This month I tried domain-expert, a skill someone sent me for Gemini that I converted into a Claude Code skill, which makes the agent research a field from its primary sources and write a dated, sourced briefing before it writes any code. The briefing found what the old generator got wrong, a Rust model built on it was physically right, and measuring real squeaks found what the model still lacked. What the skill demands, what it produced, and where it stopped."
 series: "AI Tools"
 series_part: 8
 date: 2026-10-29 00:15:00 -0700
@@ -14,7 +14,8 @@ repo_urls:
 ---
 
 <!-- DRAFT (2026-10-29), Mike: the point is the domain-expert skill, which restarted a project he considered stuck since
-     February. Mike did not write the skill; it was sent to him as a suggested skill to try (sender not named).
+     February. Mike did not write the skill; it was sent to him as a suggested Gemini skill, and he converted it into a Claude Code skill
+     (sender not named).
      Sources: text-to-sfx-gen at 3942d66 (README, docs/blog-outline.md, docs/phases.md, docs/domain-expertise.md = the
      briefing, .claude/skills/domain-expert/SKILL.md, git log: Phase 1 2026-02-10/11 with opencode + GLM-4.7; Phase 2
      committed 2026-10-29 with Claude Code + Claude Opus 5.5). Images from the repo's images/. The briefing follows the
@@ -23,7 +24,7 @@ repo_urls:
 
 <img src="{{ '/assets/images/posts/placeholder-ai-tools-domain-expert-skill.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
-In February I had an AI agent write sound effects as code: no audio model at run time, just math, so every sound it makes is mine to license. Simple sounds worked. The door creak sounded like wind, and the hinge didn't sound like a hinge. I put the project down. This month someone sent me a Claude Code skill to try, called domain-expert, and it got the project moving again. I did not write the skill; this post is about what it does and what it did here.
+In February I had an AI agent write sound effects as code: no audio model at run time, just math, so every sound it makes is mine to license. Simple sounds worked. The door creak sounded like wind, and the hinge didn't sound like a hinge. I put the project down. This month someone sent me a skill to try, called domain-expert. It was written for Gemini; I converted it into a Claude Code skill, and it got the project moving again. I did not write the skill itself; this post is about what it does and what it did here.
 
 <!--more-->
 
