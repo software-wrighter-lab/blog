@@ -27,9 +27,10 @@ repo_urls:
      refactoring, fixing, adding features), sw-checklist (reins in bad practice; a forcing function for readable, maintainable,
      extensible, modular, loosely coupled code), and markdown-checker (the main README.md has no characters that keep GitHub from
      rendering it). Facts from each repo's README (gh api, 2026-10-30). The pjmai-rs demo video belongs to earlier posts: linked
-     through them, not embedded (no reused media). Lead image: placeholder until Mike supplies one. -->
+     through them, not embedded (no reused media). Lead image: Mike's block-project-checking.jpg (Dropbox), monochrome block print (signal, track switch,
+     magnifying glass, meter, checklist), no-invert. -->
 
-<img src="{{ '/assets/images/posts/placeholder-why-i-use-my-tools.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-project-checking.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
 The first three posts in this series were about languages. This one is about tools I wrote for myself, and I use them at different levels of the same working day: where is the project, what is the next step, did I break anything, is the code still well built, and will its README display. Each is a small command-line program written in Rust.
 
