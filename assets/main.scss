@@ -2075,10 +2075,23 @@ dialog.lightbox .lightbox-close {
 }
 
 // A section heading with a symbol before it, as a bullet (class on the
-// heading: {: .spider}). Drawn by CSS so the heading's text, its anchor and
-// the table of contents stay plain.
+// heading: {: .spider}): a small black widow, with a light outline in dark
+// mode. Drawn by CSS so the heading's text, its anchor and the table of
+// contents stay plain.
 .post-content h2.spider::before {
-  content: "\1F577\FE0E";
+  content: "";
+  display: inline-block;
+  width: 1.9em;
+  height: 1.9em;
   margin-right: 0.4em;
-  font-size: 0.85em;
+  vertical-align: -0.55em;
+  background: url("/assets/images/posts/black-widow.svg") center / contain no-repeat;
+}
+[data-theme="dark"] .post-content h2.spider::before {
+  background-image: url("/assets/images/posts/black-widow-dark.svg");
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .post-content h2.spider::before {
+    background-image: url("/assets/images/posts/black-widow-dark.svg");
+  }
 }
