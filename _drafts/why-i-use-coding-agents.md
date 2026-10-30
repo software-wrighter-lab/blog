@@ -21,9 +21,10 @@ date: 2026-11-02 00:15:00 -0700
      accounts (Google AI Pro, Ultra, free tier); Gemini Code Assist enterprise licenses and API-key use were not affected. agy is
      the command; global config stays under ~/.gemini/ (project config under .agents/); the installer copies Gemini CLI skills, MCP
      servers, agents and GEMINI.md files over. Not verified, so not in the text: "Antigravity 2.0", "closed source, written in Go".
-     Mike's own reasons are marked "Mike: TODO". Lead image: placeholder until Mike supplies one. -->
+     Mike's own reasons are marked "Mike: TODO". Lead image: Mike's block-terminal-ai.jpg (Dropbox), block print of terminals reading codex, opencode,
+     claude and agv (sic: the command is agy), green text, no-invert. -->
 
-<img src="{{ '/assets/images/posts/placeholder-why-i-use-coding-agents.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-terminal-ai.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
 The [last post](/2026/11/01/why-i-use-gnu-tools/) in this series was about GNU's tools, which I have used for decades. This one is about the newest row on [my timeline of tools](/2026/10/01/tbt-timelines-of-tools/), and the fastest-moving: coding agents. Claude Code since 2025, and this year Codex, Gemini and opencode beside it, with Gemini's replacement, Antigravity, next to try.
 
