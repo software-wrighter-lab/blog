@@ -8,6 +8,17 @@ abstract: "Third in the series on the tools I reach for. To write operating-syst
 series: "Why I Use"
 series_part: 3
 date: 2026-10-30 00:15:00 -0700
+repo_urls:
+  - url: "https://github.com/sw-embed/sw-cor24-x-assembler"
+    title: "cor24-asm"
+  - url: "https://github.com/sw-embed/sw-cor24-x-tinyc"
+    title: "tc24r"
+  - url: "https://github.com/sw-embed/sw-cor24-plsw"
+    title: "PL/SW"
+  - url: "https://github.com/sw-embed/sw-tos"
+    title: "SWTOS"
+  - url: "https://github.com/sw-embed/sw-cor24-hlasm"
+    title: "sw-cor24-hlasm"
 ---
 
 <!-- DRAFT (2026-10-28), Mike: Why I Use #3, planned 10/30: "Assembler, C, PL/SW - these are low-level languages I use to
