@@ -43,6 +43,11 @@ In February I had an AI agent write sound effects as code: no audio model at run
 
 ## Stuck since February
 
+<figure class="zoomable" style="float: right; clear: right; width: 45%; margin: 0.2em 0 0.6em 1.5em;">
+<img src="{{ '/assets/images/posts/sfx-screenshot.webp' | relative_url }}" class="no-invert" alt="The February demo page, Procedural Sound Effects, MIT-licensed, no AI models: its first card is Wind Whistling, originally intended as a door creak, with a note that the generated file sounds like wind whistling; below it an explosion and a flying saucer">
+<figcaption style="font-size: 0.85em;">February's demo page: the door creak, renamed Wind Whistling. Click to enlarge.</figcaption>
+</figure>
+
 The idea is simple. An AI agent researches how a sound is made and writes code that synthesizes it from oscillators, noise, filters and physical models. Nothing runs a model when the sound is generated, so there is no GPU, no weights and no license question: the output is MIT, unlike the "open" text-to-audio models released for non-commercial use only.
 
 The first attempt, in February with opencode and GLM-4.7, produced ten Python generators, an interactive trainer and a demo page. Impacts, clicks, a flying saucer and the sirens worked. The two door sounds did not, and when I came back to the repo it was in worse shape than I remembered: the WAV files had never been committed, one generator crashed when run, and none of the random ones was seeded.
@@ -99,7 +104,12 @@ So the next step was measurement. An analysis tool found 23 squeaks in a referen
 The reference audio itself is not published anywhere, since its provenance is unclear. It stays in a folder git ignores; the site shows only spectrograms and measurements, with links to the video's timestamps, and the build refuses to run if a reference clip turns up in its output.
 
 ## What the skill did, and did not do
-{: .pos-center}
+{: .pos-left}
+
+<figure class="zoomable outdent-right">
+<img src="{{ '/assets/images/posts/sfx-demo-page.webp' | relative_url }}" class="no-invert" alt="Today's demo page, Text-to-SFX: procedural sound effects. Section 1, the first attempt from February, lists ten sounds with players, among them a door creak that sounds like wind and a hinge creak that is not convincing. Section 2, the second attempt, the squeaky hinge from October, groups the rebuilt squeaks by kind, stepped and gliding, each with a link to its analysis">
+<figcaption style="font-size: 0.85em;">Today's demo page: the first attempt, then the second. Click to enlarge.</figcaption>
+</figure>
 
 The skill did not make the hinge sound right. What it did for a stuck project was different: it replaced my vague "it doesn't sound like a hinge" with a sourced account of how a hinge makes sound, named the old code's mistakes against that account, and said plainly where its own knowledge ran out. That is what made the next two steps obvious, a model built on the physics and then measurements to find what the model lacked. And because the briefing is a file in the repo, dated, the next agent to work on this starts from it instead of from nothing.
 
