@@ -19,11 +19,11 @@ date: 2026-11-04 00:15:00 -0800
      coreutils' du). Checked on this Mac (2026-10-30): fd 10.4.2 and dua 2.34.0 from cargo (~/.cargo/bin); ripgrep 15.2.0 from
      Homebrew, first on PATH, with a second rg in ~/.cargo/bin; just 1.58.0 from Homebrew. Not installed: eza, bat, zoxide, fzf,
      dust, hyperfine, tokei, starship, delta, skim (sk). Defaults described (gitignore, hidden files, dua i) are each project's documented
-     behavior, not measurements; no speed claims without a measurement. Lead image: placeholder, due 2026-11-04. -->
+     behavior, not measurements; no speed claims without a measurement; "faster for me" is Mike's own (2026-10-30), about him at the CLI, not a benchmark. Lead image: placeholder, due 2026-11-04. -->
 
 <img src="{{ '/assets/images/posts/placeholder-why-i-use-rust-cli-tools.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
-The [prior post](/2026/11/03/why-i-use-iterm2-tmux-mosh/) was about getting to a prompt and keeping it. This one is about four commands I type at it, all written in Rust. Three of them, fd, ripgrep and dua, replace GNU tools from [#5](/2026/11/01/why-i-use-gnu-tools/), and each is better at the job I actually have, which is usually searching a source tree. The fourth, skim, is a Rust fuzzy finder in the style of fzf.
+The [prior post](/2026/11/03/why-i-use-iterm2-tmux-mosh/) was about getting to a prompt and keeping it. This one is about four commands I type at it, all written in Rust. Three of them, fd, ripgrep and dua, take the place of GNU tools from [#5](/2026/11/01/why-i-use-gnu-tools/) at my command line, and each is better at the job I actually have, which is usually searching a source tree. The fourth, skim, is a Rust fuzzy finder in the style of fzf.
 
 <!--more-->
 
@@ -44,9 +44,7 @@ The [prior post](/2026/11/03/why-i-use-iterm2-tmux-mosh/) was about getting to a
 
 ## Not instead of GNU, beside it
 
-I still install GNU's find, grep and du, and scripts still use them, because they are everywhere and their options are a standard. fd, ripgrep and dua are for typing: defaults chosen for someone searching code, so the common case needs no options at all.
-
-Mike: TODO, confirm: GNU in scripts, Rust tools interactively? Or have they replaced GNU's in scripts too?
+I still install GNU's find, grep and du, and scripts still use them, because they are everywhere and their options are a standard. I do not require the AI coding agents that write scripts for me to use the Rust alternatives. At the command line, though, I prefer the Rust commands, because they are faster for me. Their defaults are chosen for someone searching code, so the common case needs no options at all.
 
 ## fd: find, the way I mean it
 
@@ -76,11 +74,12 @@ Mike: TODO, why rg over `grep -r` for you, and whether you use it inside Emacs (
 
 ## skim: pick one as you type
 
-[skim](https://github.com/skim-rs/skim), whose command is `sk`, is a fuzzy finder: give it a list of lines, type a few letters in any order, and it narrows the list as you type until the one you want is at the top. It is a Rust implementation in the style of fzf, which is written in Go. I used to use fzf, but since I like [Rust](/2026/10/28/why-i-use-rust/), I switched to skim. It composes with the tools above, which produce the lists:
+[skim](https://github.com/skim-rs/skim), whose command is `sk`, is a fuzzy finder: give it a list of lines, type a few letters in any order, and it narrows the list as you type until the one you want is at the top. It is a Rust implementation in the style of fzf, which is written in Go. I used to use fzf, but since I like [Rust](/2026/10/28/why-i-use-rust/), I switched to skim. It does not replace find or xargs; it sits between them. fd or find produces the list, skim picks from it, and xargs or any other command acts on the pick:
 
 ```text
 fd -e rs | sk              # pick a Rust file by a few letters of its name
 rg -l TODO | sk            # pick one of the files with a TODO
+fd -e rs | sk -m | xargs wc -l   # line counts for just the files I mark
 ```
 
 Fuzzy matching is also how [pjmai-rs completes project names](/2026/03/07/pjmai-rs-navigation-history-and-fuzzy-completion/): type part of a name and the closest match wins.
@@ -89,7 +88,7 @@ Mike: TODO, how you use skim: shell key bindings for history and file search, pi
 
 ## dua: where did the disk go?
 
-[dua](https://github.com/Byron/dua-cli) is disk usage analysis: what `du` answers, sorted so the biggest offenders are obvious. Its interactive mode, `dua i`, is the reason I use it: browse the tree by size, mark what to delete, and delete it, without composing an `rm` by hand.
+[dua](https://github.com/Byron/dua-cli), for disk usage analyzer, does more than du. It answers what `du` does, sorted so the biggest offenders are obvious, and its interactive mode, `dua i`, is the reason I use it: browse the tree by size, mark what to delete, and delete it, without composing an `rm` by hand.
 
 Mike: TODO, the usual culprits on your machines. Rust `target/` directories? Model weights on Lucy?
 
