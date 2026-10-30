@@ -31,7 +31,7 @@ repo_urls:
 
 <img src="{{ '/assets/images/posts/placeholder-why-i-use-my-tools.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
-The first three posts in this series were about languages. This one is about tools I wrote for myself, and I use them at different levels of the same working day: where is the project, what is the next step, did I break anything, is the code still well built, and will its README display. Each is a small Rust command-line program, and each exists because I kept doing its job by hand.
+The first three posts in this series were about languages. This one is about tools I wrote for myself, and I use them at different levels of the same working day: where is the project, what is the next step, did I break anything, is the code still well built, and will its README display. Each is a small command-line program written in Rust.
 
 <!--more-->
 
@@ -92,4 +92,4 @@ The smallest of them. [markdown-checker](https://github.com/softwarewrighter/mar
 ## Five levels, one day
 {: .pos-center}
 
-Read in order, they follow a working session: find the project, pick up the plan, change the code without breaking it, keep the code in shape, and publish a README that displays. None of them is clever. Each one takes a check I used to do by hand, or forget to do, and makes it a command.
+Read in order, they follow a working session: find the project, pick up the plan, change the code without breaking it, keep the code in shape, and publish a README that displays.
