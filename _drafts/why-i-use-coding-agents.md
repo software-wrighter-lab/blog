@@ -4,7 +4,7 @@ title: "Why I Use #6: Coding Agents --- Claude Code, Codex, Antigravity and open
 categories: [tools, ai-agents]
 tags: [why-i-use, ai-agents, coding-agents, claude-code, codex, gemini, antigravity, agy, opencode, z-ai, glm, skills]
 keywords: "why I use coding agents, Claude Code, OpenAI Codex, Gemini CLI deprecated, Google Antigravity CLI agy, opencode, Z.ai GLM-5, agent skills, cloud agents, comparing coding agents"
-abstract: "Sixth in the series on the tools I reach for: the coding agents. Claude Code, which I have used since 2025, and the others I have worked with alongside it this year: OpenAI's Codex, Google's Gemini CLI and the Antigravity CLI that replaced it, and opencode with Z.ai's GLM models. What each is for in my work, how I run them side by side, and what changed when Gemini CLI stopped serving individual accounts."
+abstract: "Sixth in the series on the tools I reach for: the coding agents. Claude Code, which I have used since 2025, and the others I have worked with alongside it this year: OpenAI's Codex, Google's Gemini CLI, which I preferred the others over, and opencode with Z.ai's GLM models. What each is for in my work, how I run them side by side, and why Gemini's replacement, Antigravity, is worth another try."
 series: "Why I Use"
 series_part: 6
 date: 2026-11-02 00:15:00 -0700
@@ -25,7 +25,7 @@ date: 2026-11-02 00:15:00 -0700
 
 <img src="{{ '/assets/images/posts/placeholder-why-i-use-coding-agents.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
-The [last post](/2026/11/01/why-i-use-gnu-tools/) in this series was about GNU's tools, which I have used for decades. This one is about the newest row on [my timeline of tools](/2026/10/01/tbt-timelines-of-tools/), and the fastest-moving: coding agents. Claude Code since 2025, and this year Codex, Gemini and opencode beside it.
+The [last post](/2026/11/01/why-i-use-gnu-tools/) in this series was about GNU's tools, which I have used for decades. This one is about the newest row on [my timeline of tools](/2026/10/01/tbt-timelines-of-tools/), and the fastest-moving: coding agents. Claude Code since 2025, and this year Codex, Gemini and opencode beside it, with Gemini's replacement, Antigravity, next to try.
 
 <!--more-->
 
@@ -61,7 +61,7 @@ Mike: TODO, what you use Codex for, and how it compares.
 
 ## Gemini, now Antigravity
 
-Google's terminal agent changed under me this year. On June 18, 2026 the Gemini CLI [stopped serving requests](https://github.com/google-gemini/gemini-cli/discussions/28017) for individual accounts (Google AI Pro, Google AI Ultra and the free tier), with the Antigravity CLI as its replacement. Enterprise Gemini Code Assist licenses and API-key use were not affected.
+I have used the Gemini CLI in the past, but preferred the other CLIs over it. Now Google has replaced it with Antigravity, and I plan to try it again. On June 18, 2026 the Gemini CLI [stopped serving requests](https://github.com/google-gemini/gemini-cli/discussions/28017) for individual accounts (Google AI Pro, Google AI Ultra and the free tier), with the Antigravity CLI as its replacement. Enterprise Gemini Code Assist licenses and API-key use were not affected.
 
 What that means in practice:
 
@@ -70,8 +70,6 @@ What that means in practice:
 - **It is an agent, not a wrapper.** The new CLI shares its agent harness with Google's Antigravity desktop platform and runs multi-step work, tests and skills in the shell.
 
 The models underneath are still Gemini.
-
-Mike: TODO, what you use it for, and whether the change cost you anything (the skill you converted from Gemini for AI Tools #8 came from this world).
 
 ## opencode, with Z.ai's GLM
 
