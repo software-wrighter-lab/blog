@@ -45,7 +45,7 @@ In February I had an AI agent write sound effects as code: no audio model at run
 
 The idea is simple. An AI agent researches how a sound is made and writes code that synthesizes it from oscillators, noise, filters and physical models. Nothing runs a model when the sound is generated, so there is no GPU, no weights and no license question: the output is MIT, unlike the "open" text-to-audio models released for non-commercial use only.
 
-The first attempt, in February with opencode and GLM-4.7, produced ten Python generators, an interactive trainer and a demo page. Impacts, clicks, a flying saucer and the sirens worked. The two door sounds did not, and when I came back to the repo it was in worse shape than I remembered: the WAV files had never been committed, one generator crashed when run, and none of the random ones was seeded. I had no idea how to make a hinge squeak, and neither, it turned out, did the agent.
+The first attempt, in February with opencode and GLM-4.7, produced ten Python generators, an interactive trainer and a demo page. Impacts, clicks, a flying saucer and the sirens worked. The two door sounds did not, and when I came back to the repo it was in worse shape than I remembered: the WAV files had never been committed, one generator crashed when run, and none of the random ones was seeded.
 
 ## The skill
 
@@ -66,7 +66,7 @@ Its pitfalls section then named what the February generator did wrong, by name. 
 {: .pos-left}
 
 <figure class="zoomable outdent-right">
-<img src="{{ '/assets/images/posts/sfx-hinge-lab-ui.webp' | relative_url }}" class="no-invert" alt="Hinge Lab's window: sliders for the friction model's parameters, such as load, speed and stiffness, beside a waveform and spectrogram of the rendered squeak">
+<img src="{{ '/assets/images/posts/sfx-hinge-lab-ui.webp' | relative_url }}" class="no-invert" alt="Hinge Lab's window: sliders for the squeak's parameters, among them duration, swing time, peak speed, load, lubrication, rust, Stribeck speed, contact stiffness and hinge frequency; a waveform of the rendered squeak; its pitch over time, around 700 to 900 Hz; and the pin's sliding speed rising and falling through the squeak window">
 <figcaption style="font-size: 0.85em;">Hinge Lab: the friction model with sliders, re-rendering in about a tenth of a second. Click to enlarge.</figcaption>
 </figure>
 
@@ -78,8 +78,8 @@ It was physically right about *when* a hinge squeaks, and still sounded wrong: o
 {: .pos-right}
 
 <figure class="zoomable outdent-left">
-<img src="{{ '/assets/images/posts/sfx-analysis-stepped.webp' | relative_url }}" class="no-invert" alt="Analysis of one real squeak: a spectrogram with the tracked pitch drawn over it, stepping between steady plateaus with sudden jumps">
-<figcaption style="font-size: 0.85em;">A real squeak, measured: steady pitches with sudden jumps. Click to enlarge.</figcaption>
+<img src="{{ '/assets/images/posts/sfx-analysis-stepped.webp' | relative_url }}" class="no-invert" alt="Analysis of a stepped squeak: the reference squeak's spectrogram with its tracked pitch, holding steady and then jumping at two points; below it the resynthesis rebuilt from the measurements, with the same steps and bright harmonics; and its loudness and roughness over the second it lasts">
+<figcaption style="font-size: 0.85em;">A real squeak (top), measured, and rebuilt from the measurements (middle): steady pitches with sudden jumps. Click to enlarge.</figcaption>
 </figure>
 
 So the next step was measurement. An analysis tool found 23 squeaks in a reference video and tracked each one's pitch and roughness. Real squeaks turned out to be sequences of parts: steady pitches with sudden jumps, glides, and clean stretches that break into clicks, all driven by sharp slip pulses that make them bright. Five kinds emerged, from stepped and gliding squeaks to creaks and low groans. Rebuilding each squeak that way, from the measurements, reproduces those features, and those rebuilds are the second-attempt sounds on the [demo page](https://softwarewrighter.github.io/text-to-sfx-gen/).
@@ -89,6 +89,6 @@ The reference audio itself is not published anywhere, since its provenance is un
 ## What the skill did, and did not do
 {: .pos-center}
 
-The skill did not make the hinge sound right. It did something more useful for a stuck project: it replaced my vague "it doesn't sound like a hinge" with a sourced account of how a hinge makes sound, named the old code's mistakes against that account, and said plainly where its own knowledge ran out. That is what made the next two steps obvious, a model built on the physics and then measurements to find what the model lacked. And because the briefing is a file in the repo, dated, the next agent to work on this starts from it instead of from nothing.
+The skill did not make the hinge sound right. What it did for a stuck project was different: it replaced my vague "it doesn't sound like a hinge" with a sourced account of how a hinge makes sound, named the old code's mistakes against that account, and said plainly where its own knowledge ran out. That is what made the next two steps obvious, a model built on the physics and then measurements to find what the model lacked. And because the briefing is a file in the repo, dated, the next agent to work on this starts from it instead of from nothing.
 
 What is next, from the project's own list: rebuild Hinge Lab around the sequence-of-parts structure, so an analyzed squeak can be loaded and edited; fit its parameters to a measured squeak; let an LLM write new ones from a text description; and try the same friction exciter on chalk, sneakers, a wineglass and brakes.
