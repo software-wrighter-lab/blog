@@ -80,4 +80,4 @@ Mike: TODO, optional: GNU screen, if you used it before tmux ([#5](/2026/11/01/w
 
 Each tool closes off one failure: iTerm2 the Mac end, mosh the network in between, tmux the connection itself.
 
-Mike: TODO, a closing in your words. The [next post](/2026/11/04/why-i-use-rust-cli-tools/) is about what runs at the prompt once you are there: fd, ripgrep and dua.
+Mike: TODO, a closing in your words. The [next post](/2026/11/04/why-i-use-rust-cli-tools/) is about what runs at the prompt once you are there: fd, ripgrep, skim, dua and bat.
