@@ -28,7 +28,7 @@ date: 2026-11-02 00:15:00 -0700
 
 <img src="{{ '/assets/images/posts/block-terminal-ai.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
-The [last post](/2026/11/01/why-i-use-gnu-tools/) in this series was about GNU's tools, which I have used for decades. This one is about the newest row on [my timeline of tools](/2026/10/01/tbt-timelines-of-tools/), and the fastest-moving: coding agents. Claude Code since 2025, and this year Codex, Gemini and opencode beside it, with Gemini CLI's replacement, Antigravity, now getting another try.
+The [prior post](/2026/11/01/why-i-use-gnu-tools/) in this series was about GNU's tools, which I have used for decades. This one is about the newest row on [my timeline of tools](/2026/10/01/tbt-timelines-of-tools/), and the fastest-moving: coding agents. Claude Code since 2025, and this year Codex, Gemini and opencode beside it, with Gemini CLI's replacement, Antigravity, now getting another try.
 
 <!--more-->
 

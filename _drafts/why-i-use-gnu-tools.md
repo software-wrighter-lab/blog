@@ -22,7 +22,7 @@ date: 2026-11-01 00:15:00 -0700
 
 <img src="{{ '/assets/images/posts/block-gnu.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 230px;">
 
-The [last post](/2026/10/31/why-i-use-my-tools/) in this series was about tools I wrote. This one is about tools I did not write but have built a working life around: GNU's. Emacs most of all, and with it the GNU commands I install on the Mac, the GNU toolchain on the Arch Linux machines where my agents work, and GNU APL.
+The [prior post](/2026/10/31/why-i-use-my-tools/) in this series was about tools I wrote. This one is about tools I did not write but have built a working life around: GNU's. Emacs most of all, and with it the GNU commands I install on the Mac, the GNU toolchain on the Arch Linux machines where my agents work, and GNU APL.
 
 <!--more-->
 
