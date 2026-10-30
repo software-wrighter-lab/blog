@@ -88,7 +88,7 @@ Mike: TODO, how you use skim: shell key bindings for history and file search, pi
 
 ## dua: where did the disk go?
 
-[dua](https://github.com/Byron/dua-cli), for disk usage analyzer, does more than du. It answers what `du` does, sorted so the biggest offenders are obvious, and its interactive mode, `dua i`, is the reason I use it: browse the tree by size, mark what to delete, and delete it, without composing an `rm` by hand.
+[dua](https://github.com/Byron/dua-cli), for disk usage analyzer, does more than du. It answers what `du` does, sorted so the biggest offenders are obvious, and its interactive mode, `dua i`, lets me browse the tree by size, mark what to delete, and delete it, without composing an `rm` by hand.
 
 Mike: TODO, the usual culprits on your machines. Rust `target/` directories? Model weights on Lucy?
 
