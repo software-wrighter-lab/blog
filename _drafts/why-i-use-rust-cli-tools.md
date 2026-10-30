@@ -13,7 +13,7 @@ date: 2026-11-04 00:15:00 -0800
 <!-- DRAFT (2026-10-30), Mike: split from #7 (iTerm2, tmux, mosh) as he suggested: "Rust-based (fd, rg, dua) as a follow-on".
      skim added at Mike's request (2026-10-30: "there is a rust version of fzf (fuzzy find) add that"): skim, command sk, repo
      skim-rs/skim (gh api 2026-10-30; lotabout/skim redirects there). Mike (2026-10-30): he uses skim on some Arch systems, and fzf on
-     Arch too. Neither is installed on this Mac (Homebrew has both: sk 5.9.0, fzf 0.74.5). fzf itself is Go, so skim is not a GNU replacement like the other three.
+     Arch too. Both installed on this Mac with Homebrew on 2026-10-30: sk 5.9.0, fzf 0.74.5. fzf itself is Go, so skim is not a GNU replacement like the other three.
      "(and similar)": candidate list below, from what is installed, for Mike to trim. Facts from published posts: TBT #6
      (pjmai-rs: "too much time using cd, du, fd, and ls commands to find and navigate"); #1 (Rust); #5 (GNU findutils, grep,
      coreutils' du). Checked on this Mac (2026-10-30): fd 10.4.2 and dua 2.34.0 from cargo (~/.cargo/bin); ripgrep 15.2.0 from
@@ -95,7 +95,7 @@ Mike: TODO, the usual culprits on your machines. Rust `target/` directories? Mod
 
 ## How I install them
 
-On the Mac, fd and dua came from `cargo install`, and ripgrep from Homebrew (with a second copy in `~/.cargo/bin` behind it on the PATH). skim and fzf are on the Arch machines, not the Mac.
+On the Mac, fd and dua came from `cargo install`, and ripgrep from Homebrew (with a second copy in `~/.cargo/bin` behind it on the PATH). skim and fzf are on the Arch machines, and on the Mac from Homebrew (`brew install sk fzf`).
 
 Mike: TODO, cargo or Homebrew as your rule, how they get onto the Arch machines (pacman or cargo), and where skim is installed.
 
