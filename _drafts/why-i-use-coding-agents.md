@@ -16,6 +16,8 @@ date: 2026-11-02 00:15:00 -0700
      GLM-5); Saw #6 (All Together Now coordinating Claude Code and opencode/GLM-5 agents); AI Tools #6 (opencode driven against
      local models); AI Tools #8 (opencode + GLM-4.7 in February; Claude Code + Claude Opus 5.5 in October; the domain-expert skill,
      a Gemini skill Mike converted); Saw #16 (Claude in the cloud on several repos).
+     Rust puzzle: Mike (2026-10-30): a private Rust puzzle he uses to evaluate open-weight models; Antigravity solved it where many
+     open models cannot. Not published: do not describe or link it.
      Gemini/Antigravity: Mike's note (2026-10-30), CHECKED against the gemini-cli GitHub announcement (discussion #28017) and the
      Flutter docs' Antigravity CLI page, 2026-10-30. Corrections to the note: the June 18, 2026 shutdown was for individual
      accounts (Google AI Pro, Ultra, free tier); Gemini Code Assist enterprise licenses and API-key use were not affected. agy is
@@ -62,7 +64,7 @@ Mike: TODO, what you use Codex for, and how it compares.
 
 ## Gemini, now Antigravity
 
-I have used the Gemini CLI in the past, but preferred the other CLIs over it. Now Google has replaced it with Antigravity, and I plan to try it again. On June 18, 2026 the Gemini CLI [stopped serving requests](https://github.com/google-gemini/gemini-cli/discussions/28017) for individual accounts (Google AI Pro, Google AI Ultra and the free tier), with the Antigravity CLI as its replacement. Enterprise Gemini Code Assist licenses and API-key use were not affected.
+I have used the Gemini CLI in the past, but preferred the other CLIs over it. Now Google has replaced it with Antigravity, and I am trying it again. It has already passed one test that matters to me: I keep a Rust puzzle, which I have not published, that I use to evaluate open-weight models, and Antigravity solved it where many open models cannot. On June 18, 2026 the Gemini CLI [stopped serving requests](https://github.com/google-gemini/gemini-cli/discussions/28017) for individual accounts (Google AI Pro, Google AI Ultra and the free tier), with the Antigravity CLI as its replacement. Enterprise Gemini Code Assist licenses and API-key use were not affected.
 
 What that means in practice:
 
