@@ -53,6 +53,7 @@ The first three posts in this series were about languages. This one is about too
 </div>
 
 ## pjmai-rs: where is the project?
+{: .spider}
 
 I develop on several machines, and each has its own set of repositories in its own places. [pjmai-rs](https://github.com/sw-cli-tools/pjmai-rs) keeps a registry of them and hooks into the shell, so I can find where any project sits on the machine I am on and go there:
 
@@ -65,13 +66,14 @@ chpj myproject    # switch to one
 It also keeps a navigation history (`hypj`) and completes project names fuzzily. [TBT #6](/2026/03/05/tbt-pjmai-rs-project-manager/) tells where the idea came from.
 
 ## agentrail: what is the next step?
+{: .spider}
 
 Once I am in a project, [agentrail](https://github.com/sw-vibe-coding/agentrail-rs) holds the plan. Work is a *saga* of numbered steps, committed with the code, so the plan, its progress and the record of what each step did live in the repository rather than in a chat that a new context will not remember. It was built to keep AI agents on track across fresh contexts, and it does the same for me.
 
 Plans change, so it has to handle more than a straight line: inserting and reordering steps, reopening one, and taking a detour without losing the thread ([AI Tools #2](/2026/04/23/ai-tools-agentrail-rs-mid-saga-flexibility/)), and, now that several agents often work the same family of repositories at once, recording work done in parallel or somewhere else ([Saw #15](/2026/10/18/saw-agentrail-correcting-the-record/)).
 
 ## reg-rs: did I break anything?
-{: .pos-left}
+{: .pos-left .spider}
 
 <figure class="zoomable outdent-right" style="width: 200px;">
 <img src="{{ '/assets/images/posts/block-jack-o-lantern.webp' | relative_url }}" class="no-invert" alt="A block print of a grinning jack-o'-lantern in a witch's hat, a spider hanging from a web above it">
@@ -81,6 +83,7 @@ Plans change, so it has to handle more than a straight line: inserting and reord
 [reg-rs](https://github.com/sw-cli-tools/reg-rs) creates, discovers, runs and reports on regression tests: run a command, keep its output as the golden result, and fail when the output changes. That is what lets me change code with confidence, whether a refactoring, a fix or a new feature. For the compilers, interpreters and emulators I build, the output is the specification, and a golden test notices what no unit test thought to ask. It has run under most of what this blog has shown lately, from X_eTaL's hundreds of goldens to the Forth kernel that rebuilds itself. [TBT #7](/2026/03/19/tbt-reg-rs-regression-testing/) traces it from C++ to Java to Rust.
 
 ## sw-checklist: is it still well built?
+{: .spider}
 
 [sw-checklist](https://github.com/softwarewrighter/sw-checklist) reins in bad practice. It checks a project against my standards, including size limits that warn first and then fail:
 
@@ -95,7 +98,7 @@ Plans change, so it has to handle more than a straight line: inserting and reord
 The limits are a forcing function. Code that stays under them tends to be readable, maintainable, extensible, modular and loosely coupled, because the only way to grow is to split things along their seams. [AI Tools #3](/2026/04/27/sw-checklist-ratchet-ai-coding-agents/) covers how it works as a ratchet on AI coding agents, which otherwise grow functions and files without limit.
 
 ## markdown-checker: will the README display?
-{: .pos-right}
+{: .pos-right .spider}
 
 <figure class="outdent-left" style="width: 90px;">
 <img src="{{ '/assets/images/posts/block-magnifier-light.webp' | relative_url }}" class="theme-light-only" alt="A block-print magnifying glass">
@@ -105,6 +108,6 @@ The limits are a forcing function. Code that stays under them tends to be readab
 The smallest of them. [markdown-checker](https://github.com/softwarewrighter/markdown-checker) makes sure a project's main README.md contains only plain, printable characters, so that nothing in it keeps GitHub from rendering the page as intended. The usual offenders are the tree-drawing symbols people paste in to show a directory layout; `markdown-checker --fix` replaces them with ASCII equivalents.
 
 ## Five levels, one day
-{: .pos-left}
+{: .pos-left .spider}
 
 Read in order, they follow a working session: find the project, pick up the plan, change the code without breaking it, keep the code in shape, and publish a README that displays.

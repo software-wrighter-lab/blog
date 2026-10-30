@@ -2073,3 +2073,12 @@ dialog.lightbox .lightbox-close {
   .c1 { color: #626874; }
   .cs, .cp { color: #2f7a40; }
 }
+
+// A section heading with a symbol before it, as a bullet (class on the
+// heading: {: .spider}). Drawn by CSS so the heading's text, its anchor and
+// the table of contents stay plain.
+.post-content h2.spider::before {
+  content: "\1F577\FE0E";
+  margin-right: 0.4em;
+  font-size: 0.85em;
+}
