@@ -65,7 +65,7 @@ Mike: TODO, whether you put the unprefixed names first on your PATH (Homebrew's 
 
 ## Arch Linux and the GNU toolchain
 
-My agents now work on [Arch Linux](https://archlinux.org) machines, one user per agent, reached from the MacBook with mosh and tmux ([Saw #7](/2026/04/19/saw-prolog-many-agents-self-hosting-mlpl/), [AI Tools #4](/2026/05/16/pi-minimal-agent/)). There the GNU toolchain is the ordinary one: gcc and the rest of Arch's `base-devel` group for building, with the GNU userland underneath everything.
+My agents now work on [Arch Linux](https://archlinux.org) machines, one user per agent, reached from the MacBook with mosh and tmux ([Saw #7](/2026/04/19/saw-prolog-many-agents-self-hosting-mlpl/), [AI Tools #4](/2026/05/16/pi-minimal-agent/)). There the GNU toolchain is the ordinary one: gcc and the rest of Arch's `base-devel` group for building, with GNU's userland, coreutils, bash and glibc, underneath. Arch itself is not all GNU, though. A Linux distribution is many projects under many licenses: the Linux kernel under GPLv2, GNU's tools under the GPL and LGPL, and plenty of packages under BSD, MIT, Apache and other permissive licenses. Arch records each package's license in the package itself (`pacman -Qi` shows it).
 
 ## GNU APL
 
