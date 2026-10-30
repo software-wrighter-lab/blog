@@ -13,7 +13,7 @@ date: 2026-11-04 00:15:00 -0800
 <!-- DRAFT (2026-10-30), Mike: split from #7 (iTerm2, tmux, mosh) as he suggested: "Rust-based (fd, rg, dua) as a follow-on".
      skim added at Mike's request (2026-10-30: "there is a rust version of fzf (fuzzy find) add that"): skim, command sk, repo
      skim-rs/skim (gh api 2026-10-30; lotabout/skim redirects there). Mike (2026-10-30): he uses skim on some Arch systems, and fzf on
-     Arch too. Both installed on this Mac with Homebrew on 2026-10-30: sk 5.9.0, fzf 0.74.5. fzf itself is Go, so skim is not a GNU replacement like the other three.
+     Arch too; "I used to use fzf, but since I like Rust, I switched to sk". Both installed on this Mac with Homebrew on 2026-10-30: sk 5.9.0, fzf 0.74.5. fzf itself is Go, so skim is not a GNU replacement like the other three.
      "(and similar)": candidate list below, from what is installed, for Mike to trim. Facts from published posts: TBT #6
      (pjmai-rs: "too much time using cd, du, fd, and ls commands to find and navigate"); #1 (Rust); #5 (GNU findutils, grep,
      coreutils' du). Checked on this Mac (2026-10-30): fd 10.4.2 and dua 2.34.0 from cargo (~/.cargo/bin); ripgrep 15.2.0 from
@@ -76,7 +76,7 @@ Mike: TODO, why rg over `grep -r` for you, and whether you use it inside Emacs (
 
 ## skim: pick one as you type
 
-[skim](https://github.com/skim-rs/skim), whose command is `sk`, is a fuzzy finder: give it a list of lines, type a few letters in any order, and it narrows the list as you type until the one you want is at the top. It is a Rust implementation in the style of fzf, which is written in Go. I use skim on some of my Arch machines and fzf on Arch too. Either composes with the tools above, which produce the lists:
+[skim](https://github.com/skim-rs/skim), whose command is `sk`, is a fuzzy finder: give it a list of lines, type a few letters in any order, and it narrows the list as you type until the one you want is at the top. It is a Rust implementation in the style of fzf, which is written in Go. I used to use fzf, but since I like [Rust](/2026/10/28/why-i-use-rust/), I switched to skim. It composes with the tools above, which produce the lists:
 
 ```text
 fd -e rs | sk              # pick a Rust file by a few letters of its name
@@ -85,7 +85,7 @@ rg -l TODO | sk            # pick one of the files with a TODO
 
 Fuzzy matching is also how [pjmai-rs completes project names](/2026/03/07/pjmai-rs-navigation-history-and-fuzzy-completion/): type part of a name and the closest match wins.
 
-Mike: TODO, how you use them: shell key bindings for history and file search, piping into `sk`, or skim as a Rust library inside your own tools. And what decides skim or fzf on a given machine.
+Mike: TODO, how you use skim: shell key bindings for history and file search, piping into `sk`, or as a Rust library inside your own tools.
 
 ## dua: where did the disk go?
 
