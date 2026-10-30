@@ -22,7 +22,7 @@ date: 2026-11-02 00:15:00 -0700
      the command; global config stays under ~/.gemini/ (project config under .agents/); the installer copies Gemini CLI skills, MCP
      servers, agents and GEMINI.md files over. Not verified, so not in the text: "Antigravity 2.0", "closed source, written in Go".
      Mike's own reasons are marked "Mike: TODO". Lead image: Mike's block-terminal-ai.jpg (Dropbox), block print of terminals reading codex, opencode,
-     claude and agv (sic: the command is agy), green text, no-invert. -->
+     claude and agy (fixed 2026-10-30; first version read agv), green text, no-invert. -->
 
 <img src="{{ '/assets/images/posts/block-terminal-ai.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
