@@ -7,7 +7,7 @@ keywords: "why I use coding agents, Claude Code, OpenAI Codex, Gemini CLI deprec
 abstract: "Sixth in the series on the tools I reach for: the coding agents. Claude Code, which I have used since 2025, and the others I have worked with alongside it this year: OpenAI's Codex, Google's Gemini CLI, which I preferred the others over, and opencode with Z.ai's GLM models. What each is for in my work, how I run them side by side, and why Gemini CLI's replacement, Antigravity, has earned another try."
 series: "Why I Use"
 series_part: 6
-date: 2026-11-02 00:15:00 -0700
+date: 2026-11-02 00:15:00 -0800
 ---
 
 <!-- DRAFT (2026-10-30), Mike: #6 on coding agents for 11/02, split from #5 (GNU tools): Claude, Codex, Gemini (now Antigravity),
