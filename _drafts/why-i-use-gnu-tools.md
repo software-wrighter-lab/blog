@@ -2,9 +2,9 @@
 layout: post
 title: "Why I Use #5: GNU Tools, From Emacs to Arch Linux"
 categories: [tools, editors]
-tags: [why-i-use, gnu, emacs, elisp, coreutils, homebrew, arch-linux, gcc, gnu-apl, org-mode, free-software]
-keywords: "why I use GNU tools, Emacs since 1989, GNU coreutils on macOS, Homebrew coreutils, Arch Linux base-devel, gcc, GNU APL, Emacs packages for CLI tools, Emacs glyph input"
-abstract: "Fifth in the series on the tools I reach for, and the first about tools I did not write: GNU's. Emacs, which I have used since 1989 as an editor, for a while as an IDE, as a shell, and as the place my own command-line tools plug in; GNU coreutils installed on the Mac with Homebrew, so its commands behave as they do on Linux; Arch Linux, where my agents now work, with gcc and the rest of the GNU toolchain; and GNU APL."
+tags: [why-i-use, gnu, emacs, elisp, coreutils, homebrew, arch-linux, bash, zsh, shell-history, gcc, gnu-apl, org-mode, free-software]
+keywords: "why I use GNU tools, Emacs since 1989, GNU coreutils on macOS, Homebrew coreutils, Arch Linux base-devel, bash, zsh on macOS, shell history, HISTSIZE SAVEHIST, histappend, SHARE_HISTORY, gcc, GNU APL, Emacs packages for CLI tools, Emacs glyph input"
+abstract: "Fifth in the series on the tools I reach for, and the first about tools I did not write: GNU's. Emacs, which I have used since 1989 as an editor, for a while as an IDE, as a shell, and as the place my own command-line tools plug in; GNU coreutils installed on the Mac with Homebrew, so its commands behave as they do on Linux; Arch Linux, where my agents now work, with gcc and the rest of the GNU toolchain; bash, and why the Mac runs zsh instead, with a shell history worth keeping; and GNU APL."
 series: "Why I Use"
 series_part: 5
 date: 2026-11-01 00:15:00 -0700
@@ -17,6 +17,11 @@ date: 2026-11-01 00:15:00 -0700
      pjmai-rs, reg-rs); Saw #8 (Emacs glyph entry); AL #19 (X_eTaL's Emacs mode, Org Babel); TBT #1 (GNU APL); Saw #7 and AI Tools
      #4 (agents on Arch Linux, reached with mosh). Checked on this Mac (2026-10-30): Homebrew has coreutils 9.12, gcc, gnu-apl,
      gnupg, m4, libtool, readline, ncurses, gmp, mpfr; Emacs.app is GNU Emacs 30.2. "Mike: TODO" marks his own reasons.
+     bash section moved here from #7 at Mike's request (2026-10-30: "a discussion of bash and history goes somewhere, but note
+     that I use zsh on Mac"; "isn't bash gnu? seems to fit better there than tmux"). Checked on this Mac (2026-10-30): login
+     shell /bin/zsh, zsh 5.9; /bin/bash is 3.2.57; no Homebrew bash; ~/.zshrc sets no HIST* options, so /etc/zshrc's
+     HISTSIZE=2000 / SAVEHIST=1000 apply (~/.zsh_history: 1054 lines, at the cap). bash on Arch is inferred from "note that I
+     use zsh on Mac": Mike: TODO confirm. No claim about why Apple switched, only the facts (3.2 is the last GPLv2 bash).
      The GNU list section is a candidate list for Mike to trim. Lead image: Mike's block-gnu.jpg (Dropbox), white background
      made transparent, color, no-invert. -->
 
@@ -67,6 +72,27 @@ Mike: TODO, whether you put the unprefixed names first on your PATH (Homebrew's 
 
 My agents now work on [Arch Linux](https://archlinux.org) machines, one user per agent, reached from the MacBook with mosh and tmux ([Saw #7](/2026/04/19/saw-prolog-many-agents-self-hosting-mlpl/), [AI Tools #4](/2026/05/16/pi-minimal-agent/)). There the GNU toolchain is the ordinary one: gcc and the rest of Arch's `base-devel` group for building, with GNU's userland, coreutils, bash and glibc, underneath. Arch itself is not all GNU, though. A Linux distribution is many projects under many licenses: the Linux kernel under GPLv2, GNU's tools under the GPL and LGPL, and plenty of packages under BSD, MIT, Apache and other permissive licenses. Arch records each package's license in the package itself (`pacman -Qi` shows it).
 
+## bash, and zsh on the Mac
+
+bash is GNU's shell, the Bourne Again SHell. With sh and ksh before it, it has been on [my timeline](/2026/10/01/tbt-timelines-of-tools/) since 1991, and it is the shell on the Arch machines. On the Mac I use zsh, which is not GNU. It has been the macOS default since Catalina in 2019, and the bash Apple still ships is version 3.2, from 2007: the last release under GPLv2. Later versions moved to GPLv3, and Apple's copy stayed where it was. Homebrew has a current one (`brew install bash`) for scripts that need it.
+
+Mike: TODO, confirm bash on Arch, and whether you keep the two shells' configuration alike.
+
+History is the part of a shell I would least like to lose: the long command that worked last week, recalled with Ctrl-R instead of rebuilt. [tmux](/2026/11/03/why-i-use-iterm2-tmux-mosh/) makes it trickier. Every pane runs its own shell, each keeping its own history in memory until it exits, so a command typed in one window is not in another's Ctrl-R, and in bash the last shell to exit can overwrite what the others saved. Both shells can fix that:
+
+```text
+# bash: append rather than overwrite, and save after every command
+shopt -s histappend
+PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+
+# zsh: write each command as it runs, and read the others' as they go
+setopt INC_APPEND_HISTORY SHARE_HISTORY
+```
+
+The defaults are also smaller than they look. On macOS, `/etc/zshrc` sets `HISTSIZE=2000` and `SAVEHIST=1000`, so zsh saves only the last thousand commands unless you raise them.
+
+Mike: TODO, your settings: sizes, shared or per-pane history, and how you search it (Ctrl-R with [skim](/2026/11/04/why-i-use-rust-cli-tools/)?).
+
 ## GNU APL
 
 When I recreated [my first program](/2026/01/29/tbt-apl-horse-race/), a 1972 horse race in APL, it was GNU APL that ran it.
@@ -76,7 +102,7 @@ When I recreated [my first program](/2026/01/29/tbt-apl-horse-race/), a 1972 hor
 
 <!-- Mike: trim this list to the tools you actually use; it is a starting point, not a claim. -->
 
-- **Shell and text:** bash, sed, grep, gawk, findutils (`find`, `xargs`), diffutils (`diff`, `cmp`), patch, tar, gzip, less, readline (the line editing in many REPLs)
+- **Shell and text:** sed, grep, gawk, findutils (`find`, `xargs`), diffutils (`diff`, `cmp`), patch, tar, gzip, less, readline (the line editing in many REPLs)
 - **Building:** make, gcc and g++, binutils (`ld`, `as`, `objdump`), gdb, autoconf, automake, libtool, m4, bison, texinfo
 - **Libraries:** glibc, gmp and mpfr (arbitrary precision, behind gcc), ncurses
 - **Everything else:** GnuPG (`gpg`) for signing and keys, wget, GNU parallel, GNU screen (before tmux), Guile

@@ -91,7 +91,7 @@ fd -e rs | sk -m | xargs wc -l   # line counts for just the files I mark
 
 Fuzzy matching is also how [pjmai-rs completes project names](/2026/03/07/pjmai-rs-navigation-history-and-fuzzy-completion/): type part of a name and the closest match wins.
 
-Mike: TODO, how you use skim: shell key bindings for history search (see [#7 on shell history](/2026/11/03/why-i-use-iterm2-tmux-mosh/)) and file search, piping into `sk`, or as a Rust library inside your own tools.
+Mike: TODO, how you use skim: shell key bindings for history search (see [#5 on shell history](/2026/11/01/why-i-use-gnu-tools/)) and file search, piping into `sk`, or as a Rust library inside your own tools.
 
 ## dua: where did the disk go?
 
