@@ -28,7 +28,9 @@ repo_urls:
      extensible, modular, loosely coupled code), and markdown-checker (the main README.md has no characters that keep GitHub from
      rendering it). Facts from each repo's README (gh api, 2026-10-30). The pjmai-rs demo video belongs to earlier posts: linked
      through them, not embedded (no reused media). Lead image: Mike's block-project-checking.jpg (Dropbox), monochrome block print (signal, track switch,
-     magnifying glass, meter, checklist), no-invert. -->
+     magnifying glass, meter, checklist), no-invert. Gutter: Mike's block-magnifier.jpg, blue background made
+     transparent; the lens was the same blue, so it is a light/dark pair (black lines / white lines). Gutter beside reg-rs: Mike's
+     block-jack-o-lantern.jpg (Dropbox), color, no-invert, caption "Regressions are scary" (Mike). -->
 
 <img src="{{ '/assets/images/posts/block-project-checking.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
@@ -69,6 +71,12 @@ Once I am in a project, [agentrail](https://github.com/sw-vibe-coding/agentrail-
 Plans change, so it has to handle more than a straight line: inserting and reordering steps, reopening one, and taking a detour without losing the thread ([AI Tools #2](/2026/04/23/ai-tools-agentrail-rs-mid-saga-flexibility/)), and, now that several agents often work the same family of repositories at once, recording work done in parallel or somewhere else ([Saw #15](/2026/10/18/saw-agentrail-correcting-the-record/)).
 
 ## reg-rs: did I break anything?
+{: .pos-left}
+
+<figure class="zoomable outdent-right" style="width: 200px;">
+<img src="{{ '/assets/images/posts/block-jack-o-lantern.webp' | relative_url }}" class="no-invert" alt="A block print of a grinning jack-o'-lantern in a witch's hat, a spider hanging from a web above it">
+<figcaption style="font-size: 0.85em;">Regressions are scary.</figcaption>
+</figure>
 
 [reg-rs](https://github.com/sw-cli-tools/reg-rs) creates, discovers, runs and reports on regression tests: run a command, keep its output as the golden result, and fail when the output changes. That is what lets me change code with confidence, whether a refactoring, a fix or a new feature. For the compilers, interpreters and emulators I build, the output is the specification, and a golden test notices what no unit test thought to ask. It has run under most of what this blog has shown lately, from X_eTaL's hundreds of goldens to the Forth kernel that rebuilds itself. [TBT #7](/2026/03/19/tbt-reg-rs-regression-testing/) traces it from C++ to Java to Rust.
 
@@ -87,10 +95,16 @@ Plans change, so it has to handle more than a straight line: inserting and reord
 The limits are a forcing function. Code that stays under them tends to be readable, maintainable, extensible, modular and loosely coupled, because the only way to grow is to split things along their seams. [AI Tools #3](/2026/04/27/sw-checklist-ratchet-ai-coding-agents/) covers how it works as a ratchet on AI coding agents, which otherwise grow functions and files without limit.
 
 ## markdown-checker: will the README display?
+{: .pos-right}
+
+<figure class="outdent-left" style="width: 90px;">
+<img src="{{ '/assets/images/posts/block-magnifier-light.webp' | relative_url }}" class="theme-light-only" alt="A block-print magnifying glass">
+<img src="{{ '/assets/images/posts/block-magnifier-dark.webp' | relative_url }}" class="theme-dark-only" alt="A block-print magnifying glass">
+</figure>
 
 The smallest of them. [markdown-checker](https://github.com/softwarewrighter/markdown-checker) makes sure a project's main README.md contains only plain, printable characters, so that nothing in it keeps GitHub from rendering the page as intended. The usual offenders are the tree-drawing symbols people paste in to show a directory layout; `markdown-checker --fix` replaces them with ASCII equivalents.
 
 ## Five levels, one day
-{: .pos-center}
+{: .pos-left}
 
 Read in order, they follow a working session: find the project, pick up the plan, change the code without breaking it, keep the code in shape, and publish a README that displays.
