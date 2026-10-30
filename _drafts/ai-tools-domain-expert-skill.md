@@ -19,10 +19,9 @@ repo_urls:
      Sources: text-to-sfx-gen at 3942d66 (README, docs/blog-outline.md, docs/phases.md, docs/domain-expertise.md = the
      briefing, .claude/skills/domain-expert/SKILL.md, git log: Phase 1 2026-02-10/11 with opencode + GLM-4.7; Phase 2
      committed 2026-10-29 with Claude Code + Claude Opus 5.5). Images from the repo's images/. The briefing follows the
-     skill's template but lives at docs/domain-expertise.md, not docs/briefings/. Lead image: placeholder until Mike
-     supplies one. -->
+     skill's template but lives at docs/domain-expertise.md, not docs/briefings/. Lead image: Mike's block-hinge-math.jpg (text-to-sfx-gen images/, 2026-10-29), monochrome block print, no-invert. -->
 
-<img src="{{ '/assets/images/posts/placeholder-ai-tools-domain-expert-skill.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-hinge-math.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
 In February I had an AI agent write sound effects as code: no audio model at run time, just math, so every sound it makes is mine to license. Simple sounds worked. The door creak sounded like wind, and the hinge didn't sound like a hinge. I put the project down. This month someone sent me a skill to try, called domain-expert. It was written for Gemini; I converted it into a Claude Code skill, and it got the project moving again. I did not write the skill itself; this post is about what it does and what it did here.
 
