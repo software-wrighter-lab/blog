@@ -34,7 +34,7 @@ In February I had an AI agent write sound effects as code: no audio model at run
 | **The project** | [text-to-sfx-gen](https://github.com/softwarewrighter/text-to-sfx-gen) |
 | **Live demo** | [softwarewrighter.github.io/text-to-sfx-gen](https://softwarewrighter.github.io/text-to-sfx-gen/) |
 | **The skill** | [.claude/skills/domain-expert/SKILL.md](https://github.com/softwarewrighter/text-to-sfx-gen/blob/main/.claude/skills/domain-expert/SKILL.md) |
-| **The briefing it wrote** | [docs/domain-expertise.md](https://github.com/softwarewrighter/text-to-sfx-gen/blob/main/docs/domain-expertise.md) |
+| **The briefing** | [docs/domain-expertise.md](https://github.com/softwarewrighter/text-to-sfx-gen/blob/main/docs/domain-expertise.md) |
 | **Status and what remains** | [docs/phases.md](https://github.com/softwarewrighter/text-to-sfx-gen/blob/main/docs/phases.md) |
 | **The series** | [AI Tools: every post](/series/#ai-tools) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
@@ -58,13 +58,13 @@ The skill's job is to stop exactly that. Its description names the failure it pr
 
 ## What the briefing found
 
-The briefing (490 lines, [docs/domain-expertise.md](https://github.com/softwarewrighter/text-to-sfx-gen/blob/main/docs/domain-expertise.md)) read its sources in full: Akay's tutorial on friction acoustics in JASA (2002), the elasto-plastic friction model of Avanzini, Serafin and Rocchesso (DAFx-02), and the creaking-door patch in Farnell's *Designing Sound*. The physics in brief: a hinge squeaks through stick-slip. The pin sticks in the bore, force builds, it slips, and the cycle repeats. When the slips lock to a resonance of the metal, their repetition rate is the pitch you hear; when they don't, you hear separate creak clicks.
+[The briefing](https://github.com/softwarewrighter/text-to-sfx-gen/blob/main/docs/domain-expertise.md), 490 lines, read its sources in full: Akay's tutorial on friction acoustics in JASA (2002), the elasto-plastic friction model of Avanzini, Serafin and Rocchesso (DAFx-02), and the creaking-door patch in Farnell's *Designing Sound*. The physics in brief: a hinge squeaks through stick-slip. The pin sticks in the bore, force builds, it slips, and the cycle repeats. When the slips lock to a resonance of the metal, their repetition rate is the pitch you hear; when they don't, you hear separate creak clicks.
 
 Its pitfalls section then named what the February generator did wrong, by name. It treated a squeak as "noise bursts plus a sine", when the pitch comes from the slips themselves, not from a tone added on top. And it slipped 3 to 12 times a second, which is the rate of a creak or ratchet, not a squeak. The research also wrote down where it stopped: its parameter values were "reasoned starting points", not measured from recordings, and its claims were checked with a toy simulation, not against real hinges.
 
 ## The document it left behind
 
-After applying the skill, I had Claude write the research up, and [the briefing](https://github.com/softwarewrighter/text-to-sfx-gen/blob/main/docs/domain-expertise.md) is worth reading on its own. It follows the skill's template, vocabulary, canon, pitfalls, frontier and open gaps, and then goes past it into what the work needed:
+After applying the skill, I had Claude write the research up, and the briefing is worth reading on its own. It follows the skill's template, vocabulary, canon, pitfalls, frontier and open gaps, and then goes past it into what the work needed:
 
 - **The model, precisely:** the elasto-plastic friction equations from the DAFx-02 paper, how they couple to the resonant modes of the metal, and Farnell's cheaper phenomenological recipe as an alternative for creaks.
 - **A sanity simulation, run during the research:** a toy friction model driving one 600 Hz mode, swept over load and sliding speed. It squeals only inside a narrow window of speed, which is the physics saying why a hinge squeaks some of the time, not all of it.
