@@ -21,6 +21,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 POST_TIME="00:15:00"   # just before the 00:20 publish cron; see docs/workflow.md
+SITE_TZ="America/Los_Angeles"   # the TZ the Pages build and its cron run in
 DRAFT_BRANCH="drafts"
 LIVE_BRANCH="main"
 
@@ -63,7 +64,12 @@ if ! git diff --quiet -- _drafts || ! git diff --cached --quiet -- _drafts; then
 fi
 
 dest="_posts/${date_arg}-${slug}.md"
-tz_offset=$(date +%z)
+# The offset in force on the post's own date, not today's. Scheduling across a
+# daylight-saving change with today's offset moves the post a day: 00:15 -0700
+# on a date that is really -0800 is 23:15 the evening before, so it goes live
+# early under the previous day's URL. BSD date first (macOS), then GNU.
+tz_offset=$(TZ="$SITE_TZ" date -j -f '%Y-%m-%d %H:%M:%S' "$date_arg $POST_TIME" +%z 2>/dev/null \
+  || TZ="$SITE_TZ" date -d "$date_arg $POST_TIME" +%z)
 work=$(mktemp -d)
 cleanup() { git worktree remove --force "$work" 2>/dev/null || true; rm -rf "$work"; }
 trap cleanup EXIT
