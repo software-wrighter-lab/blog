@@ -30,7 +30,8 @@ repo_urls:
      through them, not embedded (no reused media). Lead image: Mike's block-project-checking.jpg (Dropbox), monochrome block print (signal, track switch,
      magnifying glass, meter, checklist), no-invert. Gutter: Mike's block-magnifier.jpg, blue background made
      transparent; the lens was the same blue, so it is a light/dark pair (black lines / white lines). Gutter beside reg-rs: Mike's
-     block-halloween.jpg (Dropbox; replaced block-jack-o-lantern), color, no-invert, caption "Regressions are scary" (Mike). -->
+     block-halloween.jpg (Dropbox; replaced block-jack-o-lantern), color, no-invert, caption "Regressions are scary" (Mike). Links box: the bottom-right cobweb from Mike's block-cobwebs.jpg (Dropbox), cut
+     diagonally, paper made transparent, laid over the box's bottom-right corner (no pointer events). -->
 
 <img src="{{ '/assets/images/posts/block-project-checking.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
@@ -38,7 +39,9 @@ The first three posts in this series were about languages. This one is about too
 
 <!--more-->
 
-<div class="resource-box" markdown="1">
+<div class="resource-box" style="position: relative;" markdown="1">
+
+<img src="{{ '/assets/images/posts/cobweb-corner.webp' | relative_url }}" alt="" aria-hidden="true" class="no-invert" style="position: absolute; right: 0; bottom: 0; width: 38%; max-width: 170px; pointer-events: none; margin: 0; border: none; box-shadow: none; background: none;">
 
 | Resource | Link |
 |----------|------|
