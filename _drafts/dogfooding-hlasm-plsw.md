@@ -7,7 +7,7 @@ keywords: "dogfooding, COR24, HLASM-inspired macro assembler, PL/SW compiler, ti
 abstract: "Each of my COR24 tools is tested by the one built on it. The simple assembler was dogfooded by my C compiler, which was dogfooded by the PL/SW compiler written in C. Now I am porting PL/SW from C to HLASM, my macro assembler written in COR24 assembly, and porting the tiny-C demos to HLASM first to prove the method. It already found a bug: HLASM's structured IF and DO had never produced code the assembler would accept, and text-only regression tests never noticed. The plan ends with HLASM and PL/SW each compiling themselves, and the SWTOS microkernel as the test of both."
 series: "Dogfooding"
 series_part: 2
-date: 2026-10-31 12:00:00 -0700
+date: 2026-11-01 00:15:00 -0700
 repo_urls:
   - url: "https://github.com/sw-embed/sw-cor24-hlasm"
     title: "sw-cor24-hlasm"
@@ -21,7 +21,7 @@ repo_urls:
     title: "SWTOS"
 ---
 
-<!-- DRAFT (2026-10-31), Mike: Dogfooding #2 for today. His framing: PL/SW previously dogfooded his C, which dogfooded the simpler
+<!-- DRAFT (2026-10-31), Mike: Dogfooding #2, planned 11/01. His framing: PL/SW previously dogfooded his C, which dogfooded the simpler
      assembler; PL/SW will dogfood HLASM; HLASM now dogfoods the simpler assembler, and he plans for HLASM and PL/SW each to dogfood
      themselves; SWTOS dogfoods the simple assembler and some PL/SW, and he hopes to make it the ultimate test of the refactored
      HLASM and PL/SW instead of cor24-asm.
@@ -30,9 +30,10 @@ repo_urls:
      tiny-C survey and macro catalog, macro library, demo ports, showcase; docs/bootstrap.md (hlasm0 -> hlasm1); README (written in
      COR24 assembly, output plain .s over UART). sw-cor24-plsw dev f6d2d64: docs/migrate-from-c-to-hlasm.md (plan, 2026-10-30, no
      migration work started; phases 0-5). sw-tos justfile (cor24-asm, plsw.lgo pipeline). Both repos' default branch is dev.
-     Lead image: placeholder until Mike supplies one. -->
+     Lead image: Mike's block-puppy-dogfood.jpg (Dropbox), NightCafe credit bar cropped off the bottom;
+     monochrome block print, no-invert. Moved to 11/01 (Mike, 2026-10-31). -->
 
-<img src="{{ '/assets/images/posts/placeholder-dogfooding-hlasm-plsw.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-puppy-dogfood.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
 [The first Dogfooding post](/2026/04/27/embedded-pascal-pcode-yagni-bump-to-reclaim/) was about one tool finding the limits of another: a Pascal VM's allocator, outgrown by an OCaml written in Pascal. This one is about a whole chain of them. On COR24, each of my tools is tested by the one built on top of it, and I am rebuilding the chain so that, in the end, the top two test themselves.
 
