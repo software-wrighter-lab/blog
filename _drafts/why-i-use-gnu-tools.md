@@ -20,8 +20,8 @@ date: 2026-11-01 00:15:00 -0700
      bash section moved here from #7 at Mike's request (2026-10-30: "a discussion of bash and history goes somewhere, but note
      that I use zsh on Mac"; "isn't bash gnu? seems to fit better there than tmux"). Checked on this Mac (2026-10-30): login
      shell /bin/zsh, zsh 5.9; /bin/bash is 3.2.57; no Homebrew bash; ~/.zshrc sets no HIST* options, so /etc/zshrc's
-     HISTSIZE=2000 / SAVEHIST=1000 apply (~/.zsh_history: 1054 lines, at the cap). bash on Arch is inferred from "note that I
-     use zsh on Mac": Mike: TODO confirm. No claim about why Apple switched, only the facts (3.2 is the last GPLv2 bash).
+     HISTSIZE=2000 / SAVEHIST=1000 apply (~/.zsh_history: 1054 lines, at the cap). Mike (2026-10-31): "I use bash on Arch. default size, no
+     sharing. mac history is fine as is." So the sharing settings are shown as an option, not as his setup. No claim about why Apple switched, only the facts (3.2 is the last GPLv2 bash).
      The GNU list section is a candidate list for Mike to trim. Lead image: Mike's block-gnu.jpg (Dropbox), white background
      made transparent, color, no-invert. -->
 
@@ -76,9 +76,9 @@ My agents now work on [Arch Linux](https://archlinux.org) machines, one user per
 
 bash is GNU's shell, the Bourne Again SHell. With sh and ksh before it, it has been on [my timeline](/2026/10/01/tbt-timelines-of-tools/) since 1991, and it is the shell on the Arch machines. On the Mac I use zsh, which is not GNU. It has been the macOS default since Catalina in 2019, and the bash Apple still ships is version 3.2, from 2007: the last release under GPLv2. Later versions moved to GPLv3, and Apple's copy stayed where it was. Homebrew has a current one (`brew install bash`) for scripts that need it.
 
-Mike: TODO, confirm bash on Arch, and whether you keep the two shells' configuration alike.
+History is the part of a shell I would least like to lose: the long command that worked last week, recalled with Ctrl-R instead of rebuilt. [tmux](/2026/11/03/why-i-use-iterm2-tmux-mosh/) makes it trickier. Every pane runs its own shell, each keeping its own history in memory until it exits, so a command typed in one window is not in another's Ctrl-R, and in bash the last shell to exit can overwrite what the others saved.
 
-History is the part of a shell I would least like to lose: the long command that worked last week, recalled with Ctrl-R instead of rebuilt. [tmux](/2026/11/03/why-i-use-iterm2-tmux-mosh/) makes it trickier. Every pane runs its own shell, each keeping its own history in memory until it exits, so a command typed in one window is not in another's Ctrl-R, and in bash the last shell to exit can overwrite what the others saved. Both shells can fix that:
+I leave both shells at their default history sizes, with no sharing between panes. For anyone who wants it shared, both shells can do it:
 
 ```text
 # bash: append rather than overwrite, and save after every command
@@ -89,9 +89,9 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 setopt INC_APPEND_HISTORY SHARE_HISTORY
 ```
 
-The defaults are also smaller than they look. On macOS, `/etc/zshrc` sets `HISTSIZE=2000` and `SAVEHIST=1000`, so zsh saves only the last thousand commands unless you raise them.
+On the Mac, the defaults come from `/etc/zshrc`, which sets `HISTSIZE=2000` and `SAVEHIST=1000`: zsh keeps the last thousand commands. That has been fine for me.
 
-Mike: TODO, your settings: sizes, shared or per-pane history, and how you search it (Ctrl-R with [skim](/2026/11/04/why-i-use-rust-cli-tools/)?).
+Mike: TODO, how you search history: plain Ctrl-R, or Ctrl-R through [skim](/2026/11/04/why-i-use-rust-cli-tools/)?
 
 ## GNU APL
 
