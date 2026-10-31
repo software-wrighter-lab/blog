@@ -2,9 +2,9 @@
 layout: post
 title: "Why I Use #5: GNU Tools, From Emacs to Arch Linux"
 categories: [tools, editors]
-tags: [why-i-use, gnu, emacs, elisp, coreutils, homebrew, arch-linux, bash, zsh, shell-history, gcc, gnu-apl, org-mode, free-software]
-keywords: "why I use GNU tools, Emacs since 1989, GNU coreutils on macOS, Homebrew coreutils, Arch Linux base-devel, bash, zsh on macOS, shell history, HISTSIZE SAVEHIST, histappend, SHARE_HISTORY, gcc, GNU APL, Emacs packages for CLI tools, Emacs glyph input"
-abstract: "Fifth in the series on the tools I reach for, and the first about tools I did not write: GNU's. Emacs, which I have used since 1989 as an editor, for a while as an IDE, as a shell, and as the place my own command-line tools plug in; GNU coreutils installed on the Mac with Homebrew, so its commands behave as they do on Linux; Arch Linux, where my agents now work, with gcc and the rest of the GNU toolchain; bash, and why the Mac runs zsh instead, with a shell history worth keeping; and GNU APL."
+tags: [why-i-use, gnu, emacs, elisp, coreutils, homebrew, arch-linux, bash, zsh, gcc, gnu-apl, org-mode, free-software]
+keywords: "why I use GNU tools, Emacs since 1989, GNU coreutils on macOS, Homebrew coreutils, Arch Linux base-devel, bash, zsh on macOS, gcc, GNU APL, Emacs packages for CLI tools, Emacs glyph input"
+abstract: "Fifth in the series on the tools I reach for, and the first about tools I did not write: GNU's. Emacs, which I have used since 1989 as an editor, for a while as an IDE, as a shell, and as the place my own command-line tools plug in; GNU coreutils installed on the Mac with Homebrew, so its commands behave as they do on Linux; Arch Linux, where my agents now work, with gcc and the rest of the GNU toolchain; bash, and zsh on the Mac instead; and GNU APL."
 series: "Why I Use"
 series_part: 5
 date: 2026-11-01 00:15:00 -0700
@@ -21,7 +21,8 @@ date: 2026-11-01 00:15:00 -0700
      that I use zsh on Mac"; "isn't bash gnu? seems to fit better there than tmux"). Checked on this Mac (2026-10-30): login
      shell /bin/zsh, zsh 5.9; /bin/bash is 3.2.57; no Homebrew bash; ~/.zshrc sets no HIST* options, so /etc/zshrc's
      HISTSIZE=2000 / SAVEHIST=1000 apply (~/.zsh_history: 1054 lines, at the cap). Mike (2026-10-31): "I use bash on Arch. default size, no
-     sharing. mac history is fine as is." So the sharing settings are shown as an option, not as his setup. No claim about why Apple switched, only the facts (3.2 is the last GPLv2 bash).
+     sharing. mac history is fine as is." Mike (2026-10-31): "cut the history elaboration. maybe say I generally use default settings?" Cut, along
+     with the forward links to #7 and #8, which would 404 until those publish. No claim about why Apple switched, only the facts (3.2 is the last GPLv2 bash).
      The GNU list section is a candidate list for Mike to trim. Lead image: Mike's block-gnu.jpg (Dropbox), white background
      made transparent, color, no-invert. -->
 
@@ -76,22 +77,7 @@ My agents now work on [Arch Linux](https://archlinux.org) machines, one user per
 
 bash is GNU's shell, the Bourne Again SHell. With sh and ksh before it, it has been on [my timeline](/2026/10/01/tbt-timelines-of-tools/) since 1991, and it is the shell on the Arch machines. On the Mac I use zsh, which is not GNU. It has been the macOS default since Catalina in 2019, and the bash Apple still ships is version 3.2, from 2007: the last release under GPLv2. Later versions moved to GPLv3, and Apple's copy stayed where it was. Homebrew has a current one (`brew install bash`) for scripts that need it.
 
-History is the part of a shell I would least like to lose: the long command that worked last week, recalled with Ctrl-R instead of rebuilt. [tmux](/2026/11/03/why-i-use-iterm2-tmux-mosh/) makes it trickier. Every pane runs its own shell, each keeping its own history in memory until it exits, so a command typed in one window is not in another's Ctrl-R, and in bash the last shell to exit can overwrite what the others saved.
-
-I leave both shells at their default history sizes, with no sharing between panes. For anyone who wants it shared, both shells can do it:
-
-```text
-# bash: append rather than overwrite, and save after every command
-shopt -s histappend
-PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
-
-# zsh: write each command as it runs, and read the others' as they go
-setopt INC_APPEND_HISTORY SHARE_HISTORY
-```
-
-On the Mac, the defaults come from `/etc/zshrc`, which sets `HISTSIZE=2000` and `SAVEHIST=1000`: zsh keeps the last thousand commands. That has been fine for me.
-
-Mike: TODO, how you search history: plain Ctrl-R, or Ctrl-R through [skim](/2026/11/04/why-i-use-rust-cli-tools/)?
+For both shells, and history in particular, I generally use the default settings.
 
 ## GNU APL
 

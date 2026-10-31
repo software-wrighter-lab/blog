@@ -67,7 +67,7 @@ Mike: TODO, the moment that made you switch from plain ssh.
 
 ## tmux: a session that survives the connection
 
-mosh keeps the connection alive; tmux keeps the work alive when the connection is gone anyway. Sessions live on the server, so a reboot of the MacBook, a new client, or a different machine can re-attach to the same running agent. That is what made [multi-day agent runs](/2026/04/19/saw-prolog-many-agents-self-hosting-mlpl/) on the Arch host practical: the agent keeps working whether or not anything is connected to it, and it can be inspected from wherever I am. One thing tmux complicates is shell history, since every pane has its own; [#5](/2026/11/01/why-i-use-gnu-tools/) covers keeping it.
+mosh keeps the connection alive; tmux keeps the work alive when the connection is gone anyway. Sessions live on the server, so a reboot of the MacBook, a new client, or a different machine can re-attach to the same running agent. That is what made [multi-day agent runs](/2026/04/19/saw-prolog-many-agents-self-hosting-mlpl/) on the Arch host practical: the agent keeps working whether or not anything is connected to it, and it can be inspected from wherever I am.
 
 Mike: TODO, how you lay out sessions and windows (one session per agent user? per project?), and whether you have any tmux configuration worth showing. There is no `~/.tmux.conf` on the Mac, so it may live on the Arch side or not exist.
 
@@ -80,4 +80,4 @@ Mike: TODO, optional: GNU screen, if you used it before tmux ([#5](/2026/11/01/w
 
 Each tool closes off one failure: iTerm2 the Mac end, mosh the network in between, tmux the connection itself.
 
-Mike: TODO, a closing in your words. The [next post](/2026/11/04/why-i-use-rust-cli-tools/) is about what runs at the prompt once you are there: fd, ripgrep, skim, dua and bat.
+Mike: TODO, a closing in your words. The next post is about what runs at the prompt once you are there: fd, ripgrep, skim, dua and bat.
