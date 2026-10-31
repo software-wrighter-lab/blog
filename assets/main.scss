@@ -2073,3 +2073,38 @@ dialog.lightbox .lightbox-close {
   .c1 { color: #626874; }
   .cs, .cp { color: #2f7a40; }
 }
+
+// A section heading with a symbol before it, as a bullet, drawn by CSS so
+// the heading's text, its anchor and the table of contents stay plain. The
+// class on the heading picks the symbol: {: .spider}, .witch-hat, .pumpkin,
+// .bat, .ghost or .black-cat. The black ones have a light-outlined version
+// for dark mode.
+.post-content h2.spider::before,
+.post-content h2.witch-hat::before,
+.post-content h2.pumpkin::before,
+.post-content h2.bat::before,
+.post-content h2.ghost::before,
+.post-content h2.black-cat::before {
+  content: "";
+  display: inline-block;
+  width: 1.9em;
+  height: 1.9em;
+  margin-right: 0.4em;
+  vertical-align: -0.55em;
+  background: center / contain no-repeat;
+}
+.post-content h2.spider::before { background-image: url("/assets/images/posts/black-widow.svg"); }
+.post-content h2.witch-hat::before { background-image: url("/assets/images/posts/halloween-hat.svg"); }
+.post-content h2.pumpkin::before { background-image: url("/assets/images/posts/halloween-pumpkin.svg"); }
+.post-content h2.bat::before { background-image: url("/assets/images/posts/halloween-bat.svg"); }
+.post-content h2.ghost::before { background-image: url("/assets/images/posts/halloween-ghost.svg"); }
+.post-content h2.black-cat::before { background-image: url("/assets/images/posts/halloween-cat.svg"); }
+@mixin halloween-dark {
+  .post-content h2.spider::before { background-image: url("/assets/images/posts/black-widow-dark.svg"); }
+  .post-content h2.bat::before { background-image: url("/assets/images/posts/halloween-bat-dark.svg"); }
+  .post-content h2.black-cat::before { background-image: url("/assets/images/posts/halloween-cat-dark.svg"); }
+}
+[data-theme="dark"] { @include halloween-dark; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { @include halloween-dark; }
+}
