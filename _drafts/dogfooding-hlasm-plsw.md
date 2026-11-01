@@ -101,7 +101,7 @@ It took a program that had to run, not just print, to find it. HLASM now sizes e
 ## Where it is headed
 {: .pos-right}
 
-<figure class="outdent-left">
+<figure class="outdent-left" style="width: 260px;">
 <img src="{{ '/assets/images/posts/hlasm-plsw-swtos-logos.webp' | relative_url }}" class="no-invert" alt="Three logos: the word HLASM in blue horizontal stripes; the PL/SW shield, PL in orange and SW in light blue; and the SWTOS badge, a chip reading Software Wrighter Tiny O/S">
 </figure>
 
