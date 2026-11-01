@@ -79,19 +79,19 @@ bash is GNU's shell, the Bourne Again SHell. With sh and ksh before it, it has b
 
 For both shells, and history in particular, I generally use the default settings.
 
-## GNU APL
+## GNU languages
 
-When I recreated [my first program](/2026/01/29/tbt-apl-horse-race/), a 1972 horse race in APL, it was GNU APL that ran it.
+When I recreated [my first program](/2026/01/29/tbt-apl-horse-race/), a 1972 horse race in APL, it was GNU APL that ran it. GNU's other languages are just as much a part of my toolbox: C and C++ through gcc and g++, Scheme through Guile, Prolog through GNU Prolog, numerical work in GNU Octave, text processing in gawk, and Common Lisp in GNU CLISP. For future embedded language projects I may use more of them as references, among them g77 for Fortran 77, GNU Pascal (gpc), and MIT/GNU Scheme.
 
 ## Candidate list: other GNU tools
 {: .pos-center}
 
 <!-- Mike: trim this list to the tools you actually use; it is a starting point, not a claim. -->
 
-- **Shell and text:** sed, grep, gawk, findutils (`find`, `xargs`), diffutils (`diff`, `cmp`), patch, tar, gzip, less, readline (the line editing in many REPLs)
+- **Shell and text:** sed, grep, findutils (`find`, `xargs`), diffutils (`diff`, `cmp`), patch, tar, gzip, less, readline (the line editing in many REPLs)
 - **Building:** make, gcc and g++, binutils (`ld`, `as`, `objdump`), gdb, autoconf, automake, libtool, m4, bison, texinfo
 - **Libraries:** glibc, gmp and mpfr (arbitrary precision, behind gcc), ncurses
-- **Everything else:** GnuPG (`gpg`) for signing and keys, wget, GNU parallel, GNU screen (before tmux), Guile
+- **Everything else:** GnuPG (`gpg`) for signing and keys, wget, GNU parallel, GNU screen (before tmux)
 - **Licenses:** the GPL itself, from the other side: my reva-fork keeps copyleft code out, so it can be used commercially
 
 Mike: TODO, a closing in your words.
