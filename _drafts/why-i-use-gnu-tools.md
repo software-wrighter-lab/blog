@@ -28,7 +28,8 @@ repo_urls:
      with the forward links to #7 and #8, which would 404 until those publish. No claim about why Apple switched, only the facts (3.2 is the last GPLv2 bash).
      The GNU list section is a candidate list for Mike to trim. Gutter beside "GNU commands on the Mac": Mike's logo-homebrew.jpg (Dropbox), no-invert. Gutter beside "bash, and zsh on the Mac": Mike's
      logo-golden-apple.jpg (Dropbox), 145px, no-invert. Gutter beside "GNU languages": Mike's
-     logo-modern-apl.jpg (Dropbox), 130px, no-invert. Lead image: Mike's block-gnu.jpg (Dropbox), white background
+     logo-modern-apl.jpg (Dropbox), 130px, no-invert. Gutter beside "Not every GNU tool":
+     Mike's logo-robot-arm.jpg (Dropbox), no-invert. Lead image: Mike's block-gnu.jpg (Dropbox), white background
      made transparent, color, no-invert. -->
 
 <img src="{{ '/assets/images/posts/block-gnu.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 230px;">
@@ -115,8 +116,12 @@ When I recreated [my first program](/2026/01/29/tbt-apl-horse-race/), a 1972 hor
 - **Licenses:** the GPL itself, from the other side: my reva-fork keeps copyleft code out, so it can be used commercially
 
 ## Not every GNU tool
-{: .pos-center}
+{: .pos-right}
 
-I do not like every tool on that list. I have been burned by Makefiles, where a recipe line must start with a tab and spaces that look the same break the build, so I prefer many of the newer build tools, lately [just](https://github.com/casey/just). And I have had portability problems between the Mac's BSD `sed` and GNU `sed` on Linux, so I wrote [sed-rs](https://github.com/sw-cli-tools/sed-rs) to behave the same on both.
+<figure class="outdent-left" style="width: 170px;">
+<img src="{{ '/assets/images/posts/logo-robot-arm.webp' | relative_url }}" class="no-invert" alt="A stylized robotic arm in silver and glowing blue on a dark navy background">
+</figure>
+
+I do not like every tool on that list. I have been burned by Makefiles, where a recipe line must start with a tab and spaces that look the same break the build, so I prefer many of the newer build tools, lately [just](https://github.com/casey/just), a command runner written in Rust. And I have had portability problems between the Mac's BSD `sed` and GNU `sed` on Linux, so I wrote [sed-rs](https://github.com/sw-cli-tools/sed-rs) to behave the same on both.
 
 GNU's commands are also my test bench. When I build a new programming language, I often test it by writing simple versions of GNU command-line tools in it, such as `cat`, `head`, `tail` and `wc`.
