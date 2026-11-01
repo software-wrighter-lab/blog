@@ -115,7 +115,7 @@ When I recreated [my first program](/2026/01/29/tbt-apl-horse-race/), a 1972 hor
 {: .pos-right}
 
 <figure class="outdent-left" style="width: 170px;">
-<img src="{{ '/assets/images/posts/logo-robot-arm.webp' | relative_url }}" class="no-invert" alt="A stylized robotic arm in silver and glowing blue on a dark navy background">
+<video src="{{ '/assets/videos/robot-arm-flexing.mp4' | relative_url }}" poster="{{ '/assets/images/posts/robot-arm-flexing-poster.webp' | relative_url }}" autoplay muted loop playsinline preload="auto" aria-label="A stylized robotic arm in silver and glowing blue flexing its elbow, on a dark navy background" style="width: 100%; height: auto; display: block;"></video>
 </figure>
 
 I do not like every tool on that list. I have been burned by Makefiles, where a recipe line must start with a tab and spaces that look the same break the build, so I prefer many of the newer build tools, lately [just](https://github.com/casey/just), a command runner written in Rust. And I have had portability problems between the Mac's BSD `sed` and GNU `sed` on Linux, so I wrote [sed-rs](https://github.com/sw-cli-tools/sed-rs) to behave the same on both.
