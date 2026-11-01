@@ -27,7 +27,8 @@ repo_urls:
      sharing. mac history is fine as is." Mike (2026-10-31): "cut the history elaboration. maybe say I generally use default settings?" Cut, along
      with the forward links to #7 and #8, which would 404 until those publish. No claim about why Apple switched, only the facts (3.2 is the last GPLv2 bash).
      The GNU list section is a candidate list for Mike to trim. Gutter beside "GNU commands on the Mac": Mike's logo-homebrew.jpg (Dropbox), no-invert. Gutter beside "bash, and zsh on the Mac": Mike's
-     logo-golden-apple.jpg (Dropbox), 240px, no-invert. Lead image: Mike's block-gnu.jpg (Dropbox), white background
+     logo-golden-apple.jpg (Dropbox), 240px, no-invert. Gutter beside "GNU languages": Mike's
+     logo-modern-apl.jpg (Dropbox), 190px, no-invert. Lead image: Mike's block-gnu.jpg (Dropbox), white background
      made transparent, color, no-invert. -->
 
 <img src="{{ '/assets/images/posts/block-gnu.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 230px;">
@@ -94,6 +95,11 @@ bash is GNU's shell, the Bourne Again SHell. With sh and ksh before it, it has b
 For both shells, and history in particular, I generally use the default settings.
 
 ## GNU languages
+{: .pos-left}
+
+<figure class="outdent-right" style="width: 190px;">
+<img src="{{ '/assets/images/posts/logo-modern-apl.webp' | relative_url }}" class="no-invert" alt="A round neon badge with two dots over a tilde, like a face, in rainbow rings on a dark background">
+</figure>
 
 When I recreated [my first program](/2026/01/29/tbt-apl-horse-race/), a 1972 horse race in APL, it was GNU APL that recreated it. GNU's other languages are just as much a part of my toolbox: C and C++ through gcc and g++, Scheme through Guile, Prolog through GNU Prolog, numerical work in GNU Octave, text processing in gawk, and Common Lisp in GNU CLISP. For future embedded language projects I may use more of them as references, among them g77 for Fortran 77, GNU Pascal (gpc), and MIT/GNU Scheme.
 
