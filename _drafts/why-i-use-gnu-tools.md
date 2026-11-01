@@ -51,7 +51,7 @@ The [prior post](/2026/10/31/why-i-use-my-tools/) in this series was about tools
 
 Emacs is one of the few bars on [my career timeline](/2026/10/01/tbt-timelines-of-tools/) that never ends: I have used it since 1989, vi since 1991 beside it, and for a few years around 2000 Emacs was my IDE as well as my editor. Since 2015 I have also used it as a shell, and since 2025 as an AI client.
 
-I still prefer it for literate programming. Org mode and its Babel, which runs code blocks in many languages inside one document, suit me better than other notebooks such as Jupyter's. That is also why I am porting Reva's notebooks, which ran on 32-bit Windows, to the Rust-based reva-fork, so they run on Arch Linux, in Chrome and on the Mac.
+I still prefer it for literate programming. Org mode and its Babel, which runs code blocks in many languages inside one document, suit me better than other notebooks such as Jupyter's. In the same spirit, I am porting Reva's notebooks, which ran on 32-bit Windows, to the Rust-based reva-fork, so they run on Arch Linux, in Chrome and on the Mac.
 
 ## Emacs as the place my tools plug in
 
