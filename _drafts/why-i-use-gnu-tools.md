@@ -8,6 +8,9 @@ abstract: "Fifth in the series on the tools I reach for, and the first about too
 series: "Why I Use"
 series_part: 5
 date: 2026-11-01 00:15:00 -0700
+repo_urls:
+  - url: "https://github.com/sw-cli-tools/sed-rs"
+    title: "sed-rs"
 ---
 
 <!-- DRAFT (2026-10-30), Mike: split from coding agents ("Why I Use ... GNU tools like Emacs (and go into the brew install to get
@@ -94,4 +97,9 @@ When I recreated [my first program](/2026/01/29/tbt-apl-horse-race/), a 1972 hor
 - **Everything else:** GnuPG (`gpg`) for signing and keys, wget, GNU parallel, GNU screen (before tmux)
 - **Licenses:** the GPL itself, from the other side: my reva-fork keeps copyleft code out, so it can be used commercially
 
-Mike: TODO, a closing in your words.
+## Not every GNU tool
+{: .pos-center}
+
+I do not like every tool on that list. I have been burned by Makefiles, where a recipe line must start with a tab and spaces that look the same break the build, so I prefer many of the newer build tools, lately [just](https://github.com/casey/just). And I have had portability problems between the Mac's BSD `sed` and GNU `sed` on Linux, so I wrote [sed-rs](https://github.com/sw-cli-tools/sed-rs) to behave the same on both.
+
+GNU's commands are also my test bench. When I build a new programming language, I often test it by writing simple versions of GNU command-line tools in it, such as `cat`, `head`, `tail` and `wc`.
