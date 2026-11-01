@@ -19,7 +19,7 @@ repo_urls:
      Facts: TBT #13 timelines (Emacs 1989-, vi 1991-, Emacs as IDE 1998-2003, Emacs shell 2015-); Saw #4 (Emacs packages for
      pjmai-rs, reg-rs); Saw #8 (Emacs glyph entry); AL #19 (X_eTaL's Emacs mode, Org Babel); TBT #1 (GNU APL); Saw #7 and AI Tools
      #4 (agents on Arch Linux, reached with mosh). Checked on this Mac (2026-10-30): Homebrew has coreutils 9.12, gcc, gnu-apl,
-     gnupg, m4, libtool, readline, ncurses, gmp, mpfr; Emacs.app is GNU Emacs 30.2. "Mike: TODO" marks his own reasons.
+     m4, libtool, readline, ncurses; Emacs.app is GNU Emacs 30.2. "Mike: TODO" marks his own reasons.
      bash section moved here from #7 at Mike's request (2026-10-30: "a discussion of bash and history goes somewhere, but note
      that I use zsh on Mac"; "isn't bash gnu? seems to fit better there than tmux"). Checked on this Mac (2026-10-30): login
      shell /bin/zsh, zsh 5.9; /bin/bash is 3.2.57; no Homebrew bash; ~/.zshrc sets no HIST* options, so /etc/zshrc's
@@ -78,8 +78,6 @@ brew install coreutils
 
 Homebrew installs them with a `g` prefix (`gls`, `gdate`, `gsed` for its separate `gnu-sed`) so they do not replace the system's, and scripts and habits from Linux then work the same on both.
 
-Mike: TODO, whether you put the unprefixed names first on your PATH (Homebrew's `gnubin` directories), and which differences bit you.
-
 ## Arch Linux and the GNU toolchain
 
 My agents now work on [Arch Linux](https://archlinux.org) machines, one user per agent, reached from the MacBook with mosh and tmux ([Saw #7](/2026/04/19/saw-prolog-many-agents-self-hosting-mlpl/), [AI Tools #4](/2026/05/16/pi-minimal-agent/)). There the GNU toolchain is the ordinary one: gcc and the rest of Arch's `base-devel` group for building, with GNU's userland, coreutils, bash and glibc, underneath. Arch itself is not all GNU, though. A Linux distribution is many projects under many licenses: the Linux kernel under GPLv2, GNU's tools under the GPL and LGPL, and plenty of packages under BSD, MIT, Apache and other permissive licenses. Arch records each package's license in the package itself (`pacman -Qi` shows it).
@@ -104,15 +102,13 @@ For both shells, and history in particular, I generally use the default settings
 
 When I recreated [my first program](/2026/01/29/tbt-apl-horse-race/), a 1972 horse race in APL, it was GNU APL that recreated it. GNU's other languages are just as much a part of my toolbox: C and C++ through gcc and g++, Scheme through Guile, Prolog through GNU Prolog, numerical work in GNU Octave, text processing in gawk, and Common Lisp in GNU CLISP. For future embedded language projects I may use more of them as references, among them g77 for Fortran 77, GNU Pascal (gpc), and MIT/GNU Scheme.
 
-## Candidate list: other GNU tools
+## Other GNU tools I use
 {: .pos-center}
-
-<!-- Mike: trim this list to the tools you actually use; it is a starting point, not a claim. -->
 
 - **Shell and text:** sed, grep, findutils (`find`, `xargs`), diffutils (`diff`, `cmp`), patch, tar, gzip, less, readline (the line editing in many REPLs)
 - **Building:** make, gcc and g++, binutils (`ld`, `as`, `objdump`), gdb, autoconf, automake, libtool, m4, bison, texinfo
-- **Libraries:** glibc, gmp and mpfr (arbitrary precision, behind gcc), ncurses
-- **Everything else:** GnuPG (`gpg`) for signing and keys, wget, GNU parallel, GNU screen (before tmux)
+- **Libraries:** glibc, ncurses
+- **Everything else:** wget, GNU parallel, and GNU screen, which I used before switching to tmux
 - **Licenses:** the GPL itself, from the other side: my reva-fork keeps copyleft code out, so it can be used commercially
 
 ## Not every GNU tool
