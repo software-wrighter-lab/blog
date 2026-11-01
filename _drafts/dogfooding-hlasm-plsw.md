@@ -32,7 +32,8 @@ repo_urls:
      migration work started; phases 0-5). sw-tos justfile (cor24-asm, plsw.lgo pipeline). Both repos' default branch is dev.
      Lead image: Mike's block-puppy-dogfood.jpg (Dropbox), NightCafe credit bar cropped off the bottom;
      monochrome block print, no-invert. Moved to 11/01 (Mike, 2026-10-31). Gutter beside "Where it
-     is headed": Mike's screenshot (Dropbox Screenshots, 2026-11-01 9.45.53 AM), the word HLASM in IBM-logo-style stripes, trimmed. -->
+     is headed": Mike's screenshot (Dropbox Screenshots, 2026-11-01 9.45.53 AM), the word HLASM in IBM-logo-style stripes, trimmed. Gutter beside "The tiny-C demos
+     go first": Mike's logo-c-3d.jpg (Dropbox), 140px, no-invert. -->
 
 <img src="{{ '/assets/images/posts/block-puppy-dogfood.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
@@ -82,6 +83,11 @@ hlasm.s (hand-written COR24 assembly)
 That takes the host C compiler out of the chain: every stage after `hlasm.s` is built on COR24. The port is mechanical, each C function becoming one HLASM routine with the same calling convention, so it can be checked against `tc24r`'s output a function at a time. And PL/SW, a real compiler, becomes the program that dogfoods HLASM.
 
 ## The tiny-C demos go first
+{: .pos-left}
+
+<figure class="outdent-right" style="width: 140px;">
+<img src="{{ '/assets/images/posts/logo-c-3d.webp' | relative_url }}" class="no-invert" alt="A white letter C on a blue hexagon">
+</figure>
 
 Before porting a compiler, the method has to work on something smaller. HLASM's current saga ports the tiny-C demos, the example programs that ship with `tc24r`, from C to HLASM, building a shared library of macros (routine entry and exit, calls, UART output, data) as it goes. Its steps: make structured control flow assemble, audit HLASM's limits, add an end-to-end harness that runs HLASM, assembles its output and runs the result, survey the demos for recurring idioms, build the macro library, port the demos, and show C, `tc24r`'s assembly and HLASM side by side.
 
