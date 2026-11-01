@@ -4,7 +4,7 @@ title: "Why I Use #5: GNU Tools, From Emacs to Arch Linux"
 categories: [tools, editors]
 tags: [why-i-use, gnu, emacs, elisp, coreutils, homebrew, arch-linux, bash, zsh, gcc, gnu-apl, org-mode, free-software]
 keywords: "why I use GNU tools, Emacs since 1989, GNU coreutils on macOS, Homebrew coreutils, Arch Linux base-devel, bash, zsh on macOS, gcc, GNU APL, Emacs packages for CLI tools, Emacs glyph input"
-abstract: "Fifth in the series on the tools I reach for, and the first about tools I did not write: GNU's. Emacs, which I have used since 1989 as an editor, for a while as an IDE, as a shell, and as the place my own command-line tools plug in; GNU coreutils installed on the Mac with Homebrew, so its commands behave as they do on Linux; Arch Linux, where my agents now work, with gcc and the rest of the GNU toolchain; bash, and zsh on the Mac instead; and GNU APL."
+abstract: "Fifth in the series on the tools I reach for, and the first about tools I did not write: GNU's. Emacs, which I have used since 1989 as an editor, for a while as an IDE, as a shell, and as the place my own command-line tools plug in; GNU coreutils installed on the Mac with Homebrew, so its commands behave as they do on Linux; Arch Linux, where my agents now work, with gcc and the rest of the GNU toolchain; bash, and zsh on the Mac instead; and GNU's languages, from GNU APL to Guile, GNU Prolog and Octave."
 series: "Why I Use"
 series_part: 5
 date: 2026-11-01 00:15:00 -0700
