@@ -32,7 +32,8 @@ repo_urls:
      migration work started; phases 0-5). sw-tos justfile (cor24-asm, plsw.lgo pipeline). Both repos' default branch is dev.
      Lead image: Mike's block-puppy-dogfood.jpg (Dropbox), NightCafe credit bar cropped off the bottom;
      monochrome block print, no-invert. Moved to 11/01 (Mike, 2026-10-31). Gutter beside "Where it
-     is headed": Mike's screenshot (Dropbox Screenshots, 2026-11-01 9.45.53 AM), the word HLASM in IBM-logo-style stripes, trimmed. Gutter beside "The tiny-C demos
+     is headed": Mike's screenshot (Dropbox Screenshots, 2026-11-01 9.45.53 AM), the word HLASM in IBM-logo-style stripes, trimmed;
+     now a montage with logo-pl-sw.png and logo-sw-tos.jpg (Dropbox) on white. Gutter beside "The tiny-C demos
      go first": Mike's logo-c-3d.jpg (Dropbox), 140px, no-invert. -->
 
 <img src="{{ '/assets/images/posts/block-puppy-dogfood.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
@@ -101,7 +102,7 @@ It took a program that had to run, not just print, to find it. HLASM now sizes e
 {: .pos-right}
 
 <figure class="outdent-left">
-<img src="{{ '/assets/images/posts/hlasm-logo.webp' | relative_url }}" class="no-invert" alt="The word HLASM in blue horizontal stripes, in the style of IBM's striped logo">
+<img src="{{ '/assets/images/posts/hlasm-plsw-swtos-logos.webp' | relative_url }}" class="no-invert" alt="Three logos: the word HLASM in blue horizontal stripes; the PL/SW shield, PL in orange and SW in light blue; and the SWTOS badge, a chip reading Software Wrighter Tiny O/S">
 </figure>
 
 Two loops close at the top of the chain:
