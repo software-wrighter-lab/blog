@@ -31,7 +31,8 @@ repo_urls:
      COR24 assembly, output plain .s over UART). sw-cor24-plsw dev f6d2d64: docs/migrate-from-c-to-hlasm.md (plan, 2026-10-30, no
      migration work started; phases 0-5). sw-tos justfile (cor24-asm, plsw.lgo pipeline). Both repos' default branch is dev.
      Lead image: Mike's block-puppy-dogfood.jpg (Dropbox), NightCafe credit bar cropped off the bottom;
-     monochrome block print, no-invert. Moved to 11/01 (Mike, 2026-10-31). -->
+     monochrome block print, no-invert. Moved to 11/01 (Mike, 2026-10-31). Gutter beside "Where it
+     is headed": Mike's screenshot (Dropbox Screenshots, 2026-11-01 9.45.53 AM), the word HLASM in IBM-logo-style stripes, trimmed. -->
 
 <img src="{{ '/assets/images/posts/block-puppy-dogfood.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
@@ -91,6 +92,11 @@ The first step had to fix something that had been wrong all along. HLASM lowered
 It took a program that had to run, not just print, to find it. HLASM now sizes each jump in a first pass and emits a short `bra` when the target is in range, or saves a register around a long `la`/`jmp` when it is not ([the design](https://github.com/sw-embed/sw-cor24-hlasm/blob/dev/docs/structured-jump-relaxation.md)). That is the whole argument for dogfooding in one bug: a test that checks the text a tool writes is not the same as a test that runs what it wrote.
 
 ## Where it is headed
+{: .pos-right}
+
+<figure class="outdent-left">
+<img src="{{ '/assets/images/posts/hlasm-logo.webp' | relative_url }}" class="no-invert" alt="The word HLASM in blue horizontal stripes, in the style of IBM's striped logo">
+</figure>
 
 Two loops close at the top of the chain:
 
