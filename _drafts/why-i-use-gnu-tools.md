@@ -81,7 +81,7 @@ For both shells, and history in particular, I generally use the default settings
 
 ## GNU languages
 
-When I recreated [my first program](/2026/01/29/tbt-apl-horse-race/), a 1972 horse race in APL, it was GNU APL that ran it. GNU's other languages are just as much a part of my toolbox: C and C++ through gcc and g++, Scheme through Guile, Prolog through GNU Prolog, numerical work in GNU Octave, text processing in gawk, and Common Lisp in GNU CLISP. For future embedded language projects I may use more of them as references, among them g77 for Fortran 77, GNU Pascal (gpc), and MIT/GNU Scheme.
+When I recreated [my first program](/2026/01/29/tbt-apl-horse-race/), a 1972 horse race in APL, it was GNU APL that recreated it. GNU's other languages are just as much a part of my toolbox: C and C++ through gcc and g++, Scheme through Guile, Prolog through GNU Prolog, numerical work in GNU Octave, text processing in gawk, and Common Lisp in GNU CLISP. For future embedded language projects I may use more of them as references, among them g77 for Fortran 77, GNU Pascal (gpc), and MIT/GNU Scheme.
 
 ## Candidate list: other GNU tools
 {: .pos-center}
