@@ -27,8 +27,8 @@ repo_urls:
      sharing. mac history is fine as is." Mike (2026-10-31): "cut the history elaboration. maybe say I generally use default settings?" Cut, along
      with the forward links to #7 and #8, which would 404 until those publish. No claim about why Apple switched, only the facts (3.2 is the last GPLv2 bash).
      The GNU list section is a candidate list for Mike to trim. Gutter beside "GNU commands on the Mac": Mike's logo-homebrew.jpg (Dropbox), no-invert. Gutter beside "bash, and zsh on the Mac": Mike's
-     logo-golden-apple.jpg (Dropbox), 240px, no-invert. Gutter beside "GNU languages": Mike's
-     logo-modern-apl.jpg (Dropbox), 190px, no-invert. Lead image: Mike's block-gnu.jpg (Dropbox), white background
+     logo-golden-apple.jpg (Dropbox), 145px, no-invert. Gutter beside "GNU languages": Mike's
+     logo-modern-apl.jpg (Dropbox), 130px, no-invert. Lead image: Mike's block-gnu.jpg (Dropbox), white background
      made transparent, color, no-invert. -->
 
 <img src="{{ '/assets/images/posts/block-gnu.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 230px;">
@@ -65,7 +65,7 @@ Emacs is where my own command-line tools meet. [pjmai-rs and reg-rs both have Em
 ## GNU commands on the Mac
 {: .pos-left}
 
-<figure class="outdent-right" style="width: 300px;">
+<figure class="outdent-right" style="width: 215px;">
 <img src="{{ '/assets/images/posts/logo-homebrew.webp' | relative_url }}" class="no-invert" alt="A frosted beer mug with HOMEBREW in metal letters across it and a silver apple on the foam">
 </figure>
 
@@ -86,7 +86,7 @@ My agents now work on [Arch Linux](https://archlinux.org) machines, one user per
 ## bash, and zsh on the Mac
 {: .pos-right}
 
-<figure class="outdent-left" style="width: 240px;">
+<figure class="outdent-left" style="width: 145px;">
 <img src="{{ '/assets/images/posts/logo-golden-apple.webp' | relative_url }}" class="no-invert" alt="A polished silver apple glowing against a golden background">
 </figure>
 
@@ -97,7 +97,7 @@ For both shells, and history in particular, I generally use the default settings
 ## GNU languages
 {: .pos-left}
 
-<figure class="outdent-right" style="width: 190px;">
+<figure class="outdent-right" style="width: 130px;">
 <img src="{{ '/assets/images/posts/logo-modern-apl.webp' | relative_url }}" class="no-invert" alt="A round neon badge with two dots over a tilde, like a face, in rainbow rings on a dark background">
 </figure>
 
