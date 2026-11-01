@@ -26,7 +26,8 @@ repo_urls:
      HISTSIZE=2000 / SAVEHIST=1000 apply (~/.zsh_history: 1054 lines, at the cap). Mike (2026-10-31): "I use bash on Arch. default size, no
      sharing. mac history is fine as is." Mike (2026-10-31): "cut the history elaboration. maybe say I generally use default settings?" Cut, along
      with the forward links to #7 and #8, which would 404 until those publish. No claim about why Apple switched, only the facts (3.2 is the last GPLv2 bash).
-     The GNU list section is a candidate list for Mike to trim. Lead image: Mike's block-gnu.jpg (Dropbox), white background
+     The GNU list section is a candidate list for Mike to trim. Gutter beside "GNU commands on the Mac": Mike's logo-homebrew.jpg (Dropbox), no-invert. Gutter beside "bash, and zsh on the Mac": Mike's
+     logo-golden-apple.jpg (Dropbox), 240px, no-invert. Lead image: Mike's block-gnu.jpg (Dropbox), white background
      made transparent, color, no-invert. -->
 
 <img src="{{ '/assets/images/posts/block-gnu.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 230px;">
@@ -61,6 +62,11 @@ I still prefer it for literate programming. Org mode and its Babel, which runs c
 Emacs is where my own command-line tools meet. [pjmai-rs and reg-rs both have Emacs packages](/2026/03/29/saw-pjmai-reg-emacs-all-together-now/), so switching projects and running regression tests happen in the editor as well as the terminal. X_eTaL has an Emacs mode that highlights and draws its notation, with Org Babel support so X_eTaL runs inside literate documents ([Array Languages #19](/2026/10/27/array-languages-xetal-tooling/)). And when my languages need glyphs, for APL, Tuplet and X_eTaL, Emacs has its own input methods for them: TeX-style and Agda-style mappings and a custom Quail input method ([Saw #8](/2026/04/26/saw-tuplet-smalltalk-forth-from-forth/)).
 
 ## GNU commands on the Mac
+{: .pos-left}
+
+<figure class="outdent-right" style="width: 300px;">
+<img src="{{ '/assets/images/posts/logo-homebrew.webp' | relative_url }}" class="no-invert" alt="A frosted beer mug with HOMEBREW in metal letters across it and a silver apple on the foam">
+</figure>
 
 macOS ships BSD versions of the basic commands, which differ from GNU's in their options and their output. So on the Mac I install GNU's with Homebrew:
 
@@ -77,6 +83,11 @@ Mike: TODO, whether you put the unprefixed names first on your PATH (Homebrew's 
 My agents now work on [Arch Linux](https://archlinux.org) machines, one user per agent, reached from the MacBook with mosh and tmux ([Saw #7](/2026/04/19/saw-prolog-many-agents-self-hosting-mlpl/), [AI Tools #4](/2026/05/16/pi-minimal-agent/)). There the GNU toolchain is the ordinary one: gcc and the rest of Arch's `base-devel` group for building, with GNU's userland, coreutils, bash and glibc, underneath. Arch itself is not all GNU, though. A Linux distribution is many projects under many licenses: the Linux kernel under GPLv2, GNU's tools under the GPL and LGPL, and plenty of packages under BSD, MIT, Apache and other permissive licenses. Arch records each package's license in the package itself (`pacman -Qi` shows it).
 
 ## bash, and zsh on the Mac
+{: .pos-right}
+
+<figure class="outdent-left" style="width: 240px;">
+<img src="{{ '/assets/images/posts/logo-golden-apple.webp' | relative_url }}" class="no-invert" alt="A polished silver apple glowing against a golden background">
+</figure>
 
 bash is GNU's shell, the Bourne Again SHell. With sh and ksh before it, it has been on [my timeline](/2026/10/01/tbt-timelines-of-tools/) since 1991, and it is the shell on the Arch machines. On the Mac I use zsh, which is not GNU. It has been the macOS default since Catalina in 2019, and the bash Apple still ships is version 3.2, from 2007: the last release under GPLv2. Later versions moved to GPLv3, and Apple's copy stayed where it was. Homebrew has a current one (`brew install bash`) for scripts that need it.
 
