@@ -25,9 +25,9 @@ repo_urls:
      Wrighter channel, not used in any other post). emacs-agent (2025-09 to 2025-11): elisp front end, Rust back end
      (open_agent_cli_fork) under development, working elisp-only Gemini MCP prototype, org-mode transcripts, TOON format claims
      60% fewer tokens (the README's figure, not measured here); LESSONS_LEARNED.md. Mike: TODO marks his own words/status.
-     Lead image: placeholder until Mike supplies one. -->
+     Lead image: Mike's Emacs Dired screenshot (2026-11-02), top row cropped, no-invert. -->
 
-<img src="{{ '/assets/images/posts/placeholder-ai-tools-emacs-ai.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/emacs-dired-home.webp' | relative_url }}" class="post-marker no-invert" alt="An Emacs Dired buffer listing a home directory" style="width: 205px;">
 
 [Why I Use #5](/2026/11/01/why-i-use-gnu-tools/) mentioned that since 2025 I have also used Emacs as an AI client. This post is how: two projects, a gateway that gives Emacs one door to every model, and an agent that lives inside Emacs.
 
