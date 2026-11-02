@@ -108,3 +108,5 @@ I have no measurements to justify these choices. They are what I have settled in
 | Trying again, after it passed my Rust puzzle | Antigravity |
 
 I still do not rely on local models to produce anything. But I am still planning a local team of AI coding agents running on distributed local CPUs, and it is closer than it was: recent work such as [FreeToken](https://arxiv.org/abs/2608.16157), [Strata](https://simeononsecurity.com/articles/strata-opencode-local-coding-agent-16gb/) and [Avalon](https://github.com/freriadoc/Avalon) lets decent coding models, built on mixture-of-experts and speculative decoding, run on the smaller GPUs I have. I expect to use it for toy projects first, and then perhaps for daily development.
+
+The goal for that team is that it gets better. I want the local agents to learn from feedback nightly, by fine-tuning on the day's work, toward a self-improving virtual development team. Someday that learning may move from nightly postmortems to continuous learning, the subject of my [Towards Continuous LLM Learning](/series/#towards-continuous-llm-learning) series.
