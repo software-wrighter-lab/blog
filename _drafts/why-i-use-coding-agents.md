@@ -60,11 +60,17 @@ The [prior post](/2026/11/01/why-i-use-gnu-tools/) in this series was about GNU'
 
 ## One workflow, several agents
 
-I run every agent the same way: the same machine, the same project, the same shell and tmux session, so what changes between them is the agent and not the setup ([AI Tools #4](/2026/05/16/pi-minimal-agent/)). That makes them easier to compare, and it lets several work at once. [All Together Now](/2026/04/12/saw-agent-coordination-fuzzit-vendoring/) coordinated Claude Code and OpenCode agents in one web UI, and the agents now work on Arch Linux machines, one user per agent.
+I run every agent the same way: the same machine, the same project, the same shell and tmux session. What changes between them is the agent and not the setup ([AI Tools #4](/2026/05/16/pi-minimal-agent/)), which makes them easier to compare and lets several work at once.
+
+[All Together Now](/2026/04/12/saw-agent-coordination-fuzzit-vendoring/) coordinated Claude Code and OpenCode agents in one web UI. The agents now work on Arch Linux machines, one user per agent.
 
 ## Claude Code
 
-Claude Code is the one I have used longest, since 2025, and the one I use most. It was the agent that restarted the stuck sound-effects project in [AI Tools #8](/2026/10/29/ai-tools-domain-expert-skill/), where February's attempt with another agent had stalled, and Claude in the cloud worked on several repositories at once to move [the Reva and CoSy forks](/2026/10/25/saw-reva-fork-cosy/) over one weekend. Two things matter most in how I use it now: skills, sets of instructions an agent loads for one kind of task, and agents running in the cloud in parallel.
+Claude Code is the one I have used longest, since 2025, and the one I use most.
+
+It restarted the stuck sound-effects project in [AI Tools #8](/2026/10/29/ai-tools-domain-expert-skill/), where February's attempt with another agent had stalled. Claude in the cloud worked on several repositories at once to move [the Reva and CoSy forks](/2026/10/25/saw-reva-fork-cosy/) over one weekend.
+
+Two things matter most in how I use it now: skills, sets of instructions an agent loads for one kind of task, and agents running in the cloud in parallel.
 
 I use Claude Code to implement most of my software projects.
 
@@ -87,7 +93,11 @@ Those are typical forms; each instrument's exact commands are in its programming
 
 ## Gemini, now Antigravity
 
-I have used the Gemini CLI in the past, but preferred the other CLIs over it. Now Google has replaced it with Antigravity, and I am trying it again. It has already passed one test that matters to me: I keep a Rust puzzle, which I have not published, that I use to evaluate open-weight models, and Antigravity solved it where many open models cannot. On June 18, 2026 the Gemini CLI [stopped serving requests](https://github.com/google-gemini/gemini-cli/discussions/28017) for individual accounts (Google AI Pro, Google AI Ultra and the free tier), with the Antigravity CLI as its replacement. Enterprise Gemini Code Assist licenses and API-key use were not affected.
+I have used the Gemini CLI in the past, but preferred the other CLIs over it. Now Google has replaced it with Antigravity, and I am trying it again.
+
+It has already passed one test that matters to me. I keep a Rust puzzle, which I have not published, that I use to evaluate open-weight models, and Antigravity solved it where many open models cannot.
+
+On June 18, 2026 the Gemini CLI [stopped serving requests](https://github.com/google-gemini/gemini-cli/discussions/28017) for individual accounts (Google AI Pro, Google AI Ultra and the free tier), with the Antigravity CLI as its replacement. Enterprise Gemini Code Assist licenses and API-key use were not affected.
 
 What that means in practice:
 
@@ -99,7 +109,9 @@ The models underneath are still Gemini.
 
 ## OpenCode, with Z.ai's GLM
 
-[OpenCode](https://opencode.ai) is the open one: an agent that can drive many models. I use it with [Z.ai](https://z.ai)'s GLM models on its developer plan. It wrote the first attempt at the sound-effects project with GLM-4.7 in February, it ran beside Claude Code under All Together Now with GLM-5, and because it can point at any model, it is the harness I used to test [local models in a plan, execute and review loop](/2026/09/09/ai-tools-local-llm-loop-model-evaluation/). It is also the architectural reference for [the coding agent I wrote in MLPL](/2026/09/16/ai-tools-coding-agent-in-mlpl/).
+[OpenCode](https://opencode.ai) is the open one: an agent that can drive many models. I use it with [Z.ai](https://z.ai)'s GLM models on its developer plan.
+
+It wrote the first attempt at the sound-effects project with GLM-4.7 in February, and it ran beside Claude Code under All Together Now with GLM-5. Because it can point at any model, it is the harness I used to test [local models in a plan, execute and review loop](/2026/09/09/ai-tools-local-llm-loop-model-evaluation/). It is also the architectural reference for [the coding agent I wrote in MLPL](/2026/09/16/ai-tools-coding-agent-in-mlpl/).
 
 Today I use OpenCode with Z.ai's GLM-5.x models for junior coding tasks, for updating web sites, for keeping track of GitHub commits and pull requests, and sometimes for [vibe-maintenance](/2026/04/29/personal-software-vibe-maintenance/).
 
@@ -119,13 +131,29 @@ Local models do plenty of other work for me, just not coding yet. I download ope
 
 ## NightCafe, in the cloud
 
-For images and video I also use [NightCafe](https://creator.nightcafe.studio/explore), a site that hosts many, many image and video models in the cloud. I use it for text to image, image editing and image to video, and Nano Banana 2.1 most of all. Two of its features matter to me: consistent characters, which keep the same character across many images, and templates, both the community's and custom ones of my own.
+For images and video I also use [NightCafe](https://creator.nightcafe.studio/explore), a site that hosts many, many image and video models in the cloud. I use it for text to image, image editing and image to video, and Nano Banana 2.1 most of all.
+
+Two of its features matter to me: consistent characters, which keep the same character across many images, and templates, both the community's and custom ones of my own.
 
 ## Local coding agents
 
-I do run coding agents against local models. The agents are OpenCode, [Pi](/2026/05/16/pi-minimal-agent/), and my own: [emacs-agent](https://github.com/softwarewrighter/emacs-agent), an agent inside Emacs that keeps every conversation as an Org transcript, working in Emacs Lisp with a Rust back end in progress, and [mlplcode](/2026/09/16/ai-tools-coding-agent-in-mlpl/), written in sw-MLPL with Rust underneath, with X_eTaL likely next. [emacs-ai-api](https://github.com/softwarewrighter/emacs-ai-api) gives Emacs one gateway to cloud and local models alike. They reach the models through Ollama, llama.cpp, vLLM, FreeToken and Strata, and [AI Tools #6](/2026/09/09/ai-tools-local-llm-loop-model-evaluation/) measured some of them. Even so, I still do not rely on local models to produce code or documentation. But I am still planning a local team of AI coding agents running on distributed local CPUs, and it is closer than it was: recent work such as [FreeToken](https://arxiv.org/abs/2608.16157), [Strata](https://github.com/Niko1221/Strata) and [Avalon](https://github.com/freriadoc/Avalon) lets decent coding models, built on mixture-of-experts and speculative decoding, run on the smaller GPUs I have. FreeToken and Strata are optimizations for NVIDIA GPUs, where a card's VRAM is separate from system memory and the model has to be split between them; a Mac's unified memory does not need them.
+I do run coding agents against local models. The agents are:
 
-The problem they solve is bandwidth. A GPU reads its own VRAM fast, but everything that does not fit there lives in system RAM, on the far side of a PCIe bus that is much slower than either memory. My host is PCIe 3, which caps every card at about 16 GB/s, or half that for a card with only eight lanes. Approximate peak figures:
+- **OpenCode** and [Pi](/2026/05/16/pi-minimal-agent/)
+- **[emacs-agent](https://github.com/softwarewrighter/emacs-agent)**, my agent inside Emacs, which keeps every conversation as an Org transcript; it is written in Emacs Lisp, with a Rust back end in progress
+- **[mlplcode](/2026/09/16/ai-tools-coding-agent-in-mlpl/)**, written in sw-MLPL with Rust underneath, with X_eTaL likely next
+
+[emacs-ai-api](https://github.com/softwarewrighter/emacs-ai-api) gives Emacs one gateway to cloud and local models alike. The agents reach the models through Ollama, llama.cpp, vLLM, FreeToken and Strata, and [AI Tools #6](/2026/09/09/ai-tools-local-llm-loop-model-evaluation/) measured some of them.
+
+Even so, I still do not rely on local models to produce code or documentation.
+
+But I am still planning a local team of AI coding agents running on distributed local CPUs, and it is closer than it was. Recent work such as [FreeToken](https://arxiv.org/abs/2608.16157), [Strata](https://github.com/Niko1221/Strata) and [Avalon](https://github.com/freriadoc/Avalon) lets decent coding models, built on mixture-of-experts and speculative decoding, run on the smaller GPUs I have.
+
+FreeToken and Strata are optimizations for NVIDIA GPUs, where a card's VRAM is separate from system memory and the model has to be split between them; a Mac's unified memory does not need them.
+
+The problem they solve is bandwidth. A GPU reads its own VRAM fast, but everything that does not fit there lives in system RAM, on the far side of a PCIe bus that is much slower than either memory.
+
+My host is PCIe 3, which caps every card at about 16 GB/s, or half that for a card with only eight lanes. Approximate peak figures:
 
 | Path | Bandwidth |
 |---|---|
@@ -152,7 +180,9 @@ That is what FreeToken and Strata work around. A mixture-of-experts model touche
 
 On unified memory, the CPU and GPU share one pool, and there is nothing to copy. But Apple Silicon has its own bandwidth tiers. I ran out of room on my M3 Pro with 18 GB, where macOS lets the GPU use only about two thirds of memory, when I went looking for a bigger model.
 
-Researching it, I found that the M3 Pro reads its memory at about 150 GB/s, less than the M2 Pro before it. The older M1 Max reads at about 400 GB/s and comes with up to 64 GB. Refurbished, the two cost about the same, as of this fall: around $1,200 to $1,400 for a 14-inch M3 Pro with 18 GB, and around $1,350 to $1,400 for an M1 Max with 64 GB.
+Researching it, I found that the M3 Pro reads its memory at about 150 GB/s, less than the M2 Pro before it. The older M1 Max reads at about 400 GB/s and comes with up to 64 GB.
+
+Refurbished, the two cost about the same, as of this fall: around $1,200 to $1,400 for a 14-inch M3 Pro with 18 GB, and around $1,350 to $1,400 for an M1 Max with 64 GB.
 
 I ended up with the M1 Max. Its 64 GB seems big enough to run decent coding models that did not fit on my 16 GB or 24 GB NVIDIA cards.
 
