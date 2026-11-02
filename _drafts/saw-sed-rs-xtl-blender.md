@@ -96,7 +96,7 @@ The other saw is 3D modeling with X_eTaL and its Blender extension. X_eTaL build
 - **[An IBM 1130](https://github.com/softwarewrighter/s1130-3D),** the 1131 CPU desk console, with its data switches, buttons, panels and a hatch that opens.
 - **[An IBM 5100](https://github.com/softwarewrighter/s5100-3D),** the portable from the mid-1970s, built up in measured, reference-checked steps.
 - **[The consoles](https://github.com/softwarewrighter/console-3D):** the IBM 1053 console of the 1130 and 1800, the IBM 2741 APL terminal, and the IBM 5471, the printer-keyboard of the System/3. All three are built on the Selectric typing mechanism, so they share their construction helpers. A TRS-80 is to be added.
-- **[Lucy's rack](https://github.com/softwarewrighter/lucy-3D),** a 25U server rack modeled from photos of [my home AI cluster](/2026/02/28/lucy-20-percent-ai-cluster-upgrade/), in three views: empty, early (three servers) and later (more servers).
+- **[Lucy's rack](https://github.com/softwarewrighter/lucy-3D),** a 25U server rack modeled from photos of [my home AI cluster](/2026/02/28/lucy-20-percent-ai-cluster-upgrade/), in three views: empty, early (three servers) and later (more servers). It does not yet model the rail slides the servers ride on.
 
 The goal is higher-fidelity models for two places. The first is the virtual Computer History Museum on [my research campus](/2026/09/12/software-wrighter-research-campus/). The second is [sw-apl](https://github.com/sw-vibe-coding/sw-apl), where I plan to show four APLs, each with the machine it ran on, which is where the console models come in:
 
