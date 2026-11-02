@@ -83,3 +83,5 @@ rN      GRID → TOUR → END
 - A section can be pinned to a side so its figure has an open margin: put `{: .pos-left}`, `{: .pos-center}` or `{: .pos-right}`
   on the line after its `##` heading; the sections after it keep alternating from there. Keep neighbors alternating, and give a
   section with no gutter image the center.
+- A long section can continue on the next side without a heading: wrap its later paragraphs in
+  `<section class="stagger" markdown="1">` … `</section>`; the stagger script gives it the next position and the cycle goes on.
