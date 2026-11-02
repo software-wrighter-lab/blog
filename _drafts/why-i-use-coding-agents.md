@@ -159,11 +159,13 @@ Most of my workstations and rack servers are PCIe 3: HPE ProLiant Gen8, Gen9 and
 |---|---|
 | PCIe 3.0, x16 (most of my machines) / x8 | about 16 / 8 GB/s |
 | PCIe 4.0 / 5.0, x16 | about 32 / 64 GB/s |
-| System RAM, dual-channel DDR4 / DDR5 | about 50 / 90 GB/s |
-| Apple M3 Pro unified memory | about 150 GB/s |
+| System RAM, DDR3, four channels (Gen8) | about 40 to 50 GB/s per socket |
+| System RAM, DDR4, four or six channels (T7910, P520, Gen9, Gen10) | about 70 to 130 GB/s per socket |
+| Apple M3 Pro unified memory, LPDDR5 | about 150 GB/s |
 | Tesla P4 / A2 VRAM | about 190 / 200 GB/s |
+| System RAM, DDR4-3200, eight channels (Gen10 Plus) | about 200 GB/s |
 | GTX 1660 Super VRAM | about 340 GB/s |
-| Apple M1 Max unified memory | about 400 GB/s |
+| Apple M1 Max unified memory, LPDDR5 | about 400 GB/s |
 | RTX 5060 Ti VRAM | about 450 GB/s |
 | RTX 4070 VRAM | about 500 GB/s |
 | RTX 3090 VRAM | about 940 GB/s |
