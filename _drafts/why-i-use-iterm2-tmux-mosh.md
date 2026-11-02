@@ -19,9 +19,9 @@ date: 2026-11-03 00:15:00 -0800
      dropped Wi-Fi; tmux so agent sessions survive disconnects and re-attach from any client; multi-day runs).
      Checked on this Mac (2026-10-30): iTerm2 3.7.4, tmux 3.6b and mosh 1.4.0 (both Homebrew). No ~/.tmux.conf.
      iTerm2 is NOT on the TBT #13 timeline: its start year is Mike: TODO. Tool behavior described is each project's documented
-     behavior, not a measurement. Lead image: placeholder, due 2026-11-03. "Mike: TODO" marks his own reasons. -->
+     behavior, not a measurement. Lead image: Mike's block-four-panes.jpg (Dropbox), no-invert. "Mike: TODO" marks his own reasons. -->
 
-<img src="{{ '/assets/images/posts/placeholder-why-i-use-iterm2-tmux-mosh.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-four-panes.webp' | relative_url }}" class="post-marker no-invert" alt="A block print of a monitor split into four terminal panes, with racks and cables behind it" style="width: 205px;">
 
 The [prior post](/2026/11/02/why-i-use-coding-agents/) in this series was about coding agents. This one is about what they run inside: the terminal stack between my MacBook and the Arch Linux machines where the agents work. Three tools, each covering a different way a session can die.
 
