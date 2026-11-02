@@ -25,9 +25,9 @@ date: 2026-11-04 00:15:00 -0800
      coreutils' du). Checked on this Mac (2026-10-30): fd 10.4.2 and dua 2.34.0 from cargo (~/.cargo/bin); ripgrep 15.2.0 from
      Homebrew, first on PATH, with a second rg in ~/.cargo/bin; just 1.58.0 from Homebrew. Not installed: eza, bat, zoxide, fzf,
      dust, hyperfine, tokei, starship, delta, skim (sk). Defaults described (gitignore, hidden files, dua i) are each project's documented
-     behavior, not measurements; no speed claims without a measurement; "faster for me" is Mike's own (2026-10-30), about him at the CLI, not a benchmark. Lead image: placeholder, due 2026-11-04. -->
+     behavior, not measurements; no speed claims without a measurement; "faster for me" is Mike's own (2026-10-30), about him at the CLI, not a benchmark. Lead image: Mike's dua screenshot (2026-11-02), tab bar cropped, no-invert. -->
 
-<img src="{{ '/assets/images/posts/placeholder-why-i-use-rust-cli-tools.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/dua-disk-usage.webp' | relative_url }}" class="post-marker no-invert" alt="dua's interactive view of a home directory, folders sorted by size with percentage bars" style="width: 205px;">
 
 The [prior post](/2026/11/03/why-i-use-iterm2-tmux-mosh/) was about getting to a prompt and keeping it. This one is about five commands I type at it, all written in Rust, and how they combine. Three of them, fd, ripgrep and dua, take the place of GNU tools from [#5](/2026/11/01/why-i-use-gnu-tools/) at my command line, and each is better at the job I actually have, which is usually searching a source tree. The other two work alongside them: skim, a fuzzy finder in the style of fzf, and bat, which takes the place of cat.
 
