@@ -29,7 +29,7 @@ date: 2026-11-04 00:15:00 -0800
 
 <img src="{{ '/assets/images/posts/dua-disk-usage.webp' | relative_url }}" class="post-marker no-invert" alt="dua's interactive view of a home directory, folders sorted by size with percentage bars" style="width: 205px;">
 
-The [prior post](/2026/11/03/why-i-use-iterm2-tmux-mosh/) was about getting to a prompt and keeping it. This one is about five commands I type at it, all written in Rust, and how they combine. Three of them, fd, ripgrep and dua, take the place of GNU tools from [#5](/2026/11/01/why-i-use-gnu-tools/) at my command line, and each is better at the job I actually have, which is usually searching a source tree. The other two work alongside them: skim, a fuzzy finder in the style of fzf, and bat, which takes the place of cat.
+The [prior post](/2026/11/03/why-i-use-iterm2-tmux-autossh/) was about getting to a prompt and keeping it. This one is about five commands I type at it, all written in Rust, and how they combine. Three of them, fd, ripgrep and dua, take the place of GNU tools from [#5](/2026/11/01/why-i-use-gnu-tools/) at my command line, and each is better at the job I actually have, which is usually searching a source tree. The other two work alongside them: skim, a fuzzy finder in the style of fzf, and bat, which takes the place of cat.
 
 <!--more-->
 
