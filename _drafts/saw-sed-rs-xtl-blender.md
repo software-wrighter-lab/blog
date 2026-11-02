@@ -30,7 +30,7 @@ repo_urls:
      ranges and first-match-only, 3 literal patterns -F, 4 --strict, 5 --diff). Mike: "I'm not implementing all of the asks, but
      some of them": WHICH ones is not yet known (Mike: TODO below). 3D: lucy-3D (25U rack, lucy-early / lucy-later; 2026-10-31 to
      11-01), s1130-3D (IBM 1131 CPU desk console; X_eTaL + Blender, named parts, .glb/.blend/.obj; switches, hatch), s5100-3D (IBM
-     5100; WIP), console-3D (fb79c47: IBM 1053, 2741, 5471 on shared Selectric helpers; TRS-80 to be added, per Mike). Mike's plan: four APLs in sw-apl, ca. '68 1130 APL with a 1053 console, a 2741 console for the '68 APL\360 demo,
+     5100; WIP), console-3D (fb79c47: IBM 1053, 2741, 5471 on shared Selectric helpers; TRS-80 to be added, per Mike). Mike's plan: four APLs in sw-apl, '68 APL\1130 (IBM's first APL for sale) with a 1053 console, a 2741 console for the ca. '70 APL\360 demo (a later release, not the first; Mike corrected '68 on 2026-11-01),
      a 5100 for the '75 5100 demo, and a TRS-80 / IBM 5471 for a future APL-80 demo. Date: today is Sunday 11/01; -0800 since
      12:00 is after the 2 a.m. change (the publish script restamps 00:15 with the right offset). Lead image: Mike's
      block-3d-chainsaw.jpg (Dropbox), paper made transparent, inverts
@@ -85,7 +85,7 @@ The goal is higher-fidelity models for two places. The first is the virtual Comp
 
 | APL | Era | Console |
 |---|---|---|
-| 1130 APL | ca. 1968 | IBM 1130 with a 1053 printer console |
-| APL\360 | 1968 | an IBM 2741 terminal |
+| APL\1130 | 1968, IBM's first APL for sale | IBM 1130 with a 1053 printer console |
+| APL\360 | ca. 1970, a later release with added features | an IBM 2741 terminal |
 | IBM 5100 APL | 1975 | the IBM 5100 itself |
 | APL-80 | future demo | a TRS-80, and an IBM 5471 |
