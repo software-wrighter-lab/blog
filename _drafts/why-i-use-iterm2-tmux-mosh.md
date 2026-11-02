@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Why I Use #7: iTerm2, tmux and mosh --- Sessions That Survive"
+title: "Why I Use #7: iTerm2, tmux, mosh and Chrome Remote Desktop --- From the MacBook to the Machines"
 categories: [tools, terminals]
-tags: [why-i-use, iterm2, tmux, mosh, ssh, terminals, macos, arch-linux, ai-agents, remote-development]
-keywords: "why I use iTerm2, tmux, mosh, mobile shell, persistent terminal sessions, ssh alternative, roaming, laptop sleep, remote development, coding agents on a remote server, Arch Linux"
-abstract: "Seventh in the series on the tools I reach for: the terminal stack between my MacBook and the machines where my agents work. iTerm2 on the Mac, mosh for a connection that survives sleep and changing networks, and tmux for sessions that outlive any connection at all."
+tags: [why-i-use, iterm2, tmux, mosh, ssh, chrome-remote-desktop, remote-desktop, terminals, macos, arch-linux, ai-agents, remote-development]
+keywords: "why I use iTerm2, tmux, mosh, Chrome Remote Desktop, remote desktop to Arch Linux, mobile shell, persistent terminal sessions, ssh alternative, roaming, laptop sleep, remote development, coding agents on a remote server, Arch Linux"
+abstract: "Seventh in the series on the tools I reach for: the stack between my MacBook and the machines where my agents work. iTerm2 on the Mac, mosh for a connection that survives sleep and changing networks, and tmux for sessions that outlive any connection at all. When a terminal is not enough, Chrome Remote Desktop brings the whole remote desktop to the Mac, to preview graphics or browse a server running on that machine."
 series: "Why I Use"
 series_part: 7
 date: 2026-11-03 00:15:00 -0800
@@ -23,7 +23,7 @@ date: 2026-11-03 00:15:00 -0800
 
 <img src="{{ '/assets/images/posts/block-four-panes.webp' | relative_url }}" class="post-marker no-invert" alt="A block print of a monitor split into four terminal panes, with racks and cables behind it" style="width: 205px;">
 
-The [prior post](/2026/11/02/why-i-use-coding-agents/) in this series was about coding agents. This one is about what they run inside: the terminal stack between my MacBook and the Arch Linux machines where the agents work. Three tools, each covering a different way a session can die.
+The [prior post](/2026/11/02/why-i-use-coding-agents/) in this series was about coding agents. This one is about what they run inside: the terminal stack between my MacBook and the Arch Linux workstations and rack servers where the agents work. Three terminal tools, each covering a different way a session can die, and one remote desktop for when a terminal is not enough.
 
 <!--more-->
 
@@ -34,6 +34,7 @@ The [prior post](/2026/11/02/why-i-use-coding-agents/) in this series was about 
 | **iTerm2** | [iterm2.com](https://iterm2.com/) |
 | **tmux** | [github.com/tmux/tmux](https://github.com/tmux/tmux) |
 | **mosh** | [mosh.org](https://mosh.org/) |
+| **Chrome Remote Desktop** | [remotedesktop.google.com](https://remotedesktop.google.com/) |
 | **How the agents use it** | [AI Tools #4](/2026/05/16/pi-minimal-agent/), [Saw #7](/2026/04/19/saw-prolog-many-agents-self-hosting-mlpl/) |
 | **The longer timeline** | [TBT #13: Many Decades of Learning the Next Thing](/2026/10/01/tbt-timelines-of-tools/) |
 | **The series** | [Why I Use: every post](/series/#why-i-use) |
@@ -75,8 +76,13 @@ Mike: TODO, how you lay out sessions and windows (one session per agent user? pe
 
 Mike: TODO, optional: GNU screen, if you used it before tmux ([#5](/2026/11/01/why-i-use-gnu-tools/) lists it as a candidate).
 
+## Chrome Remote Desktop: more than a terminal
+
+Some work needs the remote machine's screen, not just its prompt. For that I use [Chrome Remote Desktop](https://remotedesktop.google.com/) to reach the desktops of the Arch Linux workstations and rack servers from my MacBook.
+
+It lets me do more than the CLI can. I can preview graphics on the machine that made them, and browse local servers in the remote desktop's own browser, where a server listening only on that machine is just a local URL.
+
 ## Three ways to lose a session
-{: .pos-center}
 
 Each tool closes off one failure: iTerm2 the Mac end, mosh the network in between, tmux the connection itself.
 
