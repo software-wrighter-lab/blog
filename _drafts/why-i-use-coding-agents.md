@@ -26,7 +26,8 @@ date: 2026-11-02 00:15:00 -0800
      Mike's reasons filled 2026-11-02 from his message (ChatGPT web for research/architecture/planning; Claude Code for most implementation;
      Codex for non-coding: blogging, flashing microcontrollers, lab equipment over USB (he wrote "SICP?": SCPI assumed), embedded;
      opencode + GLM-5.x for junior coding, web sites, GitHub commit/PR tracking, some vibe-maintenance; no local models in production;
-     planned local agent team; FreeToken, Strata, Avalon named by Mike; checked 2026-11-02 by web search, spellings as written). Lead image: Mike's block-terminal-ai.jpg (Dropbox), block print of terminals reading codex, opencode,
+     planned local agent team; Local GPU section (Mike, 2026-11-02): tasks and models as he listed; TRELLIS (Microsoft caps), Whisper, SpeechT5, Stable
+     Diffusion, VibeVoice, MuseTalk checked on GitHub / Hugging Face; image-to-video model not named yet. FreeToken, Strata, Avalon named by Mike; checked 2026-11-02 by web search, spellings as written). Lead image: Mike's block-terminal-ai.jpg (Dropbox), block print of terminals reading codex, opencode,
      claude and agy (fixed 2026-10-30; first version read agv), green text, no-invert. -->
 
 <img src="{{ '/assets/images/posts/block-terminal-ai.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
@@ -94,6 +95,21 @@ The models underneath are still Gemini.
 
 Today I use OpenCode with Z.ai's GLM-5.x models for junior coding tasks, for updating web sites, for keeping track of GitHub commits and pull requests, and sometimes for [vibe-maintenance](/2026/04/29/personal-software-vibe-maintenance/).
 
+## What my local GPUs do now
+{: .pos-left}
+
+Local models do plenty of other work for me, just not coding yet. I download open-weight models from [Hugging Face](https://huggingface.co) and run each on whichever of my GPUs has enough VRAM for it:
+
+| Task | Model |
+|---|---|
+| Text to image | [Stable Diffusion](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0) (Stability AI) |
+| Image to 3D model | [TRELLIS](https://github.com/microsoft/TRELLIS) (Microsoft) |
+| Speech to text | [Whisper](https://github.com/openai/whisper) (OpenAI) |
+| Text to speech | [SpeechT5](https://github.com/microsoft/SpeechT5) and [VibeVoice](https://github.com/microsoft/VibeVoice) (Microsoft) |
+| Voice cloning | VibeVoice, from a short voice sample |
+| Lip-syncing a face to speech | [MuseTalk](https://github.com/TMElyralab/MuseTalk) (Tencent Music's Lyra Lab) |
+| Image to video | Mike: TODO, which model |
+
 ## How I choose
 {: .pos-center}
 
@@ -107,6 +123,6 @@ I have no measurements to justify these choices. They are what I have settled in
 | Junior coding tasks, web site updates, GitHub commit and pull-request tracking, some maintenance | OpenCode with GLM-5.x |
 | Trying again, after it passed my Rust puzzle | Antigravity |
 
-I still do not rely on local models to produce anything. But I am still planning a local team of AI coding agents running on distributed local CPUs, and it is closer than it was: recent work such as [FreeToken](https://arxiv.org/abs/2608.16157), [Strata](https://simeononsecurity.com/articles/strata-opencode-local-coding-agent-16gb/) and [Avalon](https://github.com/freriadoc/Avalon) lets decent coding models, built on mixture-of-experts and speculative decoding, run on the smaller GPUs I have. I expect to use it for toy projects first, and then perhaps for daily development.
+I still do not rely on local models to produce code or documentation. But I am still planning a local team of AI coding agents running on distributed local CPUs, and it is closer than it was: recent work such as [FreeToken](https://arxiv.org/abs/2608.16157), [Strata](https://simeononsecurity.com/articles/strata-opencode-local-coding-agent-16gb/) and [Avalon](https://github.com/freriadoc/Avalon) lets decent coding models, built on mixture-of-experts and speculative decoding, run on the smaller GPUs I have. I expect to use it for toy projects first, and then perhaps for daily development.
 
 The goal for that team is that it gets better. I want the local agents to learn from feedback nightly, by fine-tuning on the day's work, toward a self-improving virtual development team. Someday that learning may move from nightly postmortems to continuous learning, the subject of my [Towards Continuous LLM Learning](/series/#towards-continuous-llm-learning) series.
