@@ -153,11 +153,11 @@ FreeToken and Strata are optimizations for NVIDIA GPUs, where a card's VRAM is s
 
 The problem they solve is bandwidth. A GPU reads its own VRAM fast, but everything that does not fit there lives in system RAM, on the far side of a PCIe bus that is much slower than either memory.
 
-My host is PCIe 3, which caps every card at about 16 GB/s, or half that for a card with only eight lanes. Approximate peak figures:
+Most of my workstations and rack servers are PCIe 3: HPE ProLiant Gen8, Gen9 and Gen10 servers, Dell Precision T7910 workstations and a Lenovo ThinkStation P520. PCIe 3 gives a card about 16 GB/s with sixteen lanes, or half that with eight. The newest, a ProLiant Gen10 Plus, is PCIe 4, which doubles that. Approximate peak figures:
 
 | Path | Bandwidth |
 |---|---|
-| PCIe 3.0, x16 (my host) / x8 | about 16 / 8 GB/s |
+| PCIe 3.0, x16 (most of my machines) / x8 | about 16 / 8 GB/s |
 | PCIe 4.0 / 5.0, x16 | about 32 / 64 GB/s |
 | System RAM, dual-channel DDR4 / DDR5 | about 50 / 90 GB/s |
 | Apple M3 Pro unified memory | about 150 GB/s |
@@ -172,7 +172,7 @@ My host is PCIe 3, which caps every card at about 16 GB/s, or half that for a ca
 
 Two things stand out.
 
-**Newer is not faster.** The 3090, from 2020, has nearly twice the memory bandwidth of the 4070 and twice that of the 5060 Ti. The 5060 Ti's eight PCIe 5 lanes also drop to about 8 GB/s on a PCIe 3 host.
+**Newer is not faster.** The 3090, from 2020, has nearly twice the memory bandwidth of the 4070 and twice that of the 5060 Ti. The 5060 Ti's eight PCIe 5 lanes also drop to about 8 GB/s in a PCIe 3 slot.
 
 **The bus is the bottleneck.** If a token needs 3 GB of weights that are not in VRAM, copying them over PCIe 3 takes about 190 ms, a ceiling of about five tokens a second. The 3090 reads the same 3 GB from its own VRAM in about 3 ms.
 
