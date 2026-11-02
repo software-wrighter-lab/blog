@@ -31,7 +31,7 @@ repo_urls:
      some of them". Resolved 2026-11-01 from sed-rs docs/reva-fork-response.md
      (uncommitted, in testing; not linked until pushed): all five in 0.3.0, negotiated as written; --expect=N added. 3D: lucy-3D (25U rack; three views per Mike 2026-11-01: empty, early (3 servers), later (more); README 8400cd0 shows all three renders; gutter image is images/lucy-early.png from it; 2026-10-31 to
      11-01), s1130-3D (IBM 1131 CPU desk console; X_eTaL + Blender, named parts, .glb/.blend/.obj; switches, hatch), s5100-3D (IBM
-     5100; WIP), console-3D (fb79c47: IBM 1053, 2741, 5471 on shared Selectric helpers; TRS-80 to be added, per Mike). Mike's plan: four APLs in sw-apl, '68 APL\1130 (IBM's first APL for sale) with a 1053 console, a 2741 console for the ca. '70 APL\360 demo (a later release, not the first; Mike corrected '68 on 2026-11-01),
+     5100; WIP), console-3D (f828773 README renders; gutter image images/ibm5471-render.png; fb79c47: IBM 1053, 2741, 5471 on shared Selectric helpers; TRS-80 to be added, per Mike). Mike's plan: four APLs in sw-apl, '68 APL\1130 (IBM's first APL for sale) with a 1053 console, a 2741 console for the ca. '70 APL\360 demo (a later release, not the first; Mike corrected '68 on 2026-11-01),
      a 5100 for the '75 5100 demo, and a TRS-80 / IBM 5471 for a future APL-80 demo. Date: today is Sunday 11/01; -0800 since
      12:00 is after the 2 a.m. change (the publish script restamps 00:15 with the right offset). Lead image: Mike's
      block-3d-chainsaw.jpg (Dropbox), paper made transparent, inverts
@@ -106,3 +106,8 @@ The goal is higher-fidelity models for two places. The first is the virtual Comp
 | APL\360 | ca. 1970, a later release with added features | an IBM 2741 terminal |
 | IBM 5100 APL | 1975 | the IBM 5100 itself |
 | APL-80 | future demo | a TRS-80, and an IBM 5471 |
+
+<figure class="zoomable" style="width: 260px; margin: 1em 0;">
+<img src="{{ '/assets/images/posts/ibm5471-render.webp' | relative_url }}" class="no-invert" alt="A Blender render of the IBM 5471 printer-keyboard: a white Selectric-style typewriter console with a gray keyboard, a type ball under a clear paper guard, and an IBM badge">
+<figcaption style="font-size: 0.85em;">The IBM 5471, from console-3D. Click to enlarge.</figcaption>
+</figure>
