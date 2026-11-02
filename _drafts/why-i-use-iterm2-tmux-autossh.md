@@ -66,7 +66,7 @@ A reconnect is not seamless: the old connection is gone and a new one takes its 
 
 Mike: TODO, how you run autossh (a shell alias or function per host? `-M 0` with ssh's `ServerAliveInterval`?), and whether it re-attaches to tmux by itself.
 
-I used [mosh](https://mosh.org/), the mobile shell, before it. mosh keeps a session alive across sleep and changes of network instead of reconnecting, which is the better idea on paper. In practice it proved unreliable for me, and lately it refuses to connect from my Mac at all. Local and cloud LLMs suggested plenty of diagnostics and proposed causes that turned out to be wrong, and none of them got mosh working reliably. autossh is less clever, and it works, so far.
+I used [mosh](https://mosh.org/), the mobile shell, before it. mosh keeps a session alive across sleep and changes of network instead of reconnecting, which is the better idea on paper. In practice it proved unreliable for me, and lately it refuses to connect from my Mac at all. Local and cloud LLMs suggested plenty of diagnostics and proposed causes that turned out to be wrong, and none of them got mosh working reliably. autossh is less clever, and it works for me, so far.
 
 ## tmux: a session that survives the connection
 
