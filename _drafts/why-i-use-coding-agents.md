@@ -104,7 +104,6 @@ The models underneath are still Gemini.
 Today I use OpenCode with Z.ai's GLM-5.x models for junior coding tasks, for updating web sites, for keeping track of GitHub commits and pull requests, and sometimes for [vibe-maintenance](/2026/04/29/personal-software-vibe-maintenance/).
 
 ## What my local GPUs do now
-{: .pos-left}
 
 Local models do plenty of other work for me, just not coding yet. I download open-weight models from [Hugging Face](https://huggingface.co) and run each on whichever of my GPUs has enough VRAM for it:
 
@@ -119,12 +118,33 @@ Local models do plenty of other work for me, just not coding yet. I download ope
 | Image to video | [Wan 2.x](https://github.com/Wan-Video/Wan2.2) (Alibaba) |
 
 ## NightCafe, in the cloud
-{: .pos-right}
 
 For images and video I also use [NightCafe](https://creator.nightcafe.studio/explore), a site that hosts many, many image and video models in the cloud. I use it for text to image, image editing and image to video, and Nano Banana 2.1 most of all. Two of its features matter to me: consistent characters, which keep the same character across many images, and templates, both the community's and custom ones of my own.
 
+## Local coding agents
+
+I do run coding agents against local models. The agents are OpenCode, [Pi](/2026/05/16/pi-minimal-agent/), and my own: [emacs-agent](https://github.com/softwarewrighter/emacs-agent), an agent inside Emacs that keeps every conversation as an Org transcript, working in Emacs Lisp with a Rust back end in progress, and [mlplcode](/2026/09/16/ai-tools-coding-agent-in-mlpl/), written in sw-MLPL with Rust underneath, with X_eTaL likely next. [emacs-ai-api](https://github.com/softwarewrighter/emacs-ai-api) gives Emacs one gateway to cloud and local models alike. They reach the models through Ollama, llama.cpp, vLLM, FreeToken and Strata, and [AI Tools #6](/2026/09/09/ai-tools-local-llm-loop-model-evaluation/) measured some of them. Even so, I still do not rely on local models to produce code or documentation. But I am still planning a local team of AI coding agents running on distributed local CPUs, and it is closer than it was: recent work such as [FreeToken](https://arxiv.org/abs/2608.16157), [Strata](https://github.com/Niko1221/Strata) and [Avalon](https://github.com/freriadoc/Avalon) lets decent coding models, built on mixture-of-experts and speculative decoding, run on the smaller GPUs I have. FreeToken and Strata are optimizations for NVIDIA GPUs, where a card's VRAM is separate from system memory and the model has to be split between them; a Mac's unified memory does not need them.
+
+The problem they solve is bandwidth. A GPU reads its own VRAM fast, but everything that does not fit there lives in system RAM, on the far side of a PCIe bus that is much slower than either memory. My host is PCIe 3, which caps every card at about 16 GB/s, or half that for a card with only eight lanes. Approximate peak figures:
+
+| Path | Bandwidth |
+|---|---|
+| PCIe 3.0, x16 (my host) / x8 | about 16 / 8 GB/s |
+| PCIe 4.0 / 5.0, x16 | about 32 / 64 GB/s |
+| System RAM, dual-channel DDR4 / DDR5 | about 50 / 90 GB/s |
+| Apple M3 Pro unified memory | about 150 GB/s |
+| Tesla P4 / A2 VRAM | about 190 / 200 GB/s |
+| GTX 1660 Super VRAM | about 340 GB/s |
+| Apple M1 Max unified memory | about 400 GB/s |
+| RTX 5060 Ti VRAM | about 450 GB/s |
+| RTX 4070 VRAM | about 500 GB/s |
+| RTX 3090 VRAM | about 940 GB/s |
+
+Two things stand out. Newer is not faster: the 3090, from 2020, has nearly twice the memory bandwidth of the 4070 and twice that of the 5060 Ti, whose eight PCIe 5 lanes also drop to about 8 GB/s on a PCIe 3 host. And the bus is the bottleneck: if a token needs 3 GB of weights that are not in VRAM, copying them over PCIe 3 takes about 190 ms, a ceiling of about five tokens a second, while the 3090 reads the same 3 GB from its own VRAM in about 3 ms. A mixture-of-experts model touches only a few of its experts per token, so FreeToken and Strata keep the most-used experts resident in VRAM, leave the rest in system RAM, and compute those on the CPU where they sit, which reads them at RAM speed instead of copying them across the bus. On unified memory, the CPU and GPU share one pool, and there is nothing to copy. But Apple Silicon has its own bandwidth tiers. I ran out of room on my M3 Pro with 18 GB, where macOS lets the GPU use only about two thirds of memory, when I went looking for a bigger model. Researching it, I found that the M3 Pro reads its memory at about 150 GB/s, less than the M2 Pro before it, while the older M1 Max reads at about 400 GB/s and comes with up to 64 GB. Refurbished, the two cost about the same: around $1,200 to $1,400 for a 14-inch M3 Pro with 18 GB, and around $1,350 to $1,400 for an M1 Max with 64 GB, as of this fall. I ended up with the M1 Max, and its 64 GB seems big enough to run decent coding models that did not fit on my 16 GB or 24 GB NVIDIA cards.
+
+My Strata work so far is an experiment on an Arch Linux machine. I expect to use the local team for toy projects first, and then perhaps for daily development.
+
 ## How I choose
-{: .pos-center}
 
 I have no measurements to justify these choices. They are what I have settled into:
 
@@ -136,25 +156,4 @@ I have no measurements to justify these choices. They are what I have settled in
 | Junior coding tasks, web site updates, GitHub commit and pull-request tracking, some maintenance | OpenCode with GLM-5.x |
 | Trying again, after it passed my Rust puzzle | Antigravity |
 
-I do run coding agents against local models. The agents are OpenCode, [Pi](/2026/05/16/pi-minimal-agent/), and my own: [emacs-agent](https://github.com/softwarewrighter/emacs-agent), an agent inside Emacs that keeps every conversation as an Org transcript, working in Emacs Lisp with a Rust back end in progress, and [mlplcode](/2026/09/16/ai-tools-coding-agent-in-mlpl/), written in sw-MLPL with Rust underneath, with X_eTaL likely next. [emacs-ai-api](https://github.com/softwarewrighter/emacs-ai-api) gives Emacs one gateway to cloud and local models alike. They reach the models through Ollama, llama.cpp, vLLM, FreeToken and Strata, and [AI Tools #6](/2026/09/09/ai-tools-local-llm-loop-model-evaluation/) measured some of them. Even so, I still do not rely on local models to produce code or documentation. But I am still planning a local team of AI coding agents running on distributed local CPUs, and it is closer than it was: recent work such as [FreeToken](https://arxiv.org/abs/2608.16157), [Strata](https://github.com/Niko1221/Strata) and [Avalon](https://github.com/freriadoc/Avalon) lets decent coding models, built on mixture-of-experts and speculative decoding, run on the smaller GPUs I have. FreeToken and Strata are optimizations for NVIDIA GPUs, where a card's VRAM is separate from system memory and the model has to be split between them; a Mac's unified memory does not need them.
-
-The problem they solve is bandwidth. A GPU reads its own VRAM fast, but everything that does not fit there lives in system RAM, on the far side of a PCIe bus that is much slower than either memory. My host is PCIe 3, which caps every card at about 16 GB/s, or half that for a card with only eight lanes. Approximate peak figures:
-
-| Path | Bandwidth |
-|---|---|
-| PCIe 3.0, x16 (my host) / x8 | about 16 / 8 GB/s |
-| PCIe 4.0 / 5.0, x16 | about 32 / 64 GB/s |
-| System RAM, dual-channel DDR4 / DDR5 | about 50 / 90 GB/s |
-| Tesla P4 / A2 VRAM | about 190 / 200 GB/s |
-| GTX 1660 Super VRAM | about 340 GB/s |
-| RTX 5060 Ti VRAM | about 450 GB/s |
-| RTX 4070 VRAM | about 500 GB/s |
-| Apple M3 Pro unified memory | about 150 GB/s |
-| RTX 3090 VRAM | about 940 GB/s |
-| Apple M1 Max unified memory | about 400 GB/s |
-
-Two things stand out. Newer is not faster: the 3090, from 2020, has nearly twice the memory bandwidth of the 4070 and twice that of the 5060 Ti, whose eight PCIe 5 lanes also drop to about 8 GB/s on a PCIe 3 host. And the bus is the bottleneck: if a token needs 3 GB of weights that are not in VRAM, copying them over PCIe 3 takes about 190 ms, a ceiling of about five tokens a second, while the 3090 reads the same 3 GB from its own VRAM in about 3 ms. A mixture-of-experts model touches only a few of its experts per token, so FreeToken and Strata keep the most-used experts resident in VRAM, leave the rest in system RAM, and compute those on the CPU where they sit, which reads them at RAM speed instead of copying them across the bus. On unified memory, the CPU and GPU share one pool, and there is nothing to copy. But Apple Silicon has its own bandwidth tiers. I ran out of room on my M3 Pro with 18 GB, where macOS lets the GPU use only about two thirds of memory, when I went looking for a bigger model. Researching it, I found that the M3 Pro reads its memory at about 150 GB/s, less than the M2 Pro before it, while the older M1 Max reads at about 400 GB/s and comes with up to 64 GB. Refurbished, the two cost about the same: around $1,200 to $1,400 for a 14-inch M3 Pro with 18 GB, and around $1,350 to $1,400 for an M1 Max with 64 GB, as of this fall. I ended up with the M1 Max, and its 64 GB seems big enough to run decent coding models that did not fit on my 16 GB or 24 GB NVIDIA cards.
-
-My Strata work so far is an experiment on an Arch Linux machine. I expect to use the local team for toy projects first, and then perhaps for daily development.
-
-The goal for that team is that it gets better. I want the local agents to learn from feedback nightly, by fine-tuning on the day's work, toward a self-improving virtual development team. Someday that learning may move from nightly postmortems to continuous learning, the subject of my [Towards Continuous LLM Learning](/series/#towards-continuous-llm-learning) series.
+The goal for the local team is that it gets better. I want the local agents to learn from feedback nightly, by fine-tuning on the day's work, toward a self-improving virtual development team. Someday that learning may move from nightly postmortems to continuous learning, the subject of my [Towards Continuous LLM Learning](/series/#towards-continuous-llm-learning) series.
