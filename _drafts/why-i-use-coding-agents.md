@@ -61,7 +61,20 @@ I use Claude Code to implement most of my software projects.
 
 ## Codex
 
-OpenAI's coding agent, the command-line side of ChatGPT. I use Codex for work that is not mainly coding. Blogging is one, sometimes split between Claude and Codex. Hardware is another: flashing microcontrollers, talking to lab equipment over USB with SCPI commands, and developing embedded software.
+<div class="aside-box outdent-right wide" markdown="1">
+
+**What is SCPI?** Standard Commands for Programmable Instruments, a text command language for test and measurement equipment, defined in 1990 on top of the IEEE 488.2 standard. Power supplies, function generators, oscilloscopes and multimeters from most vendors accept it, over USB, Ethernet, GPIB or a serial port. Commands are short words in a tree, each instrument adds its own branches, and a question mark turns a command into a query.
+
+</div>
+
+OpenAI's coding agent, the command-line side of ChatGPT. I use Codex for work that is not mainly coding. Blogging is one, sometimes split between Claude and Codex. Hardware is another: flashing microcontrollers, developing embedded software, and talking to lab equipment over USB with SCPI commands. Codex sets up the bench from a script:
+
+- **power supply:** voltage, current limit and output, such as `VOLT 3.3`, `CURR 0.5`, `OUTP ON`
+- **function generator:** waveform, frequency and amplitude, such as `FUNC SQU`, `FREQ 1000`, `VOLT 2`
+- **oscilloscope:** time base, channel scale and trigger level, such as `:TIM:SCAL 0.001`, `:CHAN1:SCAL 1`, `:TRIG:EDGE:LEV 1.5`
+- **multimeter:** a reading, such as `MEAS:VOLT:DC?`
+
+Those are typical forms; each instrument's exact commands are in its programming manual, and `*IDN?` asks any of them which instrument it is.
 
 ## Gemini, now Antigravity
 
