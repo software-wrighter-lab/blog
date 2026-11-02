@@ -28,7 +28,7 @@ repo_urls:
 <!-- DRAFT (2026-11-01), Mike: a short Saw post: "a sed saw and a xtl-blender saw". sed-rs (sw-cli-tools/sed-rs; main f52ba15,
      0.2.0 on 2026-10-25; uncommitted Cargo changes locally) and reva-fork docs/sed-rs-asks.md (2026-11-01: 1 -i[SUFFIX], 2 address
      ranges and first-match-only, 3 literal patterns -F, 4 --strict, 5 --diff). Mike: "I'm not implementing all of the asks, but
-     some of them": WHICH ones is not yet known (Mike: TODO below). 3D: lucy-3D (25U rack; three views per Mike 2026-11-01: empty, early (3 servers), later (more); pushed README still lists lucy-early / lucy-later; 2026-10-31 to
+     some of them": WHICH ones is not yet known (Mike: TODO below). 3D: lucy-3D (25U rack; three views per Mike 2026-11-01: empty, early (3 servers), later (more); README 8400cd0 shows all three renders; gutter image is images/lucy-early.png from it; 2026-10-31 to
      11-01), s1130-3D (IBM 1131 CPU desk console; X_eTaL + Blender, named parts, .glb/.blend/.obj; switches, hatch), s5100-3D (IBM
      5100; WIP), console-3D (fb79c47: IBM 1053, 2741, 5471 on shared Selectric helpers; TRS-80 to be added, per Mike). Mike's plan: four APLs in sw-apl, '68 APL\1130 (IBM's first APL for sale) with a 1053 console, a 2741 console for the ca. '70 APL\360 demo (a later release, not the first; Mike corrected '68 on 2026-11-01),
      a 5100 for the '75 5100 demo, and a TRS-80 / IBM 5471 for a future APL-80 demo. Date: today is Sunday 11/01; -0800 since
@@ -73,6 +73,11 @@ I am not taking all of them, but some are worth the sharpening.
 Mike: TODO, which asks you are implementing (and, if you like, why the others are left out).
 
 ## The Blender saw
+
+<figure class="zoomable" style="float: right; clear: right; width: 40%; margin: 0.2em 0 0.6em 1.5em;">
+<img src="{{ '/assets/images/posts/lucy-early-rack.webp' | relative_url }}" class="no-invert" alt="A render of the Lucy rack in its early layout: a black open-frame 25U rack with a 1U server and a 2U server at the top and a blue 4U storage chassis at the bottom, on a gray floor">
+<figcaption style="font-size: 0.85em;">Lucy's rack, early: three servers, rendered by Blender from X_eTaL. Click to enlarge.</figcaption>
+</figure>
 
 The other saw is 3D modeling with X_eTaL and its Blender extension. X_eTaL builds the model as code, the extension hands it to Blender, and Blender writes `.blend`, `.glb` and `.obj` files with named parts, so a switch or a door can be found and moved in an interactive scene. Four projects are teaching me where the pipeline is weak:
 
