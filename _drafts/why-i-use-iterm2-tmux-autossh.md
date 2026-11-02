@@ -22,7 +22,6 @@ date: 2026-11-03 00:15:00 -0800
      behavior, not a measurement. Lead image: Mike's block-four-panes.jpg (Dropbox), no-invert. "Mike: TODO" marks his own reasons. -->
 
 <img src="{{ '/assets/images/posts/block-four-panes.webp' | relative_url }}" class="post-marker no-invert" alt="A block print of a monitor split into four terminal panes, with racks and cables behind it" style="width: 205px;">
-<img src="{{ '/assets/images/posts/block-four-panes.webp' | relative_url }}" class="post-marker no-invert" alt="A block print of a monitor split into four terminal panes, with racks and cables behind it" style="width: 205px;">
 
 The [prior post](/2026/11/02/why-i-use-coding-agents/) in this series was about coding agents. This one is about what they run inside: the terminal stack between my MacBook and the Arch Linux workstations and rack servers where the agents work. Three terminal tools, each covering a different way a session can die, and one remote desktop for when a terminal is not enough.
 
