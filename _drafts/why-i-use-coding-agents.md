@@ -142,7 +142,19 @@ The problem they solve is bandwidth. A GPU reads its own VRAM fast, but everythi
 
 <section class="stagger" markdown="1">
 
-Two things stand out. Newer is not faster: the 3090, from 2020, has nearly twice the memory bandwidth of the 4070 and twice that of the 5060 Ti, whose eight PCIe 5 lanes also drop to about 8 GB/s on a PCIe 3 host. And the bus is the bottleneck: if a token needs 3 GB of weights that are not in VRAM, copying them over PCIe 3 takes about 190 ms, a ceiling of about five tokens a second, while the 3090 reads the same 3 GB from its own VRAM in about 3 ms. A mixture-of-experts model touches only a few of its experts per token, so FreeToken and Strata keep the most-used experts resident in VRAM, leave the rest in system RAM, and compute those on the CPU where they sit, which reads them at RAM speed instead of copying them across the bus. On unified memory, the CPU and GPU share one pool, and there is nothing to copy. But Apple Silicon has its own bandwidth tiers. I ran out of room on my M3 Pro with 18 GB, where macOS lets the GPU use only about two thirds of memory, when I went looking for a bigger model. Researching it, I found that the M3 Pro reads its memory at about 150 GB/s, less than the M2 Pro before it, while the older M1 Max reads at about 400 GB/s and comes with up to 64 GB. Refurbished, the two cost about the same: around $1,200 to $1,400 for a 14-inch M3 Pro with 18 GB, and around $1,350 to $1,400 for an M1 Max with 64 GB, as of this fall. I ended up with the M1 Max, and its 64 GB seems big enough to run decent coding models that did not fit on my 16 GB or 24 GB NVIDIA cards.
+Two things stand out.
+
+**Newer is not faster.** The 3090, from 2020, has nearly twice the memory bandwidth of the 4070 and twice that of the 5060 Ti. The 5060 Ti's eight PCIe 5 lanes also drop to about 8 GB/s on a PCIe 3 host.
+
+**The bus is the bottleneck.** If a token needs 3 GB of weights that are not in VRAM, copying them over PCIe 3 takes about 190 ms, a ceiling of about five tokens a second. The 3090 reads the same 3 GB from its own VRAM in about 3 ms.
+
+That is what FreeToken and Strata work around. A mixture-of-experts model touches only a few of its experts per token, so they keep the most-used experts resident in VRAM and leave the rest in system RAM. The CPU computes those where they sit, reading them at RAM speed instead of copying them across the bus.
+
+On unified memory, the CPU and GPU share one pool, and there is nothing to copy. But Apple Silicon has its own bandwidth tiers. I ran out of room on my M3 Pro with 18 GB, where macOS lets the GPU use only about two thirds of memory, when I went looking for a bigger model.
+
+Researching it, I found that the M3 Pro reads its memory at about 150 GB/s, less than the M2 Pro before it. The older M1 Max reads at about 400 GB/s and comes with up to 64 GB. Refurbished, the two cost about the same, as of this fall: around $1,200 to $1,400 for a 14-inch M3 Pro with 18 GB, and around $1,350 to $1,400 for an M1 Max with 64 GB.
+
+I ended up with the M1 Max. Its 64 GB seems big enough to run decent coding models that did not fit on my 16 GB or 24 GB NVIDIA cards.
 
 My Strata work so far is an experiment on an Arch Linux machine. I expect to use the local team for toy projects first, and then perhaps for daily development.
 
