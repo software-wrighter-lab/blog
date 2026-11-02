@@ -8,6 +8,11 @@ abstract: "Sixth in the series on the tools I reach for: the coding agents. Clau
 series: "Why I Use"
 series_part: 6
 date: 2026-11-02 00:15:00 -0800
+repo_urls:
+  - url: "https://github.com/softwarewrighter/emacs-agent"
+    title: "emacs-agent"
+  - url: "https://github.com/softwarewrighter/emacs-ai-api"
+    title: "emacs-ai-api"
 ---
 
 <!-- DRAFT (2026-10-30), Mike: #6 on coding agents for 11/02, split from #5 (GNU tools): Claude, Codex, Gemini (now Antigravity),
@@ -29,7 +34,7 @@ date: 2026-11-02 00:15:00 -0800
      planned local agent team; Local GPU section (Mike, 2026-11-02): tasks and models as he listed; TRELLIS (Microsoft caps), Whisper, SpeechT5, Stable
      Diffusion, VibeVoice, MuseTalk checked on GitHub / Hugging Face; image-to-video: Wan 2.x (Mike; project spells it Wan, e.g. Wan2.2). NightCafe section per Mike 2026-11-02 (Nano
      Banana 2.1, consistent characters, community and custom templates); no claim about which blog images came from it. Local agent stack (Mike, 2026-11-02): OpenCode, Pi, his own agents in elisp and Rust; Ollama, llama.cpp, vLLM, FreeToken, Strata.
-     mlplcode (AI Tools #7) is MLPL with Rust mechanisms: CHECK with Mike that it counts as "Rust". FreeToken, Strata, Avalon named by Mike; checked 2026-11-02 by web search, spellings as written). Lead image: Mike's block-terminal-ai.jpg (Dropbox), block print of terminals reading codex, opencode,
+     emacs-agent (elisp + Rust backend) and emacs-ai-api (LiteLLM gateway, gptel) per Mike 2026-11-02; mlplcode is sw-MLPL; X_eTaL "soon, if not already". FreeToken, Strata, Avalon named by Mike; checked 2026-11-02 by web search, spellings as written). Lead image: Mike's block-terminal-ai.jpg (Dropbox), block print of terminals reading codex, opencode,
      claude and agy (fixed 2026-10-30; first version read agv), green text, no-invert. -->
 
 <img src="{{ '/assets/images/posts/block-terminal-ai.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
@@ -130,6 +135,6 @@ I have no measurements to justify these choices. They are what I have settled in
 | Junior coding tasks, web site updates, GitHub commit and pull-request tracking, some maintenance | OpenCode with GLM-5.x |
 | Trying again, after it passed my Rust puzzle | Antigravity |
 
-I do run coding agents against local models. The agents are OpenCode, [Pi](/2026/05/16/pi-minimal-agent/), and my own, written in Emacs Lisp and in Rust (one is [mlplcode](/2026/09/16/ai-tools-coding-agent-in-mlpl/), small enough to read in an afternoon). They reach the models through Ollama, llama.cpp, vLLM, FreeToken and Strata, and [AI Tools #6](/2026/09/09/ai-tools-local-llm-loop-model-evaluation/) measured some of them. Even so, I still do not rely on local models to produce code or documentation. But I am still planning a local team of AI coding agents running on distributed local CPUs, and it is closer than it was: recent work such as [FreeToken](https://arxiv.org/abs/2608.16157), [Strata](https://simeononsecurity.com/articles/strata-opencode-local-coding-agent-16gb/) and [Avalon](https://github.com/freriadoc/Avalon) lets decent coding models, built on mixture-of-experts and speculative decoding, run on the smaller GPUs I have. I expect to use it for toy projects first, and then perhaps for daily development.
+I do run coding agents against local models. The agents are OpenCode, [Pi](/2026/05/16/pi-minimal-agent/), and my own: [emacs-agent](https://github.com/softwarewrighter/emacs-agent), an Emacs Lisp front end on a Rust back end that keeps every conversation as an Org transcript, and [mlplcode](/2026/09/16/ai-tools-coding-agent-in-mlpl/), written in sw-MLPL with Rust underneath, with X_eTaL likely next. [emacs-ai-api](https://github.com/softwarewrighter/emacs-ai-api) gives Emacs one gateway to cloud and local models alike. They reach the models through Ollama, llama.cpp, vLLM, FreeToken and Strata, and [AI Tools #6](/2026/09/09/ai-tools-local-llm-loop-model-evaluation/) measured some of them. Even so, I still do not rely on local models to produce code or documentation. But I am still planning a local team of AI coding agents running on distributed local CPUs, and it is closer than it was: recent work such as [FreeToken](https://arxiv.org/abs/2608.16157), [Strata](https://simeononsecurity.com/articles/strata-opencode-local-coding-agent-16gb/) and [Avalon](https://github.com/freriadoc/Avalon) lets decent coding models, built on mixture-of-experts and speculative decoding, run on the smaller GPUs I have. I expect to use it for toy projects first, and then perhaps for daily development.
 
 The goal for that team is that it gets better. I want the local agents to learn from feedback nightly, by fine-tuning on the day's work, toward a self-improving virtual development team. Someday that learning may move from nightly postmortems to continuous learning, the subject of my [Towards Continuous LLM Learning](/series/#towards-continuous-llm-learning) series.
