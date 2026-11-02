@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Why I Use #6: Coding Agents --- Claude Code, Codex, Antigravity and OpenCode"
+title: "Why I Use #6: Coding Agents, and the Models Around Them"
 categories: [tools, ai-agents]
 tags: [why-i-use, ai-agents, coding-agents, claude-code, codex, gemini, antigravity, agy, opencode, z-ai, glm, skills]
 keywords: "why I use coding agents, Claude Code, OpenAI Codex, Gemini CLI deprecated, Google Antigravity CLI agy, OpenCode, Z.ai GLM-5, agent skills, cloud agents, comparing coding agents"
