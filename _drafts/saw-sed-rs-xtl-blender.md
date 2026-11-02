@@ -33,9 +33,10 @@ repo_urls:
      5100; WIP), console-3D (fb79c47: IBM 1053, 2741, 5471 on shared Selectric helpers; TRS-80 to be added, per Mike). Mike's plan: four APLs in sw-apl, ca. '68 1130 APL with a 1053 console, a 2741 console for the '68 APL\360 demo,
      a 5100 for the '75 5100 demo, and a TRS-80 / IBM 5471 for a future APL-80 demo. Date: today is Sunday 11/01; -0800 since
      12:00 is after the 2 a.m. change (the publish script restamps 00:15 with the right offset). Lead image: Mike's
-     block-3d-chainsaw.jpg (Dropbox), monochrome, no-invert. -->
+     block-3d-chainsaw.jpg (Dropbox), paper made transparent, inverts
+     in dark mode (Mike asked, 2026-11-01). -->
 
-<img src="{{ '/assets/images/posts/block-3d-chainsaw.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-3d-chainsaw.webp' | relative_url }}" class="post-marker" alt="" style="width: 205px;">
 
 Two saws this week, one small and one large. The small one is sed-rs, my portable `sed` in Rust, which got a list of requests from being used in earnest. The large one is 3D: modeling real machines with X_eTaL and Blender, to get good enough at it for a museum.
 
@@ -57,7 +58,7 @@ Two saws this week, one small and one large. The small one is sed-rs, my portabl
 
 </div>
 
-## The sed saw
+## The sed-rs saw
 
 I wrote [sed-rs](https://github.com/sw-cli-tools/sed-rs) because the Mac's BSD `sed` and GNU `sed` on Linux do not agree, and I wanted one that behaves the same on both. Using it to edit reva-fork's files produced a [list of asks](https://github.com/softwarewrighter/reva-fork/blob/dev/docs/sed-rs-asks.md), each with the case that hit it:
 
