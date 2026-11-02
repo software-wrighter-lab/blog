@@ -23,7 +23,10 @@ date: 2026-11-02 00:15:00 -0800
      accounts (Google AI Pro, Ultra, free tier); Gemini Code Assist enterprise licenses and API-key use were not affected. agy is
      the command; global config stays under ~/.gemini/ (project config under .agents/); the installer copies Gemini CLI skills, MCP
      servers, agents and GEMINI.md files over. Not verified, so not in the text: "Antigravity 2.0", "closed source, written in Go".
-     Mike's own reasons are marked "Mike: TODO". Lead image: Mike's block-terminal-ai.jpg (Dropbox), block print of terminals reading codex, opencode,
+     Mike's reasons filled 2026-11-02 from his message (ChatGPT web for research/architecture/planning; Claude Code for most implementation;
+     Codex for non-coding: blogging, flashing microcontrollers, lab equipment over USB (he wrote "SICP?": SCPI assumed), embedded;
+     opencode + GLM-5.x for junior coding, web sites, GitHub commit/PR tracking, some vibe-maintenance; no local models in production;
+     planned local agent team; FreeToken, Strata, Avalon named by Mike, NOT verified here). Lead image: Mike's block-terminal-ai.jpg (Dropbox), block print of terminals reading codex, opencode,
      claude and agy (fixed 2026-10-30; first version read agv), green text, no-invert. -->
 
 <img src="{{ '/assets/images/posts/block-terminal-ai.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
@@ -54,13 +57,11 @@ I run every agent the same way: the same machine, the same project, the same she
 
 Claude Code is the one I have used longest, since 2025, and the one I use most. It was the agent that restarted the stuck sound-effects project in [AI Tools #8](/2026/10/29/ai-tools-domain-expert-skill/), where February's attempt with another agent had stalled, and Claude in the cloud worked on several repositories at once to move [the Reva and CoSy forks](/2026/10/25/saw-reva-fork-cosy/) over one weekend. Two things matter most in how I use it now: skills, sets of instructions an agent loads for one kind of task, and agents running in the cloud in parallel.
 
-Mike: TODO, why Claude Code is the one you use most, in your words.
+I use Claude Code to implement most of my software projects.
 
 ## Codex
 
-OpenAI's coding agent, which I have used this year alongside the others.
-
-Mike: TODO, what you use Codex for, and how it compares.
+OpenAI's coding agent, the command-line side of ChatGPT. I use Codex for work that is not mainly coding. Blogging is one, sometimes split between Claude and Codex. Hardware is another: flashing microcontrollers, talking to lab equipment over USB with SCPI commands, and developing embedded software.
 
 ## Gemini, now Antigravity
 
@@ -78,9 +79,19 @@ The models underneath are still Gemini.
 
 [opencode](https://opencode.ai) is the open one: an agent that can drive many models. I use it with [Z.ai](https://z.ai)'s GLM models on its developer plan. It wrote the first attempt at the sound-effects project with GLM-4.7 in February, it ran beside Claude Code under All Together Now with GLM-5, and because it can point at any model, it is the harness I used to test [local models in a plan, execute and review loop](/2026/09/09/ai-tools-local-llm-loop-model-evaluation/). It is also the architectural reference for [the coding agent I wrote in MLPL](/2026/09/16/ai-tools-coding-agent-in-mlpl/).
 
-Mike: TODO, why opencode and GLM (cost, openness, local models?), and which GLM-5.x you use now.
+Today I use opencode with Z.ai's GLM-5.x models for junior coding tasks, for updating web sites, for keeping track of GitHub commits and pull requests, and sometimes for [vibe-maintenance](/2026/04/29/personal-software-vibe-maintenance/).
 
 ## How I choose
 {: .pos-center}
 
-Mike: TODO, a closing in your words: which agent for which kind of work, or why you keep several.
+I have no measurements to justify these choices. They are what I have settled into:
+
+| For | I use |
+|---|---|
+| Research, architecture, high-level planning | ChatGPT, on the web |
+| Implementing most software projects | Claude Code |
+| Non-coding work, blogging (shared with Claude), hardware and embedded work | Codex |
+| Junior coding tasks, web site updates, GitHub commit and pull-request tracking, some maintenance | opencode with GLM-5.x |
+| Trying again, after it passed my Rust puzzle | Antigravity |
+
+I still do not rely on local models to produce anything. But I am still planning a local team of AI coding agents running on distributed local CPUs, and it is closer than it was: recent work such as FreeToken, Strata and Avalon lets decent coding models, built on mixture-of-experts and speculative decoding, run on the smaller GPUs I have. I expect to use it for toy projects first, and then perhaps for daily development.
