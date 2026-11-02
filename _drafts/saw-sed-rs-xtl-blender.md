@@ -4,7 +4,7 @@ title: "Saw #17: A Sharper sed, and X_eTaL in Blender for a Computer Museum"
 categories: [tools, 3d]
 tags: [sharpen-the-saw, sed-rs, rust, cli, x-etal, xetal, blender, 3d-models, ibm-1130, ibm-5100, apl, sw-apl, retrocomputing]
 keywords: "Sharpen the Saw, sed-rs, portable sed in Rust, in-place editing, address ranges, X_eTaL Blender extension, 3D models of vintage computers, IBM 1130, IBM 5100, server rack model, virtual computer history museum, sw-apl consoles"
-abstract: "Two saws this week. sed-rs, my portable sed in Rust, got a list of asks from using it to edit reva-fork, and I am taking some of them, not all. And I am building 3D models of real machines with X_eTaL and Blender, an IBM 1130, an IBM 5100 and my Lucy server rack, to get better at high-fidelity models for the virtual computer history museum and for the consoles in my sw-apl demos."
+abstract: "Two saws this week. sed-rs, my portable sed in Rust, got a list of asks from using it to edit reva-fork, and I am taking some of them, not all. And I am building 3D models of real machines with X_eTaL and Blender, an IBM 1130, an IBM 5100, three Selectric-based consoles and my Lucy server rack, to get better at high-fidelity models for the virtual computer history museum and for the consoles in my sw-apl demos."
 series: "Sharpen the Saw Sundays"
 series_part: 17
 date: 2026-11-01 12:00:00 -0800
@@ -15,6 +15,8 @@ repo_urls:
     title: "s1130-3D"
   - url: "https://github.com/softwarewrighter/s5100-3D"
     title: "s5100-3D"
+  - url: "https://github.com/softwarewrighter/console-3D"
+    title: "console-3D"
   - url: "https://github.com/softwarewrighter/lucy-3D"
     title: "lucy-3D"
   - url: "https://github.com/softwarewrighter/X_eTaL-extensions"
@@ -28,7 +30,7 @@ repo_urls:
      ranges and first-match-only, 3 literal patterns -F, 4 --strict, 5 --diff). Mike: "I'm not implementing all of the asks, but
      some of them": WHICH ones is not yet known (Mike: TODO below). 3D: lucy-3D (25U rack, lucy-early / lucy-later; 2026-10-31 to
      11-01), s1130-3D (IBM 1131 CPU desk console; X_eTaL + Blender, named parts, .glb/.blend/.obj; switches, hatch), s5100-3D (IBM
-     5100; WIP). Mike's plan: four APLs in sw-apl, ca. '68 1130 APL with a 1053 console, a 2741 console for the '68 APL\360 demo,
+     5100; WIP), console-3D (fb79c47: IBM 1053, 2741, 5471 on shared Selectric helpers; TRS-80 to be added, per Mike). Mike's plan: four APLs in sw-apl, ca. '68 1130 APL with a 1053 console, a 2741 console for the '68 APL\360 demo,
      a 5100 for the '75 5100 demo, and a TRS-80 / IBM 5471 for a future APL-80 demo. Date: today is Sunday 11/01; -0800 since
      12:00 is after the 2 a.m. change (the publish script restamps 00:15 with the right offset). Lead image: Mike's
      block-3d-chainsaw.jpg (Dropbox), monochrome, no-invert. -->
@@ -46,6 +48,7 @@ Two saws this week, one small and one large. The small one is sed-rs, my portabl
 | **sed-rs** | [sw-cli-tools/sed-rs](https://github.com/sw-cli-tools/sed-rs); the [asks from reva-fork](https://github.com/softwarewrighter/reva-fork/blob/dev/docs/sed-rs-asks.md) |
 | **IBM 1130** | [s1130-3D](https://github.com/softwarewrighter/s1130-3D) |
 | **IBM 5100** | [s5100-3D](https://github.com/softwarewrighter/s5100-3D) |
+| **The consoles** | [console-3D](https://github.com/softwarewrighter/console-3D) (1053, 2741, 5471) |
 | **Lucy's rack** | [lucy-3D](https://github.com/softwarewrighter/lucy-3D) |
 | **The pipeline** | [X_eTaL-extensions](https://github.com/softwarewrighter/X_eTaL-extensions) (the Blender extension) |
 | **For** | [the research campus](/2026/09/12/software-wrighter-research-campus/), [sw-apl](https://github.com/sw-vibe-coding/sw-apl) |
@@ -70,13 +73,14 @@ Mike: TODO, which asks you are implementing (and, if you like, why the others ar
 
 ## The Blender saw
 
-The other saw is 3D modeling with X_eTaL and its Blender extension. X_eTaL builds the model as code, the extension hands it to Blender, and Blender writes `.blend`, `.glb` and `.obj` files with named parts, so a switch or a door can be found and moved in an interactive scene. Three models are teaching me where the pipeline is weak:
+The other saw is 3D modeling with X_eTaL and its Blender extension. X_eTaL builds the model as code, the extension hands it to Blender, and Blender writes `.blend`, `.glb` and `.obj` files with named parts, so a switch or a door can be found and moved in an interactive scene. Four projects are teaching me where the pipeline is weak:
 
 - **[An IBM 1130](https://github.com/softwarewrighter/s1130-3D),** the 1131 CPU desk console, with its data switches, buttons, panels and a hatch that opens.
 - **[An IBM 5100](https://github.com/softwarewrighter/s5100-3D),** the portable from the mid-1970s, built up in measured, reference-checked steps.
+- **[The consoles](https://github.com/softwarewrighter/console-3D):** the IBM 1053 console of the 1130 and 1800, the IBM 2741 APL terminal, and the IBM 5471, the printer-keyboard of the System/3. All three are built on the Selectric typing mechanism, so they share their construction helpers. A TRS-80 is to be added.
 - **[Lucy's rack](https://github.com/softwarewrighter/lucy-3D),** a 25U server rack in two layouts, early and later, from photos of [my home AI cluster](/2026/02/28/lucy-20-percent-ai-cluster-upgrade/).
 
-The goal is higher-fidelity models for two places. The first is the virtual Computer History Museum on [my research campus](/2026/09/12/software-wrighter-research-campus/). The second is [sw-apl](https://github.com/sw-vibe-coding/sw-apl), where I plan to show four APLs, each with the machine it ran on:
+The goal is higher-fidelity models for two places. The first is the virtual Computer History Museum on [my research campus](/2026/09/12/software-wrighter-research-campus/). The second is [sw-apl](https://github.com/sw-vibe-coding/sw-apl), where I plan to show four APLs, each with the machine it ran on, which is where the console models come in:
 
 | APL | Era | Console |
 |---|---|---|
