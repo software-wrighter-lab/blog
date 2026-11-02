@@ -28,7 +28,7 @@ repo_urls:
 <!-- DRAFT (2026-11-01), Mike: a short Saw post: "a sed saw and a xtl-blender saw". sed-rs (sw-cli-tools/sed-rs; main f52ba15,
      0.2.0 on 2026-10-25; uncommitted Cargo changes locally) and reva-fork docs/sed-rs-asks.md (2026-11-01: 1 -i[SUFFIX], 2 address
      ranges and first-match-only, 3 literal patterns -F, 4 --strict, 5 --diff). Mike: "I'm not implementing all of the asks, but
-     some of them": WHICH ones is not yet known (Mike: TODO below). 3D: lucy-3D (25U rack, lucy-early / lucy-later; 2026-10-31 to
+     some of them": WHICH ones is not yet known (Mike: TODO below). 3D: lucy-3D (25U rack; three views per Mike 2026-11-01: empty, early (3 servers), later (more); pushed README still lists lucy-early / lucy-later; 2026-10-31 to
      11-01), s1130-3D (IBM 1131 CPU desk console; X_eTaL + Blender, named parts, .glb/.blend/.obj; switches, hatch), s5100-3D (IBM
      5100; WIP), console-3D (fb79c47: IBM 1053, 2741, 5471 on shared Selectric helpers; TRS-80 to be added, per Mike). Mike's plan: four APLs in sw-apl, '68 APL\1130 (IBM's first APL for sale) with a 1053 console, a 2741 console for the ca. '70 APL\360 demo (a later release, not the first; Mike corrected '68 on 2026-11-01),
      a 5100 for the '75 5100 demo, and a TRS-80 / IBM 5471 for a future APL-80 demo. Date: today is Sunday 11/01; -0800 since
@@ -79,7 +79,7 @@ The other saw is 3D modeling with X_eTaL and its Blender extension. X_eTaL build
 - **[An IBM 1130](https://github.com/softwarewrighter/s1130-3D),** the 1131 CPU desk console, with its data switches, buttons, panels and a hatch that opens.
 - **[An IBM 5100](https://github.com/softwarewrighter/s5100-3D),** the portable from the mid-1970s, built up in measured, reference-checked steps.
 - **[The consoles](https://github.com/softwarewrighter/console-3D):** the IBM 1053 console of the 1130 and 1800, the IBM 2741 APL terminal, and the IBM 5471, the printer-keyboard of the System/3. All three are built on the Selectric typing mechanism, so they share their construction helpers. A TRS-80 is to be added.
-- **[Lucy's rack](https://github.com/softwarewrighter/lucy-3D),** a 25U server rack in two layouts, early and later, from photos of [my home AI cluster](/2026/02/28/lucy-20-percent-ai-cluster-upgrade/).
+- **[Lucy's rack](https://github.com/softwarewrighter/lucy-3D),** a 25U server rack modeled from photos of [my home AI cluster](/2026/02/28/lucy-20-percent-ai-cluster-upgrade/), in three views: empty, early (three servers) and later (more servers).
 
 The goal is higher-fidelity models for two places. The first is the virtual Computer History Museum on [my research campus](/2026/09/12/software-wrighter-research-campus/). The second is [sw-apl](https://github.com/sw-vibe-coding/sw-apl), where I plan to show four APLs, each with the machine it ran on, which is where the console models come in:
 
