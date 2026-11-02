@@ -27,7 +27,8 @@ date: 2026-11-02 00:15:00 -0800
      Codex for non-coding: blogging, flashing microcontrollers, lab equipment over USB (he wrote "SICP?": SCPI assumed), embedded;
      opencode + GLM-5.x for junior coding, web sites, GitHub commit/PR tracking, some vibe-maintenance; no local models in production;
      planned local agent team; Local GPU section (Mike, 2026-11-02): tasks and models as he listed; TRELLIS (Microsoft caps), Whisper, SpeechT5, Stable
-     Diffusion, VibeVoice, MuseTalk checked on GitHub / Hugging Face; image-to-video model not named yet. FreeToken, Strata, Avalon named by Mike; checked 2026-11-02 by web search, spellings as written). Lead image: Mike's block-terminal-ai.jpg (Dropbox), block print of terminals reading codex, opencode,
+     Diffusion, VibeVoice, MuseTalk checked on GitHub / Hugging Face; image-to-video: Wan 2.x (Mike; project spells it Wan, e.g. Wan2.2). NightCafe section per Mike 2026-11-02 (Nano
+     Banana 2.1, consistent characters, community and custom templates); no claim about which blog images came from it. FreeToken, Strata, Avalon named by Mike; checked 2026-11-02 by web search, spellings as written). Lead image: Mike's block-terminal-ai.jpg (Dropbox), block print of terminals reading codex, opencode,
      claude and agy (fixed 2026-10-30; first version read agv), green text, no-invert. -->
 
 <img src="{{ '/assets/images/posts/block-terminal-ai.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
@@ -108,7 +109,12 @@ Local models do plenty of other work for me, just not coding yet. I download ope
 | Text to speech | [SpeechT5](https://github.com/microsoft/SpeechT5) and [VibeVoice](https://github.com/microsoft/VibeVoice) (Microsoft) |
 | Voice cloning | VibeVoice, from a short voice sample |
 | Lip-syncing a face to speech | [MuseTalk](https://github.com/TMElyralab/MuseTalk) (Tencent Music's Lyra Lab) |
-| Image to video | Mike: TODO, which model |
+| Image to video | [Wan 2.x](https://github.com/Wan-Video/Wan2.2) (Alibaba) |
+
+## NightCafe, in the cloud
+{: .pos-right}
+
+For images and video I also use [NightCafe](https://creator.nightcafe.studio/explore), a site that hosts many, many image and video models in the cloud. I use it for text to image, image editing and image to video, and Nano Banana 2.1 most of all. Two of its features matter to me: consistent characters, which keep the same character across many images, and templates, both the community's and custom ones of my own.
 
 ## How I choose
 {: .pos-center}
