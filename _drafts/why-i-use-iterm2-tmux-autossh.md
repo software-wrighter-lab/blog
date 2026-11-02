@@ -72,7 +72,9 @@ I used [mosh](https://mosh.org/), the mobile shell, before it. mosh keeps a sess
 
 autossh brings the connection back; tmux keeps the work alive while it is gone. Sessions live on the server, so a reboot of the MacBook, a new client, or a different machine can re-attach to the same running agent. That is what made [multi-day agent runs](/2026/04/19/saw-prolog-many-agents-self-hosting-mlpl/) on the Arch host practical: the agent keeps working whether or not anything is connected to it, and it can be inspected from wherever I am.
 
-Mike: TODO, how you lay out sessions and windows (one session per agent user? per project?), and whether you have any tmux configuration worth showing. There is no `~/.tmux.conf` on the Mac, so it may live on the Arch side or not exist.
+I use tmux with a config of my own, and typically with two windows: one running a coding agent, the other a shell.
+
+I connect this way to many different users on the target machines, not just my main one. Those other Linux logins have reduced privileges: they cannot change anything on GitHub, cannot push, and cannot edit each other's cloned repositories. Each agent works in its own login, and the worst it can do stays there.
 
 ## Before tmux
 
