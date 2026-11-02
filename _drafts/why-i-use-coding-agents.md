@@ -153,7 +153,7 @@ FreeToken and Strata are optimizations for NVIDIA GPUs, where a card's VRAM is s
 
 The problem they solve is bandwidth. A GPU reads its own VRAM fast, but everything that does not fit there lives in system RAM, on the far side of a PCIe bus that is much slower than either memory.
 
-Most of my workstations and rack servers are PCIe 3: HPE ProLiant Gen8, Gen9 and Gen10 servers, Dell Precision T7910 workstations and a Lenovo ThinkStation P520. PCIe 3 gives a card about 16 GB/s with sixteen lanes, or half that with eight. The newest, a ProLiant Gen10 Plus, is PCIe 4, which doubles that. Approximate peak figures:
+Most of my workstations and rack servers are PCIe 3: HPE ProLiant Gen8, Gen9 and Gen10 servers, Dell Precision T7910 workstations and a Lenovo ThinkStation P520. PCIe 3 gives a card about 16 GB/s with sixteen lanes, or half that with eight. Two of the servers have 640 GB of RAM each, room for a large model's cold experts: a 2U Gen8 with four Xeons, and a 1U Gen10 Plus with one. The Gen10 Plus is the newest, and the one that is PCIe 4, which doubles that. Approximate peak figures:
 
 | Path | Bandwidth |
 |---|---|
