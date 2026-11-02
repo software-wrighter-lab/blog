@@ -29,6 +29,8 @@ repo_urls:
 
 <img src="{{ '/assets/images/posts/emacs-dired-home.webp' | relative_url }}" class="post-marker no-invert" alt="An Emacs Dired buffer listing a home directory" style="width: 205px;">
 
+Mike: TODO, replace this lead image (a Dired listing, a stand-in) with a screenshot of actual Emacs AI coding panes: gptel or emacs-agent at work.
+
 [Why I Use #5](/2026/11/01/why-i-use-gnu-tools/) mentioned that since 2025 I have also used Emacs as an AI client. This post is how: two projects, a gateway that gives Emacs one door to every model, and an agent that lives inside Emacs.
 
 <!--more-->
