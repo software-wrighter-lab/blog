@@ -21,8 +21,21 @@
     // {: .pos-left} / .pos-center / .pos-right on the line after it);
     // the sections after it go on alternating from there. Without any,
     // this is i % 3, as before.
+    // A headingless continuation, <section class="stagger" markdown="1">,
+    // takes the next position and ends the section before it.
+    const first = toStagger[0];
+    const parts = Array.from(post.querySelectorAll(':scope > h2, :scope > section.stagger'))
+      .filter(function(el) {
+        return el.tagName === 'H2' ? toStagger.indexOf(el) >= 0
+          : first.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_FOLLOWING;
+      });
     let prev = -1;
-    toStagger.forEach(function(h2) {
+    parts.forEach(function(h2) {
+      if (h2.tagName === 'SECTION') {
+        prev = (prev + 1) % 3;
+        h2.classList.add('stagger-' + prev);
+        return;
+      }
       const pinned = h2.classList.contains('pos-left') ? 0
                    : h2.classList.contains('pos-center') ? 1
                    : h2.classList.contains('pos-right') ? 2 : null;
@@ -34,7 +47,8 @@
       h2.parentNode.insertBefore(section, h2);
 
       let node = h2;
-      while (node && (node === h2 || (node.tagName !== 'H2' && node.tagName !== 'HR'))) {
+      while (node && (node === h2 || (node.tagName !== 'H2' && node.tagName !== 'HR' &&
+                                     !node.classList.contains('stagger')))) {
         const next = node.nextElementSibling;
         section.appendChild(node);
         node = next;
