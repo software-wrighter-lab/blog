@@ -4,7 +4,7 @@ title: "Saw #17: A Sharper sed, and X_eTaL in Blender for a Computer Museum"
 categories: [tools, 3d]
 tags: [sharpen-the-saw, sed-rs, rust, cli, x-etal, xetal, blender, 3d-models, ibm-1130, ibm-5100, apl, sw-apl, retrocomputing]
 keywords: "Sharpen the Saw, sed-rs, portable sed in Rust, in-place editing, address ranges, X_eTaL Blender extension, 3D models of vintage computers, IBM 1130, IBM 5100, server rack model, virtual computer history museum, sw-apl consoles"
-abstract: "Two saws this week. sed-rs, my portable sed in Rust, got a list of asks from using it to edit reva-fork, and I am taking some of them, not all. And I am building 3D models of real machines with X_eTaL and Blender, an IBM 1130, an IBM 5100, three Selectric-based consoles and my Lucy server rack, to get better at high-fidelity models for the virtual computer history museum and for the consoles in my sw-apl demos."
+abstract: "Two saws this week. sed-rs, my portable sed in Rust, got a list of asks from using it to edit reva-fork; all five are in the next version, some changed after negotiation. And I am building 3D models of real machines with X_eTaL and Blender, an IBM 1130, an IBM 5100, three Selectric-based consoles and my Lucy server rack, to get better at high-fidelity models for the virtual computer history museum and for the consoles in my sw-apl demos."
 series: "Sharpen the Saw Sundays"
 series_part: 17
 date: 2026-11-01 12:00:00 -0800
@@ -28,7 +28,8 @@ repo_urls:
 <!-- DRAFT (2026-11-01), Mike: a short Saw post: "a sed saw and a xtl-blender saw". sed-rs (sw-cli-tools/sed-rs; main f52ba15,
      0.2.0 on 2026-10-25; uncommitted Cargo changes locally) and reva-fork docs/sed-rs-asks.md (2026-11-01: 1 -i[SUFFIX], 2 address
      ranges and first-match-only, 3 literal patterns -F, 4 --strict, 5 --diff). Mike: "I'm not implementing all of the asks, but
-     some of them": WHICH ones is not yet known (Mike: TODO below). 3D: lucy-3D (25U rack; three views per Mike 2026-11-01: empty, early (3 servers), later (more); README 8400cd0 shows all three renders; gutter image is images/lucy-early.png from it; 2026-10-31 to
+     some of them". Resolved 2026-11-01 from sed-rs docs/reva-fork-response.md
+     (uncommitted, in testing; not linked until pushed): all five in 0.3.0, negotiated as written; --expect=N added. 3D: lucy-3D (25U rack; three views per Mike 2026-11-01: empty, early (3 servers), later (more); README 8400cd0 shows all three renders; gutter image is images/lucy-early.png from it; 2026-10-31 to
      11-01), s1130-3D (IBM 1131 CPU desk console; X_eTaL + Blender, named parts, .glb/.blend/.obj; switches, hatch), s5100-3D (IBM
      5100; WIP), console-3D (fb79c47: IBM 1053, 2741, 5471 on shared Selectric helpers; TRS-80 to be added, per Mike). Mike's plan: four APLs in sw-apl, '68 APL\1130 (IBM's first APL for sale) with a 1053 console, a 2741 console for the ca. '70 APL\360 demo (a later release, not the first; Mike corrected '68 on 2026-11-01),
      a 5100 for the '75 5100 demo, and a TRS-80 / IBM 5471 for a future APL-80 demo. Date: today is Sunday 11/01; -0800 since
@@ -68,9 +69,20 @@ I wrote [sed-rs](https://github.com/sw-cli-tools/sed-rs) because the Mac's BSD `
 4. **`--strict`**, so an edit that matched nothing fails instead of looking like success.
 5. **`--diff`**, to show what changed without a separate `diff`.
 
-I am not taking all of them, but some are worth the sharpening.
+<div class="aside-box" style="float: left; width: 36%; margin: 0.3em 1.8em 1.2em 0;" markdown="1">
 
-Mike: TODO, which asks you are implementing (and, if you like, why the others are left out).
+**Why Sharpen the Saw?** --- Stephen Covey's *[The 7 Habits of Highly Effective People](https://en.wikipedia.org/wiki/The_7_Habits_of_Highly_Effective_People)* (1989) ends with Habit 7, "Sharpen the Saw": a woodcutter too busy sawing to stop and sharpen the blade works harder and cuts less. The first six habits are about doing the work; the seventh is about renewing what does it. This series tracks the weekly investment in my tools themselves, so the work done with them goes faster.
+
+</div>
+
+All five made it into sed-rs 0.3.0, now in testing, but not all as asked. Some were negotiated:
+
+- **`s//…/` does not reuse the last pattern,** as GNU's does; it keeps its old meaning, so ask 2's example repeats the pattern instead.
+- **Literal mode is not quite "nothing is special".** `\n`, `\t`, `\\` and an escaped delimiter still work, because inserting lines needs `\n`. And `-F` makes only the substitutions literal, not the addresses.
+- **No default warning** for an edit that matched nothing, only `--strict`. Filters that normalize test output often contain substitutions that do not match, and a warning would flood them.
+- **One addition:** `--expect=N`, which fails unless exactly N replacements were made, so a pattern that is too broad is caught as well as one that matches nothing.
+
+Whatever the flags, a failed script or check now leaves every file untouched. Existing users are protected: 68 recorded invocations from the previous version replay unchanged, apart from two intended changes, and 4,000 generated cases check the new code against a frozen copy of the old.
 
 ## The Blender saw
 
