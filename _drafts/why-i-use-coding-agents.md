@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Why I Use #6: Coding Agents --- Claude Code, Codex, Antigravity and opencode"
+title: "Why I Use #6: Coding Agents --- Claude Code, Codex, Antigravity and OpenCode"
 categories: [tools, ai-agents]
 tags: [why-i-use, ai-agents, coding-agents, claude-code, codex, gemini, antigravity, agy, opencode, z-ai, glm, skills]
-keywords: "why I use coding agents, Claude Code, OpenAI Codex, Gemini CLI deprecated, Google Antigravity CLI agy, opencode, Z.ai GLM-5, agent skills, cloud agents, comparing coding agents"
-abstract: "Sixth in the series on the tools I reach for: the coding agents. Claude Code, which I have used since 2025, and the others I have worked with alongside it this year: OpenAI's Codex, Google's Gemini CLI, which I preferred the others over, and opencode with Z.ai's GLM models. What each is for in my work, how I run them side by side, and why Gemini CLI's replacement, Antigravity, has earned another try."
+keywords: "why I use coding agents, Claude Code, OpenAI Codex, Gemini CLI deprecated, Google Antigravity CLI agy, OpenCode, Z.ai GLM-5, agent skills, cloud agents, comparing coding agents"
+abstract: "Sixth in the series on the tools I reach for: the coding agents. Claude Code, which I have used since 2025, and the others I have worked with alongside it this year: OpenAI's Codex, Google's Gemini CLI, which I preferred the others over, and OpenCode with Z.ai's GLM models. What each is for in my work, how I run them side by side, and why Gemini CLI's replacement, Antigravity, has earned another try."
 series: "Why I Use"
 series_part: 6
 date: 2026-11-02 00:15:00 -0800
@@ -26,12 +26,12 @@ date: 2026-11-02 00:15:00 -0800
      Mike's reasons filled 2026-11-02 from his message (ChatGPT web for research/architecture/planning; Claude Code for most implementation;
      Codex for non-coding: blogging, flashing microcontrollers, lab equipment over USB (he wrote "SICP?": SCPI assumed), embedded;
      opencode + GLM-5.x for junior coding, web sites, GitHub commit/PR tracking, some vibe-maintenance; no local models in production;
-     planned local agent team; FreeToken, Strata, Avalon named by Mike, NOT verified here). Lead image: Mike's block-terminal-ai.jpg (Dropbox), block print of terminals reading codex, opencode,
+     planned local agent team; FreeToken, Strata, Avalon named by Mike; checked 2026-11-02 by web search, spellings as written). Lead image: Mike's block-terminal-ai.jpg (Dropbox), block print of terminals reading codex, opencode,
      claude and agy (fixed 2026-10-30; first version read agv), green text, no-invert. -->
 
 <img src="{{ '/assets/images/posts/block-terminal-ai.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
-The [prior post](/2026/11/01/why-i-use-gnu-tools/) in this series was about GNU's tools, which I have used for decades. This one is about the newest row on [my timeline of tools](/2026/10/01/tbt-timelines-of-tools/), and the fastest-moving: coding agents. Claude Code since 2025, and this year Codex, Gemini and opencode beside it, with Gemini CLI's replacement, Antigravity, now getting another try.
+The [prior post](/2026/11/01/why-i-use-gnu-tools/) in this series was about GNU's tools, which I have used for decades. This one is about the newest row on [my timeline of tools](/2026/10/01/tbt-timelines-of-tools/), and the fastest-moving: coding agents. Claude Code since 2025, and this year Codex, Gemini and OpenCode beside it, with Gemini CLI's replacement, Antigravity, now getting another try.
 
 <!--more-->
 
@@ -42,7 +42,7 @@ The [prior post](/2026/11/01/why-i-use-gnu-tools/) in this series was about GNU'
 | **Claude Code** | [claude.com/claude-code](https://claude.com/claude-code) |
 | **Codex** | [OpenAI Codex](https://openai.com/codex/) |
 | **Antigravity** | [antigravity.google](https://antigravity.google/); the [Gemini CLI shutdown notice](https://github.com/google-gemini/gemini-cli/discussions/28017) |
-| **opencode** | [opencode.ai](https://opencode.ai); models from [Z.ai](https://z.ai) |
+| **OpenCode** | [OpenCode.ai](https://opencode.ai); models from [Z.ai](https://z.ai) |
 | **Earlier posts** | [AI Tools: every post](/series/#ai-tools) |
 | **The series** | [Why I Use: every post](/series/#why-i-use) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
@@ -51,7 +51,7 @@ The [prior post](/2026/11/01/why-i-use-gnu-tools/) in this series was about GNU'
 
 ## One workflow, several agents
 
-I run every agent the same way: the same machine, the same project, the same shell and tmux session, so what changes between them is the agent and not the setup ([AI Tools #4](/2026/05/16/pi-minimal-agent/)). That makes them easier to compare, and it lets several work at once. [All Together Now](/2026/04/12/saw-agent-coordination-fuzzit-vendoring/) coordinated Claude Code and opencode agents in one web UI, and the agents now work on Arch Linux machines, one user per agent.
+I run every agent the same way: the same machine, the same project, the same shell and tmux session, so what changes between them is the agent and not the setup ([AI Tools #4](/2026/05/16/pi-minimal-agent/)). That makes them easier to compare, and it lets several work at once. [All Together Now](/2026/04/12/saw-agent-coordination-fuzzit-vendoring/) coordinated Claude Code and OpenCode agents in one web UI, and the agents now work on Arch Linux machines, one user per agent.
 
 ## Claude Code
 
@@ -75,11 +75,11 @@ What that means in practice:
 
 The models underneath are still Gemini.
 
-## opencode, with Z.ai's GLM
+## OpenCode, with Z.ai's GLM
 
-[opencode](https://opencode.ai) is the open one: an agent that can drive many models. I use it with [Z.ai](https://z.ai)'s GLM models on its developer plan. It wrote the first attempt at the sound-effects project with GLM-4.7 in February, it ran beside Claude Code under All Together Now with GLM-5, and because it can point at any model, it is the harness I used to test [local models in a plan, execute and review loop](/2026/09/09/ai-tools-local-llm-loop-model-evaluation/). It is also the architectural reference for [the coding agent I wrote in MLPL](/2026/09/16/ai-tools-coding-agent-in-mlpl/).
+[OpenCode](https://opencode.ai) is the open one: an agent that can drive many models. I use it with [Z.ai](https://z.ai)'s GLM models on its developer plan. It wrote the first attempt at the sound-effects project with GLM-4.7 in February, it ran beside Claude Code under All Together Now with GLM-5, and because it can point at any model, it is the harness I used to test [local models in a plan, execute and review loop](/2026/09/09/ai-tools-local-llm-loop-model-evaluation/). It is also the architectural reference for [the coding agent I wrote in MLPL](/2026/09/16/ai-tools-coding-agent-in-mlpl/).
 
-Today I use opencode with Z.ai's GLM-5.x models for junior coding tasks, for updating web sites, for keeping track of GitHub commits and pull requests, and sometimes for [vibe-maintenance](/2026/04/29/personal-software-vibe-maintenance/).
+Today I use OpenCode with Z.ai's GLM-5.x models for junior coding tasks, for updating web sites, for keeping track of GitHub commits and pull requests, and sometimes for [vibe-maintenance](/2026/04/29/personal-software-vibe-maintenance/).
 
 ## How I choose
 {: .pos-center}
@@ -91,7 +91,7 @@ I have no measurements to justify these choices. They are what I have settled in
 | Research, architecture, high-level planning | ChatGPT, on the web |
 | Implementing most software projects | Claude Code |
 | Non-coding work, blogging (shared with Claude), hardware and embedded work | Codex |
-| Junior coding tasks, web site updates, GitHub commit and pull-request tracking, some maintenance | opencode with GLM-5.x |
+| Junior coding tasks, web site updates, GitHub commit and pull-request tracking, some maintenance | OpenCode with GLM-5.x |
 | Trying again, after it passed my Rust puzzle | Antigravity |
 
-I still do not rely on local models to produce anything. But I am still planning a local team of AI coding agents running on distributed local CPUs, and it is closer than it was: recent work such as FreeToken, Strata and Avalon lets decent coding models, built on mixture-of-experts and speculative decoding, run on the smaller GPUs I have. I expect to use it for toy projects first, and then perhaps for daily development.
+I still do not rely on local models to produce anything. But I am still planning a local team of AI coding agents running on distributed local CPUs, and it is closer than it was: recent work such as [FreeToken](https://arxiv.org/abs/2608.16157), [Strata](https://simeononsecurity.com/articles/strata-opencode-local-coding-agent-16gb/) and [Avalon](https://github.com/freriadoc/Avalon) lets decent coding models, built on mixture-of-experts and speculative decoding, run on the smaller GPUs I have. I expect to use it for toy projects first, and then perhaps for daily development.
