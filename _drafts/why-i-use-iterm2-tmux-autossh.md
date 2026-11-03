@@ -64,7 +64,17 @@ ssh is a TCP connection: close the laptop, change Wi-Fi, or let the network drop
 
 A reconnect is not seamless: the old connection is gone and a new one takes its place. That is fine, because the work was never in the connection. It is in tmux.
 
-Mike: TODO, how you run autossh (a shell alias or function per host? `-M 0` with ssh's `ServerAliveInterval`?), and whether it re-attaches to tmux by itself.
+I connect with a shell alias. This one is for large12:
+
+```bash
+alias mlarge12='autossh -M 0 -t large12 "tmux attach-session || tmux new-session"'
+```
+
+- `-M 0` turns off autossh's own monitoring port, so it restarts ssh whenever ssh exits.
+- `-t` gives the remote command a terminal, which tmux needs.
+- `tmux attach-session || tmux new-session` re-attaches to the session that is already running, or starts one if there is none.
+
+So one command takes me from the Mac straight back into whatever was running, and a reconnect lands in the same place.
 
 I used [mosh](https://mosh.org/), the mobile shell, before it. mosh keeps a session alive across sleep and changes of network instead of reconnecting, which is the better idea on paper. In practice it proved unreliable for me, and lately it refuses to connect from my Mac at all. Local and cloud LLMs suggested plenty of diagnostics and proposed causes that turned out to be wrong, and none of them got mosh working reliably. autossh is less clever, and it works for me, so far.
 
