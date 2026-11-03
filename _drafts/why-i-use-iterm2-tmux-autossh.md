@@ -50,14 +50,14 @@ The [prior post](/2026/11/02/why-i-use-coding-agents/) in this series was about 
 
 From the MacBook, I connect with autossh to an Arch Linux machine, log in as an unprivileged user (one per agent), and run tmux. One tmux window runs the agent; another is a shell prompt, or sometimes an Emacs shell ([AI Tools #4](/2026/05/16/pi-minimal-agent/)). The same arrangement runs every agent, so what changes between them is the agent and not the setup.
 
-<figure class="zoomable" style="width: 320px; margin: 1em 0;">
-<img src="{{ '/assets/images/posts/iterm2-badge-claude-status.webp' | relative_url }}" class="no-invert" alt="Part of an iTerm2 window: a row of tabs, each with a Claude Code status (idle, working, waiting) under its title; the large faint badge 'blog' behind the text of the current session; and a Session Status panel listing Claude sessions, one waiting for permission to run a command">
-<figcaption style="font-size: 0.85em;">One session per tab: the badge (blog), and Claude Code's status on each tab and in the Session Status panel. Click to enlarge.</figcaption>
-</figure>
-
 ## iTerm2: the Mac end
 
-iTerm2 is the terminal on the Mac.
+<figure class="zoomable outdent-right" style="width: 160px;">
+<img src="{{ '/assets/images/posts/iterm2-badge-claude-status.webp' | relative_url }}" class="no-invert" alt="Part of an iTerm2 window: a row of tabs, each with a Claude Code status (idle, working, waiting) under its title; the large faint badge 'blog' behind the text of the current session; and a Session Status panel listing Claude sessions, one waiting for permission to run a command">
+<figcaption style="font-size: 0.85em;">Badge, Claude status.</figcaption>
+</figure>
+
+iTerm2 is the terminal I choose to use on my Macs.
 
 Mainly I use it for its watermark, which iTerm2 calls a badge: large, faint text in the corner of each session that shows what that tab is working on. With an agent in every tab, a glance tells me which is which.
 
