@@ -85,6 +85,11 @@ I used [mosh](https://mosh.org/), the mobile shell, before it. mosh keeps a sess
 
 ## tmux: a session that survives the connection
 
+<figure class="zoomable outdent-left" style="width: 380px;">
+<img src="{{ '/assets/images/posts/tmux-codex-large12.webp' | relative_url }}" class="no-invert" alt="A wide strip of an iTerm2 window: Codex waiting for its next request inside tmux on large12, with tmux's green status line (session main, window 0:codex, mike@large12 and the working directory) along the bottom, and iTerm2's Session Status panel at the right">
+<figcaption style="font-size: 0.85em;">Codex in tmux on large12. Click to enlarge.</figcaption>
+</figure>
+
 autossh brings the connection back; tmux keeps the work alive while it is gone. Sessions live on the server, so a reboot of the MacBook, a new client, or a different machine can re-attach to the same running agent. That is what made [multi-day agent runs](/2026/04/19/saw-prolog-many-agents-self-hosting-mlpl/) on the Arch host practical: the agent keeps working whether or not anything is connected to it, and it can be inspected from wherever I am.
 
 I use tmux with a config of my own, and typically with two windows: one running a coding agent, the other a shell.
