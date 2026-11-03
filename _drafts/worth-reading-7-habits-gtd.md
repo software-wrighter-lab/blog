@@ -15,9 +15,9 @@ date: 2026-12-17 00:15:00 -0800
      Mike's request: Loosely Coupled (Doug Kaye, RDS Press, 2003), The Timeless Way of Building (Alexander, 1979), Gödel, Escher, Bach
      (Hofstadter, 1979); SICP (Abelson and Sussman, 1985), 2026-11-03, when the languages post split into logic (GEB, Mockingbird) and building languages (Loeliger, SICP, AMOP); Your Code as a Crime Scene (Tornhill, 2015) and Design Patterns for Object-Oriented Software Development (Pree, 1995), both 2026-11-03, when #3 split into the pattern books and the coupling books; The Art of the Metaobject Protocol (Kiczales, des Rivières, Bobrow, 1991), added to the languages post 2026-11-03; Alexander's two books split from Design Patterns and Loosely Coupled. Within each post the books are in order
      of first publication until Mike reorders them by when he read them. What each book taught him is Mike: TODO; do not add reasons
-     he has not given. Links point only to published posts that already cite the book or its subject. Lead image: placeholder-worth-reading-7-habits-gtd.webp -->
+     he has not given. Links point only to published posts that already cite the book or its subject. Lead image: Mike's logo-seven-done (Downloads, 2026-11-03), no-invert. -->
 
-<img src="{{ '/assets/images/posts/placeholder-worth-reading-7-habits-gtd.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/logo-seven-done.webp' | relative_url }}" class="post-marker no-invert" alt="Two halves: people planning and planting on a sunlit hillside beside a saw, and a man at a desk with folders, lists and a calendar flowing into an inbox" style="width: 205px;">
 
 The [prior post](/2026/12/10/worth-reading-tils-sicp-amop/) in this series was about building languages from a small core. Mike: TODO, an intro in your words for these books.
 

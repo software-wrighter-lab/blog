@@ -15,9 +15,9 @@ date: 2026-11-05 00:15:00 -0800
      Mike's request: Loosely Coupled (Doug Kaye, RDS Press, 2003), The Timeless Way of Building (Alexander, 1979), Gödel, Escher, Bach
      (Hofstadter, 1979); SICP (Abelson and Sussman, 1985), 2026-11-03, when the languages post split into logic (GEB, Mockingbird) and building languages (Loeliger, SICP, AMOP); Your Code as a Crime Scene (Tornhill, 2015) and Design Patterns for Object-Oriented Software Development (Pree, 1995), both 2026-11-03, when #3 split into the pattern books and the coupling books; The Art of the Metaobject Protocol (Kiczales, des Rivières, Bobrow, 1991), added to the languages post 2026-11-03; Alexander's two books split from Design Patterns and Loosely Coupled. Within each post the books are in order
      of first publication until Mike reorders them by when he read them. What each book taught him is Mike: TODO; do not add reasons
-     he has not given. Links point only to published posts that already cite the book or its subject. Lead image: block-desk-books.webp -->
+     he has not given. Links point only to published posts that already cite the book or its subject. Lead image: Mike's block-psych-myth (Downloads, 2026-11-03), no-invert. -->
 
-<img src="{{ '/assets/images/posts/block-desk-books.webp' | relative_url }}" class="post-marker no-invert" alt="A block print of old leather-bound books stacked on a desk under a lamp, one open beside a fountain pen" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-psych-myth.webp' | relative_url }}" class="post-marker no-invert" alt="A glowing book cover: a brain, half folds and half circuitry, ringed by mythical creatures, a phoenix, a dragon, a unicorn, a fairy and a griffin" style="width: 205px;">
 
 Mike: TODO, an intro in your words: why a series on books, and what makes a book worth reading for you. This first post is about two books on the people who write software.
 

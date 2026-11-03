@@ -15,9 +15,9 @@ date: 2026-11-26 00:15:00 -0800
      Mike's request: Loosely Coupled (Doug Kaye, RDS Press, 2003), The Timeless Way of Building (Alexander, 1979), Gödel, Escher, Bach
      (Hofstadter, 1979); SICP (Abelson and Sussman, 1985), 2026-11-03, when the languages post split into logic (GEB, Mockingbird) and building languages (Loeliger, SICP, AMOP); Your Code as a Crime Scene (Tornhill, 2015, added to #3 on 2026-11-03); Design Patterns for Object-Oriented Software Development (Pree, 1995, added 2026-11-03, when #3 split into the pattern books and the coupling books); Alexander's two books split from Design Patterns and Loosely Coupled. Within each post the books are in order
      of first publication until Mike reorders them by when he read them. What each book taught him is Mike: TODO; do not add reasons
-     he has not given. Links point only to published posts that already cite the book or its subject. Lead image: placeholder-worth-reading-loosely-coupled-crime-scene.webp -->
+     he has not given. Links point only to published posts that already cite the book or its subject. Lead image: Mike's block-loosely-scene (Downloads, 2026-11-03), no-invert. -->
 
-<img src="{{ '/assets/images/posts/placeholder-worth-reading-loosely-coupled-crime-scene.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-loosely-scene.webp' | relative_url }}" class="post-marker no-invert" alt="Tangled lines of light across a dark circuit landscape, crossed by yellow crime-scene tape" style="width: 205px;">
 
 The [prior post](/2026/11/19/worth-reading-design-patterns-pree/) in this series was about design patterns in software. Mike: TODO, an intro in your words for these books.
 
