@@ -90,7 +90,7 @@ I connect this way to many different users on the target machines, not just my m
 
 ## Before tmux
 
-Mike: TODO, optional: GNU screen, if you used it before tmux ([#5](/2026/11/01/why-i-use-gnu-tools/) lists it as a candidate).
+Before tmux, Emacs did most of this for me. Its windows split one frame into panes, and a long-running Emacs held my buffers and shells while I came and went: `emacsclient` connected to that running Emacs instead of starting a new one, and [TRAMP](https://www.gnu.org/software/tramp/) let it edit files and run shells on remote machines. I sometimes used GNU screen.
 
 ## Chrome Remote Desktop: more than a terminal
 
