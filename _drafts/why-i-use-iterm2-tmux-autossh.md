@@ -2,7 +2,7 @@
 layout: post
 title: "Why I Use #7: iTerm2, autossh, tmux and Chrome Remote Desktop --- From the MacBook to the Machines"
 categories: [tools, terminals]
-tags: [why-i-use, iterm2, autossh, tmux, ssh, mosh, chrome-remote-desktop, remote-desktop, terminals, macos, arch-linux, ai-agents, remote-development]
+tags: [why-i-use, iterm2, autossh, tmux, ssh, mosh, chrome-remote-desktop, remote-desktop, xfce, terminals, macos, arch-linux, ai-agents, remote-development]
 keywords: "why I use iTerm2, autossh, tmux, Chrome Remote Desktop, remote desktop to Arch Linux, persistent terminal sessions, reconnecting ssh, mosh unreliable, laptop sleep, remote development, coding agents on a remote server, Arch Linux"
 abstract: "Seventh in the series on the tools I reach for: the stack between my MacBook and the machines where my agents work. iTerm2 on the Mac, autossh to bring a dropped ssh connection back (mosh, which I used before, proved unreliable), and tmux for sessions that outlive any connection at all. When a terminal is not enough, Chrome Remote Desktop brings the whole remote desktop to the Mac, to preview graphics or browse a server running on that machine."
 series: "Why I Use"
@@ -97,6 +97,8 @@ Before tmux, Emacs did most of this for me. Its windows split one frame into pan
 Some work needs the remote machine's screen, not just its prompt. For that I use [Chrome Remote Desktop](https://remotedesktop.google.com/) to reach the desktops of the Arch Linux workstations and rack servers from my MacBook.
 
 It lets me do more than the CLI can. I can preview graphics on the machine that made them, and browse local servers in the remote desktop's own browser, where a server listening only on that machine is just a local URL.
+
+The desktop on the other end is [Xfce](https://xfce.org/), a lightweight one, which I chose for its simplicity and responsiveness, and because it uses fewer resources than a heavier desktop would.
 
 ## Three ways to lose a session
 
