@@ -10,10 +10,12 @@ series_part: 1
 date: 2026-11-05 00:15:00 -0800
 ---
 
-<!-- DRAFT (2026-11-02), Mike: "start a new blog post for thursday 11/5, influential books", then "maybe a new series, worth reading";
-     ten books, split into five posts of two, one a week (Mike, 2026-11-02). More books coming; a post holds 2 to 4 books, about 3 on average (Mike, 2026-11-02). Within each post the books are in order of first
-     publication until Mike reorders them by when he read them. What each book taught him is Mike: TODO; do not add reasons he has
-     not given. Links point only to published posts that already cite the book or its subject. Lead image: block-desk-books.webp -->
+<!-- DRAFT (2026-11-02), Mike: "start a new blog post for thursday 11/5, influential books", then "maybe a new series, worth reading".
+     Split into posts of 2 to 4 books, about 3 on average, one a week; more books coming (Mike, 2026-11-02). Added the same day at
+     Mike's request: Loosely Coupled (Doug Kaye, RDS Press, 2003), The Timeless Way of Building (Alexander, 1979), Gödel, Escher, Bach
+     (Hofstadter, 1979); Alexander's two books split from Design Patterns and Loosely Coupled. Within each post the books are in order
+     of first publication until Mike reorders them by when he read them. What each book taught him is Mike: TODO; do not add reasons
+     he has not given. Links point only to published posts that already cite the book or its subject. Lead image: block-desk-books.webp -->
 
 <img src="{{ '/assets/images/posts/block-desk-books.webp' | relative_url }}" class="post-marker no-invert" alt="A block print of old leather-bound books stacked on a desk under a lamp, one open beside a fountain pen" style="width: 205px;">
 
@@ -46,4 +48,4 @@ Mike: TODO, what it taught you.
 
 ## Closing
 
-Mike: TODO, a closing in your words: what the two books have in common, or where they disagree.
+Mike: TODO, a closing in your words: what these books have in common, or where they disagree.

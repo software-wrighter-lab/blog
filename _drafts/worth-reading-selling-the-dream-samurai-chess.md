@@ -1,24 +1,25 @@
 ---
 layout: post
-title: "Worth Reading #5: Persuasion and Strategy --- Kawasaki, Gelb and Keene"
+title: "Worth Reading #6: Persuasion and Strategy --- Kawasaki, Gelb and Keene"
 categories: [books, programming-history]
 tags: [worth-reading, books, guy-kawasaki, selling-the-dream, evangelism, samurai-chess, chess, strategy]
 keywords: "books worth reading, Selling the Dream, Guy Kawasaki, evangelism, Samurai Chess, Michael Gelb, Raymond Keene, chess, strategic thinking"
-abstract: "Fifth in the series on books worth reading. Guy Kawasaki's Selling the Dream (1991), on evangelism as a way to sell a product or an idea, and Michael Gelb and Raymond Keene's Samurai Chess (1997), martial-arts principles applied to chess and strategic thinking."
+abstract: "Sixth in the series on books worth reading. Guy Kawasaki's Selling the Dream (1991), on evangelism as a way to sell a product or an idea, and Michael Gelb and Raymond Keene's Samurai Chess (1997), martial-arts principles applied to chess and strategic thinking."
 series: "Worth Reading"
-series_part: 5
-date: 2026-12-03 00:15:00 -0800
+series_part: 6
+date: 2026-12-10 00:15:00 -0800
 ---
 
-<!-- DRAFT (2026-11-02), Mike: "start a new blog post for thursday 11/5, influential books", then "maybe a new series, worth reading";
-     ten books, split into five posts of two, one a week (Mike, 2026-11-02). More books coming; a post holds 2 to 4 books, about 3 on average (Mike, 2026-11-02).
-     Possible for a post after #5 (Mike, 2026-11-02), not added to any draft yet: The Timeless Way of Building (Christopher Alexander, 1979), volume 1 of the set whose volume 2 is A Pattern Language (#2). Within each post the books are in order of first
-     publication until Mike reorders them by when he read them. What each book taught him is Mike: TODO; do not add reasons he has
-     not given. Links point only to published posts that already cite the book or its subject. Lead image: placeholder-worth-reading-selling-the-dream-samurai-chess.webp -->
+<!-- DRAFT (2026-11-02), Mike: "start a new blog post for thursday 11/5, influential books", then "maybe a new series, worth reading".
+     Split into posts of 2 to 4 books, about 3 on average, one a week; more books coming (Mike, 2026-11-02). Added the same day at
+     Mike's request: Loosely Coupled (Doug Kaye, RDS Press, 2003), The Timeless Way of Building (Alexander, 1979), Gödel, Escher, Bach
+     (Hofstadter, 1979); Alexander's two books split from Design Patterns and Loosely Coupled. Within each post the books are in order
+     of first publication until Mike reorders them by when he read them. What each book taught him is Mike: TODO; do not add reasons
+     he has not given. Links point only to published posts that already cite the book or its subject. Lead image: placeholder-worth-reading-selling-the-dream-samurai-chess.webp -->
 
 <img src="{{ '/assets/images/posts/placeholder-worth-reading-selling-the-dream-samurai-chess.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
-The [prior post](/2026/11/26/worth-reading-7-habits-gtd/) in this series was about principles and a system for getting things done. Mike: TODO, an intro in your words for these two books.
+The [prior post](/2026/12/03/worth-reading-7-habits-gtd/) in this series was about principles and a system for getting things done. Mike: TODO, an intro in your words for these books.
 
 <!--more-->
 
@@ -47,4 +48,4 @@ Mike: TODO, what it taught you.
 
 ## Closing
 
-Mike: TODO, a closing in your words: what the two books have in common, or where they disagree.
+Mike: TODO, a closing in your words: what these books have in common, or where they disagree.
