@@ -11,7 +11,7 @@ date: 2026-11-12 00:15:00 -0800
 ---
 
 <!-- DRAFT (2026-11-02), Mike: "start a new blog post for thursday 11/5, influential books", then "maybe a new series, worth reading";
-     ten books, split into five posts of two, one a week (Mike, 2026-11-02). Loosely Coupled (Doug Kaye, RDS Press, 2003) added to #2 at Mike's request the same day. Within each post the books are in order of first
+     ten books, split into five posts of two, one a week (Mike, 2026-11-02). More books coming; a post holds 2 to 4 books, about 3 on average (Mike, 2026-11-02). Loosely Coupled (Doug Kaye, RDS Press, 2003) added to #2 at Mike's request the same day. Within each post the books are in order of first
      publication until Mike reorders them by when he read them. What each book taught him is Mike: TODO; do not add reasons he has
      not given. Links point only to published posts that already cite the book or its subject. Lead image: placeholder-worth-reading-pattern-language-design-patterns.webp -->
 
