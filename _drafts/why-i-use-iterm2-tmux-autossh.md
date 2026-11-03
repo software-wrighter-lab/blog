@@ -119,6 +119,4 @@ The desktop on the other end is [Xfce](https://xfce.org/), a lightweight one, wh
 
 ## Three ways to lose a session
 
-Each tool closes off one failure: iTerm2 the Mac end, autossh the network in between, tmux the connection itself.
-
-Mike: TODO, a closing in your words. The next post is about what runs at the prompt once you are there: fd, ripgrep, skim, dua and bat.
+The terminal is still pretending to be a VT100. What has changed is everything around it: a Mac that tells me which agent needs me, a connection that comes back on its own, sessions that never noticed it was gone, and a whole desktop when a prompt is not enough. The next post is about what I type at that prompt: fd, ripgrep, skim, dua and bat.
