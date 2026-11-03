@@ -1,17 +1,17 @@
 ---
 layout: post
-title: "Worth Reading #2: Patterns --- From Buildings to Software"
+title: "Worth Reading #2: Patterns and Coupling --- From Buildings to Web Services"
 categories: [books, programming-history]
-tags: [worth-reading, books, christopher-alexander, pattern-language, design-patterns, gang-of-four, object-oriented]
-keywords: "books worth reading, A Pattern Language, Christopher Alexander, Design Patterns, Gang of Four, Gamma Helm Johnson Vlissides, object-oriented design"
-abstract: "Second in the series on books worth reading. Christopher Alexander's A Pattern Language (1977), 253 patterns for towns, buildings and rooms, and the Gang of Four's Design Patterns (1994), which carried the idea into software."
+tags: [worth-reading, books, christopher-alexander, pattern-language, design-patterns, gang-of-four, object-oriented, loose-coupling, web-services, doug-kaye]
+keywords: "books worth reading, A Pattern Language, Christopher Alexander, Design Patterns, Gang of Four, Gamma Helm Johnson Vlissides, object-oriented design, Loosely Coupled, Doug Kaye, The Missing Pieces of Web Services, loose coupling"
+abstract: "Second in the series on books worth reading: three on how things fit together. Christopher Alexander's A Pattern Language (1977), 253 patterns for towns, buildings and rooms; the Gang of Four's Design Patterns (1994), which carried the idea into software; and Doug Kaye's Loosely Coupled (2003), on what web services need to work together across companies."
 series: "Worth Reading"
 series_part: 2
 date: 2026-11-12 00:15:00 -0800
 ---
 
 <!-- DRAFT (2026-11-02), Mike: "start a new blog post for thursday 11/5, influential books", then "maybe a new series, worth reading";
-     ten books, split into five posts of two, one a week (Mike, 2026-11-02). Within each post the books are in order of first
+     ten books, split into five posts of two, one a week (Mike, 2026-11-02). Loosely Coupled (Doug Kaye, RDS Press, 2003) added to #2 at Mike's request the same day. Within each post the books are in order of first
      publication until Mike reorders them by when he read them. What each book taught him is Mike: TODO; do not add reasons he has
      not given. Links point only to published posts that already cite the book or its subject. Lead image: placeholder-worth-reading-pattern-language-design-patterns.webp -->
 
@@ -27,6 +27,7 @@ The [prior post](/2026/11/05/worth-reading-psychology-mythical-man-month/) in th
 |----------|------|
 | **A Pattern Language** | Christopher Alexander et al., 1977 |
 | **Design Patterns** | Gamma, Helm, Johnson, Vlissides, 1994 |
+| **Loosely Coupled** | Doug Kaye, 2003 |
 | **The series** | [Worth Reading: every post](/series/#worth-reading) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
@@ -44,6 +45,12 @@ Erich Gamma, Richard Helm, Ralph Johnson and John Vlissides, the Gang of Four, *
 
 Mike: TODO, what it taught you.
 
+## Loosely Coupled
+
+Doug Kaye, *Loosely Coupled: The Missing Pieces of Web Services* (RDS Press, 2003). The hard parts of web services: security, reliable messaging, and long-lived, asynchronous transactions between systems that should know as little about each other as they can. Coupling is one of the things [sw-checklist](/2026/04/27/sw-checklist-ratchet-ai-coding-agents/) measures.
+
+Mike: TODO, what it taught you.
+
 ## Closing
 
-Mike: TODO, a closing in your words: what the two books have in common, or where they disagree.
+Mike: TODO, a closing in your words: what the three books have in common, or where they disagree.
