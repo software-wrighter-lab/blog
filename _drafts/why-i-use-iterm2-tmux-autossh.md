@@ -102,9 +102,18 @@ Before tmux, Emacs did most of this for me. Its windows split one frame into pan
 
 ## Chrome Remote Desktop: more than a terminal
 
+<figure class="zoomable" style="float: left; width: 150px; margin: 0.3em 1.2em 0.4em 0;">
+<img src="{{ '/assets/images/posts/crd-remote-devices.webp' | relative_url }}" class="no-invert" alt="Chrome Remote Desktop's Remote Access page listing remote devices: large12, manager and mighty online, apiary and beast48 offline">
+<figcaption style="font-size: 0.85em;">Remote devices.</figcaption>
+</figure>
+
 Some work needs the remote machine's screen, not just its prompt. For that I use [Chrome Remote Desktop](https://remotedesktop.google.com/) to reach the desktops of the Arch Linux workstations and rack servers from my MacBook.
 
 It lets me do more than the CLI can. I can preview graphics on the machine that made them, and browse local servers in the remote desktop's own browser, where a server listening only on that machine is just a local URL.
+
+<figure class="zoomable" style="float: right; width: 80px; margin: 0.2em 0 0.4em 1.2em;">
+<img src="{{ '/assets/images/posts/logo-xfce-3d.webp' | relative_url }}" class="no-invert" alt="A 3D Xfce logo: a black mouse leaping over a gray X, above the word XFCE in blue letters">
+</figure>
 
 The desktop on the other end is [Xfce](https://xfce.org/), a lightweight one, which I chose for its simplicity and responsiveness, and because it uses fewer resources than a heavier desktop would.
 
