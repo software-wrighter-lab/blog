@@ -56,7 +56,9 @@ Mike: TODO, a diagram or screenshot of a real session: iTerm2 window, autossh co
 
 iTerm2 is the terminal on the Mac.
 
-Mike: TODO, why iTerm2 rather than Terminal.app (or Ghostty, WezTerm, Alacritty), since when, and which features you actually use. Candidates to confirm or cut: split panes, profiles per host, search and scrollback, and its tmux integration (`tmux -CC`), which shows tmux windows as native iTerm2 tabs.
+Mainly I use it for its watermark, which iTerm2 calls a badge: large, faint text in the corner of each session that shows what that tab is working on. With an agent in every tab, a glance tells me which is which.
+
+Lately there is a second reason: iTerm2 3.7 added a [Claude Code integration](https://iterm2.com/claude-code-integration.html), which shows the status of every Claude session (working, waiting or idle) on its tab.
 
 ## autossh: a connection that comes back
 
