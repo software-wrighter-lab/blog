@@ -13,7 +13,7 @@ date: 2026-11-05 00:15:00 -0800
 <!-- DRAFT (2026-11-02), Mike: "start a new blog post for thursday 11/5, influential books", then "maybe a new series, worth reading".
      Split into posts of 2 to 4 books, about 3 on average, one a week; more books coming (Mike, 2026-11-02). Added the same day at
      Mike's request: Loosely Coupled (Doug Kaye, RDS Press, 2003), The Timeless Way of Building (Alexander, 1979), Gödel, Escher, Bach
-     (Hofstadter, 1979); Your Code as a Crime Scene (Tornhill, 2015) and Design Patterns for Object-Oriented Software Development (Pree, 1995), both 2026-11-03, when #3 split into the pattern books and the coupling books; Alexander's two books split from Design Patterns and Loosely Coupled. Within each post the books are in order
+     (Hofstadter, 1979); Your Code as a Crime Scene (Tornhill, 2015) and Design Patterns for Object-Oriented Software Development (Pree, 1995), both 2026-11-03, when #3 split into the pattern books and the coupling books; The Art of the Metaobject Protocol (Kiczales, des Rivières, Bobrow, 1991), added to the languages post 2026-11-03; Alexander's two books split from Design Patterns and Loosely Coupled. Within each post the books are in order
      of first publication until Mike reorders them by when he read them. What each book taught him is Mike: TODO; do not add reasons
      he has not given. Links point only to published posts that already cite the book or its subject. Lead image: block-desk-books.webp -->
 
