@@ -46,9 +46,9 @@ All eight of its main ideas stayed with me.
 
 **Programming is social.** Most programs are written by groups, so how a team is organized and how it communicates matter as much as any one person's skill. That was a new idea to me when I read it. I had thought that writing software was all about telling the hardware what to do. I came to see that code is read, maintained, debugged, extended and replaced, and that it holds the attention of many people, possibly including me, later. It should be written for that wider audience, not just to produce running code.
 
-**Read programs.** Weinberg opens by arguing that programmers should read other people's programs the way writers read literature, to learn style and to find problems. Mike: TODO, a sentence of your own.
+**Read programs.** Weinberg opens by arguing that programmers should read other people's programs the way writers read literature, to learn style and to find problems. For me it was a daily occurrence, at code reviews of other people's code. Later, open source opened up tons of code to read.
 
-**You cannot fully test your own program.** We tend not to see the errors in work we have just made, so someone else should review and test it. Mike: TODO, a sentence of your own.
+**You cannot fully test your own program.** We tend not to see the errors in work we have just made, so someone else should review and test it. When I developed PL/S code for MVS, we had to step through the code and test every branch condition both ways, a kind of manual code-coverage testing. We tracked it with a yellow highlighter on printed assembler listings: thick printouts, delivered by cart after every compile, printed in duplicate for code review. Once a function tester accused me of skipping that step, because the console showed `SEXTENDED TORAGE` where `EXTENDED STORAGE` was expected. I pulled out my highlighted listing and showed exactly where I had stepped through that code, oblivious to the insert of `MAIN` or `EXTENDED` going in at the wrong offset. So I was not the best at function testing my own code.
 
 **A program has to work first.** In his story, a program judged on speed and size is beaten by one that produces correct results: if a program does not have to work, it can meet any other requirement. Mike: TODO, a sentence of your own.
 
