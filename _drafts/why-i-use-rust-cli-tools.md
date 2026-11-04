@@ -91,7 +91,13 @@ fd -e rs | sk -m | xargs wc -l   # line counts for just the files I mark
 
 Fuzzy matching is also how [pjmai-rs completes project names](/2026/03/07/pjmai-rs-navigation-history-and-fuzzy-completion/): type part of a name and the closest match wins.
 
-Mike: TODO, how you use skim: shell key bindings for history and file search, piping into `sk`, or as a Rust library inside your own tools.
+I run skim with a preview:
+
+```bash
+sk --preview "bat --color=always --style=numbers --line-range=:500 {}"
+```
+
+skim lists the files under the current directory, and as I move through them, the preview pane shows the one under the cursor. `{}` is that file. The preview is bat, below: `--color=always` keeps the syntax highlighting even though bat is writing to skim rather than a terminal, `--style=numbers` keeps the line numbers and drops the rest of its decoration, and `--line-range=:500` stops after the first 500 lines so a large file does not slow the preview down.
 
 ## dua: where did the disk go?
 
@@ -111,7 +117,7 @@ bat -A README.md          # show tabs, line endings and other invisible characte
 
 That last one is the check [markdown-checker](/2026/10/31/why-i-use-my-tools/) automates: characters you cannot see that stop a README rendering.
 
-Mike: TODO, whether you use bat, and where (Mac, Arch, as a skim preview).
+One place I use bat is as skim's preview, above. Mike: TODO, whether you also use bat on its own, and where (Mac, Arch).
 
 ## Together
 {: .pos-center}
