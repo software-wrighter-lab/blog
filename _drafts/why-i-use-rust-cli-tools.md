@@ -110,7 +110,7 @@ skim lists the files under the current directory, and as I move through them, th
 
 [dua](https://github.com/Byron/dua-cli), for disk usage analyzer, does more than du. It answers what `du` does, sorted so the biggest offenders are obvious, and its interactive mode, `dua i`, lets me browse the tree by size, mark what to delete, and delete it, without composing an `rm` by hand.
 
-Mike: TODO, the usual culprits on your machines. Rust `target/` directories? Model weights on Lucy?
+I use it to find space I can free. Mainly that is any Rust `target/` directory, since a build recreates it easily; sometimes it is cache directories, sometimes downloads, and sometimes large data files from old projects.
 
 ## bat: cat, for reading
 
