@@ -195,10 +195,11 @@ On the Mac, fd and dua came from `cargo install`, and ripgrep from Homebrew (wit
 ## And similar: candidates
 {: .pos-center}
 
-<!-- Mike: trim to what you actually use. Only just is installed on this Mac; the rest are common Rust CLI tools listed as
-     prompts, not claims. -->
+<!-- Mike: trim the last line to what you actually use; those are common Rust CLI tools listed as prompts, not claims.
+     just and pjmai-rs per Mike 2026-11-04. -->
 
-- **just**, a command runner: a `justfile` of named recipes instead of a Makefile's build rules (installed: 1.58.0)
-- **eza** for `ls`, **dust** for `du`, **zoxide** for `cd`, **hyperfine** for benchmarking, **tokei** for counting lines of code, **delta** for git diffs, **starship** for the prompt
+- **just**, a command runner: a `justfile` of named recipes instead of a Makefile's build rules. I use it in most new projects, such as my X_eTaL repositories.
+- For `cd`, not zoxide but my own [pjmai-rs](/2026/03/07/pjmai-rs-navigation-history-and-fuzzy-completion/): `chpj` to jump to a project, and `pspj` and `popj` to push and pop, alongside plain `cd`.
+- **eza** for `ls`, **dust** for `du`, **hyperfine** for benchmarking, **tokei** for counting lines of code, **delta** for git diffs, **starship** for the prompt
 
 Mike: TODO, a closing in your words: what these have in common, and how they connect back to [#1](/2026/10/28/why-i-use-rust/).
