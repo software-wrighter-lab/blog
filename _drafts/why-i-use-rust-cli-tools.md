@@ -88,7 +88,7 @@ The rg line is shorter, and it does more. It skips whatever `.gitignore` exclude
 
 ## skim: pick one as you type
 
-[skim](https://github.com/skim-rs/skim), whose command is `sk`, is a fuzzy finder: give it a list of lines, type a few letters in any order, and it narrows the list as you type until the one you want is at the top. It is a Rust implementation in the style of fzf, which is written in Go. I used to use fzf, but since I like [Rust](/2026/10/28/why-i-use-rust/), I switched to skim. It does not replace find or xargs; it sits between them. fd or find produces the list, skim picks from it, and xargs or any other command acts on the pick:
+[skim](https://github.com/skim-rs/skim), whose command is `sk`, is a fuzzy finder: give it a list of lines, type a few letters in any order, and it narrows the list as you type until the one you want is at the top. It is a Rust implementation in the style of fzf, which is written in Go. I found fzf useful, but after using fd and rg, both in [Rust](/2026/10/28/why-i-use-rust/), I looked for a Rust alternative to fzf, partly to support the Rust community, and switched to skim. It does not replace find or xargs; it sits between them. fd or find produces the list, skim picks from it, and xargs or any other command acts on the pick:
 
 ```text
 fd -e rs | sk              # pick a Rust file by a few letters of its name
