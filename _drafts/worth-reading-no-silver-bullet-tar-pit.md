@@ -13,9 +13,9 @@ date: 2026-12-31 00:15:00 -0800
 <!-- DRAFT (2026-11-03), Mike: papers and articles, not books, added to Worth Reading as future topics; grouping and titles
      suggested and accepted 2026-11-03. Dates are placeholders. Within each post the papers are in order of publication until
      Mike reorders them. What each taught him is Mike: TODO; do not add reasons he has not given, or papers he has not named.
-     Lead image: placeholder-worth-reading-no-silver-bullet-tar-pit.webp -->
+     Lead image: Mike's block-silver-pit.jpg (Dropbox), no-invert. -->
 
-<img src="{{ '/assets/images/posts/placeholder-worth-reading-no-silver-bullet-tar-pit.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-silver-pit.webp' | relative_url }}" class="post-marker no-invert" alt="Two panels: No Silver Bullet, a programmer at a glowing flowchart screen in a cluttered, neon-lit room; Out of the Tar Pit, a figure reaching up out of a dark tar pit full of sunken machines" style="width: 205px;">
 
 The [prior post](/2026/12/24/worth-reading-selling-the-dream-samurai-chess/) in this series was the last of the books, for now; this one starts on papers. Mike: TODO, an intro in your words for these papers.
 
