@@ -124,4 +124,4 @@ Frederick P. Brooks Jr. (1975; the 1995 anniversary edition adds *No Silver Bull
 
 ## Closing
 
-Mike: TODO, a closing in your words: what these books have in common, or where they disagree.
+These early readings influenced my choices for decades, and they are still relevant today, even as some of their ideas evolve: the chief programmer now leads a team of AI agents, and languages are written for agents as well as people.
