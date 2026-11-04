@@ -4,7 +4,7 @@ title: "Worth Reading #1: The People Who Write Software --- Weinberg and Brooks"
 categories: [books, programming-history]
 tags: [worth-reading, books, weinberg, psychology-of-computer-programming, egoless-programming, fred-brooks, mythical-man-month, brooks-law, no-silver-bullet]
 keywords: "books worth reading, The Psychology of Computer Programming, Gerald Weinberg, egoless programming, The Mythical Man-Month, Fred Brooks, Brooks's law, No Silver Bullet"
-abstract: "First in a new series on books worth reading. Two on the people who write software: Gerald Weinberg's The Psychology of Computer Programming (1971), on programmers alone and in teams, and Fred Brooks's The Mythical Man-Month (1975), on why adding people to a late project makes it later."
+abstract: "First in a new series on the reading that shaped my approach to software development, chosen because it stood out and has not dated. Two books on the people who write software: Gerald Weinberg's The Psychology of Computer Programming (1971), on programmers alone and in teams, and Fred Brooks's The Mythical Man-Month (1975), on why adding people to a late project makes it later."
 series: "Worth Reading"
 series_part: 1
 date: 2026-11-05 00:15:00 -0800
