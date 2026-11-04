@@ -77,7 +77,14 @@ rg -t rust unsafe     # only in Rust files
 rg -l TODO            # just the names of files with a TODO
 ```
 
-Mike: TODO, why rg over `grep -r` for you, and whether you use it inside Emacs (rg.el, deadgrep, or `M-x grep` with rg as the command).
+My usual search is in Rust files only:
+
+```bash
+rg -t rust Hello                                # rg
+find . -name "*.rs" -exec grep Hello {} \;      # the same search without it
+```
+
+The rg line is shorter, and it does more. It skips whatever `.gitignore` excludes, so a match in a copy under `target/` does not show up, and it prints the file name and line number with each match. The `find` line searches the ignored files too, and runs one grep per file, which prints each matching line with no file name at all.
 
 ## skim: pick one as you type
 
