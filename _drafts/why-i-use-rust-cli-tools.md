@@ -65,7 +65,7 @@ fd -e md -x wc -w     # word count of every Markdown file, in parallel
 
 fd was one of the commands I was typing too often when I wrote [pjmai-rs](/2026/03/05/tbt-pjmai-rs-project-manager/): with 200 repositories spread differently across each machine, I was spending too much time with `cd`, `du`, `fd` and `ls` just to find where a project was.
 
-Mike: TODO, your own most-used fd invocations.
+My most frequent use of fd is just `fd`, with no arguments, in place of `du -a`: it lists every file under the current directory, and it has the advantage of skipping what `.gitignore` already says to ignore.
 
 ## ripgrep: grep for source trees
 
