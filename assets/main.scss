@@ -2108,3 +2108,16 @@ dialog.lightbox .lightbox-close {
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) { @include halloween-dark; }
 }
+
+// Four boxes per row, about 25% each (Worth Reading #1's 4x2 of Weinberg's
+// ideas); one box per row on a phone.
+.post-content .grid-4 {
+  clear: both;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.7em;
+  margin: 1em 0 1.4em;
+}
+@media (max-width: 600px) {
+  .post-content .grid-4 { grid-template-columns: 1fr; }
+}

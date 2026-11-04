@@ -40,7 +40,7 @@ This first post is about two books on the people who write software.
 
 Gerald M. Weinberg (1971; a silver anniversary edition followed in 1998, but I read the original). Programming as human behavior: programmers working alone and in teams, and egoless programming. All eight of its main ideas stayed with me. In each box, Weinberg's idea is on top and what it meant for me is below:
 
-<div class="weinberg-grid" style="clear: both; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 0.7em; margin: 1em 0 1.4em;">
+<div class="grid-4">
 <div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 0.6em 0.8em; font-size: 0.88em;">
 <div style="font-size: 2.4em; font-weight: 700; line-height: 1; color: var(--link-color);">1</div>
 <div style="font-weight: 700; margin: 0.3em 0 0.2em;">Egoless programming</div>
@@ -93,9 +93,60 @@ Gerald M. Weinberg (1971; a silver anniversary edition followed in 1998, but I r
 
 ## The Mythical Man-Month
 
-Frederick P. Brooks Jr. (1975; the 1995 anniversary edition adds *No Silver Bullet*). Brooks's law, that adding people to a late software project makes it later, and the line between essential and accidental complexity that [sw-checklist](/2026/04/27/sw-checklist-ratchet-ai-coding-agents/) leaned on.
+Frederick P. Brooks Jr. (1975; the 1995 anniversary edition adds *No Silver Bullet*). Brooks managed the development of IBM's OS/360, the ancestor of the MVS I later worked on, and the book is what he learned from it. In each box, Brooks's idea is on top and what it meant for me is below:
 
-Mike: TODO, what it taught you.
+<div class="grid-4">
+<div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 0.6em 0.8em; font-size: 0.88em;">
+<div style="font-size: 2.4em; font-weight: 700; line-height: 1; color: var(--link-color);">1</div>
+<div style="font-weight: 700; margin: 0.3em 0 0.2em;">Brooks's law</div>
+<p style="margin: 0 0 0.5em;">Adding people to a late software project makes it later.</p>
+<div style="border-top: 1px solid var(--border-color); padding-top: 0.5em;"><p style="margin-bottom: 0;">Mike: TODO, your thoughts, or skip this one.</p></div>
+</div>
+<div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 0.6em 0.8em; font-size: 0.88em;">
+<div style="font-size: 2.4em; font-weight: 700; line-height: 1; color: var(--link-color);">2</div>
+<div style="font-weight: 700; margin: 0.3em 0 0.2em;">The mythical man-month</div>
+<p style="margin: 0 0 0.5em;">People and months are not interchangeable: every person added adds communication, and the paths between n people grow as n(n-1)/2.</p>
+<div style="border-top: 1px solid var(--border-color); padding-top: 0.5em;"><p style="margin-bottom: 0;">Mike: TODO, your thoughts, or skip this one.</p></div>
+</div>
+<div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 0.6em 0.8em; font-size: 0.88em;">
+<div style="font-size: 2.4em; font-weight: 700; line-height: 1; color: var(--link-color);">3</div>
+<div style="font-weight: 700; margin: 0.3em 0 0.2em;">Conceptual integrity</div>
+<p style="margin: 0 0 0.5em;">The most important quality of a system design. It comes from one mind, or a few in agreement: an architect, separate from the implementers.</p>
+<div style="border-top: 1px solid var(--border-color); padding-top: 0.5em;"><p style="margin-bottom: 0;">Mike: TODO, your thoughts, or skip this one.</p></div>
+</div>
+<div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 0.6em 0.8em; font-size: 0.88em;">
+<div style="font-size: 2.4em; font-weight: 700; line-height: 1; color: var(--link-color);">4</div>
+<div style="font-weight: 700; margin: 0.3em 0 0.2em;">Plan to throw one away</div>
+<p style="margin: 0 0 0.5em;">The first system built is a pilot, and you will throw it away anyway; the only question is whether you plan to.</p>
+<div style="border-top: 1px solid var(--border-color); padding-top: 0.5em;"><p style="margin-bottom: 0;">Mike: TODO, your thoughts, or skip this one.</p></div>
+</div>
+<div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 0.6em 0.8em; font-size: 0.88em;">
+<div style="font-size: 2.4em; font-weight: 700; line-height: 1; color: var(--link-color);">5</div>
+<div style="font-weight: 700; margin: 0.3em 0 0.2em;">The second-system effect</div>
+<p style="margin: 0 0 0.5em;">A designer's second system is the most dangerous one: every feature held back from the first goes into it.</p>
+<div style="border-top: 1px solid var(--border-color); padding-top: 0.5em;"><p style="margin-bottom: 0;">Mike: TODO, your thoughts, or skip this one.</p></div>
+</div>
+<div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 0.6em 0.8em; font-size: 0.88em;">
+<div style="font-size: 2.4em; font-weight: 700; line-height: 1; color: var(--link-color);">6</div>
+<div style="font-weight: 700; margin: 0.3em 0 0.2em;">The surgical team</div>
+<p style="margin: 0 0 0.5em;">Organize a team around one chief programmer, with others in support roles, rather than many equals working on the same code.</p>
+<div style="border-top: 1px solid var(--border-color); padding-top: 0.5em;"><p style="margin-bottom: 0;">Mike: TODO, your thoughts, or skip this one.</p></div>
+</div>
+<div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 0.6em 0.8em; font-size: 0.88em;">
+<div style="font-size: 2.4em; font-weight: 700; line-height: 1; color: var(--link-color);">7</div>
+<div style="font-weight: 700; margin: 0.3em 0 0.2em;">One day at a time</div>
+<p style="margin: 0 0 0.5em;">How does a project get to be a year late? One day at a time. Small slips are the ones to watch.</p>
+<div style="border-top: 1px solid var(--border-color); padding-top: 0.5em;"><p style="margin-bottom: 0;">Mike: TODO, your thoughts, or skip this one.</p></div>
+</div>
+<div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 0.6em 0.8em; font-size: 0.88em;">
+<div style="font-size: 2.4em; font-weight: 700; line-height: 1; color: var(--link-color);">8</div>
+<div style="font-weight: 700; margin: 0.3em 0 0.2em;">No silver bullet</div>
+<p style="margin: 0 0 0.5em;">Software's hard part is its essential complexity, the problem itself; no tool or technique removes that by an order of magnitude.</p>
+<div style="border-top: 1px solid var(--border-color); padding-top: 0.5em;"><p style="margin-bottom: 0;">Mike: TODO, your thoughts, or skip this one.</p></div>
+</div>
+</div>
+
+Its line between essential and accidental complexity is also one that [sw-checklist](/2026/04/27/sw-checklist-ratchet-ai-coding-agents/) leaned on.
 
 ## Closing
 
