@@ -80,8 +80,8 @@ rg -l TODO            # just the names of files with a TODO
 My usual search is in Rust files only:
 
 ```bash
-rg -t rust Hello                                # rg
-find . -name "*.rs" -exec grep Hello {} \;      # the same search without it
+rg -t rust Hello                                    # rg
+find . -name "*.rs" -exec grep Hello {} \; -print   # the same search without it
 ```
 
 The rg line is shorter, and it does more. It skips whatever `.gitignore` excludes, so a match in a copy under `target/` does not show up, and it prints the file name and line number with each match. The `find` line searches the ignored files too. It runs one grep per file, and the `-print` at the end names a file only after its matching lines, because `-exec` counts as true only when grep found something.
