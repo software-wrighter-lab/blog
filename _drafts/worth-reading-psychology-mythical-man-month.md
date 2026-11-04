@@ -19,7 +19,9 @@ date: 2026-11-05 00:15:00 -0800
 
 <img src="{{ '/assets/images/posts/block-psych-myth.webp' | relative_url }}" class="post-marker no-invert" alt="A glowing book cover: a brain, half folds and half circuitry, ringed by mythical creatures, a phoenix, a dragon, a unicorn, a fairy and a griffin" style="width: 205px;">
 
-Mike: TODO, an intro in your words: why a series on books, and what makes a book worth reading for you. This first post is about two books on the people who write software.
+This series is a way to acknowledge, and share, what I have read that influenced my approach to software development, and much of that goes beyond coding. I have read many, many books on every aspect of software development; the ones in this series are the ones that stood out and stayed with me. A lot of their ideas are timeless, not tied to a particular fad or fashion in software development.
+
+This first post is about two books on the people who write software.
 
 <!--more-->
 
