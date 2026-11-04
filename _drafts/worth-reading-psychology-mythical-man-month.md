@@ -52,7 +52,9 @@ All eight of its main ideas stayed with me.
 
 Once a function tester accused me of skipping that step, because the console showed `SEXTENDED TORAGE` where `EXTENDED STORAGE` was expected. I pulled out my highlighted listing and showed exactly where I had stepped through that code, oblivious to the insert of `MAIN` or `EXTENDED` going in at the wrong offset. So I was not the best at function testing my own code.
 
-**A program has to work first.** In his story, a program judged on speed and size is beaten by one that produces correct results: if a program does not have to work, it can meet any other requirement. Mike: TODO, a sentence of your own.
+**A program has to work first.** In his story, a program judged on speed and size is beaten by one that produces correct results: if a program does not have to work, it can meet any other requirement. Driving fast with the wrong map gets you somewhere sooner, but not where you meant to go.
+
+I appreciated this much later, running large open-weight models, quantized small, on old GPUs. When a model does not fit in VRAM, llama.cpp can spill it over to system RAM or even SSD: inference gets slow, but it happens at all. More recently [FreeToken, Strata and Avalon](/2026/11/02/why-i-use-coding-agents/) do the same on small hardware, running models that otherwise could not run there at all. A slow answer can be improved; no answer cannot.
 
 **The environment shapes the work.** When management removed a vending machine where programmers gathered, productivity fell, because the informal talk there was where problems got solved. Mike: TODO, a sentence of your own.
 
