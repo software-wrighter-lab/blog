@@ -197,4 +197,4 @@ On the Mac, fd and dua came from `cargo install`, and ripgrep from Homebrew (wit
 - **just**, a command runner: a `justfile` of named recipes instead of a Makefile's build rules. I use it in most new projects, such as my X_eTaL repositories.
 - For `cd`, not zoxide but my own [pjmai-rs](/2026/03/07/pjmai-rs-navigation-history-and-fuzzy-completion/): `chpj` to jump to a project, and `pspj` and `popj` to push and pop, alongside plain `cd`.
 
-Mike: TODO, a closing in your words: what these have in common, and how they connect back to [#1](/2026/10/28/why-i-use-rust/).
+Each of these started as a command I was tired of typing the long way: `find` with its quoting, `grep -r` through build output, `du` piped through grep and sort. The Rust versions are what I reach for now, and installing them with cargo is one more reason I keep [Rust](/2026/10/28/why-i-use-rust/) on every machine.
