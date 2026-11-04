@@ -200,6 +200,6 @@ On the Mac, fd and dua came from `cargo install`, and ripgrep from Homebrew (wit
 
 - **just**, a command runner: a `justfile` of named recipes instead of a Makefile's build rules. I use it in most new projects, such as my X_eTaL repositories.
 - For `cd`, not zoxide but my own [pjmai-rs](/2026/03/07/pjmai-rs-navigation-history-and-fuzzy-completion/): `chpj` to jump to a project, and `pspj` and `popj` to push and pop, alongside plain `cd`.
-- **eza** for `ls`, **dust** for `du`, **hyperfine** for benchmarking, **tokei** for counting lines of code, **delta** for git diffs, **starship** for the prompt
+- **eza** for `ls`, **dust** for `du`, **hyperfine** for benchmarking, **delta** for git diffs, **starship** for the prompt
 
 Mike: TODO, a closing in your words: what these have in common, and how they connect back to [#1](/2026/10/28/why-i-use-rust/).
