@@ -19,7 +19,7 @@ date: 2026-11-12 00:15:00 -0800
 
 <img src="{{ '/assets/images/posts/block-timeless-language.webp' | relative_url }}" class="post-marker no-invert" alt="A watercolor of curving wooden buildings grown among trees around a garden courtyard and a pond" style="width: 205px;">
 
-The [prior post](/2026/11/05/worth-reading-psychology-mythical-man-month/) in this series was about the people who write software. Mike: TODO, an intro in your words for these books.
+The [prior post](/2026/11/04/worth-reading-psychology-mythical-man-month/) in this series was about the people who write software. Mike: TODO, an intro in your words for these books.
 
 <!--more-->
 

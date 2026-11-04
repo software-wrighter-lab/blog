@@ -34,7 +34,7 @@ The [prior post](/2026/12/24/worth-reading-selling-the-dream-samurai-chess/) in 
 
 ## No Silver Bullet
 
-Fred Brooks, "No Silver Bullet --- Essence and Accident in Software Engineering" (1986; reprinted in the 1995 edition of *The Mythical Man-Month*, which [#1](/2026/11/05/worth-reading-psychology-mythical-man-month/) covers). Software is hard because of its essential complexity, the problem itself, not only its accidental complexity, the tools and environment, so no single technique will bring an order-of-magnitude gain. [sw-checklist](/2026/04/27/sw-checklist-ratchet-ai-coding-agents/) leaned on the same line.
+Fred Brooks, "No Silver Bullet --- Essence and Accident in Software Engineering" (1986; reprinted in the 1995 edition of *The Mythical Man-Month*, which [#1](/2026/11/04/worth-reading-psychology-mythical-man-month/) covers). Software is hard because of its essential complexity, the problem itself, not only its accidental complexity, the tools and environment, so no single technique will bring an order-of-magnitude gain. [sw-checklist](/2026/04/27/sw-checklist-ratchet-ai-coding-agents/) leaned on the same line.
 
 Mike: TODO, what it taught you.
 

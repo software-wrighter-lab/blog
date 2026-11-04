@@ -7,7 +7,7 @@ keywords: "books worth reading, The Psychology of Computer Programming, Gerald W
 abstract: "First in a new series on the reading that shaped my approach to software development, chosen because it stood out and has not dated. Two books on the people who write software: Gerald Weinberg's The Psychology of Computer Programming (1971), on programmers alone and in teams, and Fred Brooks's The Mythical Man-Month (1975), on why adding people to a late project makes it later."
 series: "Worth Reading"
 series_part: 1
-date: 2026-11-05 00:15:00 -0800
+date: 2026-11-04 00:15:00 -0800
 ---
 
 <!-- DRAFT (2026-11-02), Mike: "start a new blog post for thursday 11/5, influential books", then "maybe a new series, worth reading".
