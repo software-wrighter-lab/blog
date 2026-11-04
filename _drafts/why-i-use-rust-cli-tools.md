@@ -110,6 +110,8 @@ skim lists the files under the current directory, and as I move through them, th
 
 [dua](https://github.com/Byron/dua-cli), for disk usage analyzer, does more than du. It answers what `du` does, sorted so the biggest offenders are obvious, and its interactive mode, `dua i`, lets me browse the tree by size, mark what to delete, and delete it, without composing an `rm` by hand.
 
+Before dua, I used desktop apps bought from the Mac App Store, and they were clunky and very slow. dua is very fast, and ergonomic.
+
 I use it to find space I can free. Mainly that is any Rust `target/` directory, since a build recreates it easily; sometimes it is cache directories, sometimes downloads, and sometimes large data files from old projects.
 
 ## bat: cat, for reading
