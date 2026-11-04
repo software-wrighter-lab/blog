@@ -93,29 +93,35 @@ Gerald M. Weinberg (1971; a silver anniversary edition followed in 1998, but I r
 
 ## The Mythical Man-Month
 
-Frederick P. Brooks Jr. (1975; the 1995 anniversary edition adds *No Silver Bullet*). Brooks managed the development of IBM's OS/360, the ancestor of the MVS I later worked on, and the book is what he learned from it. Four of its ideas affected me most; again, Brooks's idea is on top and what it meant for me is below:
+Frederick P. Brooks Jr. (1975; the 1995 anniversary edition adds *No Silver Bullet*). Brooks managed the development of IBM's OS/360, the ancestor of the MVS I later worked on, and the book is what he learned from it. Five of its ideas affected me most; again, Brooks's idea is on top and what it meant for me is below:
 
 <div class="grid-4">
-<div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 0.6em 0.8em; font-size: 0.88em;">
+<div style="grid-column: 1 / -1; border: 1px solid var(--border-color); border-radius: 8px; padding: 0.6em 0.8em; font-size: 0.88em;">
 <div style="font-size: 2.4em; font-weight: 700; line-height: 1; color: var(--link-color);">1</div>
+<div style="font-weight: 700; margin: 0.3em 0 0.2em;">The mythical man-month</div>
+<p style="margin: 0 0 0.5em;">People and months are not interchangeable. In Brooks's words, "The bearing of a child takes nine months, no matter how many women are assigned."</p>
+<div style="border-top: 1px solid var(--border-color); padding-top: 0.5em;"><p style="margin-bottom: 0;">Nine women cannot have a baby in one month, but more than nine, overlapping, can produce babies on a monthly cadence. I have many, many projects, and I cannot finish each one as quickly as I would like, but I can show progress across the board by overlapping the work in parallel, which <a href="/2026/11/02/why-i-use-coding-agents/">multiple AI coding agents</a> make possible.</p></div>
+</div>
+<div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 0.6em 0.8em; font-size: 0.88em;">
+<div style="font-size: 2.4em; font-weight: 700; line-height: 1; color: var(--link-color);">2</div>
 <div style="font-weight: 700; margin: 0.3em 0 0.2em;">Plan to throw one away</div>
 <p style="margin: 0 0 0.5em;">The first system built is a pilot, and you will throw it away anyway; the only question is whether you plan to.</p>
 <div style="border-top: 1px solid var(--border-color); padding-top: 0.5em;"><p>I do plan to throw away early prototypes. In a way, <a href="/2026/09/16/ai-tools-coding-agent-in-mlpl/">sw-MLPL</a> is being replaced by <a href="/2026/10/07/array-languages-xetal/">X_eTaL</a>.</p><p style="margin-bottom: 0;"><a href="/2026/10/30/why-i-use-asm-c-plsw/">PL/SW</a> was implemented in C, will soon be in <a href="/2026/11/01/dogfooding-hlasm-plsw/">HLASM</a>, and eventually in PL/SW itself.</p></div>
 </div>
 <div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 0.6em 0.8em; font-size: 0.88em;">
-<div style="font-size: 2.4em; font-weight: 700; line-height: 1; color: var(--link-color);">2</div>
+<div style="font-size: 2.4em; font-weight: 700; line-height: 1; color: var(--link-color);">3</div>
 <div style="font-weight: 700; margin: 0.3em 0 0.2em;">The second-system effect</div>
 <p style="margin: 0 0 0.5em;">A designer's second system is the most dangerous one: every feature held back from the first goes into it.</p>
 <div style="border-top: 1px solid var(--border-color); padding-top: 0.5em;"><p style="margin-bottom: 0;">I have to resist the temptation to rewrite complex systems, because a rewrite loses the benefit of many fixes.</p></div>
 </div>
 <div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 0.6em 0.8em; font-size: 0.88em;">
-<div style="font-size: 2.4em; font-weight: 700; line-height: 1; color: var(--link-color);">3</div>
+<div style="font-size: 2.4em; font-weight: 700; line-height: 1; color: var(--link-color);">4</div>
 <div style="font-weight: 700; margin: 0.3em 0 0.2em;">The surgical team</div>
 <p style="margin: 0 0 0.5em;">Organize a team around one chief programmer, with others in support roles, rather than many equals working on the same code.</p>
 <div style="border-top: 1px solid var(--border-color); padding-top: 0.5em;"><p>It has been a holy grail. At IBM Research I was the lead developer on a team, writing 90% of the code.</p><p style="margin-bottom: 0;">Lately, with my <a href="/2026/11/02/why-i-use-coding-agents/">teams of AI coding agents</a>, I am the chief programmer again, but at a higher level, writing less code than I have in the past.</p></div>
 </div>
 <div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 0.6em 0.8em; font-size: 0.88em;">
-<div style="font-size: 2.4em; font-weight: 700; line-height: 1; color: var(--link-color);">4</div>
+<div style="font-size: 2.4em; font-weight: 700; line-height: 1; color: var(--link-color);">5</div>
 <div style="font-weight: 700; margin: 0.3em 0 0.2em;">No silver bullet</div>
 <p style="margin: 0 0 0.5em;">Essential complexity belongs to the problem itself; accidental complexity comes from the tools and environment. No technique removes the essential part by an order of magnitude.</p>
 <div style="border-top: 1px solid var(--border-color); padding-top: 0.5em;"><p style="margin-bottom: 0;">That distinction has been a driving concern for me when I design tools, languages and operating systems. <a href="/2026/04/27/sw-checklist-ratchet-ai-coding-agents/">sw-checklist</a> leans on it too.</p></div>
