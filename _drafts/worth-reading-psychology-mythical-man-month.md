@@ -38,13 +38,13 @@ This first post is about two books on the people who write software.
 
 ## The Psychology of Computer Programming
 
-Gerald M. Weinberg (1971; a silver anniversary edition in 1998). Programming as human behavior: programmers working alone and in teams, and egoless programming.
+Gerald M. Weinberg (1971; a silver anniversary edition followed in 1998, but I read the original). Programming as human behavior: programmers working alone and in teams, and egoless programming.
 
 All eight of its main ideas stayed with me.
 
 **Egoless programming.** A programmer who treats a program as part of themselves defends its bugs; one who detaches from it invites others to find them, and the code gets better faster. At IBM, on a team developing parts of MVS/XA, we embraced it. We had many code reviews a day, with stakeholders from many departments, and the code was discussed in detail. As a developer, I was expected to take the feedback as valuable and educational, not as personal criticism.
 
-**Programming is social.** Most programs are written by groups, so how a team is organized and how it communicates matter as much as any one person's skill. Mike: TODO, a sentence of your own.
+**Programming is social.** Most programs are written by groups, so how a team is organized and how it communicates matter as much as any one person's skill. That was a new idea to me when I read it. I had thought that writing software was all about telling the hardware what to do. I came to see that code is read, maintained, debugged, extended and replaced, and that it holds the attention of many people, possibly including me, later. It should be written for that wider audience, not just to produce running code.
 
 **Read programs.** Weinberg opens by arguing that programmers should read other people's programs the way writers read literature, to learn style and to find problems. Mike: TODO, a sentence of your own.
 
@@ -57,8 +57,6 @@ All eight of its main ideas stayed with me.
 **People differ enormously.** Ability varies widely between programmers, and aptitude tests predict little; motivation, experience and training explain more. Mike: TODO, a sentence of your own.
 
 **Languages are for people.** Weinberg judges language features by how people read and write them, not only by what the machine needs. Mike: TODO, a sentence of your own.
-
-Mike: TODO, when you read it (and whether it was the 1998 edition, with its new commentary on each chapter).
 
 ## The Mythical Man-Month
 
