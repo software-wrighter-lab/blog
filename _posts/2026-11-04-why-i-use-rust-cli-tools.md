@@ -8,6 +8,9 @@ abstract: "Eighth in the series on the tools I reach for: five command-line tool
 series: "Why I Use"
 series_part: 8
 date: 2026-11-04 00:15:00 -0800
+repo_urls:
+  - url: "https://github.com/sw-cli-tools/pjmai-rs"
+    title: "pjmai-rs"
 ---
 
 <!-- DRAFT (2026-10-30), Mike: split from #7 (iTerm2, tmux, mosh) as he suggested: "Rust-based (fd, rg, dua) as a follow-on".
