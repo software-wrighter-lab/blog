@@ -188,9 +188,9 @@ Without `-I`, under one directory of my repositories, that found nothing. With i
 
 ## How I install them
 
-On the Mac, fd and dua came from `cargo install`, and ripgrep from Homebrew (with a second copy in `~/.cargo/bin` behind it on the PATH). skim and fzf are on the Arch machines, and on the Mac from Homebrew (`brew install sk fzf`).
-
 I sometimes use Homebrew to install utilities, but if I know a utility is written in Rust, I often install it with `cargo install` instead. On Arch I use pacman, yay for packages from the AUR, or cargo.
+
+On the Mac, fd and dua came from `cargo install`, and ripgrep from Homebrew (with a second copy in `~/.cargo/bin` behind it on the PATH). skim and fzf are on the Arch machines, and on the Mac from Homebrew (`brew install sk fzf`).
 
 ## And similar: candidates
 {: .pos-center}
