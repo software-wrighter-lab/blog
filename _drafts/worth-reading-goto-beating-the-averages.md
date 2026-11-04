@@ -13,9 +13,9 @@ date: 2027-01-14 00:15:00 -0800
 <!-- DRAFT (2026-11-03), Mike: papers and articles, not books, added to Worth Reading as future topics; grouping and titles
      suggested and accepted 2026-11-03. Dates are placeholders. Within each post the papers are in order of publication until
      Mike reorders them. What each taught him is Mike: TODO; do not add reasons he has not given, or papers he has not named.
-     Lead image: placeholder-worth-reading-goto-beating-the-averages.webp -->
+     Lead image: Mike's block-goto-averages.jpg (Dropbox), no-invert. -->
 
-<img src="{{ '/assets/images/posts/placeholder-worth-reading-goto-beating-the-averages.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-goto-averages.webp' | relative_url }}" class="post-marker no-invert" alt="A glowing red GOTO arrow plunging into a dark vortex, among tangled cables of binary digits, staircases and ladders, while hammers smash two circuit cubes" style="width: 205px;">
 
 The [prior post](/2027/01/07/worth-reading-worse-is-better-big-ball-of-mud/) in this series was about why the messy thing wins. Mike: TODO, an intro in your words for these papers.
 

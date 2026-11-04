@@ -13,9 +13,9 @@ date: 2027-01-21 00:15:00 -0800
 <!-- DRAFT (2026-11-03), Mike: papers and articles, not books, added to Worth Reading as future topics; grouping and titles
      suggested and accepted 2026-11-03. Dates are placeholders. Within each post the papers are in order of publication until
      Mike reorders them. What each taught him is Mike: TODO; do not add reasons he has not given, or papers he has not named.
-     Lead image: placeholder-worth-reading-attention-is-all-you-need.webp -->
+     Lead image: Mike's block-attention-need.jpg (Dropbox), no-invert. -->
 
-<img src="{{ '/assets/images/posts/placeholder-worth-reading-attention-is-all-you-need.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-attention-need.webp' | relative_url }}" class="post-marker no-invert" alt="Glowing blue and violet circuit traces converging on a bright central chip from four corner nodes, with streaks of light between them" style="width: 205px;">
 
 The [prior post](/2027/01/14/worth-reading-goto-beating-the-averages/) in this series was about what a language lets you say. Mike: TODO, an intro in your words for these papers.
 
