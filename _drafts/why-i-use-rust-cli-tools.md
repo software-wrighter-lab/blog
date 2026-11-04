@@ -132,7 +132,19 @@ bat -A README.md          # show tabs, line endings and other invisible characte
 
 That last one is the check [markdown-checker](/2026/10/31/why-i-use-my-tools/) automates: characters you cannot see that stop a README rendering.
 
-One place I use bat is as skim's preview, above. Mike: TODO, whether you also use bat on its own, and where (Mac, Arch).
+One place I use bat is as skim's preview, above. I also use it on its own, here on my Mac:
+
+```text
+% bat hello_rust/src/main.rs
+─────┬────────────────────────────────────────────────
+     │ File: hello_rust/src/main.rs
+─────┼────────────────────────────────────────────────
+   1 │ fn main() {
+   2 │     println!("Hello, world!");
+   3 │ }
+```
+
+In the terminal the code is syntax highlighted too.
 
 ## Together
 {: .pos-center}
