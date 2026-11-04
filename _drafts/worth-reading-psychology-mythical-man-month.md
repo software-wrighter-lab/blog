@@ -54,7 +54,7 @@ Once a function tester accused me of skipping that step, because the console sho
 
 **A program has to work first.** In his story, a program judged on speed and size is beaten by one that produces correct results: if a program does not have to work, it can meet any other requirement. Driving fast with the wrong map gets you somewhere sooner, but not where you meant to go.
 
-I appreciated this much later, running large open-weight models, quantized small, on old GPUs. When a model does not fit in VRAM, llama.cpp can spill it over to system RAM or even SSD: inference gets slow, but it happens at all. More recently [FreeToken, Strata and Avalon](/2026/11/02/why-i-use-coding-agents/) do the same on small hardware, running models that otherwise could not run there at all. A slow answer can be improved; no answer cannot.
+I saw the same order in some of the software releases I worked on. Version 1 was "light the lights": a minimum viable product, before anyone called it that. Version 2, "fix the bugs, add the missing features", was the chance to deliver what was originally planned. Version 3, "make it fast", addressed performance, and "make it better" addressed the rest, such as usability, which was often an afterthought. I take the same approach on my new projects: first it works, then it has the features, then it gets faster and easier to use.
 
 **The environment shapes the work.** When management removed a vending machine where programmers gathered, productivity fell, because the informal talk there was where problems got solved. Mike: TODO, a sentence of your own.
 
