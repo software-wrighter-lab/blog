@@ -40,7 +40,25 @@ This first post is about two books on the people who write software.
 
 Gerald M. Weinberg (1971; a silver anniversary edition in 1998). Programming as human behavior: programmers working alone and in teams, and egoless programming.
 
-Mike: TODO, when you read it and what it taught you.
+All eight of its main ideas stayed with me.
+
+**Egoless programming.** A programmer who treats a program as part of themselves defends its bugs; one who detaches from it invites others to find them, and the code gets better faster. At IBM, on a team developing parts of MVS/XA, we embraced it. We had many code reviews a day, with stakeholders from many departments, and the code was discussed in detail. As a developer, I was expected to take the feedback as valuable and educational, not as personal criticism.
+
+**Programming is social.** Most programs are written by groups, so how a team is organized and how it communicates matter as much as any one person's skill. Mike: TODO, a sentence of your own.
+
+**Read programs.** Weinberg opens by arguing that programmers should read other people's programs the way writers read literature, to learn style and to find problems. Mike: TODO, a sentence of your own.
+
+**You cannot fully test your own program.** We tend not to see the errors in work we have just made, so someone else should review and test it. Mike: TODO, a sentence of your own.
+
+**A program has to work first.** In his story, a program judged on speed and size is beaten by one that produces correct results: if a program does not have to work, it can meet any other requirement. Mike: TODO, a sentence of your own.
+
+**The environment shapes the work.** When management removed a vending machine where programmers gathered, productivity fell, because the informal talk there was where problems got solved. Mike: TODO, a sentence of your own.
+
+**People differ enormously.** Ability varies widely between programmers, and aptitude tests predict little; motivation, experience and training explain more. Mike: TODO, a sentence of your own.
+
+**Languages are for people.** Weinberg judges language features by how people read and write them, not only by what the machine needs. Mike: TODO, a sentence of your own.
+
+Mike: TODO, when you read it (and whether it was the 1998 edition, with its new commentary on each chapter).
 
 ## The Mythical Man-Month
 
