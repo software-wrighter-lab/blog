@@ -192,14 +192,9 @@ I sometimes use Homebrew to install utilities, but if I know a utility is writte
 
 On the Mac, fd and dua came from `cargo install`, and ripgrep from Homebrew (with a second copy in `~/.cargo/bin` behind it on the PATH). skim and fzf are on the Arch machines, and on the Mac from Homebrew (`brew install sk fzf`).
 
-## And similar: candidates
-{: .pos-center}
-
-<!-- Mike: trim the last line to what you actually use; those are common Rust CLI tools listed as prompts, not claims.
-     just and pjmai-rs per Mike 2026-11-04. -->
+## And two more
 
 - **just**, a command runner: a `justfile` of named recipes instead of a Makefile's build rules. I use it in most new projects, such as my X_eTaL repositories.
 - For `cd`, not zoxide but my own [pjmai-rs](/2026/03/07/pjmai-rs-navigation-history-and-fuzzy-completion/): `chpj` to jump to a project, and `pspj` and `popj` to push and pop, alongside plain `cd`.
-- **eza** for `ls`, **dust** for `du`, **hyperfine** for benchmarking, **delta** for git diffs, **starship** for the prompt
 
 Mike: TODO, a closing in your words: what these have in common, and how they connect back to [#1](/2026/10/28/why-i-use-rust/).
