@@ -38,29 +38,58 @@ This first post is about two books on the people who write software.
 
 ## The Psychology of Computer Programming
 
-Gerald M. Weinberg (1971; a silver anniversary edition followed in 1998, but I read the original). Programming as human behavior: programmers working alone and in teams, and egoless programming.
+Gerald M. Weinberg (1971; a silver anniversary edition followed in 1998, but I read the original). Programming as human behavior: programmers working alone and in teams, and egoless programming. All eight of its main ideas stayed with me. In each box, Weinberg's idea is on top and what it meant for me is below:
 
-All eight of its main ideas stayed with me.
-
-**Egoless programming.** A programmer who treats a program as part of themselves defends its bugs; one who detaches from it invites others to find them, and the code gets better faster. At IBM, on a team developing parts of MVS/XA, we embraced it. We had many code reviews a day, with stakeholders from many departments, and the code was discussed in detail. As a developer, I was expected to take the feedback as valuable and educational, not as personal criticism.
-
-**Programming is social.** Most programs are written by groups, so how a team is organized and how it communicates matter as much as any one person's skill. That was a new idea to me when I read it. I had thought that writing software was all about telling the hardware what to do. I came to see that code is read, maintained, debugged, extended and replaced, and that it holds the attention of many people, possibly including me, later. It should be written for that wider audience, not just to produce running code.
-
-**Read programs.** Weinberg opens by arguing that programmers should read other people's programs the way writers read literature, to learn style and to find problems. For me it was a daily occurrence, at code reviews of other people's code. Later, open source opened up tons of code to read.
-
-**You cannot fully test your own program.** We tend not to see the errors in work we have just made, so someone else should review and test it. When I developed PL/S code for MVS, we had to step through the code and test every branch condition both ways, a kind of manual code-coverage testing. We tracked it with a yellow highlighter on printed assembler listings: thick printouts, delivered by cart after every compile, printed in duplicate for code review.
-
-Once a function tester accused me of skipping that step, because the console showed `SEXTENDED TORAGE` where `EXTENDED STORAGE` was expected. I pulled out my highlighted listing and showed exactly where I had stepped through that code, oblivious to the insert of `MAIN` or `EXTENDED` going in at the wrong offset. So I was not the best at function testing my own code.
-
-**A program has to work first.** In his story, a program judged on speed and size is beaten by one that produces correct results: if a program does not have to work, it can meet any other requirement. Driving fast with the wrong map gets you somewhere sooner, but not where you meant to go.
-
-I saw the same order in some of the software releases I worked on. Version 1 was "light the lights": a minimum viable product, before anyone called it that. Version 2, "fix the bugs, add the missing features", was the chance to deliver what was originally planned. Version 3, "make it fast", addressed performance, and "make it better" addressed the rest, such as usability, which was often an afterthought. I take the same approach on my new projects: first it works, then it has the features, then it gets faster and easier to use.
-
-**The environment shapes the work.** When management removed a vending machine where programmers gathered, productivity fell, because the informal talk there was where problems got solved. Mike: TODO, a sentence of your own.
-
-**People differ enormously.** Ability varies widely between programmers, and aptitude tests predict little; motivation, experience and training explain more. Mike: TODO, a sentence of your own.
-
-**Languages are for people.** Weinberg judges language features by how people read and write them, not only by what the machine needs. Mike: TODO, a sentence of your own.
+<div class="weinberg-grid" style="clear: both; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 0.7em; margin: 1em 0 1.4em;">
+<div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 0.6em 0.8em; font-size: 0.88em;">
+<div style="font-size: 2.4em; font-weight: 700; line-height: 1; color: var(--link-color);">1</div>
+<div style="font-weight: 700; margin: 0.3em 0 0.2em;">Egoless programming</div>
+<p style="margin: 0 0 0.5em;">Detach from your code, and invite others to find its bugs; the code gets better faster.</p>
+<div style="border-top: 1px solid var(--border-color); padding-top: 0.5em;"><p>At IBM, on a team developing parts of MVS/XA, we embraced it. We had many code reviews a day, with stakeholders from many departments, and the code was discussed in detail.</p><p style="margin-bottom: 0;">As a developer, I was expected to take the feedback as valuable and educational, not as personal criticism.</p></div>
+</div>
+<div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 0.6em 0.8em; font-size: 0.88em;">
+<div style="font-size: 2.4em; font-weight: 700; line-height: 1; color: var(--link-color);">2</div>
+<div style="font-weight: 700; margin: 0.3em 0 0.2em;">Programming is social</div>
+<p style="margin: 0 0 0.5em;">Most programs are written by groups; how a team works matters as much as any one person's skill.</p>
+<div style="border-top: 1px solid var(--border-color); padding-top: 0.5em;"><p>That was a new idea to me. I had thought writing software was all about telling the hardware what to do.</p><p style="margin-bottom: 0;">Code is read, maintained, debugged, extended and replaced, by many people, possibly including me, later. It should be written for that wider audience, not just to produce running code.</p></div>
+</div>
+<div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 0.6em 0.8em; font-size: 0.88em;">
+<div style="font-size: 2.4em; font-weight: 700; line-height: 1; color: var(--link-color);">3</div>
+<div style="font-weight: 700; margin: 0.3em 0 0.2em;">Read programs</div>
+<p style="margin: 0 0 0.5em;">Read other people's programs the way writers read literature, to learn style and to find problems.</p>
+<div style="border-top: 1px solid var(--border-color); padding-top: 0.5em;"><p style="margin-bottom: 0;">For me it was a daily occurrence, at code reviews of other people's code. Later, open source opened up tons of code to read.</p></div>
+</div>
+<div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 0.6em 0.8em; font-size: 0.88em;">
+<div style="font-size: 2.4em; font-weight: 700; line-height: 1; color: var(--link-color);">4</div>
+<div style="font-weight: 700; margin: 0.3em 0 0.2em;">You cannot fully test your own program</div>
+<p style="margin: 0 0 0.5em;">We do not see the errors in work we have just made, so someone else should review and test it.</p>
+<div style="border-top: 1px solid var(--border-color); padding-top: 0.5em;"><p>Writing PL/S for MVS, we stepped through every branch both ways, tracked in yellow highlighter on printed assembler listings, delivered by cart after every compile.</p><p style="margin-bottom: 0;">A function tester once accused me of skipping that, when the console showed <code>SEXTENDED TORAGE</code>. My highlighted listing showed exactly where I had stepped through it, oblivious to the insert going in at the wrong offset. I was not the best tester of my own code.</p></div>
+</div>
+<div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 0.6em 0.8em; font-size: 0.88em;">
+<div style="font-size: 2.4em; font-weight: 700; line-height: 1; color: var(--link-color);">5</div>
+<div style="font-weight: 700; margin: 0.3em 0 0.2em;">A program has to work first</div>
+<p style="margin: 0 0 0.5em;">If a program does not have to work, it can meet any other requirement. Fast with the wrong map gets you somewhere sooner, but not where you meant to go.</p>
+<div style="border-top: 1px solid var(--border-color); padding-top: 0.5em;"><p>Releases I worked on went in that order: version 1 "light the lights", an MVP before the name; version 2 "fix the bugs, add the missing features"; version 3 "make it fast", and "make it better", such as usability, often an afterthought.</p><p style="margin-bottom: 0;">My new projects go the same way: it works, then features, then faster and easier to use.</p></div>
+</div>
+<div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 0.6em 0.8em; font-size: 0.88em;">
+<div style="font-size: 2.4em; font-weight: 700; line-height: 1; color: var(--link-color);">6</div>
+<div style="font-weight: 700; margin: 0.3em 0 0.2em;">The environment shapes the work</div>
+<p style="margin: 0 0 0.5em;">Remove the vending machine where programmers gathered, and you lose the hall talk that solved problems.</p>
+<div style="border-top: 1px solid var(--border-color); padding-top: 0.5em;"><p style="margin-bottom: 0;">Most of my working environments encouraged hall talk, and many problems were solved informally: at a whiteboard, over coffee, or at lunch.</p></div>
+</div>
+<div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 0.6em 0.8em; font-size: 0.88em;">
+<div style="font-size: 2.4em; font-weight: 700; line-height: 1; color: var(--link-color);">7</div>
+<div style="font-weight: 700; margin: 0.3em 0 0.2em;">People are the hard part</div>
+<p style="margin: 0 0 0.5em;">Ability varies widely between programmers, and aptitude tests predict little.</p>
+<div style="border-top: 1px solid var(--border-color); padding-top: 0.5em;"><p>The hardest part of software development is dealing with people. When I get pushback, I think of "dogs bark at what they don't understand", and the onus is on me to explain it better.</p><p style="margin-bottom: 0;">As an architect, and in technology transfer, I had to tell different audiences different things, for different concerns. It was not straightforward.</p></div>
+</div>
+<div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 0.6em 0.8em; font-size: 0.88em;">
+<div style="font-size: 2.4em; font-weight: 700; line-height: 1; color: var(--link-color);">8</div>
+<div style="font-weight: 700; margin: 0.3em 0 0.2em;">Languages are for people</div>
+<p style="margin: 0 0 0.5em;">Judge a language feature by how people read and write it, not only by what the machine needs.</p>
+<div style="border-top: 1px solid var(--border-color); padding-top: 0.5em;"><p>Now they are for agents too, human and AI. Lisp, Scheme and Clojure were adopted less than I hoped; many could not get past the parentheses. I have my own likes and dislikes, and no language suits everyone.</p><p style="margin-bottom: 0;">Like the personal computer, I think the personal programming language is coming. I have created several, among them <a href="/2026/10/07/array-languages-xetal/">X_eTaL</a>, <a href="/2026/09/16/ai-tools-coding-agent-in-mlpl/">sw-MLPL</a> and <a href="/2026/10/30/why-i-use-asm-c-plsw/">PL/SW</a>.</p></div>
+</div>
+</div>
 
 ## The Mythical Man-Month
 
