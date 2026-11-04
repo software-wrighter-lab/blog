@@ -23,8 +23,8 @@ date: 2026-11-04 00:15:00 -0800
      "(and similar)": candidate list below, from what is installed, for Mike to trim. Facts from published posts: TBT #6
      (pjmai-rs: "too much time using cd, du, fd, and ls commands to find and navigate"); #1 (Rust); #5 (GNU findutils, grep,
      coreutils' du). Checked on this Mac (2026-10-30): fd 10.4.2 and dua 2.34.0 from cargo (~/.cargo/bin); ripgrep 15.2.0 from
-     Homebrew, first on PATH, with a second rg in ~/.cargo/bin; just 1.58.0 from Homebrew. Not installed: eza, bat, zoxide, fzf,
-     dust, hyperfine, tokei, starship, delta, skim (sk). Defaults described (gitignore, hidden files, dua i) are each project's documented
+     Homebrew, first on PATH, with a second rg in ~/.cargo/bin; just 1.58.0 from Homebrew. Not found in that 2026-10-30 check: eza, bat, zoxide, fzf,
+     dust, hyperfine, tokei, starship, delta, skim (sk); Mike has since shown bat and sk in use (2026-11-04). Defaults described (gitignore, hidden files, dua i) are each project's documented
      behavior, not measurements; no speed claims without a measurement; "faster for me" is Mike's own (2026-10-30), about him at the CLI, not a benchmark. Lead image: Mike's dua screenshot (2026-11-02), tab bar cropped, no-invert. -->
 
 <img src="{{ '/assets/images/posts/dua-disk-usage.webp' | relative_url }}" class="post-marker no-invert" alt="dua's interactive view of a home directory, folders sorted by size with percentage bars" style="width: 205px;">
