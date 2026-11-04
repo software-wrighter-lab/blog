@@ -38,6 +38,10 @@ This first post is about two books on the people who write software.
 
 ## The Psychology of Computer Programming
 
+<figure class="zoomable" style="float: left; width: 100px; margin: 0.3em 1.2em 0.4em 0;">
+<img src="{{ '/assets/images/posts/cover-psychology-of-computer-programming.webp' | relative_url }}" class="no-invert" alt="The cover of The Psychology of Computer Programming by Gerald M. Weinberg, red with a printed-circuit pattern, Computer Science Series">
+</figure>
+
 Gerald M. Weinberg (1971; a silver anniversary edition followed in 1998, but I read the original). Programming as human behavior: programmers working alone and in teams, and egoless programming. All eight of its main ideas stayed with me. In each box, Weinberg's idea is on top and what it meant for me is below:
 
 <div class="grid-4">
@@ -97,6 +101,9 @@ Frederick P. Brooks Jr. (1975; the 1995 anniversary edition adds *No Silver Bull
 
 <div class="grid-4">
 <div style="grid-column: 1 / -1; border: 1px solid var(--border-color); border-radius: 8px; padding: 0.6em 0.8em; font-size: 0.88em;">
+<figure class="zoomable" style="float: right; width: 92px; margin: 0 0 0.3em 1em;">
+<img src="{{ '/assets/images/posts/cover-mythical-man-month.webp' | relative_url }}" class="no-invert" alt="The cover of The Mythical Man-Month: Essays on Software Engineering by Frederick P. Brooks, Jr., tan, with an engraving of mammoths and sloths sinking into a tar pit">
+</figure>
 <div style="font-size: 2.4em; font-weight: 700; line-height: 1; color: var(--link-color);">1</div>
 <div style="font-weight: 700; margin: 0.3em 0 0.2em;">The mythical man-month</div>
 <p style="margin: 0 0 0.5em;">People and months are not interchangeable. In Brooks's words, "The bearing of a child takes nine months, no matter how many women are assigned."</p>
@@ -106,7 +113,7 @@ Frederick P. Brooks Jr. (1975; the 1995 anniversary edition adds *No Silver Bull
 <div style="font-size: 2.4em; font-weight: 700; line-height: 1; color: var(--link-color);">2</div>
 <div style="font-weight: 700; margin: 0.3em 0 0.2em;">Plan to throw one away</div>
 <p style="margin: 0 0 0.5em;">The first system built is a pilot, and you will throw it away anyway; the only question is whether you plan to.</p>
-<div style="border-top: 1px solid var(--border-color); padding-top: 0.5em;"><p>I do plan to throw away early prototypes. In a way, <a href="/2026/09/16/ai-tools-coding-agent-in-mlpl/">sw-MLPL</a> is being replaced by <a href="/2026/10/07/array-languages-xetal/">X_eTaL</a>.</p><p style="margin-bottom: 0;"><a href="/2026/10/30/why-i-use-asm-c-plsw/">PL/SW</a> was implemented in C, will soon be in <a href="/2026/11/01/dogfooding-hlasm-plsw/">HLASM</a>, and eventually in PL/SW itself.</p></div>
+<div style="border-top: 1px solid var(--border-color); padding-top: 0.5em;"><p>I do plan to throw away early prototypes, though a new language is more often the next step than a replacement. <a href="/2026/10/07/array-languages-xetal/">X_eTaL</a> is the next step after <a href="/2026/09/16/ai-tools-coding-agent-in-mlpl/">sw-MLPL</a>, and sw-MLPL was one too: I worked on ideas before it, like <a href="/2026/04/26/saw-tuplet-smalltalk-forth-from-forth/">Tuplet</a>, and many of my <a href="/2026/04/05/saw-saga-archiving-mlpl-plsw-cor24-compilers/">COR24 languages</a> informed its development.</p><p style="margin-bottom: 0;"><a href="/2026/10/30/why-i-use-asm-c-plsw/">PL/SW</a> was implemented in C, will soon be in <a href="/2026/11/01/dogfooding-hlasm-plsw/">HLASM</a>, and eventually in PL/SW itself.</p></div>
 </div>
 <div style="border: 1px solid var(--border-color); border-radius: 8px; padding: 0.6em 0.8em; font-size: 0.88em;">
 <div style="font-size: 2.4em; font-weight: 700; line-height: 1; color: var(--link-color);">3</div>
