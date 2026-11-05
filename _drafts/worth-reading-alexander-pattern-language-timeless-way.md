@@ -37,6 +37,10 @@ The [prior post](/2026/11/04/worth-reading-psychology-mythical-man-month/) in th
 
 ## A Pattern Language
 
+<figure class="zoomable" style="float: left; width: 90px; margin: 0.3em 1.2em 0.4em 0;">
+<img src="{{ '/assets/images/posts/cover-a-pattern-language.webp' | relative_url }}" class="no-invert" alt="The cover of A Pattern Language: Towns, Buildings, Construction by Christopher Alexander, Sara Ishikawa and Murray Silverstein, with Max Jacobson, Ingrid Fiksdahl-King and Shlomo Angel, cream with a red circular woodcut of builders">
+</figure>
+
 Christopher Alexander, Sara Ishikawa and Murray Silverstein, with Max Jacobson, Ingrid Fiksdahl-King and Shlomo Angel (1977). 253 patterns for towns, buildings and rooms, each a problem and its solution, and the source of the idea that *Design Patterns* carried into software.
 
 Mike: TODO, what it taught you.
