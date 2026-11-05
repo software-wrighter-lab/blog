@@ -47,6 +47,10 @@ Mike: TODO, what it taught you.
 
 ## The Timeless Way of Building
 
+<figure class="zoomable" style="float: left; width: 90px; margin: 0.3em 1.2em 0.4em 0;">
+<img src="{{ '/assets/images/posts/cover-timeless-way-of-building.webp' | relative_url }}" class="no-invert" alt="The cover of The Timeless Way of Building by Christopher Alexander, cream with a red circular woodcut">
+</figure>
+
 Christopher Alexander (1979). The first volume of the set whose second, *A Pattern Language*, came out two years earlier: the philosophy behind the patterns, and what Alexander calls the quality without a name.
 
 Mike: TODO, what it taught you.
