@@ -36,11 +36,19 @@ The [prior post](/2026/11/12/worth-reading-alexander-pattern-language-timeless-w
 
 ## Design Patterns
 
+<figure class="zoomable" style="float: left; width: 90px; margin: 0.3em 1.2em 0.4em 0;">
+<img src="{{ '/assets/images/posts/cover-design-patterns.webp' | relative_url }}" class="no-invert" alt="The cover of Design Patterns: Elements of Reusable Object-Oriented Software by Erich Gamma, Richard Helm, Ralph Johnson and John Vlissides, white with a blue spine and an M. C. Escher print of interlocking birds">
+</figure>
+
 Erich Gamma, Richard Helm, Ralph Johnson and John Vlissides, the Gang of Four, *Design Patterns: Elements of Reusable Object-Oriented Software* (1994). Twenty-three object-oriented patterns, named and catalogued after Alexander's example.
 
 Mike: TODO, what it taught you.
 
 ## Design Patterns for Object-Oriented Software Development
+
+<figure class="zoomable" style="float: left; width: 90px; margin: 0.3em 1.2em 0.4em 0;">
+<img src="{{ '/assets/images/posts/cover-design-patterns-pree.webp' | relative_url }}" class="no-invert" alt="The cover of Design Patterns for Object-Oriented Software Development by Wolfgang Pree, Addison-Wesley and ACM Press, gold title on black over a deep blue abstract pattern">
+</figure>
 
 Wolfgang Pree, *Design Patterns for Object-Oriented Software Development* (Addison-Wesley and ACM Press, 1995). Patterns one level up: metapatterns, a small set that describes the patterns of application frameworks, and hot spots, the places where a framework is meant to vary and be extended, worked through on the C++ GUI framework ET++.
 
