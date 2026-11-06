@@ -41,7 +41,7 @@ repo_urls:
 
 ## The first time
 
-I first used ray tracing in the mid-1990s, to make animated fly-throughs around shiny spheres and through pipes; I was the lead developer on IBM's BatchPipes/MVS at the time. It ran on a CPU, and generating the animation frames was not quick. This time the same kind of rendering is array code, and the question is how much a GPU changes that.
+I first used ray tracing in the mid-1990s, to make animated fly-throughs around shiny spheres and through pipes; I was the lead developer on IBM's BatchPipes/MVS at the time. I was also a big user of [TSO Pipelines and CMS Pipelines](/2026/02/05/tbt-pipelines-os390/), so I had pipes on my mind. It ran on a CPU, and generating the animation frames was not quick. This time the same kind of rendering is array code, and the question is how much a GPU changes that.
 
 ## The rules
 
