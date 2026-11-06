@@ -33,11 +33,15 @@ repo_urls:
 |----------|------|
 | **Repository** | [X_eTaL-gpu](https://github.com/softwarewrighter/X_eTaL-gpu) |
 | **The plan** | [docs/ray-tracing-plan.md](https://github.com/softwarewrighter/X_eTaL-gpu/blob/main/docs/ray-tracing-plan.md) |
-| **Earlier** | [Array Languages #10: X_eTaL on the GPU](/2026/10/13/array-languages-xetal-gpu/) |
+| **Earlier** | [Array Languages #7: X_eTaL-gpu](/2026/10/13/array-languages-xetal-gpu/) |
 | **The series** | [Array Languages: every post](/series/#array-languages) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
 </div>
+
+## The first time
+
+I first used ray tracing in the mid-1990s, to make animated fly-throughs around shiny spheres and through pipes; I was the lead developer on IBM's BatchPipes/MVS at the time. It ran on a CPU, and generating the animation frames was not quick. This time the same kind of rendering is array code, and the question is how much a GPU changes that.
 
 ## The rules
 
