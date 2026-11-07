@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Dogfooding #3: CoSy Tests reva-fork --- Bob's Bug Reports, Fixed or Filed"
+title: "Dogfooding #3: CoSy Tests reva-fork --- Bug Reports, Fixed or Filed"
 categories: [languages, forth, dogfooding]
 tags: [dogfooding, forth, reva, reva-fork, cosy, apl, k, rust, wasm, webassembly, regression-tests, golden-tests, bug-reports, porting]
-keywords: "dogfooding, reva-fork, Reva Forth in Rust and WebAssembly, CoSy, Bob Armstrong, bug catalog, golden tests, regression tests, FILE:LINE errors, runaway loop guard, Reva 7.0 compatibility, port-check, web REPL"
-abstract: "Since Saw #16, reva-fork has shipped a release almost every day, and CoSy, Bob Armstrong's APL-like language running on top of it, has become the way I validate the public repository. Bob sent a catalog of 26 crashes and bugs from years of his own logs; each is now fixed, filed for the right owner, or pinned by a regression test. Errors that say where, a guard against runaway loops, his Reva 7.0 code running unchanged, and a better web REPL. Today's releases, 2026.1106.0 and .1, finish CoSy's latest request: diagnostics that name the word at fault."
+keywords: "dogfooding, reva-fork, Reva Forth in Rust and WebAssembly, CoSy, bug catalog, golden tests, regression tests, FILE:LINE errors, runaway loop guard, Reva 7.0 compatibility, port-check, web REPL"
+abstract: "Since Saw #16, reva-fork has shipped a release almost every day, and CoSy, an APL-like language that runs on top of it, has become the way I validate the public repository. A detailed catalog of 26 issues, drawn from years of CoSy's logs, arrived; each is now fixed, filed for the right owner, or pinned by a regression test. Errors that say where, a guard against runaway loops, Reva 7.0 code running unchanged, and a better web REPL. Today's releases, 2026.1106.0 and .1, finish CoSy's latest request: diagnostics that name the word at fault."
 series: "Dogfooding"
 series_part: 3
 date: 2026-11-06 00:15:00 -0800
@@ -21,14 +21,14 @@ repo_urls:
      #37 adopted; no-invert.
      Sources (read 2026-11-06 morning, after git fetch): reva-fork dev and main, CHANGES.md, VERSION, saga steps; PR #91 (CD
      canvas, merged to dev 11/06, unreleased), PR #92 (fault chain, OPEN). PRIVATE ba-cosy-zip-fork dev: docs/reported-issues-
-     resolutions.md, docs/reva-fork-asks.md, docs/cosy-issues.md, tests (f81d232, version 2026.1106.0). Never link the CoSy repo.
+     resolutions.md, docs/reva-fork-asks.md, docs/cosy-issues.md, tests (f81d232, version 2026.1106.0). Never link the CoSy repo. Mike (2026-11-06): do not name CoSy's author in this post (not sure he is okay with it); describe his code diplomatically, facts only.
      Refreshed 2026-11-06 evening: reva-fork 2026.1106.0 (14:20) and 2026.1106.1 (18:23), main = dev, PRs #91-#98 merged, ask 22 done (#92-#95); CoSy fork main = dev at 2026.1106.0. Live: GitHub Pages at 2026.1106.1; staging cosy-web-2026.1106.0 is 200, reva-web-2026.1106.x staging is 404 (Pages is the Reva demo). Counts: reva-fork goldens 31 (10/25) to 60 on dev; CoSy goldens 39; bomb catalog 26 entries, 14 golden tests. -->
 
 <img src="{{ '/assets/images/posts/logo-cosy-relief.webp' | relative_url }}" class="post-marker no-invert" alt="The CoSy logo: a round blue badge with a gold wireframe hypercube above the word CoSy in pink, framed by leaves and stitching" style="width: 205px;">
 
-[Saw #16](/2026/10/25/saw-reva-fork-cosy/) introduced reva-fork, my port of the Reva Forth to Rust and WebAssembly, and CoSy, Bob Armstrong's APL-like language, running on top of it. Since then reva-fork has had a release almost every day, and CoSy has become the way I validate the public repository: real code, written by someone else, years before my port existed.
+[Saw #16](/2026/10/25/saw-reva-fork-cosy/) introduced reva-fork, my port of the Reva Forth to Rust and WebAssembly, and [CoSy](https://cosy.com/), an APL-like language, running on top of it. Since then reva-fork has had a release almost every day, and CoSy has become the way I validate the public repository: real code, written for Reva well before my port existed.
 
-Then Bob sent detailed bug documentation. Today's work is mostly cleanup, and regression tests for every issue he reported.
+Then detailed bug documentation arrived. Today's work is mostly cleanup, and regression tests for every reported issue.
 
 <!--more-->
 
@@ -61,7 +61,7 @@ Then Bob sent detailed bug documentation. Today's work is mostly cleanup, and re
 
 ## Errors that say where
 
-Bob's code is large and old, so when something goes wrong the first question is where. Errors now name the file and line, and the file that included it:
+CoSy is a substantial body of Forth, so when something goes wrong, the first useful answer is where. Errors now name the file and line, and the file that included it:
 
 ```text
 inner.f:3 (from outer.f:3): ERROR: unknown word: ...
@@ -81,9 +81,9 @@ Today's releases add opt-in checks for the harder cases, each with a CLI flag an
 
 Two more make long sessions safer. A stack underflow warns once and carries on, as Reva did, with `--underflow fail` for the old behavior. And a loop that runs for five seconds without asking for input pauses in the browser and the desktop app, with Stop, five seconds more, or keep going; in the terminal, `--max-cpu SECONDS` ends it.
 
-## Bob's code, unchanged
+## Existing code, unchanged
 
-`needs compat/reva70` loads a Reva 7.0 compatibility layer, so Bob's own `Job.f` and `Tui.f` open their window without edits. For code written on Windows, `reva --port-check` finds drive letters, backslash paths, Windows shell commands and `.bat` files, and reports each as FILE:LINE:COL; `--fix DIR` writes migrated copies and never touches the originals.
+`needs compat/reva70` loads a Reva 7.0 compatibility layer, so CoSy's `Job.f` and `Tui.f` open their window without edits. For code written on Windows, `reva --port-check` finds drive letters, backslash paths, Windows shell commands and `.bat` files, and reports each as FILE:LINE:COL; `--fix DIR` writes migrated copies and never touches the originals.
 
 ## A better web REPL
 
@@ -95,19 +95,19 @@ Pasted lines run one at a time, files can be uploaded and then `include`d, a mis
 
 SQLite works the same way in the terminal, the desktop app and the browser.
 
-## Bob's bug catalog
+## The bug catalog
 
-Bob's catalog has 26 entries, drawn from his logs from 2015 to 2019. Each one was reproduced, if it could be, and given an owner: the CoSy port, reva-fork, or Bob's own source.
+The catalog has 26 entries, drawn from CoSy's logs from 2015 to 2019. Each one was reproduced, where it could be, and given an owner: the CoSy port, reva-fork, or CoSy's own source.
 
 | Outcome | Entries |
 |---|---|
 | Works, or fixed | 11 |
-| Open, in Bob's source | 3 |
+| Open, in CoSy's own source | 3 |
 | Not recreatable (the words were renamed or removed) | 6 |
 | Unknown | 4 |
 | By design (Forth comments do not nest) | 1 |
 
-The three open ones are in Bob's `across` and `allocate`, so they are his to decide, and each has a documented workaround. Today's 14 golden tests pin every entry that can be run, and the three open ones are marked to fail on purpose: when a fix lands, the test says so.
+The three open ones are in CoSy's `across` and `allocate`, outside the port, and each has a documented workaround. Today's 14 golden tests pin every entry that can be run, and the three open ones are marked to fail on purpose: when a fix lands, the test says so.
 
 ## How CoSy feeds reva-fork
 
