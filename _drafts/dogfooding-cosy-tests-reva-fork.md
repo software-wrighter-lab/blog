@@ -4,7 +4,7 @@ title: "Dogfooding #3: CoSy Tests reva-fork --- Bob's Bug Reports, Fixed or File
 categories: [languages, forth, dogfooding]
 tags: [dogfooding, forth, reva, reva-fork, cosy, apl, k, rust, wasm, webassembly, regression-tests, golden-tests, bug-reports, porting]
 keywords: "dogfooding, reva-fork, Reva Forth in Rust and WebAssembly, CoSy, Bob Armstrong, bug catalog, golden tests, regression tests, FILE:LINE errors, runaway loop guard, Reva 7.0 compatibility, port-check, web REPL"
-abstract: "Since Saw #16, reva-fork has shipped a release almost every day, and CoSy, Bob Armstrong's APL-like language running on top of it, has become the way I validate the public repository. Bob sent a catalog of 26 crashes and bugs from years of his own logs; each is now fixed, filed for the right owner, or pinned by a regression test. Errors that say where, a guard against runaway loops, his Reva 7.0 code running unchanged, and a better web REPL. Today's releases, 2026.1106.0 and .1, finish the last of his asks: diagnostics that name the word at fault."
+abstract: "Since Saw #16, reva-fork has shipped a release almost every day, and CoSy, Bob Armstrong's APL-like language running on top of it, has become the way I validate the public repository. Bob sent a catalog of 26 crashes and bugs from years of his own logs; each is now fixed, filed for the right owner, or pinned by a regression test. Errors that say where, a guard against runaway loops, his Reva 7.0 code running unchanged, and a better web REPL. Today's releases, 2026.1106.0 and .1, finish CoSy's latest request: diagnostics that name the word at fault."
 series: "Dogfooding"
 series_part: 3
 date: 2026-11-06 00:15:00 -0800
