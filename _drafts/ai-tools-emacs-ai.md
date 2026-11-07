@@ -7,7 +7,7 @@ keywords: "Emacs AI client, gptel, LiteLLM gateway, LLM cost budgets, Emacs MCP 
 abstract: "Since 2025 Emacs has been one of my AI clients. Two projects make it work. emacs-ai-api puts every model, cloud or local, behind one gateway, with per-project budgets, cost tracking, Rust command-line tools and MCP tool servers, and points Emacs's gptel at it. emacs-agent goes further: a coding agent inside Emacs that keeps every conversation as an Org transcript, so nothing is lost when a context fills up."
 series: "AI Tools"
 series_part: 9
-date: 2026-11-04 00:15:00 -0800
+date: 2026-11-11 00:15:00 -0800
 video_url: "https://www.youtube.com/watch?v=e1OoixGDMXs"
 video_title: "Emacs MCP Server implementation/discussion"
 repo_urls:

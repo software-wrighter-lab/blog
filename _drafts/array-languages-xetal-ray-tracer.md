@@ -4,7 +4,7 @@ title: "Array Languages #20: A Ray Tracer in X_eTaL, on CPU and GPU"
 categories: [programming-languages, array-languages, gpu]
 tags: [array-languages, xetal, x-etal, gpu, opencl, ray-tracing, rtx-5060-ti, rendering, glass, macros, arch-linux]
 keywords: "X_eTaL ray tracer, array language ray tracing, OpenCL ray tracer, RTX 5060 Ti, glass sphere, area light, CPU and GPU same source, X_eTaL-gpu, X_eTaL-libraries, scene DSL macros, uncompressed TIFF frames"
-abstract: "Twentieth in the Array Languages series: a ray tracer written as ordinary X_eTaL array code, the same source run on the CPU and, through X_eTaL-gpu's OpenCL path, on an RTX 5060 Ti. In two days on Arch Linux it went from a plan to a glass sphere under an area light, reflections and shadows, an animated logo, and a 1280 by 512 frame that took ten minutes on the CPU and about a second on the GPU. Mike: TODO, Apple Silicon results if you get them."
+abstract: "Twentieth in the Array Languages series: a ray tracer written as ordinary X_eTaL array code, the same source run on the CPU and, through X_eTaL-gpu's OpenCL path, on an RTX 5060 Ti. In two days on Arch Linux it went from a plan to a glass sphere under an area light, reflections and shadows, an animated logo, and a 1280 by 512 frame that took ten minutes on the CPU and about a second on the GPU. On my M1 Max it ran the same sources, with the same pixels to within 53 of 655,360, and the RTX's speed or better on a large frame."
 series: "Array Languages"
 series_part: 20
 date: 2026-11-07 00:15:00 -0800
@@ -23,7 +23,7 @@ repo_urls:
      #Glass/lens-area (Mike's URLs). Refreshed 2026-11-07 afternoon: X_eTaL-gpu 6d4ce92 (ac15991, glass transport on GPU: Snell/Fresnel/TIR/absorption, matched cap-2/cap-4 CPU/GPU fixtures; larger glass still next), X_eTaL-libraries origin/main 0ee4382 (scene gallery leads the live site; Glass/example is now the Philox lens/area program, lens-area URL kept). Numbers: CPU still 1280x512 1 spp, 32 strips, 4 workers, render_wall_seconds 606.7; GPU still
      same size, RTX 5060 Ti, second resident run 890.943 ms device, 1213.376 ms total, setup 5003.902 ms; NOT a matched benchmark
      (different library revision, strips), per the GPU README. Animation: 24 frames 160x64, CPU, render_wall_seconds 2349.7.
-     Lead image: the Scene/logo presentation render (Mike, 2026-11-07), replacing the placeholder. -->
+     M1 Max section from docs/m1max-ray-results.md, UNCOMMITTED in Mike's local X_eTaL-gpu (step 065 pending, 2026-11-07 ~15:40); re-check before publishing. Lead image: the Scene/logo presentation render (Mike, 2026-11-07), replacing the placeholder. -->
 
 <img src="{{ '/assets/images/posts/ray-scene-logo.webp' | relative_url }}" class="post-marker no-invert" alt="X_eTaL in extruded letters, a white X and orange eTaL, reflected in a glossy floor under a dark sky" style="width: 260px;">
 
@@ -98,11 +98,20 @@ The GPU's first run spent about five seconds on setup. These are single observat
 <figcaption style="font-size: 0.85em;">24 frames at 160 by 64, rendered on the CPU in about 39 minutes, shown at twice size.</figcaption>
 </figure>
 
+## On Apple Silicon
+
+The same sources run on my M1 Max, through Apple's OpenCL 1.2, which has no 64-bit floating point.
+
+- **The same pixels.** At 16 by 8, the M1 Max output is byte for byte the RTX's. At 1280 by 512 the two cards differ in 53 of 655,360 pixels, all at silhouette edges or along the vane's shadow boundary, where a hit or shadow test lands within 32-bit rounding of a surface and the two vendors' arithmetic decides it differently. To the eye the images are the same.
+- **Speed.** At 1280 by 512, with the scene already prepared, the M1 Max took about 0.9 s against the RTX's 1.2 s. At 16 by 8 it was eighteen times slower, 74 ms against 4.1 ms, because a tiny image measures the cost of launching about 1,500 kernels, and Apple's driver charges more per launch. Cold setup is Apple's translation of the generated code: 11.8 s the first time, about 3 s after that.
+- **CPU against GPU, on one machine.** The first matched comparison, the 640 by 256 logo: X_eTaL's evaluator on the CPU took 476 s on eight workers; the GPU took about 0.2 s per render once prepared, and 4.5 s for the whole process. The CPU side is 64-bit and the GPU 32-bit, so this is not a strict speedup, but it shows the size of the gap.
+- **No glass yet.** The Glass library checks its unit vectors to tolerances that only 64-bit arithmetic can meet, so on the M1 Max it correctly stops at its first check. Running glass there needs a library change: a tolerance that follows the data's precision.
+
+The two cards' programs also came from different revisions of the GPU backend, which plans many more kernel launches now than when the RTX stills were made, so none of these numbers is final.
+
 ## Measuring it honestly
 
 Pictures are compared pixel by pixel, with stated tolerances, never by eye. Timings separate setup, device time and the whole run, and file writing is left out. The outputs are uncompressed TIFF and lossless PNG, with the exact source of every render kept beside it.
-
-Mike: TODO, Apple Silicon results if you get them, and anything that changes before publishing.
 
 ## Closing
 
