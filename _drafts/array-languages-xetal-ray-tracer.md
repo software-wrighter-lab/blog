@@ -20,7 +20,7 @@ repo_urls:
      site-assets/ray/{logo,logo-still,logo-gpu,image-pair}/README.md + manifest.json + timings.txt. X_eTaL-libraries main bdacede
      (2026-11-07 10:10): RL1-RL7 commits, docs/rendered-scenes.md, libs/*/docs/presentation-*.html (PNGs extracted from these; the
      work/ dir is gitignored, Mike 2026-11-07). Live demos: softwarewrighter.github.io/X_eTaL-libraries/#Scene/logo, #RayTrace/diagnostic,
-     #Glass/lens-area (Mike's URLs). Numbers: CPU still 1280x512 1 spp, 32 strips, 4 workers, render_wall_seconds 606.7; GPU still
+     #Glass/lens-area (Mike's URLs). Refreshed 2026-11-07 afternoon: X_eTaL-gpu 6d4ce92 (ac15991, glass transport on GPU: Snell/Fresnel/TIR/absorption, matched cap-2/cap-4 CPU/GPU fixtures; larger glass still next), X_eTaL-libraries origin/main 0ee4382 (scene gallery leads the live site; Glass/example is now the Philox lens/area program, lens-area URL kept). Numbers: CPU still 1280x512 1 spp, 32 strips, 4 workers, render_wall_seconds 606.7; GPU still
      same size, RTX 5060 Ti, second resident run 890.943 ms device, 1213.376 ms total, setup 5003.902 ms; NOT a matched benchmark
      (different library revision, strips), per the GPU README. Animation: 24 frames 160x64, CPU, render_wall_seconds 2349.7.
      Lead image: the Scene/logo presentation render (Mike, 2026-11-07), replacing the placeholder. -->
@@ -35,7 +35,7 @@ repo_urls:
 
 | Resource | Link |
 |----------|------|
-| **Live demos** | [Scene/logo](https://softwarewrighter.github.io/X_eTaL-libraries/#Scene/logo), [RayTrace/diagnostic](https://softwarewrighter.github.io/X_eTaL-libraries/#RayTrace/diagnostic), [Glass/lens-area](https://softwarewrighter.github.io/X_eTaL-libraries/#Glass/lens-area) |
+| **Live demos** | [Scene/logo](https://softwarewrighter.github.io/X_eTaL-libraries/#Scene/logo), [RayTrace/diagnostic](https://softwarewrighter.github.io/X_eTaL-libraries/#RayTrace/diagnostic), [Glass/example](https://softwarewrighter.github.io/X_eTaL-libraries/#Glass/example) |
 | **Ray tracing on the GPU** | [X_eTaL-gpu](https://softwarewrighter.github.io/X_eTaL-gpu/) (site), [repository](https://github.com/softwarewrighter/X_eTaL-gpu) |
 | **The libraries** | [X_eTaL-libraries](https://github.com/softwarewrighter/X_eTaL-libraries): Vector3, Extrusion, Scene, RayTrace, Glass |
 | **The plan** | [docs/ray-tracing-plan.md](https://github.com/softwarewrighter/X_eTaL-gpu/blob/main/docs/ray-tracing-plan.md) |
@@ -59,7 +59,7 @@ The GPU path is X_eTaL-gpu's existing one, source to intermediate form to OpenCL
 
 The reusable parts went into [X_eTaL-libraries](https://github.com/softwarewrighter/X_eTaL-libraries) as requests the GPU repository filed and the libraries delivered, in order: 3D vector math (Vector3), contour extrusion with original letter shapes (Extrusion), named scene arrays and rigid group animation (Scene), the opaque ray tracer itself (RayTrace), sphere geometry, bounded glass transport (Glass), and then sampling, thin lenses and area lights.
 
-Each library has a live demo with a recorded render above an editable program. Run computes a quick version in the browser; the recorded image is a slower offline render of the same scene at full size.
+The live demo site now opens with a gallery of the finished scenes. Each library has a live demo with a recorded render above an editable program. Run computes a quick version in the browser; the recorded image is a slower offline render of the same scene at full size.
 
 <figure class="zoomable">
 <img src="{{ '/assets/images/posts/ray-diagnostic.webp' | relative_url }}" class="no-invert" alt="An orange cube and a blue octahedron on a glossy gray floor, with hard shadows and reflections, under a dark blue sky">
@@ -70,10 +70,12 @@ Each library has a live demo with a recorded render above an editable program. R
 
 <figure class="zoomable">
 <img src="{{ '/assets/images/posts/ray-glass-lens-area.webp' | relative_url }}" class="no-invert" alt="A clear glass sphere floating above a pale floor under a bright rectangular area light, casting a soft shadow">
-<figcaption style="font-size: 0.85em;">The <a href="https://softwarewrighter.github.io/X_eTaL-libraries/#Glass/lens-area">Glass lens/area demo</a>: 640 by 360, 64 samples per pixel. Click to enlarge.</figcaption>
+<figcaption style="font-size: 0.85em;">The <a href="https://softwarewrighter.github.io/X_eTaL-libraries/#Glass/example">Glass example</a>: 640 by 360, 64 samples per pixel. Click to enlarge.</figcaption>
 </figure>
 
 A glass sphere under an area light, with a thin-lens camera and 64 samples per pixel. Glass is the slow case: light refracts and reflects at each surface, so every pixel follows a path, capped at 16 bounces here, and the area light makes the shadow soft. Even 64 samples leave some noise around the glass and the shadow; images like this take hours on the CPU, which is why they are rendered offline.
+
+As of today, glass runs on the GPU too: refraction, reflection, total internal reflection and absorption, from the same shared library code, through X_eTaL-gpu's OpenCL path. Small test renders with paths capped at two and at four bounces match between the CPU and the RTX; a larger glass still is next, along with faster cold shader compilation.
 
 ## The logo, on CPU and on GPU
 
