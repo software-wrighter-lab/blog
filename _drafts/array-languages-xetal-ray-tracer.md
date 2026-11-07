@@ -115,4 +115,6 @@ Pictures are compared pixel by pixel, with stated tolerances, never by eye. Timi
 
 ## Closing
 
-Mike: TODO, a closing in your words.
+In the 1990s my fly-throughs took a CPU a long time per frame. Thirty years later the same kind of picture comes from an array language, and the frame that took ten minutes on the CPU takes about a second on a GPU, on a Linux box or my Mac, with the same pixels on both.
+
+Next are a larger glass still, glass on Apple Silicon, a matched CPU-against-GPU benchmark, and the weather vane turning at full size.
