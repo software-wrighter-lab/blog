@@ -13,17 +13,6 @@ repo_urls:
     title: "reva-fork"
 ---
 
-<!-- DRAFT (2026-11-06), Mike: catch up on reva-fork and ba-cosy-zip-fork since Saw #16 (2026-10-25). "I received detailed bug
-     documentation and today's work is mainly clean up and adding regression tests for the reported issues. Note that cosy fork
-     repo remains private. At this point CoSy is being used to validate the reva-fork public repo." New release today: a
-     wrighter.space/staging URL for 2026.1106.x, and a new reva-fork release (done: reva-fork 2026.1106.1 on GitHub Pages, CoSy cosy-web-2026.1106.0 on staging). Series: Dogfooding #3 (Mike,
-     2026-11-06; not Saw on a Friday). Lead image: Mike's logo-cosy-relief.jpg (Dropbox, 2026-10-30), the blue badge that CoSy fork
-     #37 adopted; no-invert.
-     Sources (read 2026-11-06 morning, after git fetch): reva-fork dev and main, CHANGES.md, VERSION, saga steps; PR #91 (CD
-     canvas, merged to dev 11/06, unreleased), PR #92 (fault chain, OPEN). PRIVATE ba-cosy-zip-fork dev: docs/reported-issues-
-     resolutions.md, docs/reva-fork-asks.md, docs/cosy-issues.md, tests (f81d232, version 2026.1106.0). Never link the CoSy repo. Mike (2026-11-06): do not name CoSy's author in this post (not sure he is okay with it); describe his code diplomatically, facts only.
-     Refreshed 2026-11-06 evening: reva-fork 2026.1106.0 (14:20) and 2026.1106.1 (18:23), main = dev, PRs #91-#98 merged, ask 22 done (#92-#95); CoSy fork main = dev at 2026.1106.0. Live (evening): GitHub Pages at 2026.1106.2; staging cosy-web-2026.1106.2 is 200 (CoSy 1106.2 on reva-fork 1106.2), reva-web-2026.1106.x staging is 404 (Pages is the Reva demo). Counts: reva-fork goldens 31 (10/25) to 60 on dev; CoSy goldens 39; bomb catalog 26 entries, 14 golden tests. -->
-
 <img src="{{ '/assets/images/posts/logo-cosy-relief.webp' | relative_url }}" class="post-marker no-invert" alt="The CoSy logo: a round blue badge with a gold wireframe hypercube above the word CoSy in pink, framed by leaves and stitching" style="width: 205px;">
 
 [Saw #16](/2026/10/25/saw-reva-fork-cosy/) introduced reva-fork, my port of the Reva Forth to Rust and WebAssembly, and [CoSy](https://cosy.com/), an APL-like language, running on top of it. Since then reva-fork has had a release almost every day, and CoSy has become the way I validate the public repository: real code, written for Reva well before my port existed.
