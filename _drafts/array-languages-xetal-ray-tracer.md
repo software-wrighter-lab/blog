@@ -7,7 +7,7 @@ keywords: "X_eTaL ray tracer, array language ray tracing, OpenCL ray tracer, RTX
 abstract: "Twentieth in the Array Languages series: a ray tracer written as ordinary X_eTaL array code, the same source run on the CPU and, through X_eTaL-gpu's OpenCL path, on an RTX 5060 Ti. The plan, the scene (a thick X with the letters _eTaL rotating around it), the algorithm, and the rules: no host renderer, no CUDA, no copying POV-Ray, and an honest speedup or slowdown. Mike: TODO, update once there is a first image."
 series: "Array Languages"
 series_part: 20
-date: 2026-11-06 00:15:00 -0800
+date: 2026-11-07 00:15:00 -0800
 repo_urls:
   - url: "https://github.com/softwarewrighter/X_eTaL-gpu"
     title: "X_eTaL-gpu"
