@@ -75,7 +75,7 @@ The live demo site now opens with a gallery of the finished scenes. Each library
 
 A glass sphere under an area light, with a thin-lens camera and 64 samples per pixel. Glass is the slow case: light refracts and reflects at each surface, so every pixel follows a path, capped at 16 bounces here, and the area light makes the shadow soft. Even 64 samples leave some noise around the glass and the shadow; images like this take hours on the CPU, which is why they are rendered offline.
 
-As of today, glass runs on the GPU too: refraction, reflection, total internal reflection and absorption, from the same shared library code, through X_eTaL-gpu's OpenCL path. Small test renders with paths capped at two and at four bounces match between the CPU and the RTX; a larger glass still is next, along with faster cold shader compilation.
+As of today, glass runs on the GPU too: refraction, reflection, total internal reflection and absorption, from the same shared library code, through X_eTaL-gpu's OpenCL path. Small test renders with paths capped at two and at four bounces match between the CPU and the RTX; a first 1024 by 768 glass preview of three spheres and three crystals has run on the RTX, at about 8.4 s per render once prepared after more than eight minutes of cold setup, but at one sample per pixel it still shows unresolved paths. A clean version is next, along with faster cold shader compilation.
 
 ## The logo, on CPU and on GPU
 
@@ -117,4 +117,4 @@ Pictures are compared pixel by pixel, with stated tolerances, never by eye. Timi
 
 In the 1990s my fly-throughs took a CPU a long time per frame. Thirty years later the same kind of picture comes from an array language, and the frame that took ten minutes on the CPU takes about a second on a GPU, on a Linux box or my Mac, with the same picture on both.
 
-Next are a larger glass still, glass on Apple Silicon, a matched CPU-against-GPU benchmark, and the weather vane turning at full size.
+Next are a clean, larger glass still, glass on Apple Silicon, a matched CPU-against-GPU benchmark, and the weather vane turning at full size.
