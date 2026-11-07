@@ -4,7 +4,7 @@ title: "Dogfooding #3: CoSy Tests reva-fork --- Bug Reports, Fixed or Filed"
 categories: [languages, forth, dogfooding]
 tags: [dogfooding, forth, reva, reva-fork, cosy, apl, k, rust, wasm, webassembly, regression-tests, golden-tests, bug-reports, porting]
 keywords: "dogfooding, reva-fork, Reva Forth in Rust and WebAssembly, CoSy, bug catalog, golden tests, regression tests, FILE:LINE errors, runaway loop guard, Reva 7.0 compatibility, port-check, web REPL"
-abstract: "Since Saw #16, reva-fork has shipped a release almost every day, and CoSy, an APL-like language that runs on top of it, has become the way I validate the public repository. A detailed catalog of 26 issues, drawn from years of CoSy's logs, arrived; each is now fixed, filed for the right owner, or pinned by a regression test. Errors that say where, a guard against runaway loops, Reva 7.0 code running unchanged, and a better web REPL. Today's releases, 2026.1106.0 and .1, finish CoSy's latest request: diagnostics that name the word at fault."
+abstract: "Since Saw #16, reva-fork has shipped a release almost every day, and CoSy, an APL-like language that runs on top of it, has become the way I validate the public repository. A detailed catalog of 26 issues, drawn from years of CoSy's logs, arrived; each is now fixed, filed for the right owner, or pinned by a regression test. Errors that say where, a guard against runaway loops, Reva 7.0 code running unchanged, and a better web REPL. Today's releases, 2026.1106.0 to .2, finish CoSy's latest request: diagnostics that name the word at fault."
 series: "Dogfooding"
 series_part: 3
 date: 2026-11-06 00:15:00 -0800
@@ -22,7 +22,7 @@ repo_urls:
      Sources (read 2026-11-06 morning, after git fetch): reva-fork dev and main, CHANGES.md, VERSION, saga steps; PR #91 (CD
      canvas, merged to dev 11/06, unreleased), PR #92 (fault chain, OPEN). PRIVATE ba-cosy-zip-fork dev: docs/reported-issues-
      resolutions.md, docs/reva-fork-asks.md, docs/cosy-issues.md, tests (f81d232, version 2026.1106.0). Never link the CoSy repo. Mike (2026-11-06): do not name CoSy's author in this post (not sure he is okay with it); describe his code diplomatically, facts only.
-     Refreshed 2026-11-06 evening: reva-fork 2026.1106.0 (14:20) and 2026.1106.1 (18:23), main = dev, PRs #91-#98 merged, ask 22 done (#92-#95); CoSy fork main = dev at 2026.1106.0. Live: GitHub Pages at 2026.1106.1; staging cosy-web-2026.1106.0 is 200, reva-web-2026.1106.x staging is 404 (Pages is the Reva demo). Counts: reva-fork goldens 31 (10/25) to 60 on dev; CoSy goldens 39; bomb catalog 26 entries, 14 golden tests. -->
+     Refreshed 2026-11-06 evening: reva-fork 2026.1106.0 (14:20) and 2026.1106.1 (18:23), main = dev, PRs #91-#98 merged, ask 22 done (#92-#95); CoSy fork main = dev at 2026.1106.0. Live (evening): GitHub Pages at 2026.1106.2; staging cosy-web-2026.1106.2 is 200 (CoSy 1106.2 on reva-fork 1106.2), reva-web-2026.1106.x staging is 404 (Pages is the Reva demo). Counts: reva-fork goldens 31 (10/25) to 60 on dev; CoSy goldens 39; bomb catalog 26 entries, 14 golden tests. -->
 
 <img src="{{ '/assets/images/posts/logo-cosy-relief.webp' | relative_url }}" class="post-marker no-invert" alt="The CoSy logo: a round blue badge with a gold wireframe hypercube above the word CoSy in pink, framed by leaves and stitching" style="width: 205px;">
 
@@ -37,7 +37,7 @@ Then detailed bug documentation arrived. Today's work is mostly cleanup, and reg
 | Resource | Link |
 |----------|------|
 | **reva-fork** | [softwarewrighter/reva-fork](https://github.com/softwarewrighter/reva-fork) |
-| **Live demos** | [Reva in the browser](https://softwarewrighter.github.io/reva-fork/) (2026.1106.1, GitHub Pages), [CoSy in the browser](https://wrighter.space/staging/cosy-fork/cosy-web-2026.1106.0/) (2026.1106.0, on my staging site: not GitHub Pages, since the port is still private and its licensing unclear) |
+| **Live demos** | [Reva in the browser](https://softwarewrighter.github.io/reva-fork/) (2026.1106.2, GitHub Pages), [CoSy in the browser](https://wrighter.space/staging/cosy-fork/cosy-web-2026.1106.2/) (2026.1106.2, on my staging site: not GitHub Pages, since the port is still private and its licensing unclear) |
 | **CoSy** | [cosy.com](https://cosy.com/), its [Forth code](https://cosy.com/4thCoSy/) |
 | **The CoSy port** | private for now |
 | **Earlier** | [Saw #16: Reva Forth, Ported to Rust and WebAssembly, and CoSy on Top](/2026/10/25/saw-reva-fork-cosy/) |
@@ -58,6 +58,7 @@ Then detailed bug documentation arrived. Today's work is mostly cleanup, and reg
 | 2026.1105.0 | `ms` waits in the browser and the desktop app, so animations draw frame by frame |
 | 2026.1106.0 | Graphics for IUP programs: CD canvases and timers in the browser and the desktop app; diagnostics that name the word at fault |
 | 2026.1106.1 | README and docs brought up to date, with a canvas demo on the live site (`needs ui/cd-demo cd-demo`) and a new docs/diagnostics.md |
+| 2026.1106.2 | A release is checked everywhere before it ships: `just release-check` builds and checks the CLI, the web page, reva-serve and the desktop app |
 
 ## Errors that say where
 
