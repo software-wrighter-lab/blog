@@ -117,4 +117,4 @@ The tests grew along the way: reva-fork's golden tests from 31 to 60, and CoSy's
 
 ## Next
 
-With ask 22 done, reva-fork's plan goes on to portable test gates, a triage of the examples, bignums and XML, sockets in the terminal, and packaging. Mike: TODO, anything else you want to name, or a closing in your words.
+I'm winding down work on reva-fork and CoSy for a while. Several other X_eTaL projects are ramping up: ray tracing on the CPU and GPU, and machine learning, with fine-tuning and manifolds. I'm also working on some Hackaday hardware projects, with FPGAs and analog circuits.
