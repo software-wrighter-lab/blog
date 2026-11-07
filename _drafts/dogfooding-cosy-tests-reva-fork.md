@@ -99,7 +99,7 @@ SQLite works the same way in the terminal, the desktop app and the browser.
 
 <figure class="zoomable outdent-left" style="width: 240px;">
 <img src="{{ '/assets/images/posts/block-relay-moth.webp' | relative_url }}" class="no-invert" alt="A moth resting on the copper coil of an old electromechanical relay">
-<figcaption style="font-size: 0.85em;">"First actual case of bug being found": the moth in the Harvard Mark II's relay, 1947.</figcaption>
+<figcaption style="font-size: 0.85em;">A dramatization of the "first actual case of bug being found": the moth in the Harvard Mark II's relay, 1947.</figcaption>
 </figure>
 
 The catalog has 26 entries, drawn from CoSy's logs from 2015 to 2019. Each one was reproduced, where it could be, and given an owner: the CoSy port, reva-fork, or CoSy's own source.
