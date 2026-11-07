@@ -27,7 +27,7 @@ repo_urls:
 
 <img src="{{ '/assets/images/posts/ray-scene-logo.webp' | relative_url }}" class="post-marker no-invert" alt="X_eTaL in extruded letters, a white X and orange eTaL, reflected in a glossy floor under a dark sky" style="width: 260px;">
 
-[X_eTaL-gpu](/2026/10/13/array-languages-xetal-gpu/) runs X_eTaL source on the GPU by lowering it through an intermediate form to OpenCL. A ray tracer is a good test of that: lots of independent pixels, the same arithmetic for each, and a picture at the end that shows at a glance whether it worked. In two days, on Arch Linux, it went from a plan to the picture above.
+[X_eTaL-gpu](/2026/10/13/array-languages-xetal-gpu/) runs X_eTaL source on the GPU by lowering it through an intermediate form to OpenCL. A ray tracer is a good test of that: lots of independent pixels, the same arithmetic for each, and a picture at the end that shows at a glance whether it worked. In two days, on Arch Linux, it went from a plan to the picture here.
 
 <!--more-->
 
