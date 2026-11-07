@@ -16,7 +16,7 @@ repo_urls:
 <!-- DRAFT (2026-11-06), Mike: catch up on reva-fork and ba-cosy-zip-fork since Saw #16 (2026-10-25). "I received detailed bug
      documentation and today's work is mainly clean up and adding regression tests for the reported issues. Note that cosy fork
      repo remains private. At this point CoSy is being used to validate the reva-fork public repo." New release today: a
-     wrighter.space/staging URL for 2026.1106.x, and a new reva-fork release (Mike: TODO, both). Series: Dogfooding #3 (Mike,
+     wrighter.space/staging URL for 2026.1106.x, and a new reva-fork release (done: reva-fork 2026.1106.1 on GitHub Pages, CoSy cosy-web-2026.1106.0 on staging). Series: Dogfooding #3 (Mike,
      2026-11-06; not Saw on a Friday). Lead image: Mike's logo-cosy-relief.jpg (Dropbox, 2026-10-30), the blue badge that CoSy fork
      #37 adopted; no-invert.
      Sources (read 2026-11-06 morning, after git fetch): reva-fork dev and main, CHANGES.md, VERSION, saga steps; PR #91 (CD
