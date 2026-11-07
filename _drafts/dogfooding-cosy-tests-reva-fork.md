@@ -37,7 +37,7 @@ Then Bob sent detailed bug documentation. Today's work is mostly cleanup, and re
 | Resource | Link |
 |----------|------|
 | **reva-fork** | [softwarewrighter/reva-fork](https://github.com/softwarewrighter/reva-fork) |
-| **Live demos** | [Reva in the browser](https://softwarewrighter.github.io/reva-fork/) (2026.1106.1, GitHub Pages), [CoSy in the browser](https://wrighter.space/staging/cosy-fork/cosy-web-2026.1106.0/) (2026.1106.0, staging) |
+| **Live demos** | [Reva in the browser](https://softwarewrighter.github.io/reva-fork/) (2026.1106.1, GitHub Pages), [CoSy in the browser](https://wrighter.space/staging/cosy-fork/cosy-web-2026.1106.0/) (2026.1106.0, on my staging site: not GitHub Pages, since the port is still private and its licensing unclear) |
 | **CoSy** | [cosy.com](https://cosy.com/), its [Forth code](https://cosy.com/4thCoSy/) |
 | **The CoSy port** | private for now |
 | **Earlier** | [Saw #16: Reva Forth, Ported to Rust and WebAssembly, and CoSy on Top](/2026/10/25/saw-reva-fork-cosy/) |
