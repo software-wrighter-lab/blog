@@ -4,7 +4,7 @@ title: "Dogfooding #3: CoSy Tests reva-fork --- Bob's Bug Reports, Fixed or File
 categories: [languages, forth, dogfooding]
 tags: [dogfooding, forth, reva, reva-fork, cosy, apl, k, rust, wasm, webassembly, regression-tests, golden-tests, bug-reports, porting]
 keywords: "dogfooding, reva-fork, Reva Forth in Rust and WebAssembly, CoSy, Bob Armstrong, bug catalog, golden tests, regression tests, FILE:LINE errors, runaway loop guard, Reva 7.0 compatibility, port-check, web REPL"
-abstract: "Since Saw #16, reva-fork has shipped a release almost every day, and CoSy, Bob Armstrong's APL-like language running on top of it, has become the way I validate the public repository. Bob sent a catalog of 26 crashes and bugs from years of his own logs; each is now fixed, filed for the right owner, or pinned by a regression test. Errors that say where, a guard against runaway loops, his Reva 7.0 code running unchanged, and a better web REPL. Mike: TODO, today's release numbers and staging URLs."
+abstract: "Since Saw #16, reva-fork has shipped a release almost every day, and CoSy, Bob Armstrong's APL-like language running on top of it, has become the way I validate the public repository. Bob sent a catalog of 26 crashes and bugs from years of his own logs; each is now fixed, filed for the right owner, or pinned by a regression test. Errors that say where, a guard against runaway loops, his Reva 7.0 code running unchanged, and a better web REPL. Today's releases, 2026.1106.0 and .1, finish the last of his asks: diagnostics that name the word at fault."
 series: "Dogfooding"
 series_part: 3
 date: 2026-11-06 00:15:00 -0800
@@ -22,7 +22,7 @@ repo_urls:
      Sources (read 2026-11-06 morning, after git fetch): reva-fork dev and main, CHANGES.md, VERSION, saga steps; PR #91 (CD
      canvas, merged to dev 11/06, unreleased), PR #92 (fault chain, OPEN). PRIVATE ba-cosy-zip-fork dev: docs/reported-issues-
      resolutions.md, docs/reva-fork-asks.md, docs/cosy-issues.md, tests (f81d232, version 2026.1106.0). Never link the CoSy repo.
-     Counts: reva-fork goldens 31 (10/25) to 56 on dev; CoSy goldens 36; bomb catalog 26 entries, 14 golden tests. -->
+     Refreshed 2026-11-06 evening: reva-fork 2026.1106.0 (14:20) and 2026.1106.1 (18:23), main = dev, PRs #91-#98 merged, ask 22 done (#92-#95); CoSy fork main = dev at 2026.1106.0. Live: GitHub Pages at 2026.1106.1; staging cosy-web-2026.1106.0 is 200, reva-web-2026.1106.x staging is 404 (Pages is the Reva demo). Counts: reva-fork goldens 31 (10/25) to 60 on dev; CoSy goldens 39; bomb catalog 26 entries, 14 golden tests. -->
 
 <img src="{{ '/assets/images/posts/logo-cosy-relief.webp' | relative_url }}" class="post-marker no-invert" alt="The CoSy logo: a round blue badge with a gold wireframe hypercube above the word CoSy in pink, framed by leaves and stitching" style="width: 205px;">
 
@@ -37,8 +37,7 @@ Then Bob sent detailed bug documentation. Today's work is mostly cleanup, and re
 | Resource | Link |
 |----------|------|
 | **reva-fork** | [softwarewrighter/reva-fork](https://github.com/softwarewrighter/reva-fork) |
-| **Live demo** | [Reva in the browser](https://softwarewrighter.github.io/reva-fork/) (GitHub Pages) |
-| **Staging** | Mike: TODO, today's wrighter.space/staging URL for 2026.1106.x |
+| **Live demos** | [Reva in the browser](https://softwarewrighter.github.io/reva-fork/) (2026.1106.1, GitHub Pages), [CoSy in the browser](https://wrighter.space/staging/cosy-fork/cosy-web-2026.1106.0/) (2026.1106.0, staging) |
 | **CoSy** | [cosy.com](https://cosy.com/), its [Forth code](https://cosy.com/4thCoSy/) |
 | **The CoSy port** | private for now |
 | **Earlier** | [Saw #16: Reva Forth, Ported to Rust and WebAssembly, and CoSy on Top](/2026/10/25/saw-reva-fork-cosy/) |
@@ -57,8 +56,8 @@ Then Bob sent detailed bug documentation. Today's work is mostly cleanup, and re
 | 2026.1103.0 | The version in one `VERSION` file; a rebuilt web site never runs stale files |
 | 2026.1104.0 | Pasted lines run one at a time in the web REPL; a notebook in its own file; a fix for the web demo's text UI |
 | 2026.1105.0 | `ms` waits in the browser and the desktop app, so animations draw frame by frame |
-
-Since then, CD canvas graphics for IUP programs have landed on `dev`, not yet in a release. Mike: TODO, today's release and what it adds.
+| 2026.1106.0 | Graphics for IUP programs: CD canvases and timers in the browser and the desktop app; diagnostics that name the word at fault |
+| 2026.1106.1 | README and docs brought up to date, with a canvas demo on the live site (`needs ui/cd-demo cd-demo`) and a new docs/diagnostics.md |
 
 ## Errors that say where
 
@@ -68,11 +67,17 @@ Bob's code is large and old, so when something goes wrong the first question is 
 inner.f:3 (from outer.f:3): ERROR: unknown word: ...
 ```
 
-Faults report the word that was running and the stack. A change in review today goes further and names the callers, innermost first:
+Faults report the word that was running and the stack, and since today they name the callers too, innermost first:
 
 ```text
 (in a+0xc <- b <- c, eip ...)
 ```
+
+Today's releases add opt-in checks for the harder cases, each with a CLI flag and a `?diagnose=` page option:
+
+- **`--underflow fail-at-word`** stops in the word that underflowed, even when a later push hides it: `: f1 drop drop ; : f2 f1 1 ;` then `1 f2` stops in `f1+0xa <- f2`.
+- **`--check-execute`** stops an `execute` of something that is not code, naming who executed it, where `0 execute` used to fault at address 0.
+- **`--trace-compile`** shows each word compiled into a definition, and which words compiled it.
 
 Two more make long sessions safer. A stack underflow warns once and carries on, as Reva did, with `--underflow fail` for the old behavior. And a loop that runs for five seconds without asking for input pauses in the browser and the desktop app, with Stop, five seconds more, or keep going; in the terminal, `--max-cpu SECONDS` ends it.
 
@@ -106,10 +111,10 @@ The three open ones are in Bob's `across` and `allocate`, so they are his to dec
 
 ## How CoSy feeds reva-fork
 
-The CoSy port never changes reva-fork directly. When it finds a problem, it reproduces it, decides who owns it, and files an ask against reva-fork: symptom, reproduction, workaround, suggested fix and priority. reva-fork takes the ask as a step in its own plan, and when the fix ships, the CoSy side drops its workaround and closes the ask. Twenty-two asks so far; most are done.
+The CoSy port never changes reva-fork directly. When it finds a problem, it reproduces it, decides who owns it, and files an ask against reva-fork: symptom, reproduction, workaround, suggested fix and priority. reva-fork takes the ask as a step in its own plan, and when the fix ships, the CoSy side drops its workaround and closes the ask. Twenty-two asks so far, and most are done; the four diagnostics above were ask 22, finished today.
 
-The tests grew along the way: reva-fork's golden tests from 31 to 56, and CoSy's to 36.
+The tests grew along the way: reva-fork's golden tests from 31 to 60, and CoSy's to 39.
 
 ## Next
 
-The rest of the current ask: an underflow that stops at the word that caused it, a check before `execute`, and a trace of what compiles. After that, bignums and XML, sockets in the terminal, and packaging. Mike: TODO, anything else you want to name, or a closing in your words.
+With ask 22 done, reva-fork's plan goes on to portable test gates, a triage of the examples, bignums and XML, sockets in the terminal, and packaging. Mike: TODO, anything else you want to name, or a closing in your words.
