@@ -96,7 +96,7 @@ I watch math videos, and manifolds are something I want to learn more about in g
 
 <figure class="zoomable outdent-right" style="width: 150px; margin-top: -2.9em;">
 <img src="{{ '/assets/images/posts/saw18-ray-glass-preview.webp' | relative_url }}" class="no-invert" alt="Two glass spheres and two glass crystals on a reflective floor between bright panels, rendered on the RTX 5060 Ti at one sample per pixel, with fine stripes across the glass">
-<figcaption style="font-size: 0.85em;">An early RTX glass preview, one sample per pixel.</figcaption>
+<figcaption style="font-size: 0.85em;">Early RTX glass preview.</figcaption>
 </figure>
 
 The [last Saw](/2026/11/01/saw-sed-rs-xtl-blender/) used Blender to render 3D models made with X_eTaL. This week X_eTaL renders by itself: a ray tracer written as ordinary array code in X_eTaL-libraries, run on the CPU and, through X_eTaL-gpu, on an RTX 5060 Ti and an M1 Max. Glass, reflections, soft shadows and an animated logo, all in [Array Languages #20](/2026/11/07/array-languages-xetal-ray-tracer/).
