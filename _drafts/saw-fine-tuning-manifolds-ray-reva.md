@@ -58,6 +58,7 @@ Seven saws this week, all of them about later work: two new X_eTaL repositories,
 | **Terminals** | [console-3D](https://github.com/softwarewrighter/console-3D), [s5100-3D](https://github.com/softwarewrighter/s5100-3D) |
 | **reva-fork** | [Dogfooding #3](/2026/11/06/dogfooding-cosy-tests-reva-fork/); [the repository](https://github.com/softwarewrighter/reva-fork), [Reva in the browser](https://softwarewrighter.github.io/reva-fork/) |
 | **The series** | [Sharpen the Saw: every post](/series/#sharpen-the-saw-sundays) |
+| **"Sharpen the Saw"** | [The 7 Habits of Highly Effective People](https://en.wikipedia.org/wiki/The_7_Habits_of_Highly_Effective_People) (Stephen Covey) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
 </div>
