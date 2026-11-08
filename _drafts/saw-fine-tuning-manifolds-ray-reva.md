@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Saw #18: Fine-Tuning, Manifolds, Ray Tracing, Animated Terminals, and a Friendlier Reva"
+title: "Saw #18: Fine-Tuning, Manifolds, Ray Tracing, a Debugger, and More"
 categories: [tools, machine-learning]
-tags: [sharpen-the-saw, x-etal, xetal, fine-tuning, lora, manifolds, geometry, machine-learning, ray-tracing, gpu, reva-fork, forth, console-3d, selectric, apl, macros, currying, partial-application, mhc, weight-space-programming]
+tags: [sharpen-the-saw, x-etal, xetal, fine-tuning, lora, manifolds, geometry, machine-learning, ray-tracing, gpu, reva-fork, forth, console-3d, selectric, apl, macros, currying, partial-application, mhc, weight-space-programming, debugger, dap, lsp, emacs, ide]
 keywords: "Sharpen the Saw, X_eTaL fine-tuning, LoRA lessons, rank and scaling, rsLoRA, direct weight editing, X_eTaL manifolds, Poincare ball, geometry of machine learning, ray tracing without Blender, reva-fork ls pp diagnostics, weight-space programming, GPT-6 Astra, mHC"
-abstract: "Six saws this week, each to make later work possible. Two new X_eTaL repositories: one teaching fine-tuning, starting from LoRA, on the way to its variations, its alternatives and editing a model's weights directly; and one exploring manifold math and how it relates to machine learning. Ray tracing in X_eTaL itself, without Blender. And reva-fork got easier to use, with ls, pp and better diagnostics, for future work in CoSy. Animated Selectric terminals for the APL demos, and clearer documentation of idioms and best practice for applying a group."
+abstract: "Seven saws this week, each to make later work possible. Two new X_eTaL repositories: one teaching fine-tuning, starting from LoRA, on the way to its variations, its alternatives and editing a model's weights directly; and one exploring manifold math and how it relates to machine learning. Ray tracing in X_eTaL itself, without Blender. And reva-fork got easier to use, with ls, pp and better diagnostics, for future work in CoSy. Animated Selectric terminals for the APL demos, and clearer documentation of idioms and best practice for applying a group. And a debugger for X_eTaL, on the way to LSP and DAP servers for Emacs and IDE plug-ins."
 series: "Sharpen the Saw Sundays"
 series_part: 18
 date: 2026-11-08 00:15:00 -0800
@@ -21,6 +21,8 @@ repo_urls:
     title: "reva-fork"
   - url: "https://github.com/softwarewrighter/console-3D"
     title: "console-3D"
+  - url: "https://github.com/softwarewrighter/X_eTaL"
+    title: "X_eTaL"
 papers:
   - title: "Sparks of Weight-Space Programming: LLMs can natively read & write neural network weights"
     url: "https://rikiyat.github.io/blog/weight-space-programming/"
@@ -39,7 +41,7 @@ papers:
 
 <img src="{{ '/assets/images/posts/block-manifolds.webp' | relative_url }}" class="post-marker no-invert" alt="A dark, twisting space of interwoven bands and arches, with staircases running through it, in teal, red and gold" style="width: 205px;">
 
-Six saws this week, all of them about later work: two new X_eTaL repositories, one for fine-tuning and one for manifolds; ray tracing in X_eTaL itself; animated terminals for my APL demos; clearer advice on applying a group; and a friendlier reva-fork.
+Seven saws this week, all of them about later work: two new X_eTaL repositories, one for fine-tuning and one for manifolds; ray tracing in X_eTaL itself; animated terminals for my APL demos; clearer advice on applying a group; a debugger for X_eTaL, on the way to editors and IDEs; and a friendlier reva-fork.
 
 <!--more-->
 
@@ -50,6 +52,7 @@ Six saws this week, all of them about later work: two new X_eTaL repositories, o
 | **Fine-tuning** | [X_eTaL-fine-tuning](https://github.com/softwarewrighter/X_eTaL-fine-tuning), [the lessons](https://softwarewrighter.github.io/X_eTaL-fine-tuning/); [Sparks of Weight-Space Programming](https://rikiyat.github.io/blog/weight-space-programming/) |
 | **Manifolds** | [X_eTaL-manifolds](https://github.com/softwarewrighter/X_eTaL-manifolds), [the pages](https://softwarewrighter.github.io/X_eTaL-manifolds/) |
 | **Ray tracing** | [Array Languages #20](/2026/11/07/array-languages-xetal-ray-tracer/); [X_eTaL-gpu](https://github.com/softwarewrighter/X_eTaL-gpu), [X_eTaL-libraries](https://github.com/softwarewrighter/X_eTaL-libraries) |
+| **Debugger and editors** | X_eTaL's [debugger plan](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/debugger-plan.md) and [editors plan](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/editors-plan.md) |
 | **Terminals** | [console-3D](https://github.com/softwarewrighter/console-3D) |
 | **reva-fork** | [Dogfooding #3](/2026/11/06/dogfooding-cosy-tests-reva-fork/); [the repository](https://github.com/softwarewrighter/reva-fork), [Reva in the browser](https://softwarewrighter.github.io/reva-fork/) |
 | **The series** | [Sharpen the Saw: every post](/series/#sharpen-the-saw-sundays) |
@@ -106,6 +109,14 @@ Part of it is how it looks. An applied group used to be drawn as typed, trailing
 Part of it is a macro, or macros, that make a terser idiom for applying a group. The macro shows that it can be done; the documentation recommends tuples instead, passing the arguments together and matching them with a pattern. Mike: TODO, the macro's name and a one-line example, once it is pushed.
 
 
+## A debugger, then editors
+
+X_eTaL is getting a debugger, and with it a path into the editors people already use. The plan is a time-traveling debugger built on X_eTaL's steppable evaluator. Because its values are immutable and shared, a checkpoint is cheap, so stepping backward is a matter of keeping checkpoints and replaying from one. It is also meant to step through macro expansions, so a pipeline of equations can be followed stage by stage, with 2D and 3D views of the arrays along the way.
+
+The core landed this week: stops at statements, breakpoints, stepping over, in and out, continue, and the call stack. Then variables and watches, with breakpoints that take conditions and hit counts.
+
+Next it gets two servers that any editor can talk to: `xetal dap`, the Debug Adapter Protocol over the debugger, and `xetal lsp`, the Language Server Protocol over what X_eTaL already has (diagnostics, quick fixes, types and docs on hover, completion, go to definition, formatting). Emacs gets them through its built-in eglot and the dape package; JetBrains IDEs, IntelliJ IDEA and RustRover, through LSP4IJ; and VS Code through an extension, as editor plug-ins rather than a fork of an IDE.
+
 ## Closing
 
-Sunday is when I reflect on the work that enables or improves future work. This week that was two new places to learn, fine-tuning and manifolds; a renderer that no longer needs Blender; terminals for the APL demos to come; clearer advice on applying a group; and a Forth that is easier to use.
+Sunday is when I reflect on the work that enables or improves future work. This week that was two new places to learn, fine-tuning and manifolds; a renderer that no longer needs Blender; terminals for the APL demos to come; clearer advice on applying a group; a debugger, and with it a way into the editors I use; and a Forth that is easier to use.
