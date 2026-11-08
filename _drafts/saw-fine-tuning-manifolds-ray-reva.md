@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Saw #18: Fine-Tuning, Manifolds, Ray Tracing, and a Friendlier Reva"
+title: "Saw #18: Fine-Tuning, Manifolds, Ray Tracing, Animated Terminals, and a Friendlier Reva"
 categories: [tools, machine-learning]
-tags: [sharpen-the-saw, x-etal, xetal, fine-tuning, lora, manifolds, geometry, machine-learning, ray-tracing, gpu, reva-fork, forth]
+tags: [sharpen-the-saw, x-etal, xetal, fine-tuning, lora, manifolds, geometry, machine-learning, ray-tracing, gpu, reva-fork, forth, console-3d, selectric, apl, macros]
 keywords: "Sharpen the Saw, X_eTaL fine-tuning, LoRA lessons, rank and scaling, rsLoRA, direct weight editing, X_eTaL manifolds, Poincare ball, geometry of machine learning, ray tracing without Blender, reva-fork ls pp diagnostics"
-abstract: "Four saws this week, each to make later work possible. Two new X_eTaL repositories: one teaching fine-tuning, starting from LoRA, on the way to its variations, its alternatives and editing a model's weights directly; and one exploring manifold math and how it relates to machine learning. Ray tracing in X_eTaL itself, without Blender. And reva-fork got easier to use, with ls, pp and better diagnostics, for future work in CoSy."
+abstract: "Six saws this week, each to make later work possible. Two new X_eTaL repositories: one teaching fine-tuning, starting from LoRA, on the way to its variations, its alternatives and editing a model's weights directly; and one exploring manifold math and how it relates to machine learning. Ray tracing in X_eTaL itself, without Blender. And reva-fork got easier to use, with ls, pp and better diagnostics, for future work in CoSy. Animated Selectric terminals for the APL demos, and a macro for a shorter way to apply a group."
 series: "Sharpen the Saw Sundays"
 series_part: 18
 date: 2026-11-08 00:15:00 -0800
@@ -19,6 +19,8 @@ repo_urls:
     title: "X_eTaL-libraries"
   - url: "https://github.com/softwarewrighter/reva-fork"
     title: "reva-fork"
+  - url: "https://github.com/softwarewrighter/console-3D"
+    title: "console-3D"
 ---
 
 <!-- DRAFT (2026-11-08), Mike: Saw for today: X_eTaL-{fine-tuning,gpu,libraries,manifolds} "to enable future work in LoRA
@@ -27,12 +29,12 @@ repo_urls:
      future work in CoSy". Sources (2026-11-08 morning, fetched): X_eTaL-fine-tuning main 46f90a5 (public, first commit 11-05;
      README; lessons: LoRA hello, LoRA lab, LoRA training, Rank and scaling; docs/research3-5.txt plans); X_eTaL-manifolds main
      3109288 (public, first commit 11-06; README; sphere-hello, manifold-tour, experiment kit, research foundation); ray tracing
-     and reva-fork as published in AL #20 and Dogfooding #3 (+ Ed. 2026/11/07). Both new Pages sites return 200. Lead image:
+     and reva-fork as published in AL #20 and Dogfooding #3 (+ Ed. 2026/11/07). Both new Pages sites return 200. console-3D 189aff9 (11-06, Selectric mechanisms animated on all three consoles); group-application macro per Mike 2026-11-08, repo unknown (X_eTaL D-11 353a91a8/032b5a7d may or may not be it). Lead image:
      placeholder until Mike supplies one. -->
 
 <img src="{{ '/assets/images/posts/placeholder-saw-fine-tuning-manifolds-ray-reva.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
-Four saws this week, all of them about later work: two new X_eTaL repositories, one for fine-tuning and one for manifolds; ray tracing in X_eTaL itself; and a friendlier reva-fork.
+Six saws this week, all of them about later work: two new X_eTaL repositories, one for fine-tuning and one for manifolds; ray tracing in X_eTaL itself; animated terminals for my APL demos; a macro for applying a group; and a friendlier reva-fork.
 
 <!--more-->
 
@@ -43,6 +45,7 @@ Four saws this week, all of them about later work: two new X_eTaL repositories, 
 | **Fine-tuning** | [X_eTaL-fine-tuning](https://github.com/softwarewrighter/X_eTaL-fine-tuning), [the lessons](https://softwarewrighter.github.io/X_eTaL-fine-tuning/) |
 | **Manifolds** | [X_eTaL-manifolds](https://github.com/softwarewrighter/X_eTaL-manifolds), [the pages](https://softwarewrighter.github.io/X_eTaL-manifolds/) |
 | **Ray tracing** | [Array Languages #20](/2026/11/07/array-languages-xetal-ray-tracer/); [X_eTaL-gpu](https://github.com/softwarewrighter/X_eTaL-gpu), [X_eTaL-libraries](https://github.com/softwarewrighter/X_eTaL-libraries) |
+| **Terminals** | [console-3D](https://github.com/softwarewrighter/console-3D) |
 | **reva-fork** | [Dogfooding #3](/2026/11/06/dogfooding-cosy-tests-reva-fork/); [the repository](https://github.com/softwarewrighter/reva-fork), [Reva in the browser](https://softwarewrighter.github.io/reva-fork/) |
 | **The series** | [Sharpen the Saw: every post](/series/#sharpen-the-saw-sundays) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
@@ -78,6 +81,14 @@ The [last Saw](/2026/11/01/saw-sed-rs-xtl-blender/) used Blender to render 3D mo
 ## A friendlier reva-fork
 
 reva-fork, my port of Reva Forth to Rust and WebAssembly, got easier to use, to support future work in CoSy. Release 2026.1107.0 adds an `ls` word and makes `pp` work without remembering which `needs` line loads it, and earlier releases this week added errors that name the file, line and calling words, and opt-in checks for underflow, bad `execute` and compiling. The details are in [Dogfooding #3](/2026/11/06/dogfooding-cosy-tests-reva-fork/).
+
+## Animated terminals for the APL demos
+
+[console-3D](https://github.com/softwarewrighter/console-3D), the models of IBM consoles from the [last Saw](/2026/11/01/saw-sed-rs-xtl-blender/), now moves: the Selectric mechanisms animate on all three consoles, in the browser with three.js. The aim is to give my APL live demos animated terminals to type on: the Selectric first, then the IBM 5100's screen, and later a TRS-80 screen for APL-80.
+
+## A shorter way to apply a group
+
+I'm also working on a macro for a new, more concise idiom for group application. Mike: TODO, what the idiom is, and where it lives. (Related, from X_eTaL's design notes on 11/07: a parenthesized expression applied as a function, typed `(expr)_ x`, is now drawn with both parentheses underlined, the same mark an underlined function name gets. Keep this only if it is the same work.)
 
 ## Closing
 
