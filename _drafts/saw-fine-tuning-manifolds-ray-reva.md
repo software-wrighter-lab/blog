@@ -29,7 +29,7 @@ repo_urls:
      future work in CoSy". Sources (2026-11-08 morning, fetched): X_eTaL-fine-tuning main 46f90a5 (public, first commit 11-05;
      README; lessons: LoRA hello, LoRA lab, LoRA training, Rank and scaling; docs/research3-5.txt plans); X_eTaL-manifolds main
      3109288 (public, first commit 11-06; README; sphere-hello, manifold-tour, experiment kit, research foundation); ray tracing
-     and reva-fork as published in AL #20 and Dogfooding #3 (+ Ed. 2026/11/07). Both new Pages sites return 200. console-3D 189aff9 (11-06, Selectric mechanisms animated on all three consoles); group-application macro per Mike 2026-11-08, repo unknown (X_eTaL D-11 353a91a8/032b5a7d may or may not be it). Lead image:
+     and reva-fork as published in AL #20 and Dogfooding #3 (+ Ed. 2026/11/07). Both new Pages sites return 200. console-3D 189aff9 (11-06, Selectric mechanisms animated on all three consoles); group application per Mike 2026-11-08: the rendering change is X_eTaL D-11 (353a91a8, 032b5a7d, docs/lang-choices.md); the macro(s) are not pushed yet (X_eTaL and -libraries checked 2026-11-08). Lead image:
      placeholder until Mike supplies one. -->
 
 <img src="{{ '/assets/images/posts/placeholder-saw-fine-tuning-manifolds-ray-reva.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
@@ -88,7 +88,9 @@ reva-fork, my port of Reva Forth to Rust and WebAssembly, got easier to use, to 
 
 ## A shorter way to apply a group
 
-I'm also working on a macro for a new, more concise idiom for group application. Mike: TODO, what the idiom is, and where it lives. (Related, from X_eTaL's design notes on 11/07: a parenthesized expression applied as a function, typed `(expr)_ x`, is now drawn with both parentheses underlined, the same mark an underlined function name gets. Keep this only if it is the same work.)
+In X_eTaL, a parenthesized expression can be applied as a function: typed `(u:p_ow 3)_ 2`. Until now it was drawn as typed, trailing `_` and all. Now it is drawn with both parentheses underlined and no `_`, the same mark an underlined function name gets, so an underline means "function" for a name and for a group alike. Typing it, and the plain-text round trip, do not change.
+
+I'm also working on a macro, or macros, for a more concise idiom for applying a group. Mike: TODO, what the idiom looks like, once it lands.
 
 ## Closing
 
