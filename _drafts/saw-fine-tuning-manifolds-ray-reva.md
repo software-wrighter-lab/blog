@@ -38,7 +38,7 @@ papers:
      future work in CoSy". Sources (2026-11-08 morning, fetched): X_eTaL-fine-tuning main 46f90a5 (public, first commit 11-05;
      README; lessons: LoRA hello, LoRA lab, LoRA training, Rank and scaling; docs/research3-5.txt plans); X_eTaL-manifolds main
      3109288 (public, first commit 11-06; README; sphere-hello, manifold-tour, experiment kit, research foundation); ray tracing
-     and reva-fork as published in AL #20 and Dogfooding #3 (+ Ed. 2026/11/07). Both new Pages sites return 200. console-3D 189aff9 (11-06, Selectric mechanisms animated on all three consoles); group application per Mike 2026-11-08: the rendering change is X_eTaL D-11 (353a91a8, 032b5a7d, docs/lang-choices.md); the macro(s) are not pushed yet (X_eTaL and -libraries checked 2026-11-08). Lead image:
+     and reva-fork as published in AL #20 and Dogfooding #3 (+ Ed. 2026/11/07). Both new Pages sites return 200. console-3D 189aff9 (11-06, Selectric mechanisms animated on all three consoles); group application per Mike 2026-11-08: the rendering change is X_eTaL D-11 (353a91a8, 032b5a7d, docs/lang-choices.md); the macro(s) are not pushed yet (X_eTaL and -libraries checked 2026-11-08). Pushed 10:19: X_eTaL ddffc61a, docs/several-arguments.md, demos/apply.xtl, userlibs/Apply.xtlm (code below copied from the doc). Lead image:
      Mike's block-manifolds.jpg (Dropbox, 2026-11-08), no-invert. -->
 
 <img src="{{ '/assets/images/posts/block-manifolds.webp' | relative_url }}" class="post-marker no-invert" alt="A dark, twisting space of interwoven bands and arches, with staircases running through it, in teal, red and gold" style="width: 205px;">
@@ -147,7 +147,33 @@ This saw is documentation. I have been refining X_eTaL's notes on idioms and its
 
 Part of it is how it looks. An applied group used to be drawn as typed, trailing `_` and all; now it is drawn with both parentheses underlined and no `_`, the same mark an underlined function name gets, so an underline means "function" for a name and for a group alike. Typing it does not change.
 
-Part of it is a macro, or macros, that make a terser idiom for applying a group. The macro shows that it can be done; the documentation recommends tuples instead, passing the arguments together and matching them with a pattern. Mike: TODO, the macro's name and a one-line example, once it is pushed.
+Part of it is the advice itself, now written up as [three ways to call a function of several arguments](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/several-arguments.md). With this four-argument function:
+
+```xetal
+u:f_ := { a b c d -> a + (10 * b) + (100 * c) + 1000 * d }
+```
+
+Written out, the long-hand way, one group applied at a time. Stopping early is a partial application, but it nests a level for every argument after the second:
+
+```xetal
+((1 u:f_ 2)_ 3)_ 4
+```
+
+With a macro: a small macro library of my own, Apply, whose `ap:a_pply<` writes that chain for you when the program is expanded. It shows what a macro can do, and the program it leaves behind is the written-out form:
+
+```xetal
+"ap:" u_se< "Apply"
+c"u:f_" ap:a_pply< c"1; 2; 3; 4"
+```
+
+With a tuple, the recommended idiom for three or more arguments: one call, no nesting, and a tuple of the wrong size is a type error before the program runs:
+
+```xetal
+u:g_ := { (a, b, c, d) -> a + (10 * b) + (100 * c) + 1000 * d }
+u:g_ (1, 2, 3, 4)
+```
+
+All three print 4321. The convention: two arguments are written `x f y`, and a function of three or more takes a tuple.
 
 
 ## A debugger, then editors
