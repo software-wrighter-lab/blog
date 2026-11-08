@@ -139,7 +139,7 @@ It can draw now, too. [IUP](https://iup.sourceforge.io/) is a portable toolkit f
 
 <div class="aside-box outdent-right wide" markdown="1">
 
-**What is group application?** In X_eTaL every function takes one argument. A two-argument call like `2 u:p_ow 10` is currying: `u:p_ow 2` is already a function, waiting for its right argument, so `u:t_woTo := u:p_ow 2` names a partial application. Put a partial application in parentheses and apply it, typed `(u:p_ow 3)_ 2` or `('-)_ 10`, and that is applying a group: the parenthesized expression is the function.
+**What is group application?** In X_eTaL every function takes one argument. A two-argument call like `2 ᵘp̲ow 10` is currying: `ᵘp̲ow 2` is already a function, waiting for its right argument, so `ᵘt̲woTo ← ᵘp̲ow 2` names a partial application. Put a partial application in parentheses and apply it, drawn <code><span style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">(</span>ᵘp̲ow 3<span style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">)</span> 2</code> or <code><span style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">(</span>'−<span style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">)</span> 10</code> (typed `(u:p_ow 3)_ 2` and `('-)_ 10`), and that is applying a group: the parenthesized expression is the function.
 
 </div>
 
@@ -147,33 +147,59 @@ This saw is documentation. I have been refining X_eTaL's notes on idioms and its
 
 Part of it is how it looks. An applied group used to be drawn as typed, trailing `_` and all; now it is drawn with both parentheses underlined and no `_`, the same mark an underlined function name gets, so an underline means "function" for a name and for a group alike. Typing it does not change.
 
-Part of it is the advice itself, now written up as [three ways to call a function of several arguments](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/several-arguments.md). With this four-argument function:
+Part of it is the advice itself, now written up as [three ways to call a function of several arguments](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/several-arguments.md). Real code is why I started: the ray tracer's shading function takes eight arguments, and [X_eTaL-gpu's logo example](https://github.com/softwarewrighter/X_eTaL-gpu/blob/main/examples/ray/logo.xtl) calls it like this.
+
+Written out, the long-hand way: one group applied at a time, nesting a level for every argument after the second. In the drawn form each applied group's parentheses are underlined:
+
+<div class="language-xetal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">linear</span> <span class="o">←</span> <span class="p">(</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">(</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">(</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">(</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">(</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">(</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">(</span><span class="n">clip</span> <span class="nc">ʳᵗs̲hade</span> <span class="n">triangles</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">)</span> <span class="n">materials</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">)</span> <span class="n">logomaterials</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">)</span>
+  <span class="n">logolights</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">)</span> <span class="n">environment</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">)</span> <span class="n">origins</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">)</span> <span class="n">directions</span><span class="p">)</span>
+</code></pre></div></div>
+
+<details markdown="1"><summary>As typed</summary>
 
 ```xetal
-u:f_ := { a b c d -> a + (10 * b) + (100 * c) + 1000 * d }
+linear := (((((((clip rt:s_hade triangles)_ materials)_ logomaterials)_
+  logolights)_ environment)_ origins)_ directions)
+
 ```
 
-Written out, the long-hand way, one group applied at a time. Stopping early is a partial application, but it nests a level for every argument after the second:
+</details>
 
-```xetal
-((1 u:f_ 2)_ 3)_ 4
-```
+With a macro: a small macro library of my own, Apply, whose `ap:a_pply<` takes the function and its arguments in order and writes that same chain when the program is expanded:
 
-With a macro: a small macro library of my own, Apply, whose `ap:a_pply<` writes that chain for you when the program is expanded. It shows what a macro can do, and the program it leaves behind is the written-out form:
+<div class="language-xetal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"ap:"</span> <span class="nd">u̲se&lt;</span> <span class="s">"Apply"</span>
+<span class="n">linear</span> <span class="o">←</span> <span class="s">c"ʳᵗs̲hade"</span> <span class="nd">ᵃᵖa̲pply&lt;</span> <span class="n">c</span>"<span class="n">clip</span><span class="o">◆</span> <span class="n">triangles</span><span class="o">◆</span> <span class="n">materials</span><span class="o">◆</span>
+  <span class="n">logomaterials</span><span class="o">◆</span> <span class="n">logolights</span><span class="o">◆</span> <span class="n">environment</span><span class="o">◆</span> <span class="n">origins</span><span class="o">◆</span> <span class="n">directions</span>"
+</code></pre></div></div>
+
+<details markdown="1"><summary>As typed</summary>
 
 ```xetal
 "ap:" u_se< "Apply"
-c"u:f_" ap:a_pply< c"1; 2; 3; 4"
+linear := c"rt:s_hade" ap:a_pply< c"clip; triangles; materials;
+  logomaterials; logolights; environment; origins; directions"
+
 ```
 
-With a tuple, the recommended idiom for three or more arguments: one call, no nesting, and a tuple of the wrong size is a type error before the program runs:
+</details>
+
+With a tuple, the recommended idiom for three or more arguments, if the function is written to take one: one call, no nesting, and a tuple of the wrong size is a type error before the program runs:
+
+<div class="language-xetal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">linear</span> <span class="o">←</span> <span class="nc">ʳᵗs̲hade</span> <span class="p">(</span><span class="n">clip</span><span class="o">,</span> <span class="n">triangles</span><span class="o">,</span> <span class="n">materials</span><span class="o">,</span> <span class="n">logomaterials</span><span class="o">,</span>
+  <span class="n">logolights</span><span class="o">,</span> <span class="n">environment</span><span class="o">,</span> <span class="n">origins</span><span class="o">,</span> <span class="n">directions</span><span class="p">)</span>
+</code></pre></div></div>
+
+<details markdown="1"><summary>As typed</summary>
 
 ```xetal
-u:g_ := { (a, b, c, d) -> a + (10 * b) + (100 * c) + 1000 * d }
-u:g_ (1, 2, 3, 4)
+linear := rt:s_hade (clip, triangles, materials, logomaterials,
+  logolights, environment, origins, directions)
+
 ```
 
-All three print 4321. The convention: two arguments are written `x f y`, and a function of three or more takes a tuple.
+</details>
+
+The macro shows what a macro can do; the convention is to write two arguments as `x f y` and give a function of three or more a tuple.
 
 
 ## A debugger, then editors
