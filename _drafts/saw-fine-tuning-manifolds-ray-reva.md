@@ -62,6 +62,11 @@ Seven saws this week, all of them about later work: two new X_eTaL repositories,
 
 ## Fine-tuning, a lesson at a time
 
+<figure class="zoomable" style="float: left; width: 340px; margin: 0.3em 1.2em 0.4em 0;">
+<img src="{{ '/assets/images/posts/saw18-fine-tuning-loss.webp' | relative_url }}" class="no-invert" alt="Two line charts of loss per example by rank, 1 to 8, under the scalings alpha over r and alpha over the square root of r: the training loss falls to zero by rank 3, and the held-out loss falls from about 1.0 and levels off">
+<figcaption style="font-size: 0.85em;">Loss by rank under the two scalings, from <a href="https://softwarewrighter.github.io/X_eTaL-fine-tuning/rank-and-scaling/">lesson 4</a>. Click to enlarge.</figcaption>
+</figure>
+
 [X_eTaL-fine-tuning](https://github.com/softwarewrighter/X_eTaL-fine-tuning) teaches how fine-tuning changes what a trained model does by changing some of its numbers, from a single weight and its error up to low-rank adapters. It grows out of the LoRA explorer in X_eTaL-ML, which shows the math of one adapted layer; here the same libraries sit behind lessons for someone who knows arithmetic and has never trained a network.
 
 Every lesson runs the same way: a question and your prediction, one small experiment, what changed in plain words and measured numbers, then the math and the X_eTaL code, as deep as you want to go. Each has three depths, beginner, explorer and advanced, over the same computation, and the forward pass and a training step can be stepped through, forward and back.
@@ -73,6 +78,11 @@ The plan goes from there to LoRA's variations, then alternatives to it, among th
 It comes out of my ML study group's discussions: first about fine-tuning, and lately about training weight-space models without back-propagation, and the recent excitement over an LLM editing another model's weights directly: MIT CSAIL's [Sparks of Weight-Space Programming](https://rikiyat.github.io/blog/weight-space-programming/), in which GPT-6 Astra read Qwen3.5-0.8B's weights and changed about 0.016% of them, no gradients, and raised its MATH-500 score from 7.9% to 48.1%. [VentureBeat](https://venturebeat.com/technology/like-gene-editing-for-neural-networks-mit-researchers-used-gpt-6-astra-to-edit-qwens-open-weights-directly-boosting-math-performance) called it "like gene editing for neural networks". There are skeptical readings too, such as [What Is Measured and What Is Anecdote](https://akmaier.substack.com/p/weight-space-programming-what-is), and [Simon Willison](https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/) found a model on his laptop could interpret weights too. As I read it so far, weight-space programming fixes what a model already has, removing obstacles and errors such as the reasoning loops that held back Qwen's math, rather than adding a capability the model never had. That makes it different from fine-tuning, at least for now; weight-space reprogramming might be a better name.
 
 ## Manifolds and machine learning
+
+<figure class="zoomable" style="float: right; width: 230px; margin: 0.3em 0 0.4em 1.2em;">
+<img src="{{ '/assets/images/posts/saw18-manifolds.webp' | relative_url }}" class="no-invert" alt="Four wireframe drawings: a sphere with a path between two points, a torus with two marked loops, a Swiss roll with three points, and the Poincare disk with geodesic arcs">
+<figcaption style="font-size: 0.85em;">A sphere, a torus, a Swiss roll and the Poincaré disk, drawn by X_eTaL in the <a href="https://softwarewrighter.github.io/X_eTaL-manifolds/manifold-tour/">manifold tour</a>. Click to enlarge.</figcaption>
+</figure>
 
 [X_eTaL-manifolds](https://github.com/softwarewrighter/X_eTaL-manifolds) asks one question: how does the geometry of a representation, a parameter space or a transformation affect how a model learns and infers? Vectors live in a space with a shape, a gradient points downhill only once you have said how distance is measured, and a learned matrix may be held to a set of permitted ones. Those are choices, and they can be changed one at a time.
 
@@ -88,9 +98,21 @@ The [last Saw](/2026/11/01/saw-sed-rs-xtl-blender/) used Blender to render 3D mo
 
 ## A friendlier reva-fork
 
+<figure class="zoomable" style="float: right; width: 200px; margin: 0.3em 0 0.4em 1.2em;">
+<img src="{{ '/assets/images/posts/saw18-reva-cd-demo.webp' | relative_url }}" class="no-invert" alt="reva-fork's CD demo: an IUP canvas with colored marks bouncing off its walls, and a Quit button">
+<figcaption style="font-size: 0.85em;">The canvas demo on the live site. Click to enlarge.</figcaption>
+</figure>
+
 reva-fork, my port of Reva Forth to Rust and WebAssembly, got easier to use, to support future work in CoSy. Release 2026.1107.0 adds an `ls` word and makes `pp` work without remembering which `needs` line loads it, and earlier releases this week added errors that name the file, line and calling words, and opt-in checks for underflow, bad `execute` and compiling. The details are in [Dogfooding #3](/2026/11/06/dogfooding-cosy-tests-reva-fork/).
 
 ## Animated terminals for the APL demos
+
+<figure class="zoomable outdent-left" style="width: 170px;">
+<div style="display: flex; gap: 6px;">
+<img src="{{ '/assets/images/posts/saw18-ibm1053.webp' | relative_url }}" class="no-invert" style="width: 50%; min-width: 0;" alt="A render of the IBM 1053 console printer, dark gray with a blue panel">
+<img src="{{ '/assets/images/posts/saw18-ibm2741.webp' | relative_url }}" class="no-invert" style="width: 50%; min-width: 0;" alt="A render of the IBM 2741 terminal, a white Selectric typewriter">
+</div>
+</figure>
 
 [console-3D](https://github.com/softwarewrighter/console-3D), the models of IBM consoles from the [last Saw](/2026/11/01/saw-sed-rs-xtl-blender/), now moves: the Selectric mechanisms animate on all three consoles, in the browser with three.js. The aim is to give my APL live demos animated terminals to type on: the Selectric first, then the IBM 5100's screen, and later a TRS-80 screen for APL-80.
 
