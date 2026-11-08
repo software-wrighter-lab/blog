@@ -2,9 +2,9 @@
 layout: post
 title: "Saw #18: Fine-Tuning, Manifolds, Ray Tracing, a Debugger, and More"
 categories: [tools, machine-learning]
-tags: [sharpen-the-saw, x-etal, xetal, fine-tuning, lora, manifolds, geometry, machine-learning, ray-tracing, gpu, reva-fork, forth, console-3d, selectric, apl, macros, currying, partial-application, mhc, weight-space-programming, debugger, dap, lsp, emacs, ide]
+tags: [sharpen-the-saw, x-etal, xetal, fine-tuning, lora, manifolds, geometry, machine-learning, ray-tracing, gpu, reva-fork, forth, console-3d, selectric, apl, macros, currying, partial-application, mhc, weight-space-programming, debugger, dap, lsp, emacs, ide, hlasm, cor24, pl-sw]
 keywords: "Sharpen the Saw, X_eTaL fine-tuning, LoRA lessons, rank and scaling, rsLoRA, direct weight editing, X_eTaL manifolds, Poincare ball, geometry of machine learning, ray tracing without Blender, reva-fork ls pp diagnostics, weight-space programming, GPT-6 Astra, mHC"
-abstract: "Seven saws this week, each to make later work possible. Two new X_eTaL repositories: one teaching fine-tuning, starting from LoRA, on the way to its variations, its alternatives and editing a model's weights directly; and one exploring manifold math and how it relates to machine learning. Ray tracing in X_eTaL itself, without Blender. And reva-fork got easier to use, with ls, pp and better diagnostics, for future work in CoSy. Animated Selectric terminals for the APL demos, and clearer documentation of idioms and best practice for applying a group. And a debugger for X_eTaL, on the way to LSP and DAP servers for Emacs and IDE plug-ins."
+abstract: "Eight saws this week, each to make later work possible. Two new X_eTaL repositories: one teaching fine-tuning, starting from LoRA, on the way to its variations, its alternatives and editing a model's weights directly; and one exploring manifold math and how it relates to machine learning. Ray tracing in X_eTaL itself, without Blender. And reva-fork got easier to use, with ls, pp and better diagnostics, for future work in CoSy. Animated Selectric terminals for the APL demos, and clearer documentation of idioms and best practice for applying a group. And a debugger for X_eTaL, on the way to LSP and DAP servers for Emacs and IDE plug-ins. And a sharper HLASM assembler for COR24, on the way to moving PL/SW onto it."
 series: "Sharpen the Saw Sundays"
 series_part: 18
 date: 2026-11-08 00:15:00 -0800
@@ -25,6 +25,8 @@ repo_urls:
     title: "s5100-3D"
   - url: "https://github.com/softwarewrighter/X_eTaL"
     title: "X_eTaL"
+  - url: "https://github.com/sw-embed/sw-cor24-hlasm"
+    title: "sw-cor24-hlasm"
 papers:
   - title: "Sparks of Weight-Space Programming: LLMs can natively read & write neural network weights"
     url: "https://rikiyat.github.io/blog/weight-space-programming/"
@@ -43,7 +45,7 @@ papers:
 
 <img src="{{ '/assets/images/posts/block-manifolds.webp' | relative_url }}" class="post-marker no-invert" alt="A dark, twisting space of interwoven bands and arches, with staircases running through it, in teal, red and gold" style="width: 205px;">
 
-Seven saws this week, all of them about later work: two new X_eTaL repositories, one for fine-tuning and one for manifolds; ray tracing in X_eTaL itself; animated terminals for my APL demos; clearer advice on applying a group; a debugger for X_eTaL, on the way to editors and IDEs; and a friendlier reva-fork.
+Eight saws this week, all of them about later work: two new X_eTaL repositories, one for fine-tuning and one for manifolds; ray tracing in X_eTaL itself; animated terminals for my APL demos; clearer advice on applying a group; a debugger for X_eTaL, on the way to editors and IDEs; a sharper HLASM for PL/SW; and a friendlier reva-fork.
 
 <!--more-->
 
@@ -55,6 +57,7 @@ Seven saws this week, all of them about later work: two new X_eTaL repositories,
 | **Manifolds** | [X_eTaL-manifolds](https://github.com/softwarewrighter/X_eTaL-manifolds), [the pages](https://softwarewrighter.github.io/X_eTaL-manifolds/) |
 | **Ray tracing** | [Array Languages #20](/2026/11/07/array-languages-xetal-ray-tracer/); [X_eTaL-gpu](https://github.com/softwarewrighter/X_eTaL-gpu), [X_eTaL-libraries](https://github.com/softwarewrighter/X_eTaL-libraries) |
 | **Debugger and editors** | X_eTaL's [debugger plan](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/debugger-plan.md) and [editors plan](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/editors-plan.md) |
+| **HLASM** | [sw-cor24-hlasm](https://github.com/sw-embed/sw-cor24-hlasm); [Dogfooding #2](/2026/11/01/dogfooding-hlasm-plsw/) |
 | **Terminals** | [console-3D](https://github.com/softwarewrighter/console-3D), [s5100-3D](https://github.com/softwarewrighter/s5100-3D) |
 | **reva-fork** | [Dogfooding #3](/2026/11/06/dogfooding-cosy-tests-reva-fork/); [the repository](https://github.com/softwarewrighter/reva-fork), [Reva in the browser](https://softwarewrighter.github.io/reva-fork/) |
 | **The series** | [Sharpen the Saw: every post](/series/#sharpen-the-saw-sundays) |
@@ -223,6 +226,10 @@ The core landed this week: stops at statements, breakpoints, stepping over, in a
 
 Next it gets two servers that any editor can talk to: `xetal dap`, the Debug Adapter Protocol over the debugger, and `xetal lsp`, the Language Server Protocol over what X_eTaL already has (diagnostics, quick fixes, types and docs on hover, completion, go to definition, formatting). Emacs gets them through its built-in eglot and the dape package; JetBrains IDEs, IntelliJ IDEA and RustRover, through LSP4IJ; and VS Code through an extension, as editor plug-ins rather than a fork of an IDE.
 
+## HLASM, on the way to PL/SW
+
+[sw-cor24-hlasm](https://github.com/sw-embed/sw-cor24-hlasm), my HLASM-style macro assembler for COR24 from [Dogfooding #2](/2026/11/01/dogfooding-hlasm-plsw/), keeps getting sharper so that PL/SW can move onto it. This week it gained a macro library, compound AND and OR conditions in IF, ELSEIF and DOEXIT, more condition forms, and ports of three of the four batches of tiny-C demos: input and output, control flow, and functions, arrays, pointers and strings.
+
 ## Closing
 
-Sunday is when I reflect on the work that enables or improves future work. This week that was two new places to learn, fine-tuning and manifolds; a renderer that no longer needs Blender; terminals for the APL demos to come; clearer advice on applying a group; a debugger, and with it a way into the editors I use; and a Forth that is easier to use.
+Sunday is when I reflect on the work that enables or improves future work. This week that was two new places to learn, fine-tuning and manifolds; a renderer that no longer needs Blender; terminals for the APL demos to come; clearer advice on applying a group; a debugger, and with it a way into the editors I use; an assembler getting ready to carry PL/SW; and a Forth that is easier to use.
