@@ -79,7 +79,7 @@ It comes out of my ML study group's discussions: first about fine-tuning, and la
 
 ## Manifolds and machine learning
 
-<figure class="zoomable" style="float: right; width: 230px; margin: 0.3em 0 0.4em 1.2em;">
+<figure class="zoomable" style="float: left; width: 230px; margin: 0.3em 1.2em 0.4em 0;">
 <img src="{{ '/assets/images/posts/saw18-manifolds.webp' | relative_url }}" class="no-invert" alt="Four wireframe drawings: a sphere with a path between two points, a torus with two marked loops, a Swiss roll with three points, and the Poincare disk with geodesic arcs">
 <figcaption style="font-size: 0.85em;">A sphere, a torus, a Swiss roll and the Poincaré disk, drawn by X_eTaL in the <a href="https://softwarewrighter.github.io/X_eTaL-manifolds/manifold-tour/">manifold tour</a>. Click to enlarge.</figcaption>
 </figure>
@@ -94,20 +94,27 @@ I watch math videos, and manifolds are something I want to learn more about in g
 
 ## Ray tracing, without Blender
 
+<figure class="zoomable outdent-right" style="width: 150px; margin-top: -2.9em;">
+<img src="{{ '/assets/images/posts/saw18-ray-glass-preview.webp' | relative_url }}" class="no-invert" alt="Two glass spheres and two glass crystals on a reflective floor between bright panels, rendered on the RTX 5060 Ti at one sample per pixel, with fine stripes across the glass">
+<figcaption style="font-size: 0.85em;">An early RTX glass preview, one sample per pixel.</figcaption>
+</figure>
+
 The [last Saw](/2026/11/01/saw-sed-rs-xtl-blender/) used Blender to render 3D models made with X_eTaL. This week X_eTaL renders by itself: a ray tracer written as ordinary array code in X_eTaL-libraries, run on the CPU and, through X_eTaL-gpu, on an RTX 5060 Ti and an M1 Max. Glass, reflections, soft shadows and an animated logo, all in [Array Languages #20](/2026/11/07/array-languages-xetal-ray-tracer/).
 
 ## A friendlier reva-fork
 
-<figure class="zoomable" style="float: right; width: 200px; margin: 0.3em 0 0.4em 1.2em;">
+<figure class="zoomable" style="float: left; width: 200px; margin: 0.3em 1.2em 0.4em 0;">
 <img src="{{ '/assets/images/posts/saw18-reva-cd-demo.webp' | relative_url }}" class="no-invert" alt="reva-fork's CD demo: an IUP canvas with colored marks bouncing off its walls, and a Quit button">
 <figcaption style="font-size: 0.85em;">The canvas demo on the live site. Click to enlarge.</figcaption>
 </figure>
 
 reva-fork, my port of Reva Forth to Rust and WebAssembly, got easier to use, to support future work in CoSy. Release 2026.1107.0 adds an `ls` word and makes `pp` work without remembering which `needs` line loads it, and earlier releases this week added errors that name the file, line and calling words, and opt-in checks for underflow, bad `execute` and compiling. The details are in [Dogfooding #3](/2026/11/06/dogfooding-cosy-tests-reva-fork/).
 
+It can draw now, too. [IUP](https://iup.sourceforge.io/) is a portable toolkit for building user interfaces, and [CD](https://canvasdraw.sourceforge.io/), short for Canvas Draw, is its companion library for 2D graphics, both from Tecgraf at PUC-Rio in Brazil. Reva programs written for them on Windows now open their windows and draw on their canvases in the browser and the desktop app.
+
 ## Animated terminals for the APL demos
 
-<figure class="zoomable outdent-left" style="width: 170px;">
+<figure class="zoomable outdent-left" style="width: 310px; margin-top: -2.9em;">
 <div style="display: flex; gap: 6px;">
 <img src="{{ '/assets/images/posts/saw18-ibm1053.webp' | relative_url }}" class="no-invert" style="width: 50%; min-width: 0;" alt="A render of the IBM 1053 console printer, dark gray with a blue panel">
 <img src="{{ '/assets/images/posts/saw18-ibm2741.webp' | relative_url }}" class="no-invert" style="width: 50%; min-width: 0;" alt="A render of the IBM 2741 terminal, a white Selectric typewriter">
