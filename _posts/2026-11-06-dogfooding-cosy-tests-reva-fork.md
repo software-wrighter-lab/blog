@@ -113,3 +113,7 @@ The tests grew along the way: reva-fork's golden tests from 31 to 60, and CoSy's
 ## Next
 
 I'm winding down work on reva-fork and CoSy for a while. Several other X_eTaL projects are ramping up: ray tracing on the CPU and GPU, and machine learning, with fine-tuning and manifolds. I'm also working on some Hackaday hardware projects, with FPGAs and analog circuits.
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/11/07: reva-fork 2026.1107.0 adds an <code>ls</code> word and makes <code>pp</code> work without a <code>needs</code> line; gives the default notebook more to show (words, help, files and libraries); adds a tour (docs/tour.md) and an IUP/CD guide (docs/iup.md); and fixes a tail-call miscompile, in which about 1 in 256 quotations ending in a call jumped a byte into the word it called (<a href="https://github.com/softwarewrighter/reva-fork/commit/b2037f0">b2037f0</a>; <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-11-06-dogfooding-cosy-tests-reva-fork.md">post history</a>).]</em></p>
