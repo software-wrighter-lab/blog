@@ -183,16 +183,16 @@ linear := c"rt:s_hade" ap:a_pply< c"clip; triangles; materials;
 
 </details>
 
-With a tuple, the recommended idiom for three or more arguments, if the function is written to take one: one call, no nesting, and a tuple of the wrong size is a type error before the program runs:
+With a tuple, the recommended idiom for three or more arguments. X_eTaL has no overloading, so one name cannot mean both: `rt:s_hade` takes its first value and returns a function, and a version that takes all eight at once as a tuple is a different function, with a name of its own, here `u:s_hadeTuple`. Called that way it is one call, with no nesting, and a tuple of the wrong size is a type error before the program runs:
 
-<div class="language-xetal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">linear</span> <span class="o">←</span> <span class="nc">ʳᵗs̲hade</span> <span class="p">(</span><span class="n">clip</span><span class="o">,</span> <span class="n">triangles</span><span class="o">,</span> <span class="n">materials</span><span class="o">,</span> <span class="n">logomaterials</span><span class="o">,</span>
+<div class="language-xetal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">linear</span> <span class="o">←</span> <span class="nf">ᵘs̲hadeTuple</span> <span class="p">(</span><span class="n">clip</span><span class="o">,</span> <span class="n">triangles</span><span class="o">,</span> <span class="n">materials</span><span class="o">,</span> <span class="n">logomaterials</span><span class="o">,</span>
   <span class="n">logolights</span><span class="o">,</span> <span class="n">environment</span><span class="o">,</span> <span class="n">origins</span><span class="o">,</span> <span class="n">directions</span><span class="p">)</span>
 </code></pre></div></div>
 
 <details markdown="1"><summary>As typed</summary>
 
 ```xetal
-linear := rt:s_hade (clip, triangles, materials, logomaterials,
+linear := u:s_hadeTuple (clip, triangles, materials, logomaterials,
   logolights, environment, origins, directions)
 
 ```
