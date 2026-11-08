@@ -137,7 +137,7 @@ It can draw now, too. [IUP](https://iup.sourceforge.io/) is a portable toolkit f
 </div>
 </figure>
 
-[console-3D](https://github.com/softwarewrighter/console-3D), the models of IBM consoles from the [last Saw](/2026/11/01/saw-sed-rs-xtl-blender/), now moves: the Selectric mechanisms animate on all three consoles, in the browser with three.js. The IBM 5100 has a model of its own, still rough, in [s5100-3D](https://github.com/softwarewrighter/s5100-3D). The aim is to give my APL live demos animated terminals to type on: the Selectric first, then the IBM 5100's screen, and later a TRS-80 screen for a future APL-80 live demo. The TRS-80 has a model now too, the newest of the four.
+[console-3D](https://github.com/softwarewrighter/console-3D), the models of IBM consoles from the [last Saw](/2026/11/01/saw-sed-rs-xtl-blender/), now moves: the Selectric mechanisms animate on all three consoles, in the browser with three.js. The IBM 5100 has a model of its own, still rough, in [s5100-3D](https://github.com/softwarewrighter/s5100-3D). The aim is to give my APL live demos animated terminals to type on: the Selectric first, then the IBM 5100's screen, and later a TRS-80 screen for a future APL-80 live demo. The console-3D repository now has a TRS-80 model too.
 
 ## Applying a group: idioms and advice
 
