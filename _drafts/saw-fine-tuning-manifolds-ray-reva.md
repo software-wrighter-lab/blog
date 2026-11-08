@@ -123,7 +123,7 @@ It can draw now, too. [IUP](https://iup.sourceforge.io/) is a portable toolkit f
 <div style="font-size: 0.75em; line-height: 1.2;">IBM 2741 terminal</div>
 </div>
 <div style="flex: 1; min-width: 0; text-align: center;">
-<img src="{{ '/assets/images/posts/saw18-ibm5100.webp' | relative_url }}" class="no-invert" alt="A render of the IBM 5100 portable computer from the front: a small screen, switches and a tape slot above its keyboard" style="width: 100%;">
+<img src="{{ '/assets/images/posts/saw18-ibm5100.webp' | relative_url }}" class="no-invert" alt="A render of the IBM 5100 portable computer from the front, in beige: a small screen, switches and a tape slot above its keyboard" style="width: 100%;">
 <div style="font-size: 0.75em; line-height: 1.2;">IBM 5100</div>
 </div>
 <div style="flex: 1; min-width: 0; text-align: center;">
