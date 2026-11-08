@@ -116,7 +116,7 @@ It can draw now, too. [IUP](https://iup.sourceforge.io/) is a portable toolkit f
 
 ## Animated terminals for the APL demos
 
-<figure class="zoomable outdent-left" style="width: 400px; margin-top: -2.9em;">
+<figure class="zoomable outdent-left" style="width: 415px; margin-top: -2.9em;">
 <div style="display: flex; gap: 6px; align-items: flex-end;">
 <div style="flex: 1; min-width: 0; text-align: center;">
 <img src="{{ '/assets/images/posts/saw18-ibm2741.webp' | relative_url }}" class="no-invert" alt="A render of the IBM 2741 terminal, a white Selectric typewriter" style="width: 100%;">
@@ -130,10 +130,14 @@ It can draw now, too. [IUP](https://iup.sourceforge.io/) is a portable toolkit f
 <img src="{{ '/assets/images/posts/saw18-ibm1053.webp' | relative_url }}" class="no-invert" alt="A render of the IBM 1130's console printer, dark gray with a blue panel" style="width: 100%;">
 <div style="font-size: 0.75em; line-height: 1.2;">IBM 1130 console</div>
 </div>
+<div style="flex: 1; min-width: 0; text-align: center;">
+<img src="{{ '/assets/images/posts/saw18-trs80.webp' | relative_url }}" class="no-invert" alt="A render of a TRS-80 Model I from the front: the video display on top, the keyboard unit below, and a disk drive beside it" style="width: 100%;">
+<div style="font-size: 0.75em; line-height: 1.2;">TRS-80</div>
+</div>
 </div>
 </figure>
 
-[console-3D](https://github.com/softwarewrighter/console-3D), the models of IBM consoles from the [last Saw](/2026/11/01/saw-sed-rs-xtl-blender/), now moves: the Selectric mechanisms animate on all three consoles, in the browser with three.js. The IBM 5100 has a model of its own, still rough, in [s5100-3D](https://github.com/softwarewrighter/s5100-3D). The aim is to give my APL live demos animated terminals to type on: the Selectric first, then the IBM 5100's screen, and later a TRS-80 screen for APL-80.
+[console-3D](https://github.com/softwarewrighter/console-3D), the models of IBM consoles from the [last Saw](/2026/11/01/saw-sed-rs-xtl-blender/), now moves: the Selectric mechanisms animate on all three consoles, in the browser with three.js. The IBM 5100 has a model of its own, still rough, in [s5100-3D](https://github.com/softwarewrighter/s5100-3D). The aim is to give my APL live demos animated terminals to type on: the Selectric first, then the IBM 5100's screen, and later a TRS-80 screen for a future APL-80 live demo. The TRS-80 has a model now too, the newest of the four.
 
 ## Applying a group: idioms and advice
 
