@@ -3,10 +3,6 @@
 // in a post opens, on click, in a near full-screen <dialog>. Escape, the close
 // button or a click outside the media closes it. Opt-in: nothing else changes.
 (function () {
-  function media(el) {
-    if (el.matches('img, video')) return el;
-    return el.querySelector('img, video');
-  }
   function open(src) {
     var d = document.createElement('dialog');
     d.className = 'lightbox';
@@ -25,7 +21,10 @@
     b.setAttribute('aria-label', 'Close');
     b.textContent = '×';
     b.addEventListener('click', function () { d.close(); });
-    var cap = src.closest('figure') && src.closest('figure').querySelector('figcaption');
+    // In a row of thumbnails, an image's own label (the next element) is its caption.
+    var label = src.nextElementSibling;
+    var cap = (label && !label.matches('img, video') && label.textContent.trim()) ? label
+      : src.closest('figure') && src.closest('figure').querySelector('figcaption');
     d.appendChild(b);
     d.appendChild(c);
     if (cap) {
@@ -41,16 +40,18 @@
     if (c.tagName === 'VIDEO') { var p = c.play(); if (p && p.catch) p.catch(function () {}); }
   }
   document.addEventListener('DOMContentLoaded', function () {
+    // A figure may hold several images (a row of thumbnails): each opens on its own.
     document.querySelectorAll('.post-content .zoomable').forEach(function (el) {
-      var m = media(el);
-      if (!m) return;
-      m.classList.add('zoomable-media');
-      m.setAttribute('tabindex', '0');
-      m.setAttribute('role', 'button');
-      m.setAttribute('title', m.getAttribute('title') || 'Click to enlarge');
-      m.addEventListener('click', function (e) { e.preventDefault(); open(m); });
-      m.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(m); }
+      var all = el.matches('img, video') ? [el] : el.querySelectorAll('img, video');
+      Array.prototype.forEach.call(all, function (m) {
+        m.classList.add('zoomable-media');
+        m.setAttribute('tabindex', '0');
+        m.setAttribute('role', 'button');
+        m.setAttribute('title', m.getAttribute('title') || 'Click to enlarge');
+        m.addEventListener('click', function (e) { e.preventDefault(); open(m); });
+        m.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(m); }
+        });
       });
     });
   });
