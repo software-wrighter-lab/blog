@@ -26,7 +26,7 @@ Then detailed bug documentation arrived. Today's work is mostly cleanup, and reg
 | Resource | Link |
 |----------|------|
 | **reva-fork** | [softwarewrighter/reva-fork](https://github.com/softwarewrighter/reva-fork) |
-| **Live demos** | [Reva in the browser](https://softwarewrighter.github.io/reva-fork/) (2026.1106.2, GitHub Pages), [CoSy in the browser](https://wrighter.space/staging/cosy-fork/cosy-web-2026.1106.2/) (2026.1106.2, on my staging site: not GitHub Pages, since the port is still private and its licensing unclear) |
+| **Live demos** | [Reva in the browser](https://softwarewrighter.github.io/reva-fork/) (2026.1107.0, GitHub Pages), [CoSy in the browser](https://wrighter.space/staging/cosy-fork/cosy-web-2026.1106.2/) (2026.1106.2, on my staging site: not GitHub Pages, since the port is still private and its licensing unclear) |
 | **CoSy** | [cosy.com](https://cosy.com/), its [Forth code](https://cosy.com/4thCoSy/) |
 | **The CoSy port** | private for now |
 | **Earlier** | [Saw #16: Reva Forth, Ported to Rust and WebAssembly, and CoSy on Top](/2026/10/25/saw-reva-fork-cosy/) |
@@ -116,4 +116,4 @@ I'm winding down work on reva-fork and CoSy for a while. Several other X_eTaL pr
 
 ---
 
-<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/11/07: reva-fork 2026.1107.0 adds an <code>ls</code> word and makes <code>pp</code> work without a <code>needs</code> line; gives the default notebook more to show (words, help, files and libraries); adds a tour (docs/tour.md) and an IUP/CD guide (docs/iup.md); and fixes a tail-call miscompile, in which about 1 in 256 quotations ending in a call jumped a byte into the word it called (<a href="https://github.com/softwarewrighter/reva-fork/commit/b2037f0">b2037f0</a>; <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-11-06-dogfooding-cosy-tests-reva-fork.md">post history</a>).]</em></p>
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/11/07: reva-fork 2026.1107.0 adds an <code>ls</code> word and makes <code>pp</code> work without a <code>needs</code> line; gives the default notebook more to show (words, help, files and libraries); adds a tour (docs/tour.md) and an IUP/CD guide (docs/iup.md); and fixes a tail-call miscompile, in which about 1 in 256 quotations ending in a call jumped a byte into the word it called. The live demo link above now names that release (<a href="https://github.com/softwarewrighter/reva-fork/commit/2080152">2080152</a>; <a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-11-06-dogfooding-cosy-tests-reva-fork.md">post history</a>).]</em></p>
