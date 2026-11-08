@@ -149,13 +149,13 @@ Part of it is how it looks. An applied group used to be drawn as typed, trailing
 
 Part of it is the advice itself, now written up as [three ways to call a function of several arguments](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/several-arguments.md). Real code is why I started: the ray tracer's shading function takes eight arguments, and [X_eTaL-gpu's logo example](https://github.com/softwarewrighter/X_eTaL-gpu/blob/main/examples/ray/logo.xtl) calls it like this.
 
-Written out, the long-hand way: one group applied at a time, nesting a level for every argument after the second. In the drawn form each applied group's parentheses are underlined:
+<span style="font-size: 2em; font-weight: 700; line-height: 1; color: var(--link-color); margin-right: 0.25em; vertical-align: -0.12em;">1</span>**Written out**, the long-hand way: one group applied at a time, nesting a level for every argument after the second. In the drawn form each applied group's parentheses are underlined:
 
 <div class="language-xetal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">linear</span> <span class="o">←</span> <span class="p">(</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">(</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">(</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">(</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">(</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">(</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">(</span><span class="n">clip</span> <span class="nc">ʳᵗs̲hade</span> <span class="n">triangles</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">)</span> <span class="n">materials</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">)</span> <span class="n">logomaterials</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">)</span>
   <span class="n">logolights</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">)</span> <span class="n">environment</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">)</span> <span class="n">origins</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">)</span> <span class="n">directions</span><span class="p">)</span>
 </code></pre></div></div>
 
-<details markdown="1"><summary>As typed</summary>
+<details markdown="1" style="margin: 0.3em 0 1.6em; padding-bottom: 0.5em; border-bottom: 1px solid var(--border-color);"><summary>As typed</summary>
 
 ```xetal
 linear := (((((((clip rt:s_hade triangles)_ materials)_ logomaterials)_
@@ -165,14 +165,14 @@ linear := (((((((clip rt:s_hade triangles)_ materials)_ logomaterials)_
 
 </details>
 
-With a macro: a small macro library of my own, Apply, whose `ap:a_pply<` takes the function and its arguments in order and writes that same chain when the program is expanded:
+<span style="font-size: 2em; font-weight: 700; line-height: 1; color: var(--link-color); margin-right: 0.25em; vertical-align: -0.12em;">2</span>**With a macro**: a small macro library of my own, Apply, whose `ap:a_pply<` takes the function and its arguments in order and writes that same chain when the program is expanded:
 
 <div class="language-xetal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"ap:"</span> <span class="nd">u̲se&lt;</span> <span class="s">"Apply"</span>
 <span class="n">linear</span> <span class="o">←</span> <span class="s">c"ʳᵗs̲hade"</span> <span class="nd">ᵃᵖa̲pply&lt;</span> <span class="n">c</span>"<span class="n">clip</span><span class="o">◆</span> <span class="n">triangles</span><span class="o">◆</span> <span class="n">materials</span><span class="o">◆</span>
   <span class="n">logomaterials</span><span class="o">◆</span> <span class="n">logolights</span><span class="o">◆</span> <span class="n">environment</span><span class="o">◆</span> <span class="n">origins</span><span class="o">◆</span> <span class="n">directions</span>"
 </code></pre></div></div>
 
-<details markdown="1"><summary>As typed</summary>
+<details markdown="1" style="margin: 0.3em 0 1.6em; padding-bottom: 0.5em; border-bottom: 1px solid var(--border-color);"><summary>As typed</summary>
 
 ```xetal
 "ap:" u_se< "Apply"
@@ -183,15 +183,23 @@ linear := c"rt:s_hade" ap:a_pply< c"clip; triangles; materials;
 
 </details>
 
-With a tuple, the recommended idiom for three or more arguments. X_eTaL has no overloading, so one name cannot mean both: `rt:s_hade` takes its first value and returns a function, and a version that takes all eight at once as a tuple is a different function, with a name of its own, here `u:s_hadeTuple`. Called that way it is one call, with no nesting, and a tuple of the wrong size is a type error before the program runs:
+<span style="font-size: 2em; font-weight: 700; line-height: 1; color: var(--link-color); margin-right: 0.25em; vertical-align: -0.12em;">3</span>**With a tuple**, the recommended idiom for three or more arguments. X_eTaL has no overloading, so one name cannot mean both: `rt:s_hade` takes its first value and returns a function, and a version that takes all eight at once as a tuple is a different function, with a name of its own, here `u:s_hadeTuple`. Defined once, by wrapping the curried chain, it is one call with no nesting everywhere after that, and a tuple of the wrong size is a type error before the program runs:
 
-<div class="language-xetal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">linear</span> <span class="o">←</span> <span class="nf">ᵘs̲hadeTuple</span> <span class="p">(</span><span class="n">clip</span><span class="o">,</span> <span class="n">triangles</span><span class="o">,</span> <span class="n">materials</span><span class="o">,</span> <span class="n">logomaterials</span><span class="o">,</span>
+<div class="language-xetal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">ᵘs̲hadeTuple</span> <span class="o">←</span> <span class="p">{</span> <span class="p">(</span><span class="n">clip</span><span class="o">,</span> <span class="n">tris</span><span class="o">,</span> <span class="n">mats</span><span class="o">,</span> <span class="n">logomats</span><span class="o">,</span>
+                 <span class="n">lights</span><span class="o">,</span> <span class="n">env</span><span class="o">,</span> <span class="n">origins</span><span class="o">,</span> <span class="n">dirs</span><span class="p">)</span> <span class="o">→</span>
+  <span class="p">(</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">(</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">(</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">(</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">(</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">(</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">(</span><span class="n">clip</span> <span class="nc">ʳᵗs̲hade</span> <span class="n">tris</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">)</span> <span class="n">mats</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">)</span> <span class="n">logomats</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">)</span> <span class="n">lights</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">)</span>
+    <span class="n">env</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">)</span> <span class="n">origins</span><span class="p" style="text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;">)</span> <span class="n">dirs</span><span class="p">)</span> <span class="p">}</span>
+<span class="n">linear</span> <span class="o">←</span> <span class="nf">ᵘs̲hadeTuple</span> <span class="p">(</span><span class="n">clip</span><span class="o">,</span> <span class="n">triangles</span><span class="o">,</span> <span class="n">materials</span><span class="o">,</span> <span class="n">logomaterials</span><span class="o">,</span>
   <span class="n">logolights</span><span class="o">,</span> <span class="n">environment</span><span class="o">,</span> <span class="n">origins</span><span class="o">,</span> <span class="n">directions</span><span class="p">)</span>
 </code></pre></div></div>
 
-<details markdown="1"><summary>As typed</summary>
+<details markdown="1" style="margin: 0.3em 0 1.6em; padding-bottom: 0.5em; border-bottom: 1px solid var(--border-color);"><summary>As typed</summary>
 
 ```xetal
+u:s_hadeTuple := { (clip, tris, mats, logomats,
+                   lights, env, origins, dirs) ->
+  (((((((clip rt:s_hade tris)_ mats)_ logomats)_ lights)_
+    env)_ origins)_ dirs) }
 linear := u:s_hadeTuple (clip, triangles, materials, logomaterials,
   logolights, environment, origins, directions)
 
