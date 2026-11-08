@@ -21,6 +21,8 @@ repo_urls:
     title: "reva-fork"
   - url: "https://github.com/softwarewrighter/console-3D"
     title: "console-3D"
+  - url: "https://github.com/softwarewrighter/s5100-3D"
+    title: "s5100-3D"
   - url: "https://github.com/softwarewrighter/X_eTaL"
     title: "X_eTaL"
 papers:
@@ -53,7 +55,7 @@ Seven saws this week, all of them about later work: two new X_eTaL repositories,
 | **Manifolds** | [X_eTaL-manifolds](https://github.com/softwarewrighter/X_eTaL-manifolds), [the pages](https://softwarewrighter.github.io/X_eTaL-manifolds/) |
 | **Ray tracing** | [Array Languages #20](/2026/11/07/array-languages-xetal-ray-tracer/); [X_eTaL-gpu](https://github.com/softwarewrighter/X_eTaL-gpu), [X_eTaL-libraries](https://github.com/softwarewrighter/X_eTaL-libraries) |
 | **Debugger and editors** | X_eTaL's [debugger plan](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/debugger-plan.md) and [editors plan](https://github.com/softwarewrighter/X_eTaL/blob/main/docs/editors-plan.md) |
-| **Terminals** | [console-3D](https://github.com/softwarewrighter/console-3D) |
+| **Terminals** | [console-3D](https://github.com/softwarewrighter/console-3D), [s5100-3D](https://github.com/softwarewrighter/s5100-3D) |
 | **reva-fork** | [Dogfooding #3](/2026/11/06/dogfooding-cosy-tests-reva-fork/); [the repository](https://github.com/softwarewrighter/reva-fork), [Reva in the browser](https://softwarewrighter.github.io/reva-fork/) |
 | **The series** | [Sharpen the Saw: every post](/series/#sharpen-the-saw-sundays) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
@@ -114,14 +116,24 @@ It can draw now, too. [IUP](https://iup.sourceforge.io/) is a portable toolkit f
 
 ## Animated terminals for the APL demos
 
-<figure class="zoomable outdent-left" style="width: 310px; margin-top: -2.9em;">
-<div style="display: flex; gap: 6px;">
-<img src="{{ '/assets/images/posts/saw18-ibm1053.webp' | relative_url }}" class="no-invert" style="width: 50%; min-width: 0;" alt="A render of the IBM 1053 console printer, dark gray with a blue panel">
-<img src="{{ '/assets/images/posts/saw18-ibm2741.webp' | relative_url }}" class="no-invert" style="width: 50%; min-width: 0;" alt="A render of the IBM 2741 terminal, a white Selectric typewriter">
+<figure class="zoomable outdent-left" style="width: 400px; margin-top: -2.9em;">
+<div style="display: flex; gap: 6px; align-items: flex-end;">
+<div style="flex: 1; min-width: 0; text-align: center;">
+<img src="{{ '/assets/images/posts/saw18-ibm2741.webp' | relative_url }}" class="no-invert" alt="A render of the IBM 2741 terminal, a white Selectric typewriter" style="width: 100%;">
+<div style="font-size: 0.75em; line-height: 1.2;">IBM 2741 terminal</div>
+</div>
+<div style="flex: 1; min-width: 0; text-align: center;">
+<img src="{{ '/assets/images/posts/saw18-ibm5100.webp' | relative_url }}" class="no-invert" alt="A render of the IBM 5100 portable computer from the front: a small screen, switches and a tape slot above its keyboard" style="width: 100%;">
+<div style="font-size: 0.75em; line-height: 1.2;">IBM 5100</div>
+</div>
+<div style="flex: 1; min-width: 0; text-align: center;">
+<img src="{{ '/assets/images/posts/saw18-ibm1053.webp' | relative_url }}" class="no-invert" alt="A render of the IBM 1130's console printer, dark gray with a blue panel" style="width: 100%;">
+<div style="font-size: 0.75em; line-height: 1.2;">IBM 1130 console</div>
+</div>
 </div>
 </figure>
 
-[console-3D](https://github.com/softwarewrighter/console-3D), the models of IBM consoles from the [last Saw](/2026/11/01/saw-sed-rs-xtl-blender/), now moves: the Selectric mechanisms animate on all three consoles, in the browser with three.js. The aim is to give my APL live demos animated terminals to type on: the Selectric first, then the IBM 5100's screen, and later a TRS-80 screen for APL-80.
+[console-3D](https://github.com/softwarewrighter/console-3D), the models of IBM consoles from the [last Saw](/2026/11/01/saw-sed-rs-xtl-blender/), now moves: the Selectric mechanisms animate on all three consoles, in the browser with three.js. The IBM 5100 has a model of its own, still rough, in [s5100-3D](https://github.com/softwarewrighter/s5100-3D). The aim is to give my APL live demos animated terminals to type on: the Selectric first, then the IBM 5100's screen, and later a TRS-80 screen for APL-80.
 
 ## Applying a group: idioms and advice
 
