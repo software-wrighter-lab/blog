@@ -93,7 +93,7 @@ reva-fork, my port of Reva Forth to Rust and WebAssembly, got easier to use, to 
 
 ## Applying a group: idioms and advice
 
-<div class="aside-box outdent-left" markdown="1">
+<div class="aside-box outdent-right wide" markdown="1">
 
 **What is group application?** In X_eTaL every function takes one argument. A two-argument call like `2 u:p_ow 10` is currying: `u:p_ow 2` is already a function, waiting for its right argument, so `u:t_woTo := u:p_ow 2` names a partial application. Put a partial application in parentheses and apply it, typed `(u:p_ow 3)_ 2` or `('-)_ 10`, and that is applying a group: the parenthesized expression is the function.
 
