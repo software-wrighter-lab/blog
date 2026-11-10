@@ -57,8 +57,6 @@ I read this book later, and it helped me broaden my thinking about requirements 
 
 Christopher Alexander, Sara Ishikawa and Murray Silverstein, with Max Jacobson, Ingrid Fiksdahl-King and Shlomo Angel (1977). 253 patterns for towns, buildings and rooms, each a problem and its solution, and the source of the idea that *Design Patterns* carried into software.
 
-Mike: TODO, what it taught you.
-
 ## The Timeless Way of Building
 
 <figure class="zoomable" style="float: left; width: 90px; margin: 0.3em 1.2em 0.4em 0;">
@@ -67,7 +65,7 @@ Mike: TODO, what it taught you.
 
 Christopher Alexander (1979). The first volume of the set whose second, *A Pattern Language*, came out two years earlier: the philosophy behind the patterns, and what Alexander calls the quality without a name.
 
-Mike: TODO, what it taught you.
+I enjoyed both of Alexander's books, and they helped me think about software requirements analysis.
 
 ## Closing
 
