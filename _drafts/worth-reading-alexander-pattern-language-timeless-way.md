@@ -21,7 +21,7 @@ date: 2026-11-11 00:15:00 -0800
 
 The [prior post](/2026/11/04/worth-reading-psychology-mythical-man-month/) in this series was about the people who write software. This one is about three books written for architects, the kind who design buildings, in the order I read them.
 
-I read Alexander's two books when the design patterns movement in object-oriented software embraced Christopher Alexander. I was an ACM member, subscribed to [SIGPLAN](https://en.wikipedia.org/wiki/SIGPLAN), and regularly attended the [OOPSLA](https://en.wikipedia.org/wiki/OOPSLA) conferences in the 1990s. Alexander's books are about building architecture, not computer architecture, yet the patterns they document can be thought about generally. Around then I also read other books from outside software development, such as [Mario Salvadori](https://en.wikipedia.org/wiki/Mario_Salvadori)'s *Why Buildings Stand Up: The Strength of Architecture* (1980).
+I read Alexander's two books when the design patterns movement in object-oriented software embraced Christopher Alexander. I was an ACM member, subscribed to [SIGPLAN](https://en.wikipedia.org/wiki/SIGPLAN), and regularly attended the [OOPSLA](https://en.wikipedia.org/wiki/OOPSLA) conferences in the 1990s. Alexander's books are about building architecture, not computer architecture, yet the patterns they document can be thought about generally.
 
 <!--more-->
 
@@ -44,6 +44,8 @@ I read Alexander's two books when the design patterns movement in object-oriente
 </figure>
 
 Peter G. Rowe, *Design Thinking* (MIT Press, 1987). How architects and urban designers actually go about designing: the heuristics they use, the way a problem and its solution take shape together, and design as an inquiry rather than a straight line from requirements to result.
+
+I also read books from outside software development, such as [Mario Salvadori](https://en.wikipedia.org/wiki/Mario_Salvadori)'s *Why Buildings Stand Up: The Strength of Architecture* (1980).
 
 Early in my software development career I read many books on software requirements, which I can no longer recall. I was the component owner for an MVS component that had no Design Engineer at the time, IBM's term for a product manager, so I had to wear that hat myself: find out what customers were asking for, so that I could propose development projects to my management.
 
