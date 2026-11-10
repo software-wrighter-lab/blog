@@ -7,7 +7,7 @@ keywords: "papers worth reading, Go To Statement Considered Harmful, Edsger Dijk
 abstract: "Eleventh in the series on what is worth reading: two papers on how a language's constructs shape what programmers can think. Edsger Dijkstra's Go To Statement Considered Harmful (1968), which argues for taking a construct away, and Paul Graham's Beating the Averages (2001), which argues for Lisp's macros."
 series: "Worth Reading"
 series_part: 11
-date: 2027-01-14 00:15:00 -0800
+date: 2027-01-13 00:15:00 -0800
 ---
 
 <!-- DRAFT (2026-11-03), Mike: papers and articles, not books, added to Worth Reading as future topics; grouping and titles
@@ -17,7 +17,7 @@ date: 2027-01-14 00:15:00 -0800
 
 <img src="{{ '/assets/images/posts/block-goto-averages.webp' | relative_url }}" class="post-marker no-invert" alt="A glowing red GOTO arrow plunging into a dark vortex, among tangled cables of binary digits, staircases and ladders, while hammers smash two circuit cubes" style="width: 205px;">
 
-The [prior post](/2027/01/07/worth-reading-worse-is-better-big-ball-of-mud/) in this series was about why the messy thing wins. Mike: TODO, an intro in your words for these papers.
+The [prior post](/2027/01/06/worth-reading-worse-is-better-big-ball-of-mud/) in this series was about why the messy thing wins. Mike: TODO, an intro in your words for these papers.
 
 <!--more-->
 

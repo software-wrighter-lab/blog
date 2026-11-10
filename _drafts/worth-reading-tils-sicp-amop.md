@@ -7,7 +7,7 @@ keywords: "books worth reading, Threaded Interpretive Languages, R. G. Loeliger,
 abstract: "Sixth in the series on books worth reading: three on building a language from a small core. R. G. Loeliger's Threaded Interpretive Languages (1981), a Forth-like language from the inner interpreter up; Abelson and Sussman's Structure and Interpretation of Computer Programs (1985), which ends by writing Scheme in Scheme; and Kiczales, des Rivières and Bobrow's The Art of the Metaobject Protocol (1991), a Lisp object system a program can reshape from inside."
 series: "Worth Reading"
 series_part: 6
-date: 2026-12-10 00:15:00 -0800
+date: 2026-12-09 00:15:00 -0800
 ---
 
 <!-- DRAFT (2026-11-02), Mike: "start a new blog post for thursday 11/5, influential books", then "maybe a new series, worth reading".
@@ -19,7 +19,7 @@ date: 2026-12-10 00:15:00 -0800
 
 <img src="{{ '/assets/images/posts/logo-til-sicp-amop.webp' | relative_url }}" class="post-marker no-invert" alt="Gothic towers and staircases built of glowing code, wrapped in ribbons of light and geometric symbols" style="width: 205px;">
 
-The [prior post](/2026/12/03/worth-reading-geb-mockingbird/) in this series was about logic and self-reference. Mike: TODO, an intro in your words for these books.
+The [prior post](/2026/12/02/worth-reading-geb-mockingbird/) in this series was about logic and self-reference. Mike: TODO, an intro in your words for these books.
 
 <!--more-->
 

@@ -7,7 +7,7 @@ keywords: "papers worth reading, No Silver Bullet, Fred Brooks, essential comple
 abstract: "Ninth in the series on what is worth reading, and the first on papers: two on where software's complexity comes from. Fred Brooks's No Silver Bullet (1986), on essential and accidental complexity, and Ben Moseley and Peter Marks's Out of the Tar Pit (2006), which blames state."
 series: "Worth Reading"
 series_part: 9
-date: 2026-12-31 00:15:00 -0800
+date: 2026-12-30 00:15:00 -0800
 ---
 
 <!-- DRAFT (2026-11-03), Mike: papers and articles, not books, added to Worth Reading as future topics; grouping and titles
@@ -17,7 +17,7 @@ date: 2026-12-31 00:15:00 -0800
 
 <img src="{{ '/assets/images/posts/block-silver-pit.webp' | relative_url }}" class="post-marker no-invert" alt="Two panels: No Silver Bullet, a programmer at a glowing flowchart screen in a cluttered, neon-lit room; Out of the Tar Pit, a figure reaching up out of a dark tar pit full of sunken machines" style="width: 205px;">
 
-The [prior post](/2026/12/24/worth-reading-selling-the-dream-samurai-chess/) in this series was the last of the books, for now; this one starts on papers. Mike: TODO, an intro in your words for these papers.
+The [prior post](/2026/12/23/worth-reading-selling-the-dream-samurai-chess/) in this series was the last of the books, for now; this one starts on papers. Mike: TODO, an intro in your words for these papers.
 
 <!--more-->
 

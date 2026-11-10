@@ -7,7 +7,7 @@ keywords: "papers worth reading, Attention Is All You Need, Vaswani, Transformer
 abstract: "Twelfth in the series on what is worth reading: the 2017 paper by Vaswani and seven co-authors that introduced the Transformer, the architecture under today's large language models."
 series: "Worth Reading"
 series_part: 12
-date: 2027-01-21 00:15:00 -0800
+date: 2027-01-20 00:15:00 -0800
 ---
 
 <!-- DRAFT (2026-11-03), Mike: papers and articles, not books, added to Worth Reading as future topics; grouping and titles
@@ -17,7 +17,7 @@ date: 2027-01-21 00:15:00 -0800
 
 <img src="{{ '/assets/images/posts/block-attention-need.webp' | relative_url }}" class="post-marker no-invert" alt="Glowing blue and violet circuit traces converging on a bright central chip from four corner nodes, with streaks of light between them" style="width: 205px;">
 
-The [prior post](/2027/01/14/worth-reading-goto-beating-the-averages/) in this series was about what a language lets you say. Mike: TODO, an intro in your words for these papers.
+The [prior post](/2027/01/13/worth-reading-goto-beating-the-averages/) in this series was about what a language lets you say. Mike: TODO, an intro in your words for these papers.
 
 <!--more-->
 

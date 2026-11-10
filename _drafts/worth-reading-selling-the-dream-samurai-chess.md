@@ -7,7 +7,7 @@ keywords: "books worth reading, Selling the Dream, Guy Kawasaki, evangelism, Sam
 abstract: "Eighth in the series on books worth reading. Guy Kawasaki's Selling the Dream (1991), on evangelism as a way to sell a product or an idea, and Michael Gelb and Raymond Keene's Samurai Chess (1997), martial-arts principles applied to chess and strategic thinking."
 series: "Worth Reading"
 series_part: 8
-date: 2026-12-24 00:15:00 -0800
+date: 2026-12-23 00:15:00 -0800
 ---
 
 <!-- DRAFT (2026-11-02), Mike: "start a new blog post for thursday 11/5, influential books", then "maybe a new series, worth reading".
@@ -19,7 +19,7 @@ date: 2026-12-24 00:15:00 -0800
 
 <img src="{{ '/assets/images/posts/block-selling-chess.webp' | relative_url }}" class="post-marker no-invert" alt="Samurai chess pieces on a board, between an ink-painted mountain waterfall and a neon city at night" style="width: 205px;">
 
-The [prior post](/2026/12/17/worth-reading-7-habits-gtd/) in this series was about principles and a system for getting things done. Mike: TODO, an intro in your words for these books.
+The [prior post](/2026/12/16/worth-reading-7-habits-gtd/) in this series was about principles and a system for getting things done. Mike: TODO, an intro in your words for these books.
 
 <!--more-->
 

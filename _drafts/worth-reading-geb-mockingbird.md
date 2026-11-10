@@ -7,7 +7,7 @@ keywords: "books worth reading, Gödel, Escher, Bach, Douglas Hofstadter, strang
 abstract: "Fifth in the series on books worth reading: two on formal systems, taught through puzzles and play. Douglas Hofstadter's Gödel, Escher, Bach (1979), on recursion, self-reference and strange loops, and Raymond Smullyan's To Mock a Mockingbird (1985), combinatory logic as puzzles about birds."
 series: "Worth Reading"
 series_part: 5
-date: 2026-12-03 00:15:00 -0800
+date: 2026-12-02 00:15:00 -0800
 ---
 
 <!-- DRAFT (2026-11-02), Mike: "start a new blog post for thursday 11/5, influential books", then "maybe a new series, worth reading".
@@ -19,7 +19,7 @@ date: 2026-12-03 00:15:00 -0800
 
 <img src="{{ '/assets/images/posts/block-godel-mockingbird.webp' | relative_url }}" class="post-marker no-invert" alt="An Escher-like maze of impossible staircases and arches, with birds, trees and small figures climbing through it" style="width: 205px;">
 
-The [prior post](/2026/11/26/worth-reading-loosely-coupled-crime-scene/) in this series was about components, coupling and code forensics. Mike: TODO, an intro in your words for these books.
+The [prior post](/2026/11/25/worth-reading-loosely-coupled-crime-scene/) in this series was about components, coupling and code forensics. Mike: TODO, an intro in your words for these books.
 
 <!--more-->
 

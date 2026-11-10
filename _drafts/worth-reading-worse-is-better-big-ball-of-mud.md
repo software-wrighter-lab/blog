@@ -7,7 +7,7 @@ keywords: "papers worth reading, The Rise of Worse Is Better, Richard Gabriel, N
 abstract: "Tenth in the series on what is worth reading: two papers on why the designs purists dislike win anyway. Richard Gabriel's The Rise of Worse Is Better (1989) and Brian Foote and Joseph Yoder's Big Ball of Mud (1997)."
 series: "Worth Reading"
 series_part: 10
-date: 2027-01-07 00:15:00 -0800
+date: 2027-01-06 00:15:00 -0800
 ---
 
 <!-- DRAFT (2026-11-03), Mike: papers and articles, not books, added to Worth Reading as future topics; grouping and titles
@@ -17,7 +17,7 @@ date: 2027-01-07 00:15:00 -0800
 
 <img src="{{ '/assets/images/posts/block-rise-mud.webp' | relative_url }}" class="post-marker no-invert" alt="A sprawling city of towers patched together from scrap, circuit boards and tangled cables, with neon signs, and a lone figure in a long coat walking through the rubble" style="width: 205px;">
 
-The [prior post](/2026/12/31/worth-reading-no-silver-bullet-tar-pit/) in this series was about where software's complexity comes from. Mike: TODO, an intro in your words for these papers.
+The [prior post](/2026/12/30/worth-reading-no-silver-bullet-tar-pit/) in this series was about where software's complexity comes from. Mike: TODO, an intro in your words for these papers.
 
 <!--more-->
 

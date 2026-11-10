@@ -4,10 +4,10 @@ title: "Worth Reading #2: Architecture and Design --- Alexander and Rowe"
 categories: [books, programming-history]
 tags: [worth-reading, books, peter-rowe, design-thinking, christopher-alexander, pattern-language, timeless-way-of-building, architecture]
 keywords: "books worth reading, Design Thinking, Peter G. Rowe, design process, A Pattern Language, The Timeless Way of Building, Christopher Alexander, architecture, the quality without a name"
-abstract: "Second in the series on books worth reading: three from architecture about how design works. Christopher Alexander's A Pattern Language (1977), 253 patterns for towns, buildings and rooms, and The Timeless Way of Building (1979), the philosophy behind them; and Peter G. Rowe's Design Thinking (1987), on how architects actually go about designing."
+abstract: "Second in the series on books worth reading: three from architecture about how design works, in the order I read them. Peter G. Rowe's Design Thinking (1987), on how architects actually go about designing, which helped me when I discovered requirements analysis; then Christopher Alexander's A Pattern Language (1977), 253 patterns for towns, buildings and rooms, and The Timeless Way of Building (1979), the philosophy behind them, read when the design patterns movement in software took Alexander up."
 series: "Worth Reading"
 series_part: 2
-date: 2026-11-12 00:15:00 -0800
+date: 2026-11-11 00:15:00 -0800
 ---
 
 <!-- DRAFT (2026-11-02), Mike: "start a new blog post for thursday 11/5, influential books", then "maybe a new series, worth reading".
@@ -19,9 +19,9 @@ date: 2026-11-12 00:15:00 -0800
 
 <img src="{{ '/assets/images/posts/block-timeless-language.webp' | relative_url }}" class="post-marker no-invert" alt="A watercolor of curving wooden buildings grown among trees around a garden courtyard and a pond" style="width: 205px;">
 
-The [prior post](/2026/11/04/worth-reading-psychology-mythical-man-month/) in this series was about the people who write software. This one is about three books written for architects, the kind who design buildings.
+The [prior post](/2026/11/04/worth-reading-psychology-mythical-man-month/) in this series was about the people who write software. This one is about three books written for architects, the kind who design buildings, in the order I read them.
 
-I read the first two when the design patterns movement in object-oriented software embraced Christopher Alexander. I was an ACM member, subscribed to [SIGPLAN](https://en.wikipedia.org/wiki/SIGPLAN), and regularly attended the [OOPSLA](https://en.wikipedia.org/wiki/OOPSLA) conferences in the 1990s. Alexander's books are about building architecture, not computer architecture, yet the patterns they document can be thought about generally. Around then I also read other books from outside software development, such as [Mario Salvadori](https://en.wikipedia.org/wiki/Mario_Salvadori)'s *Why Buildings Stand Up: The Strength of Architecture* (1980).
+I read Alexander's two books when the design patterns movement in object-oriented software embraced Christopher Alexander. I was an ACM member, subscribed to [SIGPLAN](https://en.wikipedia.org/wiki/SIGPLAN), and regularly attended the [OOPSLA](https://en.wikipedia.org/wiki/OOPSLA) conferences in the 1990s. Alexander's books are about building architecture, not computer architecture, yet the patterns they document can be thought about generally. Around then I also read other books from outside software development, such as [Mario Salvadori](https://en.wikipedia.org/wiki/Mario_Salvadori)'s *Why Buildings Stand Up: The Strength of Architecture* (1980).
 
 <!--more-->
 
@@ -29,13 +29,23 @@ I read the first two when the design patterns movement in object-oriented softwa
 
 | Book | Author(s), year |
 |----------|------|
+| **Design Thinking** | Peter G. Rowe, 1987 |
 | **A Pattern Language** | Christopher Alexander et al., 1977 |
 | **The Timeless Way of Building** | Christopher Alexander, 1979 |
-| **Design Thinking** | Peter G. Rowe, 1987 |
 | **The series** | [Worth Reading: every post](/series/#worth-reading) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
 </div>
+
+## Design Thinking
+
+<figure class="zoomable" style="float: left; width: 90px; margin: 0.3em 1.2em 0.4em 0;">
+<img src="{{ '/assets/images/posts/cover-design-thinking.webp' | relative_url }}" class="no-invert" alt="The cover of Design Thinking by Peter G. Rowe, yellow, with line drawings of classical facades and a sketch of a building">
+</figure>
+
+Peter G. Rowe, *Design Thinking* (MIT Press, 1987). How architects and urban designers actually go about designing: the heuristics they use, the way a problem and its solution take shape together, and design as an inquiry rather than a straight line from requirements to result.
+
+This one helped me earlier in my career, when I discovered requirements analysis. I was the component owner for an MVS component that had no Design Engineer at the time, IBM's term for a product manager, so I had to wear that hat myself: find out what customers were asking for, so that I could propose development projects to my management.
 
 ## A Pattern Language
 
@@ -56,16 +66,6 @@ Mike: TODO, what it taught you.
 Christopher Alexander (1979). The first volume of the set whose second, *A Pattern Language*, came out two years earlier: the philosophy behind the patterns, and what Alexander calls the quality without a name.
 
 Mike: TODO, what it taught you.
-
-## Design Thinking
-
-<figure class="zoomable" style="float: left; width: 90px; margin: 0.3em 1.2em 0.4em 0;">
-<img src="{{ '/assets/images/posts/cover-design-thinking.webp' | relative_url }}" class="no-invert" alt="The cover of Design Thinking by Peter G. Rowe, yellow, with line drawings of classical facades and a sketch of a building">
-</figure>
-
-Peter G. Rowe, *Design Thinking* (MIT Press, 1987). How architects and urban designers actually go about designing: the heuristics they use, the way a problem and its solution take shape together, and design as an inquiry rather than a straight line from requirements to result.
-
-This one helped me earlier in my career, when I discovered requirements analysis. I was the component owner for an MVS component that had no Design Engineer at the time, IBM's term for a product manager, so I had to wear that hat myself: find out what customers were asking for, so that I could propose development projects to my management.
 
 ## Closing
 

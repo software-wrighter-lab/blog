@@ -7,7 +7,7 @@ keywords: "books worth reading, Design Patterns, Gang of Four, Gamma Helm Johnso
 abstract: "Third in the series on books worth reading: Alexander's idea, carried into software. The Gang of Four's Design Patterns (1994), patterns inside one program, and Wolfgang Pree's Design Patterns for Object-Oriented Software Development (1995), metapatterns and the hot spots where a framework is meant to vary."
 series: "Worth Reading"
 series_part: 3
-date: 2026-11-19 00:15:00 -0800
+date: 2026-11-18 00:15:00 -0800
 ---
 
 <!-- DRAFT (2026-11-02), Mike: "start a new blog post for thursday 11/5, influential books", then "maybe a new series, worth reading".
@@ -19,7 +19,7 @@ date: 2026-11-19 00:15:00 -0800
 
 <img src="{{ '/assets/images/posts/block-design-patterns.webp' | relative_url }}" class="post-marker no-invert" alt="A map of software design pattern icons, a crown, factories, a bridge, an eye, a terminal and more, joined by dashed arrows" style="width: 205px;">
 
-The [prior post](/2026/11/12/worth-reading-alexander-pattern-language-timeless-way/) in this series was about architecture and design. Mike: TODO, an intro in your words for these books.
+The [prior post](/2026/11/11/worth-reading-alexander-pattern-language-timeless-way/) in this series was about architecture and design. Mike: TODO, an intro in your words for these books.
 
 <!--more-->
 

@@ -7,7 +7,7 @@ keywords: "books worth reading, Flow-Based Programming, J. Paul Morrison, datafl
 abstract: "Fourth in the series on books worth reading: three on how software fits together, and how to see where it does not. J. Paul Morrison's Flow-Based Programming (1994), applications as networks of black-box components passing data along connections; Doug Kaye's Loosely Coupled (2003), on what web services need to work together across companies; and Adam Tornhill's Your Code as a Crime Scene (2015), which reads a code base's version-control history for hotspots and hidden coupling."
 series: "Worth Reading"
 series_part: 4
-date: 2026-11-26 00:15:00 -0800
+date: 2026-11-25 00:15:00 -0800
 ---
 
 <!-- DRAFT (2026-11-02), Mike: "start a new blog post for thursday 11/5, influential books", then "maybe a new series, worth reading".
@@ -19,7 +19,7 @@ date: 2026-11-26 00:15:00 -0800
 
 <img src="{{ '/assets/images/posts/block-flow-loose-scene.webp' | relative_url }}" class="post-marker no-invert" alt="Three panels: a glowing network of components joined by flowing connections; puzzle pieces and gears fitting loosely together; investigators examining code behind crime-scene tape" style="width: 205px;">
 
-The [prior post](/2026/11/19/worth-reading-design-patterns-pree/) in this series was about design patterns in software. Mike: TODO, an intro in your words for these books.
+The [prior post](/2026/11/18/worth-reading-design-patterns-pree/) in this series was about design patterns in software. Mike: TODO, an intro in your words for these books.
 
 <!--more-->
 
