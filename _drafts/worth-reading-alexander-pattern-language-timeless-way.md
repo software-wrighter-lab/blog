@@ -57,7 +57,7 @@ I read this book later, and it helped me broaden my thinking about requirements 
 
 Christopher Alexander, Sara Ishikawa and Murray Silverstein, with Max Jacobson, Ingrid Fiksdahl-King and Shlomo Angel (1977). 253 patterns for towns, buildings and rooms, each a problem and its solution, and the source of the idea that *Design Patterns* carried into software.
 
-I read Alexander's two books when the design patterns movement in object-oriented software embraced Christopher Alexander. I was an ACM member, subscribed to [SIGPLAN](https://en.wikipedia.org/wiki/SIGPLAN), and regularly attended the [OOPSLA](https://en.wikipedia.org/wiki/OOPSLA) conferences in the 1990s. Alexander's books are about building architecture, not computer architecture, yet the patterns they document can be thought about generally.
+I read Alexander's two books when the design patterns movement in object-oriented software embraced Christopher Alexander. I was an ACM member, subscribed to [SIGPLAN](https://en.wikipedia.org/wiki/SIGPLAN), and regularly attended the [OOPSLA](https://en.wikipedia.org/wiki/OOPSLA) conferences in the 1990s. Alexander's books are about building architecture, not computer architecture, yet the patterns they document can be thought about generally and applied across domains.
 
 ## The Timeless Way of Building
 
