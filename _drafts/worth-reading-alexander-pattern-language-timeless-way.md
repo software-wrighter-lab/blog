@@ -19,7 +19,9 @@ date: 2026-11-12 00:15:00 -0800
 
 <img src="{{ '/assets/images/posts/block-timeless-language.webp' | relative_url }}" class="post-marker no-invert" alt="A watercolor of curving wooden buildings grown among trees around a garden courtyard and a pond" style="width: 205px;">
 
-The [prior post](/2026/11/04/worth-reading-psychology-mythical-man-month/) in this series was about the people who write software. Mike: TODO, an intro in your words for these books.
+The [prior post](/2026/11/04/worth-reading-psychology-mythical-man-month/) in this series was about the people who write software. This one is about three books written for architects, the kind who design buildings.
+
+I read the first two when the design patterns movement in object-oriented software embraced Christopher Alexander. I was an ACM member, subscribed to [SIGPLAN](https://en.wikipedia.org/wiki/SIGPLAN), and regularly attended the [OOPSLA](https://en.wikipedia.org/wiki/OOPSLA) conferences in the 1990s. Alexander's books are about building architecture, not computer architecture, yet the patterns they document can be thought about generally. Around then I also read other books from outside software development, such as [Mario Salvadori](https://en.wikipedia.org/wiki/Mario_Salvadori)'s *Why Buildings Stand Up: The Strength of Architecture* (1980).
 
 <!--more-->
 
@@ -63,7 +65,7 @@ Mike: TODO, what it taught you.
 
 Peter G. Rowe, *Design Thinking* (MIT Press, 1987). How architects and urban designers actually go about designing: the heuristics they use, the way a problem and its solution take shape together, and design as an inquiry rather than a straight line from requirements to result.
 
-Mike: TODO, what it taught you, or whether it belongs in a different post.
+This one helped me earlier in my career, when I discovered requirements analysis. I was the component owner for an MVS component that had no Design Engineer at the time, IBM's term for a product manager, so I had to wear that hat myself: find out what customers were asking for, so that I could propose development projects to my management.
 
 ## Closing
 
