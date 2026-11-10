@@ -69,6 +69,8 @@ Christopher Alexander (1979). The first volume of the set whose second, *A Patte
 
 I enjoyed both of Alexander's books, and they helped me think about software requirements analysis.
 
+I also started to think about quality in a different way. To me it represents how well a product meets, or does not meet, a customer's needs. People seem to judge quality emotionally, or in an abstract way that resists measurement; quality is hard to represent with a number.
+
 ## Closing
 
 These books are a little meta: they are not directly about software development, but they helped me think outside the box.
