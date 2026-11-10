@@ -71,4 +71,4 @@ I enjoyed both of Alexander's books, and they helped me think about software req
 
 ## Closing
 
-Mike: TODO, a closing in your words: what these books have in common, or where they disagree.
+These books are a little meta: they are not directly about software development, but they helped me think outside the box.
