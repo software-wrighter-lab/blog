@@ -4,7 +4,7 @@ title: "Worth Reading #2: Architecture and Design --- Alexander and Rowe"
 categories: [books, programming-history]
 tags: [worth-reading, books, peter-rowe, design-thinking, christopher-alexander, pattern-language, timeless-way-of-building, architecture]
 keywords: "books worth reading, Design Thinking, Peter G. Rowe, design process, A Pattern Language, The Timeless Way of Building, Christopher Alexander, architecture, the quality without a name"
-abstract: "Second in the series on books worth reading: three from architecture about how design works, in the order I read them. Peter G. Rowe's Design Thinking (1987), on how architects actually go about designing, which helped me when I discovered requirements analysis; then Christopher Alexander's A Pattern Language (1977), 253 patterns for towns, buildings and rooms, and The Timeless Way of Building (1979), the philosophy behind them, read when the design patterns movement in software took Alexander up."
+abstract: "Second in the series on books worth reading: three from architecture about how design works, in the order I read them. Peter G. Rowe's Design Thinking (1987), on how architects actually go about designing, which broadened my thinking about requirements and design; then Christopher Alexander's A Pattern Language (1977), 253 patterns for towns, buildings and rooms, and The Timeless Way of Building (1979), the philosophy behind them, read when the design patterns movement in software took Alexander up."
 series: "Worth Reading"
 series_part: 2
 date: 2026-11-11 00:15:00 -0800
@@ -45,7 +45,9 @@ I read Alexander's two books when the design patterns movement in object-oriente
 
 Peter G. Rowe, *Design Thinking* (MIT Press, 1987). How architects and urban designers actually go about designing: the heuristics they use, the way a problem and its solution take shape together, and design as an inquiry rather than a straight line from requirements to result.
 
-This one helped me earlier in my career, when I discovered requirements analysis. I was the component owner for an MVS component that had no Design Engineer at the time, IBM's term for a product manager, so I had to wear that hat myself: find out what customers were asking for, so that I could propose development projects to my management.
+Early in my software development career I read many books on software requirements, which I can no longer recall. I was the component owner for an MVS component that had no Design Engineer at the time, IBM's term for a product manager, so I had to wear that hat myself: find out what customers were asking for, so that I could propose development projects to my management.
+
+I read this book later, and it helped me broaden my thinking about requirements and design.
 
 ## A Pattern Language
 
