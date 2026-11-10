@@ -4,7 +4,7 @@ title: "Worth Reading #2: Architecture and Design --- Alexander and Rowe"
 categories: [books, programming-history]
 tags: [worth-reading, books, peter-rowe, design-thinking, christopher-alexander, pattern-language, timeless-way-of-building, architecture]
 keywords: "books worth reading, Design Thinking, Peter G. Rowe, design process, A Pattern Language, The Timeless Way of Building, Christopher Alexander, architecture, the quality without a name"
-abstract: "Second in the series on books worth reading: three from architecture about how design works, in the order I read them. Peter G. Rowe's Design Thinking (1987), on how architects actually go about designing, which broadened my thinking about requirements and design; then Christopher Alexander's A Pattern Language (1977), 253 patterns for towns, buildings and rooms, and The Timeless Way of Building (1979), the philosophy behind them, read when the design patterns movement in software took Alexander up."
+abstract: "Second in the series on books worth reading: three from architecture about how design works, in the order I probably read them. Peter G. Rowe's Design Thinking (1987), on how architects actually go about designing, which broadened my thinking about requirements and design; then Christopher Alexander's A Pattern Language (1977), 253 patterns for towns, buildings and rooms, and The Timeless Way of Building (1979), the philosophy behind them, read when the design patterns movement in software took Alexander up."
 series: "Worth Reading"
 series_part: 2
 date: 2026-11-11 00:15:00 -0800
@@ -14,12 +14,12 @@ date: 2026-11-11 00:15:00 -0800
      Split into posts of 2 to 4 books, about 3 on average, one a week; more books coming (Mike, 2026-11-02). Added the same day at
      Mike's request: Loosely Coupled (Doug Kaye, RDS Press, 2003), The Timeless Way of Building (Alexander, 1979), Gödel, Escher, Bach
      (Hofstadter, 1979); SICP (Abelson and Sussman, 1985), 2026-11-03, when the languages post split into logic (GEB, Mockingbird) and building languages (Loeliger, SICP, AMOP); Flow-Based Programming (Morrison, VNR 1994, first edition), added to #4 on 2026-11-05; Design Thinking (Rowe, 1987), placeholder in #2 on 2026-11-05; Your Code as a Crime Scene (Tornhill, 2015) and Design Patterns for Object-Oriented Software Development (Pree, 1995), both 2026-11-03, when #3 split into the pattern books and the coupling books; The Art of the Metaobject Protocol (Kiczales, des Rivières, Bobrow, 1991), added to the languages post 2026-11-03; Alexander's two books split from Design Patterns and Loosely Coupled. Within each post the books are in order
-     of first publication until Mike reorders them by when he read them. What each book taught him is Mike: TODO; do not add reasons
+     of first publication until Mike reorders them by when he read them. #2: Mike does not recall the exact order (2026-11-10): Design Thinking first is the probable order; the post says "probably". What each book taught him is Mike: TODO; do not add reasons
      he has not given. Links point only to published posts that already cite the book or its subject. Lead image: Mike's block-timeless-language (Downloads, 2026-11-03), no-invert. -->
 
 <img src="{{ '/assets/images/posts/block-timeless-language.webp' | relative_url }}" class="post-marker no-invert" alt="A watercolor of curving wooden buildings grown among trees around a garden courtyard and a pond" style="width: 205px;">
 
-The [prior post](/2026/11/04/worth-reading-psychology-mythical-man-month/) in this series was about the people who write software. This one is about three books written for architects, the kind who design buildings, in the order I read them.
+The [prior post](/2026/11/04/worth-reading-psychology-mythical-man-month/) in this series was about the people who write software. This one is about three books written for architects, the kind who design buildings, in the order I probably read them.
 
 I read Alexander's two books when the design patterns movement in object-oriented software embraced Christopher Alexander. I was an ACM member, subscribed to [SIGPLAN](https://en.wikipedia.org/wiki/SIGPLAN), and regularly attended the [OOPSLA](https://en.wikipedia.org/wiki/OOPSLA) conferences in the 1990s. Alexander's books are about building architecture, not computer architecture, yet the patterns they document can be thought about generally.
 
