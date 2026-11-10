@@ -19,7 +19,7 @@ date: 2026-11-11 00:15:00 -0800
 
 <img src="{{ '/assets/images/posts/block-timeless-language.webp' | relative_url }}" class="post-marker no-invert" alt="A watercolor of curving wooden buildings grown among trees around a garden courtyard and a pond" style="width: 205px;">
 
-The [prior post](/2026/11/04/worth-reading-psychology-mythical-man-month/) in this series was about the people who write software. This one is about three books from architecture, the kind that designs buildings, in the order I probably read them.
+The [prior post](/2026/11/04/worth-reading-psychology-mythical-man-month/) in this series was about the people who write software. This one is about three books from the architecture of buildings, in the order I probably read them.
 
 <!--more-->
 
