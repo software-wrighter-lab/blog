@@ -47,7 +47,7 @@ Peter G. Rowe, *Design Thinking* (MIT Press, 1987). How architects and urban des
 
 I also read books from outside software development, such as [Mario Salvadori](https://en.wikipedia.org/wiki/Mario_Salvadori)'s *Why Buildings Stand Up: The Strength of Architecture* (1980).
 
-Early in my software development career I read many books on documenting software architectures and on software requirements analysis, which I can no longer recall. I was the component owner for an MVS component that had no Design Engineer at the time, IBM's term for a product manager, so I had to wear that hat myself: find out what customers were asking for, so that I could propose development projects to my management.
+Early in my software development career I read many books on documenting software architectures and on software requirements analysis (sorry, I cannot recall the exact titles or authors). I was the component owner for an MVS component that had no Design Engineer at the time, IBM's term for a product manager, so I had to wear that hat myself: find out what customers were asking for, so that I could propose development projects to my management.
 
 I read this book later, and it helped me broaden my thinking about requirements and design.
 
