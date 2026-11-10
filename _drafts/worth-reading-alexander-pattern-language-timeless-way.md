@@ -72,3 +72,5 @@ I enjoyed both of Alexander's books, and they helped me think about software req
 ## Closing
 
 These books are a little meta: they are not directly about software development, but they helped me think outside the box.
+
+I wanted to mention them because I found them interesting on their own. My interests are wide and varied: hardware, software, carpentry, DIY projects, art, music. My current hobbies use AI, electronics and software to explore math, machine learning, games and more. In all of it, it helps to think about design in a more general sense.
