@@ -73,7 +73,7 @@ Its 1130 entry is Lisp 1.6 on the IBM 1130, from 1972, by Guy L. Steele Jr. at B
 
 | Language | Repository | Live demo |
 |---|---|---|
-| APL | [sw-apl](https://github.com/sw-vibe-coding/sw-apl): a clean-room APL in Rust, and [sw-apl-workspaces](https://github.com/sw-vibe-coding/sw-apl-workspaces), its workspaces | [sw-apl](https://sw-apl.softwarewrighter.com/) |
+| APL | [sw-apl](https://github.com/sw-vibe-coding/sw-apl): a clean-room APL in Rust, and [sw-apl-workspaces](https://github.com/sw-vibe-coding/sw-apl-workspaces) | [sw-apl](https://sw-apl.softwarewrighter.com/) |
 | APL | [sw-cor24-apl](https://github.com/sw-embed/sw-cor24-apl): APL for COR24, in C | [web-sw-cor24-apl](https://sw-embed.github.io/web-sw-cor24-apl/) |
 | Forth | [sw-cor24-forth](https://github.com/sw-embed/sw-cor24-forth): a tiny Forth for COR24 | [web-sw-cor24-forth](https://sw-embed.github.io/web-sw-cor24-forth/) |
 | Forth | [sw-fth-wasm](https://github.com/sw-vibe-coding/sw-fth-wasm): proto-forth-wasm, a proto-Forth workbench | [sw-fth-wasm](https://sw-vibe-coding.github.io/sw-fth-wasm/) |
