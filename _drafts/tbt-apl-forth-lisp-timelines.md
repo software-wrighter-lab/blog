@@ -67,7 +67,7 @@ Three languages I keep coming back to are APL, Forth and Lisp. I have now added 
 
 <figure class="zoomable" style="float: left; width: 280px; margin: 0.3em 1.2em 0.4em 0;">
 <img src="{{ '/assets/images/posts/tbt14-apl-timeline.webp' | relative_url }}" class="no-invert" alt="The APL timeline's opening view, 1970 to 1980: APL\360 with domino, my A'70 live demo; APLSV; the IBM 5100, my B'75 live demo; SHARP APL; the 1977 APL standard; APL80 on the TRS-80, coming soon">
-<figcaption style="font-size: 0.85em;">The APL timeline. Click to enlarge.</figcaption>
+<figcaption style="font-size: 0.85em;">Part of the APL timeline. Click to enlarge.</figcaption>
 </figure>
 
 [A timeline of APL](https://sw-apl.softwarewrighter.com/) is now the front page of my APL site. It has 40 entries and opens on 1970. Iverson's notation and APL\360 are to the left; to the right are APLSV, SHARP APL, the standard, the IBM PC and APL2, and on to my own array languages.
@@ -78,7 +78,7 @@ My live demos sit on it as eras: A'70, APL\360 typed on a 2741, and B'75, APLSV 
 
 <figure class="zoomable" style="float: right; width: 280px; margin: 0.3em 0 0.4em 1.2em;">
 <img src="{{ '/assets/images/posts/tbt14-forth-timeline.webp' | relative_url }}" class="no-invert" alt="The Forth timeline's opening view: Forth on the IBM 1130, ca. 1968, a future demo; Forth at NRAO; FORTH, Inc.; the Forth Interest Group; Forth-79">
-<figcaption style="font-size: 0.85em;">The Forth timeline. Click to enlarge.</figcaption>
+<figcaption style="font-size: 0.85em;">Part of the Forth timeline. Click to enlarge.</figcaption>
 </figure>
 
 [A timeline of Forth](https://sw-embed.github.io/web-sw-cor24-forth/forth-timeline/) sits beside my browser Forth for COR24. It has 27 entries and also opens on 1970. Chuck Moore's FORTH took shape on an IBM 1130 at Mohasco, around 1968, and was named, five letters, by 1970. Then come Forth at the NRAO radio telescope, FORTH, Inc. in 1973, the Forth Interest Group and fig-Forth in 1978, and Forth-79.
@@ -89,7 +89,7 @@ My Forths are on it too: COR24 Forth, proto-forth-wasm, Forth in SWTOS and reva-
 
 <figure class="zoomable" style="float: left; width: 260px; margin: 0.3em 1.2em 0.4em 0;">
 <img src="{{ '/assets/images/posts/tbt14-lisp-timeline.webp' | relative_url }}" class="no-invert" alt="The Lisp timeline's opening view, 1957 to 1968: FORTRAN, ALGOL, Lisp at MIT, COBOL, McCarthy's 1960 paper, the LISP 1.5 Programmer's Manual, Maclisp, BBN-LISP">
-<figcaption style="font-size: 0.85em;">The Lisp timeline. Click to enlarge.</figcaption>
+<figcaption style="font-size: 0.85em;">Part of the Lisp timeline. Click to enlarge.</figcaption>
 </figure>
 
 [A timeline of Lisp](https://sw-embed.github.io/web-sw-cor24-macrolisp/lisp-timeline/) sits beside my browser Lisp for COR24, with 43 entries. It opens earlier than the other two, at Lisp's beginning: John McCarthy at MIT in 1958 and his 1960 paper, then the LISP 1.5 Programmer's Manual, Maclisp, BBN-LISP and on.
