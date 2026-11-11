@@ -126,7 +126,7 @@ It will also draw on my 3D models, [console-3D](https://github.com/softwarewrigh
 
 <figure class="zoomable outdent-right" style="width: 260px; margin-top: -2.9em;">
 <img src="{{ '/assets/images/posts/tbt14-tang-primer.webp' | relative_url }}" class="no-invert" alt="A block print of a Sipeed Tang FPGA board: a row of header pins, the FPGA chip under a TANG label, USB connectors and capacitors">
-<figcaption style="font-size: 0.85em;">A Sipeed Tang FPGA board. Click to enlarge.</figcaption>
+<figcaption style="font-size: 0.85em;">Primer FPGA. Click to enlarge.</figcaption>
 </figure>
 
 Recently I've been attending user groups for APL and for Forth, and I belong to a Lisp meetup group. I'm working toward improving my 1130 emulator so that it can run actual APL, Forth and Lisp. Once that works, I plan to create an FPGA version of the 1130.
