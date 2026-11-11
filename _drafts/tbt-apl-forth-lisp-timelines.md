@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "TBT #14: APL, Forth and Lisp on a Timeline"
+title: "TBT #14: APL, Forth and Lisp Timelines"
 categories: [tbt, programming-history, retrocomputing, languages]
 tags: [throwback-thursday, timeline, apl, forth, lisp, ibm-1130, apl-1130, cor24, emulator, computer-history-museum]
 keywords: "APL timeline, Forth timeline, Lisp timeline, history of APL, history of Forth, history of Lisp, APL\\1130, Forth on the IBM 1130, Lisp 1.6 on the IBM 1130, IBM 1130 emulator, computer history museum"
