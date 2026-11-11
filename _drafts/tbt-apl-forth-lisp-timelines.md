@@ -74,9 +74,9 @@ Three languages I keep coming back to are APL, Forth and Lisp. I have now added 
 
 My live demos sit on it as eras: A'70, APL\360 typed on a 2741, and B'75, APLSV on the IBM 5100, with C'80, APL80 on a TRS-80, and D'83, the IBM PC, still to come. APL\1130 in 1968, on the 1130's console typewriter, is marked as a future demo. Clicking a live entry opens that demo.
 
-<div style="clear: both; text-align: center; margin: 2.2em 0 1.2em;">
-<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 70%;">
-<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 70%;">
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
 </div>
 ## Forth Timeline
 
@@ -89,9 +89,9 @@ My live demos sit on it as eras: A'70, APL\360 typed on a 2741, and B'75, APLSV 
 
 My Forths are on it too: COR24 Forth, proto-forth-wasm, Forth in SWTOS and reva-fork. Forth on the IBM 1130 is marked as a future demo.
 
-<div style="clear: both; text-align: center; margin: 2.2em 0 1.2em;">
-<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 70%;">
-<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 70%;">
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
 </div>
 ## Lisp Timeline
 
