@@ -49,3 +49,7 @@ Mike: TODO, what it taught you, and whether you still run it.
 ## Closing
 
 Mike: TODO, a closing in your words: what these books have in common, or where they disagree.
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/11/11: one more book belongs with these two: David and Tom Gardner's <em>The Motley Fool: You Have More Than You Think: The Foolish Guide to Personal Finance</em> (2001), on running your own money. Mike: TODO, what it taught you.]</em></p>

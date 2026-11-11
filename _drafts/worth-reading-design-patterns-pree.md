@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Worth Reading #3: Design Patterns --- the Gang of Four and Pree"
+title: "Worth Reading #3: Design Patterns and Testing --- the Gang of Four, Pree and Binder"
 categories: [books, programming-history]
-tags: [worth-reading, books, design-patterns, gang-of-four, object-oriented, wolfgang-pree, metapatterns, frameworks]
-keywords: "books worth reading, Design Patterns, Gang of Four, Gamma Helm Johnson Vlissides, object-oriented design, Design Patterns for Object-Oriented Software Development, Wolfgang Pree, metapatterns, hot spots, application frameworks, ET++"
-abstract: "Third in the series on books worth reading: Alexander's idea, carried into software. The Gang of Four's Design Patterns (1994), patterns inside one program, and Wolfgang Pree's Design Patterns for Object-Oriented Software Development (1995), metapatterns and the hot spots where a framework is meant to vary."
+tags: [worth-reading, books, design-patterns, gang-of-four, object-oriented, wolfgang-pree, metapatterns, frameworks, robert-binder, testing, object-oriented-testing]
+keywords: "books worth reading, Design Patterns, Gang of Four, Gamma Helm Johnson Vlissides, object-oriented design, Design Patterns for Object-Oriented Software Development, Wolfgang Pree, metapatterns, hot spots, application frameworks, ET++, Testing Object-Oriented Systems, Robert Binder, object-oriented testing"
+abstract: "Third in the series on books worth reading: Alexander's idea, carried into software. The Gang of Four's Design Patterns (1994), patterns inside one program; Wolfgang Pree's Design Patterns for Object-Oriented Software Development (1995), metapatterns and the hot spots where a framework is meant to vary; and Robert Binder's Testing Object-Oriented Systems (1999), on testing such designs with models and patterns."
 series: "Worth Reading"
 series_part: 3
 date: 2026-11-18 00:15:00 -0800
@@ -29,6 +29,7 @@ The [prior post](/2026/11/11/worth-reading-alexander-pattern-language-timeless-w
 |----------|------|
 | **Design Patterns** | Gamma, Helm, Johnson, Vlissides, 1994 |
 | **Design Patterns for Object-Oriented Software Development** | Wolfgang Pree, 1995 |
+| **Testing Object-Oriented Systems** | Robert V. Binder, 1999 |
 | **The series** | [Worth Reading: every post](/series/#worth-reading) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
@@ -51,6 +52,12 @@ Mike: TODO, what it taught you.
 </figure>
 
 Wolfgang Pree, *Design Patterns for Object-Oriented Software Development* (Addison-Wesley and ACM Press, 1995). Patterns one level up: metapatterns, a small set that describes the patterns of application frameworks, and hot spots, the places where a framework is meant to vary and be extended, worked through on the C++ GUI framework ET++.
+
+Mike: TODO, what it taught you.
+
+## Testing Object-Oriented Systems
+
+Robert V. Binder, *Testing Object-Oriented Systems: Models, Patterns, and Tools* (Addison-Wesley, 1999). Testing for object-oriented designs: test models drawn from the design, and test design patterns, catalogued the way design patterns were.
 
 Mike: TODO, what it taught you.
 
