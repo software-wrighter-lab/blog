@@ -17,6 +17,8 @@ repo_urls:
     title: "web-sw-cor24-macrolisp"
   - url: "https://github.com/sw-comp-history/ibm-1130-rs"
     title: "ibm-1130-rs"
+  - url: "https://github.com/hardwarewrighter/X_eTaL-fpga"
+    title: "X_eTaL-fpga"
 ---
 
 <!-- DRAFT (2026-11-11), Mike: TBT for Thursday 11/12 on the APL, Forth and Lisp timelines; a section each with a thumbnail and
@@ -94,4 +96,4 @@ It will also draw on my 3D models, [console-3D](https://github.com/softwarewrigh
 
 Recently I've been attending user groups for APL and for Forth, and I belong to a Lisp meetup group. I'm working toward improving my 1130 emulator so that it can run actual APL, Forth and Lisp. Once that works, I plan to create an FPGA version of the 1130.
 
-I'm following the approach I took with [makerlisp.com](https://makerlisp.com/)'s COR24-TB FPGA development board, for which I wrote [an emulator](/2026/03/22/cor24-rs-assembly-emulator/). This time I'm starting with the emulator, and then creating my own FPGA design, using X_eTaL-fpga, as I did for two hex calculators loosely based on the TI 4-bit calculator chip, one with a UART interface and the other with physical buttons and LED digits.
+I'm following the approach I took with [makerlisp.com](https://makerlisp.com/)'s COR24-TB FPGA development board, for which I wrote [an emulator](/2026/03/22/cor24-rs-assembly-emulator/). This time I'm starting with the emulator, and then creating my own FPGA design, using [X_eTaL-fpga](https://github.com/hardwarewrighter/X_eTaL-fpga), as I did for two hex calculators loosely based on the TI 4-bit calculator chip, one with a UART interface and the other with physical buttons and LED digits.
