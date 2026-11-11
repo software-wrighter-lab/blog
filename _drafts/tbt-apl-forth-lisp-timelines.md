@@ -46,7 +46,7 @@ repo_urls:
 
 <img src="{{ '/assets/images/posts/block-lisp-apl-forth.webp' | relative_url }}" class="post-marker no-invert" alt="A hand-drawn timeline from the 1950s to 1975 with three scenes: 1958 Lisp, a programmer at a large computer with tape drives; 1968 APL, a programmer at a typewriter terminal; 1970 Forth, a radio telescope dish in an observatory" style="width: 340px;">
 
-Three languages I keep coming back to are APL, Forth and Lisp. Each of them now has an interactive timeline beside my live demos of it: the language's history from the 1950s on, with my own versions marked where they belong. Each timeline is a horizontal strip, about eleven years to a view. Scroll sideways to go earlier or later.
+Three languages I keep coming back to are APL, Forth and Lisp. I have now added an interactive timeline beside my live demos of each: the language's history from the 1950s on, with my own versions marked where they belong. Each timeline is a horizontal strip, about eleven years to a view. Scroll sideways to go earlier or later.
 
 <!--more-->
 
