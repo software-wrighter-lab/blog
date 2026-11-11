@@ -13,9 +13,9 @@ date: 2027-01-27 00:15:00 -0800
 <!-- DRAFT (2026-11-11), Mike: add Soul of a New Machine and Dreaming in Code to Worth Reading, a new Wednesday post, placed
      roughly by when the books were published, or at the end. Placed at the end for now (#13, Wed 2027-01-27); could move to
      follow the book posts, before the papers. What each taught him is Mike: TODO; do not add reasons he has not given.
-     Lead image: placeholder until Mike supplies one. -->
+     Lead image: Mike's block-soul-code.jpg (Dropbox, 2026-11-11), no-invert. -->
 
-<img src="{{ '/assets/images/posts/placeholder-worth-reading-soul-of-a-new-machine-dreaming-in-code.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-soul-code.webp' | relative_url }}" class="post-marker no-invert" alt="A glowing figure in profile against a starry nebula, threads of light and lines of code streaming from the head" style="width: 205px;">
 
 The [prior post](/2027/01/20/worth-reading-attention-is-all-you-need/) in this series was about one paper. This one goes back to books, two that follow a team from the inside. Mike: TODO, an intro in your words.
 
