@@ -111,6 +111,11 @@ The COR24 versions are also gathered on the [COR24 demos page](https://sw-embed.
 
 ## Next: the IBM 1130
 
+<figure class="zoomable outdent-left" style="width: 260px; margin-top: -2.9em;">
+<img src="{{ '/assets/images/posts/tbt14-ibm1130-console.webp' | relative_url }}" class="no-invert" alt="A 3D render of the IBM 1130: the 1131 CPU desk console with its lights panel, the 1053 console printer and keyboard, and the blue-doored cabinet beside it">
+<figcaption style="font-size: 0.85em;">s1130-3D model. Click to enlarge.</figcaption>
+</figure>
+
 All three timelines point at the same machine. APL\1130, Forth and Lisp 1.6 all ran on the IBM 1130, and each is marked as a future demo.
 
 My [IBM 1130 emulator](https://sw-comp-history.github.io/ibm-1130-rs/) ([TBT #5](/2026/02/26/ibm-1130-system-emulator/)) has an assembler game, the console panel, an 029 keypunch and the console printer so far, but no disk yet. Work is planned to complete it and run, if possible, actual APL, Forth and Lisp code written for the 1130.
@@ -118,6 +123,11 @@ My [IBM 1130 emulator](https://sw-comp-history.github.io/ibm-1130-rs/) ([TBT #5]
 It will also draw on my 3D models, [console-3D](https://github.com/softwarewrighter/console-3D) for the 1053 console printer and [s1130-3D](https://github.com/softwarewrighter/s1130-3D) for the 1131 console, to animate the console, keypunch, printer, disk and the rest. The goal is to update the Computer History Museum on my [research campus](/2026/09/12/software-wrighter-research-campus/).
 
 ## Closing
+
+<figure class="zoomable outdent-right" style="width: 260px; margin-top: -2.9em;">
+<img src="{{ '/assets/images/posts/tbt14-tang-primer.webp' | relative_url }}" class="no-invert" alt="A block print of a Sipeed Tang FPGA board: a row of header pins, the FPGA chip under a TANG label, USB connectors and capacitors">
+<figcaption style="font-size: 0.85em;">A Sipeed Tang FPGA board. Click to enlarge.</figcaption>
+</figure>
 
 Recently I've been attending user groups for APL and for Forth, and I belong to a Lisp meetup group. I'm working toward improving my 1130 emulator so that it can run actual APL, Forth and Lisp. Once that works, I plan to create an FPGA version of the 1130.
 
