@@ -9,6 +9,18 @@ series: "Throwback Thursday"
 series_part: 14
 date: 2026-11-12 00:15:00 -0800
 repo_urls:
+  - url: "https://github.com/sw-vibe-coding/sw-apl-workspaces"
+    title: "sw-apl-workspaces"
+  - url: "https://github.com/sw-embed/sw-cor24-forth"
+    title: "sw-cor24-forth"
+  - url: "https://github.com/softwarewrighter/reva-fork"
+    title: "reva-fork"
+  - url: "https://github.com/sw-embed/sw-cor24-macrolisp"
+    title: "sw-cor24-macrolisp"
+  - url: "https://github.com/softwarewrighter/console-3D"
+    title: "console-3D"
+  - url: "https://github.com/softwarewrighter/s1130-3D"
+    title: "s1130-3D"
   - url: "https://github.com/sw-vibe-coding/sw-apl"
     title: "sw-apl"
   - url: "https://github.com/sw-embed/web-sw-cor24-forth"
@@ -34,11 +46,22 @@ repo_urls:
 
 <img src="{{ '/assets/images/posts/block-lisp-apl-forth.webp' | relative_url }}" class="post-marker no-invert" alt="A hand-drawn timeline from the 1950s to 1975 with three scenes: 1958 Lisp, a programmer at a large computer with tape drives; 1968 APL, a programmer at a typewriter terminal; 1970 Forth, a radio telescope dish in an observatory" style="width: 340px;">
 
-Three languages I keep coming back to are APL, Forth and Lisp. Each of them now has an interactive timeline beside my live demos of it: the language's history from the 1950s on, with my own versions marked where they belong.
+Three languages I keep coming back to are APL, Forth and Lisp. Each of them now has an interactive timeline beside my live demos of it: the language's history from the 1950s on, with my own versions marked where they belong. Each timeline is a horizontal strip, about eleven years to a view. Scroll sideways to go earlier or later.
 
 <!--more-->
 
-Each timeline is a horizontal strip, about eleven years to a view. Scroll sideways, or turn the mouse wheel, to go earlier or later; the arrows beside the title jump a view at a time.
+<div class="resource-box" markdown="1">
+
+| Resource | Link |
+|----------|------|
+| **APL** | [sw-apl](https://github.com/sw-vibe-coding/sw-apl), [sw-apl-workspaces](https://github.com/sw-vibe-coding/sw-apl-workspaces) |
+| **Forth** | [sw-cor24-forth](https://github.com/sw-embed/sw-cor24-forth), [reva-fork](https://github.com/softwarewrighter/reva-fork) |
+| **Lisp** | [sw-cor24-macrolisp](https://github.com/sw-embed/sw-cor24-macrolisp) |
+| **3D models** | [console-3D](https://github.com/softwarewrighter/console-3D), [s1130-3D](https://github.com/softwarewrighter/s1130-3D) |
+| **The series** | [Throwback Thursday: every post](/series/#throwback-thursday) |
+| **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
+
+</div>
 
 ## APL
 
