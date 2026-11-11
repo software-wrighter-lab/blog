@@ -63,7 +63,7 @@ Three languages I keep coming back to are APL, Forth and Lisp. I have now added 
 
 </div>
 
-## APL
+## APL Timeline
 
 <figure class="zoomable" style="float: left; width: 280px; margin: 0.3em 1.2em 0.4em 0;">
 <img src="{{ '/assets/images/posts/tbt14-apl-timeline.webp' | relative_url }}" class="no-invert" alt="The APL timeline's opening view, 1970 to 1980: APL\360 with domino, my A'70 live demo; APLSV; the IBM 5100, my B'75 live demo; SHARP APL; the 1977 APL standard; APL80 on the TRS-80, coming soon">
@@ -74,7 +74,7 @@ Three languages I keep coming back to are APL, Forth and Lisp. I have now added 
 
 My live demos sit on it as eras: A'70, APL\360 typed on a 2741, and B'75, APLSV on the IBM 5100, with C'80, APL80 on a TRS-80, and D'83, the IBM PC, still to come. APL\1130 in 1968, on the 1130's console typewriter, is marked as a future demo. Clicking a live entry opens that demo.
 
-## Forth
+## Forth Timeline
 
 <figure class="zoomable" style="float: right; width: 280px; margin: 0.3em 0 0.4em 1.2em;">
 <img src="{{ '/assets/images/posts/tbt14-forth-timeline.webp' | relative_url }}" class="no-invert" alt="The Forth timeline's opening view: Forth on the IBM 1130, ca. 1968, a future demo; Forth at NRAO; FORTH, Inc.; the Forth Interest Group; Forth-79">
@@ -85,7 +85,7 @@ My live demos sit on it as eras: A'70, APL\360 typed on a 2741, and B'75, APLSV 
 
 My Forths are on it too: COR24 Forth, proto-forth-wasm, Forth in SWTOS and reva-fork. Forth on the IBM 1130 is marked as a future demo.
 
-## Lisp
+## Lisp Timeline
 
 <figure class="zoomable" style="float: left; width: 260px; margin: 0.3em 1.2em 0.4em 0;">
 <img src="{{ '/assets/images/posts/tbt14-lisp-timeline.webp' | relative_url }}" class="no-invert" alt="The Lisp timeline's opening view, 1957 to 1968: FORTRAN, ALGOL, Lisp at MIT, COBOL, McCarthy's 1960 paper, the LISP 1.5 Programmer's Manual, Maclisp, BBN-LISP">
