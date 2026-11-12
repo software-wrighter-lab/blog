@@ -102,7 +102,7 @@ The row everything else hangs from. The dates on the right half are the ones I a
 
 <div class="tl" data-start="1972" data-end="2026">
 <div class="tl-row" data-name="High school, APL self-study" data-spans="1972-1973"></div>
-<div class="tl-row" data-name="College, UNIVAC 1108" data-spans="1973-1977"></div>
+<div class="tl-row" data-name="College, UNIVAC 1110" data-spans="1973-1977"></div>
 <div class="tl-row" data-name="IBM Customer Engineer" data-spans="1977-1981"></div>
 <div class="tl-row" data-name="IBM, MVS development" data-spans="1981-1990"></div>
 <div class="tl-row" data-name="IBM T.J. Watson Research" data-spans="1990-1999"></div>
@@ -122,7 +122,7 @@ Every row here is a different idea of what a computer is: a room you reached thr
 
 <div class="tl" data-start="1972" data-end="2026">
 <div class="tl-row" data-name="IBM S/360, S/370" data-spans="1972-1990"></div>
-<div class="tl-row" data-name="UNIVAC 1108" data-spans="1973-1977"></div>
+<div class="tl-row" data-name="UNIVAC 1110" data-spans="1973-1977"></div>
 <div class="tl-row" data-name="IBM 1130, 1800" data-spans="1977-1981"></div>
 <div class="tl-row" data-name="IBM 2250 graphics display" data-spans="1977-1981"></div>
 <div class="tl-row" data-name="IBM 5100 family" data-spans="1977-1981"></div>
@@ -469,3 +469,7 @@ Count the hand-overs. Not the tools --- the *edges*, the places where one bar en
 A few bars never end. Emacs since 1989. APL, which came back after forty years: I build APL interpreters for education, use APL to test microprocessors, and design new APL-inspired languages for problems in machine learning and embedded work. A regression tool I have rewritten in every language I have settled in. Those are not exceptions to the rule; they are what learning the next thing looks like when the old thing was worth keeping.
 
 None of the tools was the skill. Learning the next one was.
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/11/11: corrected the UNIVAC model from 1108 to 1110. SUNY Albany's 1976&ndash;1977 Undergraduate Bulletin names a UNIVAC 1110 as its Computing Center's main computer, running EXEC 8 (<a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-01-tbt-timelines-of-tools.md">post history</a>).]</em></p>
