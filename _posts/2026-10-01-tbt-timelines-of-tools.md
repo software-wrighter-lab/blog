@@ -102,7 +102,7 @@ The row everything else hangs from. The dates on the right half are the ones I a
 
 <div class="tl" data-start="1972" data-end="2026">
 <div class="tl-row" data-name="High school, APL self-study" data-spans="1972-1973"></div>
-<div class="tl-row" data-name="College, UNIVAC 1110" data-spans="1973-1977"></div>
+<div class="tl-row" data-name="College" data-spans="1973-1977"></div>
 <div class="tl-row" data-name="IBM Customer Engineer" data-spans="1977-1981"></div>
 <div class="tl-row" data-name="IBM, MVS development" data-spans="1981-1990"></div>
 <div class="tl-row" data-name="IBM T.J. Watson Research" data-spans="1990-1999"></div>
@@ -122,7 +122,7 @@ Every row here is a different idea of what a computer is: a room you reached thr
 
 <div class="tl" data-start="1972" data-end="2026">
 <div class="tl-row" data-name="IBM S/360, S/370" data-spans="1972-1990"></div>
-<div class="tl-row" data-name="UNIVAC 1110" data-spans="1973-1977"></div>
+<div class="tl-row" data-name="UNIVAC 1110" data-spans="1975-1977"></div>
 <div class="tl-row" data-name="IBM 1130, 1800" data-spans="1977-1981"></div>
 <div class="tl-row" data-name="IBM 2250 graphics display" data-spans="1977-1981"></div>
 <div class="tl-row" data-name="IBM 5100 family" data-spans="1977-1981"></div>
@@ -153,7 +153,7 @@ Time-sharing on a mainframe, a single-program loader on a microcomputer, UNIX an
 
 <div class="tl" data-start="1972" data-end="2026">
 <div class="tl-row" data-name="APL\360 (time-sharing)" data-spans="1972-1977"></div>
-<div class="tl-row" data-name="UNIVAC EXEC 8" data-spans="1973-1977"></div>
+<div class="tl-row" data-name="UNIVAC EXEC 8" data-spans="1975-1977"></div>
 <div class="tl-row" data-name="IBM 1130 DM2" data-spans="1977-1981"></div>
 <div class="tl-row" data-name="TRSDOS" data-spans="1979-1983"></div>
 <div class="tl-row" data-name="MVS/370, MVS/XA" data-spans="1982-1990"></div>
@@ -181,7 +181,8 @@ The longest list, and the one where "learning a new way to do something" is most
 
 <div class="tl" data-start="1972" data-end="2026">
 <div class="tl-row" data-name="APL" data-spans="1972-1983,2025-2026"></div>
-<div class="tl-row" data-name="ALGOL 68, BASIC, COBOL, SNOBOL4" data-spans="1973-1983"></div>
+<div class="tl-row" data-name="FORTRAN" data-spans="1973-1975"></div>
+<div class="tl-row" data-name="ALGOL 68, BASIC, COBOL, SNOBOL4" data-spans="1975-1977"></div>
 <div class="tl-row" data-name="1130 machine code" data-spans="1977-1981"></div>
 <div class="tl-row" data-name="1802 machine code (ELF II)" data-spans="1978-1980"></div>
 <div class="tl-row" data-name="Z80 assembler (TRS-80)" data-spans="1979-1983"></div>
@@ -275,7 +276,7 @@ The 2741 was a typewriter; the 1130 had switches and lights; the 3270 was a form
 
 <div class="tl" data-start="1972" data-end="2026">
 <div class="tl-row" data-name="IBM 2741" data-spans="1972-1977"></div>
-<div class="tl-row" data-name="Teletype (UNIVAC)" data-spans="1973-1977"></div>
+<div class="tl-row" data-name="Teletype (UNIVAC)" data-spans="1975-1977"></div>
 <div class="tl-row" data-name="1130 console switches" data-spans="1977-1981"></div>
 <div class="tl-row" data-name="IBM 5471 on the TRS-80" data-spans="1980-1983"></div>
 <div class="tl-row" data-name="IBM 3270" data-spans="1981-1999"></div>
@@ -472,4 +473,4 @@ None of the tools was the skill. Learning the next one was.
 
 ---
 
-<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/11/11: corrected the UNIVAC model from 1108 to 1110. SUNY Albany's 1976&ndash;1977 Undergraduate Bulletin names a UNIVAC 1110 as its Computing Center's main computer, running EXEC 8 (<a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-01-tbt-timelines-of-tools.md">post history</a>).]</em></p>
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/11/11: corrected the UNIVAC model from 1108 to 1110 and its years to 1975&ndash;1977; the college bar no longer names a machine; ALGOL 68, BASIC, COBOL and SNOBOL4 are 1975&ndash;1977; FORTRAN, 1973&ndash;1975, is added. SUNY Albany's 1976&ndash;1977 Undergraduate Bulletin names a UNIVAC 1110 as its Computing Center's main computer, running EXEC 8 (<a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-10-01-tbt-timelines-of-tools.md">post history</a>).]</em></p>
