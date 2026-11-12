@@ -12,9 +12,9 @@ date: 2027-02-03 00:15:00 -0800
 
 <!-- DRAFT (2026-11-11), Mike: a Worth Reading post on Edward Tufte, all of his books, one post covering several; he has taken
      Tufte's class. Placeholder for now, at the end of the series (#14, Wed 2027-02-03). Titles and years from the books'
-     standard records. What each taught him is Mike: TODO; do not add reasons he has not given. Lead image: placeholder. -->
+     standard records. What each taught him is Mike: TODO; do not add reasons he has not given. Lead image: Mike's block-tufte-info.jpg (Dropbox, 2026-11-12), no-invert. -->
 
-<img src="{{ '/assets/images/posts/placeholder-worth-reading-tufte.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-tufte-info.webp' | relative_url }}" class="post-marker no-invert" alt="A book cover reading Worth Reading #14, Edward Tufte, Showing Information, over flowing bands of a data graphic with fine annotations" style="width: 205px;">
 
 The [prior post](/2027/01/27/worth-reading-soul-of-a-new-machine-dreaming-in-code/) in this series followed two teams from the inside. This one is about Edward Tufte, whose books are about showing information clearly, and whose one-day course I have taken. Mike: TODO, an intro in your words.
 
