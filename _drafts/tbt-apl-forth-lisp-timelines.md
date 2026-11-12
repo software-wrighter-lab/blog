@@ -72,7 +72,7 @@ Three languages I keep coming back to are APL, Forth and Lisp. I have now added 
 
 [A timeline of APL](https://sw-apl.softwarewrighter.com/) is now the front page of my APL site. It has 40 entries and opens on 1970. Iverson's notation and APL\360 are to the left; to the right are APLSV, SHARP APL, the standard, the IBM PC and APL2, and on to my own array languages.
 
-My live demos sit on it as eras: A'70, APL\360 typed on a 2741, and B'75, APLSV on the IBM 5100, with C'80, APL80 on a TRS-80, and D'83, the IBM PC, still to come. APL\1130 in 1968, on the 1130's console typewriter, is marked as a future demo. Clicking a live entry opens that demo.
+My live demos sit on it as eras: <u>A</u>'70, APL\360 typed on a 2741; <u>B</u>'75, APLSV on the IBM 5100; and, just added as the third, <u>C</u>'80, APL-80 on the TRS-80. Next, soon, is <u>D</u>'83, IBM PC APL. APL\1130 in 1968, on the 1130's console typewriter, is marked as a future demo. Clicking a live entry opens that demo.
 
 <div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
 <img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
