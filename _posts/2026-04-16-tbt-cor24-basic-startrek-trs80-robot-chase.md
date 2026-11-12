@@ -3,9 +3,9 @@ layout: post
 title: "TBT #9: UNIVAC Startrek, TRS-80 Adventures, and COR24 BASIC"
 date: 2026-04-16 16:30:00 -0700
 categories: [tbt, programming-history, retrocomputing]
-tags: [throwback-thursday, basic, star-trek, trs-80, univac-1108, cor24, p-code-vm, pascal, integer-basic, retro-gaming, teletype, vibe-coding]
-keywords: "UNIVAC 1108 Star Trek BASIC, teletype Red Alert bell, TRS-80 magazine listing, text adventure, COR24 BASIC, integer-only BASIC, line-numbered BASIC, p-code virtual machine, Pascal interpreter, Robot Chase, time-sharing BASIC, retro computing, classic BASIC games"
-abstract: "Three BASIC games from three eras---UNIVAC 1108 Startrek whose Red Alert bell telegraphed Klingon encounters across the teletype room, a 1980s Trek text adventure typed in from a magazine listing on a TRS-80, and Robot Chase added at a friend's request---all running in the browser on an emulated COR24 integer BASIC implemented on a p-code VM written in Pascal."
+tags: [throwback-thursday, basic, star-trek, trs-80, univac-1110, cor24, p-code-vm, pascal, integer-basic, retro-gaming, teletype, vibe-coding]
+keywords: "UNIVAC 1110 Star Trek BASIC, teletype Red Alert bell, TRS-80 magazine listing, text adventure, COR24 BASIC, integer-only BASIC, line-numbered BASIC, p-code virtual machine, Pascal interpreter, Robot Chase, time-sharing BASIC, retro computing, classic BASIC games"
+abstract: "Three BASIC games from three eras---UNIVAC 1110 Startrek whose Red Alert bell telegraphed Klingon encounters across the teletype room, a 1980s Trek text adventure typed in from a magazine listing on a TRS-80, and Robot Chase added at a friend's request---all running in the browser on an emulated COR24 integer BASIC implemented on a p-code VM written in Pascal."
 series: "Throwback Thursday"
 series_part: 9
 repo_url: "https://github.com/sw-embed/sw-cor24-basic"
@@ -17,7 +17,7 @@ repo_url: "https://github.com/sw-embed/sw-cor24-basic"
 
 Three BASIC games. Three eras. One retro-computing platform.
 
-Startrek on a UNIVAC 1108 teletype in the '70s. A Trek text adventure typed in from a computer magazine on a TRS-80 in the '80s. And Robot Chase, added just last week at a friend's request. All three now run in the browser on an emulated [COR24 BASIC](https://github.com/sw-embed/sw-cor24-basic)---a line-numbered, integer-only, 1970s-style time-sharing BASIC built on a p-code VM written in Pascal.
+Startrek on a UNIVAC 1110 teletype in the '70s. A Trek text adventure typed in from a computer magazine on a TRS-80 in the '80s. And Robot Chase, added just last week at a friend's request. All three now run in the browser on an emulated [COR24 BASIC](https://github.com/sw-embed/sw-cor24-basic)---a line-numbered, integer-only, 1970s-style time-sharing BASIC built on a p-code VM written in Pascal.
 
 </div>
 
@@ -34,9 +34,9 @@ Startrek on a UNIVAC 1108 teletype in the '70s. A Trek text adventure typed in f
 
 </div>
 
-## UNIVAC 1108 Startrek: The Bell That Gave You Away
+## UNIVAC 1110 Startrek: The Bell That Gave You Away
 
-The first version of [Star Trek](https://en.wikipedia.org/wiki/Star_Trek_%28text_game%29) I ever played ran on a [UNIVAC 1108](https://en.wikipedia.org/wiki/UNIVAC_1100/2200_series) time-sharing system, dialed into from a [teletype](https://en.wikipedia.org/wiki/Teleprinter) terminal. You typed commands, the ship's status came back as ALL CAPS tabular output, and the teletype's mechanical print head hammered out every line of the 8×8 galactic map one character at a time.
+The first version of [Star Trek](https://en.wikipedia.org/wiki/Star_Trek_%28text_game%29) I ever played ran on a [UNIVAC 1110](https://en.wikipedia.org/wiki/UNIVAC_1100/2200_series) time-sharing system, dialed into from a [teletype](https://en.wikipedia.org/wiki/Teleprinter) terminal. You typed commands, the ship's status came back as ALL CAPS tabular output, and the teletype's mechanical print head hammered out every line of the 8×8 galactic map one character at a time.
 
 The game used an 8×8 galaxy of quadrants, each with its own 8×8 sector grid, populated with Klingons, starbases, and stars. You commanded the Enterprise: warp around, fire phasers and torpedoes, dock for repairs, and save the Federation before your energy or time ran out.
 
@@ -48,7 +48,7 @@ But the detail nobody forgets: **the `BELL` character.** Every teletype in the r
 
 ...preceded by ASCII BEL (`CHR$(7)`), which rang the bell on your terminal. Loudly. Across the entire room.
 
-Which meant everyone in the terminal room could tell exactly who was playing Star Trek. This was at college, where the UNIVAC 1108 was also where you did your programming homework---and the bell was supposed to be the game warning *you* about Klingons, but in practice it also let every other student in the room know you were not, in fact, finishing that assignment.
+Which meant everyone in the terminal room could tell exactly who was playing Star Trek. This was at college, where the UNIVAC 1110 was also where you did your programming homework---and the bell was supposed to be the game warning *you* about Klingons, but in practice it also let every other student in the room know you were not, in fact, finishing that assignment.
 
 My COR24 version (`startrek.bas`) keeps the command loop, the galaxy, and the Red Alert banner. The one thing it sadly *doesn't* reproduce is the bell itself: `CHR$(7)` in a browser tab is silent, and the solenoid-driven clack of a shared teletype doesn't port. You'll have to imagine the sound.
 
@@ -120,3 +120,7 @@ Three eras, one interpreter, one browser tab. The bell is silent now, but the ga
 ---
 
 *TBT: what we built with, what we still build from.*
+
+---
+
+<p class="ed-note" style="font-size: 0.85em;"><em>[Ed. 2026/11/11: corrected the UNIVAC model from 1108 to 1110. SUNY Albany's 1976&ndash;1977 Undergraduate Bulletin names a UNIVAC 1110 as its Computing Center's main computer, running EXEC 8 (<a href="https://github.com/software-wrighter-lab/blog/commits/main/_posts/2026-04-16-tbt-cor24-basic-startrek-trs80-robot-chase.md">post history</a>).]</em></p>
