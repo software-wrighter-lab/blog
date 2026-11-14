@@ -85,7 +85,7 @@ Mike: TODO, a screenshot of the snowfield (my headless browser has no WebGPU).
 
 ## An IBM 029 keypunch
 
-<figure class="zoomable" style="float: left; width: 240px; margin: 0.3em 1.2em 0.4em 0;">
+<figure class="zoomable" style="float: left; width: 190px; margin: 0.3em 1.2em 0.4em 0;">
 <img src="{{ '/assets/images/posts/saw19-ibm029-keypunch.webp' | relative_url }}" class="no-invert" alt="A 3D render of an IBM 029 card punch: the card hopper, punch station and stacker above a keyboard with blue keys, on a desk with a steel frame">
 <figcaption style="font-size: 0.85em;">An IBM 029 keypunch model. Click to enlarge.</figcaption>
 </figure>
@@ -96,11 +96,14 @@ Mike: TODO, which repository it lives in, and how it was built (X_eTaL and Blend
 
 ## APL, from C'80 to D'83
 
+<figure class="zoomable outdent-left" style="width: 300px; margin-top: -2.9em;">
+<img src="{{ '/assets/images/posts/saw19-apl-c80.webp' | relative_url }}" class="no-invert" alt="The C'80 demo: green APL80 text on the TRS-80 monitor, listing libraries with )LIBS, loading the PLOT workspace and listing its functions and variables">
+<figcaption style="font-size: 0.85em;">C'80: APL80 on the TRS-80 screen. Click to enlarge.</figcaption>
+</figure>
+
 My APL site now opens on a landing page of machines and [a timeline of APL](https://sw-apl.softwarewrighter.com/). Its third live demo, <u>C</u>'80, is APL80 on the TRS-80: APL80's commands, its characters on the TRS-80's screen, `)RAM` with peek, poke and Call, a small `)DOS`, pasted lines run one by one, the screen shown inside my TRS-80 monitor render, and workspaces ported to it, among them RACE, BIRDS, CALC, POLY, PLOT and DRILL.
 
 Next is <u>D</u>'83, IBM PC APL. It is planned, not built yet: text on the green monochrome monitor, with the custom character chip I ran on my own PC, and AP205 graphics on a CGA screen, such as a colored wireframe cube.
-
-Mike: TODO, a screenshot of C'80 running (LIFE, or a workspace).
 
 ## A neon city
 
