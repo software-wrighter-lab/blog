@@ -4,7 +4,7 @@ title: "Saw #19: agentrail Stops Filling Repositories, and X_eTaL Videos, Snow, 
 categories: [tools]
 tags: [sharpen-the-saw, agentrail, git, x-etal, xetal, video, console-3d, apl, sw-apl, ibm-pc, procedural, city, machine-learning, fine-tuning]
 keywords: "Sharpen the Saw, X_eTaL-video, snowflow, console-3D, sw-apl, IBM PC APL, procedural city, X_eTaL-extensions, X_eTaL-ML, X_eTaL-fine-tuning"
-abstract: "Seven saws this week. agentrail stops committing agent session logs into repositories, a long-standing problem. And new X_eTaL work: a pipeline for educational videos, a snowy world and a procedural neon city in the browser, a TRS-80 model, APL80 on the TRS-80 with IBM PC APL next, and more fine-tuning in X_eTaL-ML and X_eTaL-fine-tuning, and a first, null, experiment in X_eTaL-manifolds."
+abstract: "Seven saws this week. agentrail stops committing agent session logs into repositories, a long-standing problem. And new X_eTaL work: a pipeline for educational videos, a snowy world and a procedural neon city in the browser, an IBM 029 keypunch model, APL80 on the TRS-80 with IBM PC APL next, and more fine-tuning in X_eTaL-ML and X_eTaL-fine-tuning, and a first, null, experiment in X_eTaL-manifolds."
 series: "Sharpen the Saw Sundays"
 series_part: 19
 date: 2026-11-15 00:15:00 -0800
@@ -35,7 +35,7 @@ repo_urls:
 
 <img src="{{ '/assets/images/posts/block-lumberjack.webp' | relative_url }}" class="post-marker no-invert" alt="A block print of a lumberjack in a plaid shirt and knit cap cutting through a fallen log with a chainsaw, in a sunlit forest" style="width: 205px;">
 
-Seven saws this week. The lead one fixes a long-standing problem in agentrail, my tool for keeping an agent's plan in the repository. The rest are new and growing X_eTaL work: educational videos, a snowy world and a neon city in the browser, a TRS-80 model, APL's next era, and machine learning.
+Seven saws this week. The lead one fixes a long-standing problem in agentrail, my tool for keeping an agent's plan in the repository. The rest are new and growing X_eTaL work: educational videos, a snowy world and a neon city in the browser, an IBM 029 keypunch model, APL's next era, and machine learning.
 
 <!--more-->
 
@@ -83,14 +83,16 @@ It is [live](https://softwarewrighter.github.io/snowflow_demo-fork/): an endless
 
 Mike: TODO, a screenshot of the snowfield (my headless browser has no WebGPU).
 
-## A TRS-80 model
+## An IBM 029 keypunch
 
-<figure class="zoomable" style="float: left; width: 220px; margin: 0.3em 1.2em 0.4em 0;">
-<img src="{{ '/assets/images/posts/saw19-trs80-render.webp' | relative_url }}" class="no-invert" alt="A render of the TRS-80 Model I: the keyboard unit, the expansion interface, the monitor and a mini-disk drive">
-<figcaption style="font-size: 0.85em;">The TRS-80 Model I. Click to enlarge.</figcaption>
+<figure class="zoomable" style="float: left; width: 240px; margin: 0.3em 1.2em 0.4em 0;">
+<img src="{{ '/assets/images/posts/saw19-ibm029-keypunch.webp' | relative_url }}" class="no-invert" alt="A 3D render of an IBM 029 card punch: the card hopper, punch station and stacker above a keyboard with blue keys, on a desk with a steel frame">
+<figcaption style="font-size: 0.85em;">An IBM 029 keypunch model. Click to enlarge.</figcaption>
 </figure>
 
-[console-3D](https://github.com/softwarewrighter/console-3D) now has a procedural TRS-80 Model I beside its IBM 1053, 2741 and 5471: the keyboard and CPU unit, the expansion interface, the monitor and a mini-disk drive, built through X_eTaL's Blender extension.
+My 3D models of old machines have a new one: the IBM 029 card punch, the keypunch I typed programs on in college, with its card hopper, punch station, stacker and keyboard. It joins the consoles and terminals for the computer history museum on my research campus.
+
+Mike: TODO, which repository it lives in, and how it was built (X_eTaL and Blender, like the consoles?).
 
 ## APL, from C'80 to D'83
 
