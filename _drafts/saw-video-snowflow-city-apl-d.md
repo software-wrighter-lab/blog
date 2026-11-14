@@ -77,7 +77,7 @@ Five videos so far, all on [the landing page](https://softwarewrighter.github.io
 
 ## A snowy world
 
-<figure class="zoomable outdent-right" style="width: 280px; margin-top: -2.9em;">
+<figure class="zoomable" style="float: left; width: 260px; margin: 0.3em 1.2em 0.4em 0;">
 <img src="{{ '/assets/images/posts/saw19-snowy-world.webp' | relative_url }}" class="no-invert" alt="The X_eTaL snowy world in WebGPU: a pale blue snowfield of faceted hills with a cluster of tall ice crystals in the middle, at 120 frames a second">
 <figcaption style="font-size: 0.85em;">The snowy world, with ice crystals. Click to enlarge.</figcaption>
 </figure>
@@ -88,7 +88,7 @@ It is [live](https://softwarewrighter.github.io/snowflow_demo-fork/): an endless
 
 ## An IBM 029 keypunch
 
-<figure class="zoomable" style="float: left; width: 150px; margin: 0.3em 1.2em 0.4em 0;">
+<figure class="zoomable" style="float: right; width: 150px; margin: 0.3em 0 0.4em 1.2em;">
 <img src="{{ '/assets/images/posts/saw19-ibm029-keypunch.webp' | relative_url }}" class="no-invert" alt="A 3D render of an IBM 029 card punch: the card hopper, punch station and stacker above a keyboard with blue keys, on a desk with a steel frame">
 <figcaption style="font-size: 0.85em;">IBM 029 keypunch model.</figcaption>
 </figure>
