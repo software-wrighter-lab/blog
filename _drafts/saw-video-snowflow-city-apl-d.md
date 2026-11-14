@@ -12,9 +12,9 @@ date: 2026-11-15 00:15:00 -0800
 
 <!-- DRAFT (2026-11-14), Mike: Saw for Sunday 11/15 covering X_eTaL-video, snowflow_demo-fork, console-3D, sw-apl moving from
      demo C to demo D, X_eTaL-extensions' procedural interactive city, and progress in X_eTaL-ML and X_eTaL-fine-tuning.
-     SKELETON: facts being gathered. Lead image: placeholder until Mike supplies one. -->
+     SKELETON: facts being gathered. Lead image: Mike's block-lumberjack.jpg (Dropbox, 2026-11-14), no-invert. -->
 
-<img src="{{ '/assets/images/posts/placeholder-saw-video-snowflow-city-apl-d.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-lumberjack.webp' | relative_url }}" class="post-marker no-invert" alt="A block print of a lumberjack in a plaid shirt and knit cap cutting through a fallen log with a chainsaw, in a sunlit forest" style="width: 205px;">
 
 Mike: TODO (being researched): an intro.
 
