@@ -31,7 +31,7 @@ repo_urls:
 
 <!-- DRAFT (2026-11-14), Mike: Saw for Sunday 11/15 covering X_eTaL-video, snowflow_demo-fork, console-3D, sw-apl moving from
      demo C to demo D, X_eTaL-extensions' procedural interactive city, and progress in X_eTaL-ML and X_eTaL-fine-tuning.
-     Facts from repo commits 2026-11-08..14 (research 2026-11-14); agentrail change is UNCOMMITTED on branch claude/session-logs-out-of-repo; D'83 planned only (a441b95); snowflow is a fork of Noniv/snowflow_demo (MIT). 029: console-3D on Arch, not pushed as of 2026-11-14 (Mike). Lead image: Mike's block-lumberjack.jpg (Dropbox, 2026-11-14), no-invert. -->
+     Facts from repo commits 2026-11-08..14 (research 2026-11-14); agentrail change is UNCOMMITTED on branch claude/session-logs-out-of-repo; D'83 planned only (a441b95); snowflow is a fork of Noniv/snowflow_demo (MIT). 029: console-3D, to be pushed and fetched before publishing (Mike, 2026-11-14); check it is on GitHub before publish. Lead image: Mike's block-lumberjack.jpg (Dropbox, 2026-11-14), no-invert. -->
 
 <img src="{{ '/assets/images/posts/block-lumberjack.webp' | relative_url }}" class="post-marker no-invert" alt="A block print of a lumberjack in a plaid shirt and knit cap cutting through a fallen log with a chainsaw, in a sunlit forest" style="width: 205px;">
 
@@ -94,8 +94,6 @@ It is [live](https://softwarewrighter.github.io/snowflow_demo-fork/): an endless
 </figure>
 
 [console-3D](https://github.com/softwarewrighter/console-3D), my set of 3D models of old machines, has a new one: the IBM 029 card punch, the keypunch I typed programs on in college, with its card hopper, punch station, stacker and keyboard. It joins the consoles and terminals for the computer history museum on my research campus.
-
-It is in console-3D beside the consoles and terminals; the model is still on my Arch Linux machine and will be pushed to GitHub soon.
 
 ## APL, from C'80 to D'83
 
