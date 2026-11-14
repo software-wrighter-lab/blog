@@ -110,7 +110,7 @@ Next is <u>D</u>'83, IBM PC APL. It is planned, not built yet: text on the green
 
 ## A neon city
 
-<figure class="zoomable" style="float: right; width: 280px; margin: 0.3em 0 0.4em 1.2em;">
+<figure class="zoomable outdent-right" style="width: 320px; margin-top: -2.9em;">
 <video autoplay muted loop playsinline preload="auto" class="no-invert" poster="{{ '/assets/images/posts/saw19-neon-city-poster.webp' | relative_url }}" aria-label="A flight along the avenue of a rainy neon city at night: towers with glowing bands, wet reflective streets and traffic" style="width: 100%;">
 <source src="{{ '/assets/videos/saw19-neon-city.webm' | relative_url }}" type="video/webm">
 <source src="{{ '/assets/videos/saw19-neon-city.mp4' | relative_url }}" type="video/mp4">
