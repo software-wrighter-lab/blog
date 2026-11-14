@@ -31,7 +31,7 @@ repo_urls:
 
 <!-- DRAFT (2026-11-14), Mike: Saw for Sunday 11/15 covering X_eTaL-video, snowflow_demo-fork, console-3D, sw-apl moving from
      demo C to demo D, X_eTaL-extensions' procedural interactive city, and progress in X_eTaL-ML and X_eTaL-fine-tuning.
-     Facts from repo commits 2026-11-08..14 (research 2026-11-14); agentrail change is UNCOMMITTED on branch claude/session-logs-out-of-repo; D'83 planned only (a441b95); snowflow is a fork of Noniv/snowflow_demo (MIT). Lead image: Mike's block-lumberjack.jpg (Dropbox, 2026-11-14), no-invert. -->
+     Facts from repo commits 2026-11-08..14 (research 2026-11-14); agentrail change is UNCOMMITTED on branch claude/session-logs-out-of-repo; D'83 planned only (a441b95); snowflow is a fork of Noniv/snowflow_demo (MIT). 029: console-3D on Arch, not pushed as of 2026-11-14 (Mike). Lead image: Mike's block-lumberjack.jpg (Dropbox, 2026-11-14), no-invert. -->
 
 <img src="{{ '/assets/images/posts/block-lumberjack.webp' | relative_url }}" class="post-marker no-invert" alt="A block print of a lumberjack in a plaid shirt and knit cap cutting through a fallen log with a chainsaw, in a sunlit forest" style="width: 205px;">
 
@@ -88,14 +88,14 @@ It is [live](https://softwarewrighter.github.io/snowflow_demo-fork/): an endless
 
 ## An IBM 029 keypunch
 
-<figure class="zoomable" style="float: right; width: 150px; margin: 0.3em 0 0.4em 1.2em;">
+<figure class="zoomable" style="float: right; width: 180px; margin: 0.3em 0 0.4em 1.2em;">
 <img src="{{ '/assets/images/posts/saw19-ibm029-keypunch.webp' | relative_url }}" class="no-invert" alt="A 3D render of an IBM 029 card punch: the card hopper, punch station and stacker above a keyboard with blue keys, on a desk with a steel frame">
 <figcaption style="font-size: 0.85em;">IBM 029 keypunch model.</figcaption>
 </figure>
 
-My 3D models of old machines have a new one: the IBM 029 card punch, the keypunch I typed programs on in college, with its card hopper, punch station, stacker and keyboard. It joins the consoles and terminals for the computer history museum on my research campus.
+[console-3D](https://github.com/softwarewrighter/console-3D), my set of 3D models of old machines, has a new one: the IBM 029 card punch, the keypunch I typed programs on in college, with its card hopper, punch station, stacker and keyboard. It joins the consoles and terminals for the computer history museum on my research campus.
 
-Mike: TODO, which repository it lives in, and how it was built (X_eTaL and Blender, like the consoles?).
+It is in console-3D beside the consoles and terminals; the model is still on my Arch Linux machine and will be pushed to GitHub soon.
 
 ## APL, from C'80 to D'83
 
