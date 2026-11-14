@@ -77,17 +77,20 @@ Five videos so far, all on [the landing page](https://softwarewrighter.github.io
 
 ## A snowy world
 
+<figure class="zoomable outdent-right" style="width: 280px; margin-top: -2.9em;">
+<img src="{{ '/assets/images/posts/saw19-snowy-world.webp' | relative_url }}" class="no-invert" alt="The X_eTaL snowy world in WebGPU: a pale blue snowfield of faceted hills with a cluster of tall ice crystals in the middle, at 120 frames a second">
+<figcaption style="font-size: 0.85em;">The snowy world, with ice crystals. Click to enlarge.</figcaption>
+</figure>
+
 [snowflow_demo-fork](https://github.com/softwarewrighter/snowflow_demo-fork) starts from [Noniv's snowflow demo](https://github.com/Noniv/snowflow_demo), a real-time procedural snowfield in WebGPU, Babylon.js and hand-written WGSL. My fork, "X_eTaL snowy world", rebuilds it so that pure X_eTaL array functions generate the terrain, chunk by chunk in a window that follows you, while Rust and WebAssembly handle the GPU, physics, procedural sound and footprints, with no hand-written application JavaScript. World state is immutable, updated by pure reducers.
 
 It is [live](https://softwarewrighter.github.io/snowflow_demo-fork/): an endless streamed snowfield to walk through, jump in and leave a trail across, with its X_eTaL source shown on the page. It needs a browser with WebGPU.
 
-Mike: TODO, a screenshot of the snowfield (my headless browser has no WebGPU).
-
 ## An IBM 029 keypunch
 
-<figure class="zoomable" style="float: left; width: 190px; margin: 0.3em 1.2em 0.4em 0;">
+<figure class="zoomable" style="float: left; width: 150px; margin: 0.3em 1.2em 0.4em 0;">
 <img src="{{ '/assets/images/posts/saw19-ibm029-keypunch.webp' | relative_url }}" class="no-invert" alt="A 3D render of an IBM 029 card punch: the card hopper, punch station and stacker above a keyboard with blue keys, on a desk with a steel frame">
-<figcaption style="font-size: 0.85em;">An IBM 029 keypunch model. Click to enlarge.</figcaption>
+<figcaption style="font-size: 0.85em;">IBM 029 keypunch model.</figcaption>
 </figure>
 
 My 3D models of old machines have a new one: the IBM 029 card punch, the keypunch I typed programs on in college, with its card hopper, punch station, stacker and keyboard. It joins the consoles and terminals for the computer history museum on my research campus.
