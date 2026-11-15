@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Saw #19: agentrail Stops Filling Repositories, and X_eTaL Videos, Snow, and a Neon City"
+title: "Saw #19: Taking Inventory --- agentrail, a Home Page, and a Week of X_eTaL"
 categories: [tools]
 tags: [sharpen-the-saw, agentrail, git, x-etal, xetal, video, console-3d, apl, sw-apl, ibm-pc, procedural, city, machine-learning, fine-tuning]
 keywords: "Sharpen the Saw, X_eTaL-video, snowflow, console-3D, sw-apl, IBM PC APL, procedural city, X_eTaL-extensions, X_eTaL-ML, X_eTaL-fine-tuning"
-abstract: "Seven saws this week. agentrail stops committing agent session logs into repositories, a long-standing problem. And new X_eTaL work: a pipeline for educational videos, a snowy world and a procedural neon city in the browser, an IBM 029 keypunch model, APL80 on the TRS-80 with IBM PC APL next, and more fine-tuning in X_eTaL-ML and X_eTaL-fine-tuning, and a first, null, experiment in X_eTaL-manifolds."
+abstract: "This week's saw is about looking at my own work: a tool that inventories every project I have, with its goals and priorities, toward a real home page for softwarewrighter.com. agentrail also stops committing agent session logs into repositories, a long-standing problem. And new X_eTaL work: a pipeline for educational videos, a snowy world and a procedural neon city in the browser, an IBM 029 keypunch model, APL80 on the TRS-80 with IBM PC APL next, and more fine-tuning in X_eTaL-ML and X_eTaL-fine-tuning, and a first, null, experiment in X_eTaL-manifolds."
 series: "Sharpen the Saw Sundays"
 series_part: 19
 date: 2026-11-15 00:15:00 -0800
@@ -35,7 +35,7 @@ repo_urls:
 
 <img src="{{ '/assets/images/posts/block-lumberjack.webp' | relative_url }}" class="post-marker no-invert" alt="A block print of a lumberjack in a plaid shirt and knit cap cutting through a fallen log with a chainsaw, in a sunlit forest" style="width: 205px;">
 
-Seven saws this week. The lead one fixes a long-standing problem in agentrail, my tool for keeping an agent's plan in the repository. The rest are new and growing X_eTaL work: educational videos, a snowy world and a neon city in the browser, an IBM 029 keypunch model, APL's next era, and machine learning.
+This Sunday's saw changed twice while I wrote it. First I realized the agentrail change would lead to a lot of improvements, so it became the main story. Then I realized this is a good time to finally put content on my [softwarewrighter.com](https://softwarewrighter.com/) home page. So the focus now is to look at my own work more carefully, take an inventory of it, and build a home page that indexes into it. The week's other work follows.
 
 <!--more-->
 
@@ -56,6 +56,12 @@ Seven saws this week. The lead one fixes a long-standing problem in agentrail, m
 
 </div>
 
+## Taking inventory
+
+I am building a tool that scans every clone on my main MacBook and my main Arch Linux workstation and indexes them into an inventory, not just by area of focus. It also lets me annotate each project's goals and priority. Some projects were proofs of concept I may come back to. Some are on hold, or slowed while other projects mature. Some matter more than others, and some are tied to hardware. From that inventory I want to derive a home page that is actually useful: a way into the work, organized by what it is for and where it stands.
+
+Mike: TODO, the tool's name and repository, if you want to name it, and anything it has already turned up.
+
 ## agentrail: session logs out of the repository
 
 [agentrail](https://github.com/sw-vibe-coding/agentrail-rs) keeps an agent's plan, steps and history in the repository it works on, under `.agentrail/`. It also used to keep a snapshot of the agent's whole conversation there, a Claude Code JSONL log saved with every completed step, and that was a long-standing problem. A log quotes every file the agent read and only grows, so committing it with each step stored the whole log again every time, filled the repository with large files nobody needed, and published content that was never meant to be shared.
@@ -65,6 +71,7 @@ The fix moves session logs out of the repository, to `~/.agentrail/sessions/` in
 At least twice now, an agent has reported that GitHub rejected a push because of a file's size. So next I need to install the new agentrail on my development machines, and work out how to fix every repository that uses it: they all carry logs that can now be removed, at the cost of rewriting history and a force-push. This may be a good time to do something else instead: leave the existing repositories as they are, with their older history, and fork them to a new owner, under a better organization name, keeping the repositories trim from here on.
 
 ## X_eTaL video
+{: .pos-right}
 
 <figure class="zoomable" style="float: right; width: 260px; margin: 0.3em 0 0.4em 1.2em;">
 <img src="{{ '/assets/images/posts/saw19-xetal-video-nbody.webp' | relative_url }}" class="no-invert" alt="A frame of the N-body video: the live gravity page beside its X_eTaL program, with a timeline of the video's scenes along the bottom">
