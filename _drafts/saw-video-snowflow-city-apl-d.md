@@ -31,7 +31,7 @@ repo_urls:
 
 <!-- DRAFT (2026-11-14), Mike: Saw for Sunday 11/15 covering X_eTaL-video, snowflow_demo-fork, console-3D, sw-apl moving from
      demo C to demo D, X_eTaL-extensions' procedural interactive city, and progress in X_eTaL-ML and X_eTaL-fine-tuning.
-     Facts from repo commits 2026-11-08..14 (research 2026-11-14); agentrail change is UNCOMMITTED on branch claude/session-logs-out-of-repo; D'83 planned only (a441b95); snowflow is a fork of Noniv/snowflow_demo (MIT). 029: console-3D, to be pushed and fetched before publishing (Mike, 2026-11-14); check it is on GitHub before publish. Lead image: Mike's block-lumberjack.jpg (Dropbox, 2026-11-14), no-invert. -->
+     Facts from repo commits 2026-11-08..14 (research 2026-11-14); agentrail change is UNCOMMITTED on branch claude/session-logs-out-of-repo; D'83 under development, not live (Mike, 2026-11-15; plan a441b95); snowflow is a fork of Noniv/snowflow_demo (MIT). 029: console-3D, to be pushed and fetched before publishing (Mike, 2026-11-14); check it is on GitHub before publish. Lead image: Mike's block-lumberjack.jpg (Dropbox, 2026-11-14), no-invert. -->
 
 <img src="{{ '/assets/images/posts/block-lumberjack.webp' | relative_url }}" class="post-marker no-invert" alt="A block print of a lumberjack in a plaid shirt and knit cap cutting through a fallen log with a chainsaw, in a sunlit forest" style="width: 205px;">
 
@@ -106,7 +106,7 @@ It is [live](https://softwarewrighter.github.io/snowflow_demo-fork/): an endless
 
 My APL site now opens on a landing page of machines and [a timeline of APL](https://sw-apl.softwarewrighter.com/). Its third live demo, <u>C</u>'80, is APL80 on the TRS-80: APL80's commands, its characters on the TRS-80's screen, `)RAM` with peek, poke and Call, a small `)DOS`, pasted lines run one by one, the screen shown inside my TRS-80 monitor render, and workspaces ported to it, among them RACE, BIRDS, CALC, POLY, PLOT and DRILL.
 
-Next is <u>D</u>'83, IBM PC APL. It is planned, not built yet: text on the green monochrome monitor, with the custom character chip I ran on my own PC, and AP205 graphics on a CGA screen, such as a colored wireframe cube.
+Next is <u>D</u>'83, IBM PC APL. It is under development, not live yet: text on the green monochrome monitor, with the custom character chip I ran on my own PC, and AP205 graphics on a CGA screen, such as a colored wireframe cube.
 
 ## A neon city
 
