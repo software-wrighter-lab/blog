@@ -130,6 +130,11 @@ In [X_eTaL-ML](https://github.com/softwarewrighter/X_eTaL-ML), [moe-finetune](ht
 
 In [X_eTaL-fine-tuning](https://softwarewrighter.github.io/X_eTaL-fine-tuning/), lesson 5 puts [LoRA beside LoRA-FA](https://softwarewrighter.github.io/X_eTaL-fine-tuning/lora-vs-fa/), and lesson 6 is [the landscape](https://softwarewrighter.github.io/X_eTaL-fine-tuning/landscape/), a map of six families of ways to change a model. A browser walk now checks every lesson for accessibility, keyboard, touch and replay.
 
+<figure class="zoomable" style="float: left; width: 300px; margin: 0.3em 1.2em 0.4em 0;">
+<img src="{{ '/assets/images/posts/saw19-representation-explorer.webp' | relative_url }}" class="no-invert" alt="Two views of the same colored points from the representation explorer: on the left, flat clusters on a plane with nearest-neighbor regions shaded; on the right, the points placed on a wireframe sphere">
+<figcaption style="font-size: 0.85em;">The same points, flat and on the sphere. Click to enlarge.</figcaption>
+</figure>
+
 In [X_eTaL-manifolds](https://github.com/softwarewrighter/X_eTaL-manifolds), its pages moved onto the shared teaching shell, and the [representation explorer](https://softwarewrighter.github.io/X_eTaL-manifolds/representation-explorer/) went live: the same points kept flat, measured by straight lines, and on the unit sphere, measured by angles, with everything else held equal, to test the first of its research questions. On these two small data sets the first test came out null: putting the points on the sphere did not change how well the model learned. The repository keeps that result, as its rules require.
 
 ## Closing
