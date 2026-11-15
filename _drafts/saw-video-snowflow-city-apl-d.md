@@ -75,6 +75,8 @@ At least twice now, an agent has reported that GitHub rejected a push because of
 
 Five videos so far, all on [the landing page](https://softwarewrighter.github.io/X_eTaL-video/): a making-of, the Game of Life twice (once drawn from the arrays X_eTaL printed, once captured from the live page), a 60-second Mandelbrot and a 60-second N-body, three bodies on a figure-eight. Narration is still to come.
 
+When I made narrated videos before, I used [VoxCPM](https://github.com/OpenBMB/VoxCPM), an open-weight text-to-speech model, on my Ryzen workstation, curiosity. Then I fried its motherboard adding a PCIe card, so that machine is in pieces, waiting for me to reassemble it with an upgraded Ryzen CPU. Meanwhile I need to install VoxCPM on another workstation, with the RTX 5060 16 GB card I took out of curiosity. Once my text-to-speech pipeline is going again, I plan to make a new series of videos on what I have been working on for the last several months.
+
 ## A snowy world
 
 <figure class="zoomable" style="float: left; width: 260px; margin: 0.3em 1.2em 0.4em 0;">
