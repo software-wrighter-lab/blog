@@ -62,7 +62,7 @@ Seven saws this week. The lead one fixes a long-standing problem in agentrail, m
 
 The fix moves session logs out of the repository, to `~/.agentrail/sessions/` in the user's home directory, one folder per repository. `agentrail complete` still snapshots the log, just not into git. For repositories that already have logs committed, `agentrail sessions migrate` moves them out and stops tracking them. And a new size guard, `agentrail check-size`, which also runs on `next`, `status` and `complete`, warns at 10 MiB and fails at 95 MiB for any file under `.agentrail/` that would be committed, before GitHub's 100 MB limit refuses a push.
 
-Mike: TODO, how long it had bothered you, or how big the repos had grown, if you want to say.
+At least twice now, an agent has reported that GitHub rejected a push because of a file's size. So next I need to install the new agentrail on my development machines, and work out how to fix every repository that uses it: they all carry logs that can now be removed, at the cost of rewriting history and a force-push. This may be a good time to do something else instead: leave the existing repositories as they are, with their older history, and fork them to a new owner, under a better organization name, keeping the repositories trim from here on.
 
 ## X_eTaL video
 
