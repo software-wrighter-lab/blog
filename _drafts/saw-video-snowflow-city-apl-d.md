@@ -86,7 +86,7 @@ When I made narrated videos before, I used [VoxCPM](https://github.com/OpenBMB/V
 
 [snowflow_demo-fork](https://github.com/softwarewrighter/snowflow_demo-fork) starts from [Noniv's snowflow demo](https://github.com/Noniv/snowflow_demo), a real-time procedural snowfield in WebGPU, Babylon.js and hand-written WGSL. My fork, "X_eTaL snowy world", rebuilds it so that pure X_eTaL array functions generate the terrain, chunk by chunk in a window that follows you, while Rust and WebAssembly handle the GPU, physics, procedural sound and footprints, with no hand-written application JavaScript. World state is immutable, updated by pure reducers.
 
-It is [live](https://softwarewrighter.github.io/snowflow_demo-fork/): an endless streamed snowfield to walk through, jump in and leave a trail across, with its X_eTaL source shown on the page. It needs a browser with WebGPU.
+It is [live](https://softwarewrighter.github.io/snowflow_demo-fork/): an endless streamed snowfield to walk through, jump in and leave a trail across, with its X_eTaL source shown on the page. It needs a browser with WebGPU. Its graphics do not yet approach the original's, so that is next to work on.
 
 ## An IBM 029 keypunch
 
