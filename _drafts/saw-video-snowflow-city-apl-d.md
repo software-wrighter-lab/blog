@@ -95,7 +95,7 @@ It is [live](https://softwarewrighter.github.io/snowflow_demo-fork/): an endless
 <figcaption style="font-size: 0.85em;">IBM 029 keypunch model.</figcaption>
 </figure>
 
-[console-3D](https://github.com/softwarewrighter/console-3D), my set of 3D models of old machines, has a new one: the IBM 029 card punch, the keypunch I typed programs on in college, with its card hopper, punch station, stacker and keyboard. It joins the consoles and terminals for the computer history museum on my research campus.
+[console-3D](https://github.com/softwarewrighter/console-3D), my set of 3D models of old machines, has a new one: the IBM 029 card punch, the keypunch I typed programs on in college, with its card hopper, punch station, stacker and keyboard. It is part of a series of models for the virtual computer history museum I am building, [sw-campus](https://software-wrighter-lab.github.io/sw-campus/). It will first be used in [the APL timeline](https://sw-apl.softwarewrighter.com/), for the University of Maryland APL I used through punched cards on a UNIVAC in college.
 
 ## APL, from C'80 to D'83
 
