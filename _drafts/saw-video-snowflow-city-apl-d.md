@@ -122,6 +122,8 @@ In [X_eTaL-extensions](https://github.com/softwarewrighter/X_eTaL-extensions), `
 
 New this week, it is also interactive. A Three.js extension draws the same scene in real time [in the browser](https://softwarewrighter.github.io/X_eTaL-extensions/three/live/), with wet-street reflections, neon and bloom: X_eTaL, compiled to WebAssembly, builds the city from a seed on the page, and another seed gives another city. Ride the camera's flight, fly, or walk the streets.
 
+A recent feature puts slide shows and animated GIFs on some of the billboards and screens. Some show abstract animations, some cycle through stills from my blog posts, and some play videos from my repositories.
+
 ## Machine learning, fine-tuning and manifolds
 
 In [X_eTaL-ML](https://github.com/softwarewrighter/X_eTaL-ML), [moe-finetune](https://softwarewrighter.github.io/X_eTaL-ML/moe-finetune/) fine-tunes a small mixture-of-experts model to a changed task six ways, in the browser; only adding a new expert keeps the old task. VeRA joined the LoRA library and the [LoRA explorer](https://softwarewrighter.github.io/X_eTaL-ML/lora-explorer/), and an [ML timeline](https://softwarewrighter.github.io/X_eTaL-ML/ml-timeline/) has begun, built on the Lisp timeline's shell.
