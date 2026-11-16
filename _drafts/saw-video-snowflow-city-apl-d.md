@@ -31,7 +31,7 @@ repo_urls:
 
 <!-- DRAFT (2026-11-14), Mike: Saw for Sunday 11/15 covering X_eTaL-video, snowflow_demo-fork, console-3D, sw-apl moving from
      demo C to demo D, X_eTaL-extensions' procedural interactive city, and progress in X_eTaL-ML and X_eTaL-fine-tuning.
-     Facts from repo commits 2026-11-08..14 (research 2026-11-14); agentrail change is UNCOMMITTED on branch claude/session-logs-out-of-repo; D'83 under development, not live (Mike, 2026-11-15; plan a441b95); snowflow is a fork of Noniv/snowflow_demo (MIT). 029: console-3D, to be pushed and fetched before publishing (Mike, 2026-11-14); check it is on GitHub before publish. Lead image: Mike's block-lumberjack.jpg (Dropbox, 2026-11-14), no-invert. -->
+     Facts from repo commits 2026-11-08..14 (research 2026-11-14); agentrail merged (9d169ff, shadow eba888b, guide 027cea8; Mike installed it 2026-11-15); 029 pushed (console-3D 6890d5a); D'83 under development, not live (Mike, 2026-11-15; plan a441b95); snowflow is a fork of Noniv/snowflow_demo (MIT). 029 on GitHub: console-3D 6890d5a (2026-11-14). Lead image: Mike's block-lumberjack.jpg (Dropbox, 2026-11-14), no-invert. -->
 
 <img src="{{ '/assets/images/posts/block-lumberjack.webp' | relative_url }}" class="post-marker no-invert" alt="A block print of a lumberjack in a plaid shirt and knit cap cutting through a fallen log with a chainsaw, in a sunlit forest" style="width: 205px;">
 
@@ -60,15 +60,15 @@ This Sunday's saw changed twice while I wrote it. First I realized the agentrail
 
 I am building a tool that scans every clone on my main MacBook and my main Arch Linux workstation and indexes them into an inventory, not just by area of focus. It also lets me annotate each project's goals and priority. Some projects were proofs of concept I may come back to. Some are on hold, or slowed while other projects mature. Some matter more than others, and some are tied to hardware. From that inventory I want to derive a home page that is actually useful: a way into the work, organized by what it is for and where it stands.
 
-Mike: TODO, the tool's name and repository, if you want to name it, and anything it has already turned up.
-
 ## agentrail: session logs out of the repository
 
 [agentrail](https://github.com/sw-vibe-coding/agentrail-rs) keeps an agent's plan, steps and history in the repository it works on, under `.agentrail/`. It also used to keep a snapshot of the agent's whole conversation there, a Claude Code JSONL log saved with every completed step, and that was a long-standing problem. A log quotes every file the agent read and only grows, so committing it with each step stored the whole log again every time, filled the repository with large files nobody needed, and published content that was never meant to be shared.
 
 The fix moves session logs out of the repository, to `~/.agentrail/sessions/` in the user's home directory, one folder per repository. `agentrail complete` still snapshots the log, just not into git. For repositories that already have logs committed, `agentrail sessions migrate` moves them out and stops tracking them. And a new size guard, `agentrail check-size`, which also runs on `next`, `status` and `complete`, warns at 10 MiB and fails at 95 MiB for any file under `.agentrail/` that would be committed, before GitHub's 100 MB limit refuses a push.
 
-At least twice now, an agent has reported that GitHub rejected a push because of a file's size. So next I need to install the new agentrail on my development machines, and work out how to fix every repository that uses it: they all carry logs that can now be removed, at the cost of rewriting history and a force-push. This may be a good time to do something else instead: leave the existing repositories as they are, with their older history, and fork them to a new owner, under a better organization name, keeping the repositories trim from here on.
+Each completed step now gets a readable `transcript.md` in place of the raw log. For keeping the logs anyway, `agentrail shadow` keeps them in a private store, usually a clone of a private git repository: `shadow push` writes each log compressed, with a checksum beside it, and `shadow pull` restores and verifies them on another machine. A [migration guide](https://github.com/sw-vibe-coding/agentrail-rs/blob/main/docs/migrating-session-logs.md) walks a repository off its in-repo logs. The change is merged, and the new version is installed on my main machine.
+
+At least twice now, an agent has reported that GitHub rejected a push because of a file's size. So next I need to install it on my other development systems, and work out how to fix every repository that uses it: they all carry logs that can now be removed, at the cost of rewriting history and a force-push. This may be a good time to do something else instead: clone each one, prune the logs from its history, and create a new, smaller repository under a better organization name, then point the old, bloated repository, now deprecated, at its replacement.
 
 ## X_eTaL video
 {: .pos-right}
