@@ -146,4 +146,6 @@ In [X_eTaL-manifolds](https://github.com/softwarewrighter/X_eTaL-manifolds), its
 
 ## Closing
 
-Mike: TODO, a closing in your words.
+Sharpening the saw this week was mostly about seeing the saw: which projects are tools, which are experiments, which wait on hardware, and which matter most. The inventory, and the home page it feeds, should make that visible, to me first and then to anyone who visits.
+
+Next is finishing the inventory and the home page, moving my repositories off their old logs, and getting narration going again for the videos.
