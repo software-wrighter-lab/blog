@@ -60,6 +60,11 @@ This Sunday's saw changed twice while I wrote it. First I realized the agentrail
 
 I am building a tool that scans every clone on my main MacBook and my main Arch Linux workstation and indexes them into an inventory, not just by area of focus. It also lets me annotate each project's goals and priority. Some projects were proofs of concept I may come back to. Some are on hold, or slowed while other projects mature. Some matter more than others, and some are tied to hardware. From that inventory I want to derive a home page that is actually useful: a way into the work, organized by what it is for and where it stands.
 
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
 ## agentrail: session logs out of the repository
 
 [agentrail](https://github.com/sw-vibe-coding/agentrail-rs) keeps an agent's plan, steps and history in the repository it works on, under `.agentrail/`. It also used to keep a snapshot of the agent's whole conversation there, a Claude Code JSONL log saved with every completed step, and that was a long-standing problem. A log quotes every file the agent read and only grows, so committing it with each step stored the whole log again every time, filled the repository with large files nobody needed, and published content that was never meant to be shared.
@@ -69,6 +74,11 @@ The fix moves session logs out of the repository, to `~/.agentrail/sessions/` in
 Each completed step now gets a readable `transcript.md` in place of the raw log. For keeping the logs anyway, `agentrail shadow` keeps them in a private store, usually a clone of a private git repository: `shadow push` writes each log compressed, with a checksum beside it, and `shadow pull` restores and verifies them on another machine. A [migration guide](https://github.com/sw-vibe-coding/agentrail-rs/blob/main/docs/migrating-session-logs.md) walks a repository off its in-repo logs. The change is merged, and the new version is installed on my main machine.
 
 At least twice now, an agent has reported that GitHub rejected a push because of a file's size. So next I need to install it on my other development systems, and work out how to fix every repository that uses it: they all carry logs that can now be removed, at the cost of rewriting history and a force-push. This may be a good time to do something else instead: clone each one, prune the logs from its history, and create a new, smaller repository under a better organization name, then point the old, bloated repository, now deprecated, at its replacement.
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
 
 ## X_eTaL video
 {: .pos-right}
@@ -84,6 +94,11 @@ Five videos so far, all on [the landing page](https://softwarewrighter.github.io
 
 When I made narrated videos before, I used [VoxCPM](https://github.com/OpenBMB/VoxCPM), an open-weight text-to-speech model, on my Ryzen workstation, curiosity. Then I fried its motherboard adding a PCIe card, so that machine is in pieces, waiting for me to reassemble it with a new motherboard and an upgraded Ryzen CPU. Meanwhile I need to install VoxCPM on another workstation, with the RTX 5060 16 GB card I took out of curiosity. Once my text-to-speech pipeline is going again, I plan to make a new series of videos on what I have been working on for the last several months.
 
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
 ## A snowy world
 
 <figure class="zoomable" style="float: left; width: 260px; margin: 0.3em 1.2em 0.4em 0;">
@@ -95,6 +110,11 @@ When I made narrated videos before, I used [VoxCPM](https://github.com/OpenBMB/V
 
 It is [live](https://softwarewrighter.github.io/snowflow_demo-fork/): an endless streamed snowfield to walk through, jump in and leave a trail across, with its X_eTaL source shown on the page. It needs a browser with WebGPU. Its graphics do not yet approach the original's, so that is next to work on.
 
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
 ## An IBM 029 keypunch
 
 <figure class="zoomable" style="float: right; width: 180px; margin: 0.3em 0 0.4em 1.2em;">
@@ -103,6 +123,11 @@ It is [live](https://softwarewrighter.github.io/snowflow_demo-fork/): an endless
 </figure>
 
 [console-3D](https://github.com/softwarewrighter/console-3D), my set of 3D models of old machines, has a new one: the IBM 029 card punch, the keypunch I typed programs on in college, with its card hopper, punch station, stacker and keyboard. It is part of a series of models for the 3D interactive virtual computer history museum I am building, [sw-campus](https://software-wrighter-lab.github.io/sw-campus/). It will first be used in [the APL timeline](https://sw-apl.softwarewrighter.com/), for the University of Maryland APL I used through punched cards on a UNIVAC in college.
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
 
 ## APL, from C'80 to D'83
 
@@ -114,6 +139,11 @@ It is [live](https://softwarewrighter.github.io/snowflow_demo-fork/): an endless
 My APL site now opens on a landing page of machines and [a timeline of APL](https://sw-apl.softwarewrighter.com/). Its third live demo, <u>C</u>'80, is APL80 on the TRS-80: APL80's commands, its characters on the TRS-80's screen, `)RAM` with peek, poke and Call, a small `)DOS`, pasted lines run one by one, the screen shown inside my TRS-80 monitor render, and workspaces ported to it, among them RACE, BIRDS, CALC, POLY, PLOT and DRILL.
 
 Next is <u>D</u>'83, IBM PC APL. It is under development, not live yet: text on the green monochrome monitor, with the custom character chip I ran on my own PC, and AP205 graphics on a CGA screen, such as a colored wireframe cube.
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
 
 ## A neon city
 
@@ -131,6 +161,11 @@ New this week, it is also interactive. A Three.js extension draws the same scene
 
 A recent feature puts slide shows and animated GIFs on some of the billboards and screens. Some show abstract animations, some cycle through stills from my blog posts, and some play videos from my repositories.
 
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
 ## Machine learning, fine-tuning and manifolds
 
 In [X_eTaL-ML](https://github.com/softwarewrighter/X_eTaL-ML), [moe-finetune](https://softwarewrighter.github.io/X_eTaL-ML/moe-finetune/) fine-tunes a small mixture-of-experts model to a changed task six ways, in the browser; only adding a new expert keeps the old task. VeRA joined the LoRA library and the [LoRA explorer](https://softwarewrighter.github.io/X_eTaL-ML/lora-explorer/), and an [ML timeline](https://softwarewrighter.github.io/X_eTaL-ML/ml-timeline/) has begun, built on the Lisp timeline's shell.
@@ -143,6 +178,11 @@ In [X_eTaL-fine-tuning](https://softwarewrighter.github.io/X_eTaL-fine-tuning/),
 </figure>
 
 In [X_eTaL-manifolds](https://github.com/softwarewrighter/X_eTaL-manifolds), its pages moved onto the shared teaching shell, and the [representation explorer](https://softwarewrighter.github.io/X_eTaL-manifolds/representation-explorer/) went live: the same points kept flat, measured by straight lines, and on the unit sphere, measured by angles, with everything else held equal, to test the first of its research questions. On these two small data sets the first test came out null: putting the points on the sphere did not change how well the model learned. The repository keeps that result, as its rules require.
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
 
 ## Closing
 
