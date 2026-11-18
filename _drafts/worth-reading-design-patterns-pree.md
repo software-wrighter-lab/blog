@@ -57,6 +57,8 @@ Wolfgang Pree, *Design Patterns for Object-Oriented Software Development* (Addis
 
 Around the same time I read many patterns books that tried to catalog many more application patterns. Those turned out not to be very relevant to my systems programming, what would later be called platform engineering. Of all of them, Pree's book stood out, and it really resonated with me.
 
+Pree divides any reusable framework into two fundamental parts: frozen spots, which stay the same in every application built on it, and hot spots, where each application varies it. He shows that many of the Gang of Four's 23 patterns are variations on template and hook methods: a template method that holds the frozen part and calls hook methods for the hot spots. I found that very insightful, and directly applicable to my object-oriented analysis and design work.
+
 ## Testing Object-Oriented Systems
 
 Robert V. Binder, *Testing Object-Oriented Systems: Models, Patterns, and Tools* (Addison-Wesley, 1999). Testing for object-oriented designs: test models drawn from the design, and test design patterns, catalogued the way design patterns were.
