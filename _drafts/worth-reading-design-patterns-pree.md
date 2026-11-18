@@ -78,4 +78,4 @@ It influenced me to create many testing frameworks later: JUnit-like ones for la
 
 ## Closing
 
-Mike: TODO, a closing in your words: what these books have in common, or where they disagree.
+These books were among my favorites during one of the most fun parts of my career. I have since moved on from object-oriented languages and applications, but a lot of their ideas are still relevant to functional programming, and even to array programming languages.
