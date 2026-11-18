@@ -24,7 +24,7 @@ repo_urls:
 
 The [prior post](/2026/11/11/worth-reading-alexander-pattern-language-timeless-way/) in this series was about architecture and design. This one is about what software made of Alexander's idea.
 
-I knew some of these authors a little. I worked at IBM's T.J. Watson Research Center in Hawthorne, New York, in the same building as John Vlissides, though I talked with him only once, after *Design Patterns* was published. I met Ralph Johnson at the University of Illinois at Urbana-Champaign, when IBM flew me out with a proposal for a joint project, one IBM later decided not to pursue. And I regularly attended the ACM OOPSLA conferences in the 1990s, where the other authors presented.
+I knew some of these authors a little. I worked at IBM's T.J. Watson Research Center in Hawthorne, New York, in the same building as John Vlissides, though I talked with him only once, after *Design Patterns* was published. I also got to read an internally circulated draft of *Design Patterns* before it was published. I met Ralph Johnson at the University of Illinois at Urbana-Champaign, when IBM flew me out with a proposal for a joint project, one IBM later decided not to pursue. And I regularly attended the ACM OOPSLA conferences in the 1990s, where the other authors presented.
 
 <!--more-->
 
