@@ -19,7 +19,9 @@ date: 2026-11-18 00:15:00 -0800
 
 <img src="{{ '/assets/images/posts/block-design-patterns.webp' | relative_url }}" class="post-marker no-invert" alt="A map of software design pattern icons, a crown, factories, a bridge, an eye, a terminal and more, joined by dashed arrows" style="width: 205px;">
 
-The [prior post](/2026/11/11/worth-reading-alexander-pattern-language-timeless-way/) in this series was about architecture and design. Mike: TODO, an intro in your words for these books.
+The [prior post](/2026/11/11/worth-reading-alexander-pattern-language-timeless-way/) in this series was about architecture and design. This one is about what software made of Alexander's idea.
+
+I knew some of these authors a little. I worked at IBM's T.J. Watson Research Center in Hawthorne, New York, in the same building as John Vlissides, though I talked with him only once, after *Design Patterns* was published. I met Ralph Johnson at the University of Illinois at Urbana-Champaign, when IBM flew me out with a proposal for a joint project, one IBM later decided not to pursue. And I regularly attended the ACM OOPSLA conferences in the 1990s, where the other authors presented.
 
 <!--more-->
 
@@ -43,7 +45,7 @@ The [prior post](/2026/11/11/worth-reading-alexander-pattern-language-timeless-w
 
 Erich Gamma, Richard Helm, Ralph Johnson and John Vlissides, the Gang of Four, *Design Patterns: Elements of Reusable Object-Oriented Software* (1994). Twenty-three object-oriented patterns, named and catalogued after Alexander's example.
 
-Mike: TODO, what it taught you.
+I embraced it when I was implementing Java libraries for mainframe file systems, using Builder, Facade, Chain of Responsibility and others. This book was very influential on my work, and it improved my skills.
 
 ## Design Patterns for Object-Oriented Software Development
 
@@ -53,7 +55,7 @@ Mike: TODO, what it taught you.
 
 Wolfgang Pree, *Design Patterns for Object-Oriented Software Development* (Addison-Wesley and ACM Press, 1995). Patterns one level up: metapatterns, a small set that describes the patterns of application frameworks, and hot spots, the places where a framework is meant to vary and be extended, worked through on the C++ GUI framework ET++.
 
-Mike: TODO, what it taught you.
+Around the same time I read many patterns books that tried to catalog many more application patterns. Those turned out not to be very relevant to my systems programming, what would later be called platform engineering. Of all of them, Pree's book stood out, and it really resonated with me.
 
 ## Testing Object-Oriented Systems
 
