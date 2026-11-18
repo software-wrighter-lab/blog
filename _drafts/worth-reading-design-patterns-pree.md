@@ -52,6 +52,11 @@ I embraced it when I was implementing Java libraries for mainframe record-orient
 
 Because I had built a testable, pluggable, composable object-oriented implementation that could emulate the mainframe code on other systems, I could write Java on a PC, test it on an RS/6000 AIX workstation, and deploy it on a mainframe. A fun project was a distributed file explorer that ran on a Windows, Linux or AIX desktop and showed the file systems across those machines and a mainframe. You could copy files from one system to another, converting between ASCII and EBCDIC as needed.
 
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
 ## Design Patterns for Object-Oriented Software Development
 
 <figure class="zoomable" style="float: left; width: 90px; margin: 0.3em 1.2em 0.4em 0;">
@@ -63,6 +68,11 @@ Wolfgang Pree, *Design Patterns for Object-Oriented Software Development* (Addis
 Around the same time I read many patterns books that tried to catalog many more application patterns. Those turned out not to be very relevant to my systems programming, what would later be called platform engineering. Of all of them, Pree's book stood out, and it really resonated with me.
 
 Pree divides any reusable framework into two fundamental parts: frozen spots, which stay the same in every application built on it, and hot spots, where each application varies it. He shows that many of the Gang of Four's 23 patterns are variations on template and hook methods: a template method that holds the frozen part and calls hook methods for the hot spots. I found that very insightful, and directly applicable to my object-oriented analysis and design work.
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
 
 ## Testing Object-Oriented Systems
 
