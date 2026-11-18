@@ -8,6 +8,9 @@ abstract: "Third in the series on books worth reading: Alexander's idea, carried
 series: "Worth Reading"
 series_part: 3
 date: 2026-11-18 00:15:00 -0800
+repo_urls:
+  - url: "https://github.com/sw-cli-tools/reg-rs"
+    title: "reg-rs"
 ---
 
 <!-- DRAFT (2026-11-02), Mike: "start a new blog post for thursday 11/5, influential books", then "maybe a new series, worth reading".
@@ -63,7 +66,9 @@ Pree divides any reusable framework into two fundamental parts: frozen spots, wh
 
 Robert V. Binder, *Testing Object-Oriented Systems: Models, Patterns, and Tools* (Addison-Wesley, 1999). Testing for object-oriented designs: test models drawn from the design, and test design patterns, catalogued the way design patterns were.
 
-Mike: TODO, what it taught you.
+Through my software development career, the number of developers and the number of testers (QA and QE) were often out of balance. We used testers to help implement features when we were short of developers, and developers to write and run tests when we were short of testers. That got me interested in testing techniques and tools. This was the most comprehensive book I could find, and while it covers testing object-oriented code, a lot of it applies to other ways of building software.
+
+It influenced me to create many testing frameworks later: JUnit-like ones for languages such as Forte 4GL, Guidewire Gosu and my own sw-MLPL ([mlplunit](/2026/09/06/saw-mlpl-libraries-extensions-graphics-networking/)). I ported regress, a C++ golden-file CLI testing tool, to Java, and later to Rust, then adapted it for AI coding and testing as [reg-rs](https://github.com/sw-cli-tools/reg-rs). I have also written fuzzers, mocks, spies, dummies, fixtures and more. I am still very interested in testing, and I use various tools every day to make sure my AI coding work is of higher quality and doesn't break when new features or fixes are added.
 
 ## Closing
 
