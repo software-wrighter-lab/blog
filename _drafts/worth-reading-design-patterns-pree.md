@@ -48,7 +48,7 @@ I knew some of these authors a little. I worked at IBM's T.J. Watson Research Ce
 
 Erich Gamma, Richard Helm, Ralph Johnson and John Vlissides, the Gang of Four, *Design Patterns: Elements of Reusable Object-Oriented Software* (1994). Twenty-three object-oriented patterns, named and catalogued after Alexander's example.
 
-I embraced it when I was implementing Java libraries for mainframe file systems, using Builder, Facade, Chain of Responsibility and others. This book was very influential on my work, and it improved my skills.
+I embraced it when I was implementing Java libraries for mainframe record-oriented file systems, using Builder, Facade, Chain of Responsibility and others. This book was very influential on my work, and it improved my skills.
 
 ## Design Patterns for Object-Oriented Software Development
 
