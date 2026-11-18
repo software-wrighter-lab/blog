@@ -50,7 +50,7 @@ Erich Gamma, Richard Helm, Ralph Johnson and John Vlissides, the Gang of Four, *
 
 I embraced it when I was implementing Java libraries for mainframe record-oriented file systems, using Builder, Facade, Chain of Responsibility and others. This book was very influential on my work, and it improved my skills.
 
-Because I had built a testable, pluggable, composable object-oriented implementation that could emulate the mainframe code on other systems, I could write Java on a PC, test it on an RS/6000 AIX workstation, and deploy it on a mainframe. A fun project was a distributed file explorer that ran on a Windows, Linux or AIX desktop and showed the file systems across those machines and a mainframe. You could copy files from one system to another, converting between ASCII and EBCDIC as needed.
+Because I had built a testable, pluggable, composable object-oriented implementation that could emulate the mainframe code on other systems, I could write Java on a PC, test it on an RS/6000 AIX workstation, and deploy it on a mainframe. A fun project I implemented was a distributed file explorer that ran on a Windows, Linux or AIX desktop and showed the file systems across those machines and a mainframe. You could copy files from one system to another, converting between ASCII and EBCDIC as needed.
 
 <div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
 <img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
