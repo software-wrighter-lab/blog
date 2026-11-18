@@ -64,6 +64,10 @@ Pree divides any reusable framework into two fundamental parts: frozen spots, wh
 
 ## Testing Object-Oriented Systems
 
+<figure class="zoomable" style="float: left; width: 90px; margin: 0.3em 1.2em 0.4em 0;">
+<img src="{{ '/assets/images/posts/cover-testing-object-oriented-systems.webp' | relative_url }}" class="no-invert" alt="The cover of Testing Object-Oriented Systems: Models, Patterns, and Tools by Robert V. Binder, foreword by Boris Beizer, in the Booch Jacobson Rumbaugh Object Technology Series">
+</figure>
+
 Robert V. Binder, *Testing Object-Oriented Systems: Models, Patterns, and Tools* (Addison-Wesley, 1999). Testing for object-oriented designs: test models drawn from the design, and test design patterns, catalogued the way design patterns were.
 
 Through my software development career, the number of developers and the number of testers (QA and QE) were often out of balance. We used testers to help implement features when we were short of developers, and developers to write and run tests when we were short of testers. That got me interested in testing techniques and tools. This was the most comprehensive book I could find, and while it covers testing object-oriented code, a lot of it applies to other ways of building software.
