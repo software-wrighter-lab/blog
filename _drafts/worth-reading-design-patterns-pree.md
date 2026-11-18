@@ -50,6 +50,8 @@ Erich Gamma, Richard Helm, Ralph Johnson and John Vlissides, the Gang of Four, *
 
 I embraced it when I was implementing Java libraries for mainframe record-oriented file systems, using Builder, Facade, Chain of Responsibility and others. This book was very influential on my work, and it improved my skills.
 
+Because I had built a testable, pluggable, composable object-oriented implementation that could emulate the mainframe code on other systems, I could write Java on a PC, test it on an RS/6000 AIX workstation, and deploy it on a mainframe. A fun project was a distributed file explorer that ran on a Windows, Linux or AIX desktop and showed the file systems across those machines and a mainframe. You could copy files from one system to another, converting between ASCII and EBCDIC as needed.
+
 ## Design Patterns for Object-Oriented Software Development
 
 <figure class="zoomable" style="float: left; width: 90px; margin: 0.3em 1.2em 0.4em 0;">
