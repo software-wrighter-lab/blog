@@ -48,9 +48,9 @@ The IBM 2741 Communications Terminal was a Selectric typewriter turned into a te
 
 ## Printing at the 2741's pace
 
-<figure class="zoomable outdent-right" style="margin-top: -2.9em;">
+<figure class="zoomable" style="float: right; width: 230px; margin: 0.3em 0 0.6em 1.2em;">
 <img src="{{ '/assets/images/posts/tbt15-2741-2d.webp' | relative_url }}" alt="The 2D view of the A'70 demo: a session printed on green-bar paper with sprocket holes down both edges, and the type element waiting at the six-space indent">
-<figcaption>The 2D view: the session on green-bar paper, the type element waiting at the six-space indent.</figcaption>
+<figcaption>The 2D view, on green-bar paper.</figcaption>
 </figure>
 
 Now <u>A</u>'70 sends what the session prints to the paper one character at a time, at about fifteen characters a second with a little jitter, and a carriage return takes longer the further the carriage has to travel. An overstrike is struck as its two parts with a backspace between them. The keyboard stays locked until printing finishes, as it did, and ATTN prints the rest at once.
@@ -61,25 +61,25 @@ The sound is recorded, not synthesized: a key strike pitched a little by its cha
 
 ## The 2741 in 3D
 
-<figure class="zoomable outdent-left" style="margin-top: -2.9em;">
+<figure class="zoomable" style="float: left; width: 230px; margin: 0.3em 1.2em 0.6em 0;">
 <img src="{{ '/assets/images/posts/tbt15-2741-whole.webp' | relative_url }}" alt="The Whole view: a 3D model of the IBM 2741, a Selectric-style terminal with an APL keyboard, fan-fold green-bar paper rising from the platen">
-<figcaption>The Whole view: my console-3D model of the 2741, with fan-fold green-bar paper.</figcaption>
+<figcaption>The Whole view: my model of the 2741.</figcaption>
 </figure>
 
 <u>A</u>'70 now opens in 3D, on my model of the 2741 from [console-3D](https://github.com/softwarewrighter/console-3D), my set of 3D models of historical consoles and terminals. The model is built in Blender and drawn in the browser with three.js. As the session prints, the carrier moves to each column and back at the return, and the type element tilts and turns to each character.
 
 The paper is one continuous strip of fan-fold green-bar, from the platen up past the top, over and down behind, with sprocket holes in both margins and a perforation every 66 lines. Printed lines move up at each line feed.
 
+<figure class="zoomable" style="float: right; width: 230px; margin: 0.3em 0 0.6em 1.2em;">
+<img src="{{ '/assets/images/posts/tbt15-2741-half.webp' | relative_url }}" alt="The Half view: the 2741's APL keyboard with its symbols on the key fronts, the IBM 2741 Communications Terminal badge, and the printed session on the paper above">
+<figcaption>The Half view: the APL keyboard and badge.</figcaption>
+</figure>
+
 There are three views: **Close**, for reading while you type, the default; **Half**, with the keyboard; and **Whole**, the entire machine. A **2D** button switches back to the flat paper, and your choice is remembered.
 
 <figure class="zoomable" style="clear: both;">
-<img src="{{ '/assets/images/posts/tbt15-2741-half.webp' | relative_url }}" alt="The Half view: the 2741's APL keyboard with its symbols on the key fronts, the IBM 2741 Communications Terminal badge, and the printed session on the paper above">
-<figcaption>The Half view: the APL keyboard, the badge, and the session on the paper.</figcaption>
-</figure>
-
-<figure class="zoomable">
-<img src="{{ '/assets/images/posts/tbt15-2741-close.webp' | relative_url }}" alt="The Close view: the printed session on green-bar paper, seen from just above the type element and platen">
-<figcaption>The Close view, the default: the session on the paper, just above the type element.</figcaption>
+<img src="{{ '/assets/images/posts/tbt15-2741-life.webp' | relative_url }}" alt="An animation of the Close view: a session typed and printed at the 2741's pace on green-bar paper, )LIBS, )LIB 1, )LOAD 1 LIFE, DESCRIBE, listing the GEN function, RUN 2 printing three generations of a glider, then )CLEAR and blank lines feeding the paper">
+<figcaption>The Close view, at the 2741's own pace: <code>)LIBS</code>, <code>)LIB 1</code>, <code>)LOAD 1 LIFE</code>, <code>DESCRIBE</code>, <code>∇GEN[⎕]∇</code> to list Conway's Game of Life in two lines, <code>RUN 2</code> for a glider's first two generations, then <code>)CLEAR</code> and blank lines to feed the paper. About a minute and a half; it loops.</figcaption>
 </figure>
 
 ## Try it
