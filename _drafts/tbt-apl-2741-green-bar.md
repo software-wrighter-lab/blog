@@ -47,6 +47,11 @@ Mike: TODO, your own memory of a 2741 (or the Selectric terminals you used), if 
 
 ## The 2741
 
+<figure class="zoomable" style="float: left; width: 260px; margin: 0.3em 1.2em 0.6em 0;">
+<img src="{{ '/assets/images/posts/tbt15-apl-timeline-1970.webp' | relative_url }}" alt="Part of the sw-apl timeline around 1970: the A'70 card, my live demo, with a picture of the 2741 model, labeled 1970: APL\360, with domino, the IBM Program Product, typed on a 2741; nearby cards for 1970 APL*PLUS, ca. 1973 University of Maryland APL on the UNIVAC 1110, 1973 APLSV and 1973 MCM/70">
+<figcaption>Part of the APL timeline: the <u>A</u>'70 card, with the 2741.</figcaption>
+</figure>
+
 The IBM 2741 Communications Terminal was a Selectric typewriter turned into a terminal. With an APL type element in it, it was how most people met APL\360 in the late 1960s and early 1970s: you typed a line, the keyboard locked, and the answer came back on the same paper at about fifteen characters a second, the type element spinning and tilting to each character. APL's special symbols were on that element, and the ones that weren't were made by overstriking: one character, a backspace, and another on top of it.
 
 <div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
