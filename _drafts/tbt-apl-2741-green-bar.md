@@ -46,6 +46,11 @@ Mike: TODO, your own memory of a 2741 (or the Selectric terminals you used), if 
 
 The IBM 2741 Communications Terminal was a Selectric typewriter turned into a terminal. With an APL type element in it, it was how most people met APL\360 in the late 1960s and early 1970s: you typed a line, the keyboard locked, and the answer came back on the same paper at about fifteen characters a second, the type element spinning and tilting to each character. APL's special symbols were on that element, and the ones that weren't were made by overstriking: one character, a backspace, and another on top of it.
 
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
 ## Printing at the 2741's pace
 
 <figure class="zoomable" style="float: right; width: 230px; margin: 0.3em 0 0.6em 1.2em;">
@@ -59,6 +64,11 @@ The paper is continuous green-bar, stripes three lines deep, with a sprocket hol
 
 The sound is recorded, not synthesized: a key strike pitched a little by its character, the space bar, and a thud at the return. Two buttons in the bar control it: **Fast** prints everything at once, and **Sound** turns the sound on or off. Each visit opens on a card that starts the session with sound or silently, since a browser won't play sound before a click.
 
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
 ## The 2741 in 3D
 
 <figure class="zoomable" style="float: left; width: 230px; margin: 0.3em 1.2em 0.6em 0;">
@@ -69,6 +79,11 @@ The sound is recorded, not synthesized: a key strike pitched a little by its cha
 <u>A</u>'70 now opens in 3D, on my model of the 2741 from [console-3D](https://github.com/softwarewrighter/console-3D), my set of 3D models of historical consoles and terminals. The model is built in Blender and drawn in the browser with three.js. As the session prints, the carrier moves to each column and back at the return, and the type element tilts and turns to each character.
 
 The paper is one continuous strip of fan-fold green-bar, from the platen up past the top, over and down behind, with sprocket holes in both margins and a perforation every 66 lines. Printed lines move up at each line feed.
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
 
 <figure class="zoomable" style="float: right; width: 230px; margin: 0.3em 0 0.6em 1.2em;">
 <img src="{{ '/assets/images/posts/tbt15-2741-half.webp' | relative_url }}" alt="The Half view: the 2741's APL keyboard with its symbols on the key fronts, the IBM 2741 Communications Terminal badge, and the printed session on the paper above">
@@ -81,6 +96,11 @@ There are three views: **Close**, for reading while you type, the default; **Hal
 <img src="{{ '/assets/images/posts/tbt15-2741-life.webp' | relative_url }}" alt="An animation of the Close view: a session typed and printed at the 2741's pace on green-bar paper, )LIBS, )LIB 1, )LOAD 1 LIFE, DESCRIBE, listing the GEN function, RUN 2 printing three generations of a glider, then )CLEAR and blank lines feeding the paper">
 <figcaption>The Close view, at the 2741's own pace: <code>)LIBS</code>, <code>)LIB 1</code>, <code>)LOAD 1 LIFE</code>, <code>DESCRIBE</code>, <code>∇GEN[⎕]∇</code> to list Conway's Game of Life in two lines, <code>RUN 2</code> for a glider's first two generations, then <code>)CLEAR</code> and blank lines to feed the paper. About a minute and a half; it loops.</figcaption>
 </figure>
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
 
 ## Try it
 
