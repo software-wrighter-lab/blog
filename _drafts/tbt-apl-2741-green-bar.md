@@ -90,7 +90,7 @@ The paper is one continuous strip of fan-fold green-bar, from the platen up past
 <img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
 </div>
 
-<figure class="zoomable" style="float: right; width: 230px; margin: 0.3em 0 0.6em 1.2em;">
+<figure class="zoomable" style="float: left; width: 230px; margin: 0.3em 1.2em 0.6em 0;">
 <img src="{{ '/assets/images/posts/tbt15-2741-half.webp' | relative_url }}" alt="The Half view: the 2741's APL keyboard with its symbols on the key fronts, the IBM 2741 Communications Terminal badge, and the printed session on the paper above">
 <figcaption>The Half view: the APL keyboard and badge.</figcaption>
 </figure>
