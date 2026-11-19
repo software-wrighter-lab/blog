@@ -104,7 +104,9 @@ There are three views: **Close**, for reading while you type, the default; **Hal
 
 ## Try it
 
-Open [<u>A</u>'70](https://sw-apl.softwarewrighter.com/demo.html?mode=A), choose **Start with sound**, and type a line, say `2 3⍴⍳6` or `+/⍳100`. The **Keyboard** button shows where the APL symbols are, and **Help** lists the rest.
+Open [<u>A</u>'70](https://sw-apl.softwarewrighter.com/demo.html?mode=A), choose **Start with sound**, and type a line, say `2 3⍴⍳6` or `+/⍳100`.
+
+There are some anachronistic usability aids. The up arrow instantly brings back your prior input for editing, without animating its printing, until you press backspace to edit the recalled line. And if your keycaps don't have APL decals, as mine do, the **Keyboard** button shows where each APL symbol is and helps you enter it. **Help** lists the rest.
 
 ## Closing
 
