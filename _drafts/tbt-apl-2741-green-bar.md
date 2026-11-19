@@ -71,6 +71,11 @@ The sound is recorded, not synthesized: a key strike pitched a little by its cha
 
 ## The 2741 in 3D
 
+<figure class="zoomable outdent-right" style="width: 45%; margin-top: -2.9em;">
+<img src="{{ '/assets/images/posts/tbt15-2741-life.webp' | relative_url }}" alt="An animation of the Close view: a session typed and printed at the 2741's pace on green-bar paper, )LIBS, )LIB 1, )LOAD 1 LIFE, DESCRIBE, listing the GEN function, RUN 2 printing three generations of a glider, then )CLEAR and blank lines feeding the paper">
+<figcaption>The Close view, at the 2741's own pace: <code>)LIBS</code>, <code>)LIB 1</code>, <code>)LOAD 1 LIFE</code>, <code>DESCRIBE</code>, <code>∇GEN[⎕]∇</code> to list Conway's Game of Life in two lines, <code>RUN 2</code> for a glider's first two generations, then <code>)CLEAR</code> and blank lines to feed the paper. About a minute and a half; it loops. Click to enlarge.</figcaption>
+</figure>
+
 <figure class="zoomable" style="float: left; width: 230px; margin: 0.3em 1.2em 0.6em 0;">
 <img src="{{ '/assets/images/posts/tbt15-2741-whole.webp' | relative_url }}" alt="The Whole view: a 3D model of the IBM 2741, a Selectric-style terminal with an APL keyboard, fan-fold green-bar paper rising from the platen">
 <figcaption>The Whole view: my model of the 2741.</figcaption>
@@ -91,11 +96,6 @@ The paper is one continuous strip of fan-fold green-bar, from the platen up past
 </figure>
 
 There are three views: **Close**, for reading while you type, the default; **Half**, with the keyboard; and **Whole**, the entire machine. A **2D** button switches back to the flat paper, and your choice is remembered.
-
-<figure class="zoomable" style="clear: both;">
-<img src="{{ '/assets/images/posts/tbt15-2741-life.webp' | relative_url }}" alt="An animation of the Close view: a session typed and printed at the 2741's pace on green-bar paper, )LIBS, )LIB 1, )LOAD 1 LIFE, DESCRIBE, listing the GEN function, RUN 2 printing three generations of a glider, then )CLEAR and blank lines feeding the paper">
-<figcaption>The Close view, at the 2741's own pace: <code>)LIBS</code>, <code>)LIB 1</code>, <code>)LOAD 1 LIFE</code>, <code>DESCRIBE</code>, <code>∇GEN[⎕]∇</code> to list Conway's Game of Life in two lines, <code>RUN 2</code> for a glider's first two generations, then <code>)CLEAR</code> and blank lines to feed the paper. About a minute and a half; it loops.</figcaption>
-</figure>
 
 <div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
 <img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
