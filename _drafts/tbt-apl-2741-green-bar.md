@@ -7,6 +7,8 @@ keywords: "APL\\360, IBM 2741, IBM 2741 Communications Terminal, Selectric type 
 abstract: "The 1970 stop on my APL timeline now runs on an IBM 2741. Typed APL\\360 prints a character at a time, at the 2741's own pace, onto green-bar fan-fold paper, with the sound of the keys and the carriage return, and in 3D on my model of the 2741 from console-3D, its type element turning to each character."
 series: "Throwback Thursday"
 series_part: 15
+# video_url: "Mike: TODO, the TBT video URL once it is published" (post.html embeds it at the end, under "Watch the Video", as in TBT #6)
+# video_title: "TODO"
 date: 2026-11-19 00:15:00 -0800
 repo_urls:
   - url: "https://github.com/sw-vibe-coding/sw-apl"
@@ -34,6 +36,7 @@ Mike: TODO, your own memory of a 2741 (or the Selectric terminals you used), if 
 
 | Resource | Link |
 |----------|------|
+| **Video** | Mike: TODO, the TBT video link and thumbnail, once published |
 | **Live demo** | [<u>A</u>'70 on the 2741](https://sw-apl.softwarewrighter.com/demo.html?mode=A) |
 | **Timeline** | [APL timeline](https://sw-apl.softwarewrighter.com/) |
 | **Code** | [sw-apl](https://github.com/sw-vibe-coding/sw-apl), [console-3D](https://github.com/softwarewrighter/console-3D) |
