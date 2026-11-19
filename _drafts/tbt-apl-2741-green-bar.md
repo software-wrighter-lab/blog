@@ -111,6 +111,11 @@ Open [<u>A</u>'70](https://sw-apl.softwarewrighter.com/demo.html?mode=A), choose
 
 There are some anachronistic usability aids. The up arrow instantly brings back your prior input for editing, without animating its printing, until you press backspace to edit the recalled line. And if your keycaps don't have APL decals, as mine do, the **Keyboard** button shows where each APL symbol is and helps you enter it. **Help** lists the rest.
 
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
 ## Closing
 
 <figure class="zoomable outdent-left" style="width: 45%; margin-top: -2.9em;">
