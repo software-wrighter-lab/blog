@@ -130,4 +130,4 @@ The working APL-related demos currently linked from the [timeline](https://sw-ap
 - [sw-MLPL](https://mlpl.softwarewrighter.com/) (new array language)
 - [X_eTaL](https://softwarewrighter.github.io/X_eTaL/) (new array language)
 
-Still to do: University of Maryland APL/1100, and IBM APL\1130.
+Still to do: University of Maryland APL/1100, IBM APL\1130, and 3279G showing APL2.
