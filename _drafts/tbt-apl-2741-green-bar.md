@@ -28,7 +28,7 @@ repo_urls:
 <img src="{{ '/assets/images/posts/block-tbt-apl.webp' | relative_url }}" class="post-marker no-invert" alt="The letters APL in chrome over a neon sunset and a glowing grid, in 1980s synthwave style">
 
 The [APL timeline](https://sw-apl.softwarewrighter.com/) I wrote about [last week](/2026/11/12/tbt-apl-forth-lisp-timelines/) opens on 1970, and its first live demo is <u>A</u>'70: APL\360 as people typed it then. Until now it printed in a browser font. As of this week it prints the way it did on an IBM 2741: a character at a time, on green-bar paper, with the sound of the keys, and in 3D on a model of the terminal itself.
-I used many Selectric terminals.
+I used many Selectric terminals on the IBM System/360, 1130 and System/3 (and later on my TRS-80).
 
 <!--more-->
 
