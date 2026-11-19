@@ -130,4 +130,4 @@ The working demos currently linked from the [timeline](https://sw-apl.softwarewr
 - [sw-MLPL](https://mlpl.softwarewrighter.com/)
 - [X_eTaL](https://softwarewrighter.github.io/X_eTaL/), new array languages
 
-Still to do: University of Maryland APL on the UNIVAC 1100 series, and IBM APL\1130.
+Still to do: University of Maryland APL/1100, and IBM APL\1130.
