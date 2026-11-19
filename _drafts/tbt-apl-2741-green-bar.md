@@ -119,3 +119,15 @@ There are some anachronistic usability aids. The up arrow instantly brings back 
 </figure>
 
 This is part of my ongoing work to build a virtual computer history museum, covering topics like APL, Forth, Lisp, and assemblers; the IBM 1130 and 1800, the UNIVAC 1110, the RCA CDP1802, the IBM 360, IBM 5100, IBM 3279G, and more.
+
+The working demos currently linked from the [timeline](https://sw-apl.softwarewrighter.com/):
+
+- APL\360, [<u>A</u>'70](https://sw-apl.softwarewrighter.com/demo.html?mode=A), on the 2741
+- 5100 APL, [<u>B</u>'75](https://sw-apl.softwarewrighter.com/demo.html?mode=B)
+- APL80 on the TRS-80, [<u>C</u>'80](https://sw-apl.softwarewrighter.com/demo.html?mode=C)
+- IBM PC APL, [<u>D</u>'83](https://sw-apl.softwarewrighter.com/demo.html?mode=D)
+- [COR24 APL](https://sw-embed.github.io/web-sw-cor24-apl/)
+- [sw-MLPL](https://mlpl.softwarewrighter.com/)
+- [X_eTaL](https://softwarewrighter.github.io/X_eTaL/), new array languages
+
+Still to do: University of Maryland APL on the UNIVAC 1100 series, and IBM APL\1130.
