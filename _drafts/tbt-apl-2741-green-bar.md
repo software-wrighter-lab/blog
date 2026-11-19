@@ -110,4 +110,4 @@ There are some anachronistic usability aids. The up arrow instantly brings back 
 
 ## Closing
 
-Mike: TODO, a closing in your words.
+This is part of my ongoing work to build a virtual computer history museum, covering topics like APL, Forth and Lisp; the IBM 1130 and 1800, the UNIVAC 1110, the RCA CDP1802 and the IBM 360; and more.
