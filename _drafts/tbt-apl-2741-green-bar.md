@@ -127,7 +127,7 @@ The working demos currently linked from the [timeline](https://sw-apl.softwarewr
 - APL80 on the TRS-80, [<u>C</u>'80](https://sw-apl.softwarewrighter.com/demo.html?mode=C)
 - IBM PC APL, [<u>D</u>'83](https://sw-apl.softwarewrighter.com/demo.html?mode=D)
 - [COR24 APL](https://sw-embed.github.io/web-sw-cor24-apl/)
-- [sw-MLPL](https://mlpl.softwarewrighter.com/)
-- [X_eTaL](https://softwarewrighter.github.io/X_eTaL/), new array languages
+- [sw-MLPL](https://mlpl.softwarewrighter.com/) (new array language)
+- [X_eTaL](https://softwarewrighter.github.io/X_eTaL/) (new array language)
 
 Still to do: University of Maryland APL/1100, and IBM APL\1130.
