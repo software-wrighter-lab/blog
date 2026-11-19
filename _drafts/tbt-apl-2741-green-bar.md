@@ -120,7 +120,7 @@ There are some anachronistic usability aids. The up arrow instantly brings back 
 
 This is part of my ongoing work to build a virtual computer history museum, covering topics like APL, Forth, Lisp, and assemblers; the IBM 1130 and 1800, the UNIVAC 1110, the RCA CDP1802, the IBM 360, IBM 5100, IBM 3279G, and more.
 
-The working demos currently linked from the [timeline](https://sw-apl.softwarewrighter.com/):
+The working APL-related demos currently linked from the [timeline](https://sw-apl.softwarewrighter.com/):
 
 - APL\360, [<u>A</u>'70](https://sw-apl.softwarewrighter.com/demo.html?mode=A), on the 2741
 - 5100 APL, [<u>B</u>'75](https://sw-apl.softwarewrighter.com/demo.html?mode=B)
