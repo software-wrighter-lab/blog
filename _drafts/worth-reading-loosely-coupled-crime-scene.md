@@ -44,7 +44,7 @@ The [prior post](/2026/11/18/worth-reading-design-patterns-pree/) in this series
 
 J. Paul Morrison, *Flow-Based Programming: A New Approach to Application Development* (Van Nostrand Reinhold, 1994). I recently read the second edition, *Flow-Based Programming, 2nd Edition: A New Approach to Application Development* (2010). An application as a network of black-box components that share no data and communicate only by passing packets of data along connections, defined outside the components themselves. Morrison developed the approach at IBM in the early 1970s, two decades before the book. The data-flow-first pipelines of [X_eTaL's Flow library](/2026/10/18/array-languages-xetal-pipelines/) are in the same spirit. So are TSO Pipelines and CMS Pipelines, IBM's record-oriented pipes on the mainframe, which I used heavily and recreated in Rust for [TBT #2: Pipelines on OS/390](/2026/02/05/tbt-pipelines-os390/).
 
-Mike: TODO, what it taught you.
+I learned an interesting approach to data buffers from it: instead of copying a buffer from program to program, dispatch the programs against changing versions of the buffer.
 
 ## Loosely Coupled
 
