@@ -30,6 +30,7 @@ The [prior post](/2026/11/18/worth-reading-design-patterns-pree/) in this series
 | **Flow-Based Programming** | J. Paul Morrison, 1994; 2nd edition 2010 |
 | **Loosely Coupled** | Doug Kaye, 2003 |
 | **Your Code as a Crime Scene** | Adam Tornhill, 2015 |
+| **See also** | [*Microservices Patterns*](https://www.manning.com/books/microservices-patterns), Chris Richardson, 2018 |
 | **The series** | [Worth Reading: every post](/series/#worth-reading) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
