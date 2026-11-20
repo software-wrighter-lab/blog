@@ -27,7 +27,7 @@ The [prior post](/2026/11/18/worth-reading-design-patterns-pree/) in this series
 
 | Book | Author(s), year |
 |----------|------|
-| **Flow-Based Programming** | J. Paul Morrison, 1994 |
+| **Flow-Based Programming** | J. Paul Morrison, 1994; 2nd edition 2010 |
 | **Loosely Coupled** | Doug Kaye, 2003 |
 | **Your Code as a Crime Scene** | Adam Tornhill, 2015 |
 | **The series** | [Worth Reading: every post](/series/#worth-reading) |
@@ -37,7 +37,11 @@ The [prior post](/2026/11/18/worth-reading-design-patterns-pree/) in this series
 
 ## Flow-Based Programming
 
-J. Paul Morrison, *Flow-Based Programming: A New Approach to Application Development* (Van Nostrand Reinhold, 1994; the first edition, not the 2010 second). An application as a network of black-box components that share no data and communicate only by passing packets of data along connections, defined outside the components themselves. Morrison developed the approach at IBM in the early 1970s, two decades before the book. The data-flow-first pipelines of [X_eTaL's Flow library](/2026/10/18/array-languages-xetal-pipelines/) are in the same spirit.
+<figure class="zoomable" style="float: left; width: 90px; margin: 0.3em 1.2em 0.4em 0;">
+<img src="{{ '/assets/images/posts/cover-flow-based-programming-2e.webp' | relative_url }}" class="no-invert" alt="The cover of Flow-Based Programming, 2nd Edition: A New Approach to Application Development by J. Paul Morrison, showing a network of boxes connected by arrows">
+</figure>
+
+J. Paul Morrison, *Flow-Based Programming: A New Approach to Application Development* (Van Nostrand Reinhold, 1994). I recently read the second edition, *Flow-Based Programming, 2nd Edition: A New Approach to Application Development* (2010). An application as a network of black-box components that share no data and communicate only by passing packets of data along connections, defined outside the components themselves. Morrison developed the approach at IBM in the early 1970s, two decades before the book. The data-flow-first pipelines of [X_eTaL's Flow library](/2026/10/18/array-languages-xetal-pipelines/) are in the same spirit.
 
 Mike: TODO, what it taught you.
 
