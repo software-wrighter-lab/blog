@@ -21,13 +21,12 @@ repo_urls:
      Facts gathered 2026-11-20 from X_eTaL-video main b70e597 (2026-11-20): lessons/al-01-why/{README.md, title.txt,
      description.txt, timing.json}, docs/array-languages-video-series-plan.md. Render: out/al-01-why-landscape-remotion.mp4,
      1920x1080, 518.4 s (8:38). Thumbnails are frames from that render. Dated today, 2026-11-20, by Mike.
-     The lead image is a placeholder until Mike supplies one.
+    
 -->
 
-<img src="{{ '/assets/images/posts/placeholder-array-languages-xetal-video-why.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-video-tutorial-xetal.webp' | relative_url }}" class="post-marker no-invert" alt="A desktop monitor in a dim room showing a video coding lesson: a module outline, X_eTaL code in an editor, a language picker with X_eTaL selected, and an instructor in a corner window">
 
-I've started a video series that teaches array programming, using my language X_eTaL. Episode 1, *Why Another Programming Language?*, runs about eight and a half minutes. This may be the dawn of personal programming languages, and this is not the first one I've started creating.
-Mike: TODO, anything more on why a video series now, and who it is for.
+I've started a video series that teaches array programming, using my language X_eTaL. Episode 1, *Why Another Programming Language?*, runs about eight and a half minutes. This may be the dawn of personal programming languages, and this is not the first one I've started creating. I want people to be able to learn my new APL-inspired language, so I am using Remotion and X_eTaL itself to generate video tutorials.
 
 <!--more-->
 
