@@ -48,6 +48,10 @@ I learned an interesting approach to data buffers from it: instead of copying a 
 
 ## Loosely Coupled
 
+<figure class="zoomable" style="float: left; margin: 0.3em 1.2em 0.4em 0;">
+<img src="{{ '/assets/images/posts/cover-loosely-coupled.webp' | relative_url }}" class="no-invert" style="height: 120px; width: auto;" alt="The cover of Loosely Coupled: The Missing Pieces of Web Services by Doug Kaye, black puzzle pieces against a fiery orange background">
+</figure>
+
 Doug Kaye, *Loosely Coupled: The Missing Pieces of Web Services* (RDS Press, 2003). The hard parts of web services: security, reliable messaging, and long-lived, asynchronous transactions between systems that should know as little about each other as they can. Coupling is one of the things [sw-checklist](/2026/04/27/sw-checklist-ratchet-ai-coding-agents/) measures.
 
 Mike: TODO, what it taught you.
