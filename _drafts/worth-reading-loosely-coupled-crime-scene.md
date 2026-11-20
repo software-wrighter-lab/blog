@@ -67,7 +67,9 @@ Doug Kaye, *Loosely Coupled: The Missing Pieces of Web Services* (RDS Press, 200
 
 Kaye's book predates microservices by about a decade, but the case it makes for loosely coupled, independently evolving services is the same one microservices architecture later built on. For that later view, see Chris Richardson's [*Microservices Patterns*](https://www.manning.com/books/microservices-patterns) (Manning, 2018).
 
-Mike: TODO, what it taught you.
+Part of the appeal of loosely coupled services, and of microservices, is that a small service can be written in a language that makes it quick to deploy, and later rewritten in a more secure or higher-performance language as needed. Small, testable services are easier to maintain, patch and extend.
+
+Decades-old monoliths are still in use precisely because their tight coupling makes changes hard to implement, difficult to verify and risky to deploy. Rewriting a large, complex system has its own problems: the [second-system effect](/2026/11/04/worth-reading-psychology-mythical-man-month/) Brooks warned about. Small, testable, composable services could be less prone to it.
 
 ## Your Code as a Crime Scene
 
