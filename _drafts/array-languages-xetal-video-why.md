@@ -101,7 +101,7 @@ Later modules (types and functional programming; idioms, macros and language des
 
 ## How it's made
 
-The episode is built in [X_eTaL-video](https://github.com/softwarewrighter/X_eTaL-video), rendered with Remotion and narrated in my cloned voice, with my own music between sections. Every X_eTaL line it shows is run at a pinned version of X_eTaL, and the episode's README lists every fact the narration states with its source.
+The episode is built in [X_eTaL-video](https://github.com/softwarewrighter/X_eTaL-video), rendered with Remotion and narrated in my cloned voice using VoxCPM running on an RTX 3090 (24 GB), with my own music between sections. Every X_eTaL line it shows is run at a pinned version of X_eTaL, and the episode's README lists every fact the narration states with its source.
 
 ## Closing
 
