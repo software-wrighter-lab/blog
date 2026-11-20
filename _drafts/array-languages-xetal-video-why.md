@@ -7,7 +7,7 @@ keywords: "array programming tutorial, learn array programming, why another prog
 abstract: "Twenty-first in the Array Languages series: the first episode of a new video series that teaches array programming with X_eTaL. Why another programming language? It compares a Rust loop with whole-array operations, traces the array family from Iverson's 1962 notation through APL\\360, APL2, J, K and BQN, and introduces X_eTaL, typed in plain ASCII and drawn as notation. The series plan, and how the videos are made."
 series: "Array Languages"
 series_part: 21
-date: 2026-11-21 00:15:00 -0800
+date: 2026-11-20 00:15:00 -0800
 # video_url: "Mike: TODO, the episode's YouTube URL once it is published" (post.html embeds it at the end and it joins the Videos tab)
 # video_title: "Why Another Programming Language? Array Languages #1"
 repo_urls:
@@ -20,7 +20,7 @@ repo_urls:
 <!-- DRAFT
      Facts gathered 2026-11-20 from X_eTaL-video main b70e597 (2026-11-20): lessons/al-01-why/{README.md, title.txt,
      description.txt, timing.json}, docs/array-languages-video-series-plan.md. Render: out/al-01-why-landscape-remotion.mp4,
-     1920x1080, 518.4 s (8:38). Thumbnails are frames from that render. Date is a guess (Mike: video today or tomorrow).
+     1920x1080, 518.4 s (8:38). Thumbnails are frames from that render. Dated today, 2026-11-20, by Mike.
      The lead image is a placeholder until Mike supplies one.
 -->
 
