@@ -37,8 +37,9 @@ The [prior post](/2026/11/18/worth-reading-design-patterns-pree/) in this series
 
 ## Flow-Based Programming
 
-<figure class="zoomable" style="float: left; width: 90px; margin: 0.3em 1.2em 0.4em 0;">
-<img src="{{ '/assets/images/posts/cover-flow-based-programming-2e.webp' | relative_url }}" class="no-invert" alt="The cover of Flow-Based Programming, 2nd Edition: A New Approach to Application Development by J. Paul Morrison, showing a network of boxes connected by arrows">
+<figure class="zoomable" style="float: left; margin: 0.3em 1.2em 0.4em 0; white-space: nowrap;">
+<img src="{{ '/assets/images/posts/cover-flow-based-programming.webp' | relative_url }}" class="no-invert" style="height: 120px; width: auto; display: inline-block; margin-right: 0.5em;" alt="The cover of the first edition of Flow-Based Programming: A New Approach to Application Development by J. Paul Morrison, its title in a yellow oval on a blue background patterned with FBP and arrows">
+<img src="{{ '/assets/images/posts/cover-flow-based-programming-2e.webp' | relative_url }}" class="no-invert" style="height: 120px; width: auto; display: inline-block;" alt="The cover of Flow-Based Programming, 2nd Edition: A New Approach to Application Development by J. Paul Morrison, showing a network of boxes connected by arrows">
 </figure>
 
 J. Paul Morrison, *Flow-Based Programming: A New Approach to Application Development* (Van Nostrand Reinhold, 1994). I recently read the second edition, *Flow-Based Programming, 2nd Edition: A New Approach to Application Development* (2010). An application as a network of black-box components that share no data and communicate only by passing packets of data along connections, defined outside the components themselves. Morrison developed the approach at IBM in the early 1970s, two decades before the book. The data-flow-first pipelines of [X_eTaL's Flow library](/2026/10/18/array-languages-xetal-pipelines/) are in the same spirit.
