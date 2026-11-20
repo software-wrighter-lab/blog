@@ -23,7 +23,7 @@ The [prior post](/2026/11/18/worth-reading-design-patterns-pree/) in this series
 
 With AI accelerating the discovery of exploits, the industry needs better architecture: more resilient systems that can patch vulnerabilities more quickly. My early exposure to MVS Dynamic Reconfiguration introduced me to the idea of keeping software running as the hardware changes underneath it, and I've been on a quest ever since to build systems that do not fail.
 
-The ideas in these books help in building systems that are easier to change with confidence. Monolithic, tightly coupled, Big Ball of Mud architectures are brittle and hard to test, and therefore hard to change safely. Understanding how to assemble systems better, and how to test and diagnose them, seems very important to me. A back-burner project of mine is a distributed system that can be monitored, debugged and patched, with automatic rollback, and AI coding agents and my growing toolbox are bringing me closer to building and demonstrating it.
+The ideas in these books help in building systems that are easier to change with confidence. Monolithic, tightly coupled, Big Ball of Mud architectures are brittle and hard to test, and therefore hard to change safely. Understanding how to assemble systems better, and how to test and diagnose them, seems very important to me. A back-burner project of mine is a distributed system that can be monitored, debugged and patched, with automatic rollback, and AI coding agents and my growing toolbox are bringing me closer to building and demonstrating it. Forte Software's Conductor was an inspiration, as an early example of this kind of robust distributed system. So was Paul Graham's use of Lisp to add features and fixes dynamically to a running system.
 
 <!--more-->
 
