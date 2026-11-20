@@ -56,6 +56,12 @@ After reading the first edition I discovered JavaSpaces and Linda, which gave me
 
 Doug Kaye, *Loosely Coupled: The Missing Pieces of Web Services* (RDS Press, 2003). The hard parts of web services: security, reliable messaging, and long-lived, asynchronous transactions between systems that should know as little about each other as they can. Coupling is one of the things [sw-checklist](/2026/04/27/sw-checklist-ratchet-ai-coding-agents/) measures.
 
+<figure class="zoomable" style="float: right; margin: 0.3em 0 0.4em 1.2em;">
+<img src="{{ '/assets/images/posts/cover-microservices-patterns.webp' | relative_url }}" class="no-invert" style="height: 120px; width: auto; box-shadow: 0 0 0 1px rgba(0,0,0,0.15);" alt="The cover of Microservices Patterns: With examples in Java by Chris Richardson, from Manning, with a figure in historical costume">
+</figure>
+
+Kaye's book predates microservices by about a decade, but the case it makes for loosely coupled, independently evolving services is the same one microservices architecture later built on. For that later view, see Chris Richardson's [*Microservices Patterns*](https://www.manning.com/books/microservices-patterns) (Manning, 2018).
+
 Mike: TODO, what it taught you.
 
 ## Your Code as a Crime Scene
