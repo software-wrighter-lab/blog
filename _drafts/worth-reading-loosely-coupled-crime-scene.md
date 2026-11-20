@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Worth Reading #4: Components and Coupling --- Morrison, Kaye and Tornhill"
+title: "Worth Reading #4: Components and Coupling --- Morrison, Kaye, Tornhill, and Richardson"
 categories: [books, programming-history]
 tags: [worth-reading, books, flow-based-programming, j-paul-morrison, dataflow, components, loose-coupling, web-services, doug-kaye, adam-tornhill, your-code-as-a-crime-scene, code-forensics, hotspots, temporal-coupling]
 keywords: "books worth reading, Flow-Based Programming, J. Paul Morrison, dataflow, black-box components, information packets, Loosely Coupled, Doug Kaye, The Missing Pieces of Web Services, loose coupling, Your Code as a Crime Scene, Adam Tornhill, code forensics, hotspots, temporal coupling, version control history"
