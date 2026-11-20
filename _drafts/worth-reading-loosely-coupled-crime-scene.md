@@ -79,7 +79,7 @@ Decades-old monoliths are still in use precisely because their tight coupling ma
 
 Adam Tornhill, *Your Code as a Crime Scene: Use Forensic Techniques to Arrest Defects, Bottlenecks, and Bad Design in Your Programs* (Pragmatic Bookshelf, 2015). Forensic psychology applied to a code base's version-control history: hotspots, the few files where most of the work and most of the defects land, and temporal coupling, files that change together although nothing in the code says they depend on each other.
 
-Mike: TODO, what it taught you.
+As an operating system developer at IBM, I was involved in studies that analyzed the bugs in our code. One of the worst and most frequent causes was an inexperienced programmer making changes to a large, complex component. Later, as a technology transfer engineer at IBM's T.J. Watson Research Center, I worked with computer scientist Ram Chillarege on [Orthogonal Defect Classification](https://en.wikipedia.org/wiki/Orthogonal_defect_classification). And later still, at Silicon Valley startups, I used the code from this book to analyze code bases and the bugs we tracked.
 
 ## Closing
 
