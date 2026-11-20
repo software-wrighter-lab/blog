@@ -46,6 +46,8 @@ J. Paul Morrison, *Flow-Based Programming: A New Approach to Application Develop
 
 I learned an interesting approach to data buffers from it: instead of copying a buffer from program to program, dispatch the programs against changing versions of the buffer.
 
+After reading the first edition I discovered JavaSpaces and Linda, which gave me new ideas about distributed data processing.
+
 ## Loosely Coupled
 
 <figure class="zoomable" style="float: left; margin: 0.3em 1.2em 0.4em 0;">
