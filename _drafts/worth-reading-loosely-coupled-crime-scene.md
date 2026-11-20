@@ -58,6 +58,10 @@ Mike: TODO, what it taught you.
 
 ## Your Code as a Crime Scene
 
+<figure class="zoomable" style="float: left; margin: 0.3em 1.2em 0.4em 0;">
+<img src="{{ '/assets/images/posts/cover-your-code-as-a-crime-scene.webp' | relative_url }}" class="no-invert" style="height: 120px; width: auto; box-shadow: 0 0 0 1px rgba(0,0,0,0.15);" alt="The cover of Your Code as a Crime Scene by Adam Tornhill, from the Pragmatic Programmers, with a magnifying glass over lines of code, foreword by Michael Feathers">
+</figure>
+
 Adam Tornhill, *Your Code as a Crime Scene: Use Forensic Techniques to Arrest Defects, Bottlenecks, and Bad Design in Your Programs* (Pragmatic Bookshelf, 2015). Forensic psychology applied to a code base's version-control history: hotspots, the few files where most of the work and most of the defects land, and temporal coupling, files that change together although nothing in the code says they depend on each other.
 
 Mike: TODO, what it taught you.
