@@ -105,4 +105,4 @@ The episode is built in [X_eTaL-video](https://github.com/softwarewrighter/X_eTa
 
 ## Closing
 
-Mike: TODO, a closing in your words.
+I learned APL on a 2741 decades ago, and thinking in arrays has shaped how I program ever since, even in languages that don't have them. The best way to learn to think in arrays is to try it. Watch the episode, do the exercise at the end in the [browser editor](https://softwarewrighter.github.io/X_eTaL/), and tell me on [Discord](https://discord.com/invite/Ctzk5uHggZ) what was clear and what wasn't. The early episodes will shape the pacing, look and voice of the rest of the series, so feedback now matters most.
