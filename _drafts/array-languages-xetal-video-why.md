@@ -7,9 +7,9 @@ keywords: "array programming tutorial, learn array programming, why another prog
 abstract: "Twenty-first in the Array Languages series: the first episode of a new video series that teaches array programming with X_eTaL. Why another programming language? It compares a Rust loop with whole-array operations, traces the array family from Iverson's 1962 notation through APL\\360, APL2, J, K and BQN, and introduces X_eTaL, typed in plain ASCII and drawn as notation. The series plan, and how the videos are made."
 series: "Array Languages"
 series_part: 21
-date: 2026-11-21 00:15:00 -0800
-# video_url: "Mike: TODO, the episode's YouTube URL once it is published" (post.html embeds it at the end and it joins the Videos tab)
-# video_title: "Why Another Programming Language? Array Languages #1"
+date: 2026-11-22 00:15:00 -0800
+video_url: "https://www.youtube.com/watch?v=NfdzVWjje2Y"
+video_title: "Why Another Programming Language? Array Languages #1"
 repo_urls:
   - url: "https://github.com/softwarewrighter/X_eTaL"
     title: "X_eTaL"
@@ -20,7 +20,7 @@ repo_urls:
 <!-- DRAFT
      Facts gathered 2026-11-20 from X_eTaL-video main b70e597 (2026-11-20): lessons/al-01-why/{README.md, title.txt,
      description.txt, timing.json}, docs/array-languages-video-series-plan.md. Render: out/al-01-why-landscape-remotion.mp4,
-     1920x1080, 518.4 s (8:38). Thumbnails are frames from that render. Dated 2026-11-20 by Mike; moved to 2026-11-21 (video upload running late).
+     1920x1080, 518.4 s (8:38). Thumbnails are frames from that render. Dated 2026-11-20 by Mike; moved to 2026-11-21, then 2026-11-22 (video upload running late). Video NfdzVWjje2Y given by Mike 2026-11-22; title from title.txt (oEmbed not public yet).
     
 -->
 
@@ -34,7 +34,7 @@ I've started a video series that teaches array programming, using my language X_
 
 | Resource | Link |
 |----------|------|
-| **Video** | Mike: TODO, the episode link and thumbnail, once published |
+| **Video** | [Why Another Programming Language? Array Languages #1](https://www.youtube.com/watch?v=NfdzVWjje2Y)<br>[![Video](https://img.youtube.com/vi/NfdzVWjje2Y/mqdefault.jpg){: .video-thumb}](https://www.youtube.com/watch?v=NfdzVWjje2Y) |
 | **Try X_eTaL** | [In your browser](https://softwarewrighter.github.io/X_eTaL/) |
 | **Code** | [X_eTaL](https://github.com/softwarewrighter/X_eTaL), [X_eTaL-video](https://github.com/softwarewrighter/X_eTaL-video) |
 | **The series** | [Array Languages: every post](/series/#array-languages) |
