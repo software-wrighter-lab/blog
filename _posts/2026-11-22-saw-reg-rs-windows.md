@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Saw #20: reg-rs on Windows, Enabling Windows Installers (for Reva and CoSy)"
+title: "Saw #20: reg-rs on Windows, Enabling Windows Installers (for Reva Forth and CoSy)"
 categories: [tools]
-tags: [sharpen-the-saw, reg-rs, windows, ci, github-actions, rust, testing, reva-fork, cosy, installers]
+tags: [sharpen-the-saw, reg-rs, windows, ci, github-actions, rust, testing, reva-fork, forth, cosy, installers]
 keywords: "Sharpen the Saw, reg-rs Windows, regression testing on Windows, Rust cross-platform CI, GitHub Actions Windows runner, File::lock, Child::kill, rusqlite bundled, reva-fork installers, CoSy Windows installer"
-abstract: "A short saw: reg-rs, my regression-testing tool, now builds and runs on Windows, so reva-fork can test on a Windows VM in CI on its way to desktop installers for Linux, macOS and Windows, and a Windows installer for my private CoSy fork. Three small changes did it: std's file lock in place of a Unix-only crate, Child::kill in place of kill -9, and SQLite compiled in."
+abstract: "A short saw: reg-rs, my regression-testing tool, now builds and runs on Windows, so reva-fork Forth can test on a Windows VM in CI on its way to desktop installers for Linux, macOS and Windows, and a Windows installer for my private CoSy fork. Three small changes did it: std's file lock in place of a Unix-only crate, Child::kill in place of kill -9, and SQLite compiled in."
 series: "Sharpen the Saw Sundays"
 series_part: 20
 date: 2026-11-22 00:15:00 -0800
@@ -17,7 +17,7 @@ repo_urls:
 
 <img src="{{ '/assets/images/posts/block-windows.webp' | relative_url }}" class="post-marker no-invert" alt="A flat illustration of many kinds of windows overlapping on a sage background: a plain modern frame, a carved Gothic arch, an arched stained-glass window, a white double-hung sash, a diamond-paned leaded casement and a large dark-framed picture window" style="width: 205px;">
 
-This week's saw is a short one, and a little sideways. [reva-fork](https://github.com/softwarewrighter/reva-fork) is heading for desktop installers on Linux, macOS and now Windows, the first step toward a Windows installer for my private CoSy fork. Testing that on a Windows VM in CI meant my regression tester, [reg-rs](https://github.com/sw-cli-tools/reg-rs), had to run on Windows first.
+This week's saw is a short one, and a little sideways. [reva-fork](https://github.com/softwarewrighter/reva-fork) Forth is heading for desktop installers on Linux, macOS and now Windows, the first step toward a Windows installer for my private CoSy fork. Testing that on a Windows VM in CI meant my regression tester, [reg-rs](https://github.com/sw-cli-tools/reg-rs), had to run on Windows first.
 
 <!--more-->
 
