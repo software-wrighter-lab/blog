@@ -53,19 +53,23 @@ reva-fork's gate, `just check`, runs its golden tests with reg-rs, and the Windo
 
 ## Three small changes
 
-<span style="float: left; clear: left; margin: 0.2em 1em 0.4em 0;"><img src="{{ '/assets/images/posts/saw20-padlock.webp' | relative_url }}" class="theme-light-only no-invert" alt="A brass padlock" style="width: 80px;"><img src="{{ '/assets/images/posts/saw20-padlock-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="A brass padlock" style="width: 80px;"></span>
-
+<div style="clear: both; display: flow-root; margin-bottom: 0.6em;" markdown="1">
+<img src="{{ '/assets/images/posts/saw20-padlock.webp' | relative_url }}" class="theme-light-only no-invert" alt="A brass padlock" style="float: left; width: 80px; margin: 0.2em 1em 0.4em 0;"><img src="{{ '/assets/images/posts/saw20-padlock-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="A brass padlock" style="float: left; width: 80px; margin: 0.2em 1em 0.4em 0;">
 **File locking.** reg-rs locks its SQLite database while it records results. The crate it used compiled Unix-only C (`fcntl`), and it also pulled in an old `nix` that no longer builds on macOS against the current `libc`. Rust's standard library has had `File::lock` since 1.89, so the crate is gone.
 
-<span style="float: left; clear: left; margin: 0.2em 1em 0.4em 0;"><img src="{{ '/assets/images/posts/saw20-timer.webp' | relative_url }}" class="theme-light-only no-invert" alt="A chrome stopwatch" style="width: 80px;"><img src="{{ '/assets/images/posts/saw20-timer-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="A chrome stopwatch" style="width: 80px;"></span>
+</div>
 
+<div style="clear: both; display: flow-root; margin-bottom: 0.6em;" markdown="1">
+<img src="{{ '/assets/images/posts/saw20-timer.webp' | relative_url }}" class="theme-light-only no-invert" alt="A chrome stopwatch" style="float: left; width: 80px; margin: 0.2em 1em 0.4em 0;"><img src="{{ '/assets/images/posts/saw20-timer-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="A chrome stopwatch" style="float: left; width: 80px; margin: 0.2em 1em 0.4em 0;">
 **Timeouts.** A test that runs too long was stopped with `kill -9`, which Windows does not have. Now the wait loop polls `try_wait` and stops the command with `Child::kill`, and a new test checks that a timed-out command really stops.
 
-<span style="float: left; clear: left; margin: 0.2em 1em 0.4em 0;"><img src="{{ '/assets/images/posts/saw20-sql-cylinder.webp' | relative_url }}" class="theme-light-only no-invert" alt="A stack of three silver disks, the top one marked SQL, the usual symbol for a database" style="width: 80px;"><img src="{{ '/assets/images/posts/saw20-sql-cylinder-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="A stack of three silver disks, the top one marked SQL, the usual symbol for a database" style="width: 80px;"></span>
+</div>
 
+<div style="clear: both; display: flow-root; margin-bottom: 0.6em;" markdown="1">
+<img src="{{ '/assets/images/posts/saw20-sql-cylinder.webp' | relative_url }}" class="theme-light-only no-invert" alt="A stack of three silver disks, the top one marked SQL, the usual symbol for a database" style="float: left; width: 80px; margin: 0.2em 1em 0.4em 0;"><img src="{{ '/assets/images/posts/saw20-sql-cylinder-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="A stack of three silver disks, the top one marked SQL, the usual symbol for a database" style="float: left; width: 80px; margin: 0.2em 1em 0.4em 0;">
 **SQLite.** Windows has no system SQLite to link against, so on Windows rusqlite compiles it in (its `bundled` feature).
 
-<div style="clear: both;"></div>
+</div>
 
 Test commands still run through `sh -c` on every OS; on Windows that is Git Bash's `sh`, so existing test scripts keep working. A new GitHub Actions workflow runs the full build (format, clippy, tests, build of every component) on Ubuntu, macOS and Windows. Rust 1.100's new clippy lints got fixed along the way.
 
