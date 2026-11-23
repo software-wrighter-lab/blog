@@ -46,15 +46,35 @@ reva-fork runs Reva's Forth unchanged on a small x86 virtual machine written in 
 
 reva-fork's gate, `just check`, runs its golden tests with reg-rs, and the Windows job has to run them too, in Git Bash. I had only used reg-rs on Linux and macOS, and it did not build on Windows.
 
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
 ## Three small changes
 
-- **File locking.** reg-rs locks its SQLite database while it records results. The crate it used compiled Unix-only C (`fcntl`), and it also pulled in an old `nix` that no longer builds on macOS against the current `libc`. Rust's standard library has had `File::lock` since 1.89, so the crate is gone.
-- **Timeouts.** A test that runs too long was stopped with `kill -9`, which Windows does not have. Now the wait loop polls `try_wait` and stops the command with `Child::kill`, and a new test checks that a timed-out command really stops.
-- **SQLite.** Windows has no system SQLite to link against, so on Windows rusqlite compiles it in (its `bundled` feature).
+<span style="float: left; clear: left; margin: 0.2em 1em 0.4em 0;"><img src="{{ '/assets/images/posts/saw20-padlock.webp' | relative_url }}" class="theme-light-only no-invert" alt="A brass padlock" style="width: 80px;"><img src="{{ '/assets/images/posts/saw20-padlock-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="A brass padlock" style="width: 80px;"></span>
+
+**File locking.** reg-rs locks its SQLite database while it records results. The crate it used compiled Unix-only C (`fcntl`), and it also pulled in an old `nix` that no longer builds on macOS against the current `libc`. Rust's standard library has had `File::lock` since 1.89, so the crate is gone.
+
+<span style="float: left; clear: left; margin: 0.2em 1em 0.4em 0;"><img src="{{ '/assets/images/posts/saw20-timer.webp' | relative_url }}" class="theme-light-only no-invert" alt="A chrome stopwatch" style="width: 80px;"><img src="{{ '/assets/images/posts/saw20-timer-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="A chrome stopwatch" style="width: 80px;"></span>
+
+**Timeouts.** A test that runs too long was stopped with `kill -9`, which Windows does not have. Now the wait loop polls `try_wait` and stops the command with `Child::kill`, and a new test checks that a timed-out command really stops.
+
+<span style="float: left; clear: left; margin: 0.2em 1em 0.4em 0;"><img src="{{ '/assets/images/posts/saw20-sql-cylinder.webp' | relative_url }}" class="theme-light-only no-invert" alt="A stack of three silver disks, the top one marked SQL, the usual symbol for a database" style="width: 80px;"><img src="{{ '/assets/images/posts/saw20-sql-cylinder-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="A stack of three silver disks, the top one marked SQL, the usual symbol for a database" style="width: 80px;"></span>
+
+**SQLite.** Windows has no system SQLite to link against, so on Windows rusqlite compiles it in (its `bundled` feature).
+
+<div style="clear: both;"></div>
 
 Test commands still run through `sh -c` on every OS; on Windows that is Git Bash's `sh`, so existing test scripts keep working. A new GitHub Actions workflow runs the full build (format, clippy, tests, build of every component) on Ubuntu, macOS and Windows. Rust 1.100's new clippy lints got fixed along the way.
 
 The first Windows runs found a few more things, which is the point of running them. Usage text said `reg-rs.exe`. The default data directory needed `USERPROFILE` when `HOME` is unset. A test path like `subdir/foo` came back as `subdir\foo.rgt`. And `bash` on a Windows PATH can be the launcher for WSL, the Windows Subsystem for Linux, rather than Git Bash. All of them are fixed, and the [workflow](https://github.com/sw-cli-tools/reg-rs/actions) is green on all three systems.
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
 
 ## Closing
 
