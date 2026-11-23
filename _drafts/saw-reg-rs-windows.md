@@ -18,8 +18,7 @@ repo_urls:
 <!-- DRAFT (2026-11-22), Mike: a quick, short saw for today on reg-rs Windows support, for reva-fork CI on a Windows VM,
      toward desktop installers (Linux, macOS, Windows) and a Windows installer for Mike's private CoSy fork.
      Facts from reg-rs branch fix/windows-support: 0376410 (File::lock, Child::kill), ef8fc65 (clippy, Rust 1.100),
-     f6297ad (CI workflow ubuntu/macos/windows, rusqlite bundled on Windows, README Windows section). At drafting the
-     branch was not yet on GitHub (ls-remote empty). reva-fork plan e2f1030 (steps 77-79: local-ci with Windows on
+     f6297ad (CI workflow ubuntu/macos/windows, rusqlite bundled on Windows, README Windows section). Merged to main as PR #1 (1a18986, 2026-11-22), CI green on all three; also ef62639 (exe name, USERPROFILE, Git Bash sh, test dir), 4a461e2 (path separators), 3eeb0ca (app Cargo.lock). reva-fork plan e2f1030 (steps 77-79: local-ci with Windows on
      GitHub Actions, local-desktop-installers, local-installer-tests; GitHub Actions, no paid signing, .deb/.rpm, no AppImage).
      Lead image: Mike's block-windows.jpg (Dropbox, 2026-11-22). -->
 
@@ -54,6 +53,8 @@ reva-fork's gate, `just check`, runs its golden tests with reg-rs, and the Windo
 - **SQLite.** Windows has no system SQLite to link against, so on Windows rusqlite compiles it in (its `bundled` feature).
 
 Test commands still run through `sh -c` on every OS; on Windows that is Git Bash's `sh`, so existing test scripts keep working. A new GitHub Actions workflow runs the full build (format, clippy, tests, build of every component) on Ubuntu, macOS and Windows. Rust 1.100's new clippy lints got fixed along the way.
+
+The first Windows runs found a few more things, which is the point of running them. Usage text said `reg-rs.exe`. The default data directory needed `USERPROFILE` when `HOME` is unset. A test path like `subdir/foo` came back as `subdir\foo.rgt`. And `bash` on a Windows PATH can be the launcher for WSL, the Windows Subsystem for Linux, rather than Git Bash. All of them are fixed, and the [workflow](https://github.com/sw-cli-tools/reg-rs/actions) is green on all three systems.
 
 ## Closing
 
