@@ -57,4 +57,4 @@ Test commands still run through `sh -c` on every OS; on Windows that is Git Bash
 
 ## Closing
 
-Mike: TODO, a closing in your words (optional; one or two sentences).
+This change enables porting more of my work to Windows. Most of my tools are Rust, and reg-rs is how I test them, so with it running on a Windows CI runner, any of my projects can add Windows to its checks and see what breaks before anyone installs it.
