@@ -136,4 +136,4 @@ Episode 2 is made the same way as [episode 1](/2026/11/22/array-languages-xetal-
 
 ## Closing
 
-Mike: TODO, a closing in your words.
+I am hoping to cover all the language decisions that went into X_eTaL as I demonstrate array concepts, functional programming, metaprogramming, and related tooling.
