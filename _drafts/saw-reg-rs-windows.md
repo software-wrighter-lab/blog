@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Saw #20: reg-rs on Windows, for a Windows Installer"
+title: "Saw #20: reg-rs on Windows, Enabling Windows Installers (for Reva and CoSy)"
 categories: [tools]
 tags: [sharpen-the-saw, reg-rs, windows, ci, github-actions, rust, testing, reva-fork, cosy, installers]
 keywords: "Sharpen the Saw, reg-rs Windows, regression testing on Windows, Rust cross-platform CI, GitHub Actions Windows runner, File::lock, Child::kill, rusqlite bundled, reva-fork installers, CoSy Windows installer"
