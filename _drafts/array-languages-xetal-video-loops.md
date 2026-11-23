@@ -23,10 +23,10 @@ repo_urls:
      out/al-02-loops-youtube/{title.txt, description.txt, narration.txt}. Title from title.txt (oEmbed not public at drafting).
      Frames al22-* from out/al-02-loops-youtube/al-02-loops-landscape.mp4 at 0:39, 1:18, 1:37, 2:22, 2:58, 3:13.
      Dated 2026-11-23, the day the video went up (was a tentative 11/24).
-     Still to do: the lead image (Mike; placeholder until then), the closing (Mike).
+     Lead image: Mike's block-map-filter-reduce.jpg (Dropbox, 2026-11-23), no-invert. Still to do: the closing (Mike).
 -->
 
-<img src="{{ '/assets/images/posts/placeholder-array-languages-xetal-video-loops.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-map-filter-reduce.webp' | relative_url }}" class="post-marker no-invert" alt="A linocut of a small workshop assembly line: wooden shapes ride a conveyor under a stamping press, a sorting gate sends some down a chute, and the rest drop into a bin on a scale" style="width: 205px;">
 
 Episode 2 of my video series on array programming is out. [Episode 1](/2026/11/22/array-languages-xetal-video-why/) asked why another programming language; this one starts the work, turning common loops into array operations. It runs about five minutes, and it ends with a preview of the next episode and an exercise.
 
