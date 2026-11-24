@@ -27,10 +27,10 @@ repo_urls:
      Date 2026-11-24 is tentative; Made Visible #5 is also dated 11/24.
      To do when the episode is done (me): video_url/video_title from the youtube title.txt, the links-box Video row,
      al23-* frames from the render, floated beside the sections as in AL #22.
-     Mike: the lead image (placeholder until then), the closing.
+     Lead image: Mike's block-typesetting.jpg (Dropbox, 2026-11-23), no-invert. Mike: the closing.
 -->
 
-<img src="{{ '/assets/images/posts/placeholder-array-languages-xetal-video-shape.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-typesetting.webp' | relative_url }}" class="post-marker no-invert" alt="A linocut of a letterpress workbench: a single piece of type, a line of type in a composing stick, a page of type locked in an iron frame, and locked pages stacked in a rack" style="width: 205px;">
 
 Episode 3 of my video series on array programming moves past lists. [Episode 2](/2026/11/23/array-languages-xetal-video-loops/) turned loops into map, filter and reduce over whole lists, and a list is only one kind of array. Every array has a shape, a rank and axes, and this episode is about all three.
 
