@@ -99,5 +99,7 @@ rN      GRID → TOUR → END
   palette (light and dark). Realign `⍝` columns after rendering: subscripts and underlines shorten names (`r_/_1` → `r̲/₁`).
 - Inline snippets: `` `r̲ev₂ M`{:.language-xetal} ``; the same lexer colors them (`code.language-xetal` in `assets/main.scss`).
   Plain results (`5 7 9`, shapes) stay plain inline code.
+- Array results: `xetal --box` (or `d̲isplay`) draws them boxed, as APL2 DISPLAY did (the video slides use this). Show a boxed
+  result in a plain fence when the shape matters.
 - Edit rendered text with UTF-8-safe tools: a Perl script needs `use utf8;` plus `-CSD`, or the combining underline and
   subscripts come out double-encoded.

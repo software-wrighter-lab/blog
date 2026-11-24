@@ -25,6 +25,9 @@ repo_urls:
      PUBLISH: ship the assets/main.scss change (code.language-xetal, inline colors; drafts fc21c3c) to main with this post.
      Left out on purpose: the preview-dialects scene (APL, J, BQN, K, NumPy broadcasting rules), which the README marks
      "to be checked by the author"; and the code_report credit for LeetCode 1351, a third party, pending Mike's go.
+     Tooling section: X_eTaL-video props.mjs runs `bin/xetal render --html` on every lesson line (c-error fails the build); Panel.tsx colors
+     the c-* classes from theme.ts; boxes from `xetal --box` / d̲isplay, run 2026-11-24. Mike: the slides will show boxed outputs soon;
+     when they do, re-check that paragraph and the al23 frames.
      Re-check against the final script before publishing (scenes may change in the words and voice steps).
      Date 2026-11-24 is tentative; Made Visible #5 is also dated 11/24.
      To do when the episode is done (me): video_url/video_title from the youtube title.txt, the links-box Video row,
@@ -119,6 +122,29 @@ There are 7.
 ## Tensors
 
 In machine learning, arrays like these are called tensors. A color image might have shape `480 640 3`: height, width and three color channels. Stack 32 of them and the batch gains an axis, shape `32 480 640 3`, rank 4, and `'× r̲/ s̲hape images`{:.language-xetal} counts its 29,491,200 values. A GPU works on many values at once, and shape and axes tell it how a tensor is laid out. The ideas are the same ones, and later episodes come back to tensors.
+
+## How the video draws the code
+
+The code on the slides isn't typeset by hand. You type X_eTaL in plain ASCII, `M := 2 3 r_eshape r_ange 6`, and X_eTaL's own `xetal render` draws it as notation: `M ← 2 3 r̲eshape r̲ange 6`{:.language-xetal}. The underlined letter marks a name as a function, the `_2` becomes the subscript axis in `r̲/₂`{:.language-xetal}, and the `#` of a remark becomes `⍝`.
+
+The video is built in [X_eTaL-video](https://github.com/softwarewrighter/X_eTaL-video), which pins one build of X_eTaL so the slides always match the language they show. Before a lesson renders, its build script collects every line of X_eTaL in the lesson and runs them through `xetal render --html`. That returns each line as HTML spans, one class for each kind of token:
+
+```html
+<span class="c-symbol">'+</span> <span class="c-builtin">r̲/₂</span> M    <span class="c-comment">⍝ 6 15</span>
+```
+
+The renderer, written with [Remotion](https://www.remotion.dev/), gives each class its color (built-in functions blue, numbers gold, remarks gray), and a line that doesn't lex as X_eTaL stops the build instead of reaching the screen. The arrays drawn as grids come from X_eTaL too: the lesson's data file is run with the same pinned xetal, and the slides draw the numbers it prints. The code blocks in this post are colored the same way. The blog's highlighter follows the same token classes as `xetal render --html`.
+
+X_eTaL can also draw its results in boxes, the way APL2's DISPLAY did: `xetal --box` boxes every result, and `d̲isplay`{:.language-xetal} boxes one. The box shows the shape and rank:
+
+```
+┌→────┐
+↓1 2 3│
+│4 5 6│
+└~────┘
+```
+
+That's `M`. The `→` on the top edge marks the last axis, the one that runs along each row, and the `↓` on the left edge marks the first axis, down the rows. A vector gets only the `→`, so the number of arrows is the rank, and the `~` on the bottom edge means the items are numbers. The slides will soon show their outputs boxed like this.
 
 ## Coming up, and an exercise
 
