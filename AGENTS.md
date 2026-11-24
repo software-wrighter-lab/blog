@@ -85,3 +85,19 @@ rN      GRID → TOUR → END
   section with no gutter image the center.
 - A long section can continue on the next side without a heading: wrap its later paragraphs in
   `<section class="stagger" markdown="1">` … `</section>`; the stagger script gives it the next position and the cycle goes on.
+
+## X_eTaL code: show it as rendered, not as typed
+
+- When a post shows X_eTaL, it almost always wants the **as-rendered** form (what the video, the live demo and `xetal render`
+  show: `M ← 2 3 r̲eshape r̲ange 6`, `'+ r̲/₂ M`, `10 × M`), color highlighted, not the typed ASCII (`M := 2 3 r_eshape r_ange 6`).
+  The typed form appears only where the post is explicitly about typing it (a "type `:=` for `←`" note, a keyboard topic).
+- Generate it with X_eTaL's own tool, never by hand: `bin/xetal render FILE` or `bin/xetal render -e 'EXPR'` (in a repo with a
+  pinned `bin/xetal`, e.g. X_eTaL-video for a video post; else X_eTaL's `target/release/xetal`). A `# remark` renders as `⍝`, so
+  a block can carry each result as `⍝ 6 15`; check every result by running the lines (`scripts/xt run FILE` in X_eTaL-video).
+  `xetal fmt` is the canonical, fully parenthesized form, not what the video shows; don't use it for posts.
+- Code blocks: put the rendered text in a ```` ```xetal ```` fence; `_plugins/rouge_xetal.rb` colors the drawn form with X_eTaL's
+  palette (light and dark). Realign `⍝` columns after rendering: subscripts and underlines shorten names (`r_/_1` → `r̲/₁`).
+- Inline snippets: `` `r̲ev₂ M`{:.language-xetal} ``; the same lexer colors them (`code.language-xetal` in `assets/main.scss`).
+  Plain results (`5 7 9`, shapes) stay plain inline code.
+- Edit rendered text with UTF-8-safe tools: a Perl script needs `use utf8;` plus `-CSD`, or the combining underline and
+  subscripts come out double-encoded.
