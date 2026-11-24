@@ -22,6 +22,7 @@ repo_urls:
      scenes in lesson.json, the README sources table, and data.xtl, whose every output here was run with the pinned
      xetal (49c00785) on 2026-11-23 (`scripts/xt run lessons/al-03-shape/data.xtl`). Not yet narrated or rendered.
      Code is shown as rendered (`bin/xetal render`), per AGENTS.md; results as ⍝ remarks, each run.
+     PUBLISH: ship the assets/main.scss change (code.language-xetal, inline colors; drafts fc21c3c) to main with this post.
      Left out on purpose: the preview-dialects scene (APL, J, BQN, K, NumPy broadcasting rules), which the README marks
      "to be checked by the author"; and the code_report credit for LeetCode 1351, a third party, pending Mike's go.
      Re-check against the final script before publishing (scenes may change in the words and voice steps).
