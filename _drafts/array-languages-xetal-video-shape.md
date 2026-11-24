@@ -26,7 +26,7 @@ repo_urls:
      Left out on purpose: the preview-dialects scene (APL, J, BQN, K, NumPy broadcasting rules), which the README marks
      "to be checked by the author"; and the code_report credit for LeetCode 1351, a third party, pending Mike's go.
      Tooling section: X_eTaL-video props.mjs runs `bin/xetal render --html` on every lesson line (c-error fails the build); Panel.tsx colors
-     the c-* classes from theme.ts; boxes from `xetal --box` / d̲isplay, run 2026-11-24. Mike: the slides will show boxed outputs soon;
+     the c-* classes from theme.ts; boxes from `xetal --box` / d̲isplay, run 2026-11-24. Shape and rank shows Mike's boxed examples (s̲hape 42, s̲hape r̲avel 42, ᵘr̲ankOf; built-in rank planned after this video, not mentioned), run 2026-11-24. Mike: the slides will show boxed outputs soon;
      when they do, re-check that paragraph and the al23 frames.
      Re-check against the final script before publishing (scenes may change in the words and voice steps).
      Date 2026-11-24 is tentative; Made Visible #5 is also dated 11/24.
@@ -56,14 +56,42 @@ Episode 3 of my video series on array programming moves past lists. [Episode 2](
 
 ## Shape and rank
 
-A scalar is a single value. It has no axes: its shape is an empty list, so its rank is zero. A vector has one axis; `3 1 4 1 5` has shape `5` and rank 1. Rank is the length of the shape, so `t̲ally s̲hape`{:.language-xetal} gives it.
+A scalar is a single value. It has no axes, so its shape is an empty list. X_eTaL can draw a result in a box, and the box shows that clearly: the `⊖` on the top edge marks a list with no items, and the `~` on the bottom marks a list of numbers.
+
+```xetal
+s̲hape 42
+```
+```
+┌⊖┐
+│ │
+└~┘
+```
+
+A vector has one axis. `r̲avel`{:.language-xetal} turns the scalar into a vector of one item, and its shape is a list holding one number, 1:
+
+```xetal
+s̲hape r̲avel 42
+```
+```
+┌→┐
+│1│
+└~┘
+```
+
+Rank is the number of axes, which is the length of the shape: tally the shape and you have it. X_eTaL has no built-in for rank yet, so the episode defines one. `ᵘ`{:.language-xetal} marks a name the user defined, and `⍵`{:.language-xetal} is the argument on the right:
+
+```xetal
+ᵘr̲ankOf ← { t̲ally s̲hape ⍵}
+ᵘr̲ankOf 42         ⍝ 0
+ᵘr̲ankOf r̲avel 42   ⍝ 1
+```
 
 A matrix has two axes, rows and columns:
 
 ```xetal
 M ← 2 3 r̲eshape r̲ange 6
-s̲hape M          ⍝ 2 3
-t̲ally s̲hape M   ⍝ 2
+s̲hape M     ⍝ 2 3
+ᵘr̲ankOf M   ⍝ 2
 ```
 
 `M`{:.language-xetal} is `1 2 3` over `4 5 6`, with shape `2 3`. It holds six values, but its rank is 2. Add one more axis and two tables, each three by four, make an array of shape `2 3 4` and rank 3. Higher ranks follow the same rule.
@@ -135,7 +163,7 @@ The video is built in [X_eTaL-video](https://github.com/softwarewrighter/X_eTaL-
 
 The renderer, written with [Remotion](https://www.remotion.dev/), gives each class its color (built-in functions blue, numbers gold, remarks gray), and a line that doesn't lex as X_eTaL stops the build instead of reaching the screen. The arrays drawn as grids come from X_eTaL too: the lesson's data file is run with the same pinned xetal, and the slides draw the numbers it prints. The code blocks in this post are colored the same way. The blog's highlighter follows the same token classes as `xetal render --html`.
 
-X_eTaL can also draw its results in boxes, the way APL2's DISPLAY did: `xetal --box` boxes every result, and `d̲isplay`{:.language-xetal} boxes one. The box shows the shape and rank:
+The boxes come from X_eTaL too, drawn the way APL2's DISPLAY drew them: `xetal --box` boxes every result, and `d̲isplay`{:.language-xetal} boxes one. A matrix shows how to read them:
 
 ```
 ┌→────┐
@@ -144,7 +172,7 @@ X_eTaL can also draw its results in boxes, the way APL2's DISPLAY did: `xetal --
 └~────┘
 ```
 
-That's `M`. The `→` on the top edge marks the last axis, the one that runs along each row, and the `↓` on the left edge marks the first axis, down the rows. A vector gets only the `→`, so the number of arrows is the rank, and the `~` on the bottom edge means the items are numbers. The slides will soon show their outputs boxed like this.
+That's `M`. The `→` on the top edge marks the last axis, the one that runs along each row, and the `↓` on the left edge marks the first axis, down the rows. A vector gets only the `→`, so the number of arrows is the rank, and the `~` on the bottom edge means the items are numbers. An empty list gets `⊖` instead of `→`, as `s̲hape 42`{:.language-xetal} showed. The slides will soon show their outputs boxed like this.
 
 ## Coming up, and an exercise
 
