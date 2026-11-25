@@ -249,4 +249,4 @@ The exercise: a video clip has 300 frames, each 480 by 640 with three colors. Wo
 ## Closing
 {: .pos-center}
 
-In future videos I hope to include more interesting coding problems and better visualizations as I add more tools to help with code experimentation and understanding.
+In future videos I plan to include more interesting coding problems and better visualizations as I add more tools to help with code experimentation and understanding.
