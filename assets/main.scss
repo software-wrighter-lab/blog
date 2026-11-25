@@ -2009,7 +2009,9 @@ dialog.lightbox .lightbox-close {
 // X_eTaL code blocks (```xetal, highlighted by _plugins/rouge_xetal.rb).
 // The palette is X_eTaL's own (docs/literate/style.css), light and dark, so
 // the blog's snippets match the live demo and `xetal render --html`.
-.language-xetal .highlight {
+// Inline X_eTaL (`code`{:.language-xetal}) is highlighted by the same lexer,
+// as spans in a bare <code class="language-xetal">, and takes the same palette.
+.language-xetal .highlight, code.language-xetal {
   .nb { color: #1f5fbf; }                       // built-in (c-builtin)
   .nf { color: #1e7a34; }                       // user function (c-userfunc)
   .nc { color: #0b7d8a; }                       // library function (c-libfunc)
@@ -2028,7 +2030,7 @@ dialog.lightbox .lightbox-close {
 }
 
 @mixin xetal-dark {
-  .language-xetal .highlight {
+  .language-xetal .highlight, code.language-xetal {
     .nb { color: #5b9cff; }
     .nf { color: #3fbf5f; }
     .nc { color: #22b8c8; }
