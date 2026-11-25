@@ -8,8 +8,8 @@ abstract: "Twenty-third in the Array Languages series: episode 3 of the video se
 series: "Array Languages"
 series_part: 23
 date: 2026-11-24 00:15:00 -0800
-# video_url: "Mike: TODO, the episode's YouTube URL once it is published" (post.html embeds it at the end and it joins the Videos tab)
-# video_title: "Shape, Rank, Axes and Dimensions: Array Languages #3" (check against X_eTaL-video out/al-03-shape-youtube/title.txt)
+video_url: "https://www.youtube.com/watch?v=JbKMtZZT6AY"
+video_title: "Shape, Rank, Axes and Dimensions: Array Languages #3"
 repo_urls:
   - url: "https://github.com/softwarewrighter/X_eTaL"
     title: "X_eTaL"
@@ -18,20 +18,17 @@ repo_urls:
 ---
 
 <!-- DRAFT
-     Started 2026-11-23 from X_eTaL-video lessons/al-03-shape: the script Mike approved (23ed733, step 001), its 26
-     scenes in lesson.json, the README sources table, and data.xtl, whose every output here was run with the pinned
-     xetal (49c00785) on 2026-11-23 (`scripts/xt run lessons/al-03-shape/data.xtl`). Not yet narrated or rendered.
+     Started 2026-11-23 from X_eTaL-video lessons/al-03-shape; every output here was run with the pinned xetal (49c00785).
+     Checked 2026-11-24 against the published episode (JbKMtZZT6AY, 6:27): out/al-03-shape-youtube/narration.txt, title.txt
+     (oEmbed matches), description.txt. al23-* frames from that mp4 (0:58, 2:08, 3:15, 3:53, 4:33, 2:18, 5:16).
      Code is shown as rendered (`bin/xetal render`), per AGENTS.md; results as ⍝ remarks, each run.
      PUBLISH: ship the assets/main.scss change (code.language-xetal, inline colors; drafts fc21c3c) to main with this post.
-     Left out on purpose: the preview-dialects scene (APL, J, BQN, K, NumPy broadcasting rules), which the README marks
-     "to be checked by the author"; and the code_report credit for LeetCode 1351, a third party, pending Mike's go.
-     Tooling section: X_eTaL-video props.mjs runs `bin/xetal render --html` on every lesson line (c-error fails the build); Panel.tsx colors
-     the c-* classes from theme.ts; boxes from `xetal --box` / d̲isplay, run 2026-11-24. Shape and rank shows Mike's boxed examples (s̲hape 42, s̲hape r̲avel 42, ᵘr̲ankOf; built-in rank planned after this video, not mentioned), run 2026-11-24. Mike: the slides will show boxed outputs soon;
-     when they do, re-check that paragraph and the al23 frames.
-     Re-check against the final script before publishing (scenes may change in the words and voice steps).
-     Date 2026-11-24 is tentative; Made Visible #5 is also dated 11/24.
-     To do when the episode is done (me): video_url/video_title from the youtube title.txt, the links-box Video row,
-     al23-* frames from the render, floated beside the sections as in AL #22.
+     Where languages differ: from the narration (the published video says it), not from the README's unchecked table.
+     code_report: the video description credits code_report for LeetCode 1351 (youtu.be/pDbDtGn1PXk); not in the post
+     until Mike's go.
+     Tooling section: X_eTaL-video props.mjs runs `bin/xetal render --html` on every lesson line (c-error fails the build);
+     Panel.tsx colors the c-* classes from theme.ts; boxes from `xetal --box` / d̲isplay. Shape and rank uses Mike's boxed
+     examples (s̲hape 42, s̲hape r̲avel 42, ᵘr̲ankOf); the video says a built-in rank of is coming soon.
      Lead image: Mike's block-typesetting.jpg (Dropbox, 2026-11-23), no-invert. Mike: the closing.
 -->
 
@@ -45,8 +42,10 @@ Episode 3 of my video series on array programming moves past lists. [Episode 2](
 
 | Resource | Link |
 |----------|------|
-| **Video** | Mike: TODO, the episode link and thumbnail, once published |
-| **Earlier episodes** | [1: Why another language?](/2026/11/22/array-languages-xetal-video-why/), [2: Loops to array operations](/2026/11/23/array-languages-xetal-video-loops/) |
+| **Video** | [Shape, Rank, Axes and Dimensions: Array Languages #3](https://www.youtube.com/watch?v=JbKMtZZT6AY)<br>[![Video](https://img.youtube.com/vi/JbKMtZZT6AY/mqdefault.jpg){: .video-thumb}](https://www.youtube.com/watch?v=JbKMtZZT6AY) |
+| **Earlier episodes** | 1: [Why Another Programming Language?](/2026/11/22/array-languages-xetal-video-why/) ([video](https://www.youtube.com/watch?v=NfdzVWjje2Y))<br>2: [From Scalar Loops to Array Operations](/2026/11/23/array-languages-xetal-video-loops/) ([video](https://www.youtube.com/watch?v=YiJYDiD7xqc)) |
+| **All the videos** | [X_eTaL-video's page](https://softwarewrighter.github.io/X_eTaL-video/) |
+| **Challenges** | LeetCode [1672](https://leetcode.com/problems/richest-customer-wealth/), [1351](https://leetcode.com/problems/count-negative-numbers-in-a-sorted-matrix/) |
 | **Try X_eTaL** | [In your browser](https://softwarewrighter.github.io/X_eTaL/) |
 | **Code** | [X_eTaL](https://github.com/softwarewrighter/X_eTaL), [X_eTaL-video](https://github.com/softwarewrighter/X_eTaL-video) |
 | **The series** | [Array Languages: every post](/series/#array-languages) |
@@ -55,6 +54,11 @@ Episode 3 of my video series on array programming moves past lists. [Episode 2](
 </div>
 
 ## Shape and rank
+
+<figure class="zoomable" style="float: right; width: 260px; margin: 0.3em 0 0.6em 1.2em;">
+<img src="{{ '/assets/images/posts/al23-rank-of.webp' | relative_url }}" alt="A frame from the episode, Rank, as a function: rankOf is defined as tally of shape of its argument; rankOf 7 gives 0 and rankOf v gives 1">
+<figcaption>Rank, as a function.</figcaption>
+</figure>
 
 A scalar is a single value. It has no axes, so its shape is an empty list. X_eTaL can draw a result in a box, and the box shows that clearly: the `⊖` on the top edge marks a list with no items, and the `~` on the bottom marks a list of numbers.
 
@@ -78,7 +82,7 @@ s̲hape r̲avel 42
 └~┘
 ```
 
-Rank is the number of axes, which is the length of the shape: tally the shape and you have it. X_eTaL has no built-in for rank yet, so the episode defines one. `ᵘ`{:.language-xetal} marks a name the user defined, and `⍵`{:.language-xetal} is the argument on the right:
+Rank is the number of axes, which is the length of the shape: tally the shape and you have it. X_eTaL will soon have it built in; until then, the episode defines it. `ᵘ`{:.language-xetal} marks a name the user defined, and `⍵`{:.language-xetal} is the argument on the right:
 
 ```xetal
 ᵘr̲ankOf ← { t̲ally s̲hape ⍵}
@@ -98,6 +102,11 @@ s̲hape M     ⍝ 2 3
 
 ## Along an axis
 
+<figure class="zoomable" style="float: left; width: 260px; margin: 0.3em 1.2em 0.6em 0;">
+<img src="{{ '/assets/images/posts/al23-reduce-axis.webp' | relative_url }}" alt="A frame from the episode, Reduce along an axis: M boxed, 1 2 3 over 4 5 6, and plus-reduce along axis 2 of M gives 6 15, boxed">
+<figcaption>Reduce along axis 2.</figcaption>
+</figure>
+
 Each axis has a number. In a matrix, axis 1 runs down the rows, and axis 2 runs along each row. Many operations work along an axis, and in X_eTaL a subscript after the name picks which one. (The code here is shown as X_eTaL draws it, as the video does. To try it in the [browser editor](https://softwarewrighter.github.io/X_eTaL/), type the ASCII it is drawn from: `:=` for `←`, `r_/_2` for `r̲/₂`, `*` for `×`, and `#` for `⍝`.)
 
 ```xetal
@@ -112,6 +121,11 @@ Rotate, reverse and transpose work the same way. `1 o̲-₁ M`{:.language-xetal}
 
 ## Three dimensions
 
+<figure class="zoomable" style="float: right; width: 260px; margin: 0.3em 0 0.6em 1.2em;">
+<img src="{{ '/assets/images/posts/al23-transposed.webp' | relative_url }}" alt="A frame from the episode, Rank three, transposed: the shape of T with axes 2 and 3 swapped is 2 4 3, and the shape of 3 1 2 transpose T is 3 4 2">
+<figcaption>Rank three, transposed.</figcaption>
+</figure>
+
 The same subscripts work on the rank 3 array:
 
 ```xetal
@@ -125,6 +139,11 @@ Reduce along axis 1 adds the two tables together, a `3 4` result. Reduce along a
 Ravel goes the other way, turning any array back into a vector: `r̲avel T`{:.language-xetal} is the 24 values in order, rank 1 again. With subscript 2, `r̲avel₂ M`{:.language-xetal} unrolls a matrix column by column: `1 4 2 5 3 6`.
 
 ## Two challenges, along axes
+
+<figure class="zoomable" style="float: left; width: 260px; margin: 0.3em 1.2em 0.6em 0;">
+<img src="{{ '/assets/images/posts/al23-richest.webp' | relative_url }}" alt="A frame from the episode, A challenge: the richest customer: accounts is a 3 by 2 matrix, plus-reduce along axis 2 gives 6 10 8, and the max of that is 10">
+<figcaption>The richest customer.</figcaption>
+</figure>
 
 The episode tries the ideas on two short coding challenges from LeetCode.
 
@@ -149,9 +168,19 @@ There are 7.
 
 ## Tensors
 
+<figure class="zoomable" style="float: right; width: 260px; margin: 0.3em 0 0.6em 1.2em;">
+<img src="{{ '/assets/images/posts/al23-tensors.webp' | relative_url }}" alt="A frame from the episode, Tensors: images is 32 480 640 3 reshape 0, its shape is 32 480 640 3, and rankOf images is 4">
+<figcaption>A batch of images, rank 4.</figcaption>
+</figure>
+
 In machine learning, arrays like these are called tensors. A color image might have shape `480 640 3`: height, width and three color channels. Stack 32 of them and the batch gains an axis, shape `32 480 640 3`, rank 4, and `'× r̲/ s̲hape images`{:.language-xetal} counts its 29,491,200 values. A GPU works on many values at once, and shape and axes tell it how a tensor is laid out. The ideas are the same ones, and later episodes come back to tensors.
 
 ## How the video draws the code
+
+<figure class="zoomable" style="float: left; width: 260px; margin: 0.3em 1.2em 0.6em 0;">
+<img src="{{ '/assets/images/posts/al23-rotate-boxed.webp' | relative_url }}" alt="A frame from the episode, Rotate: M and 1 rotate along axis 1 of M, then 1 rotate along axis 2 of M giving 2 3 1 over 5 6 4, each result drawn in a box">
+<figcaption>Results boxed by xetal.</figcaption>
+</figure>
 
 The code on the slides isn't typeset by hand. You type X_eTaL in plain ASCII, `M := 2 3 r_eshape r_ange 6`, and X_eTaL's own `xetal render` draws it as notation: `M ← 2 3 r̲eshape r̲ange 6`{:.language-xetal}. The underlined letter marks a name as a function, the `_2` becomes the subscript axis in `r̲/₂`{:.language-xetal}, and the `#` of a remark becomes `⍝`.
 
@@ -172,11 +201,18 @@ The boxes come from X_eTaL too, drawn the way APL2's DISPLAY drew them: `xetal -
 └~────┘
 ```
 
-That's `M`. The `→` on the top edge marks the last axis, the one that runs along each row, and the `↓` on the left edge marks the first axis, down the rows. A vector gets only the `→`, so the number of arrows is the rank, and the `~` on the bottom edge means the items are numbers. An empty list gets `⊖` instead of `→`, as `s̲hape 42`{:.language-xetal} showed. The slides will soon show their outputs boxed like this.
+That's `M`. The `→` on the top edge marks the last axis, the one that runs along each row, and the `↓` on the left edge marks the first axis, down the rows. A vector gets only the `→`, so the number of arrows is the rank, and the `~` on the bottom edge means the items are numbers. An empty list gets `⊖` instead of `→`, as `s̲hape 42`{:.language-xetal} showed. The episode's slides show their results boxed this way, as in the rotate here.
 
 ## Coming up, and an exercise
 
+<figure class="zoomable" style="float: right; width: 260px; margin: 0.3em 0 0.6em 1.2em;">
+<img src="{{ '/assets/images/posts/al23-broadcast.webp' | relative_url }}" alt="A frame from the episode, One value, or the same shape: 10 times M, and M plus M">
+<figcaption>The preview of broadcasting.</figcaption>
+</figure>
+
 The next episode is about broadcasting: how an operation combines arrays of different shapes. The preview starts with the simplest case. `10 × M`{:.language-xetal} multiplies every item by ten, because a single value extends to every item, and `M + M`{:.language-xetal} combines two arrays of the same shape item by item. In X_eTaL that is the whole rule, and other shapes are an error.
+
+Array languages draw this line in different places. APL extends a single value too, and an axis can say how a vector meets a matrix. J and BQN match axes from the front, so each item of a vector goes with one row; K works much the same way, since there a matrix is a list of rows. NumPy, for Python, matches axes from the back. The next episode puts them side by side.
 
 The exercise: a video clip has 300 frames, each 480 by 640 with three colors. Work out its shape and its rank, then count its values. Everything in this post can be tried in the [browser editor](https://softwarewrighter.github.io/X_eTaL/).
 
