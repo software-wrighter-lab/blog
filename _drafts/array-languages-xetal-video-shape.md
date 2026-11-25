@@ -20,7 +20,7 @@ repo_urls:
 <!-- DRAFT
      Started 2026-11-23 from X_eTaL-video lessons/al-03-shape; every output here was run with the pinned xetal (49c00785).
      Checked 2026-11-24 against the published episode (JbKMtZZT6AY, 6:27): out/al-03-shape-youtube/narration.txt, title.txt
-     (oEmbed matches), description.txt. al23-* frames from that mp4 (0:58, 2:08, 3:15, 3:53, 4:33, 2:18, 5:16).
+     (oEmbed matches), description.txt. al23-* frames from that mp4 (3:15, 3:53, 4:33, 2:18, 5:16) as gutter figures; the first two sections flow beside the links box (not staggered), so no frames there.
      Code is shown as rendered (`bin/xetal render`), per AGENTS.md; results as ⍝ remarks, each run.
      PUBLISH: ship the assets/main.scss change (code.language-xetal, inline colors; drafts fc21c3c) to main with this post.
      Where languages differ: from the narration (the published video says it), not from the README's unchecked table.
@@ -54,11 +54,6 @@ Episode 3 of my video series on array programming moves past lists. [Episode 2](
 </div>
 
 ## Shape and rank
-
-<figure class="zoomable" style="float: right; width: 260px; margin: 0.3em 0 0.6em 1.2em;">
-<img src="{{ '/assets/images/posts/al23-rank-of.webp' | relative_url }}" alt="A frame from the episode, Rank, as a function: rankOf is defined as tally of shape of its argument; rankOf 7 gives 0 and rankOf v gives 1">
-<figcaption>Rank, as a function.</figcaption>
-</figure>
 
 A scalar is a single value. It has no axes, so its shape is an empty list. X_eTaL can draw a result in a box, and the box shows that clearly: the `⊖` on the top edge marks a list with no items, and the `~` on the bottom marks a list of numbers.
 
@@ -100,12 +95,12 @@ s̲hape M     ⍝ 2 3
 
 `M`{:.language-xetal} is `1 2 3` over `4 5 6`, with shape `2 3`. It holds six values, but its rank is 2. Add one more axis and two tables, each three by four, make an array of shape `2 3 4` and rank 3. Higher ranks follow the same rule.
 
-## Along an axis
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
 
-<figure class="zoomable" style="float: left; width: 260px; margin: 0.3em 1.2em 0.6em 0;">
-<img src="{{ '/assets/images/posts/al23-reduce-axis.webp' | relative_url }}" alt="A frame from the episode, Reduce along an axis: M boxed, 1 2 3 over 4 5 6, and plus-reduce along axis 2 of M gives 6 15, boxed">
-<figcaption>Reduce along axis 2.</figcaption>
-</figure>
+## Along an axis
 
 Each axis has a number. In a matrix, axis 1 runs down the rows, and axis 2 runs along each row. Many operations work along an axis, and in X_eTaL a subscript after the name picks which one. (The code here is shown as X_eTaL draws it, as the video does. To try it in the [browser editor](https://softwarewrighter.github.io/X_eTaL/), type the ASCII it is drawn from: `:=` for `←`, `r_/_2` for `r̲/₂`, `*` for `×`, and `#` for `⍝`.)
 
@@ -119,11 +114,17 @@ Reduce works along axis 1 unless told otherwise, so the first two both give `5 7
 
 Rotate, reverse and transpose work the same way. `1 o̲-₁ M`{:.language-xetal} rotates along axis 1, so the rows trade places; `1 o̲-₂ M`{:.language-xetal} shifts each row left by one, giving `2 3 1` over `5 6 4`. `r̲ev₂ M`{:.language-xetal} reverses each row. And `o̲\ M`{:.language-xetal}, transpose, reverses the order of the axes: rows become columns, and the `2 3` matrix becomes `3 2`.
 
-## Three dimensions
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
 
-<figure class="zoomable" style="float: right; width: 260px; margin: 0.3em 0 0.6em 1.2em;">
+## Three dimensions
+{: .pos-left}
+
+<figure class="zoomable outdent-right" style="width: 45%; margin-top: -2.9em;">
 <img src="{{ '/assets/images/posts/al23-transposed.webp' | relative_url }}" alt="A frame from the episode, Rank three, transposed: the shape of T with axes 2 and 3 swapped is 2 4 3, and the shape of 3 1 2 transpose T is 3 4 2">
-<figcaption>Rank three, transposed.</figcaption>
+<figcaption>Rank three, transposed. Click to enlarge.</figcaption>
 </figure>
 
 The same subscripts work on the rank 3 array:
@@ -138,11 +139,17 @@ Reduce along axis 1 adds the two tables together, a `3 4` result. Reduce along a
 
 Ravel goes the other way, turning any array back into a vector: `r̲avel T`{:.language-xetal} is the 24 values in order, rank 1 again. With subscript 2, `r̲avel₂ M`{:.language-xetal} unrolls a matrix column by column: `1 4 2 5 3 6`.
 
-## Two challenges, along axes
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
 
-<figure class="zoomable" style="float: left; width: 260px; margin: 0.3em 1.2em 0.6em 0;">
+## Two challenges, along axes
+{: .pos-right}
+
+<figure class="zoomable outdent-left" style="width: 45%; margin-top: -2.9em;">
 <img src="{{ '/assets/images/posts/al23-richest.webp' | relative_url }}" alt="A frame from the episode, A challenge: the richest customer: accounts is a 3 by 2 matrix, plus-reduce along axis 2 gives 6 10 8, and the max of that is 10">
-<figcaption>The richest customer.</figcaption>
+<figcaption>The richest customer. Click to enlarge.</figcaption>
 </figure>
 
 The episode tries the ideas on two short coding challenges from LeetCode.
@@ -166,20 +173,32 @@ grid ← 3 4 r̲eshape 3 2 1 -1 1 1 -1 -2 -1 -1 -2 -3
 
 There are 7.
 
-## Tensors
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
 
-<figure class="zoomable" style="float: right; width: 260px; margin: 0.3em 0 0.6em 1.2em;">
+## Tensors
+{: .pos-left}
+
+<figure class="zoomable outdent-right" style="width: 45%; margin-top: -2.9em;">
 <img src="{{ '/assets/images/posts/al23-tensors.webp' | relative_url }}" alt="A frame from the episode, Tensors: images is 32 480 640 3 reshape 0, its shape is 32 480 640 3, and rankOf images is 4">
-<figcaption>A batch of images, rank 4.</figcaption>
+<figcaption>A batch of images, rank 4. Click to enlarge.</figcaption>
 </figure>
 
 In machine learning, arrays like these are called tensors. A color image might have shape `480 640 3`: height, width and three color channels. Stack 32 of them and the batch gains an axis, shape `32 480 640 3`, rank 4, and `'× r̲/ s̲hape images`{:.language-xetal} counts its 29,491,200 values. A GPU works on many values at once, and shape and axes tell it how a tensor is laid out. The ideas are the same ones, and later episodes come back to tensors.
 
-## How the video draws the code
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
 
-<figure class="zoomable" style="float: left; width: 260px; margin: 0.3em 1.2em 0.6em 0;">
+## How the video draws the code
+{: .pos-right}
+
+<figure class="zoomable outdent-left" style="width: 45%; margin-top: -2.9em;">
 <img src="{{ '/assets/images/posts/al23-rotate-boxed.webp' | relative_url }}" alt="A frame from the episode, Rotate: M and 1 rotate along axis 1 of M, then 1 rotate along axis 2 of M giving 2 3 1 over 5 6 4, each result drawn in a box">
-<figcaption>Results boxed by xetal.</figcaption>
+<figcaption>Results boxed by xetal. Click to enlarge.</figcaption>
 </figure>
 
 The code on the slides isn't typeset by hand. You type X_eTaL in plain ASCII, `M := 2 3 r_eshape r_ange 6`, and X_eTaL's own `xetal render` draws it as notation: `M ← 2 3 r̲eshape r̲ange 6`{:.language-xetal}. The underlined letter marks a name as a function, the `_2` becomes the subscript axis in `r̲/₂`{:.language-xetal}, and the `#` of a remark becomes `⍝`.
@@ -201,13 +220,19 @@ The boxes come from X_eTaL too, drawn the way APL2's DISPLAY drew them: `xetal -
 └~────┘
 ```
 
-That's `M`. The `→` on the top edge marks the last axis, the one that runs along each row, and the `↓` on the left edge marks the first axis, down the rows. A vector gets only the `→`, so the number of arrows is the rank, and the `~` on the bottom edge means the items are numbers. An empty list gets `⊖` instead of `→`, as `s̲hape 42`{:.language-xetal} showed. The episode's slides show their results boxed this way, as in the rotate here.
+That's `M`. The `→` on the top edge marks the last axis, the one that runs along each row, and the `↓` on the left edge marks the first axis, down the rows. A vector gets only the `→`, so the number of arrows is the rank, and the `~` on the bottom edge means the items are numbers. An empty list gets `⊖` instead of `→`, as `s̲hape 42`{:.language-xetal} showed. The episode's slides show their results boxed this way, as in the rotate beside this section.
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
 
 ## Coming up, and an exercise
+{: .pos-left}
 
-<figure class="zoomable" style="float: right; width: 260px; margin: 0.3em 0 0.6em 1.2em;">
+<figure class="zoomable outdent-right" style="width: 45%; margin-top: -2.9em;">
 <img src="{{ '/assets/images/posts/al23-broadcast.webp' | relative_url }}" alt="A frame from the episode, One value, or the same shape: 10 times M, and M plus M">
-<figcaption>The preview of broadcasting.</figcaption>
+<figcaption>The preview of broadcasting. Click to enlarge.</figcaption>
 </figure>
 
 The next episode is about broadcasting: how an operation combines arrays of different shapes. The preview starts with the simplest case. `10 × M`{:.language-xetal} multiplies every item by ten, because a single value extends to every item, and `M + M`{:.language-xetal} combines two arrays of the same shape item by item. In X_eTaL that is the whole rule, and other shapes are an error.
@@ -216,6 +241,12 @@ Array languages draw this line in different places. APL extends a single value t
 
 The exercise: a video clip has 300 frames, each 480 by 640 with three colors. Work out its shape and its rank, then count its values. Everything in this post can be tried in the [browser editor](https://softwarewrighter.github.io/X_eTaL/).
 
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
 ## Closing
+{: .pos-center}
 
 In future videos I hope to include more interesting coding problems and better visualizations as I add more tools to help with code experimentation and understanding.
