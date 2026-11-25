@@ -29,7 +29,7 @@ repo_urls:
      Tooling section: X_eTaL-video props.mjs runs `bin/xetal render --html` on every lesson line (c-error fails the build);
      Panel.tsx colors the c-* classes from theme.ts; boxes from `xetal --box` / d̲isplay. Shape and rank uses Mike's boxed
      examples (s̲hape 42, s̲hape r̲avel 42, ᵘr̲ankOf); the video says a built-in rank of is coming soon.
-     Lead image: Mike's block-typesetting.jpg (Dropbox, 2026-11-23), no-invert. Mike: the closing.
+     Lead image: Mike's block-typesetting.jpg (Dropbox, 2026-11-23), no-invert. Closing: Mike's words (2026-11-24).
 -->
 
 <img src="{{ '/assets/images/posts/block-typesetting.webp' | relative_url }}" class="post-marker no-invert" alt="A linocut of a letterpress workbench: a single piece of type, a line of type in a composing stick, a page of type locked in an iron frame, and locked pages stacked in a rack" style="width: 205px;">
@@ -218,4 +218,4 @@ The exercise: a video clip has 300 frames, each 480 by 640 with three colors. Wo
 
 ## Closing
 
-Mike: TODO, a closing in your words.
+In future videos I hope to include more interesting coding problems and better visualizations as I add more tools to help with code experimentation and understanding.
