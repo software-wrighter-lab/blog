@@ -287,4 +287,4 @@ Before then, try this in the [browser editor](https://softwarewrighter.github.io
 ## Closing
 {: .pos-center}
 
-One thing I find interesting when studying a language is learning its idioms: the short, familiar phrases experienced programmers reach for without thinking. Each language in this episode has its own idiom for "add this to each row", and the next episode introduces some X_eTaL idioms.
+One thing I find interesting when studying a language is learning its idioms: the short, familiar phrases experienced programmers reach for without thinking. Each language in this episode has its own idiom for "add this to each row", and the next episode introduces some more X_eTaL idioms.
