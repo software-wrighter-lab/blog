@@ -7,9 +7,9 @@ keywords: "array programming tutorial, broadcasting, scalar extension, arrays of
 abstract: "Twenty-fourth in the Array Languages series: episode 4 of the video series that teaches array programming with X_eTaL. What happens when two arrays meet: a single value extends to every item, arrays of the same shape combine item by item, and in X_eTaL any other pair of shapes is an error. How to say what you mean instead (reshape, transpose, the rank form, table), how APL, J, BQN, K and NumPy draw the line differently, why NumPy's stretching can give an answer of the wrong shape, and the trade-off between automatic rules and strict ones."
 series: "Array Languages"
 series_part: 24
-date: 2026-11-27 00:15:00 -0800
-# video_url: "Mike: TODO, the episode's YouTube URL once it is published" (post.html embeds it at the end and it joins the Videos tab)
-# video_title: "Mike: TODO, from X_eTaL-video out/al-04-broadcast-youtube/title.txt (or oEmbed once public)"
+date: 2026-11-25 00:30:00 -0800
+video_url: "https://www.youtube.com/watch?v=-te7ZGCdIkE"
+video_title: "Broadcasting: When Array Shapes Meet: Array Languages #4"
 repo_urls:
   - url: "https://github.com/softwarewrighter/X_eTaL"
     title: "X_eTaL"
@@ -26,10 +26,9 @@ repo_urls:
      check it before publishing. No other-language code is shown, only what each does.
      Cubes: al24-cubes-ladder and al24-cubes-stretch from X_eTaL-video work/cubes/*-tight.png (just cubes, Blender 5.3,
      2026-11-25 20:17); the video shows them as silent scenes after the recap and after numpy-stretch.
-     Date 2026-11-27 is tentative (11/26 is a TBT Thursday); move it to the day the video goes up.
-     To do when the episode is done (me): video_url/video_title, the links-box Video row, al24-* frames from the
-     published mp4 as gutter figures (outdent-right in pos-left sections, outdent-left in pos-right; none in the
-     first two sections, which sit beside the links box), and the narration check.
+     Updated 2026-11-25 22:10 for the published video (-te7ZGCdIkE, 6:18): video_url/title, links row, date 11/25
+     (the video went up today), the new "same table in X_eTaL" scenes, and gutter frames al24-columns (1:55),
+     al24-apl (3:05), al24-same-table (5:00), checked against out/al-04-broadcast-youtube/narration.txt.
      Lead image: Mike's block-stamp.jpg (Dropbox, 2026-11-25), no-invert. Mike: the closing.
 -->
 
@@ -43,8 +42,7 @@ Episode 4 of my video series on array programming is about what happens when two
 
 | Resource | Link |
 |----------|------|
-| **Video** | Mike: TODO, the episode link and thumbnail, once published |
-| **Earlier episodes** | 1: [Why Another Programming Language?](/2026/11/22/array-languages-xetal-video-why/) ([video](https://www.youtube.com/watch?v=NfdzVWjje2Y))<br>2: [From Scalar Loops to Array Operations](/2026/11/23/array-languages-xetal-video-loops/) ([video](https://www.youtube.com/watch?v=YiJYDiD7xqc))<br>3: [Shape, Rank, Axes and Dimensions](/2026/11/24/array-languages-xetal-video-shape/) ([video](https://www.youtube.com/watch?v=JbKMtZZT6AY)) |
+| **Video** | [Broadcasting: When Array Shapes Meet: Array Languages #4](https://www.youtube.com/watch?v=-te7ZGCdIkE)<br>[![Video](https://img.youtube.com/vi/-te7ZGCdIkE/mqdefault.jpg){: .video-thumb}](https://www.youtube.com/watch?v=-te7ZGCdIkE) |
 | **All the videos** | [X_eTaL-video's page](https://softwarewrighter.github.io/X_eTaL-video/) |
 | **Try X_eTaL** | [In your browser](https://softwarewrighter.github.io/X_eTaL/) |
 | **Code** | [X_eTaL](https://github.com/softwarewrighter/X_eTaL), [X_eTaL-video](https://github.com/softwarewrighter/X_eTaL-video) |
@@ -117,7 +115,7 @@ So the whole rule in X_eTaL fits in three lines: one value extends to every item
 </div>
 
 ## Why an error?
-{: .pos-left}
+{: .pos-center}
 
 The rule is short, so a result is easy to predict. A mismatch is often a mistake, and an error shows it at once, naming both shapes. To combine other shapes, you say how.
 
@@ -128,6 +126,11 @@ The rule is short, so a result is easy to predict. A mismatch is often a mistake
 
 ## Saying how
 {: .pos-right}
+
+<figure class="zoomable outdent-left" style="width: 45%; margin-top: -2.9em;">
+<img src="{{ '/assets/images/posts/al24-columns.webp' | relative_url }}" alt="The episode's slide: M plus the transposed reshape of w, drawn as boxes, 1 2 3 4 5 6 plus 100 100 100 200 200 200 equals 101 102 103 204 205 206">
+<figcaption>From the video: a vector down the columns. Click to enlarge.</figcaption>
+</figure>
 
 To add the vector to each row, say so. `r̲eshape`{:.language-xetal} repeats the vector to the matrix's shape, and then the shapes match:
 
@@ -187,6 +190,11 @@ v '+ t̲able w
 ## Other array languages
 {: .pos-left}
 
+<figure class="zoomable outdent-right" style="width: 45%; margin-top: -2.9em;">
+<img src="{{ '/assets/images/posts/al24-apl.webp' | relative_url }}" alt="The episode's APL slide: M plus 10 20 30 is a RANK ERROR; M plus with axis 2 in brackets adds 10 20 30 to each row">
+<figcaption>From the video: APL says a rank error, and an axis in brackets says how. Click to enlarge.</figcaption>
+</figure>
+
 Other array languages draw this line in different places. `M`{:.language-xetal} has two rows and three columns, so three values match its last axis and two values match its first:
 
 | Language | Matches | `M + 10 20 30` | `M + 100 200` |
@@ -217,8 +225,45 @@ That stretching has a cost. A column of three plus a row of three gives a three 
 <img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
 </div>
 
-## The trade-off
+## The same table in X_eTaL, step by step
 {: .pos-right}
+
+<figure class="zoomable outdent-left" style="width: 45%; margin-top: -2.9em;">
+<img src="{{ '/assets/images/posts/al24-same-table.webp' | relative_url }}" alt="The episode's slide: the transposed reshape 1 1 1, 2 2 2, 3 3 3 plus the reshape 1 2 3 three times equals 2 3 4, 3 4 5, 4 5 6; below it, the same with table">
+<figcaption>From the video: stretch each one, then add. Click to enlarge.</figcaption>
+</figure>
+
+In X_eTaL nothing stretches by itself. A column plus a row is an error, because the shapes differ:
+
+```xetal
+(3 1 r̲eshape 1 2 3) + 1 3 r̲eshape 1 2 3
+```
+```
+error[shape-mismatch]: shapes differ: 3 1 and 1 3
+```
+
+So we stretch each one ourselves. Reshape repeats the row three times, down the rows; reshape and transpose repeat the column across. Now both are three by three, and plus adds them item by item. The result is the same table that NumPy gave:
+
+```xetal
+(o̲\ 3 3 r̲eshape 1 2 3) + 3 3 r̲eshape 1 2 3
+```
+```
+┌→────┐
+↓2 3 4│
+│3 4 5│
+│4 5 6│
+└~────┘
+```
+
+`t̲able`{:.language-xetal} does it in one step, and gives the same box: `1 2 3 '+ t̲able 1 2 3`{:.language-xetal}.
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
+## The trade-off
+{: .pos-center}
 
 Each choice has a cost. Automatic rules are short to write, but a wrong shape can still give an answer. A strict rule asks for one more step, and in return a mismatch shows itself.
 
