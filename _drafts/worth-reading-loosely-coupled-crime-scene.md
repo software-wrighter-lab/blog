@@ -53,6 +53,11 @@ I learned an interesting approach to data buffers from it: instead of copying a 
 
 After reading the first edition I discovered JavaSpaces and Linda, which gave me new ideas about distributed data processing.
 
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
 ## Loosely Coupled
 
 <figure class="zoomable" style="float: left; margin: 0.3em 1.2em 0.4em 0;">
@@ -70,6 +75,11 @@ Kaye's book predates microservices by about a decade, but the case it makes for 
 Part of the appeal of loosely coupled services, and of microservices, is that a small service can be written in a language that makes it quick to deploy, and later rewritten in a more secure or higher-performance language as needed. Small, testable services are easier to maintain, patch and extend.
 
 Decades-old monoliths are still in use precisely because their tight coupling makes changes hard to implement, difficult to verify and risky to deploy. Rewriting a large, complex system has its own problems: the [second-system effect](/2026/11/04/worth-reading-psychology-mythical-man-month/) Brooks warned about. Small, testable, composable services could be less prone to it.
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
 
 ## Your Code as a Crime Scene
 
