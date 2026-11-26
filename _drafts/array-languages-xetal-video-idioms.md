@@ -28,7 +28,7 @@ repo_urls:
      To do when the episode is done (me): video_url/video_title, the links-box Video row, frames from the published
      mp4 as gutter figures (outdent-right in pos-left sections, outdent-left in pos-right; none in the first two
      sections, which sit beside the links box), any cube renders, the narration check. Mike: the closing.
-     Short names (Mike, 2026-11-26): from X_eTaL docs/lang-choices.md B2 and N3 (a trailing mark only where APL gave
+     Short names aside (Mike, 2026-11-26): from X_eTaL docs/lang-choices.md B2 and N3 (a trailing mark only where APL gave
      it a meaning: r_/, s_\, o_-, o_\), A2 (o_- like APL circle-minus), docs/history.md Q34 (words, not single letters).
 -->
 
@@ -70,6 +70,21 @@ votes ← 2 3 2 1 2 3
 
 ## Idioms you have met
 
+<div class="aside-box outdent-right" markdown="1">
+
+**Why are a few names one letter and a mark?** Most X_eTaL built-ins are words with one underlined letter: `r̲ev`{:.language-xetal}, `r̲eshape`{:.language-xetal}, `t̲ally`{:.language-xetal}, `d̲rop`{:.language-xetal}. The underline marks a function name (typed as an underscore after the letter, `r_ev`), and a word, because one letter cannot stand for every word that starts with it. A name ends in a mark only where that mark already means something in APL, so just four read like the APL symbols they come from:
+
+| Name | Does | APL |
+|------|------|-----|
+| `r̲/`{:.language-xetal} (`r_/`) | reduce | `/` |
+| `s̲\`{:.language-xetal} (`s_\`) | scan | `\` |
+| `o̲-`{:.language-xetal} (`o_-`) | rotate, first axis | `⊖` |
+| `o̲\`{:.language-xetal} (`o_\`) | transpose | `⍉` |
+
+The letter names the kind (r for reduce, s for scan); o stands in for APL's circle.
+
+</div>
+
 Some idioms have come up already. Plus reduce sums a list, and a comparison followed by a sum counts the matches:
 
 ```xetal
@@ -83,27 +98,6 @@ Reverse and rotate rearrange the items, and no index appears anywhere:
 r̲ev x    ⍝ 9 5 1 4 1 3
 2 o̲- x   ⍝ 4 1 5 9 3 1
 ```
-
-<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
-<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
-<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
-</div>
-
-## Why a few names are one letter and a mark
-{: .pos-center}
-
-Most X_eTaL built-ins are words with one underlined letter: `r̲ev`{:.language-xetal}, `r̲eshape`{:.language-xetal}, `t̲ally`{:.language-xetal}, `d̲rop`{:.language-xetal}, `u̲nique`{:.language-xetal}, `f̲loat`{:.language-xetal}. The underline marks a function name (a variable has none), and you type it as an underscore after the letter: `r_ev`. Words are the rule because a single letter cannot stand for every word that starts with it.
-
-Four built-ins are a letter and a mark instead. A function name may end in a mark only where that mark already means something in APL, so these four read like the APL symbols they come from:
-
-| X_eTaL | Typed | Does | From APL |
-|--------|-------|------|----------|
-| `r̲/`{:.language-xetal} | `r_/` | reduce: `'+ r̲/ x` is the sum | `/`, reduce (`+/x`) |
-| `s̲\`{:.language-xetal} | `s_\` | scan: every running reduce | `\`, scan (`+\x`) |
-| `o̲-`{:.language-xetal} | `o_-` | rotate, along the first axis | `⊖`, a circle with a bar |
-| `o̲\`{:.language-xetal} | `o_\` | transpose: rows become columns | `⍉`, a circle with a backslash |
-
-The letter says which kind (r for reduce, s for scan), and o stands in for APL's circle. Like any built-in, each can take an axis subscript: `'+ r̲/₂ M`{:.language-xetal} reduces along axis 2.
 
 <div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
 <img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
