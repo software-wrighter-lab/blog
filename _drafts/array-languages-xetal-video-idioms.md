@@ -22,7 +22,7 @@ repo_urls:
      the script, in progress; nothing narrated or rendered yet). Text follows the scene narration in lesson.json at
      that time; re-check it against the approved script and the final narration.txt. Every X_eTaL line here is from
      data.xtl, drawn with the pinned `bin/xetal render` (49c00785) and run with `bin/xetal run --box`; the Rust
-     loops are the lesson's panels. The next episode is "to be decided with the author" in the lesson.
+     loops are the lesson's panels. Next episode (2026-11-26 10:26, uncommitted): the language family, APL, J, K, BQN, X_eTaL.
      Date 2026-11-26 is tentative (move it to the day the video goes up). Lead image: a placeholder; the lesson
      README has a text-to-image prompt (a tangled wire loop beside four rows of cubes).
      To do when the episode is done (me): video_url/video_title, the links-box Video row, frames from the published
@@ -251,7 +251,7 @@ An array idiom is more than a shorter spelling of a loop. It captures a pattern 
 ## Coming up, and an exercise
 {: .pos-left}
 
-Mike: TODO, the next episode (the lesson has it as still to be decided).
+The next episode tours the family of array languages: APL first, then J and K, then BQN, and last X_eTaL, and what each one chose.
 
 Before then, try this in the [browser editor](https://softwarewrighter.github.io/X_eTaL/). Take `3 1 4 1 5 9`. Find its sum and its largest value. Find its running totals. Count the values greater than three. Then find the adjacent differences. (To type it, use the ASCII it is drawn from: `:=` for `←`, `r_/` for `r̲/`, `s_\` for `s̲\`, `d_rop` for `d̲rop`.)
 
