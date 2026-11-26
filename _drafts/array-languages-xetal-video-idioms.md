@@ -28,6 +28,8 @@ repo_urls:
      To do when the episode is done (me): video_url/video_title, the links-box Video row, frames from the published
      mp4 as gutter figures (outdent-right in pos-left sections, outdent-left in pos-right; none in the first two
      sections, which sit beside the links box), any cube renders, the narration check. Mike: the closing.
+     Frames al25-scan, -subtract, -normalize, -count from out/al-05-idioms-landscape-remotion.mp4 (11:42, 4:33, before
+     the YouTube package); narration unchanged from the draft but for the next scene. Re-take if the final cut differs.
      Short names aside (Mike, 2026-11-26): from X_eTaL docs/lang-choices.md B2 and N3 (a trailing mark only where APL gave
      it a meaning: r_/, s_\, o_-, o_\), A2 (o_- like APL circle-minus), docs/history.md Q34 (words, not single letters).
 -->
@@ -107,6 +109,11 @@ r̲ev x    ⍝ 9 5 1 4 1 3
 ## Running totals: scan
 {: .pos-left}
 
+<figure class="zoomable outdent-right" style="width: 45%; margin-top: -2.9em;">
+<img src="{{ '/assets/images/posts/al25-scan.webp' | relative_url }}" alt="The episode's slide: plus scan of x, the boxed list 3 1 4 1 5 9 becomes 3 4 8 9 14 23">
+<figcaption>From the video: plus scan keeps every running sum. Click to enlarge.</figcaption>
+</figure>
+
 The first new problem is running totals: each item becomes the sum of everything up to it. A loop keeps a total and saves it after each step:
 
 ```rust
@@ -149,6 +156,11 @@ The trade-off: scan keeps every step, not only the last.
 ## Adjacent changes: shift and subtract
 {: .pos-right}
 
+<figure class="zoomable outdent-left" style="width: 45%; margin-top: -2.9em;">
+<img src="{{ '/assets/images/posts/al25-subtract.webp' | relative_url }}" alt="The episode's slide: 1 drop x minus negative 1 drop x is -2 3 -3 4 4; compared with greater than, 0 1 0 1 1">
+<figcaption>From the video: subtract the shifted lists, or compare them. Click to enlarge.</figcaption>
+</figure>
+
 Next, adjacent changes: how much each item differs from the one before it. A loop starts at the second item and looks back one:
 
 ```rust
@@ -178,6 +190,11 @@ Subtract them item by item. The result has one item fewer than the list. Compare
 
 ## Normalize values: an aggregate, then each item
 {: .pos-left}
+
+<figure class="zoomable outdent-right" style="width: 45%; margin-top: -2.9em;">
+<img src="{{ '/assets/images/posts/al25-normalize.webp' | relative_url }}" alt="The episode's slide: plus reduce of s divided by its tally is 5.0; float s minus that is -3.0 -1.0 1.0 3.0">
+<figcaption>From the video: an aggregate, then each item. Click to enlarge.</figcaption>
+</figure>
 
 Next, normalize values: subtract the average from every item. A loop needs two passes, the first to find the average and the second to subtract it:
 
@@ -213,6 +230,11 @@ error[type-mismatch]: expected Int, found Float
 
 ## Count occurrences: unique and a table
 {: .pos-right}
+
+<figure class="zoomable outdent-left" style="width: 45%; margin-top: -2.9em;">
+<img src="{{ '/assets/images/posts/al25-count.webp' | relative_url }}" alt="The episode's slide: the equality table of unique votes against votes, summed along each row, gives 3 2 1">
+<figcaption>From the video: sum each row of the table. Click to enlarge.</figcaption>
+</figure>
 
 Last, count occurrences: how many times each value appears. A loop keeps a map from each value to its count:
 
