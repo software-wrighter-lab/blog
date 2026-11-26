@@ -23,14 +23,14 @@ repo_urls:
      that time; re-check it against the approved script and the final narration.txt. Every X_eTaL line here is from
      data.xtl, drawn with the pinned `bin/xetal render` (49c00785) and run with `bin/xetal run --box`; the Rust
      loops are the lesson's panels. Next episode (2026-11-26 10:26, uncommitted): the language family, APL, J, K, BQN, X_eTaL.
-     Date 2026-11-26 is tentative (move it to the day the video goes up). Lead image: a placeholder; the lesson
-     README has a text-to-image prompt (a tangled wire loop beside four rows of cubes).
+     Date 2026-11-26 is tentative (move it to the day the video goes up). Lead image: Mike's block-strings-blocks.jpg (Dropbox, 2026-11-26),
+     made from the lesson README's prompt (a tangled wire loop beside four rows of cubes, one per idiom).
      To do when the episode is done (me): video_url/video_title, the links-box Video row, frames from the published
      mp4 as gutter figures (outdent-right in pos-left sections, outdent-left in pos-right; none in the first two
      sections, which sit beside the links box), any cube renders, the narration check. Mike: the closing.
 -->
 
-<img src="{{ '/assets/images/posts/placeholder-array-languages-xetal-video-idioms.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-strings-blocks.webp' | relative_url }}" class="post-marker no-invert" alt="A tangled loop of gray wire on the left; on the right the wire runs straight through four rows of glowing blue cubes: a rising staircase, cubes stepping up and down between neighbors, cubes leveled around a center line, and short stacks like a bar chart" style="width: 205px;">
 
 Episode 5 of my video series on array programming is about idioms. [Episode 4](/2026/11/25/array-languages-xetal-video-broadcast/) was about what happens when arrays of different shapes meet. This one is about thinking without loops: small problems you would usually solve with a loop, each solved again with whole arrays.
 
