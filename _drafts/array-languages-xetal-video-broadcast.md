@@ -29,7 +29,7 @@ repo_urls:
      Updated 2026-11-25 22:10 for the published video (-te7ZGCdIkE, 6:18): video_url/title, links row, date 11/25
      (the video went up today), the new "same table in X_eTaL" scenes, and gutter frames al24-columns (1:55),
      al24-apl (3:05), al24-same-table (5:00), checked against out/al-04-broadcast-youtube/narration.txt.
-     Lead image: Mike's block-stamp.jpg (Dropbox, 2026-11-25), no-invert. Mike: the closing.
+     Lead image: Mike's block-stamp.jpg (Dropbox, 2026-11-25), no-invert.
 -->
 
 <img src="{{ '/assets/images/posts/block-stamp.webp' | relative_url }}" class="post-marker no-invert" alt="A hand presses a wooden stamp onto a printed grid, the same blue mark in square after square; a second, empty grid on another sheet lies askew beside it" style="width: 205px;">
@@ -287,4 +287,4 @@ Before then, try this in the [browser editor](https://softwarewrighter.github.io
 ## Closing
 {: .pos-center}
 
-Mike: TODO, a closing in your words.
+One thing I find interesting when studying a language is learning its idioms: the short, familiar phrases experienced programmers reach for without thinking. Each language in this episode has its own idiom for "add this to each row", and the next episode introduces some idioms like that.
