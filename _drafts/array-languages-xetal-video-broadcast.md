@@ -28,10 +28,10 @@ repo_urls:
      To do when the episode is done (me): video_url/video_title, the links-box Video row, al24-* frames from the
      published mp4 as gutter figures (outdent-right in pos-left sections, outdent-left in pos-right; none in the
      first two sections, which sit beside the links box), and the narration check.
-     Lead image: placeholder (scripts/placeholder-marker); Mike: a block print. Mike: the closing.
+     Lead image: Mike's block-stamp.jpg (Dropbox, 2026-11-25), no-invert. Mike: the closing.
 -->
 
-<img src="{{ '/assets/images/posts/placeholder-array-languages-xetal-video-broadcast.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-stamp.webp' | relative_url }}" class="post-marker no-invert" alt="A hand presses a wooden stamp onto a printed grid, the same blue mark in square after square; a second, empty grid on another sheet lies askew beside it" style="width: 205px;">
 
 Episode 4 of my video series on array programming is about what happens when two arrays meet. [Episode 3](/2026/11/24/array-languages-xetal-video-shape/) gave every array a shape, a rank and axes. Add two arrays, and the question is what their shapes have to do with each other. Array languages answer it in different ways, and this episode compares them.
 
