@@ -228,7 +228,7 @@ The first whole circuit is a 555 LED blinker: an NE555P, three resistors, a 10 Â
 5. The LED's anode is lapped onto the third resistor's post, and a last ground jumper joins its cathode to pin 1.
 6. The battery snap is set flat on the turntable beside the vise, and a jumper rises from each lead, past the jaw, to pin 8 and pin 1.
 
-That is 367 commands and about 19 minutes of simulated time; the video plays it at four times speed.
+That is 366 steps in the live page's list and about 19 minutes of simulated time; the video plays it at four times speed.
 
 It ends with the check against the netlist:
 
