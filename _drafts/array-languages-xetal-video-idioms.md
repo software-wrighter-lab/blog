@@ -8,8 +8,8 @@ abstract: "Twenty-fifth in the Array Languages series: episode 5 of the video se
 series: "Array Languages"
 series_part: 25
 date: 2026-11-26 00:15:00 -0800
-# video_url: "Mike: TODO, the episode's YouTube URL once it is published" (post.html embeds it at the end and it joins the Videos tab)
-# video_title: "Mike: TODO, from X_eTaL-video out/al-05-idioms-youtube/title.txt (or oEmbed once public)"
+video_url: "https://www.youtube.com/watch?v=YsfU6YFgkYo"
+video_title: "Array Idioms: Thinking Without Loops: Array Languages #5"
 repo_urls:
   - url: "https://github.com/softwarewrighter/X_eTaL"
     title: "X_eTaL"
@@ -35,6 +35,7 @@ repo_urls:
      the YouTube package); narration unchanged from the draft but for the next scene. Re-take if the final cut differs.
      Short names aside (Mike, 2026-11-26): from X_eTaL docs/lang-choices.md B2 and N3 (a trailing mark only where APL gave
      it a meaning: r_/, s_\, o_-, o_\), A2 (o_- like APL circle-minus), docs/history.md Q34 (words, not single letters).
+     Published 2026-11-26 as YsfU6YFgkYo; out/al-05-idioms-youtube/narration.txt matches the text (but the CTA).
 -->
 
 <img src="{{ '/assets/images/posts/block-strings-blocks.webp' | relative_url }}" class="post-marker no-invert" alt="A tangled loop of gray wire on the left; on the right the wire runs straight through four rows of glowing blue cubes: a rising staircase, cubes stepping up and down between neighbors, cubes leveled around a center line, and short stacks like a bar chart" style="width: 205px;">
@@ -47,7 +48,7 @@ Episode 5 of my video series on array programming is about idioms. [Episode 4](/
 
 | Resource | Link |
 |----------|------|
-| **Video** | Mike: TODO, the episode link and thumbnail, once published |
+| **Video** | [Array Idioms: Thinking Without Loops: Array Languages #5](https://www.youtube.com/watch?v=YsfU6YFgkYo)<br>[![Video](https://img.youtube.com/vi/YsfU6YFgkYo/mqdefault.jpg){: .video-thumb}](https://www.youtube.com/watch?v=YsfU6YFgkYo) |
 | **All the videos** | [X_eTaL-video's page](https://softwarewrighter.github.io/X_eTaL-video/) |
 | **Try X_eTaL** | [In your browser](https://softwarewrighter.github.io/X_eTaL/) |
 | **Code** | [X_eTaL](https://github.com/softwarewrighter/X_eTaL), [X_eTaL-video](https://github.com/softwarewrighter/X_eTaL-video) |
