@@ -47,7 +47,8 @@ This first post is about circuits: the groups of parts inside a language model t
 | **Code** | [X_eTaL-circuits](https://github.com/softwarewrighter/X_eTaL-circuits) |
 | **Live demo** | [The model map, every head, the scores](https://softwarewrighter.github.io/X_eTaL-circuits/) |
 | **In plain words** | [eli5.md](https://github.com/softwarewrighter/X_eTaL-circuits/blob/main/docs/eli5.md) |
-| **Related** | [In-Context Learning Revisited](/2026/02/22/icl-revisited-from-mystery-to-engineering/), [BDH: a visible brain](/2026/02/03/small-models-part4-bdh/) |
+| **Related posts** | [In-Context Learning Revisited](/2026/02/22/icl-revisited-from-mystery-to-engineering/), [Small Models (4/6): BDH, a visible brain](/2026/02/03/small-models-part4-bdh/) |
+| **Related code** | [bdh](https://github.com/softwarewrighter/bdh) (my BDH) |
 | **X_eTaL** | [The language](https://github.com/softwarewrighter/X_eTaL), [try it in your browser](https://softwarewrighter.github.io/X_eTaL/) |
 | **The series** | [Deep Learning: every post](/series/#deep-learning) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |

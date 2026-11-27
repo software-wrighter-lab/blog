@@ -43,7 +43,8 @@ The second paper from the Deep Learning meetup is [Exo: An Architecture for Self
 | **Paper** | [Exo: An Architecture for Self-Improving Systems at Runtime](https://arxiv.org/abs/2611.00463) (arXiv 2611.00463) |
 | **Code** | [X_eTaL-RSI](https://github.com/softwarewrighter/X_eTaL-RSI) |
 | **Live experiments** | [In your browser (WebAssembly)](https://softwarewrighter.github.io/X_eTaL-RSI/) |
-| **Related** | [ICL](/2026/02/22/icl-revisited-from-mystery-to-engineering/), [ICRL](/2026/03/16/mlf-02-icrl-in-context-reinforcement-learning/), [XSkill](/2026/03/17/ai-tools-xskill-memory-layer-multimodal-agents/), [agentrail-rs](https://github.com/sw-vibe-coding/agentrail-rs), [all-together-now](https://github.com/sw-vibe-coding/all-together-now) |
+| **Related posts** | [ICL Revisited](/2026/02/22/icl-revisited-from-mystery-to-engineering/), [ICRL](/2026/03/16/mlf-02-icrl-in-context-reinforcement-learning/), [XSkill](/2026/03/17/ai-tools-xskill-memory-layer-multimodal-agents/), [agentrail-rs (Saw #3)](/2026/03/22/saw-agentrail-rs-icrl-dual-memory/), [all-together-now (Saw #4)](/2026/03/29/saw-pjmai-reg-emacs-all-together-now/), [How AI Learns, Part 1](/2026/02/24/how-ai-learns-part1-time-scales/) |
+| **Related code** | [agentrail-rs](https://github.com/sw-vibe-coding/agentrail-rs), [all-together-now](https://github.com/sw-vibe-coding/all-together-now), [XSkill](https://github.com/XSkill-Agent/XSkill) |
 | **X_eTaL** | [The language](https://github.com/softwarewrighter/X_eTaL), [try it in your browser](https://softwarewrighter.github.io/X_eTaL/) |
 | **The series** | [Deep Learning: every post](/series/#deep-learning) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
