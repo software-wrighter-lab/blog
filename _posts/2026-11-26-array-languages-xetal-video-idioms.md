@@ -1,0 +1,408 @@
+---
+layout: post
+title: "Array Languages #25: Array Idioms, Thinking Without Loops"
+categories: [programming-languages, array-languages, video]
+tags: [array-languages, xetal, x-etal, apl, rust, video, teaching, idioms, scan, reduce, grade]
+keywords: "array programming tutorial, array idioms, thinking without loops, running totals, scan, adjacent differences, drop, normalize, scalar extension, count occurrences, unique, outer product table, where, index of, membership, moving window, n-wise, grade, sort by key, Rust loop versus array idiom, array languages video series, X_eTaL video"
+abstract: "Twenty-fifth in the Array Languages series: episode 5 of the video series that teaches array programming with X_eTaL. An idiom is a short phrase for a pattern that keeps coming back. After the idioms met so far (sum, count matches, reverse, rotate), four new ones, each beside the Rust loop it replaces: running totals with scan, adjacent changes by dropping and subtracting, normalizing with an aggregate and scalar extension (and a float), and counting occurrences with unique and an equality table; then four more: finding positions (where, index of), membership, moving windows (n-wise) and sorting by a key (grade, then select). Each with what it costs."
+series: "Array Languages"
+series_part: 25
+date: 2026-11-26 00:15:00 -0800
+video_url: "https://www.youtube.com/watch?v=YsfU6YFgkYo"
+video_title: "Array Idioms: Thinking Without Loops: Array Languages #5"
+repo_urls:
+  - url: "https://github.com/softwarewrighter/X_eTaL"
+    title: "X_eTaL"
+  - url: "https://github.com/softwarewrighter/X_eTaL-video"
+    title: "X_eTaL-video"
+---
+
+<img src="{{ '/assets/images/posts/block-strings-blocks.webp' | relative_url }}" class="post-marker no-invert" alt="A tangled loop of gray wire on the left; on the right the wire runs straight through four rows of glowing blue cubes: a rising staircase, cubes stepping up and down between neighbors, cubes leveled around a center line, and short stacks like a bar chart" style="width: 205px;">
+
+Episode 5 of my video series on array programming is about idioms. [Episode 4](/2026/11/25/array-languages-xetal-video-broadcast/) was about what happens when arrays of different shapes meet. This one is about thinking without loops: small problems you would usually solve with a loop, each solved again with whole arrays.
+
+<!--more-->
+
+<div class="resource-box" markdown="1">
+
+| Resource | Link |
+|----------|------|
+| **Video** | [Array Idioms: Thinking Without Loops: Array Languages #5](https://www.youtube.com/watch?v=YsfU6YFgkYo)<br>[![Video](https://img.youtube.com/vi/YsfU6YFgkYo/mqdefault.jpg){: .video-thumb}](https://www.youtube.com/watch?v=YsfU6YFgkYo) |
+| **All the videos** | [X_eTaL-video's page](https://softwarewrighter.github.io/X_eTaL-video/) |
+| **Try X_eTaL** | [In your browser](https://softwarewrighter.github.io/X_eTaL/) |
+| **Code** | [X_eTaL](https://github.com/softwarewrighter/X_eTaL), [X_eTaL-video](https://github.com/softwarewrighter/X_eTaL-video) |
+| **The series** | [Array Languages: every post](/series/#array-languages) |
+| **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
+
+</div>
+
+## One pattern for each idiom
+
+An idiom is a short phrase for a pattern that keeps coming back. Each idiom in this episode follows one pattern: first the problem, then a loop that solves it (in Rust), then the idiom, and what it costs.
+
+The examples use three small lists:
+
+```xetal
+x ← 3 1 4 1 5 9
+s ← 2 4 6 8
+votes ← 2 3 2 1 2 3
+```
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
+## Idioms you have met
+
+<div class="aside-box outdent-right" markdown="1">
+
+**Why are a few names one letter and a mark?** Most X_eTaL built-ins are words with one underlined letter: `r̲ev`{:.language-xetal}, `r̲eshape`{:.language-xetal}, `t̲ally`{:.language-xetal}, `d̲rop`{:.language-xetal}. The underline marks a function name (typed as an underscore after the letter, `r_ev`), and a word, because one letter cannot stand for every word that starts with it. A name ends in a mark only where that mark already means something in APL, so just four read like the APL symbols they come from:
+
+| Name | Does | APL |
+|------|------|-----|
+| `r̲/`{:.language-xetal} (`r_/`) | reduce | `/` |
+| `s̲\`{:.language-xetal} (`s_\`) | scan | `\` |
+| `o̲-`{:.language-xetal} (`o_-`) | rotate, first axis | `⊖` |
+| `o̲\`{:.language-xetal} (`o_\`) | transpose | `⍉` |
+
+The letter names the kind (r for reduce, s for scan); o stands in for APL's circle. One other mark ends a name: a `?` marks a yes-or-no question, as in `m̲ember?`{:.language-xetal}.
+
+</div>
+
+Some idioms have come up already. Plus reduce sums a list, and a comparison followed by a sum counts the matches:
+
+```xetal
+'+ r̲/ x       ⍝ 23
+'+ r̲/ x > 3   ⍝ 3
+```
+
+Reverse and rotate rearrange the items, and no index appears anywhere:
+
+```xetal
+r̲ev x    ⍝ 9 5 1 4 1 3
+2 o̲- x   ⍝ 4 1 5 9 3 1
+```
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
+## Running totals: scan
+{: .pos-left}
+
+<figure class="zoomable outdent-right" style="width: 45%; margin-top: -2.9em;">
+<img src="{{ '/assets/images/posts/al25-scan.webp' | relative_url }}" alt="The episode's slide: plus scan of x, the boxed list 3 1 4 1 5 9 becomes 3 4 8 9 14 23">
+<figcaption>From the video: plus scan keeps every running sum. Click to enlarge.</figcaption>
+</figure>
+
+The first new problem is running totals: each item becomes the sum of everything up to it. A loop keeps a total and saves it after each step:
+
+```rust
+let mut total = 0;
+for v in &x {
+    total += v;
+    out.push(total);
+}
+```
+
+In X_eTaL this is a scan. Plus scan keeps every running sum, and the last one is the total:
+
+```xetal
+'+ s̲\ x
+```
+```
+┌→────────────┐
+│3 4 8 9 14 23│
+└~────────────┘
+```
+
+Scan works with any function. Max scan keeps the largest value so far:
+
+```xetal
+'m̲ax s̲\ x
+```
+```
+┌→──────────┐
+│3 3 4 4 5 9│
+└~──────────┘
+```
+
+The trade-off: scan keeps every step, not only the last.
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
+## Adjacent changes: shift and subtract
+{: .pos-right}
+
+<figure class="zoomable outdent-left" style="width: 45%; margin-top: -2.9em;">
+<img src="{{ '/assets/images/posts/al25-subtract.webp' | relative_url }}" alt="The episode's slide: 1 drop x minus negative 1 drop x is -2 3 -3 4 4; compared with greater than, 0 1 0 1 1">
+<figcaption>From the video: subtract the shifted lists, or compare them. Click to enlarge.</figcaption>
+</figure>
+
+Next, adjacent changes: how much each item differs from the one before it. A loop starts at the second item and looks back one:
+
+```rust
+for i in 1..x.len() {
+    out.push(x[i] - x[i - 1]);
+}
+```
+
+The idiom shifts the list instead of looking back. Drop the first item, then drop the last, and the two lists line up, each item beside the one before it:
+
+```xetal
+1 d̲rop x    ⍝ 1 4 1 5 9
+-1 d̲rop x   ⍝ 3 1 4 1 5
+```
+
+Subtract them item by item. The result has one item fewer than the list. Compare instead, and you find every rise:
+
+```xetal
+(1 d̲rop x) − -1 d̲rop x   ⍝ -2 3 -3 4 4
+(1 d̲rop x) > -1 d̲rop x   ⍝ 0 1 0 1 1
+```
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
+## Normalize values: an aggregate, then each item
+{: .pos-left}
+
+<figure class="zoomable outdent-right" style="width: 45%; margin-top: -2.9em;">
+<img src="{{ '/assets/images/posts/al25-normalize.webp' | relative_url }}" alt="The episode's slide: plus reduce of s divided by its tally is 5.0; float s minus that is -3.0 -1.0 1.0 3.0">
+<figcaption>From the video: an aggregate, then each item. Click to enlarge.</figcaption>
+</figure>
+
+Next, normalize values: subtract the average from every item. A loop needs two passes, the first to find the average and the second to subtract it:
+
+```rust
+let mean = s.iter().sum::<f64>() / n;
+for v in &s {
+    out.push(v - mean);
+}
+```
+
+The idiom is an aggregate, then an item-by-item step. Reduce and divide give the average, a single value, and scalar extension from episode 4 does the rest:
+
+```xetal
+('+ r̲/ s) ÷ t̲ally s                ⍝ 5.0
+(f̲loat s) − ('+ r̲/ s) ÷ t̲ally s   ⍝ -3.0 -1.0 1.0 3.0
+```
+
+One detail: division gives a float, and these items are integers. In X_eTaL the two do not mix, so without `f̲loat`{:.language-xetal} it is an error:
+
+```xetal
+s − ('+ r̲/ s) ÷ t̲ally s
+```
+```
+error[type-mismatch]: expected Int, found Float
+```
+
+`f̲loat`{:.language-xetal} turns the integers into floats first.
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
+## Count occurrences: unique and a table
+{: .pos-right}
+
+<figure class="zoomable outdent-left" style="width: 45%; margin-top: -2.9em;">
+<img src="{{ '/assets/images/posts/al25-count.webp' | relative_url }}" alt="The episode's slide: the equality table of unique votes against votes, summed along each row, gives 3 2 1">
+<figcaption>From the video: sum each row of the table. Click to enlarge.</figcaption>
+</figure>
+
+Last, count occurrences: how many times each value appears. A loop keeps a map from each value to its count:
+
+```rust
+let mut counts = HashMap::new();
+for v in &votes {
+    *counts.entry(v).or_insert(0) += 1;
+}
+```
+
+The idiom starts with unique, which gives each value once, in the order they first appear:
+
+```xetal
+u̲nique votes   ⍝ 2 3 1
+```
+
+Equals table compares each value with every vote, so each row marks where one value appears:
+
+```xetal
+(u̲nique votes) '= t̲able votes
+```
+```
+┌→──────────┐
+↓1 0 1 0 1 0│
+│0 1 0 0 0 1│
+│0 0 0 1 0 0│
+└~──────────┘
+```
+
+Sum along each row, and you have the counts: 2 appears three times, 3 twice and 1 once.
+
+```xetal
+'+ r̲/₂ (u̲nique votes) '= t̲able votes   ⍝ 3 2 1
+```
+
+The trade-off: the table has a cell for every value and every vote. For a long list, that is a lot of cells.
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
+## Find positions: where and index of
+{: .pos-left}
+
+<figure class="zoomable outdent-right" style="width: 45%; margin-top: -2.9em;">
+<img src="{{ '/assets/images/posts/al25-where.webp' | relative_url }}" alt="The episode's slide: where of x greater than 3 turns 0 0 1 0 1 1 into 3 5 6; x index of its maximum is 6">
+<figcaption>From the video: where, then index of. Click to enlarge.</figcaption>
+</figure>
+
+Now, some more idioms. First, find the positions of the matches. A loop checks each item and keeps the index of each match:
+
+```rust
+for (i, v) in x.iter().enumerate() {
+    if *v > 3 { out.push(i + 1); }
+}
+```
+
+The idiom asks the question of every item first, then `w̲here`{:.language-xetal} turns the ones into positions. Positions count from one:
+
+```xetal
+x > 3           ⍝ 0 0 1 0 1 1
+w̲here x > 3     ⍝ 3 5 6
+```
+
+`i̲ndexOf`{:.language-xetal} finds where a value first appears. Here, it finds the largest:
+
+```xetal
+x i̲ndexOf 'm̲ax r̲/ x   ⍝ 6
+```
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
+## Membership: member
+{: .pos-right}
+
+<figure class="zoomable outdent-left" style="width: 45%; margin-top: -2.9em;">
+<img src="{{ '/assets/images/posts/al25-member.webp' | relative_url }}" alt="The episode's slide: x member of 1 5, drawn 3 1 4 1 5 9 element-of 1 5 equals 0 1 0 1 1 0">
+<figcaption>From the video: a mask of members. Click to enlarge.</figcaption>
+</figure>
+
+Next, membership: is each item one of a few allowed values? A loop checks each item against the whole set:
+
+```rust
+for v in &x {
+    out.push(allowed.contains(v));
+}
+```
+
+`m̲ember?`{:.language-xetal} asks that of every item at once. The result is a mask of ones and zeros, and a mask can count, choose or find positions:
+
+```xetal
+x m̲ember? 1 5   ⍝ 0 1 0 1 1 0
+```
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
+## Moving windows: n-wise
+{: .pos-left}
+
+<figure class="zoomable outdent-right" style="width: 45%; margin-top: -2.9em;">
+<img src="{{ '/assets/images/posts/al25-nwise.webp' | relative_url }}" alt="The episode's slide: 3 plus n-wise of 3 1 4 1 5 9 is 8 6 10 15">
+<figcaption>From the video: plus over every window of three. Click to enlarge.</figcaption>
+</figure>
+
+Next, moving windows: the sum of every three items in a row. A loop slides a window along the list:
+
+```rust
+for i in 0..x.len() - 2 {
+    out.push(x[i] + x[i + 1] + x[i + 2]);
+}
+```
+
+`n̲wise`{:.language-xetal} reduces every window of a given size. Plus, three at a time, adds each group of neighbors, and the result is two items shorter:
+
+```xetal
+3 '+ n̲wise x   ⍝ 8 6 10 15
+```
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
+## Sort by a key: grade, then select
+{: .pos-right}
+
+<figure class="zoomable outdent-left" style="width: 45%; margin-top: -2.9em;">
+<img src="{{ '/assets/images/posts/al25-grade.webp' | relative_url }}" alt="The episode's slide: grade of ages 40 25 33 19 is 4 2 3 1; selecting those from ids 101 102 103 104 gives 104 102 103 101">
+<figcaption>From the video: grade, then select. Click to enlarge.</figcaption>
+</figure>
+
+Last, sort by a key. We have people, and we have their ages, and we want the people in order of age. A loop pairs them, sorts the pairs and keeps the people:
+
+```rust
+let mut p: Vec<_> = ids.iter().zip(&ages).collect();
+p.sort_by_key(|(_, age)| **age);
+let out: Vec<_> = p.iter().map(|(id, _)| **id).collect();
+```
+
+`g̲rade`{:.language-xetal} gives the positions that would sort the ages, and `s̲elect`{:.language-xetal} takes the people at those positions. The youngest comes first:
+
+```xetal
+ids ← 101 102 103 104
+ages ← 40 25 33 19
+g̲rade ages                ⍝ 4 2 3 1
+(g̲rade ages) s̲elect ids   ⍝ 104 102 103 101
+```
+
+One grade can order many lists the same way.
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
+## More than a shorter loop
+{: .pos-center}
+
+An array idiom is more than a shorter spelling of a loop. It captures a pattern that keeps coming back. Once you see the pattern, you can reason about the whole operation, reuse it and test it, and often make it faster apart from the program that uses it. The goal is not to remove every loop. The goal is to say the problem at the most useful level.
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
+## Coming up, and an exercise
+{: .pos-left}
+
+The next episode tours the family of array languages: APL first, then J and K, then BQN, and last X_eTaL, and what each one chose.
+
+Before then, try this in the [browser editor](https://softwarewrighter.github.io/X_eTaL/). Take `3 1 4 1 5 9`. Find its sum and its largest value. Find its running totals. Count the values greater than three. Then find the adjacent differences. (To type it, use the ASCII it is drawn from: `:=` for `←`, `r_/` for `r̲/`, `s_\` for `s̲\`, `d_rop` for `d̲rop`.)
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
+## Closing
+{: .pos-center}
+
+I started developing X_eTaL as an alternative to using Python for machine learning. NumPy seems to be heavily influenced by array languages, so I wanted my own approach to array languages. I ended up making the language more general-purpose. I also wanted to show how to extend the language so that the base language stays small. Later in the video series I will show some ways to do this.
