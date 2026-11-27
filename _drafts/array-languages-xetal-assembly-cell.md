@@ -8,8 +8,8 @@ abstract: "Twenty-seventh in the Array Languages series: the assembly cell, an X
 series: "Array Languages"
 series_part: 27
 date: 2026-11-28 00:15:00 -0800
-# video_url: "Mike: TODO, the 555 blinker video's YouTube URL once it is published"
-# video_title: "Mike: TODO"
+# video_url: "Mike: TODO, the 555 video's YouTube URL (uncomment both lines once it is up; the Videos tab reads them)"
+# video_title: "A robot cell builds a 555 blinker"
 repo_urls:
   - url: "https://github.com/softwarewrighter/X_eTaL-extensions"
     title: "X_eTaL-extensions"
@@ -49,7 +49,7 @@ The idea is to provide this "slicer"-like tool via MCP to AI coding agents to mo
 | Resource | Link |
 |----------|------|
 | **Live page** | [The assembly cell, live](https://softwarewrighter.github.io/X_eTaL-extensions/cell/live/) (runs in your browser) |
-| **Video** | Mike: TODO, the 555 blinker video once published |
+| **Video** | Mike: TODO, [A robot cell builds a 555 blinker](YOUTUBE_URL)<br>[![Video](https://img.youtube.com/vi/VIDEO_ID/mqdefault.jpg){: .video-thumb}](YOUTUBE_URL), once it is up |
 | **Docs** | [The cell extension](https://github.com/softwarewrighter/X_eTaL-extensions/blob/main/extensions/cell/docs/README.md), [the design](https://github.com/softwarewrighter/X_eTaL-extensions/blob/main/docs/cell-design.md) |
 | **Code** | [X_eTaL-extensions](https://github.com/softwarewrighter/X_eTaL-extensions), [X_eTaL](https://github.com/softwarewrighter/X_eTaL) |
 | **Related posts** | [X_eTaL-extensions, Extending the Machine](/2026/10/10/array-languages-xetal-extensions/), [X_eTaL and Blender](/2026/10/15/array-languages-xetal-blender/) |
