@@ -30,7 +30,7 @@ repo_urls:
      sections, which sit beside the links box), any cube renders, the narration check. Mike: the closing.
      Four more idioms (X_eTaL-video 8e5b225, 17:41): where/index of, member, n_wise, grade+select; run at the pin.
      Narration rewording at e937305 (scan: "the total") applied.
-     Frames al25-scan, -subtract, -normalize, -count from out/al-05-idioms-landscape-remotion.mp4 (11:42, 4:33, before
+     Frames al25-scan, -subtract, -normalize, -count (and al25-where, -member, -nwise, -grade from the 16:34 render, 6:10) from out/al-05-idioms-landscape-remotion.mp4 (11:42, 4:33, before
      the YouTube package); narration unchanged from the draft but for the next scene. Re-take if the final cut differs.
      Short names aside (Mike, 2026-11-26): from X_eTaL docs/lang-choices.md B2 and N3 (a trailing mark only where APL gave
      it a meaning: r_/, s_\, o_-, o_\), A2 (o_- like APL circle-minus), docs/history.md Q34 (words, not single letters).
@@ -282,6 +282,11 @@ The trade-off: the table has a cell for every value and every vote. For a long l
 ## Find positions: where and index of
 {: .pos-left}
 
+<figure class="zoomable outdent-right" style="width: 45%; margin-top: -2.9em;">
+<img src="{{ '/assets/images/posts/al25-where.webp' | relative_url }}" alt="The episode's slide: where of x greater than 3 turns 0 0 1 0 1 1 into 3 5 6; x index of its maximum is 6">
+<figcaption>From the video: where, then index of. Click to enlarge.</figcaption>
+</figure>
+
 Four more idioms. First, find the positions of the matches. A loop checks each item and keeps the index of each match:
 
 ```rust
@@ -311,6 +316,11 @@ x i̲ndexOf 'm̲ax r̲/ x   ⍝ 6
 ## Membership: member
 {: .pos-right}
 
+<figure class="zoomable outdent-left" style="width: 45%; margin-top: -2.9em;">
+<img src="{{ '/assets/images/posts/al25-member.webp' | relative_url }}" alt="The episode's slide: x member of 1 5, drawn 3 1 4 1 5 9 element-of 1 5 equals 0 1 0 1 1 0">
+<figcaption>From the video: a mask of members. Click to enlarge.</figcaption>
+</figure>
+
 Next, membership: is each item one of a few allowed values? A loop checks each item against the whole set:
 
 ```rust
@@ -333,6 +343,11 @@ x m̲ember? 1 5   ⍝ 0 1 0 1 1 0
 ## Moving windows: n-wise
 {: .pos-left}
 
+<figure class="zoomable outdent-right" style="width: 45%; margin-top: -2.9em;">
+<img src="{{ '/assets/images/posts/al25-nwise.webp' | relative_url }}" alt="The episode's slide: 3 plus n-wise of 3 1 4 1 5 9 is 8 6 10 15">
+<figcaption>From the video: plus over every window of three. Click to enlarge.</figcaption>
+</figure>
+
 Next, moving windows: the sum of every three items in a row. A loop slides a window along the list:
 
 ```rust
@@ -354,6 +369,11 @@ for i in 0..x.len() - 2 {
 
 ## Sort by a key: grade, then select
 {: .pos-right}
+
+<figure class="zoomable outdent-left" style="width: 45%; margin-top: -2.9em;">
+<img src="{{ '/assets/images/posts/al25-grade.webp' | relative_url }}" alt="The episode's slide: grade of ages 40 25 33 19 is 4 2 3 1; selecting those from ids 101 102 103 104 gives 104 102 103 101">
+<figcaption>From the video: grade, then select. Click to enlarge.</figcaption>
+</figure>
 
 Last, sort by a key. We have people and their ages, and we want the people in order of age. A loop pairs them, sorts the pairs and keeps the people:
 
