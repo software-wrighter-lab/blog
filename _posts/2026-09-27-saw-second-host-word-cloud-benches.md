@@ -28,7 +28,8 @@ repo_urls:
 books:
   - title: "Build a Reasoning Model (From Scratch)"
     author: "Sebastian Raschka"
-    year: 2025
+    year: 2026
+    url: "https://www.manning.com/books/build-a-reasoning-model-from-scratch"
   - title: "The 7 Habits of Highly Effective People"
     author: "Stephen R. Covey"
     year: 1989
