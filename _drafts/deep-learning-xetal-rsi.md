@@ -25,12 +25,12 @@ repo_urls:
      pages 05, 04, 01 (2026-11-26 19:38). Econ code from libs/Econ/src/Econ.xtl, run and drawn with bin/xetal.
      The paper's authors are named in the repo READMEs; not named here (Mike's go needed). The ski-rental bound's
      1988 paper is cited in 05's README; described here without names.
-     Date 2026-11-30 is tentative (after Deep Learning #1, 11/28; 11/29 is a Saw Sunday). Lead image: a placeholder.
+     Date 2026-11-30 is tentative (after Deep Learning #1, 11/28; 11/29 is a Saw Sunday). Lead image: Mike's block-rsi.jpg (Dropbox, 2026-11-26), no-invert.
      Related section (Mike, 2026-11-26): from X_eTaL-RSI docs/related.md (committed), with blog links.
      Mike: the closing; whether the intro should say more about the meetup.
 -->
 
-<img src="{{ '/assets/images/posts/placeholder-deep-learning-xetal-rsi.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-rsi.webp' | relative_url }}" class="post-marker no-invert" alt="An illustrated machine room around a glowing core labeled X_eTaL-RSI, with six panels around it: learn history versus hints, evolving halves production, a self-editing optimizer, improvement pays with reuse (ski rental), general tools transfer, and a layered guardian" style="width: 205px;">
 
 The second paper from the Deep Learning meetup is [Exo: An Architecture for Self-Improving Systems at Runtime](https://arxiv.org/abs/2611.00463). A frozen model drives an agent harness, and the harness improves itself: its code, memory, tools and prompts are data the agent may rewrite, and so is the policy that decides what to rewrite. No weights change. [X_eTaL-RSI](https://github.com/softwarewrighter/X_eTaL-RSI) asks whether an array language makes that loop cheaper, clearer and easier to verify, with small deterministic experiments you can run in a browser.
 

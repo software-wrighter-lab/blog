@@ -27,11 +27,11 @@ repo_urls:
      repo's pinned bin/xetal render.
      The paper's authors are named in docs/eli5.md; not named here (Mike's go needed). Related projects (the paper's
      code, TransformerLens, BDH) are linked neutrally, as the README does.
-     Date 2026-11-28 is tentative. Lead image: a placeholder. Mike: the closing. Intro: Mike's words (2026-11-26).
+     Date 2026-11-28 is tentative. Lead image: Mike's block-circuits.jpg (Dropbox, 2026-11-26), no-invert. Mike: the closing. Intro: Mike's words (2026-11-26).
      Deep Learning #2 is planned from X_eTaL-RSI (Exo, arXiv 2611.00463); no forward link here until it is published.
 -->
 
-<img src="{{ '/assets/images/posts/placeholder-deep-learning-xetal-circuits.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
+<img src="{{ '/assets/images/posts/block-circuits.webp' | relative_url }}" class="post-marker no-invert" alt="An illustrated workbench labeled X_eTaL-circuits: monitors of circuit diagrams and analysis panels, bundles of glowing wires routed between instruments, and a drawing tablet with a circuit sketch" style="width: 205px;">
 
 I recently started attending a weekly Deep Learning meetup on Zoom, where each week one person goes through a paper and the others discuss it. The group votes on a paper to study the following week. This series covers some of the papers discussed, for which I went on to create X_eTaL-based repos to explore and demonstrate concepts from each paper.
 
