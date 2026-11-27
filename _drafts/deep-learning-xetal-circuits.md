@@ -19,15 +19,15 @@ repo_urls:
 ---
 
 <!-- DRAFT
-     Started 2026-11-26 19:30 from X_eTaL-circuits at 4c62236 (saga step 005 edge-effects complete). Step 006
-     (held-out edges) was in progress and uncommitted then: its README section says 181 of 186 edges confirm; the
-     post gives that as "so far" and uses the committed model map. Re-check README and the map before publishing.
+     Started 2026-11-26 19:30 from X_eTaL-circuits at 4c62236; updated 2026-11-27 to c1623f8 (step 006 held-out
+     edges committed: 181 of 186 confirmed, the circuit's 22 edges all confirmed; model map recopied, edges thick).
+     Saga 3 steps 007 faithfulness and 008 circuit-graph-view are pending: the closing says so. Re-check if more lands.
      Numbers are copied from the README's command output. Figures are the repo's own SVGs (drawn by X_eTaL),
      no-invert; the live-demo picture is images/demo.png. X_eTaL code: xetal/Scores/src/Scores.xtl, drawn with the
      repo's pinned bin/xetal render.
      The paper's authors are named in docs/eli5.md; not named here (Mike's go needed). Related projects (the paper's
      code, TransformerLens, BDH) are linked neutrally, as the README does.
-     Date 2026-11-28 is tentative. Lead image: Mike's block-circuits.jpg (Dropbox, 2026-11-26), no-invert. Mike: the closing. Intro: Mike's words (2026-11-26).
+     Date 2026-11-28 is tentative. Lead image: Mike's block-circuits.jpg (Dropbox, 2026-11-26), no-invert. Closing: Mike's go on the suggested text (2026-11-27). Intro: Mike's words (2026-11-26).
      Deep Learning #2 is planned from X_eTaL-RSI (Exo, arXiv 2611.00463); no forward link here until it is published.
 -->
 
@@ -163,7 +163,7 @@ A head is one thing; an **edge** is one head's output reaching a later head's qu
 
 186 of the 400 edges pass. The previous-token head 4.11 feeds the key of every induction head (5.1, 5.5, 6.9, 7.2, 7.10, and 5.0, 5.8, 7.11, 8.1), restoring 17 to 45% of each one's attention score at the induction target, against controls of 2% at most. Heads 3.7, 5.6 and 2.2 add to it, and 4.7 pushes against it. The induction heads in turn feed the queries of later heads, and ten heads write straight into the logits, two of them against the answer.
 
-That is the textbook induction circuit, found again by experiment: a previous-token head tells each position what came before it, and the induction heads use that to find and copy the next token. On held-out seeds, the check so far confirms 181 of the 186 edges.
+That is the textbook induction circuit, found again by experiment: a previous-token head tells each position what came before it, and the induction heads use that to find and copy the next token. The same 400 edges, path-patched again on ten held-out seeds that played no part in choosing them, confirm 181 of the 186: 174 of the 176 into queries and keys, among them every edge from 4.11 into an induction head's key, at the same strength (36% on the finding seeds, 37% held out, for 4.11 into 5.1).
 
 <div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
 <img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
@@ -174,11 +174,11 @@ That is the textbook induction circuit, found again by experiment: a previous-to
 {: .pos-left}
 
 <figure class="zoomable outdent-right" style="width: 45%; margin-top: -2.9em;">
-<img src="{{ '/assets/images/posts/dl1-model-map.svg' | relative_url }}" class="no-invert" alt="GPT-2 Small's model map: a row per layer, a cell per head and one per MLP, heads colored blue for induction and orange for previous token, confirmed heads outlined, the induction circuit's edges drawn between them">
-<figcaption>The model map, drawn by X_eTaL. Click to enlarge.</figcaption>
+<img src="{{ '/assets/images/posts/dl1-model-map.svg' | relative_url }}" class="no-invert" alt="GPT-2 Small's model map: a row per layer, a cell per head and one per MLP, heads colored blue for induction and orange for previous token, confirmed heads outlined, the induction circuit's 22 confirmed edges drawn thick between them">
+<figcaption>The model map, drawn by X_eTaL: the circuit's twelve confirmed heads and its 22 edges, all confirmed. Click to enlarge.</figcaption>
 </figure>
 
-The map draws the whole model in one picture: a row per layer, a cell per head and per MLP, the residual stream beside them. Heads are colored by their scores, blue for induction and orange for previous token. A circuit file draws its heads and edges over the map, and the line says how far the evidence has come: dashed for observed (an attention pattern or score only), solid for tested against random controls, thick for confirmed on held-out prompts.
+The map draws the whole model in one picture: a row per layer, a cell per head and per MLP, the residual stream beside them. Heads are colored by their scores, blue for induction and orange for previous token. A circuit file draws its heads and edges over the map, and the line says how far the evidence has come: dashed for observed (an attention pattern or score only), solid for tested against random controls, thick for confirmed on held-out prompts. The circuit drawn has twelve confirmed heads: the previous-token head 4.11, the induction heads 5.1, 5.5, 6.9, 7.2 and 7.10, and six more the interventions found (7.6, 8.5, 9.9, 9.6, 10.1 and 0.1). Its 22 edges are every edge between those heads that path patching confirms, so all of them are drawn thick.
 
 The [live demo](https://softwarewrighter.github.io/X_eTaL-circuits/) has the map (hover a head for its numbers), every head's attention with a layer and head picker, the score grids, an introduction for a first-time reader and a glossary. Every picture there is drawn by X_eTaL, exactly as at the command line.
 
@@ -225,4 +225,4 @@ Two of those connect to earlier posts here. The paper's question, how a model le
 ## Closing
 {: .pos-center}
 
-Mike: TODO, a closing in your words.
+This is a first look at work still in progress. The circuit is found and its edges hold up on held-out seeds, but two checks remain before I'd call it done. The first is faithfulness: keep only the circuit's heads and edges, blank out the rest of the model, and see how much of the behavior survives, compared against random subgraphs of the same size. With that come completeness and minimality: does removing the circuit remove the behavior, and does every head in it earn its place? The second is a graph view that draws the circuit directly, senders to receivers, with each edge's evidence and whether it feeds a head's query, key or value. After that come the studies above, starting with local models, and ending with BDH, a model built to be inspected. I'll write about them as results come in.

@@ -3,7 +3,7 @@
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#be123c"/></marker><marker id="spine" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L10 5L0 10z" fill="#4b5563"/></marker></defs>
 <text x="8" y="20" font-family="monospace" font-size="14" fill="#1f2937" xml:space="preserve">gpt2 model map, circuit: induction, GPT-2 Small</text>
 <text x="8" y="40" font-family="monospace" font-size="11" fill="#1f2937" xml:space="preserve">a row per layer (embedding at the bottom), a cell per head and per MLP</text>
-<text x="8" y="56" font-family="monospace" font-size="11" fill="#1f2937" xml:space="preserve">circuit from: attention scores and the literature; heads tested by ablation and patching</text>
+<text x="8" y="56" font-family="monospace" font-size="11" fill="#1f2937" xml:space="preserve">circuit from: attention scores and the literature; heads tested by ablation and patching, edges by path patching</text>
 <path class="residual" d="M768 532 V88" stroke="#4b5563" stroke-width="4" marker-end="url(#spine)"/>
 <text x="744" y="78" font-family="monospace" font-size="11" fill="#1f2937" xml:space="preserve">unembed</text>
 <text x="750" y="550" font-family="monospace" font-size="11" fill="#1f2937" xml:space="preserve">embed</text>
@@ -199,11 +199,28 @@
 <g class="head-evidence" data-head="9.6" data-evidence="confirmed"><title>head 9.6: confirmed (denoising confirmed (7%, held-out 6%); mean ablation under 5%)</title><rect x="357" y="169" width="50" height="34" rx="5" fill="none" stroke="#111827" stroke-width="3.5"/></g>
 <g class="head-evidence" data-head="10.1" data-evidence="confirmed"><title>head 10.1: confirmed (denoising confirmed (6%, held-out 6%); mean ablation under 5%)</title><rect x="97" y="133" width="50" height="34" rx="5" fill="none" stroke="#111827" stroke-width="3.5"/></g>
 <g class="head-evidence" data-head="0.1" data-evidence="confirmed"><title>head 0.1: confirmed (denoising confirmed (5%, held-out 6%); mean ablation under 5%)</title><rect x="97" y="493" width="50" height="34" rx="5" fill="none" stroke="#111827" stroke-width="3.5"/></g>
-<path class="edge" data-from="4.11" data-to="5.1" data-evidence="observed" d="M642 352 Q 382 368 122 344" fill="none" stroke="#be123c" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
-<path class="edge" data-from="4.11" data-to="5.5" data-evidence="observed" d="M642 352 Q 486 368 330 344" fill="none" stroke="#be123c" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
-<path class="edge" data-from="4.11" data-to="6.9" data-evidence="observed" d="M642 352 Q 590 332 538 308" fill="none" stroke="#be123c" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
-<path class="edge" data-from="4.11" data-to="7.2" data-evidence="observed" d="M642 352 Q 408 296 174 272" fill="none" stroke="#be123c" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
-<path class="edge" data-from="4.11" data-to="7.10" data-evidence="observed" d="M642 352 Q 616 296 590 272" fill="none" stroke="#be123c" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+<path class="edge" data-from="0.1" data-to="6.9" data-evidence="confirmed" d="M122 496 Q 330 332 538 308" fill="none" stroke="#be123c" stroke-width="4" marker-end="url(#arrow)"/>
+<path class="edge" data-from="4.11" data-to="5.1" data-evidence="confirmed" d="M642 352 Q 382 368 122 344" fill="none" stroke="#be123c" stroke-width="4" marker-end="url(#arrow)"/>
+<path class="edge" data-from="4.11" data-to="5.1" data-evidence="confirmed" d="M642 352 Q 382 368 122 344" fill="none" stroke="#be123c" stroke-width="4" marker-end="url(#arrow)"/>
+<path class="edge" data-from="4.11" data-to="5.5" data-evidence="confirmed" d="M642 352 Q 486 368 330 344" fill="none" stroke="#be123c" stroke-width="4" marker-end="url(#arrow)"/>
+<path class="edge" data-from="4.11" data-to="6.9" data-evidence="confirmed" d="M642 352 Q 590 332 538 308" fill="none" stroke="#be123c" stroke-width="4" marker-end="url(#arrow)"/>
+<path class="edge" data-from="4.11" data-to="7.2" data-evidence="confirmed" d="M642 352 Q 408 296 174 272" fill="none" stroke="#be123c" stroke-width="4" marker-end="url(#arrow)"/>
+<path class="edge" data-from="4.11" data-to="7.10" data-evidence="confirmed" d="M642 352 Q 616 296 590 272" fill="none" stroke="#be123c" stroke-width="4" marker-end="url(#arrow)"/>
+<path class="edge" data-from="5.1" data-to="6.9" data-evidence="confirmed" d="M122 316 Q 330 332 538 308" fill="none" stroke="#be123c" stroke-width="4" marker-end="url(#arrow)"/>
+<path class="edge" data-from="5.1" data-to="7.6" data-evidence="confirmed" d="M122 316 Q 252 296 382 272" fill="none" stroke="#be123c" stroke-width="4" marker-end="url(#arrow)"/>
+<path class="edge" data-from="5.1" data-to="7.10" data-evidence="confirmed" d="M122 316 Q 356 296 590 272" fill="none" stroke="#be123c" stroke-width="4" marker-end="url(#arrow)"/>
+<path class="edge" data-from="5.1" data-to="9.6" data-evidence="confirmed" d="M122 316 Q 252 224 382 200" fill="none" stroke="#be123c" stroke-width="4" marker-end="url(#arrow)"/>
+<path class="edge" data-from="5.1" data-to="9.9" data-evidence="confirmed" d="M122 316 Q 330 224 538 200" fill="none" stroke="#be123c" stroke-width="4" marker-end="url(#arrow)"/>
+<path class="edge" data-from="5.1" data-to="10.1" data-evidence="confirmed" d="M122 316 Q 122 188 122 164" fill="none" stroke="#be123c" stroke-width="4" marker-end="url(#arrow)"/>
+<path class="edge" data-from="5.5" data-to="6.9" data-evidence="confirmed" d="M330 316 Q 434 332 538 308" fill="none" stroke="#be123c" stroke-width="4" marker-end="url(#arrow)"/>
+<path class="edge" data-from="5.5" data-to="7.6" data-evidence="confirmed" d="M330 316 Q 356 296 382 272" fill="none" stroke="#be123c" stroke-width="4" marker-end="url(#arrow)"/>
+<path class="edge" data-from="5.5" data-to="9.6" data-evidence="confirmed" d="M330 316 Q 356 224 382 200" fill="none" stroke="#be123c" stroke-width="4" marker-end="url(#arrow)"/>
+<path class="edge" data-from="5.5" data-to="9.9" data-evidence="confirmed" d="M330 316 Q 434 224 538 200" fill="none" stroke="#be123c" stroke-width="4" marker-end="url(#arrow)"/>
+<path class="edge" data-from="5.5" data-to="10.1" data-evidence="confirmed" d="M330 316 Q 226 188 122 164" fill="none" stroke="#be123c" stroke-width="4" marker-end="url(#arrow)"/>
+<path class="edge" data-from="6.9" data-to="7.6" data-evidence="confirmed" d="M538 280 Q 460 296 382 272" fill="none" stroke="#be123c" stroke-width="4" marker-end="url(#arrow)"/>
+<path class="edge" data-from="6.9" data-to="9.6" data-evidence="confirmed" d="M538 280 Q 460 224 382 200" fill="none" stroke="#be123c" stroke-width="4" marker-end="url(#arrow)"/>
+<path class="edge" data-from="6.9" data-to="9.9" data-evidence="confirmed" d="M538 280 Q 538 224 538 200" fill="none" stroke="#be123c" stroke-width="4" marker-end="url(#arrow)"/>
+<path class="edge" data-from="6.9" data-to="10.1" data-evidence="confirmed" d="M538 280 Q 330 188 122 164" fill="none" stroke="#be123c" stroke-width="4" marker-end="url(#arrow)"/>
 <rect x="48" y="562" width="14" height="12" fill="#4e8ef6" stroke="#cbd5e1"/><text x="68" y="572" font-family="monospace" font-size="11" fill="#1f2937" xml:space="preserve">induction score</text><rect x="218" y="562" width="14" height="12" fill="#f5a722" stroke="#cbd5e1"/><text x="238" y="572" font-family="monospace" font-size="11" fill="#1f2937" xml:space="preserve">previous token score</text><rect x="428" y="562" width="14" height="12" fill="#f3f4f6" stroke="#cbd5e1"/><text x="448" y="572" font-family="monospace" font-size="11" fill="#1f2937" xml:space="preserve">neither reaches 20%</text>
 <text x="48" y="592" font-family="monospace" font-size="11" fill="#1f2937" xml:space="preserve">Head colors are attention-pattern scores: candidates, not causal evidence. Hover a head for its numbers.</text>
 <path class="key-edge" d="M48 614 H88" stroke="#be123c" stroke-width="2" stroke-dasharray="6 4"/><text x="100" y="618" font-family="monospace" font-size="11" fill="#1f2937" xml:space="preserve">edge observed: attention patterns only (which head feeds which is untested)</text>
