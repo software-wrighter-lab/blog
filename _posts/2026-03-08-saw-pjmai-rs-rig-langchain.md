@@ -11,6 +11,11 @@ series_part: 1
 repo_url: "https://github.com/sw-cli-tools/pjmai-rs"
 video_url: "https://youtu.be/CqdBxXXOeUs"
 video_title: "Sharpen the Saw: Rust AI Tools"
+books:
+  - title: "The 7 Habits of Highly Effective People"
+    author: "Stephen R. Covey"
+    year: 1989
+    url: "https://en.wikipedia.org/wiki/The_7_Habits_of_Highly_Effective_People"
 ---
 
 <img src="{{ '/assets/images/posts/block-sharp-tools.webp' | relative_url }}" class="post-marker no-invert" alt="">

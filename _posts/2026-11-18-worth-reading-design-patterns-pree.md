@@ -11,6 +11,16 @@ date: 2026-11-18 00:15:00 -0800
 repo_urls:
   - url: "https://github.com/sw-cli-tools/reg-rs"
     title: "reg-rs"
+books:
+  - title: "Design Patterns: Elements of Reusable Object-Oriented Software"
+    author: "Gamma, Helm, Johnson, Vlissides"
+    year: 1994
+  - title: "Design Patterns for Object-Oriented Software Development"
+    author: "Wolfgang Pree"
+    year: 1995
+  - title: "Testing Object-Oriented Systems"
+    author: "Robert V. Binder"
+    year: 1999
 ---
 
 <!-- DRAFT (2026-11-02), Mike: "start a new blog post for thursday 11/5, influential books", then "maybe a new series, worth reading".

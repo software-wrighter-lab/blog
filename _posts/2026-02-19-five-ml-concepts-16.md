@@ -17,6 +17,11 @@ papers:
     url: "https://arxiv.org/abs/1502.03167"
   - title: "Understanding Deep Learning Requires Rethinking Generalization"
     url: "https://arxiv.org/abs/1611.03530"
+books:
+  - title: "Deep Learning"
+    author: "Ian Goodfellow, Yoshua Bengio, Aaron Courville"
+    year: 2016
+    url: "https://www.deeplearningbook.org/"
 ---
 
 <img src="{{ '/assets/images/posts/block-sixteen.webp' | relative_url }}" class="post-marker" alt="">

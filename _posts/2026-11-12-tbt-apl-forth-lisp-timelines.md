@@ -33,6 +33,10 @@ repo_urls:
     title: "X_eTaL-fpga"
   - url: "https://github.com/hardwarewrighter/hex1000"
     title: "hex1000"
+books:
+  - title: "LISP 1.5 Programmer's Manual"
+    author: "John McCarthy et al."
+    year: 1962
 ---
 
 <!-- DRAFT (2026-11-11), Mike: TBT for Thursday 11/12 on the APL, Forth and Lisp timelines; a section each with a thumbnail and

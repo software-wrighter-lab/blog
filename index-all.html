@@ -217,12 +217,30 @@ permalink: /index-all/
 [data-theme="dark"] .year-header {
   color: #999;
 }
+
+.books-table td {
+  vertical-align: top;
+}
+
+.book-byline {
+  font-size: 0.85em;
+  color: #666;
+}
+
+[data-theme="dark"] .book-byline {
+  color: #999;
+}
+
+.book-post + .book-post {
+  margin-top: 0.35em;
+}
 </style>
 
 <div class="index-tabs">
   <button class="active" data-tab="alpha">Alphabetical</button>
   <button data-tab="chron">Chronological</button>
   <button data-tab="kwic">KWIC</button>
+  <button data-tab="books">Books</button>
   <button data-tab="code">Code</button>
   <button data-tab="videos">Videos</button>
   <button data-tab="papers">Papers</button>
@@ -490,6 +508,61 @@ permalink: /index-all/
 </table>
 {% else %}
 <p><em>No papers indexed yet. Add <code>papers</code> frontmatter to posts.</em></p>
+{% endif %}
+</div>
+
+<!-- Books Panel -->
+<div class="tab-panel" id="panel-books">
+<p><em>Books mentioned in posts, sorted alphabetically by title, each with the posts that mention it.</em></p>
+{% assign book_entries = "" | split: "" %}
+{% for post in site.posts %}
+  {% if post.books %}
+    {% for book in post.books %}
+      {% if book.title %}
+        {% comment %} Sort key: lowercase, leading article dropped; posts under a book oldest first {% endcomment %}
+
+        {% assign book_key = book.title | downcase | prepend: "^" | replace: "^the ", "" | replace: "^a ", "" | replace: "^an ", "" | remove: "^" %}
+        {% assign post_date = post.date | date: "%Y-%m-%d" %}
+        {% assign entry = book_key | append: "|" | append: post_date | append: "|" | append: book.title | append: "|" | append: book.author | append: "|" | append: book.year | append: "|" | append: book.url | append: "|" | append: post.title | append: "|" | append: post.url %}
+        {% assign book_entries = book_entries | push: entry %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+{% assign sorted_books = book_entries | sort %}
+{% if sorted_books.size > 0 %}
+<table class="index-list books-table" style="width: 100%;">
+<tr><th style="text-align: left; width: 40%;">Book</th><th style="text-align: left;">Blog Posts</th></tr>
+{% assign prev_key = "" %}
+{% for entry in sorted_books %}
+  {% assign parts = entry | split: "|" %}
+  {% assign book_key = parts[0] %}
+  {% if book_key != prev_key %}
+    {% unless forloop.first %}</td></tr>{% endunless %}
+    {% assign book_title = parts[2] %}
+    {% assign book_author = parts[3] %}
+    {% assign book_year = parts[4] %}
+    {% assign book_url = parts[5] %}
+  <tr>
+    <td>
+      {% if book_url and book_url != "" %}<a href="{{ book_url }}" target="_blank"><em>{{ book_title }}</em></a>{% else %}<em>{{ book_title }}</em>{% endif %}
+      {% if book_author and book_author != "" %}<br><span class="book-byline">{{ book_author }}{% if book_year and book_year != "" %}, {{ book_year }}{% endif %}</span>{% endif %}
+    </td>
+    <td>
+    {% assign prev_key = book_key %}
+  {% endif %}
+  {% assign post_title = parts[6] %}
+  {% assign post_url = parts[7] %}
+      <div class="book-post">
+        <a href="{{ post_url | relative_url }}">{{ post_title }}</a>
+        <span class="index-abstract-toggle" data-url="{{ post_url | relative_url }}"></span>
+        <div class="index-abstract" data-url="{{ post_url | relative_url }}"></div>
+      </div>
+  {% if forloop.last %}</td></tr>{% endif %}
+{% endfor %}
+</table>
+{% else %}
+<p><em>No books indexed yet. Add <code>books</code> frontmatter to posts.</em></p>
 {% endif %}
 </div>
 

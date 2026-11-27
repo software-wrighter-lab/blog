@@ -16,6 +16,18 @@ repo_urls:
     title: "sw-cor24-apl"
   - url: "https://github.com/sw-ml-study/sw-mlpl"
     title: "sw-mlpl"
+books:
+  - title: "A Programming Language"
+    author: "Kenneth E. Iverson"
+    year: 1962
+  - title: "APL\\360 User's Manual"
+    author: "IBM"
+    year: 1968
+    url: "https://www.bitsavers.org/pdf/ibm/apl/GH20-0683-1_APL_360_Users_Manual_Mar70.pdf"
+  - title: "APL\\360 Primer"
+    author: "IBM"
+    year: 1971
+    url: "https://www.bitsavers.org/pdf/ibm/apl/GH20-0689-2_APL_360_Primer_Aug71.pdf"
 ---
 
 <img src="{{ '/assets/images/posts/sw-apl-marker.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">

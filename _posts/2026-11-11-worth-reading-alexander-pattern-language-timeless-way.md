@@ -8,6 +8,19 @@ abstract: "Second in the series on books worth reading: three from architecture 
 series: "Worth Reading"
 series_part: 2
 date: 2026-11-11 00:15:00 -0800
+books:
+  - title: "A Pattern Language"
+    author: "Christopher Alexander et al."
+    year: 1977
+  - title: "The Timeless Way of Building"
+    author: "Christopher Alexander"
+    year: 1979
+  - title: "Design Thinking"
+    author: "Peter G. Rowe"
+    year: 1987
+  - title: "Why Buildings Stand Up"
+    author: "Mario Salvadori"
+    year: 1980
 ---
 
 <!-- DRAFT (2026-11-02), Mike: "start a new blog post for thursday 11/5, influential books", then "maybe a new series, worth reading".

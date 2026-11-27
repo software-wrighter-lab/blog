@@ -17,6 +17,11 @@ papers:
     url: "https://arxiv.org/abs/2103.13630"
   - title: "FlashAttention: Fast and Memory-Efficient Exact Attention"
     url: "https://arxiv.org/abs/2205.14135"
+books:
+  - title: "Deep Learning"
+    author: "Ian Goodfellow, Yoshua Bengio, Aaron Courville"
+    year: 2016
+    url: "https://www.deeplearningbook.org/"
 ---
 
 <img src="{{ '/assets/images/posts/block-nine.webp' | relative_url }}" class="post-marker" alt="">

@@ -13,6 +13,19 @@ video_title: "Five ML Concepts - #19"
 papers:
   - title: "Curriculum Learning"
     url: "https://dl.acm.org/doi/10.1145/1553374.1553380"
+books:
+  - title: "Dataset Shift in Machine Learning"
+    author: "Joaquin Quiñonero-Candela et al. (eds.)"
+    year: 2009
+    url: "https://mitpress.mit.edu/9780262170055/"
+  - title: "Causality"
+    author: "Judea Pearl"
+    year: 2009
+    url: "https://www.cambridge.org/core/books/causality/B0046844FAE10CBF274D4ACBDAEB5F5B"
+  - title: "Practical Machine Learning for Computer Vision"
+    author: "Valliappa Lakshmanan et al."
+    year: 2021
+    url: "https://www.oreilly.com/library/view/practical-machine-learning/9781098102357/"
 ---
 
 <img src="{{ '/assets/images/posts/block-nineteen.webp' | relative_url }}" class="post-marker" alt="">

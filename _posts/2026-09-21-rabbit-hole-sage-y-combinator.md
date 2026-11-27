@@ -13,6 +13,11 @@ repo_urls:
 series: "Down the Rabbit-Hole"
 series_part: 6
 date: 2026-09-21 00:15:00 -0700
+books:
+  - title: "To Mock a Mockingbird"
+    author: "Raymond Smullyan"
+    year: 1985
+    url: "https://en.wikipedia.org/wiki/To_Mock_a_Mockingbird"
 ---
 
 <img src="{{ '/assets/images/posts/sage-bird-marker.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">

@@ -17,6 +17,11 @@ papers:
     url: "https://arxiv.org/abs/1903.12261"
   - title: "Efficient Transformers: A Survey"
     url: "https://arxiv.org/abs/2009.06732"
+books:
+  - title: "Deep Learning"
+    author: "Ian Goodfellow, Yoshua Bengio, Aaron Courville"
+    year: 2016
+    url: "https://www.deeplearningbook.org/"
 ---
 
 <img src="{{ '/assets/images/posts/block-eighteen.webp' | relative_url }}" class="post-marker" alt="">

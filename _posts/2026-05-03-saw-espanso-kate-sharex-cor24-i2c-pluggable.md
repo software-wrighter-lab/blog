@@ -13,6 +13,11 @@ repo_urls:
     title: "COR24 emulator"
   - url: "https://github.com/sw-vibe-coding/tuplet"
     title: "Tuplet"
+books:
+  - title: "The 7 Habits of Highly Effective People"
+    author: "Stephen R. Covey"
+    year: 1989
+    url: "https://en.wikipedia.org/wiki/The_7_Habits_of_Highly_Effective_People"
 ---
 
 <img src="{{ '/assets/images/posts/block-eight-saws.webp' | relative_url }}" class="post-marker no-invert" alt="Eight different saws---rip, crosscut, coping, keyhole, two-handed, pruning---rendered as a woodcut" style="width: 220px;">

@@ -9,6 +9,11 @@ abstract: "Rust-to-Prolog solves the classic Lion and Unicorn logic puzzles---a 
 series: "Sharpen the Saw Sundays"
 series_part: 7
 repo_url: "https://github.com/sw-vibe-coding/rust-to-prolog"
+books:
+  - title: "The 7 Habits of Highly Effective People"
+    author: "Stephen R. Covey"
+    year: 1989
+    url: "https://en.wikipedia.org/wiki/The_7_Habits_of_Highly_Effective_People"
 ---
 
 <img src="{{ '/assets/images/posts/block-lion-unicorn-arch.webp' | relative_url }}" class="post-marker no-invert" alt="">

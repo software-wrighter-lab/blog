@@ -9,6 +9,11 @@ abstract: "All Together Now gained a multi-panel Web UI for coordinating Claude 
 series: "Sharpen the Saw Sundays"
 series_part: 6
 repo_url: "https://github.com/sw-vibe-coding/all-together-now"
+books:
+  - title: "The 7 Habits of Highly Effective People"
+    author: "Stephen R. Covey"
+    year: 1989
+    url: "https://en.wikipedia.org/wiki/The_7_Habits_of_Highly_Effective_People"
 ---
 
 <img src="{{ '/assets/images/posts/block-robots-card-table.webp' | relative_url }}" class="post-marker no-invert" alt="">

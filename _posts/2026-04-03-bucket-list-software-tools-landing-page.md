@@ -13,6 +13,10 @@ repo_urls:
     title: "bucketlist"
   - url: "https://github.com/sw-vibe-coding/agentrail-rs"
     title: "agentrail-rs"
+books:
+  - title: "Structure and Interpretation of Computer Programs"
+    author: "Harold Abelson, Gerald Jay Sussman"
+    year: 1985
 ---
 
 <img src="{{ '/assets/images/posts/block-buckets-in-space.webp' | relative_url }}" class="post-marker" alt="" style="width: 200px;">

@@ -15,6 +15,15 @@ papers:
     url: "https://arxiv.org/abs/2201.11903"
   - title: "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer"
     url: "https://arxiv.org/abs/1701.06538"
+books:
+  - title: "Deep Learning"
+    author: "Ian Goodfellow, Yoshua Bengio, Aaron Courville"
+    year: 2016
+    url: "https://www.deeplearningbook.org/"
+  - title: "Dataset Shift in Machine Learning"
+    author: "Joaquin Quiñonero-Candela et al. (eds.)"
+    year: 2009
+    url: "https://mitpress.mit.edu/9780262170055/"
 ---
 
 <img src="{{ '/assets/images/posts/block-pipers.webp' | relative_url }}" class="post-marker" style="width: 480px;" alt="">

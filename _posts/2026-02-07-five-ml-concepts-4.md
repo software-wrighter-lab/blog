@@ -15,6 +15,11 @@ papers:
     url: "https://arxiv.org/abs/2103.00020"
   - title: "Adam: A Method for Stochastic Optimization"
     url: "https://arxiv.org/abs/1412.6980"
+books:
+  - title: "Deep Learning"
+    author: "Ian Goodfellow, Yoshua Bengio, Aaron Courville"
+    year: 2016
+    url: "https://www.deeplearningbook.org/"
 ---
 
 <img src="{{ '/assets/images/posts/block-four.webp' | relative_url }}" class="post-marker no-invert" alt="">
