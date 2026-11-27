@@ -47,6 +47,7 @@ This first post is about circuits: the groups of parts inside a language model t
 | **Code** | [X_eTaL-circuits](https://github.com/softwarewrighter/X_eTaL-circuits) |
 | **Live demo** | [The model map, every head, the scores](https://softwarewrighter.github.io/X_eTaL-circuits/) |
 | **In plain words** | [eli5.md](https://github.com/softwarewrighter/X_eTaL-circuits/blob/main/docs/eli5.md) |
+| **Related** | [In-Context Learning Revisited](/2026/02/22/icl-revisited-from-mystery-to-engineering/), [BDH: a visible brain](/2026/02/03/small-models-part4-bdh/) |
 | **X_eTaL** | [The language](https://github.com/softwarewrighter/X_eTaL), [try it in your browser](https://softwarewrighter.github.io/X_eTaL/) |
 | **The series** | [Deep Learning: every post](/series/#deep-learning) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
@@ -211,7 +212,9 @@ GPT-2 Small's induction circuit is the check that the tools work. The studies pl
 - Qwen3-4B-Base, the paper's reference model: are its writers, readers, gate and brakes found here too?
 - X_eTaL code: does the same mechanism carry over to programming-language examples?
 - a tiny trained transformer: in what order do circuit parts appear during training?
-- [Baby Dragon Hatchling](https://github.com/pathwaycom/bdh), a model designed to be inspected: does it make circuits easier to find?
+- Baby Dragon Hatchling (BDH), a model designed to be inspected: does it make circuits easier to find?
+
+Two of those connect to earlier posts here. The paper's question, how a model learns from examples in its prompt, is the one [In-Context Learning Revisited](/2026/02/22/icl-revisited-from-mystery-to-engineering/) asked from the outside; circuits are the inside view. And BDH, the [Baby Dragon Hatchling](https://github.com/pathwaycom/bdh), is a model I have already coded and written about in [Small Models (4/6): This AI Has a Visible Brain](/2026/02/03/small-models-part4-bdh/) ([my version](https://github.com/softwarewrighter/bdh)): its sparse activations, with most neurons silent for each token, are meant to make what it does visible. GPT-2 Small's circuit had to be found by experiment; the open question is how much of that work a model built to be inspected saves.
 
 <div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
 <img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">

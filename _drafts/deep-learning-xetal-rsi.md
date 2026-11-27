@@ -26,6 +26,7 @@ repo_urls:
      The paper's authors are named in the repo READMEs; not named here (Mike's go needed). The ski-rental bound's
      1988 paper is cited in 05's README; described here without names.
      Date 2026-11-30 is tentative (after Deep Learning #1, 11/28; 11/29 is a Saw Sunday). Lead image: a placeholder.
+     Related section (Mike, 2026-11-26): from X_eTaL-RSI docs/related.md (committed), with blog links.
      Mike: the closing; whether the intro should say more about the meetup.
 -->
 
@@ -42,6 +43,7 @@ The second paper from the Deep Learning meetup is [Exo: An Architecture for Self
 | **Paper** | [Exo: An Architecture for Self-Improving Systems at Runtime](https://arxiv.org/abs/2611.00463) (arXiv 2611.00463) |
 | **Code** | [X_eTaL-RSI](https://github.com/softwarewrighter/X_eTaL-RSI) |
 | **Live experiments** | [In your browser (WebAssembly)](https://softwarewrighter.github.io/X_eTaL-RSI/) |
+| **Related** | [ICL](/2026/02/22/icl-revisited-from-mystery-to-engineering/), [ICRL](/2026/03/16/mlf-02-icrl-in-context-reinforcement-learning/), [XSkill](/2026/03/17/ai-tools-xskill-memory-layer-multimodal-agents/), [agentrail-rs](https://github.com/sw-vibe-coding/agentrail-rs), [all-together-now](https://github.com/sw-vibe-coding/all-together-now) |
 | **X_eTaL** | [The language](https://github.com/softwarewrighter/X_eTaL), [try it in your browser](https://softwarewrighter.github.io/X_eTaL/) |
 | **The series** | [Deep Learning: every post](/series/#deep-learning) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
@@ -185,8 +187,37 @@ In Exo, a guardian outside the agent's reach authorizes each replacement of the 
 <img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
 </div>
 
+## Beside what came before
+{: .pos-left}
+
+Exo is one more way for an agent to get better without retraining, and I have built or written about several others. The repository's [related-work note](https://github.com/softwarewrighter/X_eTaL-RSI/blob/main/docs/related.md) places each by what changes, where it is kept, who checks it, and whether the improver itself improves:
+
+| Approach | What changes | Checked by | Improver improves |
+|----------|--------------|------------|-------------------|
+| [ICL](/2026/02/22/icl-revisited-from-mystery-to-engineering/) | the prompt's examples | nothing | no |
+| [ICRL](/2026/03/16/mlf-02-icrl-in-context-reinforcement-learning/) | (state, action, reward) traces in the prompt | the reward | no |
+| [XSkill](/2026/03/17/ai-tools-xskill-memory-layer-multimodal-agents/) | skills and experiences, as text | nothing explicit | no |
+| [agentrail-rs](https://github.com/sw-vibe-coding/agentrail-rs) | trajectories and distilled skills; the saga | validation steps, audit | no (a fixed engine) |
+| [all-together-now](https://github.com/sw-vibe-coding/all-together-now) | nothing learned: coordination | compare-and-swap | no |
+| Exo | the harness: code, tools, memory, prompts | a guardian (by default: it builds) | yes |
+| X_eTaL-RSI | a policy as an array program, and the optimizer's settings | a layered guardian | yes (group E) |
+
+How each connects to the experiments:
+
+- **ICL** is how the frozen model works inside one step; it is not what improves. Nothing persists past the call.
+- **ICRL** replays successful traces in the prompt, and its known limit is that "agents ignore rules even when they're present". Group B, hints in the prompt, is that baseline; group C turns the same sequences into tools that run as written, so the gap between B and C measures what is lost when a lesson is advice rather than code.
+- **XSkill** builds skill documents from batches of rollouts. Experiment 01 is its accumulation phase with the skill compiled into code, and experiment 07 adds the gate XSkill does not have between accumulating a skill and using it.
+- **agentrail-rs**, the saga tool both repositories here are built with ([Saw #3](/2026/03/22/saw-agentrail-rs-icrl-dual-memory/), [AI Tools #2](/2026/04/23/ai-tools-agentrail-rs-mid-saga-flexibility/)), already has much of Exo's protected layer: an append-only saga, an audit against git, snapshots. What it lacks, by design, is self-modification. The Journal library is its trajectory store as columns, and a later experiment could make agentrail's own policy (which trajectories to inject, when to distill) the editable optimizer of group E.
+- **all-together-now** ([Saw #4](/2026/03/29/saw-pjmai-reg-emacs-all-together-now/)) does not learn, but it is mechanism Exo needs: an append-only event timeline is the kind of history Exo protects, and running several agents at once is how a guardian would shadow-run a candidate beside the one in production.
+- **The time scales of learning** in [How AI Learns](/2026/02/24/how-ai-learns-part1-time-scales/) run from weights to adapters to memory to context. Exo adds a layer none of them is: the harness itself, executable and versioned like code, persistent like memory, cheap to change like context, and checked before use like an adapter ([Part 7](/2026/03/02/how-ai-learns-part7-full-architecture/) asked for exactly those gates).
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
 ## What it adds up to
-{: .pos-center}
+{: .pos-right}
 
 In these small worlds, self-improvement is real but conditional. It pays when work repeats, when the improver is well tuned, when what is learned is general enough to keep fitting, and when production between revisions is large enough to pay for checking it. Each of those conditions is a number you can compute, and in X_eTaL each is a short expression over the history, run in the same language as the policy it judges.
 
