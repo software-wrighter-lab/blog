@@ -7,7 +7,7 @@ keywords: "mechanistic interpretability, transformer circuits, induction heads, 
 abstract: "First in the Deep Learning series: X_eTaL-circuits, a workbench for finding, testing and drawing circuits inside language models, with X_eTaL as the analysis and drawing language. It follows the causal method of A Circuit for In-Context Learning (twin prompts, a continuous margin, interventions against random controls, held-out checks) and validates it on GPT-2 Small's induction circuit: attention scores name candidate heads, ablation and patching test them, path patching tests which head feeds which, and a model map draws the evidence."
 series: "Deep Learning"
 series_part: 1
-date: 2026-11-28 00:15:00 -0800
+date: 2026-11-27 00:15:00 -0800
 papers:
   - title: "A Circuit for In-Context Learning"
     url: "https://arxiv.org/abs/2611.05344"
@@ -27,7 +27,7 @@ repo_urls:
      repo's pinned bin/xetal render.
      The paper's authors are named in docs/eli5.md; not named here (Mike's go needed). Related projects (the paper's
      code, TransformerLens, BDH) are linked neutrally, as the README does.
-     Date 2026-11-28 is tentative. Lead image: Mike's block-circuits.jpg (Dropbox, 2026-11-26), no-invert. Closing: Mike's go on the suggested text (2026-11-27). Intro: Mike's words (2026-11-26).
+     Published 2026-11-27 (Mike's go). Lead image: Mike's block-circuits.jpg (Dropbox, 2026-11-26), no-invert. Closing: Mike's go on the suggested text (2026-11-27). Intro: Mike's words (2026-11-26).
      Deep Learning #2 is planned from X_eTaL-RSI (Exo, arXiv 2611.00463); no forward link here until it is published.
 -->
 
