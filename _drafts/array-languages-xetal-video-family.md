@@ -24,7 +24,7 @@ repo_urls:
      X_eTaL lines run with the pinned bin/xetal (49c00785) and drawn with bin/xetal render. The other languages'
      lines checked here on 2026-11-27: GNU APL 2.0 (scan, reverse, 2×3+4), J 9.7.1, ngn/k (b9eeb91), Kona, CBQN
      (2bf102f), all matching. Not checkable locally: the APL train (+/÷≢), since GNU APL has no trains and sw-apl
-     no ≢. NOT checked anywhere yet (the video session, 2026-11-27: the lesson README says "to check on tryapl.org"); see the Mike: TODO in the train section. The APL2 form (+/x)÷⍴x checked in GNU APL and sw-apl: 3.833333333. Kona gives 3 for {(+/x)%#x} (integer %); ngn/k 3.8333. Told Mike.
+     no ≢. Checked by Mike on TryAPL (Dyalog, TryAPL 3.8.1) 2026-11-27 09:10: 3.833333333. The APL2 form (+/x)÷⍴x checked in GNU APL and sw-apl: 3.833333333. Kona gives 3 for {(+/x)%#x} (integer %); ngn/k 3.8333. Told Mike.
      No frames yet (gutter figures once the video renders). Lead image block-apl-trees (Mike, 2026-11-27). Mike: video URL, closing.
 -->
 
@@ -147,8 +147,6 @@ K        {(+/x)%#x}3 1 4 1 5 9
 ```
 
 The APL train is Dyalog APL's, from 2014. APL2-style APLs such as GNU APL have no trains, so there the mean names its argument, as in K: `(+/x)÷⍴x` gives 3.833333333.
-
-Mike: TODO, run (+/÷≢)3 1 4 1 5 9 on https://tryapl.org and confirm 3.833333333.
 
 One catch if you try the K line: which K you run matters. ngn/k gives 3.8333333333333335, but Kona, an older open-source K, divides two integers into an integer and gives 3.
 
