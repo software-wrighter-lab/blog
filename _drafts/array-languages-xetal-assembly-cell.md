@@ -57,7 +57,9 @@ The idea is to provide this "slicer"-like tool via MCP to AI coding agents to mo
 
 The assembly cell is a robot bench, simulated, that builds electronic circuits in free air: no circuit board, no layers, the parts soldered lead to lead in 3D, growing outward from a chip at the center. It is the newest extension in [X_eTaL-extensions](https://github.com/softwarewrighter/X_eTaL-extensions), and it now builds a complete 555 LED blinker.
 
-The idea is dead-bug construction, done by a machine. A chip goes in a vise with its legs up, and each part is brought in so that its lead lies against a leg, held there, and soldered. The next part comes in, and the circuit grows outward from the center. Nothing is laid out on a board first.
+The strategy is dead-bug construction, done by a machine. Dead-bug is an old way of building a circuit by hand without a circuit board: turn the chip on its back, so its legs stick up like a dead insect's, and solder the parts and wires straight to the legs. It is quick for a prototype, with nothing to design or etch first, and the leads stay short.
+
+It suits a machine, too. With the chip upside down, every leg is bare and reachable, from above and from the sides, and the circuit can grow outward in three dimensions instead of across a flat board. In the cell, the chip goes in a vise legs up, each part is brought in so that its lead lies along a leg, held there, and soldered, and then the next part comes in. Surface-mount parts are planned the same way: held pads up, and wired with very fine enameled wire.
 
 It is virtual first: a simulation that respects the physics that matter here (reach, collision, gravity, heat, solder, wire), driven by commands such as these:
 
