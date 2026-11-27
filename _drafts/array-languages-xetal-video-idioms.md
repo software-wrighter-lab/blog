@@ -2,9 +2,9 @@
 layout: post
 title: "Array Languages #25: Array Idioms, Thinking Without Loops"
 categories: [programming-languages, array-languages, video]
-tags: [array-languages, xetal, x-etal, apl, rust, video, teaching, idioms, scan, reduce]
-keywords: "array programming tutorial, array idioms, thinking without loops, running totals, scan, adjacent differences, drop, normalize, scalar extension, count occurrences, unique, outer product table, Rust loop versus array idiom, array languages video series, X_eTaL video"
-abstract: "Twenty-fifth in the Array Languages series: episode 5 of the video series that teaches array programming with X_eTaL. An idiom is a short phrase for a pattern that keeps coming back. After the idioms met so far (sum, count matches, reverse, rotate), four new ones, each beside the Rust loop it replaces: running totals with scan, adjacent changes by dropping and subtracting, normalizing with an aggregate and scalar extension (and a float), and counting occurrences with unique and an equality table, with what each one costs."
+tags: [array-languages, xetal, x-etal, apl, rust, video, teaching, idioms, scan, reduce, grade]
+keywords: "array programming tutorial, array idioms, thinking without loops, running totals, scan, adjacent differences, drop, normalize, scalar extension, count occurrences, unique, outer product table, where, index of, membership, moving window, n-wise, grade, sort by key, Rust loop versus array idiom, array languages video series, X_eTaL video"
+abstract: "Twenty-fifth in the Array Languages series: episode 5 of the video series that teaches array programming with X_eTaL. An idiom is a short phrase for a pattern that keeps coming back. After the idioms met so far (sum, count matches, reverse, rotate), four new ones, each beside the Rust loop it replaces: running totals with scan, adjacent changes by dropping and subtracting, normalizing with an aggregate and scalar extension (and a float), and counting occurrences with unique and an equality table; then four more: finding positions (where, index of), membership, moving windows (n-wise) and sorting by a key (grade, then select). Each with what it costs."
 series: "Array Languages"
 series_part: 25
 date: 2026-11-26 00:15:00 -0800
@@ -28,6 +28,8 @@ repo_urls:
      To do when the episode is done (me): video_url/video_title, the links-box Video row, frames from the published
      mp4 as gutter figures (outdent-right in pos-left sections, outdent-left in pos-right; none in the first two
      sections, which sit beside the links box), any cube renders, the narration check. Mike: the closing.
+     Four more idioms (X_eTaL-video 8e5b225, 17:41): where/index of, member, n_wise, grade+select; run at the pin.
+     Narration rewording at e937305 (scan: "the total") applied.
      Frames al25-scan, -subtract, -normalize, -count from out/al-05-idioms-landscape-remotion.mp4 (11:42, 4:33, before
      the YouTube package); narration unchanged from the draft but for the next scene. Re-take if the final cut differs.
      Short names aside (Mike, 2026-11-26): from X_eTaL docs/lang-choices.md B2 and N3 (a trailing mark only where APL gave
@@ -83,7 +85,7 @@ votes ← 2 3 2 1 2 3
 | `o̲-`{:.language-xetal} (`o_-`) | rotate, first axis | `⊖` |
 | `o̲\`{:.language-xetal} (`o_\`) | transpose | `⍉` |
 
-The letter names the kind (r for reduce, s for scan); o stands in for APL's circle.
+The letter names the kind (r for reduce, s for scan); o stands in for APL's circle. One other mark ends a name: a `?` marks a yes-or-no question, as in `m̲ember?`{:.language-xetal}.
 
 </div>
 
@@ -124,7 +126,7 @@ for v in &x {
 }
 ```
 
-In X_eTaL this is a scan. Plus scan keeps every running sum, and the last one is the whole sum:
+In X_eTaL this is a scan. Plus scan keeps every running sum, and the last one is the total:
 
 ```xetal
 '+ s̲\ x
@@ -271,6 +273,106 @@ Sum along each row, and you have the counts: 2 appears three times, 3 twice and 
 ```
 
 The trade-off: the table has a cell for every value and every vote. For a long list, that is a lot of cells.
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
+## Find positions: where and index of
+{: .pos-left}
+
+Four more idioms. First, find the positions of the matches. A loop checks each item and keeps the index of each match:
+
+```rust
+for (i, v) in x.iter().enumerate() {
+    if *v > 3 { out.push(i + 1); }
+}
+```
+
+The idiom asks the question of every item first, then `w̲here`{:.language-xetal} turns the ones into positions. Positions count from one:
+
+```xetal
+x > 3           ⍝ 0 0 1 0 1 1
+w̲here x > 3     ⍝ 3 5 6
+```
+
+`i̲ndexOf`{:.language-xetal} finds where a value first appears. Here, it finds the largest:
+
+```xetal
+x i̲ndexOf 'm̲ax r̲/ x   ⍝ 6
+```
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
+## Membership: member
+{: .pos-right}
+
+Next, membership: is each item one of a few allowed values? A loop checks each item against the whole set:
+
+```rust
+for v in &x {
+    out.push(allowed.contains(v));
+}
+```
+
+`m̲ember?`{:.language-xetal} asks that of every item at once. The result is a mask of ones and zeros, and a mask can count, choose or find positions:
+
+```xetal
+x m̲ember? 1 5   ⍝ 0 1 0 1 1 0
+```
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
+## Moving windows: n-wise
+{: .pos-left}
+
+Next, moving windows: the sum of every three items in a row. A loop slides a window along the list:
+
+```rust
+for i in 0..x.len() - 2 {
+    out.push(x[i] + x[i + 1] + x[i + 2]);
+}
+```
+
+`n̲wise`{:.language-xetal} reduces every window of a given size. Plus, three at a time, adds each group of neighbors, and the result is two items shorter:
+
+```xetal
+3 '+ n̲wise x   ⍝ 8 6 10 15
+```
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
+## Sort by a key: grade, then select
+{: .pos-right}
+
+Last, sort by a key. We have people and their ages, and we want the people in order of age. A loop pairs them, sorts the pairs and keeps the people:
+
+```rust
+let mut p: Vec<_> = ids.iter().zip(&ages).collect();
+p.sort_by_key(|(_, age)| **age);
+let out: Vec<_> = p.iter().map(|(id, _)| **id).collect();
+```
+
+`g̲rade`{:.language-xetal} gives the positions that would sort the ages, and `s̲elect`{:.language-xetal} takes the people at those positions. The youngest comes first:
+
+```xetal
+ids ← 101 102 103 104
+ages ← 40 25 33 19
+g̲rade ages                ⍝ 4 2 3 1
+(g̲rade ages) s̲elect ids   ⍝ 104 102 103 101
+```
+
+One grade can order many lists the same way.
 
 <div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
 <img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
