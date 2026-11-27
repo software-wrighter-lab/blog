@@ -41,6 +41,7 @@ Episode 6 of my video series on array programming is a tour of the array-languag
 | **Video** | Mike: TODO, the episode link and thumbnail, once published |
 | **All the videos** | [X_eTaL-video's page](https://softwarewrighter.github.io/X_eTaL-video/) |
 | **Try X_eTaL** | [In your browser](https://softwarewrighter.github.io/X_eTaL/) |
+| **Try APL** | [TryAPL](https://tryapl.org/) |
 | **Code** | [X_eTaL](https://github.com/softwarewrighter/X_eTaL), [X_eTaL-video](https://github.com/softwarewrighter/X_eTaL-video) |
 | **Related posts** | [How X_eTaL Evolved, Decision by Decision](/2026/10/22/array-languages-xetal-language-history/), [What Makes a Practical Language](/2026/10/23/array-languages-xetal-philosophy/) |
 | **The series** | [Array Languages: every post](/series/#array-languages) |
