@@ -18,14 +18,15 @@ repo_urls:
 ---
 
 <!-- DRAFT
-     Started 2026-11-27 10:30 from X_eTaL-extensions at 2bfa2b6 (Saga 17, the assembly cell, through step 28
-     cell-blinker). Sources: extensions/cell/docs/README.md, docs/cell-design.md, docs/plan.md (Saga 17 and its
+     Started 2026-11-27 10:30 from X_eTaL-extensions at 2bfa2b6; updated to e19b867 (step 29: wrap joints, the
+     live page's run in a worker; models.jpg recopied with the wrap tool; cell-wrap from videos/wrap.webm at 40 s). Sources: extensions/cell/docs/README.md, docs/cell-design.md, docs/plan.md (Saga 17 and its
      decisions C1-C23). Stills from extensions/cell/videos/*.webm (solder at 20 s, lap at 30 s, blinker at 535 s);
      cell-models from docs/models.jpg; cell-four-arms from docs/mcp.jpg (the earlier four-arm cell).
      Lead image: Mike's screenshot of the live page (Dropbox/Screenshots, 2026-11-27 9.54.53), for the first
      paragraph and the abstracts card.
-     X_eTaL drawn with the repo's pinned bin/xetal render (8c49bd80). The facade's results (cell 0.1.0, the
-     parse JSON) are copied from the README: the cell extension was not built here, so they were not re-run.
+     X_eTaL drawn with the repo's pinned bin/xetal render (8c49bd80). The facade lines run
+     2026-11-27 with the extension built locally (target/debug/xetal-x --ext extensions/cell): cell 0.1.0 and the
+     parse JSON as shown; cargo test -p xetal-ext-cell passed.
      The 555 video: X_eTaL-video is recording it (full frame, moving camera, 4x, captions); add the video
      link, a frame or two, and Mike's closing. Date 2026-11-28 is tentative.
 -->
@@ -86,7 +87,7 @@ The split is the same one the neon city and the other 3D demos use: X_eTaL decid
 | The agent's door | Rust, MCP | the simulator's commands as tools for an agent |
 | The live page | the simulator as WebAssembly | the cell driven in a browser, nothing installed |
 
-The simulator has no threads, files or clocks; time is the simulation's own. So the same crate runs natively, behind the MCP server, and in the browser as WebAssembly: the live page is a build, not a port. The same program always gives the same state, to the microsecond.
+The simulator has no threads, files or clocks; time is the simulation's own. So the same crate runs natively, behind the MCP server, and in the browser as WebAssembly: the live page is a build, not a port. On the live page a program now runs in a background worker, so the page stays responsive while a long one, like the blinker, works through. The same program always gives the same state, to the microsecond.
 
 From X_eTaL, the cell is a handful of functions:
 
@@ -168,10 +169,41 @@ The microscope, on a pan-tilt head above the work, shows the joint close up.
 <img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
 </div>
 
-## The 555 blinker
+## Wrap joints
 {: .pos-right}
 
 <figure class="zoomable outdent-left" style="width: 45%; margin-top: -2.9em;">
+<img src="{{ '/assets/images/posts/cell-wrap.webp' | relative_url }}" class="no-invert" alt="The live page running the wrap program: the arm holds the wrap tool over the chip, and the microscope's close-up shows an enameled wire wound round the end of a leg">
+<figcaption>A wrap joint: the wire wound round a leg's end, seen through the microscope. Click to enlarge.</figcaption>
+</figure>
+
+Where a lap does not fit, on a crowded pin or at a jumper's end, a wire can be wrapped instead. Wound 1.5 turns or more round a lead's end, it holds before the solder flows. The wrap tool sits in the arm's rack: a bit whose sleeve slips over the lead's free end and winds the wire round it, and a small blade.
+
+```
+wire S5 awg=30 span=U1.4.tip+U1.5.tip wrap=1.75 enamel=yes
+...                               # picked, cut, laid, pinched
+tool A wrapper
+present U1.4+W1.1 at=S1
+wrap A on=W1.1 around=U1.4 turns=1.75
+touch S1 at=U1.4+W1.1 dwell=1.5 temp=400
+feed S1 mm=2 rate=1
+back S1
+wait until=U1.4+W1.1 below=100
+snip A on=W1.1                    # the blade cuts the tail; the bit lifts off
+inspect U1.4+W1.1                 # good; a wrap of 1.75 turns
+```
+
+The tool holds the wire while the iron solders, so the joint is already presented at the iron station when it winds. Fewer than 1.5 turns is judged weak, and the tool winds under two: two or more is refused, which keeps the tool simple. The wire is enameled, and the iron burns the enamel off where it heats.
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
+## The 555 blinker
+{: .pos-left}
+
+<figure class="zoomable outdent-right" style="width: 45%; margin-top: -2.9em;">
 <img src="{{ '/assets/images/posts/cell-blinker.webp' | relative_url }}" class="no-invert" alt="The live page at the end of the blinker program: the finished free-air circuit on the turntable, the program list beside it, the timeline near its end at 1070 of 1080 seconds">
 <figcaption>The 555 blinker, nearly done: 1070 of 1080 simulated seconds. Click to enlarge.</figcaption>
 </figure>
@@ -218,9 +250,9 @@ The core goes in the vise legs up, its pin tips from the simulator (`ᶜᵉt̲ip
 </div>
 
 ## Models, from X_eTaL through Blender
-{: .pos-left}
+{: .pos-right}
 
-<figure class="zoomable outdent-right" style="width: 45%; margin-top: -2.9em;">
+<figure class="zoomable outdent-left" style="width: 45%; margin-top: -2.9em;">
 <img src="{{ '/assets/images/posts/cell-models.webp' | relative_url }}" class="no-invert" alt="A contact sheet of every model in the cell, each from four sides: the arm, resistors, a diode, capacitors, DIP chips, an LED, transistors, the tool rack, the gantry, the rotary stage, a parts tray and the tools">
 <figcaption>Every model, from four sides. Click to enlarge.</figcaption>
 </figure>
@@ -235,7 +267,7 @@ The arm's joints are nodes in the model, each turning about its own axis, with t
 </div>
 
 ## An agent at the bench
-{: .pos-right}
+{: .pos-left}
 
 `xetal-cell-mcp` serves the cell over MCP, so an agent such as Claude Code can drive it command by command. Every command is a tool, its schema generated from the same command table the parser checks against, so a command added appears in the parser, the tools and the docs at once. There are tools to reset, run a whole program, rewind, inspect and read the state: every arm, part, joint and fixture, and where things are.
 
@@ -251,11 +283,11 @@ The server also serves the live page and pushes each result to it, so you can wa
 
 The plan has more ahead of it:
 
-- wire-wrapped joints, a wire wound 1.5 to 2 turns round a lead by a tool that holds it taut while it is soldered, for places a lap does not fit;
 - the second circuit, a two-transistor multivibrator, which needs heat management for its transistors;
 - surface-mount parts, held pads up and wired with very fine enameled wire, a ball-grid-array chip included;
 - sacrificial supports, a steel-wire frame welded on to hold a growing circuit and cut away at the end;
 - reading parts from the microscope's picture, and testing each part electrically before it goes in;
+- the planner taught the blinker's rules, so it plans the whole circuit itself and chooses a wrap where a lap does not fit;
 - the planner offered to agents over MCP, with insulation where nets cross.
 
 <div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
@@ -264,6 +296,6 @@ The plan has more ahead of it:
 </div>
 
 ## Closing
-{: .pos-left}
+{: .pos-right}
 
 Mike: TODO, a closing in your words.
