@@ -27,13 +27,13 @@ repo_urls:
      repo's pinned bin/xetal render.
      The paper's authors are named in docs/eli5.md; not named here (Mike's go needed). Related projects (the paper's
      code, TransformerLens, BDH) are linked neutrally, as the README does.
-     Date 2026-11-28 is tentative. Lead image: a placeholder. Mike: the intro (why this series) and the closing.
+     Date 2026-11-28 is tentative. Lead image: a placeholder. Mike: the closing. Intro: Mike's words (2026-11-26).
      Deep Learning #2 is planned from X_eTaL-RSI (Exo, arXiv 2611.00463); no forward link here until it is published.
 -->
 
 <img src="{{ '/assets/images/posts/placeholder-deep-learning-xetal-circuits.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
-Mike: TODO, a sentence or two on why a Deep Learning series, and why now.
+I recently started attending a weekly Deep Learning meetup on Zoom, where each week one person goes through a paper and the others discuss it. The group votes on a paper to study the following week. This series covers some of the papers discussed, for which I went on to create X_eTaL-based repos to explore and demonstrate concepts from each paper.
 
 This first post is about circuits: the groups of parts inside a language model that work together to produce one behavior. [X_eTaL-circuits](https://github.com/softwarewrighter/X_eTaL-circuits) is a workbench for finding, testing and drawing them, with X_eTaL as the analysis and drawing language. Its first study finds the circuit GPT-2 Small uses to continue a repeated sequence, and tests every part of it by experiment.
 
