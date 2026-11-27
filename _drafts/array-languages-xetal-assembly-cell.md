@@ -4,7 +4,7 @@ title: "Array Languages #27: The Assembly Cell, a Robot Bench That Builds Circui
 categories: [programming-languages, array-languages, simulation]
 tags: [array-languages, xetal, x-etal, xetal-extensions, robotics, simulation, electronics, soldering, ne555, dead-bug, three-js, blender, webassembly, mcp, rust]
 keywords: "simulated robot assembly cell, building electronic circuits in 3D, dead-bug construction, free-air circuit, 555 LED blinker, lap joint soldering, robot arm inverse kinematics, soldering simulation, thermal model, netlist to robot program, circuit slicer, X_eTaL extension, Rust simulator, WebAssembly, Three.js player, Blender models, MCP server for an LLM agent"
-abstract: "Twenty-seventh in the Array Languages series: the assembly cell, an X_eTaL extension that simulates a robot bench building electronic circuits in free air, in 3D, from the center outward, one command at a time. A Rust simulator decides what is possible (reach, collision, heat, solder); X_eTaL plans the circuit and describes the models; Three.js and Blender only draw. It began with four robot arms and became a bench: a turntable, one slender arm, pincers and an iron that feeds its own solder. Lap joints, a 555 LED blinker built whole and checked against its netlist, a planner that turns a netlist into a program, and an MCP server so an LLM agent can drive it."
+abstract: "Twenty-seventh in the Array Languages series: the assembly cell, an X_eTaL extension that simulates a robot bench building electronic circuits in free air, in 3D, from the center outward, one command at a time. A Rust simulator decides what is possible (reach, collision, heat, solder); X_eTaL plans the circuit and describes the models; Three.js and Blender only draw. It began with four robot arms and became a bench: a turntable, one slender arm, pincers and an iron that feeds its own solder. Lap joints, a 555 LED blinker planned from its netlist by search and built whole, every step tried on the simulator, and an MCP server so an LLM agent can drive it."
 series: "Array Languages"
 series_part: 27
 date: 2026-11-28 00:15:00 -0800
@@ -27,6 +27,11 @@ repo_urls:
      X_eTaL drawn with the repo's pinned bin/xetal render (8c49bd80). The facade lines run
      2026-11-27 with the extension built locally (target/debug/xetal-x --ext extensions/cell): cell 0.1.0 and the
      parse JSON as shown; cargo test -p xetal-ext-cell passed.
+     Updated 2026-11-27 afternoon to X_eTaL-extensions 1c8b0ef (steps 30-31: the feature programs on lap joints;
+     the planner plans the blinker by search, nets/blinker.net, 367 commands, 1128.01 simulated s) and to the
+     re-cut 555 video (X_eTaL-video lessons/cell-555, working tree: the planned build's join order, grounds to pin 1).
+     cell-blinker.webp is still a frame of the earlier hand build (videos/blinker.webm): replace it with a frame of
+     the finished planned circuit from the new recording when it exists.
      The 555 video: X_eTaL-video is recording it (full frame, moving camera, 4x, captions); add the video
      link, a frame or two, and Mike's closing. Date 2026-11-28 is tentative.
 -->
@@ -55,7 +60,7 @@ The idea is to provide this "slicer"-like tool via MCP to AI coding agents to mo
 
 ## A circuit in free air
 
-The assembly cell is a robot bench, simulated, that builds electronic circuits in free air: no circuit board, no layers, the parts soldered lead to lead in 3D, growing outward from a chip at the center. It is the newest extension in [X_eTaL-extensions](https://github.com/softwarewrighter/X_eTaL-extensions), and it now builds a complete 555 LED blinker.
+The assembly cell is a robot bench, simulated, that builds electronic circuits in free air: no circuit board, no layers, the parts soldered lead to lead in 3D, growing outward from a chip at the center. It is the newest extension in [X_eTaL-extensions](https://github.com/softwarewrighter/X_eTaL-extensions), and it now plans and builds a complete 555 LED blinker.
 
 The strategy is dead-bug construction, done by a machine. Dead-bug is an old way of building a circuit by hand without a circuit board: turn the chip on its back, so its legs stick up like a dead insect's, and solder the parts and wires straight to the legs. It is quick for a prototype, with nothing to design or etch first, and the leads stay short.
 
@@ -210,16 +215,20 @@ The tool holds the wire while the iron solders, so the joint is already presente
 {: .pos-left}
 
 <figure class="zoomable outdent-right" style="width: 45%; margin-top: -2.9em;">
-<img src="{{ '/assets/images/posts/cell-blinker.webp' | relative_url }}" class="no-invert" alt="The live page at the end of the blinker program: the finished free-air circuit on the turntable, the program list beside it, the timeline near its end at 1070 of 1080 seconds">
-<figcaption>The 555 blinker, nearly done: 1070 of 1080 simulated seconds. Click to enlarge.</figcaption>
+<img src="{{ '/assets/images/posts/cell-blinker.webp' | relative_url }}" class="no-invert" alt="The live page near the end of the blinker program: the finished free-air circuit on the turntable, the program list beside it">
+<figcaption>The 555 blinker, nearly done. Click to enlarge.</figcaption>
 </figure>
 
-The first whole circuit is a 555 LED blinker: an NE555P, three resistors, a 10 µF electrolytic, a 10 nF disc, a red LED and a 9 V battery snap, seven nets. The program builds it dead-bug, every joint a lap:
+The first whole circuit is a 555 LED blinker: an NE555P, three resistors, a 10 µF electrolytic, a 10 nF disc, a red LED and a 9 V battery snap, seven nets. The planner writes its program from the netlist (more on that below), and builds it dead-bug, every joint a lap. In the order the video shows it:
 
-1. The chip goes in the vise legs up. Enameled jumpers go between legs while they are bare: pin 4 to pin 8, then pin 2 to pin 6 over it.
-2. Each part's lead is laid along its pin's leg from outside: the resistors' leads bent in the rig and sheared, the capacitors' straight leads lowered from above, the LED's anode lapped onto a resistor's end.
-3. Enameled jumpers with lapped ends make the rest, brought in from the side and routed around the leads and bodies already standing.
-4. The battery snap is set on the turntable, and a jumper from each lead rises to pin 8 and pin 1.
+1. The chip goes in the vise legs up. Enameled jumpers join the legs that share a net while they are still bare: pin 8 to pin 4, then pin 6 to pin 2, laid over the first.
+2. Then one part at a time, and each part finished before the next: its lead laid along its pin's leg, soldered, and then its other lead dealt with at once. The first resistor goes on pin 8, and a jumper with lapped ends runs from its other lead to pin 7, the discharge pin, brought in from the side. The second resistor goes on pin 6, with its own jumper to pin 7.
+3. The third resistor goes on pin 3, the output. Nothing else of its other net is placed yet, so a pincer bends that free end straight up as a post.
+4. The capacitors' straight leads are lowered from above, the disc onto pin 5 and the electrolytic onto pin 2, and a ground jumper runs from each to pin 1.
+5. The LED's anode is lapped onto the third resistor's post, and a last ground jumper joins its cathode to pin 1.
+6. The battery snap is set flat on the turntable beside the vise, and a jumper rises from each lead, past the jaw, to pin 8 and pin 1.
+
+That is 367 commands and about 19 minutes of simulated time; the video plays it at four times speed.
 
 It ends with the check against the netlist:
 
@@ -237,18 +246,29 @@ What is simulated: every motion and collision, parts resting where they fall, fo
 ## The planner, in X_eTaL
 {: .pos-center}
 
-Writing a program like the blinker's by hand is slow. The planner is the slicer: it turns a netlist into a command program, and it is written in X_eTaL, working the placement out as arrays. Its first netlist is four resistors on a DIP-8:
+Writing a program like the blinker's by hand is slow; the first blinker was, written by a script that held the rules by hand. The planner is the slicer: it turns a netlist into a command program, and it is written in X_eTaL, working the placement out as arrays.
+
+It began with four resistors on a DIP-8, each named with the pin it goes on. The blinker's netlist names nets instead, the pins each one joins:
 
 ```
-circuit plan
+circuit blinker
 core U1 dip8
-R1 U1 2          # R1's lead 1 to the core's pin 2
-R2 U1 3
-R3 U1 6
-R4 U1 7
+net VCC U1.8 U1.4 R1.1 BT1.1
+net DIS U1.7 R1.2 R2.1
+net THR U1.6 U1.2 R2.2 C1.1
+net CTRL U1.5 C2.1
+net OUT U1.3 R3.1
+net LED R3.2 D1.1
+net GND U1.1 C1.2 C2.2 D1.2 BT1.2
 ```
 
-The core goes in the vise legs up, its pin tips from the simulator (`ᶜᵉt̲ips`{:.language-xetal}). Each neighbor comes in level along its pin, fanned along the row so neighbors on one side spread apart (`ᶜᵖd̲irections`{:.language-xetal}), and the least clearance between any two bodies is written at the top of the program (`ᶜᵖc̲learance`{:.language-xetal}). The joins go one side of the core at a time, in pin order (`ᶜᵖo̲rder`{:.language-xetal}), so no pincer crosses the leads already standing. Each join is a lap joint, and each cools below 100 °C before the next. The planned program ends `check: 4 of 4 nets made`, every joint a good 3.6 mm lap. The planner says where and from which way; the simulator works out the motion.
+The planner proposes and the simulator disposes. The planner keeps a session cell in the simulator and tries each step on it (`ᶜᵉa̲ttempt`{:.language-xetal}): a step is kept only if every command in it is ok; otherwise the cell is left as it was, with the reason. For each step the planner has a list of candidates in order (straight, low over the middle of the chip, or routed out to the side and brought in from it; one pincer or the other), and keeps the first the simulator takes. Its rules are the ones the build above follows: the core's shared pins first, then the parts, the ones reaching farthest first so that they are not blocked, each part's other leads finished at once, and kitted parts like the battery snap last. The refusals stay in the program as comments, so you can see what it tried:
+
+```
+# refused: no bring A R2.1 to=U1.7.tip along=1,0,0 lap=3.2: collision: arm A's tool with R1.2 lead at 351.898 s
+```
+
+The planned blinker checks 7 of 7 nets, every joint a lap. Planning it takes some minutes, since every candidate is simulated. The planner says where and from which way; the simulator works out the motion, and has the last word.
 
 <div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
 <img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
@@ -293,7 +313,7 @@ The plan has more ahead of it:
 - surface-mount parts, held pads up and wired with very fine enameled wire, a ball-grid-array chip included;
 - sacrificial supports, a steel-wire frame welded on to hold a growing circuit and cut away at the end;
 - reading parts from the microscope's picture, and testing each part electrically before it goes in;
-- the planner taught the blinker's rules, so it plans the whole circuit itself and chooses a wrap where a lap does not fit;
+- the planner choosing a wrap where a lap does not fit (the blinker needs none);
 - the planner offered to agents over MCP, with insulation where nets cross.
 
 <div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
