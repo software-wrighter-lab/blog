@@ -14,6 +14,11 @@ papers:
     url: "https://proceedings.mlr.press/v9/glorot10a.html"
 series: "Machine Learning"
 series_part: 4
+books:
+  - title: "Perceptrons"
+    author: "Marvin Minsky, Seymour Papert"
+    year: 1969
+    url: "https://mitpress.mit.edu/9780262534772/perceptrons/"
 ---
 
 <img src="{{ '/assets/images/posts/block-graph.webp' | relative_url }}" class="post-marker" alt="">

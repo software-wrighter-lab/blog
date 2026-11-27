@@ -8,6 +8,16 @@ abstract: "Sixth in the series on books worth reading: three on building a langu
 series: "Worth Reading"
 series_part: 6
 date: 2026-12-09 00:15:00 -0800
+books:
+  - title: "Threaded Interpretive Languages"
+    author: "R. G. Loeliger"
+    year: 1981
+  - title: "Structure and Interpretation of Computer Programs"
+    author: "Harold Abelson, Gerald Jay Sussman"
+    year: 1985
+  - title: "The Art of the Metaobject Protocol"
+    author: "Gregor Kiczales, Jim des Rivières, Daniel G. Bobrow"
+    year: 1991
 ---
 
 <!-- DRAFT (2026-11-02), Mike: "start a new blog post for thursday 11/5, influential books", then "maybe a new series, worth reading".

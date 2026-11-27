@@ -26,6 +26,10 @@ papers:
     url: "https://arxiv.org/abs/2512.24601"
 series: "Machine Learning"
 series_part: 3
+books:
+  - title: "War and Peace"
+    author: "Leo Tolstoy"
+    year: 1869
 ---
 
 <img src="{{ '/assets/images/posts/block-mirror-recursion.webp' | relative_url }}" class="post-marker" alt="">

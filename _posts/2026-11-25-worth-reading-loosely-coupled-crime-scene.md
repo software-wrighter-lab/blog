@@ -8,6 +8,20 @@ abstract: "Fourth in the series on books worth reading: three on how software fi
 series: "Worth Reading"
 series_part: 4
 date: 2026-11-25 00:15:00 -0800
+books:
+  - title: "Flow-Based Programming"
+    author: "J. Paul Morrison"
+    year: 1994
+  - title: "Loosely Coupled: The Missing Pieces of Web Services"
+    author: "Doug Kaye"
+    year: 2003
+  - title: "Your Code as a Crime Scene"
+    author: "Adam Tornhill"
+    year: 2015
+  - title: "Microservices Patterns"
+    author: "Chris Richardson"
+    year: 2018
+    url: "https://www.manning.com/books/microservices-patterns"
 ---
 
 <img src="{{ '/assets/images/posts/block-flow-loose-scene.webp' | relative_url }}" class="post-marker no-invert" alt="Three panels: a glowing network of components joined by flowing connections; puzzle pieces and gears fitting loosely together; investigators examining code behind crime-scene tape" style="width: 205px;">

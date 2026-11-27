@@ -8,6 +8,10 @@ abstract: "Eleventh in the series on what is worth reading: two papers on how a 
 series: "Worth Reading"
 series_part: 11
 date: 2027-01-13 00:15:00 -0800
+books:
+  - title: "On Lisp"
+    author: "Paul Graham"
+    year: 1993
 ---
 
 <!-- DRAFT (2026-11-03), Mike: papers and articles, not books, added to Worth Reading as future topics; grouping and titles

@@ -8,6 +8,13 @@ abstract: "Thirteenth in the series on what is worth reading: two books that fol
 series: "Worth Reading"
 series_part: 13
 date: 2027-01-27 00:15:00 -0800
+books:
+  - title: "The Soul of a New Machine"
+    author: "Tracy Kidder"
+    year: 1981
+  - title: "Dreaming in Code"
+    author: "Scott Rosenberg"
+    year: 2007
 ---
 
 <!-- DRAFT (2026-11-11), Mike: add Soul of a New Machine and Dreaming in Code to Worth Reading, a new Wednesday post, placed

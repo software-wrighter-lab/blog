@@ -11,6 +11,19 @@ repo_urls:
 series: "Throwback Thursday"
 series_part: 12
 date: 2026-09-24 00:15:00 -0700
+books:
+  - title: "To Mock a Mockingbird"
+    author: "Raymond Smullyan"
+    year: 1985
+    url: "https://en.wikipedia.org/wiki/To_Mock_a_Mockingbird"
+  - title: "IBM 5100 APL Reference Manual"
+    author: "IBM"
+    year: 1976
+    url: "https://www.bitsavers.org/pdf/ibm/5100/SA21-9213-2_IBM_5100_APL_Reference_Manual_May1976.pdf"
+  - title: "IBM 5110 APL Reference Manual"
+    author: "IBM"
+    year: 1977
+    url: "https://www.bitsavers.org/pdf/ibm/5110/SA21-9303-0_IBM_5110_APL_Reference_Manual_Dec1977.pdf"
 ---
 
 <img src="{{ '/assets/images/posts/ibm-5100-marker.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">

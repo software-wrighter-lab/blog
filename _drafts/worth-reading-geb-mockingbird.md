@@ -8,6 +8,14 @@ abstract: "Fifth in the series on books worth reading: two on formal systems, ta
 series: "Worth Reading"
 series_part: 5
 date: 2026-12-02 00:15:00 -0800
+books:
+  - title: "Gödel, Escher, Bach: An Eternal Golden Braid"
+    author: "Douglas Hofstadter"
+    year: 1979
+  - title: "To Mock a Mockingbird"
+    author: "Raymond Smullyan"
+    year: 1985
+    url: "https://en.wikipedia.org/wiki/To_Mock_a_Mockingbird"
 ---
 
 <!-- DRAFT (2026-11-02), Mike: "start a new blog post for thursday 11/5, influential books", then "maybe a new series, worth reading".

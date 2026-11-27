@@ -27,6 +27,11 @@ repo_urls:
     title: "X_eTaL-fine-tuning"
   - url: "https://github.com/softwarewrighter/X_eTaL-manifolds"
     title: "X_eTaL-manifolds"
+books:
+  - title: "The 7 Habits of Highly Effective People"
+    author: "Stephen R. Covey"
+    year: 1989
+    url: "https://en.wikipedia.org/wiki/The_7_Habits_of_Highly_Effective_People"
 ---
 
 <!-- DRAFT (2026-11-14), Mike: Saw for Sunday 11/15 covering X_eTaL-video, snowflow_demo-fork, console-3D, sw-apl moving from

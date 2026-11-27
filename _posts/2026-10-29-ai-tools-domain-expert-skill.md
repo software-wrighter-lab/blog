@@ -11,6 +11,10 @@ date: 2026-10-29 00:15:00 -0700
 repo_urls:
   - url: "https://github.com/softwarewrighter/text-to-sfx-gen"
     title: "text-to-sfx-gen"
+books:
+  - title: "Designing Sound"
+    author: "Andy Farnell"
+    year: 2010
 ---
 
 <!-- DRAFT (2026-10-29), Mike: the point is the domain-expert skill, which restarted a project he considered stuck since

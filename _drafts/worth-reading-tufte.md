@@ -8,6 +8,22 @@ abstract: "Fourteenth in the series on what is worth reading: Edward Tufte's boo
 series: "Worth Reading"
 series_part: 14
 date: 2027-02-03 00:15:00 -0800
+books:
+  - title: "The Visual Display of Quantitative Information"
+    author: "Edward R. Tufte"
+    year: 1983
+  - title: "Envisioning Information"
+    author: "Edward R. Tufte"
+    year: 1990
+  - title: "Visual Explanations"
+    author: "Edward R. Tufte"
+    year: 1997
+  - title: "Beautiful Evidence"
+    author: "Edward R. Tufte"
+    year: 2006
+  - title: "Seeing with Fresh Eyes"
+    author: "Edward R. Tufte"
+    year: 2020
 ---
 
 <!-- DRAFT (2026-11-11), Mike: a Worth Reading post on Edward Tufte, all of his books, one post covering several; he has taken

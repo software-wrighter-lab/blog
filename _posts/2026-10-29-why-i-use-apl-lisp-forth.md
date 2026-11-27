@@ -23,6 +23,11 @@ repo_urls:
     title: "X_eTaL"
   - url: "https://github.com/sw-ml-study/sw-mlpl"
     title: "sw-MLPL"
+books:
+  - title: "To Mock a Mockingbird"
+    author: "Raymond Smullyan"
+    year: 1985
+    url: "https://en.wikipedia.org/wiki/To_Mock_a_Mockingbird"
 ---
 
 <!-- DRAFT (2026-10-28), Mike: Why I Use #2, planned 10/29, while he reviews #1 (10/28). Mike's own words so far are #1's:

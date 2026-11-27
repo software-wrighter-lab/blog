@@ -8,6 +8,13 @@ abstract: "Sixteenth in the series on what is worth reading: two books on workin
 series: "Worth Reading"
 series_part: 16
 date: 2027-02-17 00:15:00 -0800
+books:
+  - title: "Finding Flow"
+    author: "Mihaly Csikszentmihalyi"
+    year: 1997
+  - title: "Slack"
+    author: "Tom DeMarco"
+    year: 2001
 ---
 
 <!-- DRAFT (2026-11-11), Mike: books added to Worth Reading, grouped as suggested and accepted 2026-11-11; placed after the Tufte

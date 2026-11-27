@@ -11,6 +11,10 @@ date: 2026-10-18 00:15:00 -0700
 repo_urls:
   - url: "https://github.com/softwarewrighter/X_eTaL-ML"
     title: "X_eTaL-ML (the Flow library)"
+books:
+  - title: "On Lisp"
+    author: "Paul Graham"
+    year: 1993
 ---
 
 <!-- DRAFT (rewritten 2026-10-18 afternoon from X_eTaL-ML's committed Flow: a5e4463 "Flow's pipelines written as code strings, drawn as

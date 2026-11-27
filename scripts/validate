@@ -83,8 +83,8 @@ for f in "${posts[@]}"; do
     fi
   fi
 
-  # index-all.html builds its Code, Videos and Papers tabs purely from front
-  # matter --- repo_url / repo_urls, video_url / video_urls, papers. A post that
+  # index-all.html builds its Code, Videos, Papers and Books tabs purely from
+  # front matter --- repo_url / repo_urls, video_url / video_urls, papers, books. A post that
   # links a repository in its body but declares none is simply absent from the
   # Code index. Nothing fails: the post builds, renders, and reaches every other
   # index, so the gap is invisible until someone opens the tab and notices a

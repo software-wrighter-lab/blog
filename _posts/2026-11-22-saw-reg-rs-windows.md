@@ -13,6 +13,11 @@ repo_urls:
     title: "reg-rs"
   - url: "https://github.com/softwarewrighter/reva-fork"
     title: "reva-fork"
+books:
+  - title: "The 7 Habits of Highly Effective People"
+    author: "Stephen R. Covey"
+    year: 1989
+    url: "https://en.wikipedia.org/wiki/The_7_Habits_of_Highly_Effective_People"
 ---
 
 <img src="{{ '/assets/images/posts/block-windows.webp' | relative_url }}" class="post-marker no-invert" alt="A flat illustration of many kinds of windows overlapping on a sage background: a plain modern frame, a carved Gothic arch, an arched stained-glass window, a white double-hung sash, a diamond-paned leaded casement and a large dark-framed picture window" style="width: 205px;">

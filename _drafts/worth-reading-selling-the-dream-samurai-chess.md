@@ -8,6 +8,13 @@ abstract: "Eighth in the series on books worth reading. Guy Kawasaki's Selling t
 series: "Worth Reading"
 series_part: 8
 date: 2026-12-23 00:15:00 -0800
+books:
+  - title: "Selling the Dream"
+    author: "Guy Kawasaki"
+    year: 1991
+  - title: "Samurai Chess"
+    author: "Michael J. Gelb, Raymond Keene"
+    year: 1997
 ---
 
 <!-- DRAFT (2026-11-02), Mike: "start a new blog post for thursday 11/5, influential books", then "maybe a new series, worth reading".

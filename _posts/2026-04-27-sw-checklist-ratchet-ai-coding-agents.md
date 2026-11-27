@@ -9,6 +9,10 @@ abstract: "sw-checklist is a personal-software Rust CLI I wrote to rein in AI co
 series: "AI Tools"
 series_part: 3
 repo_url: "https://github.com/softwarewrighter/sw-checklist"
+books:
+  - title: "The Mythical Man-Month"
+    author: "Frederick P. Brooks Jr."
+    year: 1975
 ---
 
 <img src="{{ '/assets/images/posts/block-twisted-ropes.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 200px;">

@@ -8,6 +8,16 @@ abstract: "Fifteenth in the series on what is worth reading: three books on desi
 series: "Worth Reading"
 series_part: 15
 date: 2027-02-10 00:15:00 -0800
+books:
+  - title: "The Design of Everyday Things"
+    author: "Donald A. Norman"
+    year: 1988
+  - title: "Don't Make Me Think"
+    author: "Steve Krug"
+    year: 2000
+  - title: "The Zen of CSS Design"
+    author: "Dave Shea, Molly E. Holzschlag"
+    year: 2005
 ---
 
 <!-- DRAFT (2026-11-11), Mike: books added to Worth Reading, grouped as suggested and accepted 2026-11-11; placed after the Tufte

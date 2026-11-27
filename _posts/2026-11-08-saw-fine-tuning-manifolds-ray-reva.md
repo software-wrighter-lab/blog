@@ -32,6 +32,11 @@ papers:
     url: "https://rikiyat.github.io/blog/weight-space-programming/"
   - title: "mHC: Manifold-Constrained Hyper-Connections"
     url: "https://arxiv.org/abs/2512.24880"
+books:
+  - title: "The 7 Habits of Highly Effective People"
+    author: "Stephen R. Covey"
+    year: 1989
+    url: "https://en.wikipedia.org/wiki/The_7_Habits_of_Highly_Effective_People"
 ---
 
 <!-- DRAFT (2026-11-08), Mike: Saw for today: X_eTaL-{fine-tuning,gpu,libraries,manifolds} "to enable future work in LoRA

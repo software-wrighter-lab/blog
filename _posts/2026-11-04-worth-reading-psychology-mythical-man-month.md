@@ -8,6 +8,13 @@ abstract: "First in a new series on the reading that shaped my approach to softw
 series: "Worth Reading"
 series_part: 1
 date: 2026-11-04 00:15:00 -0800
+books:
+  - title: "The Psychology of Computer Programming"
+    author: "Gerald M. Weinberg"
+    year: 1971
+  - title: "The Mythical Man-Month"
+    author: "Frederick P. Brooks Jr."
+    year: 1975
 ---
 
 <!-- DRAFT (2026-11-02), Mike: "start a new blog post for thursday 11/5, influential books", then "maybe a new series, worth reading".

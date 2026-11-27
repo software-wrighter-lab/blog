@@ -24,6 +24,11 @@ repo_urls:
     title: "demo-decision-model"
   - url: "https://github.com/software-wrighter-lab/sw-atlas"
     title: "sw-atlas"
+books:
+  - title: "The 7 Habits of Highly Effective People"
+    author: "Stephen R. Covey"
+    year: 1989
+    url: "https://en.wikipedia.org/wiki/The_7_Habits_of_Highly_Effective_People"
 ---
 
 <img src="{{ '/assets/images/posts/sw-atlas-marker.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">

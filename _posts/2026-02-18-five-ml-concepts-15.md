@@ -17,6 +17,11 @@ papers:
     url: "https://arxiv.org/abs/1810.11953"
   - title: "Understanding the Difficulty of Training Deep Feedforward Neural Networks"
     url: "https://proceedings.mlr.press/v9/glorot10a.html"
+books:
+  - title: "The Elements of Statistical Learning"
+    author: "Trevor Hastie, Robert Tibshirani, Jerome Friedman"
+    year: 2009
+    url: "https://hastie.su.domains/ElemStatLearn/"
 ---
 
 <img src="{{ '/assets/images/posts/block-fifteen.webp' | relative_url }}" class="post-marker" alt="">

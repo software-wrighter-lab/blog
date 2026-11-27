@@ -19,6 +19,11 @@ papers:
     url: "https://arxiv.org/abs/1710.03740"
   - title: "DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model"
     url: "https://arxiv.org/abs/2405.04434"
+books:
+  - title: "The Elements of Statistical Learning"
+    author: "Trevor Hastie, Robert Tibshirani, Jerome Friedman"
+    year: 2009
+    url: "https://hastie.su.domains/ElemStatLearn/"
 ---
 
 <img src="{{ '/assets/images/posts/block-eight.webp' | relative_url }}" class="post-marker no-invert" alt="">

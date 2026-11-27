@@ -8,6 +8,17 @@ abstract: "Seventh in the series on books worth reading, and the first two that 
 series: "Worth Reading"
 series_part: 7
 date: 2026-12-16 00:15:00 -0800
+books:
+  - title: "The 7 Habits of Highly Effective People"
+    author: "Stephen R. Covey"
+    year: 1989
+    url: "https://en.wikipedia.org/wiki/The_7_Habits_of_Highly_Effective_People"
+  - title: "Getting Things Done"
+    author: "David Allen"
+    year: 2001
+  - title: "The Motley Fool: You Have More Than You Think"
+    author: "David and Tom Gardner"
+    year: 2001
 ---
 
 <!-- DRAFT (2026-11-02), Mike: "start a new blog post for thursday 11/5, influential books", then "maybe a new series, worth reading".

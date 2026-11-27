@@ -23,6 +23,11 @@ repo_urls:
     title: "X_eTaL-extensions"
   - url: "https://github.com/sw-vibe-coding/sw-apl"
     title: "sw-apl"
+books:
+  - title: "The 7 Habits of Highly Effective People"
+    author: "Stephen R. Covey"
+    year: 1989
+    url: "https://en.wikipedia.org/wiki/The_7_Habits_of_Highly_Effective_People"
 ---
 
 <!-- DRAFT (2026-11-01), Mike: a short Saw post: "a sed saw and a xtl-blender saw". sed-rs (sw-cli-tools/sed-rs; main f52ba15,

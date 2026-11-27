@@ -19,6 +19,11 @@ papers:
     url: "https://arxiv.org/abs/1702.08608"
   - title: "Stochastic Gradient Descent as Approximate Bayesian Inference"
     url: "https://arxiv.org/abs/1704.04289"
+books:
+  - title: "Human-in-the-Loop Machine Learning"
+    author: "Robert Monarch"
+    year: 2021
+    url: "https://www.manning.com/books/human-in-the-loop-machine-learning"
 ---
 
 <img src="{{ '/assets/images/posts/block-twenty.webp' | relative_url }}" class="post-marker" alt="">

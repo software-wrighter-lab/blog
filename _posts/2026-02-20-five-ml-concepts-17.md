@@ -17,6 +17,11 @@ papers:
     url: "https://arxiv.org/abs/1711.05101"
   - title: "Scaling Laws for Neural Language Models"
     url: "https://arxiv.org/abs/2001.08361"
+books:
+  - title: "Reliable Machine Learning"
+    author: "Cathy Chen et al."
+    year: 2022
+    url: "https://www.oreilly.com/library/view/reliable-machine-learning/9781098106218/"
 ---
 
 <img src="{{ '/assets/images/posts/block-seventeen.webp' | relative_url }}" class="post-marker" alt="">

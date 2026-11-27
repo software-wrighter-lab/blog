@@ -8,6 +8,13 @@ abstract: "Seventeenth in the series on what is worth reading: two books that ar
 series: "Worth Reading"
 series_part: 17
 date: 2027-02-24 00:15:00 -0800
+books:
+  - title: "Blink"
+    author: "Malcolm Gladwell"
+    year: 2005
+  - title: "Think!"
+    author: "Michael R. LeGault"
+    year: 2006
 ---
 
 <!-- DRAFT (2026-11-11), Mike: books added to Worth Reading, grouped as suggested and accepted 2026-11-11; placed after the Tufte

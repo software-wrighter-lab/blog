@@ -8,6 +8,10 @@ abstract: "Ninth in the series on what is worth reading, and the first on papers
 series: "Worth Reading"
 series_part: 9
 date: 2026-12-30 00:15:00 -0800
+books:
+  - title: "The Mythical Man-Month"
+    author: "Frederick P. Brooks Jr."
+    year: 1975
 ---
 
 <!-- DRAFT (2026-11-03), Mike: papers and articles, not books, added to Worth Reading as future topics; grouping and titles

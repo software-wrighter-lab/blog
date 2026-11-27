@@ -9,6 +9,11 @@ abstract: "Two CLI tools got full Emacs packages this week---pjmai-rs for projec
 series: "Sharpen the Saw Sundays"
 series_part: 4
 repo_url: "https://github.com/sw-cli-tools/pjmai-rs"
+books:
+  - title: "The 7 Habits of Highly Effective People"
+    author: "Stephen R. Covey"
+    year: 1989
+    url: "https://en.wikipedia.org/wiki/The_7_Habits_of_Highly_Effective_People"
 ---
 
 <img src="{{ '/assets/images/posts/block-saw-sharpen-tool.webp' | relative_url }}" class="post-marker no-invert" alt="">
