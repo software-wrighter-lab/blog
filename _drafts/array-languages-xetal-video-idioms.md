@@ -27,7 +27,7 @@ repo_urls:
      made from the lesson README's prompt (a tangled wire loop beside four rows of cubes, one per idiom).
      To do when the episode is done (me): video_url/video_title, the links-box Video row, frames from the published
      mp4 as gutter figures (outdent-right in pos-left sections, outdent-left in pos-right; none in the first two
-     sections, which sit beside the links box), any cube renders, the narration check. Mike: the closing.
+     sections, which sit beside the links box), any cube renders, the narration check.
      Four more idioms (X_eTaL-video 8e5b225, 17:41): where/index of, member, n_wise, grade+select; run at the pin.
      Narration rewording at e937305 (scan: "the total") applied.
      Frames al25-scan, -subtract, -normalize, -count (and al25-where, -member, -nwise, -grade from the 16:34 render, 6:10) from out/al-05-idioms-landscape-remotion.mp4 (11:42, 4:33, before
@@ -424,4 +424,4 @@ Before then, try this in the [browser editor](https://softwarewrighter.github.io
 ## Closing
 {: .pos-center}
 
-Mike: TODO, a closing in your words.
+I started developing X_eTaL as an alternative to using Python for machine learning. NumPy seems to be heavily influenced by array languages, so I wanted my own approach to array languages. I ended up making the language more general-purpose. I also wanted to show how to extend the language so that the base language stays small. Later in the video series I will show some ways to do this.
