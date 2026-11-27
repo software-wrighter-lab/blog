@@ -29,7 +29,8 @@ repo_urls:
      mp4 as gutter figures (outdent-right in pos-left sections, outdent-left in pos-right; none in the first two
      sections, which sit beside the links box), any cube renders, the narration check.
      Four more idioms (X_eTaL-video 8e5b225, 17:41): where/index of, member, n_wise, grade+select; run at the pin.
-     Narration rewording at e937305 (scan: "the total") applied.
+     Narration rewording at e937305 (scan: "the total") applied. Rewording at ff38966/6af51a8 (18:24) applied too.
+     The 18:26 render (6:11) retitles the break slides only; the gutter frames still match.
      Frames al25-scan, -subtract, -normalize, -count (and al25-where, -member, -nwise, -grade from the 16:34 render, 6:10) from out/al-05-idioms-landscape-remotion.mp4 (11:42, 4:33, before
      the YouTube package); narration unchanged from the draft but for the next scene. Re-take if the final cut differs.
      Short names aside (Mike, 2026-11-26): from X_eTaL docs/lang-choices.md B2 and N3 (a trailing mark only where APL gave
@@ -287,7 +288,7 @@ The trade-off: the table has a cell for every value and every vote. For a long l
 <figcaption>From the video: where, then index of. Click to enlarge.</figcaption>
 </figure>
 
-Four more idioms. First, find the positions of the matches. A loop checks each item and keeps the index of each match:
+Now, some more idioms. First, find the positions of the matches. A loop checks each item and keeps the index of each match:
 
 ```rust
 for (i, v) in x.iter().enumerate() {
@@ -375,7 +376,7 @@ for i in 0..x.len() - 2 {
 <figcaption>From the video: grade, then select. Click to enlarge.</figcaption>
 </figure>
 
-Last, sort by a key. We have people and their ages, and we want the people in order of age. A loop pairs them, sorts the pairs and keeps the people:
+Last, sort by a key. We have people, and we have their ages, and we want the people in order of age. A loop pairs them, sorts the pairs and keeps the people:
 
 ```rust
 let mut p: Vec<_> = ids.iter().zip(&ages).collect();
