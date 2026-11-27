@@ -8,6 +8,7 @@ abstract: "Twelfth in the series on what is worth reading: the 2017 paper by Vas
 series: "Worth Reading"
 series_part: 12
 date: 2027-01-20 00:15:00 -0800
+books: []
 ---
 
 <!-- DRAFT (2026-11-03), Mike: papers and articles, not books, added to Worth Reading as future topics; grouping and titles

@@ -122,6 +122,51 @@ for f in "${posts[@]}"; do
   done
 done
 
+# Books tab coverage. index-all.html builds the Books tab from each post's
+# `books:` front matter, so a post that names a book without listing it is
+# missing from that book's row. Collect every title already listed anywhere
+# (posts and drafts), then warn when a post's text names one its own `books:`
+# lacks. Titles of four or more words match as plain text; shorter ones (Slack,
+# Deep Learning) only in italics or as link text, since they are ordinary
+# phrases too. `books: []` marks a books post that names none (a paper post). HTML comments are skipped.
+# Also warn when a books-category or worth-reading post sets no `books:`.
+# A book named for the first time anywhere is not caught: add `books:` when
+# drafting. Warn, not error: a title can appear in some other sense.
+book_hits=$(perl -CSD -Mutf8 -e '
+  my (%fm, %body, %listed, %all);
+  for my $f (@ARGV) {
+    open my $h, "<:encoding(UTF-8)", $f or next; local $/; my $t = <$h>;
+    $t =~ /\A---\n(.*?)\n---\n(.*)\z/s or next;
+    my ($fm, $b) = ($1, $2);
+    $b =~ s/<!--.*?-->//gs;
+    $fm{$f} = $fm; $body{$f} = $b;
+    if ($fm =~ /^books:\n((?:[ \t].*\n?)*)/m) {
+      for ($1 =~ /^\s*-\s*title:\s*"((?:[^"\\]|\\.)*)"/mg) {
+        (my $x = $_) =~ s/\\(.)/$1/g; $listed{$f}{$x} = 1; $all{$x} = 1;
+      }
+    }
+    $listed{$f}{""} = 1 if $fm =~ /^books:/m;
+  }
+  for my $f (grep { m{^_posts/} || m{^_drafts/} } sort keys %body) {
+    my $b = $body{$f};
+    (my $base = $f) =~ s{.*/}{};
+    if (!$listed{$f} && $fm{$f} =~ /^(?:categories|tags):.*\b(?:books|worth-reading)\b/m) {
+      print "$base: is a books/worth-reading post but sets no books; it will be missing from the Books tab on /index-all/\n";
+    }
+    for my $title (sort keys %all) {
+      next if $listed{$f}{$title};
+      my $q = quotemeta $title;
+      my @w = split /\s+/, $title;
+      my $hit = (@w > 3) ? ($b =~ /(?<![\w])$q(?![\w])/)
+                         : ($b =~ /(?:\*|_|<em>|<i>|\[)$q(?:\*|_|<\/em>|<\/i>|\])/);
+      print "$base: names \"$title\" but its books does not list it; it will be missing from that row of the Books tab on /index-all/\n" if $hit;
+    }
+  }
+' _posts/*.md $(ls _drafts/*.md 2>/dev/null | grep -v README.md))
+while IFS= read -r line; do
+  [[ -n "$line" ]] && warn "$line"
+done <<< "$book_hits"
+
 # First-paragraph image uniqueness: every post and every draft leads with its
 # own image. Reusing another post's (or draft's) lead image is an error; the
 # one allowlisted pair predates the rule and stays as-is. A draft with no lead
