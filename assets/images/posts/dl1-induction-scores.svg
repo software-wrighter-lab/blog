@@ -1,0 +1,327 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="632" height="365" viewBox="0 0 632 365" role="img">
+<rect width="632" height="365" fill="#ffffff"/>
+<text x="8" y="18" font-family="monospace" fill="#1f2937" font-size="13" xml:space="preserve">gpt2: induction score of every head, in percent</text>
+<text x="8" y="36" font-family="monospace" fill="#1f2937" font-size="11" xml:space="preserve">rows: layers, columns: heads. Attention-pattern scores: candidates, not causal evidence.</text>
+<g class="rows">
+<text x="27" y="77" font-family="monospace" fill="#1f2937" font-size="11" text-anchor="end" dominant-baseline="central" xml:space="preserve">L0</text>
+<text x="27" y="101" font-family="monospace" fill="#1f2937" font-size="11" text-anchor="end" dominant-baseline="central" xml:space="preserve">L1</text>
+<text x="27" y="125" font-family="monospace" fill="#1f2937" font-size="11" text-anchor="end" dominant-baseline="central" xml:space="preserve">L2</text>
+<text x="27" y="149" font-family="monospace" fill="#1f2937" font-size="11" text-anchor="end" dominant-baseline="central" xml:space="preserve">L3</text>
+<text x="27" y="173" font-family="monospace" fill="#1f2937" font-size="11" text-anchor="end" dominant-baseline="central" xml:space="preserve">L4</text>
+<text x="27" y="197" font-family="monospace" fill="#1f2937" font-size="11" text-anchor="end" dominant-baseline="central" xml:space="preserve">L5</text>
+<text x="27" y="221" font-family="monospace" fill="#1f2937" font-size="11" text-anchor="end" dominant-baseline="central" xml:space="preserve">L6</text>
+<text x="27" y="245" font-family="monospace" fill="#1f2937" font-size="11" text-anchor="end" dominant-baseline="central" xml:space="preserve">L7</text>
+<text x="27" y="269" font-family="monospace" fill="#1f2937" font-size="11" text-anchor="end" dominant-baseline="central" xml:space="preserve">L8</text>
+<text x="27" y="293" font-family="monospace" fill="#1f2937" font-size="11" text-anchor="end" dominant-baseline="central" xml:space="preserve">L9</text>
+<text x="27" y="317" font-family="monospace" fill="#1f2937" font-size="11" text-anchor="end" dominant-baseline="central" xml:space="preserve">L10</text>
+<text x="27" y="341" font-family="monospace" fill="#1f2937" font-size="11" text-anchor="end" dominant-baseline="central" xml:space="preserve">L11</text>
+</g>
+<g class="cols">
+<text x="0" y="0" font-family="monospace" fill="#1f2937" font-size="11" text-anchor="start" dominant-baseline="central" transform="translate(45 59) rotate(-90)" xml:space="preserve">H0</text>
+<text x="0" y="0" font-family="monospace" fill="#1f2937" font-size="11" text-anchor="start" dominant-baseline="central" transform="translate(69 59) rotate(-90)" xml:space="preserve">H1</text>
+<text x="0" y="0" font-family="monospace" fill="#1f2937" font-size="11" text-anchor="start" dominant-baseline="central" transform="translate(93 59) rotate(-90)" xml:space="preserve">H2</text>
+<text x="0" y="0" font-family="monospace" fill="#1f2937" font-size="11" text-anchor="start" dominant-baseline="central" transform="translate(117 59) rotate(-90)" xml:space="preserve">H3</text>
+<text x="0" y="0" font-family="monospace" fill="#1f2937" font-size="11" text-anchor="start" dominant-baseline="central" transform="translate(141 59) rotate(-90)" xml:space="preserve">H4</text>
+<text x="0" y="0" font-family="monospace" fill="#1f2937" font-size="11" text-anchor="start" dominant-baseline="central" transform="translate(165 59) rotate(-90)" xml:space="preserve">H5</text>
+<text x="0" y="0" font-family="monospace" fill="#1f2937" font-size="11" text-anchor="start" dominant-baseline="central" transform="translate(189 59) rotate(-90)" xml:space="preserve">H6</text>
+<text x="0" y="0" font-family="monospace" fill="#1f2937" font-size="11" text-anchor="start" dominant-baseline="central" transform="translate(213 59) rotate(-90)" xml:space="preserve">H7</text>
+<text x="0" y="0" font-family="monospace" fill="#1f2937" font-size="11" text-anchor="start" dominant-baseline="central" transform="translate(237 59) rotate(-90)" xml:space="preserve">H8</text>
+<text x="0" y="0" font-family="monospace" fill="#1f2937" font-size="11" text-anchor="start" dominant-baseline="central" transform="translate(261 59) rotate(-90)" xml:space="preserve">H9</text>
+<text x="0" y="0" font-family="monospace" fill="#1f2937" font-size="11" text-anchor="start" dominant-baseline="central" transform="translate(285 59) rotate(-90)" xml:space="preserve">H10</text>
+<text x="0" y="0" font-family="monospace" fill="#1f2937" font-size="11" text-anchor="start" dominant-baseline="central" transform="translate(309 59) rotate(-90)" xml:space="preserve">H11</text>
+</g>
+<g class="cells" transform="translate(33 65)">
+<svg xmlns="http://www.w3.org/2000/svg" width="288" height="288" viewBox="0 0 288 288" role="img">
+<rect width="288" height="288" fill="#f8fafc"/>
+<rect x="0" y="0" width="24" height="24" fill="#430b5b"/>
+<text x="12" y="12" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">3</text>
+<rect x="24" y="0" width="24" height="24" fill="#440154"/>
+<text x="36" y="12" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="48" y="0" width="24" height="24" fill="#430b5b"/>
+<text x="60" y="12" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">3</text>
+<rect x="72" y="0" width="24" height="24" fill="#440154"/>
+<text x="84" y="12" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="96" y="0" width="24" height="24" fill="#440154"/>
+<text x="108" y="12" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="120" y="0" width="24" height="24" fill="#440154"/>
+<text x="132" y="12" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="144" y="0" width="24" height="24" fill="#420f5d"/>
+<text x="156" y="12" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">4</text>
+<rect x="168" y="0" width="24" height="24" fill="#440154"/>
+<text x="180" y="12" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="192" y="0" width="24" height="24" fill="#430b5b"/>
+<text x="204" y="12" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">3</text>
+<rect x="216" y="0" width="24" height="24" fill="#430b5b"/>
+<text x="228" y="12" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">3</text>
+<rect x="240" y="0" width="24" height="24" fill="#430859"/>
+<text x="252" y="12" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">2</text>
+<rect x="264" y="0" width="24" height="24" fill="#420f5d"/>
+<text x="276" y="12" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">4</text>
+<rect x="0" y="24" width="24" height="24" fill="#440154"/>
+<text x="12" y="36" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="24" y="24" width="24" height="24" fill="#440456"/>
+<text x="36" y="36" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">1</text>
+<rect x="48" y="24" width="24" height="24" fill="#430859"/>
+<text x="60" y="36" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">2</text>
+<rect x="72" y="24" width="24" height="24" fill="#440456"/>
+<text x="84" y="36" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">1</text>
+<rect x="96" y="24" width="24" height="24" fill="#430859"/>
+<text x="108" y="36" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">2</text>
+<rect x="120" y="24" width="24" height="24" fill="#430b5b"/>
+<text x="132" y="36" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">3</text>
+<rect x="144" y="24" width="24" height="24" fill="#430b5b"/>
+<text x="156" y="36" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">3</text>
+<rect x="168" y="24" width="24" height="24" fill="#421260"/>
+<text x="180" y="36" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">5</text>
+<rect x="192" y="24" width="24" height="24" fill="#430b5b"/>
+<text x="204" y="36" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">3</text>
+<rect x="216" y="24" width="24" height="24" fill="#430b5b"/>
+<text x="228" y="36" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">3</text>
+<rect x="240" y="24" width="24" height="24" fill="#430b5b"/>
+<text x="252" y="36" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">3</text>
+<rect x="264" y="24" width="24" height="24" fill="#440154"/>
+<text x="276" y="36" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="0" y="48" width="24" height="24" fill="#440456"/>
+<text x="12" y="60" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">1</text>
+<rect x="24" y="48" width="24" height="24" fill="#420f5d"/>
+<text x="36" y="60" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">4</text>
+<rect x="48" y="48" width="24" height="24" fill="#440154"/>
+<text x="60" y="60" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="72" y="48" width="24" height="24" fill="#440154"/>
+<text x="84" y="60" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="96" y="48" width="24" height="24" fill="#440154"/>
+<text x="108" y="60" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="120" y="48" width="24" height="24" fill="#440154"/>
+<text x="132" y="60" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="144" y="48" width="24" height="24" fill="#440456"/>
+<text x="156" y="60" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">1</text>
+<rect x="168" y="48" width="24" height="24" fill="#430859"/>
+<text x="180" y="60" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">2</text>
+<rect x="192" y="48" width="24" height="24" fill="#440154"/>
+<text x="204" y="60" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="216" y="48" width="24" height="24" fill="#440154"/>
+<text x="228" y="60" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="240" y="48" width="24" height="24" fill="#430859"/>
+<text x="252" y="60" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">2</text>
+<rect x="264" y="48" width="24" height="24" fill="#440456"/>
+<text x="276" y="60" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">1</text>
+<rect x="0" y="72" width="24" height="24" fill="#440154"/>
+<text x="12" y="84" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="24" y="72" width="24" height="24" fill="#440154"/>
+<text x="36" y="84" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="48" y="72" width="24" height="24" fill="#440154"/>
+<text x="60" y="84" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="72" y="72" width="24" height="24" fill="#440154"/>
+<text x="84" y="84" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="96" y="72" width="24" height="24" fill="#430859"/>
+<text x="108" y="84" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">2</text>
+<rect x="120" y="72" width="24" height="24" fill="#430b5b"/>
+<text x="132" y="84" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">3</text>
+<rect x="144" y="72" width="24" height="24" fill="#440154"/>
+<text x="156" y="84" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="168" y="72" width="24" height="24" fill="#440154"/>
+<text x="180" y="84" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="192" y="72" width="24" height="24" fill="#440154"/>
+<text x="204" y="84" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="216" y="72" width="24" height="24" fill="#440154"/>
+<text x="228" y="84" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="240" y="72" width="24" height="24" fill="#440154"/>
+<text x="252" y="84" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="264" y="72" width="24" height="24" fill="#440154"/>
+<text x="276" y="84" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="0" y="96" width="24" height="24" fill="#440154"/>
+<text x="12" y="108" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="24" y="96" width="24" height="24" fill="#440154"/>
+<text x="36" y="108" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="48" y="96" width="24" height="24" fill="#440456"/>
+<text x="60" y="108" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">1</text>
+<rect x="72" y="96" width="24" height="24" fill="#440154"/>
+<text x="84" y="108" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="96" y="96" width="24" height="24" fill="#440456"/>
+<text x="108" y="108" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">1</text>
+<rect x="120" y="96" width="24" height="24" fill="#440154"/>
+<text x="132" y="108" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="144" y="96" width="24" height="24" fill="#440154"/>
+<text x="156" y="108" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="168" y="96" width="24" height="24" fill="#440456"/>
+<text x="180" y="108" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">1</text>
+<rect x="192" y="96" width="24" height="24" fill="#430859"/>
+<text x="204" y="108" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">2</text>
+<rect x="216" y="96" width="24" height="24" fill="#440154"/>
+<text x="228" y="108" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="240" y="96" width="24" height="24" fill="#440456"/>
+<text x="252" y="108" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">1</text>
+<rect x="264" y="96" width="24" height="24" fill="#440154"/>
+<text x="276" y="108" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="0" y="120" width="24" height="24" fill="#37a57d"/>
+<text x="12" y="132" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">56</text>
+<rect x="24" y="120" width="24" height="24" fill="#c1dc3c"/>
+<text x="36" y="132" font-family="monospace" font-size="11" fill="#1f2937" text-anchor="middle" dominant-baseline="central">86</text>
+<rect x="48" y="120" width="24" height="24" fill="#440154"/>
+<text x="60" y="132" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="72" y="120" width="24" height="24" fill="#440456"/>
+<text x="84" y="132" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">1</text>
+<rect x="96" y="120" width="24" height="24" fill="#440154"/>
+<text x="108" y="132" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="120" y="120" width="24" height="24" fill="#fde725"/>
+<text x="132" y="132" font-family="monospace" font-size="11" fill="#1f2937" text-anchor="middle" dominant-baseline="central">95</text>
+<rect x="144" y="120" width="24" height="24" fill="#440154"/>
+<text x="156" y="132" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="168" y="120" width="24" height="24" fill="#440154"/>
+<text x="180" y="132" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="192" y="120" width="24" height="24" fill="#3b538b"/>
+<text x="204" y="132" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">24</text>
+<rect x="216" y="120" width="24" height="24" fill="#420f5d"/>
+<text x="228" y="132" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">4</text>
+<rect x="240" y="120" width="24" height="24" fill="#430859"/>
+<text x="252" y="132" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">2</text>
+<rect x="264" y="120" width="24" height="24" fill="#440154"/>
+<text x="276" y="132" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="0" y="144" width="24" height="24" fill="#440154"/>
+<text x="12" y="156" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="24" y="144" width="24" height="24" fill="#440456"/>
+<text x="36" y="156" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">1</text>
+<rect x="48" y="144" width="24" height="24" fill="#430859"/>
+<text x="60" y="156" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">2</text>
+<rect x="72" y="144" width="24" height="24" fill="#440456"/>
+<text x="84" y="156" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">1</text>
+<rect x="96" y="144" width="24" height="24" fill="#411964"/>
+<text x="108" y="156" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">7</text>
+<rect x="120" y="144" width="24" height="24" fill="#440456"/>
+<text x="132" y="156" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">1</text>
+<rect x="144" y="144" width="24" height="24" fill="#420f5d"/>
+<text x="156" y="156" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">4</text>
+<rect x="168" y="144" width="24" height="24" fill="#430859"/>
+<text x="180" y="156" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">2</text>
+<rect x="192" y="144" width="24" height="24" fill="#440154"/>
+<text x="204" y="156" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="216" y="144" width="24" height="24" fill="#bada3f"/>
+<text x="228" y="156" font-family="monospace" font-size="11" fill="#1f2937" text-anchor="middle" dominant-baseline="central">85</text>
+<rect x="240" y="144" width="24" height="24" fill="#421260"/>
+<text x="252" y="156" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">5</text>
+<rect x="264" y="144" width="24" height="24" fill="#440456"/>
+<text x="276" y="156" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">1</text>
+<rect x="0" y="168" width="24" height="24" fill="#440154"/>
+<text x="12" y="180" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="24" y="168" width="24" height="24" fill="#3c4582"/>
+<text x="36" y="180" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">20</text>
+<rect x="48" y="168" width="24" height="24" fill="#63ca60"/>
+<text x="60" y="180" font-family="monospace" font-size="11" fill="#1f2937" text-anchor="middle" dominant-baseline="central">72</text>
+<rect x="72" y="168" width="24" height="24" fill="#430859"/>
+<text x="84" y="180" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">2</text>
+<rect x="96" y="168" width="24" height="24" fill="#440154"/>
+<text x="108" y="180" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="120" y="168" width="24" height="24" fill="#430b5b"/>
+<text x="132" y="180" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">3</text>
+<rect x="144" y="168" width="24" height="24" fill="#411964"/>
+<text x="156" y="180" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">7</text>
+<rect x="168" y="168" width="24" height="24" fill="#412069"/>
+<text x="180" y="180" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">9</text>
+<rect x="192" y="168" width="24" height="24" fill="#440154"/>
+<text x="204" y="180" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="216" y="168" width="24" height="24" fill="#430859"/>
+<text x="228" y="180" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">2</text>
+<rect x="240" y="168" width="24" height="24" fill="#add844"/>
+<text x="252" y="180" font-family="monospace" font-size="11" fill="#1f2937" text-anchor="middle" dominant-baseline="central">83</text>
+<rect x="264" y="168" width="24" height="24" fill="#3f2a70"/>
+<text x="276" y="180" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">12</text>
+<rect x="0" y="192" width="24" height="24" fill="#440456"/>
+<text x="12" y="204" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">1</text>
+<rect x="24" y="192" width="24" height="24" fill="#22908c"/>
+<text x="36" y="204" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">47</text>
+<rect x="48" y="192" width="24" height="24" fill="#430859"/>
+<text x="60" y="204" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">2</text>
+<rect x="72" y="192" width="24" height="24" fill="#421260"/>
+<text x="84" y="204" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">5</text>
+<rect x="96" y="192" width="24" height="24" fill="#440154"/>
+<text x="108" y="204" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="120" y="192" width="24" height="24" fill="#440456"/>
+<text x="132" y="204" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">1</text>
+<rect x="144" y="192" width="24" height="24" fill="#365d8b"/>
+<text x="156" y="204" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">28</text>
+<rect x="168" y="192" width="24" height="24" fill="#440154"/>
+<text x="180" y="204" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="192" y="192" width="24" height="24" fill="#411c67"/>
+<text x="204" y="204" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">8</text>
+<rect x="216" y="192" width="24" height="24" fill="#421260"/>
+<text x="228" y="204" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">5</text>
+<rect x="240" y="192" width="24" height="24" fill="#40276d"/>
+<text x="252" y="204" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">11</text>
+<rect x="264" y="192" width="24" height="24" fill="#430859"/>
+<text x="276" y="204" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">2</text>
+<rect x="0" y="216" width="24" height="24" fill="#39588b"/>
+<text x="12" y="228" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">26</text>
+<rect x="24" y="216" width="24" height="24" fill="#35608b"/>
+<text x="36" y="228" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">29</text>
+<rect x="48" y="216" width="24" height="24" fill="#3e3b7b"/>
+<text x="60" y="228" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">17</text>
+<rect x="72" y="216" width="24" height="24" fill="#440154"/>
+<text x="84" y="228" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="96" y="216" width="24" height="24" fill="#3f3174"/>
+<text x="108" y="228" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">14</text>
+<rect x="120" y="216" width="24" height="24" fill="#440456"/>
+<text x="132" y="228" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">1</text>
+<rect x="144" y="216" width="24" height="24" fill="#2d9c84"/>
+<text x="156" y="228" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">52</text>
+<rect x="168" y="216" width="24" height="24" fill="#421260"/>
+<text x="180" y="228" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">5</text>
+<rect x="192" y="216" width="24" height="24" fill="#421562"/>
+<text x="204" y="228" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">6</text>
+<rect x="216" y="216" width="24" height="24" fill="#259589"/>
+<text x="228" y="228" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">49</text>
+<rect x="240" y="216" width="24" height="24" fill="#440154"/>
+<text x="252" y="228" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="264" y="216" width="24" height="24" fill="#421260"/>
+<text x="276" y="228" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">5</text>
+<rect x="0" y="240" width="24" height="24" fill="#306d8b"/>
+<text x="12" y="252" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">34</text>
+<rect x="24" y="240" width="24" height="24" fill="#279788"/>
+<text x="36" y="252" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">50</text>
+<rect x="48" y="240" width="24" height="24" fill="#411c67"/>
+<text x="60" y="252" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">8</text>
+<rect x="72" y="240" width="24" height="24" fill="#3e3879"/>
+<text x="84" y="252" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">16</text>
+<rect x="96" y="240" width="24" height="24" fill="#3f2a70"/>
+<text x="108" y="252" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">12</text>
+<rect x="120" y="240" width="24" height="24" fill="#440456"/>
+<text x="132" y="252" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">1</text>
+<rect x="144" y="240" width="24" height="24" fill="#2c758c"/>
+<text x="156" y="252" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">37</text>
+<rect x="168" y="240" width="24" height="24" fill="#53bf6a"/>
+<text x="180" y="252" font-family="monospace" font-size="11" fill="#1f2937" text-anchor="middle" dominant-baseline="central">67</text>
+<rect x="192" y="240" width="24" height="24" fill="#40236b"/>
+<text x="204" y="252" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">10</text>
+<rect x="216" y="240" width="24" height="24" fill="#440154"/>
+<text x="228" y="252" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">0</text>
+<rect x="240" y="240" width="24" height="24" fill="#3e3b7b"/>
+<text x="252" y="252" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">17</text>
+<rect x="264" y="240" width="24" height="24" fill="#2b788c"/>
+<text x="276" y="252" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">38</text>
+<rect x="0" y="264" width="24" height="24" fill="#421260"/>
+<text x="12" y="276" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">5</text>
+<rect x="24" y="264" width="24" height="24" fill="#40276d"/>
+<text x="36" y="276" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">11</text>
+<rect x="48" y="264" width="24" height="24" fill="#430b5b"/>
+<text x="60" y="276" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">3</text>
+<rect x="72" y="264" width="24" height="24" fill="#430b5b"/>
+<text x="84" y="276" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">3</text>
+<rect x="96" y="264" width="24" height="24" fill="#421260"/>
+<text x="108" y="276" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">5</text>
+<rect x="120" y="264" width="24" height="24" fill="#3e3477"/>
+<text x="132" y="276" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">15</text>
+<rect x="144" y="264" width="24" height="24" fill="#411964"/>
+<text x="156" y="276" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">7</text>
+<rect x="168" y="264" width="24" height="24" fill="#40276d"/>
+<text x="180" y="276" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">11</text>
+<rect x="192" y="264" width="24" height="24" fill="#430b5b"/>
+<text x="204" y="276" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">3</text>
+<rect x="216" y="264" width="24" height="24" fill="#3a558b"/>
+<text x="228" y="276" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">25</text>
+<rect x="240" y="264" width="24" height="24" fill="#26858c"/>
+<text x="252" y="276" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">43</text>
+<rect x="264" y="264" width="24" height="24" fill="#430b5b"/>
+<text x="276" y="276" font-family="monospace" font-size="11" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">3</text>
+<path d="M0 0H288M0 24H288M0 48H288M0 72H288M0 96H288M0 120H288M0 144H288M0 168H288M0 192H288M0 216H288M0 240H288M0 264H288M0 288H288M0 0V288M24 0V288M48 0V288M72 0V288M96 0V288M120 0V288M144 0V288M168 0V288M192 0V288M216 0V288M240 0V288M264 0V288M288 0V288" stroke="#cbd5e1" stroke-width="1" fill="none"/>
+</svg>
+</g>
+</svg>
