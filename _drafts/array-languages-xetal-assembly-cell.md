@@ -33,7 +33,7 @@ repo_urls:
      cell-blinker.webp is still a frame of the earlier hand build (videos/blinker.webm): replace it with a frame of
      the finished planned circuit from the new recording when it exists.
      The 555 video: X_eTaL-video is recording it (full frame, moving camera, 4x, captions); video: https://www.youtube.com/watch?v=GStCitdYkNo (2026-11-27; private or processing then: oEmbed 403, thumbnail 404; check both before
-     publishing). Still to add: a frame or two, and Mike's closing. Date 2026-11-28 is tentative.
+     publishing). Closing: Mike's words (2026-11-27). Still to add: a frame or two. Date 2026-11-28 is tentative.
 -->
 
 <img src="{{ '/assets/images/posts/cell-live-lead.webp' | relative_url }}" class="post-marker no-invert" alt="The assembly cell's live page: the controls on the left, a slender orange arm over a turntable with a vise and pincers in the middle, the microscope's close-up below it, and the program's numbered command list on the right" style="width: 205px;">
@@ -319,4 +319,4 @@ The plan has more ahead of it:
 ## Closing
 {: .pos-right}
 
-Mike: TODO, a closing in your words.
+The current version uses through-hole components. A future version will work with surface-mount components. I want to iterate on the simulation, refining it, before I attempt to build a physical version with motors and actuators.
