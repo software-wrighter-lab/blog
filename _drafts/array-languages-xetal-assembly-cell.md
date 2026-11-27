@@ -23,7 +23,7 @@ repo_urls:
      decisions C1-C23). Stills from extensions/cell/videos/*.webm (solder at 20 s, lap at 30 s, blinker at 535 s);
      cell-models from docs/models.jpg; cell-four-arms from docs/mcp.jpg (the earlier four-arm cell).
      Lead image: Mike's screenshot of the live page (Dropbox/Screenshots, 2026-11-27 9.54.53), for the first
-     paragraph and the abstracts card.
+     paragraph and the abstracts card. Opening: Mike's words (2026-11-27; "set off" read as "set of").
      X_eTaL drawn with the repo's pinned bin/xetal render (8c49bd80). The facade lines run
      2026-11-27 with the extension built locally (target/debug/xetal-x --ext extensions/cell): cell 0.1.0 and the
      parse JSON as shown; cargo test -p xetal-ext-cell passed.
@@ -33,7 +33,9 @@ repo_urls:
 
 <img src="{{ '/assets/images/posts/cell-live-lead.webp' | relative_url }}" class="post-marker no-invert" alt="The assembly cell's live page: the controls on the left, a slender orange arm over a turntable with a vise and pincers in the middle, the microscope's close-up below it, and the program's numbered command list on the right" style="width: 205px;">
 
-The assembly cell is a robot bench, simulated, that builds electronic circuits in free air: no circuit board, no layers, the parts soldered lead to lead in 3D, growing outward from a chip at the center. A program or an LLM agent drives it one command at a time, and it is drawn as it goes. It is the newest extension in [X_eTaL-extensions](https://github.com/softwarewrighter/X_eTaL-extensions), and it now builds a complete 555 LED blinker.
+I've been attending a monthly Electronics meetup Zoom call, and I described a machine that could assemble 3D circuits "in the air" (in a harness with a set of grippers and manipulators). The organizer challenged me to "build it!" So I am starting with X_eTaL to build Blender models and an interactive demo of a machine like I described. I've already made many refinements.
+
+The idea is to provide this "slicer"-like tool via MCP to AI coding agents to model circuits. If/when I build the actual robot assembler, the same MCP could allow an AI coding agent to construct circuits (subject to what parts I have in-stock and can feed to the robot).
 
 <!--more-->
 
@@ -52,6 +54,8 @@ The assembly cell is a robot bench, simulated, that builds electronic circuits i
 </div>
 
 ## A circuit in free air
+
+The assembly cell is a robot bench, simulated, that builds electronic circuits in free air: no circuit board, no layers, the parts soldered lead to lead in 3D, growing outward from a chip at the center. It is the newest extension in [X_eTaL-extensions](https://github.com/softwarewrighter/X_eTaL-extensions), and it now builds a complete 555 LED blinker.
 
 The idea is dead-bug construction, done by a machine. A chip goes in a vise with its legs up, and each part is brought in so that its lead lies against a leg, held there, and soldered. The next part comes in, and the circuit grows outward from the center. Nothing is laid out on a board first.
 
