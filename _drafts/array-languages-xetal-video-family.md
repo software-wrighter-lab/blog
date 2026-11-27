@@ -2,9 +2,9 @@
 layout: post
 title: "Array Languages #26: APL, J, K, BQN and X_eTaL, the Language Family"
 categories: [programming-languages, array-languages, video]
-tags: [array-languages, xetal, x-etal, apl, j, k, bqn, video, teaching, notation, combinators, tacit-programming]
+tags: [array-languages, xetal, x-etal, apl, j, k, bqn, video, teaching, notation, scan, trains, tacit-programming, type-inference]
 keywords: "array languages family, APL J K BQN compared, array language notation, tacit programming, function composition, combinators, ASCII notation, static types in an array language, X_eTaL rendered source, array languages video series"
-abstract: "Twenty-sixth in the Array Languages series: episode 6 of the video series that teaches array programming with X_eTaL, a tour of the array-language family. APL made arrays the vocabulary; J explored an ASCII notation and composition; K a compact vocabulary; BQN a modern notation and combinators. X_eTaL takes inspiration from all of them and makes different choices: statically checked types, ASCII source drawn with typography, and an emphasis on functional composition. Compared by notation, evaluation order, composition, array structure, typing and tooling."
+abstract: "Twenty-sixth in the Array Languages series: episode 6 of the video series that teaches array programming with X_eTaL, a tour of the array-language family. APL made arrays and math the vocabulary; J explored an ASCII notation and function composition; K a compact vocabulary; BQN a modern notation and combinators. The same small problems in all five: running totals, reverse, right-to-left reading and a mean written as a train; then dynamic types against X_eTaL's static, inferred ones, and X_eTaL source as typed and as drawn."
 series: "Array Languages"
 series_part: 26
 date: 2026-11-27 00:15:00 -0800
@@ -18,20 +18,19 @@ repo_urls:
 ---
 
 <!-- DRAFT
-     Started 2026-11-26 20:05, BEFORE episode 6 exists: X_eTaL-video has no al-06 lesson or saga yet (last commit
-     9ccdf70, al-05 published). Sources: docs/array-languages-video-series-plan.md (06, APL J K BQN and X_eTaL, 10 min,
-     moved up 2026-11-26), docs/research2.txt "Video 07" (its narration and the six comparison axes), al-05's
-     next-episode slide (APL arrays as the vocabulary; J ASCII notation, composition; K a compact vocabulary; BQN a
-     modern notation, combinators; X_eTaL checked types, rendered ASCII source), and AL #24 for K's list of rows.
-     Rewrite against the lesson's script and narration once they exist; add each language's code from the lesson
-     (and comparing-languages.md's REPL results). No other-language code here yet: a local GNU APL/J/K check hung.
-     The X_eTaL lines were run with X_eTaL-video's pinned bin/xetal (49c00785) and drawn with bin/xetal render.
-     Date 2026-11-27 is tentative. Lead image: a placeholder (prompt suggested to Mike 2026-11-26). Mike: the closing.
+     Rewritten 2026-11-27 08:40 from X_eTaL-video lessons/al-06-tour/lesson.mjs, UNCOMMITTED work in progress
+     (08:25; saga step 004 al-06-script in progress; no narration audio, render or upload yet). Section order and
+     wording follow the lesson's scenes and narration. Re-check against the lesson when it is committed.
+     X_eTaL lines run with the pinned bin/xetal (49c00785) and drawn with bin/xetal render. The other languages'
+     lines checked here on 2026-11-27: GNU APL 2.0 (scan, reverse, 2×3+4), J 9.7.1, ngn/k (b9eeb91), Kona, CBQN
+     (2bf102f), all matching. Not checkable locally: the APL train (+/÷≢), since GNU APL has no trains and sw-apl
+     no ≢; the lesson says it was checked online. Kona gives 3 for {(+/x)%#x} (integer %); ngn/k 3.8333. Told Mike.
+     No frames yet (gutter figures once the video renders). Lead image: placeholder. Mike: video URL, closing.
 -->
 
 <img src="{{ '/assets/images/posts/placeholder-array-languages-xetal-video-family.webp' | relative_url }}" class="post-marker no-invert" alt="" style="width: 205px;">
 
-Episode 6 of my video series on array programming tours the family X_eTaL belongs to. [Episode 5](/2026/11/26/array-languages-xetal-video-idioms/) solved small problems twice, with a loop and with whole arrays. This one steps back to the languages that worked out how to think that way: APL, then J and K, then BQN, and last X_eTaL, and what each one chose.
+Episode 6 of my video series on array programming is a tour of the array-language family. [Episode 5](/2026/11/26/array-languages-xetal-video-idioms/) was about idioms, short phrases for patterns that keep coming back. This one is about the languages behind those idioms: APL, J, K, BQN and X_eTaL, side by side on the same small problems.
 
 <!--more-->
 
@@ -49,89 +48,175 @@ Episode 6 of my video series on array programming tours the family X_eTaL belong
 
 </div>
 
-## A family, not a replacement
+## Five languages
 
-X_eTaL is not a replacement for any one of these languages. Each made choices the others did not, and X_eTaL borrows from all of them while making some of its own. The episode compares them on six things:
+- **APL** showed that a language could treat arrays and math as its basic vocabulary.
+- **J** explored an ASCII notation, and powerful function composition.
+- **K** kept a compact vocabulary, and short expressions.
+- **BQN**, after them, revisited many of these ideas with a modern notation and combinators.
+- **X_eTaL** takes ideas from this family, but makes different choices: checked types, ASCII source drawn with typography, and composition.
 
-- **notation:** symbols, ASCII words, or something in between;
-- **evaluation order:** how an expression is read;
-- **function composition:** how small functions combine into bigger ones;
-- **array structure:** what an array is (a rectangle of items, or lists of lists);
-- **typing:** what is checked, and when;
-- **tooling:** what you edit, and what you see.
-
-<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
-<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
-<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
-</div>
-
-## APL: arrays as the vocabulary
-
-APL showed that a programming language could treat arrays, and the mathematical transformations on them, as its basic vocabulary. Its functions are symbols, one glyph each, and most of what this series has shown so far, from reduce and scan to rotate and transpose, started there. The short names X_eTaL keeps with a mark, like `r̲/`{:.language-xetal} and `o̲\`{:.language-xetal}, are the places where it kept APL's own symbol.
-
-Mike: TODO from the lesson, APL's code for the episode's example.
+X_eTaL is not a replacement for any one of them. It borrows from the family, then makes its own choices.
 
 <div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
 <img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
 <img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
 </div>
 
-## J: ASCII notation and composition
-{: .pos-left}
+## Running totals in five languages
 
-J explored writing the same ideas in plain ASCII, with powerful ways to combine functions without naming their arguments. Episode 4 used J's rank to say "each row"; this episode looks at its composition.
-
-Mike: TODO from the lesson.
-
-<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
-<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
-<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
-</div>
-
-## K: a compact vocabulary
-{: .pos-right}
-
-K emphasized a small vocabulary and very concise expressions. As episode 4 showed, a K matrix is a list of rows, which shapes how its functions meet each other.
-
-Mike: TODO from the lesson.
-
-<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
-<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
-<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
-</div>
-
-## BQN: a modern notation and combinators
-{: .pos-left}
-
-BQN revisited many array-language ideas with a modern notation and an explicit set of combinators, the building blocks for combining functions.
-
-Mike: TODO from the lesson.
-
-<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
-<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
-<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
-</div>
-
-## X_eTaL: different choices
-{: .pos-right}
-
-X_eTaL takes inspiration from this family but makes different choices: statically checked types, ASCII source drawn with typography, and a deliberate emphasis on functional composition.
-
-The source is plain ASCII. Here is the mean of a list, written as a train, a fork of three functions in brackets, as you would type it:
+Start with running totals, from the last episode. Every language here has a scan. The spelling differs; the answer is the same.
 
 ```
-x := 3 1 4 1 5 9
-['+ r_/ / t_ally] x
+APL      +\3 1 4 1 5 9
+J        +/\ 3 1 4 1 5 9
+K        +\3 1 4 1 5 9
+BQN      +`3‿1‿4‿1‿5‿9
 ```
-
-And the same program as X_eTaL draws it:
 
 ```xetal
 x ← 3 1 4 1 5 9
+'+ s̲\ x   ⍝ 3 4 8 9 14 23
+```
+
+All five give `3 4 8 9 14 23`. BQN writes a list with ligatures, `3‿1‿4‿1‿5‿9`, where the others use spaces.
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
+## Notation: reverse
+{: .pos-left}
+
+Reverse shows the notation. APL and BQN use a glyph, a circle with a bar. J and K use ASCII symbols. X_eTaL uses a word, with its first letter underlined.
+
+```
+APL      ⌽3 1 4 1 5 9
+BQN      ⌽3‿1‿4‿1‿5‿9
+J        |. 3 1 4 1 5 9
+K        |3 1 4 1 5 9
+```
+
+```xetal
+r̲ev x   ⍝ 9 5 1 4 1 3
+```
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
+## Right to left
+{: .pos-right}
+
+All five read from right to left, with no precedence among functions. So three plus four comes first, then two times seven gives fourteen. In J and K, times is typed as a star.
+
+```
+APL      2×3+4
+J        2*3+4
+K        2*3+4
+BQN      2×3+4
+```
+
+```xetal
+2 × 3 + 4   ⍝ 14
+```
+
+X_eTaL's source has the star too; it is drawn as `×`.
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
+## A mean, as a train
+{: .pos-left}
+
+A train joins functions without naming the argument. Sum, divided by count, is the mean. APL, J and BQN write it as a train; X_eTaL writes the same fork in square brackets. K writes a small function instead, with `x` as its argument.
+
+```
+APL      (+/÷≢)3 1 4 1 5 9
+J        (+/ % #) 3 1 4 1 5 9
+BQN      (+´÷≠)3‿1‿4‿1‿5‿9
+K        {(+/x)%#x}3 1 4 1 5 9
+```
+
+```xetal
 ['+ r̲/ ÷ t̲ally] x   ⍝ 3.8333333333333335
 ```
 
-It is one program, not two. The underline marks a function name, `:=` is drawn as `←`, and `/` between numbers is drawn as `÷`. The text stays simple for editors, diffs and search; the drawing carries more meaning to the reader.
+One catch if you try the K line: which K you run matters. ngn/k gives 3.8333333333333335, but Kona, an older open-source K, divides two integers into an integer and gives 3.
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
+## Types, checked before it runs
+{: .pos-right}
+
+The four older languages check types as the program runs. X_eTaL infers a type for every function first. Name the mean, and X_eTaL works out that it takes integers and gives a float:
+
+```xetal
+ᵘm̲ean ← ['+ r̲/ ÷ t̲ally]
+```
+
+```
+u:m_ean : Int -> Float
+```
+
+A program that gives it floats is rejected before it runs:
+
+```xetal
+['+ r̲/ ÷ t̲ally] f̲loat x
+```
+
+```
+error[type-mismatch]: expected Int, found Float
+```
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
+## The family at a glance
+{: .pos-center}
+
+| | Notation | Reading order | Trains | Types |
+|---|---|---|---|---|
+| **APL** | glyphs | right to left | yes | dynamic |
+| **J** | ASCII | right to left | yes | dynamic |
+| **K** | ASCII | right to left | no | dynamic |
+| **BQN** | glyphs | right to left | yes | dynamic |
+| **X_eTaL** | ASCII, drawn | right to left | yes | static |
+
+Glyphs or ASCII; right to left in every one; trains in four of them, counting X_eTaL's brackets; types checked as the program runs, or before. X_eTaL is the one with static types.
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
+## ASCII in, decorated out
+{: .pos-left}
+
+The episode ends where X_eTaL differs most visibly. Here is the mean as you type it, in plain ASCII:
+
+```
+u:m_ean := ['+ r_/ / t_ally]
+```
+
+And as X_eTaL draws it:
+
+```xetal
+ᵘm̲ean ← ['+ r̲/ ÷ t̲ally]
+```
+
+The underlines mark functions. The slash for divide is drawn as a division sign, and `:=` as an arrow. The small u says the name belongs to this program. It is one program, not two: the text stays simple for editors, diffs and search, and the drawing carries more to the reader. Reading and writing X_eTaL itself, names and decorations and what each one promises, is where the series goes next.
+
+Before the next episode, try this: find the mean of 3 1 4 1 5 9 in two of these languages. [TryAPL](https://tryapl.org/), the [BQN REPL](https://mlochbaum.github.io/BQN/try.html) and [X_eTaL in your browser](https://softwarewrighter.github.io/X_eTaL/) all run without installing anything.
 
 <div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
 <img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
@@ -139,6 +224,6 @@ It is one program, not two. The underline marks a function name, `:=` is drawn a
 </div>
 
 ## Closing
-{: .pos-center}
+{: .pos-right}
 
 Mike: TODO, a closing in your words.
