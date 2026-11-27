@@ -21,7 +21,7 @@ repo_urls:
      Started 2026-11-27 10:30 from X_eTaL-extensions at 2bfa2b6; updated to e19b867 (step 29: wrap joints, the
      live page's run in a worker; models.jpg recopied with the wrap tool; cell-wrap from videos/wrap.webm at 40 s). Sources: extensions/cell/docs/README.md, docs/cell-design.md, docs/plan.md (Saga 17 and its
      decisions C1-C23). Stills from extensions/cell/videos/*.webm (solder at 20 s, lap at 30 s, blinker at 535 s);
-     cell-models from docs/models.jpg; cell-four-arms from docs/mcp.jpg (the earlier four-arm cell).
+     cell-models from docs/models.jpg.
      Lead image: Mike's screenshot of the live page (Dropbox/Screenshots, 2026-11-27 9.54.53), for the first
      paragraph and the abstracts card. Opening: Mike's words (2026-11-27; "set off" read as "set of").
      X_eTaL drawn with the repo's pinned bin/xetal render (8c49bd80). The facade lines run
@@ -117,12 +117,7 @@ From X_eTaL, the cell is a handful of functions:
 </div>
 
 ## From four arms to a bench
-{: .pos-left}
-
-<figure class="zoomable outdent-right" style="width: 45%; margin-top: -2.9em;">
-<img src="{{ '/assets/images/posts/cell-four-arms.webp' | relative_url }}" class="no-invert" alt="The first version of the cell: four large orange six-axis robot arms around a small work zone, each with its own tool rack, a microscope on a gantry above">
-<figcaption>The first cell: four arms, each with its own rack of tools. Click to enlarge.</figcaption>
-</figure>
+{: .pos-center}
 
 The first design had four six-axis arms around a 60 mm work zone, each with a rack of every tool: two arms to hold the parts, one to solder, one to feed solder and clip heatsinks. It worked, and it kept getting in its own way. Around one small joint the iron, the feeder, the clip and the tweezers all came down from above and met each other.
 
