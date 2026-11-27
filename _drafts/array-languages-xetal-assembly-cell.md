@@ -8,8 +8,8 @@ abstract: "Twenty-seventh in the Array Languages series: the assembly cell, an X
 series: "Array Languages"
 series_part: 27
 date: 2026-11-28 00:15:00 -0800
-# video_url: "Mike: TODO, the 555 video's YouTube URL (uncomment both lines once it is up; the Videos tab reads them)"
-# video_title: "A robot cell builds a 555 blinker"
+video_url: "https://www.youtube.com/watch?v=GStCitdYkNo"
+video_title: "A robot cell builds a 555 blinker"
 repo_urls:
   - url: "https://github.com/softwarewrighter/X_eTaL-extensions"
     title: "X_eTaL-extensions"
@@ -32,8 +32,8 @@ repo_urls:
      re-cut 555 video (X_eTaL-video lessons/cell-555, working tree: the planned build's join order, grounds to pin 1).
      cell-blinker.webp is still a frame of the earlier hand build (videos/blinker.webm): replace it with a frame of
      the finished planned circuit from the new recording when it exists.
-     The 555 video: X_eTaL-video is recording it (full frame, moving camera, 4x, captions); add the video
-     link, a frame or two, and Mike's closing. Date 2026-11-28 is tentative.
+     The 555 video: X_eTaL-video is recording it (full frame, moving camera, 4x, captions); video: https://www.youtube.com/watch?v=GStCitdYkNo (2026-11-27; private or processing then: oEmbed 403, thumbnail 404; check both before
+     publishing). Still to add: a frame or two, and Mike's closing. Date 2026-11-28 is tentative.
 -->
 
 <img src="{{ '/assets/images/posts/cell-live-lead.webp' | relative_url }}" class="post-marker no-invert" alt="The assembly cell's live page: the controls on the left, a slender orange arm over a turntable with a vise and pincers in the middle, the microscope's close-up below it, and the program's numbered command list on the right" style="width: 205px;">
@@ -49,7 +49,7 @@ The idea is to provide this "slicer"-like tool via MCP to AI coding agents to mo
 | Resource | Link |
 |----------|------|
 | **Live page** | [The assembly cell, live](https://softwarewrighter.github.io/X_eTaL-extensions/cell/live/) (runs in your browser) |
-| **Video** | Mike: TODO, [A robot cell builds a 555 blinker](YOUTUBE_URL)<br>[![Video](https://img.youtube.com/vi/VIDEO_ID/mqdefault.jpg){: .video-thumb}](YOUTUBE_URL), once it is up |
+| **Video** | [A robot cell builds a 555 blinker](https://www.youtube.com/watch?v=GStCitdYkNo)<br>[![Video](https://img.youtube.com/vi/GStCitdYkNo/mqdefault.jpg){: .video-thumb}](https://www.youtube.com/watch?v=GStCitdYkNo) |
 | **Docs** | [The cell extension](https://github.com/softwarewrighter/X_eTaL-extensions/blob/main/extensions/cell/docs/README.md), [the design](https://github.com/softwarewrighter/X_eTaL-extensions/blob/main/docs/cell-design.md) |
 | **Code** | [X_eTaL-extensions](https://github.com/softwarewrighter/X_eTaL-extensions), [X_eTaL](https://github.com/softwarewrighter/X_eTaL) |
 | **Related posts** | [X_eTaL-extensions, Extending the Machine](/2026/10/10/array-languages-xetal-extensions/), [X_eTaL and Blender](/2026/10/15/array-languages-xetal-blender/) |
