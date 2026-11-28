@@ -25,7 +25,7 @@ repo_urls:
      lines checked here on 2026-11-27: GNU APL 2.0 (scan, reverse, 2×3+4), J 9.7.1, ngn/k (b9eeb91), Kona, CBQN
      (2bf102f), all matching. Not checkable locally: the APL train (+/÷≢), since GNU APL has no trains and sw-apl
      no ≢. Checked by Mike on TryAPL (Dyalog, TryAPL 3.8.1) 2026-11-27 09:10: 3.833333333. The APL2 form (+/x)÷⍴x checked in GNU APL and sw-apl: 3.833333333. Kona gives 3 for {(+/x)%#x} (integer %); ngn/k 3.8333. Told Mike.
-     No frames yet (gutter figures once the video renders). Lead image block-apl-trees (Mike, 2026-11-27). Mike: video URL, closing.
+     No frames yet (gutter figures once the video renders). Re-checked 2026-11-27 17:15 against the -video working tree (uncommitted): two scenes added after the table, origin and overload, run here in GNU APL, J, ngn/k and Kona, CBQN and scripts/xt (BQN needs a lowercase m: M is a function's role, and M←2‿3⥊↕6 is an error). The video's "More differences" card also lists "How many built-ins" and "What each does best", not yet scenes; and the next-episode preview (the syntax poster), which the post leaves out (no forward links). Lead image block-apl-trees (Mike, 2026-11-27). Mike: video URL, closing.
 -->
 
 <img src="{{ '/assets/images/posts/block-apl-trees.webp' | relative_url }}" class="post-marker no-invert" alt="A woodblock print on a cream scroll: five trees of glowing blue cubes rise from one tangle of shared roots, from a gnarled old tree hung with small glyph ornaments, through two slim angular trees and a tall neat one, to a small sapling; an arrow-shaped stream beneath them flows right to left" style="width: 205px;">
@@ -197,6 +197,55 @@ error[type-mismatch]: expected Int, found Float
 | **X_eTaL** | ASCII, drawn | right to left | yes | static |
 
 Glyphs or ASCII; right to left in every one; trains in four of them, counting X_eTaL's brackets; types checked as the program runs, or before. X_eTaL is the one with static types.
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
+## Counting from one, or zero
+{: .pos-left}
+
+Ask each language for the first five numbers. APL starts at one. J, K and BQN start at zero.
+
+```
+⍳5                  APL       1 2 3 4 5
+i.5                 J         0 1 2 3 4
+!5                  K         0 1 2 3 4
+↕5                  BQN       ⟨ 0 1 2 3 4 ⟩
+```
+
+X_eTaL starts at one, as APL does:
+
+```xetal
+r̲ange 5                                            ⍝ 1 2 3 4 5
+```
+
+(APL's start can be changed, by setting `⎕IO` to 0; one is the default.)
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
+## One symbol, two meanings
+{: .pos-right}
+
+In APL, J and K, the same mark often does two jobs. With one argument, APL's `⍴` gives a shape; with two, it changes the shape. J's `$` does the same. K's `#` counts with one argument, and takes with two. BQN gives shape and reshape their own glyphs, `≢` and `⥊`.
+
+```
+⍴M      2 3⍴⍳6      APL    shape; reshape
+$M      2 3$i.6     J      shape; reshape
+#v      2#v         K      count; take
+≢m      2‿3⥊↕6      BQN    shape; reshape
+```
+
+X_eTaL gives them two names:
+
+```xetal
+M ← 2 3 r̲eshape r̲ange 6                            ⍝ 1 2 3, 4 5 6
+s̲hape M                                            ⍝ 2 3
+```
 
 <div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
 <img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
