@@ -170,6 +170,14 @@ One catch if you try the K line: which K you run matters. ngn/k gives 3.83333333
 <figcaption>Spread, explicit and tacit, from the video. Click to enlarge.</figcaption>
 </figure>
 
+<div class="aside-box outdent-left" style="width: 45%;" markdown="1">
+**What is tacit programming?** *Tacit* means unspoken: a tacit definition never mentions its argument. Instead of saying what to do with `x`, it says how functions combine, and the argument is implied. Elsewhere it is called point-free style; the idea goes back to function-level programming, as in John Backus's FP.
+
+In the array languages, functions combine by position, in trains. Three functions in a row make a **fork**: `(f g h) x` means `(f x) g (h x)`. So `(+/ % #)` is the sum of `x`, divided by the count of `x`: the mean. Two in a row make a **hook** in J: `(f g) x` means `x f (g x)`. Trains came with J, around 1990; Dyalog APL added them in 2014, and BQN has them too, and X_eTaL writes its trains in square brackets.
+
+The gain is a definition that reads as what it computes ("max minus min"), with nothing to name. The cost is that a long train can be hard to follow, so programmers in these languages switch between the two styles as suits the line.
+</div>
+
 A function can name its argument (explicit), or leave it out and just combine functions (tacit). Like J, X_eTaL supports both styles. Here is the spread of a list, its largest minus its smallest, both ways in each:
 
 ```
