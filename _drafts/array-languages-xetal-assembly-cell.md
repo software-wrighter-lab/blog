@@ -9,7 +9,7 @@ series: "Array Languages"
 series_part: 27
 date: 2026-11-28 00:15:00 -0800
 video_url: "https://www.youtube.com/watch?v=GStCitdYkNo"
-video_title: "A robot cell builds a 555 blinker"
+video_title: "A Robot Cell Builds a 555 LED Blinker: the X_eTaL Assembly Cell"
 repo_urls:
   - url: "https://github.com/softwarewrighter/X_eTaL-extensions"
     title: "X_eTaL-extensions"
@@ -30,10 +30,8 @@ repo_urls:
      Updated 2026-11-27 afternoon to X_eTaL-extensions 1c8b0ef (steps 30-31: the feature programs on lap joints;
      the planner plans the blinker by search, nets/blinker.net, 367 commands, 1128.01 simulated s) and to the
      re-cut 555 video (X_eTaL-video lessons/cell-555, working tree: the planned build's join order, grounds to pin 1).
-     cell-blinker.webp is still a frame of the earlier hand build (videos/blinker.webm): replace it with a frame of
-     the finished planned circuit from the new recording when it exists.
-     The 555 video: X_eTaL-video is recording it (full frame, moving camera, 4x, captions); video: https://www.youtube.com/watch?v=GStCitdYkNo (2026-11-27; private or processing then: oEmbed 403, thumbnail 404; check both before
-     publishing). Closing: Mike's words (2026-11-27). Still to add: a frame or two. Date 2026-11-28 is tentative.
+     cell-blinker-planned.webp: the final 555 video (out/cell-555-landscape-remotion.mp4) at 312 s.
+     The 555 video: X_eTaL-video is recording it (full frame, moving camera, 4x, captions); video: https://www.youtube.com/watch?v=GStCitdYkNo (public 2026-11-27, "A Robot Cell Builds a 555 LED Blinker: the X_eTaL Assembly Cell"). Closing: Mike's words (2026-11-27). Date 2026-11-28 is tentative.
 -->
 
 <img src="{{ '/assets/images/posts/cell-live-lead.webp' | relative_url }}" class="post-marker no-invert" alt="The assembly cell's live page: the controls on the left, a slender orange arm over a turntable with a vise and pincers in the middle, the microscope's close-up below it, and the program's numbered command list on the right" style="width: 205px;">
@@ -49,7 +47,7 @@ The idea is to provide this "slicer"-like tool via MCP to AI coding agents to mo
 | Resource | Link |
 |----------|------|
 | **Live page** | [The assembly cell, live](https://softwarewrighter.github.io/X_eTaL-extensions/cell/live/) (runs in your browser) |
-| **Video** | [A robot cell builds a 555 blinker](https://www.youtube.com/watch?v=GStCitdYkNo)<br>[![Video](https://img.youtube.com/vi/GStCitdYkNo/mqdefault.jpg){: .video-thumb}](https://www.youtube.com/watch?v=GStCitdYkNo) |
+| **Video** | [A Robot Cell Builds a 555 LED Blinker: the X_eTaL Assembly Cell](https://www.youtube.com/watch?v=GStCitdYkNo)<br>[![Video](https://img.youtube.com/vi/GStCitdYkNo/mqdefault.jpg){: .video-thumb}](https://www.youtube.com/watch?v=GStCitdYkNo) |
 | **Docs** | [The cell extension](https://github.com/softwarewrighter/X_eTaL-extensions/blob/main/extensions/cell/docs/README.md), [the design](https://github.com/softwarewrighter/X_eTaL-extensions/blob/main/docs/cell-design.md) |
 | **Code** | [X_eTaL-extensions](https://github.com/softwarewrighter/X_eTaL-extensions), [X_eTaL](https://github.com/softwarewrighter/X_eTaL) |
 | **Related posts** | [X_eTaL-extensions, Extending the Machine](/2026/10/10/array-languages-xetal-extensions/), [X_eTaL and Blender](/2026/10/15/array-languages-xetal-blender/) |
@@ -210,8 +208,8 @@ The tool holds the wire while the iron solders, so the joint is already presente
 {: .pos-left}
 
 <figure class="zoomable outdent-right" style="width: 45%; margin-top: -2.9em;">
-<img src="{{ '/assets/images/posts/cell-blinker.webp' | relative_url }}" class="no-invert" alt="The live page near the end of the blinker program: the finished free-air circuit on the turntable, the program list beside it">
-<figcaption>The 555 blinker, nearly done. Click to enlarge.</figcaption>
+<img src="{{ '/assets/images/posts/cell-blinker-planned.webp' | relative_url }}" class="no-invert" alt="A frame of the 555 video near the end of the build, at 1115 of 1128 simulated seconds: the free-air circuit on the turntable, the red LED standing on the third resistor, the enameled jumpers fanning out from the upturned chip, the last commands of the program listed beside it">
+<figcaption>The 555 blinker, from the video: the last ground jumper, 1115 of 1128 simulated seconds. Click to enlarge.</figcaption>
 </figure>
 
 The first whole circuit is a 555 LED blinker: an NE555P, three resistors, a 10 µF electrolytic, a 10 nF disc, a red LED and a 9 V battery snap, seven nets. The planner writes its program from the netlist (more on that below), and builds it dead-bug, every joint a lap. In the order the video shows it:
