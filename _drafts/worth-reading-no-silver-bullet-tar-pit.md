@@ -7,7 +7,7 @@ keywords: "papers worth reading, No Silver Bullet, Fred Brooks, essential comple
 abstract: "Ninth in the series on what is worth reading, and the first on papers: two on where software's complexity comes from. Fred Brooks's No Silver Bullet (1986), on essential and accidental complexity, and Ben Moseley and Peter Marks's Out of the Tar Pit (2006), which blames state."
 series: "Worth Reading"
 series_part: 9
-date: 2026-12-30 00:15:00 -0800
+date: 2027-01-06 00:15:00 -0800
 books:
   - title: "The Mythical Man-Month"
     author: "Frederick P. Brooks Jr."

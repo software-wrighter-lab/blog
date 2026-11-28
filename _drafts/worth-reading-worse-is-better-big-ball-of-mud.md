@@ -7,7 +7,7 @@ keywords: "papers worth reading, The Rise of Worse Is Better, Richard Gabriel, N
 abstract: "Tenth in the series on what is worth reading: two papers on why the designs purists dislike win anyway. Richard Gabriel's The Rise of Worse Is Better (1989) and Brian Foote and Joseph Yoder's Big Ball of Mud (1997)."
 series: "Worth Reading"
 series_part: 10
-date: 2027-01-06 00:15:00 -0800
+date: 2027-01-13 00:15:00 -0800
 books:
   - title: "Pattern Languages of Program Design 4"
     author: "Neil Harrison, Brian Foote, Hans Rohnert (eds.)"

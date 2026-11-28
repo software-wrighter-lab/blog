@@ -7,7 +7,7 @@ keywords: "books worth reading, The Soul of a New Machine, Tracy Kidder, Data Ge
 abstract: "Thirteenth in the series on what is worth reading: two books that follow a team from the inside. Tracy Kidder's The Soul of a New Machine (1981), Data General's race to build a 32-bit minicomputer, and Scott Rosenberg's Dreaming in Code (2007), three years with the team building the Chandler personal information manager."
 series: "Worth Reading"
 series_part: 13
-date: 2027-01-27 00:15:00 -0800
+date: 2027-02-03 00:15:00 -0800
 books:
   - title: "The Soul of a New Machine"
     author: "Tracy Kidder"

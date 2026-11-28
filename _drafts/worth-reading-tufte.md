@@ -7,7 +7,7 @@ keywords: "books worth reading, Edward Tufte, The Visual Display of Quantitative
 abstract: "Fourteenth in the series on what is worth reading: Edward Tufte's books on showing information, from The Visual Display of Quantitative Information (1983) to Seeing with Fresh Eyes (2020). I have also taken his one-day course. Mike: TODO, update once the post is written."
 series: "Worth Reading"
 series_part: 14
-date: 2027-02-03 00:15:00 -0800
+date: 2027-02-10 00:15:00 -0800
 books:
   - title: "The Visual Display of Quantitative Information"
     author: "Edward R. Tufte"

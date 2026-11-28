@@ -7,7 +7,7 @@ keywords: "recursive self-improvement, self-improving agent harness, Exo archite
 abstract: "Second in the Deep Learning series: X_eTaL-RSI, small deterministic experiments in recursive self-improvement after Exo: An Architecture for Self-Improving Systems at Runtime. A frozen model's harness rewrites its own tools, then the procedure that rewrites them, with a guardian it cannot touch. Six experiments in X_eTaL: tools learned from the history beat hints; evolving halves production but reviews can cost more; an optimizer that edits itself rescues a bad one but not a good one; improving pays only with reuse (ski rental); general tools transfer to near work; and a layered guardian stops what 'it builds' lets through."
 series: "Deep Learning"
 series_part: 2
-date: 2026-11-30 00:15:00 -0800
+date: 2026-12-07 00:15:00 -0800
 papers:
   - title: "Exo: An Architecture for Self-Improving Systems at Runtime"
     url: "https://arxiv.org/abs/2611.00463"
@@ -25,7 +25,7 @@ repo_urls:
      pages 05, 04, 01 (2026-11-26 19:38). Econ code from libs/Econ/src/Econ.xtl, run and drawn with bin/xetal.
      The paper's authors are named in the repo READMEs; not named here (Mike's go needed). The ski-rental bound's
      1988 paper is cited in 05's README; described here without names.
-     Date 2026-11-30 is tentative (after Deep Learning #1, 11/28; 11/29 is a Saw Sunday). Lead image: Mike's block-rsi.jpg (Dropbox, 2026-11-26), no-invert.
+     Date 2026-12-07 (moved out a week 2026-11-28, Mike). Lead image: Mike's block-rsi.jpg (Dropbox, 2026-11-26), no-invert.
      Related section (Mike, 2026-11-26): from X_eTaL-RSI docs/related.md (committed), with blog links.
      Mike: the closing; whether the intro should say more about the meetup.
 -->

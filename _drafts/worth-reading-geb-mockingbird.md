@@ -7,7 +7,7 @@ keywords: "books worth reading, Gödel, Escher, Bach, Douglas Hofstadter, strang
 abstract: "Fifth in the series on books worth reading: two on formal systems, taught through puzzles and play. Douglas Hofstadter's Gödel, Escher, Bach (1979), on recursion, self-reference and strange loops, and Raymond Smullyan's To Mock a Mockingbird (1985), combinatory logic as puzzles about birds."
 series: "Worth Reading"
 series_part: 5
-date: 2026-12-02 00:15:00 -0800
+date: 2026-12-09 00:15:00 -0800
 books:
   - title: "Gödel, Escher, Bach: An Eternal Golden Braid"
     author: "Douglas Hofstadter"

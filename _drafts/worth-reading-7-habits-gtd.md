@@ -7,7 +7,7 @@ keywords: "books worth reading, The 7 Habits of Highly Effective People, Stephen
 abstract: "Seventh in the series on books worth reading, and the first two that are not about computing. Stephen Covey's The 7 Habits of Highly Effective People (1989), whose seventh habit named my Sunday series, and David Allen's Getting Things Done (2001), a system for every open commitment."
 series: "Worth Reading"
 series_part: 7
-date: 2026-12-16 00:15:00 -0800
+date: 2026-12-23 00:15:00 -0800
 books:
   - title: "The 7 Habits of Highly Effective People"
     author: "Stephen R. Covey"

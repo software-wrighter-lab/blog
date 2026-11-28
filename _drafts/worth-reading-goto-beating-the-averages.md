@@ -7,7 +7,7 @@ keywords: "papers worth reading, Go To Statement Considered Harmful, Edsger Dijk
 abstract: "Eleventh in the series on what is worth reading: two papers on how a language's constructs shape what programmers can think. Edsger Dijkstra's Go To Statement Considered Harmful (1968), which argues for taking a construct away, and Paul Graham's Beating the Averages (2001), which argues for Lisp's macros."
 series: "Worth Reading"
 series_part: 11
-date: 2027-01-13 00:15:00 -0800
+date: 2027-01-20 00:15:00 -0800
 books:
   - title: "On Lisp"
     author: "Paul Graham"

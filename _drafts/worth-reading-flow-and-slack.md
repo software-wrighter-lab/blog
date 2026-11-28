@@ -7,7 +7,7 @@ keywords: "books worth reading, Finding Flow, Mihaly Csikszentmihalyi, flow stat
 abstract: "Sixteenth in the series on what is worth reading: two books on working well. Mihaly Csikszentmihalyi's Finding Flow (1997), on full absorption in a task, and Tom DeMarco's Slack (2001), on why an organization needs room to think and change."
 series: "Worth Reading"
 series_part: 16
-date: 2027-02-17 00:15:00 -0800
+date: 2027-02-24 00:15:00 -0800
 books:
   - title: "Finding Flow"
     author: "Mihaly Csikszentmihalyi"

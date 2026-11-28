@@ -7,7 +7,7 @@ keywords: "books worth reading, Blink, Malcolm Gladwell, snap judgments, Think!,
 abstract: "Seventeenth in the series on what is worth reading: two books that argue with each other about decisions. Malcolm Gladwell's Blink (2005), on the power of snap judgments, and Michael LeGault's Think! (2006), on why crucial decisions need careful reasoning."
 series: "Worth Reading"
 series_part: 17
-date: 2027-02-24 00:15:00 -0800
+date: 2027-03-03 00:15:00 -0800
 books:
   - title: "Blink"
     author: "Malcolm Gladwell"

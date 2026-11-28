@@ -7,7 +7,7 @@ keywords: "books worth reading, The Design of Everyday Things, Donald Norman, af
 abstract: "Fifteenth in the series on what is worth reading: three books on design that people can use. Donald Norman's The Design of Everyday Things (1988), Steve Krug's Don't Make Me Think (2000), and Dave Shea and Molly Holzschlag's The Zen of CSS Design (2005)."
 series: "Worth Reading"
 series_part: 15
-date: 2027-02-10 00:15:00 -0800
+date: 2027-02-17 00:15:00 -0800
 books:
   - title: "The Design of Everyday Things"
     author: "Donald A. Norman"
