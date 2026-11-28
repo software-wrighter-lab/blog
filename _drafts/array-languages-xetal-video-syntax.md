@@ -260,7 +260,25 @@ Square brackets compose functions without naming the argument: a train, as in AP
 | Longer | forks grouped from the right | `[f̲irst c̲at 'm̲ax r̲/ c̲at t̲ally] 3 1 4`{:.language-xetal} gives `3 4 3` |
 | Quoted | a train passed as a value is monadic | `'[t̲ally d̲isclose] e̲ach "ab" "cde" "f"`{:.language-xetal} gives `2 3 1` |
 
-X_eTaL has no separate hook rule, as J does: a hook is a fork whose left function is identity.
+X_eTaL has no separate hook rule, as J does. In J, two functions in a row are a hook: `(f g) y` is `y f (g y)`. In X_eTaL, two functions in brackets are an atop, and a hook is written as a fork whose left function is identity, `i̲d`{:.language-xetal}. J's classic hook divides each item by the total:
+
+```
+(% +/) 1 2 3 4                                       J: 0.1 0.2 0.3 0.4
+```
+
+```xetal
+[i̲d ÷ '+ r̲/] 1 2 3 4                               ⍝ 0.1 0.2 0.3 0.4
+```
+
+The second way uses the Combinators library. Its Starling, `S x y z = x z (y z)`, is J's hook as a function: its argument is used twice, once as it is and once through the other function. The functions go in quoted, the nearest one first, so `'÷`{:.language-xetal} is the joining function and the sum is applied first. The sum gets a name, since a function passed this way is quoted by name:
+
+```xetal
+"c:" u̲se< "Combinators"
+ᵘs̲um ← { '+ r̲/ ⍵ }
+'ᵘs̲um '÷ ᶜS̲ 1 2 3 4                                ⍝ 0.1 0.2 0.3 0.4
+'n̲eg '− ᶜS̲ 3                                       ⍝ 6, that is 3 − (n̲eg 3)
+```
+
 
 <div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
 <img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
