@@ -8,8 +8,8 @@ abstract: "Twenty-sixth in the Array Languages series: episode 6 of the video se
 series: "Array Languages"
 series_part: 26
 date: 2026-11-27 00:15:00 -0800
-# video_url: "Mike: TODO, the episode's YouTube URL once it is published" (post.html embeds it at the end and it joins the Videos tab)
-# video_title: "Mike: TODO, from X_eTaL-video out/al-06-*-youtube/title.txt (or oEmbed once public)"
+video_url: "https://www.youtube.com/watch?v=q1LR7SaIg2g"
+video_title: "APL, J, K, BQN and X_eTaL: The Array Language Family: Array Languages #6"
 repo_urls:
   - url: "https://github.com/softwarewrighter/X_eTaL"
     title: "X_eTaL"
@@ -25,7 +25,7 @@ repo_urls:
      lines checked here on 2026-11-27: GNU APL 2.0 (scan, reverse, 2×3+4), J 9.7.1, ngn/k (b9eeb91), Kona, CBQN
      (2bf102f), all matching. Not checkable locally: the APL train (+/÷≢), since GNU APL has no trains and sw-apl
      no ≢. Checked by Mike on TryAPL (Dyalog, TryAPL 3.8.1) 2026-11-27 09:10: 3.833333333. The APL2 form (+/x)÷⍴x checked in GNU APL and sw-apl: 3.833333333. Kona gives 3 for {(+/x)%#x} (integer %); ngn/k 3.8333. Told Mike.
-     No frames yet (gutter figures once the video renders). Re-checked 2026-11-27 17:15 against the -video working tree (uncommitted): two scenes added after the table, origin and overload, run here in GNU APL, J, ngn/k and Kona, CBQN and scripts/xt (BQN needs a lowercase m: M is a function's role, and M←2‿3⥊↕6 is an error). The video's "More differences" card also lists "How many built-ins" and "What each does best", not yet scenes; and the next-episode preview (the syntax poster), which the post leaves out (no forward links). Lead image block-apl-trees (Mike, 2026-11-27). Mike: video URL, closing.
+     Frames from the final render (out/al-06-tour-landscape-remotion.mp4, 18:50): reverse 85 s, tacit 145 s, overload 225 s, rendered 323 s. Re-checked 2026-11-27 17:15 against the -video working tree (uncommitted): two scenes added after the table, origin and overload, run here in GNU APL, J, ngn/k and Kona, CBQN and scripts/xt (BQN needs a lowercase m: M is a function's role, and M←2‿3⥊↕6 is an error). The video's "More differences" card also lists "How many built-ins" and "What each does best", not yet scenes; and the next-episode preview (the syntax poster), which the post leaves out (no forward links). Re-checked again 17:40 (the video session's message): explicit or tacit (spread, run in J and scripts/xt, both typed Num a => a -> a), how many built-ins (counts as the video's panel gives them, sources Dyalog 20, J Dictionary, ngn/k, BQN docs, X_eTaL reference; not re-counted here), what each does best, where X_eTaL fits. Lead image block-apl-trees (Mike, 2026-11-27). Video: https://www.youtube.com/watch?v=q1LR7SaIg2g (public 2026-11-27, final render 18:50, 6:37). Mike: closing.
 -->
 
 <img src="{{ '/assets/images/posts/block-apl-trees.webp' | relative_url }}" class="post-marker no-invert" alt="A woodblock print on a cream scroll: five trees of glowing blue cubes rise from one tangle of shared roots, from a gnarled old tree hung with small glyph ornaments, through two slim angular trees and a tall neat one, to a small sapling; an arrow-shaped stream beneath them flows right to left" style="width: 205px;">
@@ -38,7 +38,7 @@ Episode 6 of my video series on array programming is a tour of the array-languag
 
 | Resource | Link |
 |----------|------|
-| **Video** | Mike: TODO, the episode link and thumbnail, once published |
+| **Video** | [APL, J, K, BQN and X_eTaL: The Array Language Family: Array Languages #6](https://www.youtube.com/watch?v=q1LR7SaIg2g)<br>[![Video](https://img.youtube.com/vi/q1LR7SaIg2g/mqdefault.jpg){: .video-thumb}](https://www.youtube.com/watch?v=q1LR7SaIg2g) |
 | **All the videos** | [X_eTaL-video's page](https://softwarewrighter.github.io/X_eTaL-video/) |
 | **Try X_eTaL** | [In your browser](https://softwarewrighter.github.io/X_eTaL/) |
 | **Try APL** | [TryAPL](https://tryapl.org/) |
@@ -90,6 +90,11 @@ All five give `3 4 8 9 14 23`. BQN writes a list with ligatures, `3‿1‿4‿1�
 
 ## Notation: reverse
 {: .pos-left}
+
+<figure class="zoomable outdent-right" style="width: 45%; margin-top: -2.9em;">
+<img src="{{ '/assets/images/posts/al26-reverse.webp' | relative_url }}" class="no-invert" alt="The video's reverse panel: APL and BQN with the circle-bar glyph, J and K with ASCII bars, and X_eTaL's underlined rev, its boxed result 9 5 1 4 1 3">
+<figcaption>Reverse in five languages, from the video. Click to enlarge.</figcaption>
+</figure>
 
 Reverse shows the notation. APL and BQN use a glyph, a circle with a bar. J and K use ASCII symbols. X_eTaL uses a word, with its first letter underlined.
 
@@ -157,8 +162,36 @@ One catch if you try the K line: which K you run matters. ngn/k gives 3.83333333
 <img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
 </div>
 
-## Types, checked before it runs
+## Explicit or tacit
 {: .pos-right}
+
+<figure class="zoomable outdent-left" style="width: 45%; margin-top: -2.9em;">
+<img src="{{ '/assets/images/posts/al26-tacit.webp' | relative_url }}" class="no-invert" alt="The video's explicit-or-tacit panel: the spread in J both ways, and in X_eTaL as a braced lambda and as a bracketed train, with the inferred type Num a => a -> a and the result 8">
+<figcaption>Spread, explicit and tacit, from the video. Click to enlarge.</figcaption>
+</figure>
+
+A function can name its argument (explicit), or leave it out and just combine functions (tacit). Like J, X_eTaL supports both styles. Here is the spread of a list, its largest minus its smallest, both ways in each:
+
+```
+3 : '(>./y) - <./y'      J, explicit
+(>./ - <./)              J, tacit
+```
+
+```xetal
+ᵘs̲pread ← { ('m̲ax r̲/ ⍵) − 'm̲in r̲/ ⍵ }             ⍝ explicit
+ᵘs̲pread ← ['m̲ax r̲/ − 'm̲in r̲/]                    ⍝ tacit
+ᵘs̲pread 3 1 4 1 5 9                                ⍝ 8
+```
+
+All four give 8 for `3 1 4 1 5 9`. X_eTaL infers the same type for both forms, `Num a => a -> a`: any kind of number in, the same kind out.
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
+## Types, checked before it runs
+{: .pos-left}
 
 The four older languages check types as the program runs. X_eTaL infers a type for every function first. Name the mean, and X_eTaL works out that it takes integers and gives a float:
 
@@ -204,7 +237,7 @@ Glyphs or ASCII; right to left in every one; trains in four of them, counting X_
 </div>
 
 ## Counting from one, or zero
-{: .pos-left}
+{: .pos-right}
 
 Ask each language for the first five numbers. APL starts at one. J, K and BQN start at zero.
 
@@ -229,7 +262,12 @@ r̲ange 5                                            ⍝ 1 2 3 4 5
 </div>
 
 ## One symbol, two meanings
-{: .pos-right}
+{: .pos-left}
+
+<figure class="zoomable outdent-right" style="width: 45%; margin-top: -2.9em;">
+<img src="{{ '/assets/images/posts/al26-overload.webp' | relative_url }}" class="no-invert" alt="The video's panel of shape and reshape: APL rho, J dollar, K hash, BQN's two glyphs, and X_eTaL's shape and reshape as words">
+<figcaption>Shape and reshape, from the video. Click to enlarge.</figcaption>
+</figure>
 
 In APL, J and K, the same mark often does two jobs. With one argument, APL's `⍴` gives a shape; with two, it changes the shape. J's `$` does the same. K's `#` counts with one argument, and takes with two. BQN gives shape and reshape their own glyphs, `≢` and `⥊`.
 
@@ -252,8 +290,58 @@ s̲hape M                                            ⍝ 2 3
 <img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
 </div>
 
-## ASCII in, decorated out
+## How many built-ins
+{: .pos-center}
+
+| | Functions | Modifiers | Written as |
+|---|---|---|---|
+| **APL** (Dyalog 20) | 56 glyphs | 22 operators | glyphs |
+| **J** (the J Dictionary) | 118 spellings, verbs and modifiers together | | ASCII, one or two characters |
+| **K** (ngn/k) | 22 verbs | 6 adverbs | ASCII |
+| **BQN** | 44 functions | 20 modifiers | 64 glyphs |
+| **X_eTaL** | 75 functions | 11 higher-order functions | 13 symbols, 73 words |
+
+K has the fewest, but most of its verbs mean several things. X_eTaL has no operators as such: functions are values, so a function that takes a function does the job.
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
+## What each does best
+{: .pos-right}
+
+- **APL**: notation as a tool of thought, in the words of its inventor, Kenneth Iverson (his 1979 Turing Award lecture).
+- **J**: made tacit programming central, all in ASCII.
+- **K**: small and fast; kdb+ and q are built on it, and it is popular in finance.
+- **BQN**: fewer primitives, and less overloading, than APL or J.
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
+## Where X_eTaL fits
 {: .pos-left}
+
+- Typed in ASCII, like J and K.
+- Read drawn, like APL and BQN.
+- Built-ins mostly words, with one meaning each, not overloaded symbols.
+- Functions passed as values, so no separate operators.
+- Types checked before it runs, which none of the others do.
+
+<div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
+<img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
+<img src="{{ '/assets/images/posts/block-hr-rule-dark.webp' | relative_url }}" class="theme-dark-only no-invert" alt="" style="width: 45%;">
+</div>
+
+## ASCII in, decorated out
+{: .pos-right}
+
+<figure class="zoomable outdent-left" style="width: 45%; margin-top: -2.9em;">
+<img src="{{ '/assets/images/posts/al26-rendered.webp' | relative_url }}" class="no-invert" alt="The video's panel of the mean as typed in ASCII, u:m_ean := ['+ r_/ / t_ally], and as drawn by X_eTaL, with underlines and a division sign">
+<figcaption>The mean, typed and drawn, from the video. Click to enlarge.</figcaption>
+</figure>
 
 The episode ends where X_eTaL differs most visibly. Here is the mean as you type it, in plain ASCII:
 
@@ -277,6 +365,6 @@ Before the next episode, try this: find the mean of 3 1 4 1 5 9 in two of these 
 </div>
 
 ## Closing
-{: .pos-right}
+{: .pos-left}
 
 Mike: TODO, a closing in your words.
