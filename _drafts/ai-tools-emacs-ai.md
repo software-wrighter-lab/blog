@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "AI Tools #9: Emacs as an AI Client --- a Gateway and an Agent"
+title: "AI Tools #10: Emacs as an AI Client --- a Gateway and an Agent"
 categories: [ai-tools, emacs]
 tags: [ai-tools, emacs, elisp, gptel, litellm, llm-gateway, mcp, coding-agents, org-mode, rust, ollama, llama-cpp, local-llm]
 keywords: "Emacs AI client, gptel, LiteLLM gateway, LLM cost budgets, Emacs MCP server, Emacs coding agent, emacs-agent, org-mode transcripts, Rust CLI tools, local models in Emacs, Ollama, llama.cpp"
 abstract: "Since 2025 Emacs has been one of my AI clients. Two projects make it work. emacs-ai-api puts every model, cloud or local, behind one gateway, with per-project budgets, cost tracking, Rust command-line tools and MCP tool servers, and points Emacs's gptel at it. emacs-agent goes further: a coding agent inside Emacs that keeps every conversation as an Org transcript, so nothing is lost when a context fills up."
 series: "AI Tools"
-series_part: 9
+series_part: 10
 date: 2026-12-03 00:15:00 -0800
 video_url: "https://www.youtube.com/watch?v=e1OoixGDMXs"
 video_title: "Emacs MCP Server implementation/discussion"
@@ -18,7 +18,7 @@ repo_urls:
 ---
 
 <!-- DRAFT (2026-11-02), Mike: "emacs-ai-api, emacs-agent ... not yet blogged about, maybe create a draft post for these -- which
-     series? or a new emacs series?" Series: AI Tools (#9), since both are agent tooling; a new Emacs series is the alternative.
+     series? or a new emacs series?" Series: AI Tools (#10; #9 went to the assembly cell, 2026-11-27), since both are agent tooling; a new Emacs series is the alternative.
      Facts from the READMEs: emacs-ai-api (2025-08 to 2026-01; LiteLLM gateway; OpenAI, Anthropic, Gemini, DeepSeek, Ollama,
      llama.cpp; per-project budgets with virtual keys; gptel config; MCP incl. Playwright and Rust servers; Rust CLIs llm-status,
      llm-history, llm-costs, llm-stats, llm-config; GPL-3.0 with a dual-licensed Rust component; video e1OoixGDMXs, Software

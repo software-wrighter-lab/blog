@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Array Languages #27: The Assembly Cell, a Robot Bench That Builds Circuits in Free Air"
-categories: [programming-languages, array-languages, simulation]
-tags: [array-languages, xetal, x-etal, xetal-extensions, robotics, simulation, electronics, soldering, ne555, dead-bug, three-js, blender, webassembly, mcp, rust]
-keywords: "simulated robot assembly cell, building electronic circuits in 3D, dead-bug construction, free-air circuit, 555 LED blinker, lap joint soldering, robot arm inverse kinematics, soldering simulation, thermal model, netlist to robot program, circuit slicer, X_eTaL extension, Rust simulator, WebAssembly, Three.js player, Blender models, MCP server for an LLM agent"
-abstract: "Twenty-seventh in the Array Languages series: the assembly cell, an X_eTaL extension that simulates a robot bench building electronic circuits in free air, in 3D, from the center outward, one command at a time. A Rust simulator decides what is possible (reach, collision, heat, solder); X_eTaL plans the circuit and describes the models; Three.js and Blender only draw. It began with four robot arms and became a bench: a turntable, one slender arm, pincers and an iron that feeds its own solder. Lap joints, a 555 LED blinker planned from its netlist by search and built whole, every step tried on the simulator, and an MCP server so an LLM agent can drive it."
-series: "Array Languages"
-series_part: 27
+title: "AI Tools #9: An MCP Robot Bench, Where an LLM Agent Builds Circuits in Free Air"
+categories: [ai-tools, simulation]
+tags: [ai-tools, mcp, llm-agents, claude-code, xetal, x-etal, xetal-extensions, robotics, simulation, electronics, soldering, ne555, dead-bug, three-js, blender, webassembly, rust]
+keywords: "MCP server for robot assembly, LLM agent manipulating electronic parts and tools, simulated robot assembly cell, building electronic circuits in 3D, dead-bug construction, free-air circuit, 555 LED blinker, lap joint soldering, robot arm inverse kinematics, soldering simulation, thermal model, netlist to robot program, circuit slicer, X_eTaL extension, Rust simulator, WebAssembly, Three.js player, Blender models"
+abstract: "The assembly cell: a simulated robot bench, served over MCP, so an LLM agent can pick up electronic parts and tools and build a circuit in free air, in 3D, from the center outward, one command at a time. It is an X_eTaL extension. A Rust simulator decides what is possible (reach, collision, heat, solder); X_eTaL plans the circuit and describes the models; Three.js and Blender only draw. It began with four robot arms and became a bench: a turntable, one slender arm, pincers and an iron that feeds its own solder. Every command is an MCP tool. Lap joints, and a 555 LED blinker planned from its netlist by search and built whole, every step tried on the simulator."
+series: "AI Tools"
+series_part: 9
 date: 2026-11-27 16:00:00 -0800
 video_url: "https://www.youtube.com/watch?v=GStCitdYkNo"
 video_title: "A Robot Cell Builds a 555 LED Blinker: the X_eTaL Assembly Cell"
@@ -51,7 +51,7 @@ The idea is to provide this "slicer"-like tool via MCP to AI coding agents to mo
 | **Docs** | [The cell extension](https://github.com/softwarewrighter/X_eTaL-extensions/blob/main/extensions/cell/docs/README.md), [the design](https://github.com/softwarewrighter/X_eTaL-extensions/blob/main/docs/cell-design.md) |
 | **Code** | [X_eTaL-extensions](https://github.com/softwarewrighter/X_eTaL-extensions), [X_eTaL](https://github.com/softwarewrighter/X_eTaL) |
 | **Related posts** | [X_eTaL-extensions, Extending the Machine](/2026/10/10/array-languages-xetal-extensions/), [X_eTaL and Blender](/2026/10/15/array-languages-xetal-blender/) |
-| **The series** | [Array Languages: every post](/series/#array-languages) |
+| **The series** | [AI Tools: every post](/series/#ai-tools) |
 | **Comments** | [Discord](https://discord.com/invite/Ctzk5uHggZ) |
 
 </div>
