@@ -323,6 +323,7 @@ K has the fewest, but most of its verbs mean several things. X_eTaL has no opera
 - **J**: made tacit programming central, all in ASCII.
 - **K**: small and fast; kdb+ and q are built on it, and it is popular in finance.
 - **BQN**: fewer primitives, and less overloading, than APL or J.
+- **X_eTaL**: metaprogramming, with macros written in X_eTaL itself that turn source into source, and static types, inferred for every function before it runs. Also: plain ASCII source drawn as typography, and extensions in Rust (Blender, the assembly cell) called like any library.
 
 <div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
 <img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
