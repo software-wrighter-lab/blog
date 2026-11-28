@@ -7,7 +7,7 @@ keywords: "simulated robot assembly cell, building electronic circuits in 3D, de
 abstract: "Twenty-seventh in the Array Languages series: the assembly cell, an X_eTaL extension that simulates a robot bench building electronic circuits in free air, in 3D, from the center outward, one command at a time. A Rust simulator decides what is possible (reach, collision, heat, solder); X_eTaL plans the circuit and describes the models; Three.js and Blender only draw. It began with four robot arms and became a bench: a turntable, one slender arm, pincers and an iron that feeds its own solder. Lap joints, a 555 LED blinker planned from its netlist by search and built whole, every step tried on the simulator, and an MCP server so an LLM agent can drive it."
 series: "Array Languages"
 series_part: 27
-date: 2026-11-28 00:15:00 -0800
+date: 2026-11-27 16:00:00 -0800
 video_url: "https://www.youtube.com/watch?v=GStCitdYkNo"
 video_title: "A Robot Cell Builds a 555 LED Blinker: the X_eTaL Assembly Cell"
 repo_urls:
@@ -31,7 +31,7 @@ repo_urls:
      the planner plans the blinker by search, nets/blinker.net, 367 commands, 1128.01 simulated s) and to the
      re-cut 555 video (X_eTaL-video lessons/cell-555, working tree: the planned build's join order, grounds to pin 1).
      cell-blinker-planned.webp: the final 555 video (out/cell-555-landscape-remotion.mp4) at 312 s.
-     The 555 video: X_eTaL-video is recording it (full frame, moving camera, 4x, captions); video: https://www.youtube.com/watch?v=GStCitdYkNo (public 2026-11-27, "A Robot Cell Builds a 555 LED Blinker: the X_eTaL Assembly Cell"). Closing: Mike's words (2026-11-27). Date 2026-11-28 is tentative.
+     The 555 video: X_eTaL-video is recording it (full frame, moving camera, 4x, captions); video: https://www.youtube.com/watch?v=GStCitdYkNo (public 2026-11-27, "A Robot Cell Builds a 555 LED Blinker: the X_eTaL Assembly Cell"). Closing: Mike's words (2026-11-27).
 -->
 
 <img src="{{ '/assets/images/posts/cell-live-lead.webp' | relative_url }}" class="post-marker no-invert" alt="The assembly cell's live page: the controls on the left, a slender orange arm over a turntable with a vise and pincers in the middle, the microscope's close-up below it, and the program's numbered command list on the right" style="width: 205px;">
