@@ -376,4 +376,4 @@ Before the next episode, try this: find the mean of 3 1 4 1 5 9 in two of these 
 ## Closing
 {: .pos-left}
 
-There are several other array languages, and I plan to eventually compare X_eTaL to them too. But first, I will go into more detail about X_eTaL syntax and capabilities.
+There are several other array languages, and I plan to eventually compare X_eTaL to them too. But first, I will go into more detail about X_eTaL syntax and capabilities in upcoming videos and blog posts.
