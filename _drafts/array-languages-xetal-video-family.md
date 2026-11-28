@@ -262,7 +262,7 @@ X_eTaL starts at one, as APL does:
 r̲ange 5                                            ⍝ 1 2 3 4 5
 ```
 
-(APL's start can be changed, by setting `⎕IO` to 0; one is the default.)
+(APL's start can be changed, by setting `⎕IO` to 0; one is the default. COBOL, Fortran, Julia, Lua, MATLAB/Octave, R, SAS, Wolfram Language and X_eTaL also use 1 as the index origin.)
 
 <div style="clear: both; text-align: center; margin: 2.6em 0 1.8em; opacity: 0.45;">
 <img src="{{ '/assets/images/posts/block-hr-rule.webp' | relative_url }}" class="theme-light-only no-invert" alt="" style="width: 45%;">
